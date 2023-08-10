@@ -443,8 +443,6 @@ CCPIS$elections_political_alt <- political(
   old = CCPIS$elections_political, new = CCPIS$elections_political_alt)
 CCPIS$parties_political_alt <- political(
   old = CCPIS$parties_political, new = CCPIS$parties_political_alt)
-CCPISBoys <- filter(CCPIS, female == 0)
-CCPISGirls <- filter(CCPIS, female == 1)
 
 ##### 1.1.1 Factor analysis #####
 AgencyScale <- na.omit(CCPIS[, c(
@@ -536,6 +534,8 @@ CCPIS$communal <- (
     CCPIS$sexrole_warm * CommunalityFactorLoadings[8]) /
   sum(CommunalityFactorLoadings) # 0 = not communal, 1 = communal
 length(na.omit(CCPIS$communal)) / nrow(CCPIS) * 100 # 73% available data
+CCPISBoys <- filter(CCPIS, female == 0)
+CCPISGirls <- filter(CCPIS, female == 1)
 
 #### 1.2.0 Census ####
 Census16 <- readstata13::read.dta13( # Census microdata for raking
@@ -2407,14 +2407,13 @@ ggplot(CCPISLonger, aes(x = name, fill = as.factor(value))) +
 ggsave("_graphs/ParentIssuesGirls.pdf", width = 5.5, height = 4.25)
 CCPIS |>
   pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
-  group_by(value) |>
+  group_by(name) |>
   mutate(N = n()) |>
   group_by(name, value) |>
   summarise(perc = n() / unique(N)) |>
   filter(!is.na(value)) |>
-  ggplot(aes(x = value, fill = name)) +
-  geom_bar(aes(y = after_stat(count) / sum(after_stat(count))),
-           position = "dodge") +
+  ggplot(aes(x = value, y = perc, fill = name)) +
+  geom_bar(position = "dodge", stat = "identity") +
   scale_x_discrete("Topic most often discussed with parent") +
   scale_y_continuous("Percent of students", labels = scales::percent) +
   scale_fill_discrete("Parent",
@@ -2423,45 +2422,39 @@ CCPIS |>
   theme(axis.text.x = element_text(angle = 90))
 ggsave("_graphs/ParentIssuesMomDad.pdf", width = 5.5, height = 4.25)
 CCPISBoys |>
-  filter(!is.na(mother_discuss_clean)) |>
-  ggplot(aes(x = mother_discuss_clean)) +
-  geom_bar(aes(y = after_stat(count) / sum(after_stat(count)))) +
-  scale_x_discrete("Topic most often discussed with mother") +
-  scale_y_continuous("Percent of students", labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 90))
-ggsave("_graphs/MotherIssuesBoys.pdf", width = 5.5, height = 4.25)
+  pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
+  group_by(name) |>
+  mutate(N = n()) |>
+  group_by(name, value) |>
+  summarise(perc = n() / unique(N)) |>
+  filter(!is.na(value)) |>
+  ggplot(aes(x = value, y = perc, fill = name)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  scale_x_discrete("Topic most often discussed with parent") +
+  scale_y_continuous("Percent of boys", labels = scales::percent) +
+  scale_fill_discrete("Parent",
+                      labels = c("Father", "Mother"),
+                      type = c("purple", "orange")) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  ggtitle("Boys")
+ggsave("_graphs/ParentIssuesMomDadBoys.pdf", width = 5.5, height = 4.25)
 CCPISGirls |>
-  filter(!is.na(mother_discuss_clean)) |>
-  ggplot(aes(x = mother_discuss_clean)) +
-  geom_bar(aes(y = after_stat(count) / sum(after_stat(count)))) +
-  scale_x_discrete("Topic most often discussed with mother") +
-  scale_y_continuous("Percent of students", labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 90))
-ggsave("_graphs/MotherIssuesGirls.pdf", width = 5.5, height = 4.25)
-CCPIS |>
-  filter(!is.na(father_discuss_clean)) |>
-  ggplot(aes(x = father_discuss_clean)) +
-  geom_bar(aes(y = after_stat(count) / sum(after_stat(count)))) +
-  scale_x_discrete("Topic most often discussed with father") +
-  scale_y_continuous("Percent of students", labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 90))
-ggsave("_graphs/FatherIssues.pdf", width = 5.5, height = 4.25)
-CCPISBoys |>
-  filter(!is.na(father_discuss_clean)) |>
-  ggplot(aes(x = father_discuss_clean)) +
-  geom_bar(aes(y = after_stat(count) / sum(after_stat(count)))) +
-  scale_x_discrete("Topic most often discussed with father") +
-  scale_y_continuous("Percent of students", labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 90))
-ggsave("_graphs/FatherIssuesBoys.pdf", width = 5.5, height = 4.25)
-CCPISGirls |>
-  filter(!is.na(father_discuss_clean)) |>
-  ggplot(aes(x = father_discuss_clean)) +
-  geom_bar(aes(y = after_stat(count) / sum(after_stat(count)))) +
-  scale_x_discrete("Topic most often discussed with father") +
-  scale_y_continuous("Percent of students", labels = scales::percent) +
-  theme(axis.text.x = element_text(angle = 90))
-ggsave("_graphs/FatherIssuesGirls.pdf", width = 5.5, height = 4.25)
+  pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
+  group_by(name) |>
+  mutate(N = n()) |>
+  group_by(name, value) |>
+  summarise(perc = n() / unique(N)) |>
+  filter(!is.na(value)) |>
+  ggplot(aes(x = value, y = perc, fill = name)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  scale_x_discrete("Topic most often discussed with parent") +
+  scale_y_continuous("Percent of girls", labels = scales::percent) +
+  scale_fill_discrete("Parent",
+                      labels = c("Father", "Mother"),
+                      type = c("purple", "orange")) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  ggtitle("Girls")
+ggsave("_graphs/ParentIssuesMomDadGirls.pdf", width = 5.5, height = 4.25)
 Model10 <- nlme::lme(data = CCPISBoys, fixed = interest_health ~
                        gender_parent_health, random = ~ 1 | Class,
                      na.action = na.omit)
@@ -2505,9 +2498,9 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model19)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
-  notes = c("Multilevel regression with random effects at the classroom level"),
-  title = paste("(\\#tab:lmeParentAlt) Interest in topic by gender of parent",
-                "who discusses that topic the most"),
+  notes = "Multilevel regression with random effects at the classroom level",
+  title = paste("Interest in topic by gender of parent who discusses that",
+                "topic the most {#tbl-lmeParent}"),
   coef_rename = c(
     "gender_parent_health" = "Health care (1 = mother)",
     "gender_parent_foreign" = "International affairs (1 = mother)",
@@ -2554,8 +2547,8 @@ modelsummary::modelsummary(models = list(
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
   notes = c("Multilevel regression with random effects at the classroom level"),
-  title = paste("(\\#tab:lmeMother) Interest in topic most often discussed",
-                "with one's mother"),
+  title = paste("Interest in topic most often discussed with one's mother",
+                "{#tbl-lmeMother}"),
   coef_rename = c("mother_discuss_health" = "Health care",
                   "mother_discuss_foreign" = "International affairs",
                   "mother_discuss_law" = "Law and crime",
@@ -2601,8 +2594,8 @@ modelsummary::modelsummary(models = list(
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
   notes = c("Multilevel regression with random effects at the classroom level"),
-  title = paste("(\\#tab:lmeFather) Interest in topic most often discussed",
-                "with one's father"),
+  title = paste("Interest in topic most often discussed with one's father",
+                "{#tbl-lmeFather}"),
   coef_rename = c("father_discuss_health" = "Health care",
                   "father_discuss_foreign" = "International affairs",
                   "father_discuss_law" = "Law and crime",
@@ -2610,44 +2603,44 @@ modelsummary::modelsummary(models = list(
                   "father_discuss_partisan" = "Partisan politics"))
 Model100 <- nlme::lme(data = CCPISBoys, fixed = interest_health ~
                         gender_parent_health + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model110 <- nlme::lme(data = CCPISGirls, fixed = interest_health ~
                        gender_parent_health + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model120 <- nlme::lme(data = CCPISBoys, fixed = interest_foreign ~
                        gender_parent_foreign + age + age_squared + white +
                         immig + lang, random = ~ 1 | Class,
                       na.action = na.omit)
 Model130 <- nlme::lme(data = CCPISGirls, fixed = interest_foreign ~
                        gender_parent_foreign + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model140 <- nlme::lme(data = CCPISBoys, fixed = interest_law ~
                        gender_parent_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model150 <- nlme::lme(data = CCPISGirls, fixed = interest_law ~
                        gender_parent_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model160 <- nlme::lme(data = CCPISBoys, fixed = interest_education ~
                        gender_parent_education + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model170 <- nlme::lme(data = CCPISGirls, fixed = interest_education ~
                        gender_parent_education + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model180 <- nlme::lme(data = CCPISBoys, fixed = interest_partisan ~
                        gender_parent_partisan + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model190 <- nlme::lme(data = CCPISGirls, fixed = interest_partisan ~
                        gender_parent_partisan + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Models10 <- tibble::tribble(~a, ~b, ~c, ~d, ~e, ~f,
                             "**Results among boys**", '', '', '', '', '',
                             '**Results among girls**', '', '', '', '', '')
@@ -2661,9 +2654,9 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model190)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
-  notes = c("Multilevel regression with random effects at the classroom level"),
-  title = paste("(\\#tab:lmeParent) Interest in topic by gender of parent who",
-                "discusses that topic the most"),
+  notes = "Multilevel regression with random effects at the classroom level",
+  title = paste("Interest in topic by gender of parent who discusses that",
+                "topic the most {#tbl-lmeParentAlt}"),
   coef_rename = c(
     "gender_parent_health" = "Health care (1 = mother)",
     "gender_parent_foreign" = "International affairs (1 = mother)",
@@ -2675,48 +2668,50 @@ modelsummary::modelsummary(models = list(
     "white" = "Race (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
-    "langFrancophone" = "French spoken at home"))
+    "langFrancophone" = "French spoken at home",
+    "agentic" = "Agency",
+    "communal" = "Communality"))
 
 Model200 <- nlme::lme(data = CCPISBoys, fixed = interest_health ~
                        mother_discuss_health + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model210 <- nlme::lme(data = CCPISGirls, fixed = interest_health ~
                        mother_discuss_health + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model220 <- nlme::lme(data = CCPISBoys, fixed = interest_foreign ~
                        mother_discuss_foreign + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model230 <- nlme::lme(data = CCPISGirls, fixed = interest_foreign ~
                        mother_discuss_foreign + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model240 <- nlme::lme(data = CCPISBoys, fixed = interest_law ~
                        mother_discuss_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model250 <- nlme::lme(data = CCPISGirls, fixed = interest_law ~
                        mother_discuss_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model260 <- nlme::lme(data = CCPISBoys, fixed = interest_education ~
                        mother_discuss_education + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model270 <- nlme::lme(data = CCPISGirls, fixed = interest_education ~
                        mother_discuss_education + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model280 <- nlme::lme(data = CCPISBoys, fixed = interest_partisan ~
                        mother_discuss_partisan + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model290 <- nlme::lme(data = CCPISGirls, fixed = interest_partisan ~
                        mother_discuss_partisan + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 modelsummary::modelsummary(models = list(
   "Boys" = list("Health care" = Model200, "International affairs" = Model220,
                 "Law and crime" = Model240, "Education" = Model260,
@@ -2727,8 +2722,8 @@ modelsummary::modelsummary(models = list(
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
   notes = c("Multilevel regression with random effects at the classroom level"),
-  title = paste("(\\#tab:lmeMotherAlt) Interest in topic most often discussed",
-                "with one's mother"),
+  title = paste("Interest in topic most often discussed with one's mother",
+                "{#tbl-lmeMotherAlt}"),
   coef_rename = c("mother_discuss_health" = "Health care",
                   "mother_discuss_foreign" = "International affairs",
                   "mother_discuss_law" = "Law and crime",
@@ -2739,47 +2734,49 @@ modelsummary::modelsummary(models = list(
                   "white" = "Race (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
-                  "langFrancophone" = "French spoken at home"))
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality"))
 Model300 <- nlme::lme(data = CCPISBoys, fixed = interest_health ~
                        father_discuss_health + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model310 <- nlme::lme(data = CCPISGirls, fixed = interest_health ~
                        father_discuss_health + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model320 <- nlme::lme(data = CCPISBoys, fixed = interest_foreign ~
                        father_discuss_foreign + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model330 <- nlme::lme(data = CCPISGirls, fixed = interest_foreign ~
                        father_discuss_foreign + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model340 <- nlme::lme(data = CCPISBoys, fixed = interest_law ~
                        father_discuss_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model350 <- nlme::lme(data = CCPISGirls, fixed = interest_law ~
                        father_discuss_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model360 <- nlme::lme(data = CCPISBoys, fixed = interest_education ~
                        father_discuss_education + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model370 <- nlme::lme(data = CCPISGirls, fixed = interest_education ~
                        father_discuss_education + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model380 <- nlme::lme(data = CCPISBoys, fixed = interest_partisan ~
                        father_discuss_partisan + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 Model390 <- nlme::lme(data = CCPISGirls, fixed = interest_partisan ~
                        father_discuss_partisan + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal, random = ~ 1 |
+                        Class, na.action = na.omit)
 modelsummary::modelsummary(models = list(
   "Boys" = list("Health care" = Model300, "International affairs" = Model320,
                 "Law and crime" = Model340, "Education" = Model360,
@@ -2790,8 +2787,8 @@ modelsummary::modelsummary(models = list(
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
   notes = c("Multilevel regression with random effects at the classroom level"),
-  title = paste("(\\#tab:lmeFatherAlt) Interest in topic most often discussed",
-                "with one's father"),
+  title = paste("Interest in topic most often discussed with one's father",
+                "{#tbl-lmeFatherAlt}"),
   coef_rename = c("father_discuss_health" = "Health care",
                   "father_discuss_foreign" = "International affairs",
                   "father_discuss_law" = "Law and crime",
@@ -2802,7 +2799,9 @@ modelsummary::modelsummary(models = list(
                   "white" = "Race (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
-                  "langFrancophone" = "French spoken at home"))
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality"))
 
 #### 3.3 Chapter 3 ####
 ### Effect of peers (CCPIS) ####
@@ -2845,8 +2844,9 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model49)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
-  notes = c("Multilevel regression with random effects at the classroom level"),
-  title = "Interest in topic most often discussed with one's female friends",
+  notes = "Multilevel regression with random effects at the classroom level",
+  title = paste("Interest in topic most often discussed with one's female",
+                "friends {#tbl-lmeFemaleFriends}"),
   coef_rename = c("femalefriends_discuss_health" = "Health care",
                   "femalefriends_discuss_foreign" = "International affairs",
                   "femalefriends_discuss_law" = "Law and crime",
@@ -2891,9 +2891,9 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model59)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
-  notes = c(
-    "Multilevel regression with random effects at the classroom level"),
-  title = "Interest in topic most often discussed with one's male friends",
+  notes = "Multilevel regression with random effects at the classroom level",
+  title = paste("Interest in topic most often discussed with one's male",
+                "friends {#tbl-lmeMaleFriends}"),
   coef_rename = c("malefriends_discuss_health" = "Health care",
                   "malefriends_discuss_foreign" = "International affairs",
                   "malefriends_discuss_law" = "Law and crime",
@@ -2901,44 +2901,44 @@ modelsummary::modelsummary(models = list(
                   "malefriends_discuss_partisan" = "Partisan politics"))
 Model400 <- nlme::lme(data = CCPISBoys, fixed = interest_health ~
                         femalefriends_discuss_health + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model410 <- nlme::lme(data = CCPISGirls, fixed = interest_health ~
                         femalefriends_discuss_health + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model420 <- nlme::lme(data = CCPISBoys, fixed = interest_foreign ~
                         femalefriends_discuss_foreign + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model430 <- nlme::lme(data = CCPISGirls, fixed = interest_foreign ~
                         femalefriends_discuss_foreign + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model440 <- nlme::lme(data = CCPISBoys, fixed = interest_law ~
                         femalefriends_discuss_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model450 <- nlme::lme(data = CCPISGirls, fixed = interest_law ~
                         femalefriends_discuss_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model460 <- nlme::lme(data = CCPISBoys, fixed = interest_education ~
                         femalefriends_discuss_education + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model470 <- nlme::lme(data = CCPISGirls, fixed = interest_education ~
                         femalefriends_discuss_education + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model480 <- nlme::lme(data = CCPISBoys, fixed = interest_partisan ~
                         femalefriends_discuss_partisan + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model490 <- nlme::lme(data = CCPISGirls, fixed = interest_partisan ~
                         femalefriends_discuss_partisan + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 modelsummary::modelsummary(models = list(
   "Boys" = list("Health care" = Model400, "International affairs" = Model420,
                 "Law and crime" = Model440, "Education" = Model460,
@@ -2948,9 +2948,9 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model490)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
-  notes = c(
-    "Multilevel regression with random effects at the classroom level"),
-  title = "Interest in topic most often discussed with one's female friends",
+  notes = "Multilevel regression with random effects at the classroom level",
+  title = paste("Interest in topic most often discussed with one's female",
+                "friends {#tbl-lmeFemaleFriendsAlt}"),
   coef_rename = c("femalefriends_discuss_health" = "Health care",
                   "femalefriends_discuss_foreign" = "International affairs",
                   "femalefriends_discuss_law" = "Law and crime",
@@ -2961,47 +2961,49 @@ modelsummary::modelsummary(models = list(
                   "white" = "Race (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
-                  "langFrancophone" = "French spoken at home"))
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality"))
 Model500 <- nlme::lme(data = CCPISBoys, fixed = interest_health ~
                         malefriends_discuss_health + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model510 <- nlme::lme(data = CCPISGirls, fixed = interest_health ~
                         malefriends_discuss_health + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model520 <- nlme::lme(data = CCPISBoys, fixed = interest_foreign ~
                         malefriends_discuss_foreign + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model530 <- nlme::lme(data = CCPISGirls, fixed = interest_foreign ~
                         malefriends_discuss_foreign + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model540 <- nlme::lme(data = CCPISBoys, fixed = interest_law ~
                         malefriends_discuss_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model550 <- nlme::lme(data = CCPISGirls, fixed = interest_law ~
                         malefriends_discuss_law + age + age_squared + white +
-                        immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model560 <- nlme::lme(data = CCPISBoys, fixed = interest_education ~
                         malefriends_discuss_education + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model570 <- nlme::lme(data = CCPISGirls, fixed = interest_education ~
                         malefriends_discuss_education + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model580 <- nlme::lme(data = CCPISBoys, fixed = interest_partisan ~
                         malefriends_discuss_partisan + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 Model590 <- nlme::lme(data = CCPISGirls, fixed = interest_partisan ~
                         malefriends_discuss_partisan + age + age_squared +
-                        white + immig + lang, random = ~ 1 | Class,
-                      na.action = na.omit)
+                        white + immig + lang + agentic + communal,
+                      random = ~ 1 | Class, na.action = na.omit)
 modelsummary::modelsummary(models = list(
   "Boys" = list("Health care" = Model500, "International affairs" = Model520,
                 "Law and crime" = Model540, "Education" = Model560,
@@ -3011,8 +3013,9 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model590)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
-  notes = c("Multilevel regression with random effects at the classroom level"),
-  title = "Interest in topic most often discussed with one's male friends",
+  notes = "Multilevel regression with random effects at the classroom level",
+  title = paste("Interest in topic most often discussed with one's male",
+                "friends {#tbl-lmeMaleFriendsAlt}"),
   coef_rename = c("malefriends_discuss_health" = "Health care",
                   "malefriends_discuss_foreign" = "International affairs",
                   "malefriends_discuss_law" = "Law and crime",
@@ -3023,4 +3026,6 @@ modelsummary::modelsummary(models = list(
                   "white" = "Race (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
-                  "langFrancophone" = "French spoken at home"))
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality"))

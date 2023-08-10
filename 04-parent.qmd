@@ -49,6 +49,15 @@ The gender gap in political topics discussed is pretty stark between mothers and
 
 These results match with what previous literature has found about women reporting more interest in education and health care, and men reporting more interest in partisan politics, law and crime, and international affairs. However, parents seem to talk about politics just as much with their sons as with their daughters.
 
+@fig-parentsmomdad shows the extent to which mothers discuss each of the five topics, and the same for fathers. Mothers overwhelmingly discuss education and health care according to their children, while fathers discuss international affairs more than other topics but seem like a more heterogeneous group. Despite partisan politics being the least discussed issue by both parents, fathers are much more likely to discuss it than mothers according to this metric. For law and crime too, fathers are more likely to discuss it. Again, when these results are broken down by students' gender (see Appendix IV), very similar results are found for boys and girls.
+
+```{r}
+#| label: fig-parentsmomdad
+#| echo: false
+#| fig-cap: "Issue most often discussed by mothers and fathers, 2023 CCPIS data"
+knitr::include_graphics("_graphs/ParentIssuesMomDad.pdf")
+```
+
 ### Issues Parents Discuss the Most
 
 When it comes to parents' role in political interest transmission, @tbl-lmeParent shows the relationship between students' interest in each of the five topics and the gender of the parent who discusses the issue with them the most.^[Students who do not have one parent of either gender are removed from the analysis.] Children's interest in any of the five topics does not seem to be related to the gender of the parent who discusses the issue the most; all relationships are statistically insignificant.
