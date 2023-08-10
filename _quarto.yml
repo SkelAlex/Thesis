@@ -1,0 +1,26 @@
+project:
+  type: book
+book:
+  title: "Gendered Political Socialization"
+  subtitle: "Why Women and Men Still Differ in Political Interest"
+  author: "Alexandre Fortier-Chouinard"
+  date: last-modified
+  date-format: "MMMM D, YYYY"
+  chapters:
+    - index.qmd
+    - 01-intro.qmd
+    - 02-method.qmd
+    - 03-develop.qmd
+    - 04-parent.qmd
+    - 05-peer.qmd
+    - 06-mediaschool.qmd
+    - 07-conclu.qmd
+    - 08-references.qmd
+  appendices:
+    - 09-appendix.qmd
+bibliography: Thesis.bib
+filters:
+  - section-bibliographies
+format:
+  pdf:
+    documentclass: scrreprt

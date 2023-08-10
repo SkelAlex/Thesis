@@ -1,0 +1,9 @@
+---
+title: "Conclusion"
+author: "Alexandre Fortier-Chouinard"
+bibliography: Thesis.bib
+format: pdf
+toc: true
+toc-depth: 5
+---
+## References

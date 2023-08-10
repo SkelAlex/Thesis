@@ -1,0 +1,15 @@
+---
+title: "Teachers, Influencers and Political Interest: School and Social Media as Other Venues of Acquisition"
+author: "Alexandre Fortier-Chouinard"
+bibliography: Thesis.bib
+format: pdf
+toc: true
+toc-depth: 5
+---
+manipulation?
+
+"students who actively use social media have an increased level of support for conventional citizenship values and demonstrate more interest in active political participation in the future." [@blasko2019]
+
+storytelling can be effective in increasing political engagement online [@vromen2022] (not sure for interest)
+
+## References

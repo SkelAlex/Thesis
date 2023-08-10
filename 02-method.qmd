@@ -1,0 +1,159 @@
+---
+title: "Data, Methods and Descriptive Statistics"
+author: "Alexandre Fortier-Chouinard"
+bibliography: Thesis.bib
+format: pdf
+toc: true
+toc-depth: 5
+---
+This chapter details the datasets and methods that will be used throughout the chapters of this dissertation. It also provides descriptive statistics about some of the main variables that will be used. Before doing so, it provides a brief explanation of the case selection.
+
+## Why Canada?
+
+The data used for this dissertation comes from Canada, a country often classified by reports as one of the best for women to live in [@conant2019; @em22020; @usnews2020], but where only 30.7% of elected MPs are women, the 61st highest percentage among the world's 193 countries [@ipu2023]. Canadian Election Study (CES) data since 1997 also shows that the gender gap in political interest has remained fairly stable despite a recent increase in the percentage of women politicians at the national and provincial levels [@sevi2021]. These characteristics make Canada a country worth studying to better understand the underlying reasons behind the stability of the gender gap in the aggregate measure of political interest, which mainly taps into interest in partisan politics. Studies that measure interest in different political topics have been conducted in Europe and the Middle East, but it is unclear how the gender differences they do find for many topics apply in North America. Studying the transmission of political interest to children in Canada seems like a promising place to look for explanations of these gender differences.
+
+## Data Collection
+
+Within Canada, this dissertation relies on two main datasets which have been collected for the purposes of this dissertation. However, three other large-scale surveys are mobilized to provide extra context and better estimates of political engagement in Canada --- and its evolution as Canadians age.
+
+The two datasets which were collected for this dissertation share similar questions about political interest and about interest in five specific political topics: health care, international affairs, law and crime, education, and partisan politics. Past studies have shown that women typically report being more interested in the political aspects of health care and education, while men typically report being more interested in the political aspects of the other three topics mentioned [@campbellrosie2008; @coffe2013; @ferrin2020; @hayes1993; @kuhn2004; @sabella2004; @verba1997].
+
+### Canadian Children Political Interest Survey (CCPIS)
+
+To create the Canadian Children Political Interest Survey (CCPIS), data was collected among 698 Canadian children and adolescents aged 8 to 18 from seven elementary and secondary schools and one school board's Student Senate, all located in various urban areas of Quebec and Ontario,^[All are considered urban since they are part of a census metropolitan area (CMA) as defined by @statcan2023.] between August 2022 and January 2023. Students had to fill a 15-minute online survey questionnaire during classroom time. The survey was hosted on the Qualtrics Web platform and was available in both French and English. @tbl-descriptive shows the number of classrooms and students in each of the eight schools included in the final sample of the CCPIS, as well as additional information about the schools. Several hundred school boards and schools across Canada were originally contacted to take part in the project, but nonresponse/rejection rate was higher than 90%. This sample should be considered a non-random, convenience sample. Nevertheless, due to the scarcity of available data on school-aged children's political predispositions within Canada, this dataset provides relevant information about students' interests, role models, and relation to politics. The core of the data analysis in each chapter therefore relies on this dataset.
+
+Table: Descriptive statistics, CCPIS data {#tbl-descriptive}
+
+| **ID** | **Public/ Private**^[The three public bodies that accepted to be part of the study are associated with three different school boards.] | **Language** | **Province** | **Ages**^[Age groups are for the school itself, not the classrooms selected.] |  **Number of students in body**  | **Number of students in sample** | **Number of classrooms in sample**  | **Number of teachers in sample** |
+|----|-----------------|-------------------|-----------------|-----------|------------------------|------------------------|------------------------|------------------------|
+| 1           | Private          | French            | Quebec            | 12--17        | 450               | 133                | 5                   | 2                  |
+| 2           | Public           | French            | Quebec            | 12--17        | 690               | 196                | 10                  | 2                  |
+| 3           | Private          | French            | Quebec            | 12--17        | 670               | 78                 | 3                   | 1                  |
+| 4           | Private          | French            | Quebec            | 12--17        | 900               | 253                | 12                  | 3                  |
+| 5^[Mixed on-site/online school.]           | Private          | English           | Ontario           | 14--18        |                   | 5                  | 3                   | 2                  |
+| 6           | Public           | French            | Quebec            | 5--12         |                   | 14                 | 1                   | 1                  |
+| 7           | Private          | English           | Ontario           | 5--14         |                   | 4                  | 3                   | 1                  |
+| 8^[Student Senate, a body located at the school board level.]           | Public           | English           | Ontario           | 14--18        | 15                | 15                 | 1                   | 1                  |
+|             |                  |                   |                   |               | **Total**    | **698**       | **38**         | **13**        |
+<!--School ID 1: Collège Boisbriand 2016, nombre d'élèves https://cdn-contenu.quebec.ca/cdn-contenu/adm/min/education/publications-adm/education/organismes-lies/CCEP/CCEP-rapport-annuel-20-21.pdf
+School ID 2: École Jean-de-Brébeuf, nombre d'élèves https://cssc.gouv.qc.ca/ecole/ecole-jean-de-brebeuf
+School ID 3: Collège mariste de Québec, nombre d'élèves https://www.xn--collgemariste-zgb.ca/historique
+School ID 4: Collège Citoyen, nombre d'élèves https://ecolespriveesquebec.ca/ecole/college-citoyen/
+School ID 5: Jaya International High School
+School ID 6: École de la Rose-des-Vents
+School ID 7: Urban Village Academy
+School ID 8: Renfrew County DSB Student Senate, number of students https://www.rcdsb.on.ca/en/parents-and-students/student-senate.aspx-->
+
+The CCPIS includes information about students' interest in various political topics, the political topics they say they discuss with their mothers, fathers and peers, as well as the political topics discussed by a teacher and an influencer they like. The gender of these role models is also inquired. The Personal Attributes Questionnaire [@spence1978; @ward2006] is used to assess students' degrees of agency and communality, and to assess whether interest correlations between children and their same-gender role models change when controlling for the child's degree of agency or communality. Socio-demographic questions are asked to children about gender, language spoken at home, immigrant status, age, and race. These questions are mostly inspired by the Canadian Election Study [@ces2019], except for the question on race, which is based on the 2016 Census [@census2017]. The English and French CCPIS questionnaires are available in Appendices I and II.
+
+The following questions are asked about students' interests: "How interested are you in politics generally? Set the slider to a number from 0 to 10, where 0 means no interest at all, and 10 means a great deal of interest", and "If you were to open a news website and see the following articles how interested would you be in reading each article? Set the slider to a number from 0 to 10, where 0 means 'Not at all interested, I would not read it,' and 10 means 'Very interested, I would most likely read it.' (a) Health care (i.e., pandemic restrictions, working conditions of nurses); (b) International affairs (i.e., diplomatic disputes between Canada and China, Ukrainian war); (c) Law and crime (i.e., police funding, sentences for violent crimes); (d) Education (i.e., university tuition, funding of public and private schools); (e) Partisan politics (i.e., federal elections, political parties)". These questions specify concrete examples of political issues related to each topic, in order to make the political aspects of these topics more salient and avoid students answering while thinking about their own health or classes they are taking. The question's phrasing is meant to be easily understood by children and teenagers.
+
+In order to determine the importance of role models' gender, the following questions were asked to children: "Which parent do you discuss most often with? (a) Mother; (b) Father; (c) Both equally"; "What is the gender of most of your friends? (a) Girls; (b) Boys; (c) About the same for both genders"; "Think about a teacher that you like(d). Is that teacher... (a) A woman; (b) A man; (c) Other (e.g. Trans, non-binary, two-spirit, gender-queer)"; "Think about someone that you like and sometimes read or watch on social media --- including YouTube. Is that person... (a) A man; (b) A woman; (c) Other (e.g. Trans, non-binary, two-spirit, gender-queer)." Questions are then asked about the topics most discussed by parents, peers, teachers and influencers among the five political topics highlighted beforehand.
+
+### Datagotchi Post-Election Survey (Datagotchi PES)
+
+The second dataset collected over the course of this dissertation is the Datagotchi post-election survey, which includes 2,228 Quebec adult respondents [@datagotchi2023]. This dataset was collected in February and March 2023 using a panel of respondents which agreed to be contacted by email during the 2022 Quebec general election through the Datagotchi Web app [@datagotchi2022]. For the purposes of this dissertation, the questions of interest which were asked to panel respondents inquired about their level of interest in various political topics and general socio-economic status. For these questions, the same question wording was used than among students, with the same five political topics. The Datagotchi Post-Election Survey French questionnaire is available in Appendix III.
+
+### Canadian Election Survey (CES)
+
+Other than these two main datasets, three often-used datasets including Canadian respondents are mobilized to give a more general empirical overlook on political interest in Canada. First, Canadian Election Study (CES) data on various aspects of political engagement is analyzed [@ces2021]. This includes data about political interest, political knowledge, internal efficacy, external efficacy, political discussion, political debating, participation in protests, participation in boycotts, participation in petitions, party membership, donations to parties, and voting. CES data allows time series analyses of the evolution of gender gaps, with some political engagement questions having been asked since 1965.
+
+### World Values Survey (WVS)
+
+Second, time-series World Values Survey (WVS) data is also used. These data, like CES data, make it possible to visually represent descriptive statistics by age and gender on political engagement. Moreover, the World Values Survey (WVS) Wave 7 (2017--22) includes data from Canada and 56 other countries, therefore providing the opportunity for cross-country comparisons on political interest and political engagement. Respondents were asked a different political interest question than in other surveys: "How interested would you say you are in politics? (a) Very interested; (b) Somewhat interested; (c) Not very interested; (d) Not at all interested" [@wvs2022].^[This 4-point scale is transformed into a 0--10 scale comparable with the CES's political interest scale, using the same method as @prior2010.]
+
+### General Social Survey (GSS)
+
+Finally, microdata from the 2013 Canadian General Social Survey (GSS), cycle 27.2 (Social Identity) are used to complement the CES and WVS data with a less non-political questionnaire which might be more representative of Canadians' overall level of interest in politics [@gss2013].
+
+## Variable Description & Descriptive Statistics
+
+### CCPIS
+
+@fig-ccpis1 shows the distribution of CCPIS students by age, gender, language, race, immigrant status, degree of agency and communality, family situation, and the gender of their role models. The gender composition of the sample is roughly balanced, with 50% of girls and 47% of boys. Most respondents are aged 13 to 17, with a large proportion (41%) being exactly 16 years old. This roughly corresponds to the moment where adolescents' political interest starts increasing alongside a gender gap in which boys report being more interested in politics [@fraile2020; @janmaat2022; @prior2019]. Respondents are mainly white (57%) and Francophone (66%), but several students who speak another language than English or French at home have also filled the survey (25%). 85% of them were born in Canada. Most students live with one mother and one father (72%), with a substantial minority (18%) also having stepparents. Other family arrangements are less common.
+
+```{r}
+#| label: fig-ccpis1
+#| echo: false
+#| fig-cap: "CCPIS Descriptive Statistics - General"
+knitr::include_graphics("_graphs/CCPISDescriptive1.pdf")
+```
+
+For agency and communality, scales are replicated from @ward2006. Factor analysis in @fig-factor1 and @fig-factor2 show that, with one exception on the agency list --- an item that was reverse-coded^[This could be a data quality issue, since this is the only question for which the agentic pole is reverse-coded among the first eight questions asked to children, and none of the communality scale questions are reverse-coded. The scale is an exact replication of the one used by @ward2006.] --- all items scale well together, with factor loadings above 0.3, a Cronbach's alpha higher than 0.6 and first eigenvalues larger than 1.
+
+```{r}
+#| label: fig-factor1
+#| echo: false
+#| fig-cap: "CCPIS Factor Analysis: Agency Scale"
+knitr::include_graphics("_graphs/AgencyScale.pdf")
+```
+
+```{r}
+#| label: fig-factor2
+#| echo: false
+#| fig-cap: "CCPIS Factor Analysis: Communality Scale"
+knitr::include_graphics("_graphs/CommunalityScale.pdf")
+```
+
+@fig-ccpis2 shows the distribution of students by interest in each of the political topics. 0 is associated with the lowest level of interest and 10 with the highest. International relations, and law and crime are generally well-balanced, with students' mean interest above 5/10 (5.2--5.3). On the other hand, few students report high interest in health care (4.1), education (4.1), or partisan politics (3.5).
+
+```{r}
+#| label: fig-ccpis2
+#| echo: false
+#| fig-cap: "CCPIS Descriptive Statistics - Political Interest"
+knitr::include_graphics("_graphs/CCPISDescriptive2.pdf")
+```
+
+### Datagotchi PES, CES, WVS and GSS
+
+@fig-dg shows descriptive statistics for the Datagotchi PES, which is not a representative sample. This sample includes an over-representation of men (57%), white people (97%), Francophones (94%), university-educated people (71%), and people born in Canada (86%) compared to 2021 Canadian Census data for Quebec [@census2022]. 45% of respondents have a yearly household income over \$110,000. The average age is 48, with a bimodal distribution centered around 35--40 and 65. Given the mismatch between many of these characteristics --- notably gender, level of education and race --- and the Quebec population, survey weights are created and used to make the sample more representative of the Quebec population on these two aspects, as well as income, language and age. A raking procedure is used to produce these weights. [Question to Chris: Public-use microdata are not out yet ("Individual PUMF files and hierarchical PUMF files are to be released in Fall 2023 and Winter 2023-2024 respectively, by Statistics Canada, per 2021 Census of Population Data Product Page." https://mdl.library.utoronto.ca/collections/numeric-data/census-canada/2021/microdata) They should be released this fall. Do you know any way to fast-track my access to such data? I might need to rely on 2016 data otherwise.]
+
+```{r}
+#| label: fig-dg
+#| echo: false
+#| fig-cap: "Datagotchi PES Descriptive Statistics - General"
+knitr::include_graphics("_graphs/DGDescriptive1.pdf")
+```
+
+[Question to Chris: Is it necessary to add @fig-gss and analyze it? Should I do the same for the CES and WVS? They serve as supportive data but have already been the topic of several studies and have their own survey weights which I will re-use.]
+
+```{r}
+#| label: fig-gss
+#| echo: false
+#| fig-cap: "2013 GSS Descriptive Statistics (Wave 27 - Social Identity) - General"
+knitr::include_graphics("_graphs/GSSDescriptive1.pdf")
+```
+
+@fig-dginterest and @fig-ceswvsgssinterest show the level of interest in politics among the four adult Canadian surveys, including interest in the five topics in the case of the Datagotchi PES. While adult Quebeckers (Datagotchi PES) report being more interested in each of the five topics compared with Canadian students (CCPIS), interest in law and crime (5.5/10) is lower than for other topics, followed by law and crime (6.1/10). General political interest (7.4/10) is higher on average than interest in any of the five topics. Interest in the five political topics also follows a more bell-shaped, normal distribution than what CCPIS found among Canadian youth.
+
+GSS and WVS respondents are less slightly interested in politics (5.7/10 for both) than those to the 2021 CES (6.4/10), potentially related to the CES's more explicitly political nature. Datagotchi PES respondents score an even higher average general political interest score of 7.4/10, which might not be surprising given the fact that these respondents are former users of the Datagotchi Web app. Analyses using the Datagotchi PES throughout this dissertation can therefore be considered to be a high bar for level of interest in each of the political topics.
+
+```{r}
+#| label: fig-dginterest
+#| echo: false
+#| fig-cap: "Datagotchi PES Descriptive Statistics - Political Interest"
+knitr::include_graphics("_graphs/DGInterest.pdf")
+```
+
+```{r}
+#| label: fig-ceswvsgssinterest
+#| echo: false
+#| fig-cap: "CES, WVS and GSS Descriptive Statistics - Political Interest"
+knitr::include_graphics("_graphs/CESWVSGSSInterest.pdf")
+```
+
+## Methods
+
+### Multilevel Regressions and OLS
+
+For CCPIS data, multilevel regressions with two levels are used to help disentangle classroom-level effects from individual-level effects. While students are clustered within classrooms, which are themselves nested within schools and provinces, the number of schools (8) and provinces (2) in the final sample is too low for multilevel regressions to be conducted, and only the classroom level is kept in the analyses. Simple regression models and multiple regression models are computed, with control variables for the variables highlighted in this chapter's descriptive statistics section.
+
+Empty models are calculated to assess what percentage in the total variance in political interest --- and in each of the five topics --- is located at the classroom level. Results show that 6.2% of variance in political interest is located at the classroom level, as well as 4.6% of variance in interest in health care, 3.6% of variance in interest in international affairs, 1.4% of variance in interest in law and crime, 8.1% of variance in interest in education, and 2.6% of variance in interest in partisan politics. In all cases, the bulk of variance therefore seems to be located at another level --- presumably the individual level.
+
+For the other four datasets, simple and multiple ordinary least squares (OLS) regression are instead performed, with the same control variables.
+
+### Note on Social Desirability Bias
+
+Questions about political interest can be subject to some degree of social desirability bias, which is "the difference between an individual's own intention and his/her perception of his/her peers' intention" [@chung2003, p.&nbsp;296]. However, it is not entirely clear whether girls' scores or boys' scores would be more inflated as a result of social desirability bias. Studies have found that in Canada, Australia, and the United States, *women* generally exhibit higher social desirability bias when answering survey questions [@chung2003; @cohen1998; @cohen2001]. However, studies in these same countries and more instead show that *men* are more likely to over-report having voted in the previous elections [@belli2001; @herrick2020; @stockemer2023]. For political interest, it is unclear which gender --- if any --- tends to over-report it, but disaggregating the concept in five topics might be the best approach to avoid systematic social desirability bias associated with one particular question.
+
+## References
