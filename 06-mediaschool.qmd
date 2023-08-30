@@ -6,6 +6,8 @@ format: pdf
 toc: true
 toc-depth: 5
 ---
+Gender homophily and social learning both suggest that children are influenced by same-gender models. These models include parents, as social learning theory finds it, and peers, as gender homophily theory finds it. However, it might be the case that other role models, including teachers and social media influencers, also have a broader influence on children of their gender. This would be coherent with the idea that observer-model similarity encourages children to model their behaviour on people who resemble them. Is gender homophily just one example among many of social learning through observer-model similarity?
+
 manipulation?
 
 "students who actively use social media have an increased level of support for conventional citizenship values and demonstrate more interest in active political participation in the future." [@blasko2019]

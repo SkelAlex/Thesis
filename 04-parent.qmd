@@ -8,9 +8,41 @@ toc-depth: 5
 ---
 ## Political Interest Transmission
 
-Parents' role in transmitting political interest to their children has been emphasized by numerous studies. @campbell1960 already suggested that "interest in politics, like partisanship, is readily transmitted within the family from generation to generation" (p.&nbsp;413). Political interest can be transmitted in parent--child political discussions [@dostiegoulet2009en; @mayer2004; @shehata2019], and scholars suggest the development of political interest happens through increasingly complex political discussions at home [@easton1969; @greenstein1965]. Studies have generally shown a significant relationship between parents' political interest and their children's political interest [@beauregard2008; @janmaat2022; @neundorf2013; @prior2019; @shehata2019], although @jennings2009 find no statistically significant relationship. Using panel data in three countries, @prior2019 estimates a Pearson correlation coefficient of 0.3 to 0.4 for parent--child political interest scores, and finds a weak but noticeable causal link in which changes in parents' political interest often cause similar changes in their children's political interest.
+Parents play a prominent role in raising their children and therefore are among the main actors who can transmit political interest to them. Political scientists have long studied the extent of parents' role in that regard and the mechanisms through which political interest can be transmitted. @campbell1960 already suggested that "interest in politics, like partisanship, is readily transmitted within the family from generation to generation" (p.&nbsp;413). Studies have generally shown a significant relationship between parents' political interest and their children's political interest [@beauregard2008; @janmaat2022; @neundorf2013; @prior2019; @shehata2019], although @jennings2009 find no statistically significant relationship. @prior2019 estimates a moderately strong Pearson correlation coefficient of 0.3 to 0.4 for parent--child political interest scores.
 
-Parent--child political interest correlations also vary by age. @prior2019 finds that parent--child correlations are very weak at age 11, but grow steadily until age 15. Parent--child correlations then remain stronger when both parents share a similar level of political interest, when this parental political interest is stable through time, and when children move out late from their parents' place. Children who move out early of their parents' place tend to see a quick drop in the extent to which their political interest matches their parents'.
+Parent--child political interest correlations vary by age. @prior2019 finds very weak correlations at age 11, followed by a steady growth until age 15. Parent--child correlations then remain stronger when both parents share a similar level of political interest, when this parental political interest is stable through time, and when children move out late from their parents' place. Children who move out early of their parents' place tend to see a quick drop in the extent to which their political interest matches their parents'.
+
+While parents' political interest often seems to match their children's political interest, most studies lack the kind of data needed to establish a causal link between both. However, @prior2019 uses panel data collected among parents and chidlren and finds a weak but noticeable causal link in parental transmission of political interest. In time series, an increase in mothers' political interest is often accompanied by an increase in their children's political interest. The same goes for fathers, and for decreases rather than increases. These trends are clearer in the United Kingdom and Germany, despite weaker evidence in Switzerland. In the first two countries, it seems reasonable to assume that a change in parents' political interest could cause a similar change in their children's political interest.
+
+The main causal mechanism for this transmission process seems to be parent--child political discussions. Scholars have long suggested that the development of political interest can happens through increasingly complex discussions about political topics between parents and children at home [@easton1969; @greenstein1965]. These discussions can be initiated either by the parent or by the child, and the more they occur, the likelier the child is to be interested in politics. This relationship between the frequency of political discussions with parents and the child's interest in politics is statistically significant in the United States [@shehata2019], China, Mexico, Japan [@mayer2004], and Canada [@dostiegoulet2009en]. Furthermore, @shehata2019 find that changes in the frequency of political discussions with parents positively predict changes in adolescents' level of political interest.
+
+## Social Learning (to cut)
+
+@neundorf2013 section "The role of the family in the formation of political interest"
+
+@shehata2019
+
+@prior2019 p. 62, then every part talking about social learning, then chapter about parents
+
+The gendered version of social learning theory seems promising since it provides an opportunity to check mechanisms of reinforcement of this gender gap through generations, and it has not been studied in a systematic way thus far, especially a way that includes attention to political interest transmission by actors other than parents.
+
+Studies have already highlighted parents' important role in fostering higher political interest among their children, in part through parent--child political discussions and in part through observation of parents' behaviour by children, a process called *social learning* [@gidengil2016; @jennings2009].
+
+*Social learning* suggests that children learn through observation and model their behaviour after their parents. Transmission of political attitudes is deemed to be more effective when cue-giving and reinforcement from the socializing agent are strong and consistent [@jennings2009]. Research has found that social learning exhibits gendered effects: *observer-model similarity* leads children to model their behaviour based on the behaviour of models that resemble them [@bandura1969].
+
+Gender homophily and social learning both suggest that children are influenced by same-gender models. These models include parents, as social learning theory finds it.
+
+Social learning theory suggests that children learn through the observation of their parents, therefore making children of parents who vote more politically active [@gidengil2016]. @jennings1981 show that young adults' political engagement is influenced more heavily by their parents' political engagement than by their own political engagement eight years earlier when they were adolescents, but that their engagement is less and less influenced by their parents through time.
+
+*Social learning* suggests that children learn through observation and model their behaviour after their parents. Transmission of political attitudes is deemed to be more effective when cue-giving and reinforcement from the socializing agent are strong and consistent [@jennings2009]. Research has found that social learning exhibits gender effects: *observer-model similarity* leads children to model their behaviour based on the behaviour of models that resemble them [@bandura1969]. Indeed, past research has shown that the trickle-down effect of political engagement from parents to children works in gendered ways, with sons modeling their behaviour after their fathers and daughters after their mothers [@gidengil2016]. It is stronger for mother--daughter dyads than other parent--child dyads [@gidengil2016]. Observer-model similarity should also apply to the influence of other role models.
+
+Political interest might be transferred from one generation to the next by role models of the same gender.
+
+Social learning theory has been used to study mothers and fathers' relative impact on sons and daughters' political engagement [@gidengil2016], but not to explain overall gender differences in political engagement, such as women's higher interest in health care politics and men's higher tendency to discuss partisan politics. While gender tendencies towards agency vs. communality also contribute to women's interest in health care and men's interest in partisan politics, a broader application of social learning that includes parents, peers, teachers and influencers would provide a more comprehensive understanding of who influences girls and boys to decide how much attention they should devote to varied aspects of politics.
+
+Finally, I expect *social learning* better predicts girls' political engagement, while *gender homophily* better predicts boys' political engagement. Research has found that peer influence is stronger among adolescent girls than boys, though this does not apply to early childhood [@steinberg2007; @sumter2009]. On the other hand, @thomas2006 find that Canadian women's political knowledge depends a lot on their political socialization at home and at school during their childhood, while men are unaffected by this variable. Therefore, political engagement is expected to be driven mainly by peers for boys and mainly by mothers and school for girls.
+
+While social learning theory is one of the main theories for explaining the transmission of political behaviour, attitudes and opinions(?) from parents to children, it has typically not been applied to the study of political interest, especially because children do not "see" parents' political interest and therefore cannot mimic it. However, given the causal link between on the one hand, either changes in parents' political interest or changes , and on the other hand, children's political interest, it seems like social learning theory could also apply, perhaps in indirect ways, to the parent--child transmission of political interest. Moreover, social learning theory works in gendered ways, just like what studies have found about parent--child political interest transmission -- which we turn to now.
 
 ## Gender Differences in Transmission
 
@@ -18,7 +50,9 @@ Research has found that the trickle-down effect of political interest from paren
 
 Studies have investigated the gender patterns in parent--child political discussions, but the amount of political discussions does not seem to vary based on parents and children's gender. While earlier studies found that children discuss politics more often with their fathers than mothers [@noller1985; @oswald1998], more recent research has found no significant difference between fathers and mothers [@hooghe2015; @mayer2004; @shulman2014]. @noller1985 also find that, despite more mother--children discussions about non-political topics, parents discuss politics more often with their sons. However, most studies again find a different pattern in which parents discuss politics with their daughters as much as with their sons [@dowse1971; @lawless2015; @mayer2004]. Given those findings, it seems reasonable to assume, as @hooghe2015 does, that political discussions involving the father tend to revolve mostly around partisan politics, while political discussions with mothers might center on other topics --- presumably health care, education, gender issues, and so on.
 
-Other parental characteristics can also affect the development of children's political interest in gendered or non-gendered ways. @beauregard2008 and @janmaat2022 find that parents' education has a positive relationship with their adolescents' political interest regardless of parents' gender, while @neundorf2013 and @koskimaa2015 find a positive relationship for fathers, @sanjuan2022 find a positive relationship for mothers, @koskimaa2015 find a *negative* relationship for mothers, and @jennings2009 find null results. @gidengil2010 and @cicognani2012 find that a mother's level of political participation has a positive link with her daughter's political interest. @jennings2009 do not find a relationship between parents' income and children's political interest, but @neundorf2013 finds a positive relationship between fathers' income and children's political interest. @borkowska2022 find that political interest transmission patterns vary between immigrant and non-immigrant families, with intergenerational transmission somewhat weaker in immigrant families than other families --- but no moderating effect for naturalization. \[Note for Chris: I could either expand on this paragraph or remove it altogether. Not sure which strategy to adopt.\]
+Other parental characteristics can also affect the development of children's political interest in gendered or non-gendered ways. @gidengil2010 and @cicognani2012 find that a mother's level of political participation has a positive link with her daughter's political interest. @jennings2009 do not find a relationship between parents' income and children's political interest, but @neundorf2013 finds a positive relationship between fathers' income and children's political interest. @borkowska2022 find that political interest transmission patterns vary between immigrant and non-immigrant families, with intergenerational transmission somewhat weaker in immigrant families than other families --- but no moderating effect for naturalization.
+
+Status transmission theory suggests that "well-educated parents are more likely to provide a politically stimulating home environment" and therefore have politically engaged children [@gidengil2016, p.&nbsp;373]. It is not clear if status transmission theory works in gendered ways. @beauregard2008 and @janmaat2022 find that parents' education has a positive relationship with their adolescents' political interest regardless of parents' gender, while @neundorf2013 and @koskimaa2015 find a positive relationship for fathers, @sanjuan2022 find a positive relationship for mothers, @koskimaa2015 find a *negative* relationship for mothers, and @jennings2009 find null results. \[Question to Chris: Should I expand on the last two paragraphs and incldue other variables? Or should I remove them altogether? Not sure which strategy to adopt.\]
 
 ## Parental Socialization Theory
 
@@ -30,194 +64,249 @@ In other words, a parent's interest in a specific political topic should influen
 
 ## Data Analysis
 
-Several questions are then used to assess the role of parents in transmitting interest to their children. First, the following question is asked: "For each of the following topics, which parent do you discuss most often with?" Answers are either "My mother", "My father" or "Don't know/Prefer not to answer". Second, students are asked "Among these five topics, which one do you discuss most often with your mother(s)?" Each of the five topics is listed, and the same question is then asked for the father(s). While topics such as health care and education can be spoken about without referring to their political aspects, children were given examples of political topics related to each of this issue shortly before in the same survey when they were asked which topic they were most interested in (e.g., "Health care (i.e., pandemic restrictions, working conditions of nurses)"). Nevertheless, it is possible that children will answer while keeping the non-political aspects of these topics in mind (e.g., "How was school today? Are you feeling sick?"), and results are therefore interpreted with caution for these two topics.
+Several questions are then used to assess the role of parents in transmitting interest to their children. First, the following question is asked: "For each of the following topics, which parent do you discuss most often with?" Answers are either "My mother", "My father" or "Don't know/Prefer not to answer". Second, students are asked "Among these five topics, which one do you discuss most often with your mother(s)?" Each of the five topics is listed, and the same question is then asked for the father(s). While topics such as health care and education can be spoken about without referring to their political aspects, children were given examples of political issues related to each of this topic shortly before in the same survey when they were asked which topic they were most interested in (e.g., "Health care (i.e., pandemic restrictions, working conditions of nurses)"). Nevertheless, it is possible that children will answer while keeping the non-political aspects of these topics in mind (e.g., "How was school today? Are you feeling sick?"), and results are therefore interpreted with caution for these two topics.
 
 Relying on children's assessments of what their parents think is commonplace among both studies of parent--child political discussions and of parent--child transmission of political interest [@beauregard2008; @dostiegoulet2009en; @dowse1971; @lawless2015; @mayer2004; @oswald1998; @shehata2019; @shulman2014]. This practice can be an imperfect metric, since @beauregard2008 finds that girls tend to rate their parents' political interest more highly than boys do and @stattin2022 find that youth's political interest can cause changes in their perceptions of others' political interest.
 
 ### Parent--Child Political Discussions by Gender
 
-@fig-parents shows, for each issue, which parent students report discussing the most often with. Out of 698 students, after removing non-answers and missing data, 82% of students report discussing health care more often with their mother than father, and 74% say the same for education. To the contrary, 64% of students say they discuss law and crime more often with their father, as well as 68% for partisan politics and 71% for international affairs. There are more non-answers and missing data for partisan politics, which presumably means no parent discusses the issue at home with their children. When these results are broken down by students' gender (see Appendix IV), very similar results are found for boys and girls.
+@fig-parents shows, for each topic, which parent students report discussing the most often with. Out of 698 students, after removing non-answers and missing data, 82% of students report discussing health care more often with their mother than father, and 74% say the same for education. To the contrary, 64% of students say they discuss law and crime more often with their father, as well as 68% for partisan politics and 71% for international affairs. There are more non-answers and missing data for partisan politics, which presumably means no parent discusses the topic at home with their children. When these results are broken down by students' gender (see Appendix IV), very similar results are found for boys and girls.
 
 ```{r}
 #| label: fig-parents
 #| echo: false
-#| fig-cap: "Issue most often discussed with parents, 2023 CCPIS data"
-knitr::include_graphics("_graphs/ParentIssues.pdf")
+#| fig-cap: "Topic most often discussed with parents, 2023 CCPIS data"
+knitr::include_graphics("_graphs/ParentTopics.pdf")
 ```
 
-The gender gap in political topics discussed is pretty stark between mothers and fathers, according to their children's assessments. It is important to specify that given the question's phrasing, it is not clear if these interactions are initiated by parents or by their children, and if it is reflective of top-down or trickle-up political socialization [@mcdevitt2002]. Moreover, the question does not ask children to specify a percentage of interactions about each topic started by the mother or father; it simply asks them to pick the parent most likely to have these discussions with them. Regardless, the fact that results among boys and girls both strongly point in the same direction is revealing.
+These results match with what previous literature has found about women reporting more interest in education and health care, and men reporting more interest in partisan politics, law and crime, and international affairs. Also in line with the literature, parents seem to talk about politics just as much with their sons as with their daughters.
 
-These results match with what previous literature has found about women reporting more interest in education and health care, and men reporting more interest in partisan politics, law and crime, and international affairs. However, parents seem to talk about politics just as much with their sons as with their daughters.
-
-@fig-parentsmomdad shows the extent to which mothers discuss each of the five topics, and the same for fathers. Mothers overwhelmingly discuss education and health care according to their children, while fathers discuss international affairs more than other topics but seem like a more heterogeneous group. Despite partisan politics being the least discussed issue by both parents, fathers are much more likely to discuss it than mothers according to this metric. For law and crime too, fathers are more likely to discuss it. Again, when these results are broken down by students' gender (see Appendix IV), very similar results are found for boys and girls.
+@fig-parentsmomdad shows the extent to which mothers discuss each of the five topics, and the same for fathers. Mothers overwhelmingly discuss education and health care according to their children, while fathers discuss international affairs more than other topics but seem like a more heterogeneous group. Despite partisan politics being the least discussed topic by both parents, fathers are much more likely to discuss it than mothers according to this metric. For law and crime too, fathers are more likely to discuss it. Again, when these results are broken down by students' gender (see Appendix IV), very similar results are found for boys and girls.
 
 ```{r}
 #| label: fig-parentsmomdad
 #| echo: false
-#| fig-cap: "Issue most often discussed by mothers and fathers, 2023 CCPIS data"
-knitr::include_graphics("_graphs/ParentIssuesMomDad.pdf")
+#| fig-cap: "Topic most often discussed by mothers and fathers, 2023 CCPIS data"
+knitr::include_graphics("_graphs/ParentTopicsMomDad.pdf")
 ```
 
-### Issues Parents Discuss the Most
+The gender gap in political topics discussed is pretty stark between mothers and fathers, according to their children's assessments. It is important to specify that given the question's phrasing, it is not clear if these interactions are initiated by parents or by their children, and if it is reflective of top-down or trickle-up political socialization [@mcdevitt2002]. Moreover, the question does not ask children to specify a percentage of interactions about each topic started by the mother or father; it simply asks them to pick the parent most likely to have these discussions with them. There is no assumption that mothers are the only ones talking about health care and fathers the only ones to talk about international affairs, but on average, they are more likely to raise this topic than the other-gender parent.
 
-When it comes to parents' role in political interest transmission, @tbl-lmeParent shows the relationship between students' interest in each of the five topics and the gender of the parent who discusses the issue with them the most.^[Students who do not have one parent of either gender are removed from the analysis.] Children's interest in any of the five topics does not seem to be related to the gender of the parent who discusses the issue the most; all relationships are statistically insignificant.
+Regardless, the fact that results among boys and girls both strongly point in the same direction is revealing. It makes little doubt that mothers and fathers speak differently about politics when they raise the topic with their children. Both questions were formulated in concrete ways, asking children the extent to which they discuss these topics with their parents. There is no Hawthorne effect among kids; they would not know what they are expected to answer. Parents speak in starkly different ways about politics to their children, and this confirms that political socialization is a deeply gendered process.
 
-Table: Interest in topic by gender of parent who discusses that topic the most {#tbl-lmeParent}
+### Topics Parents Discuss the Most
 
-|                                    | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:-----------------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**             |             |                       |               |           |                   | 
-| (Intercept)                        |   4.631***  |        6.333***       |    5.504***   |  4.260*** |      4.601***     | 
-|                                    |   (0.379)   |        (0.251)        |    (0.222)    |  (0.340)  |      (0.286)      | 
-| Health care (1 = mother)           |    -0.411   |                       |               |           |                   | 
-|                                    |   (0.401)   |                       |               |           |                   | 
-| International affairs (1 = mother) |             |         -0.332        |               |           |                   | 
-|                                    |             |        (0.401)        |               |           |                   | 
-| Law and crime (1 = mother)         |             |                       |     -0.242    |           |                   | 
-|                                    |             |                       |    (0.381)    |           |                   | 
-| Education (1 = mother)             |             |                       |               |   0.286   |                   | 
-|                                    |             |                       |               |  (0.379)  |                   | 
-| Partisan politics (1 = mother)     |             |                       |               |           |       -0.182      | 
-|                                    |             |                       |               |           |      (0.480)      | 
-| SD (Intercept Class)               |    0.705    |         0.820         |     0.349     |   0.649   |       0.582       | 
-| SD (Observations)                  |    2.361    |         2.483         |     2.638     |   2.694   |       2.973       | 
-| Num.Obs.                           |     241     |          225          |      228      |    252    |        192        | 
-| R2 Marg.                           |    0.004    |         0.003         |     0.002     |   0.002   |       0.001       | 
-|:-----------------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls**            |             |                       |               |           |                   | 
-| (Intercept)                        |   4.138***  |        5.057***       |    5.652***   |  4.602*** |      3.449***     | 
-|                                    |   (0.424)   |        (0.240)        |    (0.265)    |  (0.423)  |      (0.279)      | 
-| Health care (1 = mother)           |    0.158    |                       |               |           |                   | 
-|                                    |   (0.442)   |                       |               |           |                   | 
-| International affairs (1 = mother) |             |         -0.118        |               |           |                   | 
-|                                    |             |        (0.415)        |               |           |                   | 
-| Law and crime (1 = mother)         |             |                       |     0.047     |           |                   | 
-|                                    |             |                       |    (0.397)    |           |                   | 
-| Education (1 = mother)             |             |                       |               |   -0.434  |                   | 
-|                                    |             |                       |               |  (0.445)  |                   | 
-| Partisan politics (1 = mother)     |             |                       |               |           |       0.110       | 
-|                                    |             |                       |               |           |      (0.475)      | 
-| SD (Intercept Class)               |    0.665    |         0.345         |     0.492     |   0.849   |       0.360       | 
-| SD (Observations)                  |    2.376    |         2.687         |     2.777     |   2.599   |       2.748       | 
-| Num.Obs.                           |     237     |          199          |      212      |    228    |        156        | 
-| R2 Marg.                           |    0.001    |         0.000         |     0.000     |   0.004   |       0.000       | 
-|:-----------------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
+When it comes to parents' role in political interest transmission, @tbl-lmeParentAlt shows the relationship between students' interest in each of the five topics and the gender of the parent who discusses the topic with them the most.^[Students who do not have one parent of either gender are removed from the analysis.] Children's interest in any of the five topics does not seem to be related to the gender of the parent who discusses the topic the most; all relationships are statistically insignificant. Only when aggregated, and only for boys, it seems that the gender of the parent who discusses one topic the most is related to the child's level of interest in that topic.^[Appendix V shows very similar findings without controls.]
 
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
+Table: Interest in topic by gender of parent who discusses that topic the most {#tbl-lmeParentAlt}
 
-__Note:__
-^^ Multilevel regression with random effects at the classroom level
-
-### Issues Most Often Discussed with Mothers
-
-@tbl-lmeMother shows students' interest in a specific topic depending on it being the topic they most often discuss with their mother(s). For both boys and girls, interest in law and crime is related to their mothers discussing law and crime (*p*<0.05 and *p*<0.01 respectively). If a girl's mother discusses mostly law and crime among the five topics, her interest in law and crime is expected to increase by a large 3.1 points on the 11-point scale. For boys, the expected increase is 1.6 points. For girls, interest in education is also related to their mothers discussing the issue at home (*p*<0.01), but not for boys. If a girl's mother discusses mostly education among the five topics, her interest in this topic is expected to increase by 0.9 points. All other relationships are non-significant at the *p*<0.05 level.
-
-Table: Interest in topic most often discussed with one's mother {#tbl-lmeMother}
-
-|                         | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**  |             |                       |               |           |                   | 
-| (Intercept)             |   4.093***  |        5.981***       |    5.077***   |  4.339*** |      4.210***     | 
-|                         |   (0.227)   |        (0.208)        |    (0.167)    |  (0.249)  |      (0.207)      | 
-| Health care             |    0.355    |                       |               |           |                   | 
-|                         |   (0.303)   |                       |               |           |                   | 
-| International affairs   |             |         1.113         |               |           |                   | 
-|                         |             |        (0.733)        |               |           |                   | 
-| Law and crime           |             |                       |     1.747*    |           |                   | 
-|                         |             |                       |    (0.677)    |           |                   | 
-| Education               |             |                       |               |   0.253   |                   | 
-|                         |             |                       |               |  (0.335)  |                   | 
-| Partisan politics       |             |                       |               |           |       1.519       | 
-|                         |             |                       |               |           |      (1.231)      | 
-| SD (Intercept Class)    |    0.706    |         0.631         |     0.000     |   0.567   |       0.537       | 
-| SD (Observations)       |    2.377    |         2.722         |     2.706     |   2.744   |       2.931       | 
-| Num.Obs.                |     275     |          277          |      278      |    277    |        277        | 
-| R2 Marg.                |    0.005    |         0.008         |     0.023     |   0.002   |       0.005       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls** |             |                       |               |           |                   | 
-| (Intercept)             |   4.046***  |        4.739***       |    5.226***   |  3.834*** |      3.136***     | 
-|                         |   (0.225)   |        (0.202)        |    (0.196)    |  (0.277)  |      (0.167)      | 
-| Health care             |    0.278    |                       |               |           |                   | 
-|                         |   (0.310)   |                       |               |           |                   | 
-| International affairs   |             |         1.226+        |               |           |                   | 
-|                         |             |        (0.644)        |               |           |                   | 
-| Law and crime           |             |                       |    3.057***   |           |                   | 
-|                         |             |                       |    (0.620)    |           |                   | 
-| Education               |             |                       |               |  0.881**  |                   | 
-|                         |             |                       |               |  (0.338)  |                   | 
-| Partisan politics       |             |                       |               |           |       2.864+      | 
-|                         |             |                       |               |           |      (1.579)      | 
-| SD (Intercept Class)    |    0.691    |         0.590         |     0.438     |   0.974   |       0.000       | 
-| SD (Observations)       |    2.370    |         2.651         |     2.761     |   2.579   |       2.719       | 
-| Num.Obs.                |     270     |          267          |      265      |    267    |        267        | 
-| R2 Marg.                |    0.003    |         0.013         |     0.084     |   0.024   |       0.012       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
+|                                         |    All   | Health care | International affairs | Law and crime | Education | Partisan politics | 
+|:----------------------------------------|---------:|------------:|----------------------:|--------------:|----------:|------------------:|
+| **Results among boys**                  |          |             |                       |               |           |                   | 
+| (Intercept)                             |   1.437  |    7.825    |         -3.757        |     2.568     |  36.781+  |       17.051      | 
+|                                         | (11.191) |   (19.394)  |        (16.316)       |    (23.200)   |  (20.133) |      (21.989)     | 
+| Mother discusses topic more than father | -0.489** |    -0.244   |         -0.380        |     -0.065    |   0.180   |       0.221       | 
+|                                         |  (0.179) |   (0.468)   |        (0.397)        |    (0.432)    |  (0.442)  |      (0.524)      | 
+| Age                                     |  -0.165  |    -1.156   |         1.447         |     -0.417    |  -5.153+  |       -2.456      | 
+|                                         |  (1.515) |   (2.647)   |        (2.240)        |    (3.169)    |  (2.748)  |      (3.018)      | 
+| Age squared                             |   0.013  |    0.048    |         -0.050        |     0.023     |   0.185+  |       0.086       | 
+|                                         |  (0.051) |   (0.090)   |        (0.076)        |    (0.109)    |  (0.094)  |      (0.104)      | 
+| Race (1 = white)                        |  0.463*  |    0.305    |        1.082**        |     0.171     |   -0.337  |       0.437       | 
+|                                         |  (0.221) |   (0.442)   |        (0.385)        |    (0.474)    |  (0.466)  |      (0.564)      | 
+| Immigrant                               |  -0.761* |    -0.443   |        -1.025*        |     -0.310    |  -1.148+  |       -1.081      | 
+|                                         |  (0.319) |   (0.617)   |        (0.519)        |    (0.695)    |  (0.672)  |      (0.839)      | 
+| English spoken at home                  |  -0.220  |    -0.392   |         -1.252        |     0.156     |   -0.535  |       0.630       | 
+|                                         |  (0.469) |   (0.901)   |        (0.803)        |    (0.948)    |  (0.933)  |      (1.258)      | 
+| French spoken at home                   |  -0.077  |    0.238    |        -0.882+        |     0.364     |   -0.076  |       0.035       | 
+|                                         |  (0.276) |   (0.539)   |        (0.453)        |    (0.594)    |  (0.578)  |      (0.692)      | 
+| Agency                                  | 3.009*** |   3.580**   |                       |     2.976*    |   1.450   |      4.552**      | 
+|                                         |  (0.602) |   (1.163)   |                       |    (1.309)    |  (1.253)  |      (1.588)      | 
+| Communality                             |  1.793*  |    0.476    |                       |     2.174     |   3.515*  |       2.407       | 
+|                                         |  (0.697) |   (1.355)   |                       |    (1.527)    |  (1.466)  |      (1.749)      | 
+| SD (Intercept Class)                    |   0.761  |    0.482    |         0.829         |     0.174     |   0.425   |       0.000       | 
+| SD (Observations)                       |   2.549  |    2.314    |         2.413         |     2.582     |   2.634   |       2.821       | 
+| Num.Obs.                                |    850   |     178     |          220          |      166      |    187    |        147        | 
+| R2 Marg.                                |   0.071  |    0.087    |         0.067         |     0.072     |   0.100   |       0.101       | 
+| _______________
+| **Results among girls**                 |          |             |                       |               |           |                   | 
+| (Intercept)                             |   6.187  |   -11.514   |        25.110+        |     14.368    |   1.183   |       28.707      | 
+|                                         |  (8.435) |   (14.607)  |        (14.569)       |    (15.973)   |  (13.913) |      (24.214)     | 
+| Mother discusses topic more than father |  -0.022  |    0.505    |         0.453         |     0.297     |   0.004   |       0.314       | 
+|                                         |  (0.192) |   (0.518)   |        (0.494)        |    (0.475)    |  (0.486)  |      (0.561)      | 
+| Age                                     |  -0.512  |    1.587    |         -3.060        |     -1.506    |   0.049   |       -3.633      | 
+|                                         |  (1.158) |   (1.989)   |        (2.026)        |    (2.199)    |  (1.914)  |      (3.303)      | 
+| Age squared                             |   0.025  |    -0.041   |         0.108         |     0.059     |   0.010   |       0.126       | 
+|                                         |  (0.040) |   (0.068)   |        (0.070)        |    (0.076)    |  (0.066)  |      (0.113)      | 
+| Race (1 = white)                        |  -0.362  |    -0.055   |         -0.424        |     -0.333    |   -0.611  |       0.034       | 
+|                                         |  (0.246) |   (0.435)   |        (0.535)        |    (0.518)    |  (0.469)  |      (0.660)      | 
+| Immigrant                               |  -0.390  |    -0.325   |         -0.528        |    -1.533+    |   0.517   |       -0.220      | 
+|                                         |  (0.354) |   (0.628)   |        (0.777)        |    (0.835)    |  (0.667)  |      (0.876)      | 
+| English spoken at home                  |  -0.354  |    -0.567   |         0.306         |     -0.849    |   0.305   |       0.304       | 
+|                                         |  (0.430) |   (0.711)   |        (0.889)        |    (0.845)    |  (0.808)  |      (1.039)      | 
+| French spoken at home                   |   0.120  |    0.213    |         0.185         |     -0.262    |   0.248   |       0.168       | 
+|                                         |  (0.269) |   (0.485)   |        (0.594)        |    (0.595)    |  (0.517)  |      (0.717)      | 
+| Agency                                  |  -0.386  |    -0.781   |         -0.256        |     0.139     |   -0.070  |       0.748       | 
+|                                         |  (0.695) |   (1.279)   |        (1.588)        |    (1.558)    |  (1.358)  |      (1.812)      | 
+| Communality                             |   1.164  |    1.856    |         1.938         |     1.077     |   0.115   |       -0.024      | 
+|                                         |  (0.754) |   (1.295)   |        (1.607)        |    (1.621)    |  (1.499)  |      (2.027)      | 
+| SD (Intercept Class)                    |   0.769  |    0.857    |         0.000         |     0.674     |   0.758   |       0.796       | 
+| SD (Observations)                       |   2.521  |    2.172    |         2.631         |     2.668     |   2.416   |       2.597       | 
+| Num.Obs.                                |    732   |     164     |          144          |      151      |    160    |        113        | 
+| R2 Marg.                                |   0.026  |    0.082    |         0.039         |     0.046     |   0.077   |       0.022       | 
 
 __Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
++ p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
 
 __Note:__
-^^ Multilevel regression with random effects at the classroom level
+Multilevel regression with random effects at the classroom level
 
-### Issues Most Often Discussed with Fathers
+### Topics Most Often Discussed with Mothers
 
-@tbl-lmeFather shows students' interest in a specific topic depending on it being the topic they most often discuss with their father(s). Again, for both boys and girls, interest in law and crime is related to their fathers discussing law and crime (*p*<0.05 and *p*<0.001 respectively). If a girl's father discusses mostly law and crime among the five topics, her interest in law and crime is expected to increase by 1.6 points on the 11-point scale. For boys, the expected increase is 1 point. Boys' interest in partisan politics is also related to their fathers discussing the issue at home (*p*<0.01), but the same result does not apply to girls. If a boy's father discusses mostly partisan politics among the five topics, his interest in this topic is expected to increase by 1.9 points. All other relationships are non-significant at the *p*<0.05 level.
+@tbl-lmeMotherAlt shows students' interest in a specific topic depending on it being the topic they most often discuss with their mother(s). For both boys and girls, interest in law and crime is related to their mothers discussing law and crime (*p*<0.1 and *p*<0.001 respectively). If a girl's mother discusses mostly law and crime among the five topics, her interest in law and crime is expected to increase by a large 3.1 points on the 11-point scale. For boys, the expected increase is 1.6 points. For girls, interest in education is also related to their mothers discussing the topic at home (*p*<0.01), but not for boys. If a girl's mother discusses mostly education among the five topics, her interest in this topic is expected to increase by 0.9 points. All other relationships are non-significant at the *p*<0.05 level.
 
-Table: Interest in topic most often discussed with one's father {#tbl-lmeFather}
+Table: Interest in topic most often discussed with one's mother {#tbl-lmeMotherAlt}
 
-|                         | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**  |             |                       |               |           |                   | 
-| (Intercept)             |   4.275***  |        5.838***       |    4.987***   |  4.479*** |      4.110***     | 
-|                         |   (0.194)   |        (0.215)        |    (0.175)    |  (0.219)  |      (0.215)      | 
-| Health care             |    -0.206   |                       |               |           |                   | 
-|                         |   (0.499)   |                       |               |           |                   | 
-| International affairs   |             |         0.557         |               |           |                   | 
-|                         |             |        (0.343)        |               |           |                   | 
-| Law and crime           |             |                       |     1.013*    |           |                   | 
-|                         |             |                       |    (0.424)    |           |                   | 
-| Education               |             |                       |               |   0.037   |                   | 
-|                         |             |                       |               |  (0.405)  |                   | 
-| Partisan politics       |             |                       |               |           |      1.887**      | 
-|                         |             |                       |               |           |      (0.644)      | 
-| SD (Intercept Class)    |    0.650    |         0.370         |     0.000     |   0.614   |       0.626       | 
-| SD (Observations)       |    2.336    |         2.730         |     2.677     |   2.715   |       2.849       | 
-| Num.Obs.                |     278     |          281          |      281      |    281    |        280        | 
-| R2 Marg.                |    0.001    |         0.009         |     0.020     |   0.000   |       0.030       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls** |             |                       |               |           |                   | 
-| (Intercept)             |   4.057***  |        4.816***       |    5.213***   |  4.052*** |      3.167***     | 
-|                         |   (0.205)   |        (0.238)        |    (0.214)    |  (0.261)  |      (0.185)      | 
-| Health care             |    0.383    |                       |               |           |                   | 
-|                         |   (0.444)   |                       |               |           |                   | 
-| International affairs   |             |         -0.018        |               |           |                   | 
-|                         |             |        (0.371)        |               |           |                   | 
-| Law and crime           |             |                       |    1.559**    |           |                   | 
-|                         |             |                       |    (0.507)    |           |                   | 
-| Education               |             |                       |               |   0.036   |                   | 
-|                         |             |                       |               |  (0.395)  |                   | 
-| Partisan politics       |             |                       |               |           |       0.199       | 
-|                         |             |                       |               |           |      (0.653)      | 
-| SD (Intercept Class)    |    0.704    |         0.674         |     0.537     |   0.994   |       0.290       | 
-| SD (Observations)       |    2.341    |         2.678         |     2.787     |   2.578   |       2.724       | 
-| Num.Obs.                |     259     |          257          |      256      |    257    |        257        | 
-| R2 Marg.                |    0.003    |         0.000         |     0.035     |   0.000   |       0.000       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
+|                                         |    All   | Health care | International affairs | Law and crime | Education | Partisan politics | 
+|:----------------------------------------|---------:|------------:|----------------------:|--------------:|----------:|------------------:|
+| _______________
+**Results among boys**  |          |             |                       |               |           |                   | 
+| (Intercept)                             |   7.517  |    3.188    |         7.773         |     18.119    |   24.785  |       24.672      | 
+|                                         |  (9.946) |   (17.546)  |        (17.436)       |    (17.617)   |  (18.994) |      (18.866)     | 
+| Main topic discussed with mother?       |   0.059  |    0.299    |         1.481*        |     1.310+    |   0.301   |       1.520       | 
+|                                         |  (0.211) |   (0.363)   |        (0.722)        |    (0.722)    |  (0.399)  |      (1.297)      | 
+| Age                                     |  -1.156  |    -0.567   |         -1.093        |     -2.583    |   -3.688  |       -3.291      | 
+|                                         |  (1.345) |   (2.395)   |        (2.382)        |    (2.419)    |  (2.592)  |      (2.583)      | 
+| Age squared                             |   0.050  |    0.031    |         0.045         |     0.100     |   0.139   |       0.111       | 
+|                                         |  (0.046) |   (0.082)   |        (0.081)        |    (0.083)    |  (0.089)  |      (0.089)      | 
+| Race (1 = white)                        |  0.388+  |    0.472    |        1.246**        |     -0.027    |   -0.261  |       0.207       | 
+|                                         |  (0.218) |   (0.420)   |        (0.439)        |    (0.451)    |  (0.468)  |      (0.506)      | 
+| Immigrant                               |  -0.570+ |    -0.169   |        -1.419*        |     -0.661    |   -0.840  |       -0.787      | 
+|                                         |  (0.313) |   (0.599)   |        (0.629)        |    (0.647)    |  (0.667)  |      (0.712)      | 
+| English spoken at home                  |   0.227  |    -0.454   |         -1.329        |     0.113     |   0.970   |       0.881       | 
+|                                         |  (0.524) |   (0.986)   |        (1.035)        |    (1.060)    |  (1.093)  |      (1.170)      | 
+| French spoken at home                   |  -0.122  |    0.047    |        -1.631**       |     -0.057    |   0.265   |       0.245       | 
+|                                         |  (0.270) |   (0.515)   |        (0.542)        |    (0.552)    |  (0.573)  |      (0.612)      | 
+| Agency                                  | 2.750*** |    2.860*   |        3.540**        |     2.872*    |   1.477   |       3.325*      | 
+|                                         |  (0.569) |   (1.108)   |        (1.173)        |    (1.200)    |  (1.230)  |      (1.326)      | 
+| Communality                             | 2.091*** |    0.249    |        4.046**        |     1.732     |  3.617**  |       2.062       | 
+|                                         |  (0.631) |   (1.219)   |        (1.268)        |    (1.320)    |  (1.344)  |      (1.443)      | 
+| SD (Intercept Class)                    |   0.764  |    0.876    |         0.599         |     0.001     |   0.692   |       0.000       | 
+| SD (Observations)                       |   2.589  |    2.259    |         2.424         |     2.544     |   2.550   |       2.811       | 
+| Num.Obs.                                |    941   |     188     |          189          |      188      |    188    |        188        | 
+| R2 Marg.                                |   0.079  |    0.081    |         0.199         |     0.111     |   0.123   |       0.081       | 
+| _______________
+**Results among girls** |          |             |                       |               |           |                   | 
+| (Intercept)                             |  11.521  |   -11.420   |        28.362+        |     4.925     |   7.745   |      42.821**     | 
+|                                         |  (7.923) |   (13.409)  |        (15.184)       |    (14.939)   |  (15.046) |      (14.364)     | 
+| Main topic discussed with mother?       | 0.904*** |    0.531    |         1.442*        |    2.922***   |   0.717+  |       3.600       | 
+|                                         |  (0.216) |   (0.354)   |        (0.688)        |    (0.716)    |  (0.385)  |      (2.641)      | 
+| Age                                     |  -1.151  |    1.820    |        -3.506+        |     -0.210    |   -0.726  |      -5.449**     | 
+|                                         |  (1.082) |   (1.834)   |        (2.076)        |    (2.045)    |  (2.054)  |      (1.962)      | 
+| Age squared                             |   0.044  |    -0.053   |         0.125+        |     0.016     |   0.034   |      0.182**      | 
+|                                         |  (0.037) |   (0.063)   |        (0.071)        |    (0.070)    |  (0.070)  |      (0.067)      | 
+| Race (1 = white)                        |  -0.355  |    0.004    |         -0.174        |     -0.561    |   -0.612  |       -0.456      | 
+|                                         |  (0.234) |   (0.427)   |        (0.479)        |    (0.490)    |  (0.467)  |      (0.480)      | 
+| Immigrant                               |  -0.452  |    -0.130   |         -0.677        |    -1.981**   |   0.715   |       -0.373      | 
+|                                         |  (0.313) |   (0.572)   |        (0.650)        |    (0.674)    |  (0.621)  |      (0.649)      | 
+| English spoken at home                  |  -0.627  |    -0.383   |        -1.404+        |     -0.806    |   -0.090  |       -0.198      | 
+|                                         |  (0.401) |   (0.701)   |        (0.770)        |    (0.758)    |  (0.789)  |      (0.736)      | 
+| French spoken at home                   |  -0.113  |    -0.245   |         -0.301        |     -0.627    |   0.222   |       0.187       | 
+|                                         |  (0.255) |   (0.474)   |        (0.536)        |    (0.555)    |  (0.512)  |      (0.541)      | 
+| Agency                                  |   0.342  |    -0.930   |         1.228         |     0.519     |   0.299   |       1.245       | 
+|                                         |  (0.620) |   (1.177)   |        (1.325)        |    (1.363)    |  (1.261)  |      (1.337)      | 
+| Communality                             |   0.492  |    1.310    |         0.564         |     0.826     |   -0.910  |       0.287       | 
+|                                         |  (0.657) |   (1.206)   |        (1.358)        |    (1.385)    |  (1.313)  |      (1.359)      | 
+| SD (Intercept Class)                    |   0.627  |    0.624    |         0.555         |     0.210     |   0.930   |       0.000       | 
+| SD (Observations)                       |   2.595  |    2.224    |         2.529         |     2.635     |   2.370   |       2.601       | 
+| Num.Obs.                                |    900   |     181     |          179          |      178      |    181    |        181        | 
+| R2 Marg.                                |   0.034  |    0.060    |         0.076         |     0.146     |   0.089   |       0.064       |
 
 __Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
++ p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
 
 __Note:__
-^^ Multilevel regression with random effects at the classroom level
+Multilevel regression with random effects at the classroom level
 
-Results from @tbl-lmeParent, @tbl-lmeMother and @tbl-lmeFather are somewhat intriguing. On the one hand, whichever parent discusses an issue with them has little impact on students' interest in that issue. Moreover, parents' interest in law and crime seems to be transmitted to their children in a consistent way, while interest in health care and international relations seems to have little to do with parents' discussion of these issues at home. It is relevant to note that substantively, daughters seem to be more influenced by their parents' discussion of law and crime than boys: their rating of law and crime increases by 1.6--3.1 points on the 11-point scale, compared with 1--1.7 points for boys.^[Appendix V reproduces @tbl-lmeParent, @tbl-lmeMother and @tbl-lmeFather while adding controls for age, age squared, language, immigrant status and race. The same relationships are found. Mother--daughter international affairs interest transmission also becomes marginally significant at the *p*<0.05 level.]
+### Topics Most Often Discussed with Fathers
 
-On the other hand, parental socialization theory partly seems to apply for the transmission of interest in education and partisan politics. Mothers' frequent discussion of --- and perhaps higher interest in --- education seems to trickle down to their daughters but not their sons, while fathers' discussion of education is unrelated to their children's interest in the issue. The opposite pattern can be observed for partisan politics: fathers' frequent discussion of it --- and perhaps higher interest in partisan politics --- is associated with their sons' higher interest in the issue, but not their daughters', while mothers' discussion of partisan politics is unrelated to their children's interest in the issue. Since adult women are generally more interested in education and men in partisan politics, these patterns match with the theory --- but nothing similar can be said for international affairs and health care. It may be the case that for these topics other socialization agents have more influence.
+@tbl-lmeFather shows students' interest in a specific topic depending on it being the topic they most often discuss with their father(s). Again, for both boys and girls, interest in law and crime is related to their fathers discussing law and crime (*p*<0.05 and *p*<0.001 respectively). If a girl's father discusses mostly law and crime among the five topics, her interest in law and crime is expected to increase by 1.6 points on the 11-point scale. For boys, the expected increase is 1 point. Boys' interest in partisan politics is also related to their fathers discussing the topic at home (*p*<0.01), but the same result does not apply to girls. If a boy's father discusses mostly partisan politics among the five topics, his interest in this topic is expected to increase by 1.9 points. All other relationships are non-significant at the *p*<0.05 level.
+
+Table: Interest in topic most often discussed with one's father {#tbl-lmeFatherAlt}
+
+|                                         |    All   | Health care | International affairs | Law and crime | Education | Partisan politics | 
+|:----------------------------------------|---------:|------------:|----------------------:|--------------:|----------:|------------------:|
+| _______________
+**Results among boys**  |          |             |                       |               |           |                   | 
+| (Intercept)                             |   5.353  |    3.085    |         0.812         |     18.145    |   28.165  |      33.127+      | 
+|                                         | (10.025) |   (17.260)  |        (17.961)       |    (17.816)   |  (19.195) |      (18.514)     | 
+| Main topic discussed with father?       | 0.958*** |    0.199    |         -0.187        |     1.204*    |   0.141   |      2.652***     | 
+|                                         |  (0.210) |   (0.617)   |        (0.398)        |    (0.468)    |  (0.474)  |      (0.720)      | 
+| Age                                     |  -0.769  |    -0.505   |         0.047         |     -2.622    |   -4.044  |      -4.448+      | 
+|                                         |  (1.357) |   (2.359)   |        (2.458)        |    (2.450)    |  (2.629)  |      (2.538)      | 
+| Age squared                             |   0.035  |    0.026    |         0.006         |     0.098     |   0.149   |       0.151+      | 
+|                                         |  (0.046) |   (0.081)   |        (0.084)        |    (0.084)    |  (0.090)  |      (0.087)      | 
+| Race (1 = white)                        |  0.371+  |    0.206    |        1.258**        |     0.191     |   -0.285  |       0.127       | 
+|                                         |  (0.211) |   (0.423)   |        (0.445)        |    (0.437)    |  (0.478)  |      (0.475)      | 
+| Immigrant                               |  -0.603+ |    -0.208   |        -1.400*        |     -0.050    |   -1.107  |       -0.750      | 
+|                                         |  (0.307) |   (0.597)   |        (0.639)        |    (0.634)    |  (0.689)  |      (0.683)      | 
+| English spoken at home                  |   0.323  |    0.307    |         -1.595        |     0.551     |   0.580   |       0.521       | 
+|                                         |  (0.498) |   (0.946)   |        (1.002)        |    (0.990)    |  (1.075)  |      (1.085)      | 
+| French spoken at home                   |  -0.005  |    0.462    |        -1.495**       |     0.479     |   0.075   |       0.434       | 
+|                                         |  (0.279) |   (0.535)   |        (0.566)        |    (0.558)    |  (0.609)  |      (0.603)      | 
+| Agency                                  | 2.883*** |   3.122**   |         2.665*        |    3.316**    |   1.562   |       3.384*      | 
+|                                         |  (0.587) |   (1.151)   |        (1.221)        |    (1.208)    |  (1.306)  |      (1.302)      | 
+| Communality                             |  1.371*  |    0.247    |         3.254*        |     1.635     |   3.515*  |       1.461       | 
+|                                         |  (0.644) |   (1.245)   |        (1.324)        |    (1.306)    |  (1.430)  |      (1.411)      | 
+| SD (Intercept Class)                    |   0.766  |    0.678    |         0.506         |     0.000     |   0.546   |       0.124       | 
+| SD (Observations)                       |   2.536  |    2.275    |         2.451         |     2.476     |   2.632   |       2.664       | 
+| Num.Obs.                                |    911   |     182     |          183          |      182      |    182    |        182        | 
+| R2 Marg.                                |   0.080  |    0.068    |         0.145         |     0.115     |   0.094   |       0.146       | 
+| _______________
+**Results among girls** |          |             |                       |               |           |                   | 
+| (Intercept)                             |   5.300  |    1.411    |         21.839        |     6.238     |   -6.377  |      33.506*      | 
+|                                         |  (7.852) |   (12.270)  |        (14.358)       |    (13.915)   |  (14.190) |      (14.250)     | 
+| Main topic discussed with father?       |  0.684** |    0.030    |         0.332         |    1.829**    |   0.381   |       -0.616      | 
+|                                         |  (0.224) |   (0.533)   |        (0.442)        |    (0.575)    |  (0.438)  |      (0.841)      | 
+| Age                                     |  -0.460  |    -0.076   |         -2.678        |     -0.327    |   0.855   |      -4.200*      | 
+|                                         |  (1.075) |   (1.681)   |        (1.972)        |    (1.909)    |  (1.943)  |      (1.954)      | 
+| Age squared                             |   0.021  |    0.014    |         0.096         |     0.018     |   -0.018  |       0.140*      | 
+|                                         |  (0.037) |   (0.058)   |        (0.068)        |    (0.066)    |  (0.067)  |      (0.067)      | 
+| Race (1 = white)                        |  -0.256  |    0.112    |         0.240         |     -0.678    |   -0.588  |       -0.502      | 
+|                                         |  (0.237) |   (0.421)   |        (0.491)        |    (0.496)    |  (0.463)  |      (0.491)      | 
+| Immigrant                               |  -0.206  |    -0.334   |         -0.647        |    -1.679*    |   1.133+  |       -0.160      | 
+|                                         |  (0.339) |   (0.616)   |        (0.724)        |    (0.718)    |  (0.661)  |      (0.711)      | 
+| English spoken at home                  |  -0.496  |    -0.358   |         -1.313        |     -1.256    |   0.639   |       0.254       | 
+|                                         |  (0.415) |   (0.697)   |        (0.813)        |    (0.796)    |  (0.790)  |      (0.816)      | 
+| French spoken at home                   |   0.158  |    0.274    |         -0.424        |     -0.299    |   0.765   |       0.470       | 
+|                                         |  (0.263) |   (0.482)   |        (0.570)        |    (0.569)    |  (0.519)  |      (0.568)      | 
+| Agency                                  |   0.444  |    -1.449   |         0.947         |     0.502     |   1.252   |       0.483       | 
+|                                         |  (0.682) |   (1.244)   |        (1.455)        |    (1.453)    |  (1.339)  |      (1.463)      | 
+| Communality                             |  1.225+  |    2.027    |         1.505         |     0.275     |   0.671   |       1.023       | 
+|                                         |  (0.713) |   (1.286)   |        (1.520)        |    (1.501)    |  (1.398)  |      (1.515)      | 
+| SD (Intercept Class)                    |   0.748  |    0.537    |         0.464         |     0.000     |   1.020   |       0.627       | 
+| SD (Observations)                       |   2.546  |    2.186    |         2.590         |     2.625     |   2.293   |       2.547       | 
+| Num.Obs.                                |    811   |     163     |          161          |      161      |    163    |        163        | 
+| R2 Marg.                                |   0.030  |    0.064    |         0.050         |     0.108     |   0.101   |       0.052       | 
+
+__Note:__
++ p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
+
+__Note:__
+Multilevel regression with random effects at the classroom level
+
+Results from @tbl-lmeParent, @tbl-lmeMother and @tbl-lmeFather are somewhat intriguing. On the one hand, whichever parent discusses a topic with them has little impact on students' interest in that topic. Moreover, parents' interest in law and crime seems to be transmitted to their children in a consistent way, while interest in health care and international relations seems to have little to do with parents' discussion of these topics at home. It is relevant to note that substantively, daughters seem to be more influenced by their parents' discussion of law and crime than boys: their rating of law and crime increases by 1.6--3.1 points on the 11-point scale, compared with 1--1.7 points for boys.^[Appendix V reproduces @tbl-lmeParent, @tbl-lmeMother and @tbl-lmeFather while adding controls for age, age squared, language, immigrant status and race. The same relationships are found. Mother--daughter international affairs interest transmission also becomes marginally significant at the *p*<0.05 level.]
+
+On the other hand, parental socialization theory partly seems to apply for the transmission of interest in education and partisan politics. Mothers' frequent discussion of --- and perhaps higher interest in --- education seems to trickle down to their daughters but not their sons, while fathers' discussion of education is unrelated to their children's interest in the topic. The opposite pattern can be observed for partisan politics: fathers' frequent discussion of it --- and perhaps higher interest in partisan politics --- is associated with their sons' higher interest in the topic, but not their daughters', while mothers' discussion of partisan politics is unrelated to their children's interest in the topic. Since adult women are generally more interested in education and men in partisan politics, these patterns match with the theory --- but nothing similar can be said for international affairs and health care. It may be the case that for these topics other socialization agents have more influence.
+
+\[Question to Chris: Should I add predicted probabilities plots in this section?\]
+
+\[Question to Chris: Would it be relevant for me to add a model where discussion of each issue with parents predicts the child's general political interest (rather than predicting the child's interest in that same issue)?\]
+
+Power analysis to make sure father-son and mother-daughter relationships are significant
 
 ## Discussion
 
-For parental socialization theory, descriptive results show a clear trend: mothers are much more likely to speak about education and health care, while fathers are more likely to speak about the other three issues. These trends mirror previous literature on interest in these topics. Moreover, fathers' discussion of partisan politics is related to their sons' interest in the issue, while mothers' discussion of education is related to their daughters' interest in the issue. However, other findings show the limitations of this theory, since transmission of interest in health care and international relations does not seem to happen in the family. Moreover, when students are interested in one specific topic, it does not seem that this interest is necessarily related to a parent's gender.
+For parental socialization theory, descriptive results show a clear trend: mothers are much more likely to speak about education and health care, while fathers are more likely to speak about the other three topics. These trends mirror previous literature on interest in these topics. Moreover, fathers' discussion of partisan politics is related to their sons' interest in the topic, while mothers' discussion of education is related to their daughters' interest in the topic. However, other findings show the limitations of this theory, since transmission of interest in health care and international relations does not seem to happen in the family. Moreover, when students are interested in one specific topic, it does not seem that this interest is necessarily related to a parent's gender.
 
 While results are mixed, they highlight the role parents can have on transmitting some forms of interests to their children and they reinforce the idea that, in some respects, there are different socialization routes for girls and boys.
 
