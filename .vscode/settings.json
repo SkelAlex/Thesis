@@ -3,5 +3,6 @@
         "CCPIS",
         "CCPISEN",
         "CCPISFR"
-    ]
+    ],
+    "grammarly.config.documentDialect": "canadian"
 }
