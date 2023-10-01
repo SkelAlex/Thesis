@@ -16,33 +16,7 @@ While parents' political interest often seems to match their children's politica
 
 The main causal mechanism for this transmission process seems to be parent--child political discussions. Scholars have long suggested that the development of political interest can happens through increasingly complex discussions about political topics between parents and children at home [@easton1969; @greenstein1965]. These discussions can be initiated either by the parent or by the child, and the more they occur, the likelier the child is to be interested in politics. This relationship between the frequency of political discussions with parents and the child's interest in politics is statistically significant in the United States [@shehata2019], China, Mexico, Japan [@mayer2004], and Canada [@dostiegoulet2009en]. Furthermore, @shehata2019 find that changes in the frequency of political discussions with parents positively predict changes in adolescents' level of political interest.
 
-## Social Learning (to cut)
-
-@neundorf2013 section "The role of the family in the formation of political interest"
-
-@shehata2019
-
-@prior2019 p. 62, then every part talking about social learning, then chapter about parents
-
-The gendered version of social learning theory seems promising since it provides an opportunity to check mechanisms of reinforcement of this gender gap through generations, and it has not been studied in a systematic way thus far, especially a way that includes attention to political interest transmission by actors other than parents.
-
-Studies have already highlighted parents' important role in fostering higher political interest among their children, in part through parent--child political discussions and in part through observation of parents' behaviour by children, a process called *social learning* [@gidengil2016; @jennings2009].
-
-*Social learning* suggests that children learn through observation and model their behaviour after their parents. Transmission of political attitudes is deemed to be more effective when cue-giving and reinforcement from the socializing agent are strong and consistent [@jennings2009]. Research has found that social learning exhibits gendered effects: *observer-model similarity* leads children to model their behaviour based on the behaviour of models that resemble them [@bandura1969].
-
-Gender homophily and social learning both suggest that children are influenced by same-gender models. These models include parents, as social learning theory finds it.
-
-Social learning theory suggests that children learn through the observation of their parents, therefore making children of parents who vote more politically active [@gidengil2016]. @jennings1981 show that young adults' political engagement is influenced more heavily by their parents' political engagement than by their own political engagement eight years earlier when they were adolescents, but that their engagement is less and less influenced by their parents through time.
-
-*Social learning* suggests that children learn through observation and model their behaviour after their parents. Transmission of political attitudes is deemed to be more effective when cue-giving and reinforcement from the socializing agent are strong and consistent [@jennings2009]. Research has found that social learning exhibits gender effects: *observer-model similarity* leads children to model their behaviour based on the behaviour of models that resemble them [@bandura1969]. Indeed, past research has shown that the trickle-down effect of political engagement from parents to children works in gendered ways, with sons modeling their behaviour after their fathers and daughters after their mothers [@gidengil2016]. It is stronger for mother--daughter dyads than other parent--child dyads [@gidengil2016]. Observer-model similarity should also apply to the influence of other role models.
-
-Political interest might be transferred from one generation to the next by role models of the same gender.
-
-Social learning theory has been used to study mothers and fathers' relative impact on sons and daughters' political engagement [@gidengil2016], but not to explain overall gender differences in political engagement, such as women's higher interest in health care politics and men's higher tendency to discuss partisan politics. While gender tendencies towards agency vs. communality also contribute to women's interest in health care and men's interest in partisan politics, a broader application of social learning that includes parents, peers, teachers and influencers would provide a more comprehensive understanding of who influences girls and boys to decide how much attention they should devote to varied aspects of politics.
-
-Finally, I expect *social learning* better predicts girls' political engagement, while *gender homophily* better predicts boys' political engagement. Research has found that peer influence is stronger among adolescent girls than boys, though this does not apply to early childhood [@steinberg2007; @sumter2009]. On the other hand, @thomas2006 find that Canadian women's political knowledge depends a lot on their political socialization at home and at school during their childhood, while men are unaffected by this variable. Therefore, political engagement is expected to be driven mainly by peers for boys and mainly by mothers and school for girls.
-
-While social learning theory is one of the main theories for explaining the transmission of political behaviour, attitudes and opinions(?) from parents to children, it has typically not been applied to the study of political interest, especially because children do not "see" parents' political interest and therefore cannot mimic it. However, given the causal link between on the one hand, either changes in parents' political interest or changes , and on the other hand, children's political interest, it seems like social learning theory could also apply, perhaps in indirect ways, to the parent--child transmission of political interest. Moreover, social learning theory works in gendered ways, just like what studies have found about parent--child political interest transmission -- which we turn to now.
+## Social Learning (to fill)
 
 ## Gender Differences in Transmission
 

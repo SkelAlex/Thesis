@@ -8,6 +8,10 @@ toc-depth: 5
 ---
 Gender homophily and social learning both suggest that children are influenced by same-gender models. These models include parents, as social learning theory finds it, and peers, as gender homophily theory finds it. However, it might be the case that other role models, including teachers and social media influencers, also have a broader influence on children of their gender. This would be coherent with the idea that observer-model similarity encourages children to model their behaviour on people who resemble them. Is gender homophily just one example among many of social learning through observer-model similarity?
 
+Friends and acquaintances can contribute to the development of political interest, mainly through political discussions. Political discussions with friends and acquaintances increase political interest among child and adult respondents [@klofstad2007; @shehata2019]. Peer-group diversity can also contribute to the development of political interest. The size of one's social network has been found to have a positive relationship with political interest, while political disagreement is not related to it [@pattie2009].
+
+Political discussions among peers typically exhibit gender effects. Among adults, leaving aside relatives, 84% of men report discussing politics only with men, while 64% of women report discussing politics only with women [@huckfeldt1995]. This could be a by-product of gender homophily since people generally spend more time with other people of the same gender.
+
 ## Data Analysis
 
 Questions are also asked about students' peers and interests. First, students are asked "What is the gender of most of your friends?" They can choose either girls, boys, or "About the same for both genders". Second, the following question is asked: "Among these five topics, which one do you discuss most often with your male friends?" Each of the five topics is listed, and the same question is then asked for female friends.
