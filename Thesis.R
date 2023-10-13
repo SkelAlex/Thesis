@@ -570,7 +570,7 @@ DG$female_alt[DG$ses_gender %in% c(
   "Women"
 DG$female_alt[DG$ses_gender %in% c(
   "Queer", "Non-binaire", "Non-binary", "Agender", "Agenre")] <- "Other"
-DG$female_alt <- factor(DG$female_alt, levels = c("Women", "Men", "Other"))
+DG$female_alt <- factor(DG$female_alt, levels = c("Men", "Women", "Other"))
 DG$ses_female <- DG$female_alt
 DG$age <- as.numeric(DG$ses_age)
 table(DG$age)
