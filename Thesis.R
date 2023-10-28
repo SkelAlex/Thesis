@@ -548,8 +548,83 @@ CCPISBoys <- filter(CCPIS, female == 0)
 CCPISGirls <- filter(CCPIS, female == 1)
 
 ### 1.2.0 Census ####
-Census16 <- readstata13::read.dta13( # Census microdata for raking
-  "_data/Census16/pumf-98M0001-E-2016-individuals_F1.dta")
+#Census16 <- readstata13::read.dta13( # Census microdata for raking
+#  "_data/Census16/pumf-98M0001-E-2016-individuals_F1.dta")
+#Censusdta <- readstata13::read.dta13( # Census microdata for raking
+#  "_data/Census21/Data/Census_2021_Individual_pumf.dta")
+# dta too long to run (116 seconds)
+#Censusspss <- haven::read_spss(
+# spss slightly longer to run than csv (49 vs. 43 sec)
+#  "_data/Census21/Data/Census_2021_Individual_pumf.sav")
+Census21 <- read.csv("_data/Census21/Data/data_donnees_2021_ind.csv")
+Census21$female <- 2 - Census21$Gender
+Census21$age <- Census21$AGEGRP
+Census21$age[Census21$age == 88] <- NA
+Census21$ses_age <- NA
+Census21$ses_age[Census21$age %in% seq(1, 10)] <- 0
+Census21$ses_age[Census21$age %in% seq(11, 14)] <- 1
+Census21$ses_age[Census21$age %in% seq(15, 21)] <- 2
+Census21$adult <- 0
+Census21$adult[Census21$age > 6] <- 1
+Census21$lang <- NA
+Census21$lang[Census21$HLMOSTEN == 1 & Census21$HLMOSTFR == 0] <- "Anglophone"
+Census21$lang[Census21$HLMOSTEN == 0 & Census21$HLMOSTFR == 1] <- "Francophone"
+Census21$lang[Census21$HLMOSTNO > 1 & Census21$HLMOSTNO < 88] <- "Allophone"
+Census21$immig <- Census21$IMMSTAT
+Census21$immig[Census21$immig == 88] <- NA
+Census21$immig[Census21$immig == 1] <- 0
+Census21$immig[Census21$immig %in% c(2, 3)] <- 1
+Census21$ethnicity <- Census21$DPGRSUM
+Census21$ethnicity[Census21$ethnicity == 88] <- NA
+Census21$white[Census21$ethnicity == 1] <- 1
+Census21$white[Census21$ethnicity > 1] <- 0
+Census21$education <- Census21$HDGREE
+Census21$education[Census21$education == 88] <- NA
+Census21$ses_education <- NA
+Census21$ses_education[Census21$education %in% seq(1, 2)] <- 0
+Census21$ses_education[Census21$education %in% seq(3, 7)] <- 1
+Census21$ses_education[Census21$education %in% seq(8, 13)] <- 2
+Census21$income <- Census21$CFInc
+Census21$income[Census21$income == 88] <- NA
+Census21$ses_income <- NA
+Census21$ses_income[Census21$income %in% seq(1, 16)] <- 0 # 0-60000
+Census21$ses_income[Census21$income %in% seq(17, 25)] <- 1 # 60000-110000
+Census21$ses_income[Census21$income %in% seq(26, 33)] <- 2 # 110000-...
+
+# Adult data
+CensusAdult <- filter(Census21, adult == 1) # 782,545 adults or 79.8% of sample
+prop.table(table(CensusAdult$female)) # 51.1% of women
+cumsum(prop.table(table(CensusAdult$age))) # median age: 45-49
+prop.table(table(CensusAdult$lang, useNA = "always")) # 63.4% anglo,
+# 19.2% franco, 16.5% allo (first language spoken at home)
+prop.table(table(CensusAdult$immig)) # 70.5% born in Canada
+prop.table(table(CensusAdult$ethnicity)) # 70.2% white
+cumsum(prop.table(table(CensusAdult$education))) # 30.7% university degree
+cumsum(prop.table(table(CensusAdult$income))) # yearly median between
+# $85000 and $89999 (before tax)
+
+# Adult Quebec data
+CensusQcAdult <- filter(CensusAdult, PR == 24) # 179,178 adults or 18.3%
+prop.table(table(CensusQcAdult$female)) # 50.7% of women
+cumsum(prop.table(table(CensusQcAdult$age))) # median age: 50-54
+prop.table(table(CensusQcAdult$lang, useNA = "always")) # 10.5% anglo,
+# 77.6% franco, 10.2% allo (first language spoken at home)
+prop.table(table(CensusQcAdult$immig)) # 80.7% born in Canada
+prop.table(table(CensusQcAdult$ethnicity)) # 82.1% white
+cumsum(prop.table(table(CensusQcAdult$education))) # 28.2% university degree
+cumsum(prop.table(table(CensusQcAdult$income))) # yearly median between
+# $80000 and $84999 (before tax)
+cumsum(prop.table(table(CensusQcAdult$ses_income)))
+cumsum(prop.table(table(CensusQcAdult$ses_education)))
+
+# Teen data
+CensusTeen <- filter(Census21, AGEGRP %in% c(5, 6))
+# 66,774 teenagers or 6.8% of sample
+prop.table(table(CensusTeen$female)) # 51.5% of men
+prop.table(table(CensusTeen$lang, useNA = "always")) # 67.6% anglo,
+# 18.3% franco, 13.2% allo (first language spoken at home)
+prop.table(table(CensusTeen$immig)) # 86.8% born in Canada
+prop.table(table(CensusTeen$ethnicity)) # 59.8% white
 
 #### 1.2 Datagotchi PES ####
 DGFR <- read.csv("_data/DatagotchiPES/PES_prov2022_April+6,+2023_22.00.csv")
@@ -574,7 +649,6 @@ DG$female_alt <- factor(DG$female_alt, levels = c("Men", "Women", "Other"))
 DG$ses_female <- DG$female_alt
 DG$age <- as.numeric(DG$ses_age)
 table(DG$age)
-DG$ses_age <- DG$age
 DG$age_squared <- DG$age ^ 2
 DG$age_low <- NA
 DG$age_low[DG$age >= 35] <- 0
@@ -585,9 +659,12 @@ DG$age_mid[DG$age >= 35 & DG$age <= 54] <- 1
 DG$age_high <- NA
 DG$age_high[DG$age <= 54] <- 0
 DG$age_high[DG$age > 54] <- 1
-DG$lang <- "Anglophone"
-DG$lang[DG$QlangueSplit == "Français"] <- "Francophone"
-DG$ses_lang <- DG$lang
+DG$ses_age <- NA
+DG$ses_age[DG$age < 35] <- 0
+DG$ses_age[DG$age >= 35 & DG$age <= 54] <- 1
+DG$ses_age[DG$age > 54] <- 2
+DG$lang <- "English"
+DG$lang[DG$QlangueSplit == "Français"] <- "French"
 DG$immig <- 1
 DG$immig[DG$ses_birth_country == "Canada"] <- 0
 DG$immig[is.na(DG$ses_birth_country) | DG$ses_birth_country == ""] <- NA
@@ -625,31 +702,37 @@ DG$education <- factor(DG$education, levels = c(
   "Technical, community college,\nCEGEP or College classique",
   "Bachelor's degree", "Master's degree", "Doctorate"))
 table(DG$education, useNA = "always")
-DG$ses_education <- DG$education
 DG$educ_low <- NA
-DG$educ_low[DG$ses_education %in% c(
+DG$educ_low[DG$education %in% c(
   "Baccalauréat", "Bachelor's degree", "Collège, CÉGEP ou Collège classique",
   "Doctorat", "Doctorate", "Maîtrise", "Master's degree",
   "Technical, community college, CEGEP or College classique")] <- 0
-DG$educ_low[DG$ses_education %in% c(
+DG$educ_low[DG$education %in% c(
   "Aucune scolarité", "École primaire", "École secondaire",
   "High school")] <- 1
 DG$educ_mid <- NA
-DG$educ_mid[DG$ses_education %in% c(
+DG$educ_mid[DG$education %in% c(
   "Aucune scolarité", "École primaire", "École secondaire", "High school",
   "Baccalauréat", "Bachelor's degree", "Doctorat", "Doctorate", "Maîtrise",
   "Master's degree")] <- 0
-DG$educ_mid[DG$ses_education %in% c(
+DG$educ_mid[DG$education %in% c(
   "Collège, CÉGEP ou Collège classique",
   "Technical, community college, CEGEP or College classique")] <- 1
 DG$educ_high <- NA
-DG$educ_high[DG$ses_education %in% c(
+DG$educ_high[DG$education %in% c(
   "Aucune scolarité", "École primaire", "École secondaire", "High school",
   "Collège, CÉGEP ou Collège classique",
   "Technical, community college, CEGEP or College classique")] <- 0
-DG$educ_high[DG$ses_education %in% c(
+DG$educ_high[DG$education %in% c(
   "Baccalauréat", "Bachelor's degree", "Doctorat", "Doctorate", "Maîtrise",
   "Master's degree")] <- 1
+DG$ses_education <- NA
+DG$ses_education[DG$education %in% c(
+  "No schooling", "Elementary school", "High school")] <- 0
+DG$ses_education[DG$education == paste0("Technical, community college,\n",
+                                        "CEGEP or College classique")] <- 1
+DG$ses_education[DG$education %in% c(
+  "Bachelor's degree", "Doctorate", "Master's degree")] <- 2
 DG$income <- DG$ses_income
 DG$income[DG$income == "Aucun revenu"] <- "No income"
 DG$income[DG$income == "1$ à 30 000$"] <- "$1 to $30 000"
@@ -665,33 +748,39 @@ DG$income <- factor(DG$income, levels = c(
   "$90 001 to $110 000", "$110 001 to $150 000", "$150 001 to $200 000",
   "More than $200 000"))
 table(DG$income, useNA = "always")
-DG$ses_income <- DG$income
 DG$income_low <- NA
-DG$income_low[DG$ses_income %in% c(
+DG$income_low[DG$income %in% c(
   "$110 001 to $150 000", "$150 001 to $200 000", "$60 001 to $90 000",
   "$90 001 to $110 000", "110 001$ à 150 000$", "150 001$ à 200 000$",
   "60 001$ à 90 000$", "90 001 à 110 000$", "More than $200 000",
   "Plus de 200 000$")] <- 0
-DG$income_low[DG$ses_income %in% c(
+DG$income_low[DG$income %in% c(
   "$1 to $30 000", "$30 001 to $60 000", "1$ à 30 000$", "30 001$ à 60 000$",
   "Aucun revenu", "No income")] <- 1
 DG$income_mid <- NA
-DG$income_mid[DG$ses_income %in% c(
+DG$income_mid[DG$income %in% c(
   "$1 to $30 000", "$30 001 to $60 000", "1$ à 30 000$", "30 001$ à 60 000$",
   "Aucun revenu", "No income", "$150 001 to $200 000", "150 001$ à 200 000$",
   "More than $200 000", "Plus de 200 000$")] <- 0
-DG$income_mid[DG$ses_income %in% c(
+DG$income_mid[DG$income %in% c(
   "$110 001 to $150 000", "$60 001 to $90 000", "$90 001 to $110 000",
   "110 001$ à 150 000$", "60 001$ à 90 000$", "90 001 à 110 000$")] <- 1
 DG$income_high <- NA
-DG$income_high[DG$ses_income %in% c(
+DG$income_high[DG$income %in% c(
   "$1 to $30 000", "$30 001 to $60 000", "1$ à 30 000$", "30 001$ à 60 000$",
   "Aucun revenu", "No income", "$110 001 to $150 000", "$60 001 to $90 000",
   "$90 001 to $110 000", "110 001$ à 150 000$", "60 001$ à 90 000$",
   "90 001 à 110 000$")] <- 0
-DG$income_high[DG$ses_income %in% c(
+DG$income_high[DG$income %in% c(
   "$150 001 to $200 000", "150 001$ à 200 000$", "More than $200 000",
   "Plus de 200 000$")] <- 1
+DG$ses_income <- NA
+DG$ses_income[DG$income %in% c(
+  "$1 to $30 000", "$30 001 to $60 000", "No income")] <- 0
+DG$ses_income[DG$income %in% c(
+  "$110 001 to $150 000", "$60 001 to $90 000", "$90 001 to $110 000")] <- 1
+DG$ses_income[DG$income %in% c(
+  "$150 001 to $200 000", "More than $200 000")] <- 2
 DG$interest <- as.numeric(DG$pol_interest_1)
 DG$interest_health <- as.numeric(DG$issues_interest_1)
 DG$interest_foreign <- as.numeric(DG$issues_interest_2)
@@ -700,67 +789,67 @@ DG$interest_education <- as.numeric(DG$issues_interest_4)
 DG$interest_partisan <- as.numeric(DG$issues_interest_5)
 
 ### 1.2.1 Weighting ####
-#calculate_unweighted_props <- function(data, variable) {
-#  data |> # calculate proportions for one variable
-#    select({{variable}}) |>
-#    group_by({{variable}}) |>
-#    summarise(n = n()) |>
-#    na.omit() |>
-#    mutate(prop = n / sum(n))
-#}
-#calculate_5_unweighted_props <- function(
-#    data, variable1, variable2, variable3, variable4, variable5) {
-#  Prop1 <- calculate_unweighted_props(data, # calculate proportions for
-#                                      variable = {{variable1}}) # variable 1
-#  Prop2 <- calculate_unweighted_props(data, variable = {{variable2}})
-#  Prop3 <- calculate_unweighted_props(data, variable = {{variable3}})
-#  Prop4 <- calculate_unweighted_props(data, variable = {{variable4}})
-#  Prop5 <- calculate_unweighted_props(data, variable = {{variable5}})
-#  DataProp <- bind_rows(Prop1, Prop2, Prop3, Prop4, Prop5) |>
-#    pivot_longer(!c(n, prop), names_to = key, values_to = value) |>
-#    na.omit() |>
-#    select(key, value, n, prop)
-#  return(DataProp) # calculate proportions for multiple variables
-#}
-#add_raking_weights_column_5_var <- function(
-#    popData, sampleData, variable1, variable2, variable3, variable4,
-#    variable5) {
-#  popProps <- calculate_5_unweighted_props(data = popData, # population data
-#                                           variable1 = {{variable1}},
-#                                           variable2 = {{variable2}},
-#                                           variable3 = {{variable3}},
-#                                           variable4 = {{variable4}},
-#                                           variable5 = {{variable5}})
-#  targets <- unstack(popProps, form = prop ~ key)
-#  # transform data.frame into list (needed for anesrake)
-#  sampleData$mergeId <- 1:nrow(sampleData) # add a variable for row number
-#  subsetRaking <- sampleData |> # keep only relevant variables
-#    select(mergeId, {{variable1}}, {{variable2}}, {{variable3}},
-#           {{variable4}}, {{variable5}}) |>
-#    as.data.frame() # transform into data.frame
-#  raking <- anesrake::anesrake(
-#    inputter = targets, # target proportions from the population
-#    dataframe = subsetRaking, # sample data
-#    caseid = subsetRaking$mergeId,
-#    cap = 5, # maximum value the weight variable is allowed to take
-#    type = "pctlim", # among the 5 SES variables, only those whose
-#    # proportions deviate  enough from the population proportion are included
-#    pctlim = 5, # the "enough" on the previous line is set to 5 percentage
-#    # points
-#    choosemethod = "total") # this 5 points applies to all variable values
-#  # added together
-#  sampleData$weightRaking <- raking$weightvec # add raking weights column
-#  # to sample
-#  return(sampleData)
-#}
-#DG <- add_raking_weights_column_5_var(
-#  popData = Census16,
-#  sampleData = DG,
-#  variable1 = ses_female,
-#  variable2 = ses_education,
-#  variable3 = ses_lang,
-#  variable4 = ses_age,
-#  variable5 = ses_income)
+calculate_unweighted_props <- function(data, variable) {
+  data |> # calculate proportions for one variable
+    select({{variable}}) |>
+    group_by({{variable}}) |>
+    summarise(n = n()) |>
+    na.omit() |>
+    mutate(prop = n / sum(n))
+}
+calculate_5_unweighted_props <- function(
+    data, variable1, variable2, variable3, variable4, variable5) {
+  Prop1 <- calculate_unweighted_props(data, # calculate proportions for
+                                      variable = {{variable1}}) # variable 1
+  Prop2 <- calculate_unweighted_props(data, variable = {{variable2}})
+  Prop3 <- calculate_unweighted_props(data, variable = {{variable3}})
+  Prop4 <- calculate_unweighted_props(data, variable = {{variable4}})
+  Prop5 <- calculate_unweighted_props(data, variable = {{variable5}})
+  DataProp <- bind_rows(Prop1, Prop2, Prop3, Prop4, Prop5) |>
+    pivot_longer(!c(n, prop), names_to = key, values_to = value) |>
+    na.omit() |>
+    select(key, value, n, prop)
+  return(DataProp) # calculate proportions for multiple variables
+}
+add_raking_weights_column_5_var <- function(
+    popData, sampleData, variable1, variable2, variable3, variable4,
+    variable5) {
+  popProps <- calculate_5_unweighted_props(data = popData, # population data
+                                           variable1 = {{variable1}},
+                                           variable2 = {{variable2}},
+                                           variable3 = {{variable3}},
+                                           variable4 = {{variable4}},
+                                           variable5 = {{variable5}})
+  targets <- unstack(popProps, form = prop ~ key)
+  # transform data.frame into list (needed for anesrake)
+  sampleData$mergeId <- 1:nrow(sampleData) # add a variable for row number
+  subsetRaking <- sampleData |> # keep only relevant variables
+    select(mergeId, {{variable1}}, {{variable2}}, {{variable3}},
+           {{variable4}}, {{variable5}}) |>
+    as.data.frame() # transform into data.frame
+  raking <- anesrake::anesrake(
+    inputter = targets, # target proportions from the population
+    dataframe = subsetRaking, # sample data
+    caseid = subsetRaking$mergeId,
+    cap = 5, # maximum value the weight variable is allowed to take
+    type = "pctlim", # among the 5 SES variables, only those whose
+    # proportions deviate  enough from the population proportion are included
+    pctlim = 5, # the "enough" on the previous line is set to 5 percentage
+    # points
+    choosemethod = "total") # this 5 points applies to all variable values
+  # added together
+  sampleData$weightRaking <- raking$weightvec # add raking weights column
+  # to sample
+  return(sampleData)
+}
+DG <- add_raking_weights_column_5_var(
+  popData = Census21,
+  sampleData = DG,
+  variable1 = female,
+  variable2 = ses_education,
+  variable3 = immig,
+  variable4 = age,
+  variable5 = ses_income)
 
 #### 1.3 CES ####
 CES97 <- readstata13::read.dta13("_data/CES/CES97/CES97.dta")
@@ -1117,96 +1206,185 @@ WVSCA20nonimmigrantwomen <- filter(WVSCA20, female == 1 &
                                      immigrant == 1)
 
 #### 1.5 GSS ####
-GSS <- readstata13::read.dta13("_data/GSS2013/gss-89M0032x-E-2013-c27_F1.dta")
-GSS$female <- NA
-GSS$female[GSS$SEX == "Male"] <- 0
-GSS$female[GSS$SEX == "Female"] <- 1
-GSS$female <- as.factor(GSS$female)
-GSS$female_alt <- NA
-GSS$female_alt[GSS$SEX == "Male"] <- "Men"
-GSS$female_alt[GSS$SEX == "Female"] <- "Women"
-GSS$female_alt <- as.factor(GSS$female_alt)
-GSS$age <- GSS$AGEGR10
-GSS$age_low <- 0
-GSS$age_low[GSS$AGEGR10 %in% c("15 to 24 years", "25 to 34 years")] <- 1
-GSS$age_mid <- 0
-GSS$age_mid[GSS$AGEGR10 %in% c("35 to 44 years", "45 to 54 years")] <- 1
-GSS$age_high <- 0
-GSS$age_high[GSS$AGEGR10 %in% c("55 to 64 years", "65 to 74 years",
+GSS13 <- readstata13::read.dta13("_data/GSS2013/gss-89M0032x-E-2013-c27_F1.dta")
+GSS13$female <- NA
+GSS13$female[GSS13$SEX == "Male"] <- 0
+GSS13$female[GSS13$SEX == "Female"] <- 1
+GSS13$female <- as.factor(GSS13$female)
+GSS13$female_alt <- NA
+GSS13$female_alt[GSS13$SEX == "Male"] <- "Men"
+GSS13$female_alt[GSS13$SEX == "Female"] <- "Women"
+GSS13$female_alt <- as.factor(GSS13$female_alt)
+GSS13$age <- GSS13$AGEGR10
+GSS13$age_low <- 0
+GSS13$age_low[GSS13$AGEGR10 %in% c("15 to 24 years", "25 to 34 years")] <- 1
+GSS13$age_mid <- 0
+GSS13$age_mid[GSS13$AGEGR10 %in% c("35 to 44 years", "45 to 54 years")] <- 1
+GSS13$age_high <- 0
+GSS13$age_high[GSS13$AGEGR10 %in% c("55 to 64 years", "65 to 74 years",
                                 "75 years and over")] <- 1
-GSS$lang <- NA
-GSS$lang[GSS$LANCH %in% c("French only", "French and other equally")] <-
+GSS13$lang <- NA
+GSS13$lang[GSS13$LANCH %in% c("French only", "French and other equally")] <-
   "Francophone"
-GSS$lang[GSS$LANCH %in% c("English only", "English and other equally")] <-
+GSS13$lang[GSS13$LANCH %in% c("English only", "English and other equally")] <-
   "Anglophone"
-GSS$lang[GSS$LANCH == "Other language only"] <- "Allophone"
-GSS$lang[GSS$LANCH %in% c("English and French equally",
+GSS13$lang[GSS13$LANCH == "Other language only"] <- "Allophone"
+GSS13$lang[GSS13$LANCH %in% c("English and French equally",
                           "English, French and other equally")] <- "Bilingual"
-table(GSS$LANCH, useNA = "always")
-GSS$immig <- NA
-GSS$immig[GSS$BRTHCAN == "Born in Canada"] <- 0
-GSS$immig[GSS$BRTHCAN == "Born outside Canada"] <- 1
-GSS$education <- as.character(GSS$EHG_ALL)
-GSS$education[
-  GSS$education == "Bachelor's degree (e.g. B.A., B.Sc., LL.B.)"] <-
+table(GSS13$LANCH, useNA = "always")
+GSS13$immig <- NA
+GSS13$immig[GSS13$BRTHCAN == "Born in Canada"] <- 0
+GSS13$immig[GSS13$BRTHCAN == "Born outside Canada"] <- 1
+GSS13$education <- as.character(GSS13$EHG_ALL)
+GSS13$education[
+  GSS13$education == "Bachelor's degree (e.g. B.A., B.Sc., LL.B.)"] <-
   "Bachelor's degree\n(e.g. B.A., B.Sc., LL.B.)"
-GSS$education[
-  GSS$education ==
+GSS13$education[
+  GSS13$education ==
     "College/CEGEP/other non-university certificate or diploma"] <-
   "College/CEGEP/other non-university\ncertificate or diploma"
-GSS$education[
-  GSS$education ==
+GSS13$education[
+  GSS13$education ==
     "University certificate, diploma, degree above the BA level"] <-
   "University certificate, diploma,\ndegree above the BA level"
-GSS$education[
-  GSS$education ==
+GSS13$education[
+  GSS13$education ==
     "University certificate or diploma below the bachelor's level"] <-
   "University certificate or diploma\nbelow the bachelor's level"
-GSS$education[
-  GSS$education ==
+GSS13$education[
+  GSS13$education ==
     "Less than high school diploma or its equivalent"] <-
   "Less than high school\ndiploma or its equivalent"
-GSS$education[
-  GSS$education ==
+GSS13$education[
+  GSS13$education ==
     "High school diploma or a high school equivalency certificate"] <-
   "High school diploma or a high\nschool equivalency certificate"
-GSS$education <- as.factor(GSS$education)
-table(GSS$education, useNA = "always")
-GSS$educ_low <- NA
-GSS$educ_low[GSS$DH1GED %in% c(
+GSS13$education <- as.factor(GSS13$education)
+table(GSS13$education, useNA = "always")
+GSS13$educ_low <- NA
+GSS13$educ_low[GSS13$DH1GED %in% c(
   "Post-secondary diploma", "University degree")] <- 0
-GSS$educ_low[GSS$DH1GED %in% c(
+GSS13$educ_low[GSS13$DH1GED %in% c(
   "Less than High School", "Graduated from High School")] <- 1
-GSS$educ_mid <- NA
-GSS$educ_mid[GSS$DH1GED %in% c(
+GSS13$educ_mid <- NA
+GSS13$educ_mid[GSS13$DH1GED %in% c(
   "Less than High School", "Graduated from High School",
   "University degree")] <- 0
-GSS$educ_mid[GSS$DH1GED == "Post-secondary diploma"] <- 1
-GSS$educ_high <- NA
-GSS$educ_high[GSS$DH1GED %in% c(
+GSS13$educ_mid[GSS13$DH1GED == "Post-secondary diploma"] <- 1
+GSS13$educ_high <- NA
+GSS13$educ_high[GSS13$DH1GED %in% c(
   "Less than High School", "Graduated from High School",
   "Post-secondary diploma")] <- 0
-GSS$educ_high[GSS$DH1GED == "University degree"] <- 1
-GSS$income <- GSS$INCMHSD
-GSS$income_low <- 0
-GSS$income_low[GSS$INCMHSD %in% c(
+GSS13$educ_high[GSS13$DH1GED == "University degree"] <- 1
+GSS13$income <- GSS13$INCMHSD
+GSS13$income_low <- 0
+GSS13$income_low[GSS13$INCMHSD %in% c(
   "No income or loss", "Less than $ 5,000", "$ 5,000 to $ 9,999",
   "$ 10,000 to $ 14,999", "$ 15,000 to $ 19,999", "$ 20,000 to $ 29,999",
   "$ 30,000 to $ 39,999", "$ 40,000 to $ 49,999", "$ 50,000 to $ 59,999")] <- 1
-GSS$income_low[is.na(GSS$INCMHSD)] <- NA
-GSS$income_mid <- 0
-GSS$income_mid[GSS$INCMHSD %in% c(
+GSS13$income_low[is.na(GSS13$INCMHSD)] <- NA
+GSS13$income_mid <- 0
+GSS13$income_mid[GSS13$INCMHSD %in% c(
   "$ 60,000 to $ 79,999", "$ 80,000 to $ 99,999", "$ 100,00 to $ 149,999")] <- 1
-GSS$income_mid[is.na(GSS$INCMHSD)] <- NA
-GSS$income_high <- 0
-GSS$income_high[GSS$INCMHSD == "$ 150,000 or more"] <- 1
-GSS$income_high[is.na(GSS$INCMHSD)] <- NA
-GSS$interest <- NA
-GSS$interest[GSS$REP_05 == "Very interested"] <- 100
-GSS$interest[GSS$REP_05 == "Somewhat interested"] <- (2 / 3) * 100
-GSS$interest[GSS$REP_05 == "Not very interested"] <- (1 / 3) * 100
-GSS$interest[GSS$REP_05 == "Not at all interested"] <- 0
-GSS$weight <- GSS$WGHT_PER
+GSS13$income_mid[is.na(GSS13$INCMHSD)] <- NA
+GSS13$income_high <- 0
+GSS13$income_high[GSS13$INCMHSD == "$ 150,000 or more"] <- 1
+GSS13$income_high[is.na(GSS13$INCMHSD)] <- NA
+GSS13$interest <- NA
+GSS13$interest[GSS13$REP_05 == "Very interested"] <- 100
+GSS13$interest[GSS13$REP_05 == "Somewhat interested"] <- (2 / 3) * 100
+GSS13$interest[GSS13$REP_05 == "Not very interested"] <- (1 / 3) * 100
+GSS13$interest[GSS13$REP_05 == "Not at all interested"] <- 0
+GSS13$weight <- GSS13$WGHT_PER
+
+GSS20 <- read.csv(
+  "_data/GSS2020/dataverse_files/CSV/gss-89M0032x-E-2020-c35_F1.csv")
+GSS20$female <- NA
+GSS20$female[GSS20$GENDER2P == 1] <- 0
+GSS20$female[GSS20$GENDER2P == 2] <- 1
+GSS20$female <- as.factor(GSS20$female)
+GSS20$female_alt <- NA
+GSS20$female_alt[GSS20$GENDER2P == 1] <- "Men"
+GSS20$female_alt[GSS20$GENDER2P == 2] <- "Women"
+GSS20$female_alt <- as.factor(GSS20$female_alt)
+GSS20$age <- NA
+GSS20$age[GSS20$AGEGR10 == 1] <- "15 to 24 years"
+GSS20$age[GSS20$AGEGR10 == 2] <- "25 to 34 years"
+GSS20$age[GSS20$AGEGR10 == 3] <- "35 to 44 years"
+GSS20$age[GSS20$AGEGR10 == 4] <- "45 to 54 years"
+GSS20$age[GSS20$AGEGR10 == 5] <- "55 to 64 years"
+GSS20$age[GSS20$AGEGR10 == 6] <- "65 to 74 years"
+GSS20$age[GSS20$AGEGR10 == 7] <- "75 years and over"
+GSS20$age_low <- 0
+GSS20$age_low[GSS20$AGEGR10 %in% c(1, 2)] <- 1
+GSS20$age_mid <- 0
+GSS20$age_mid[GSS20$AGEGR10 %in% c(3, 4)] <- 1
+GSS20$age_high <- 0
+GSS20$age_high[GSS20$AGEGR10 %in% c(5, 6, 7)] <- 1
+GSS20$lang <- NA
+GSS20$lang[GSS20$LANHSD_C == 2] <- "Francophone"
+GSS20$lang[GSS20$LANHSD_C == 1] <- "Anglophone"
+GSS20$lang[GSS20$LANHSD_C == 3] <- "Allophone"
+GSS20$lang[GSS20$LANHSD_C == 4] <- "Bilingual"
+GSS20$lang[GSS20$LANHSD_C == 99] <- NA
+table(GSS20$lang, useNA = "always")
+GSS20$immig <- NA
+GSS20$immig[GSS20$IM_05A1 == 1] <- 0
+GSS20$immig[GSS20$IM_05A1 == 2] <- 1
+GSS20$education <- GSS20$ED_05
+GSS20$education[GSS20$education == 1] <-
+  "Less than high school\ndiploma or its equivalent"
+GSS20$education[GSS20$education == 2] <-
+  "High school diploma or a high\nschool equivalency certificate"
+GSS20$education[GSS20$education %in% c(3, 4)] <-
+  "College/CEGEP/other non-university\ncertificate or diploma"
+GSS20$education[GSS20$education == 5] <-
+  "University certificate or diploma\nbelow the bachelor's level"
+GSS20$education[GSS20$education == 6] <-
+  "Bachelor's degree\n(e.g. B.A., B.Sc., LL.B.)"
+GSS20$education[GSS20$education == 7] <-
+  "University certificate, diploma,\ndegree above the BA level"
+GSS20$education[GSS20$education == 99] <- NA
+GSS20$education <- as.factor(GSS20$education)
+GSS20$educ_low <- NA
+GSS20$educ_low[GSS20$ED_05 %in% c(3, 4, 5, 6, 7)] <- 0
+GSS20$educ_low[GSS20$ED_05 %in% c(1, 2)] <- 1
+GSS20$educ_mid <- NA
+GSS20$educ_mid[GSS20$ED_05 %in% c(1, 2, 5, 6, 7)] <- 0
+GSS20$educ_mid[GSS20$ED_05 %in% c(3, 4)] <- 1
+GSS20$educ_high <- NA
+GSS20$educ_high[GSS20$ED_05 %in% c(1, 2, 3, 4)] <- 0
+GSS20$educ_high[GSS20$ED_05 %in% c(5, 6, 7)] <- 1
+GSS20$income <- GSS20$FAMINC_C
+GSS20$income[GSS20$income == 1] <- "Less than $24,999"
+GSS20$income[GSS20$income == 2] <- "$25,000 to $49,999"
+GSS20$income[GSS20$income == 3] <- "$50,000 to $74,999"
+GSS20$income[GSS20$income == 4] <- "$75,000 to $99,999"
+GSS20$income[GSS20$income == 5] <- "$100,000 and over"
+GSS20$income <- factor(GSS20$income, levels = c(
+  "Less than $24,999", "$25,000 to $49,999", "$50,000 to $74,999",
+  "$75,000 to $99,999", "$100,000 and over"))
+GSS20$income_low <- 0
+GSS20$income_low[GSS20$FAMINC_C %in% c(1, 2)] <- 1
+GSS20$income_low[is.na(GSS20$FAMINC_C)] <- NA
+GSS20$income_mid <- 0
+GSS20$income_mid[GSS20$FAMINC_C %in% c(3, 4)] <- 1
+GSS20$income_mid[is.na(GSS20$FAMINC_C)] <- NA
+GSS20$income_high <- 0
+GSS20$income_high[GSS20$FAMINC_C == 5] <- 1
+GSS20$income_high[is.na(GSS20$FAMINCMHSD)] <- NA
+GSS20$interest <- NA
+GSS20$interest[GSS20$REP_05 == 1] <- 100
+GSS20$interest[GSS20$REP_05 == 2] <- (2 / 3) * 100
+GSS20$interest[GSS20$REP_05 == 3] <- (1 / 3) * 100
+GSS20$interest[GSS20$REP_05 == 4] <- 0
+GSS20$weight <- GSS20$WGHT_PER # 10.0000 - 32631.0308
+prop.table(table(GSS20$female))
+prop.table(table(GSS20$lang))
+prop.table(table(GSS20$education))
+prop.table(table(GSS20$immig))
+cumsum(prop.table(table(GSS20$income)))
+cumsum(prop.table(table(GSS20$age)))
 
 ##### 2. Descriptive statistics #####
 #### 2.1 CCPIS ####
@@ -1405,40 +1583,40 @@ ggsave(plot = gridExtra::arrangeGrob(
   PlotIncomeDG, PlotEducationDG, nrow = 3, ncol = 3),
   "_graphs/DGDescriptive1.pdf", height = 8.5, width = 11)
 
-PlotAgeGSS <- GSS |>
+PlotAgeGSS <- GSS20 |>
   filter(!is.na(age)) |>
   ggplot(aes(x = age)) +
   geom_bar() +
   labs(x = "Age", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
-PlotGenderGSS <- GSS |>
+PlotGenderGSS <- GSS20 |>
   filter(!is.na(female_alt)) |>
   ggplot(aes(x = female_alt)) +
   geom_bar() +
   labs(x = "Gender", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotLanguageGSS <- GSS |>
+PlotLanguageGSS <- GSS20 |>
   filter(!is.na(lang)) |>
   ggplot(aes(x = lang)) +
   geom_bar() +
-  labs(x = "Language of the survey", y = "Frequency") +
+  labs(x = "Language spoken at home", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotImmigrantGSS <- GSS |>
+PlotImmigrantGSS <- GSS20 |>
   filter(!is.na(immig)) |>
   ggplot(aes(x = as.factor(immig))) +
   geom_bar() +
   labs(x = "Born in Canada?", y = "Frequency") +
   scale_x_discrete(labels = c("Yes", "No")) +
   theme(text = element_text(family = "CM Roman"))
-PlotIncomeGSS <- GSS |>
+PlotIncomeGSS <- GSS20 |>
   filter(!is.na(income)) |>
   ggplot(aes(x = as.factor(income))) +
   geom_bar() +
   labs(x = "Household yearly income", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
-PlotEducationGSS <- GSS |>
+PlotEducationGSS <- GSS20 |>
   filter(!is.na(education)) |>
   ggplot(aes(x = as.factor(education))) +
   geom_bar() +
@@ -1495,10 +1673,10 @@ PlotInterestWVS <- ggplot(WVSCA20, aes(x = interest)) +
   labs(x = "General political interest -\n2020 WVS - Canada",
        y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotInterestGSS <- ggplot(GSS, aes(x = interest)) +
+PlotInterestGSS <- ggplot(GSS20, aes(x = interest)) +
   geom_histogram(binwidth = (100/3)) +
   scale_x_continuous(breaks = c(0, 25, 50, 75, 100)) +
-  labs(x = "General political interest -\n2013 GSS - Canada",
+  labs(x = "General political interest -\n2020 GSS - Canada",
        y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
 ggsave(plot = gridExtra::arrangeGrob(
@@ -1540,8 +1718,8 @@ Model02 <- nlme::lme(data = CCPIS, fixed = interest_health ~ female * age +
 ModelForeign <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ 1,
                          random = ~ 1 | Class, na.action = na.omit) # empty model
 ModelForeigneffects <- nlme::VarCorr(ModelForeign)
-100 * as.numeric(ModelForeigneffects[1]) / (as.numeric(ModelForeigneffects[1]) +
-                                             as.numeric(ModelForeigneffects[2]))
+100 * as.numeric(ModelForeigneffects[1]) / (
+  as.numeric(ModelForeigneffects[1]) + as.numeric(ModelForeigneffects[2]))
 # ~3.6% of variance in interest in international affairs is located at the
 # classroom level
 Model3 <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ female,
@@ -1551,8 +1729,8 @@ Model03 <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ female * age +
                        age_squared + female * white + immig + lang + agentic +
                        communal + school, random = ~ 1 | Class,
                      na.action = na.omit)
-ModelLaw <- nlme::lme(data = CCPIS, fixed = interest_law ~ 1,
-                          random = ~ 1 | Class, na.action = na.omit) # empty model
+ModelLaw <- nlme::lme(data = CCPIS, fixed = interest_law ~ 1, # empty model
+                          random = ~ 1 | Class, na.action = na.omit)
 ModelLaweffects <- nlme::VarCorr(ModelLaw)
 100 * as.numeric(ModelLaweffects[1]) / (as.numeric(ModelLaweffects[1]) +
                                               as.numeric(ModelLaweffects[2]))
@@ -2106,10 +2284,10 @@ summary(lm(data = WVSWave7, formula = interest / 10 ~ female,
 summary(lm(data = WVSWave7, formula = interest / 10 ~ female * canada,
            weights = weight))
 
-GSSgrouped <- GSS |>
+GSSgrouped <- GSS20 |>
   group_by(age, female) |>
   summarise(interest = weighted.mean(interest, w = weight, na.rm = TRUE))
-PlotTimeGSS <- ggplot(filter(GSS, !is.na(female)),
+PlotTimeGSS <- ggplot(filter(GSS20, !is.na(female)),
        aes(x = age, y = interest / 10, color = female, weight = weight,
            group = as.factor(female))) +
   geom_smooth(data = filter(GSSgrouped, !is.na(female)), size = 0.25,
@@ -2118,7 +2296,7 @@ PlotTimeGSS <- ggplot(filter(GSS, !is.na(female)),
              aes(x = age, y = interest / 10, color = female, weight = NULL)) +
   scale_y_continuous(name = "General political interest   ",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
-  scale_x_discrete(name = "Age, 2013 GSS, Canada") +
+  scale_x_discrete(name = "Age, 2020 GSS, Canada") +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
@@ -2126,7 +2304,7 @@ ggsave(plot = gridExtra::arrangeGrob(
   PlotTimeCES, PlotTimeWVS, PlotTimeWVSCA, PlotTimeGSS, nrow = 2, ncol = 2),
   "_graphs/TimeCESWVSGSS.pdf", height = 4.25, width = 5.5)
 
-summary(lm(data = GSS, formula = interest / 10 ~ female, weights = weight))
+summary(lm(data = GSS20, formula = interest / 10 ~ female, weights = weight))
 
 ### 3.1.2 Political interest by year & gender (CES & WVS) ####
 weighted.interest.se <- function(data) {
