@@ -358,16 +358,16 @@ CCPIS$fam_situation_alt[CCPIS$fam_situation == "Deux pères"] <-
 CCPIS$fam_situation_alt[CCPIS$fam_situation == "Autre"] <- "Other"
 CCPIS$fam_situation_alt[CCPIS$fam_situation ==
                              "Une mère, un père et au moins un beau-parent"] <-
-  "One mother, one father and\nat least one stepparent"
+  "One mother, one\nfather and at least\none stepparent"
 CCPIS$fam_situation_alt[CCPIS$fam_situation == paste(
   "One mother, one father and at least one stepparent")] <-
-  "One mother, one father and\nat least one stepparent"
+  "One mother, one\nfather and at least\none stepparent"
 CCPIS$fam_situation_alt[CCPIS$fam_situation ==
                              "Une mère, un père et aucun beau-parent"] <-
-  "One mother, one father and\nno stepparents"
+  "One mother, one \nfather and no\nstepparents"
 CCPIS$fam_situation_alt[CCPIS$fam_situation ==
                              "One mother, one father and no stepparents"] <-
-  "One mother, one father and\nno stepparents"
+  "One mother, one \nfather and no\nstepparents"
 table(CCPIS$fam_situation_alt, useNA = "always")
 CCPIS$friends_gender_alt <- CCPIS$friends_gender
 CCPIS$friends_gender_alt[CCPIS$friends_gender == "Filles"] <- "Girls"
@@ -546,6 +546,8 @@ CCPIS$communal <- (
 length(na.omit(CCPIS$communal)) / nrow(CCPIS) * 100 # 73% available data
 CCPISBoys <- filter(CCPIS, female == 0)
 CCPISGirls <- filter(CCPIS, female == 1)
+mean(CCPIS$agentic, na.rm= T)
+mean(CCPIS$communal, na.rm= T)
 
 ### 1.2.0 Census ####
 #Census16 <- readstata13::read.dta13( # Census microdata for raking
@@ -557,55 +559,58 @@ CCPISGirls <- filter(CCPIS, female == 1)
 # spss slightly longer to run than csv (49 vs. 43 sec)
 #  "_data/Census21/Data/Census_2021_Individual_pumf.sav")
 Census21 <- read.csv("_data/Census21/Data/data_donnees_2021_ind.csv")
-Census21$female <- 2 - Census21$Gender
+Census21$ses_female <- 3 - Census21$Gender
 Census21$age <- Census21$AGEGRP
 Census21$age[Census21$age == 88] <- NA
 Census21$ses_age <- NA
-Census21$ses_age[Census21$age %in% seq(1, 10)] <- 0
-Census21$ses_age[Census21$age %in% seq(11, 14)] <- 1
-Census21$ses_age[Census21$age %in% seq(15, 21)] <- 2
+Census21$ses_age[Census21$age %in% seq(1, 10)] <- 1
+Census21$ses_age[Census21$age %in% seq(11, 14)] <- 2
+Census21$ses_age[Census21$age %in% seq(15, 21)] <- 3
 Census21$adult <- 0
 Census21$adult[Census21$age > 6] <- 1
 Census21$lang <- NA
 Census21$lang[Census21$HLMOSTEN == 1 & Census21$HLMOSTFR == 0] <- "Anglophone"
 Census21$lang[Census21$HLMOSTEN == 0 & Census21$HLMOSTFR == 1] <- "Francophone"
 Census21$lang[Census21$HLMOSTNO > 1 & Census21$HLMOSTNO < 88] <- "Allophone"
+Census21$ses_franco <- NA
+Census21$ses_franco[Census21$FOL %in% c(1, 3, 4)] <- 1
+Census21$ses_franco[Census21$FOL == 2] <- 2
 Census21$immig <- Census21$IMMSTAT
 Census21$immig[Census21$immig == 88] <- NA
-Census21$immig[Census21$immig == 1] <- 0
-Census21$immig[Census21$immig %in% c(2, 3)] <- 1
+Census21$immig[Census21$immig == 3] <- 2
 Census21$ethnicity <- Census21$DPGRSUM
 Census21$ethnicity[Census21$ethnicity == 88] <- NA
-Census21$white[Census21$ethnicity == 1] <- 1
-Census21$white[Census21$ethnicity > 1] <- 0
+Census21$white[Census21$ethnicity == 1] <- 2
+Census21$white[Census21$ethnicity > 1] <- 1
 Census21$education <- Census21$HDGREE
 Census21$education[Census21$education == 88] <- NA
 Census21$ses_education <- NA
-Census21$ses_education[Census21$education %in% seq(1, 2)] <- 0
-Census21$ses_education[Census21$education %in% seq(3, 7)] <- 1
-Census21$ses_education[Census21$education %in% seq(8, 13)] <- 2
+Census21$ses_education[Census21$education %in% seq(1, 2)] <- 1
+Census21$ses_education[Census21$education %in% seq(3, 7)] <- 2
+Census21$ses_education[Census21$education %in% seq(8, 13)] <- 3
 Census21$income <- Census21$CFInc
 Census21$income[Census21$income == 88] <- NA
 Census21$ses_income <- NA
-Census21$ses_income[Census21$income %in% seq(1, 16)] <- 0 # 0-60000
-Census21$ses_income[Census21$income %in% seq(17, 25)] <- 1 # 60000-110000
-Census21$ses_income[Census21$income %in% seq(26, 33)] <- 2 # 110000-...
+Census21$ses_income[Census21$income %in% seq(1, 16)] <- 1 # 0-60000
+Census21$ses_income[Census21$income %in% seq(17, 25)] <- 2 # 60000-110000
+Census21$ses_income[Census21$income %in% seq(26, 33)] <- 3 # 110000-...
 
 # Adult data
 CensusAdult <- filter(Census21, adult == 1) # 782,545 adults or 79.8% of sample
-prop.table(table(CensusAdult$female)) # 51.1% of women
+prop.table(table(CensusAdult$ses_female)) # 51.1% of women
 cumsum(prop.table(table(CensusAdult$age))) # median age: 45-49
 prop.table(table(CensusAdult$lang, useNA = "always")) # 63.4% anglo,
 # 19.2% franco, 16.5% allo (first language spoken at home)
 prop.table(table(CensusAdult$immig)) # 70.5% born in Canada
 prop.table(table(CensusAdult$ethnicity)) # 70.2% white
+prop.table(table(CensusAdult$PR)) # 22.9% Quebec, 38.8% Ontario
 cumsum(prop.table(table(CensusAdult$education))) # 30.7% university degree
 cumsum(prop.table(table(CensusAdult$income))) # yearly median between
 # $85000 and $89999 (before tax)
 
 # Adult Quebec data
 CensusQcAdult <- filter(CensusAdult, PR == 24) # 179,178 adults or 18.3%
-prop.table(table(CensusQcAdult$female)) # 50.7% of women
+prop.table(table(CensusQcAdult$ses_female)) # 50.7% of women
 cumsum(prop.table(table(CensusQcAdult$age))) # median age: 50-54
 prop.table(table(CensusQcAdult$lang, useNA = "always")) # 10.5% anglo,
 # 77.6% franco, 10.2% allo (first language spoken at home)
@@ -616,15 +621,27 @@ cumsum(prop.table(table(CensusQcAdult$income))) # yearly median between
 # $80000 and $84999 (before tax)
 cumsum(prop.table(table(CensusQcAdult$ses_income)))
 cumsum(prop.table(table(CensusQcAdult$ses_education)))
+cumsum(prop.table(table(CensusQcAdult$ses_age)))
+prop.table(table(CensusQcAdult$ses_franco))
 
 # Teen data
 CensusTeen <- filter(Census21, AGEGRP %in% c(5, 6))
 # 66,774 teenagers or 6.8% of sample
-prop.table(table(CensusTeen$female)) # 51.5% of men
+prop.table(table(CensusTeen$ses_female)) # 51.5% of men
 prop.table(table(CensusTeen$lang, useNA = "always")) # 67.6% anglo,
 # 18.3% franco, 13.2% allo (first language spoken at home)
 prop.table(table(CensusTeen$immig)) # 86.8% born in Canada
 prop.table(table(CensusTeen$ethnicity)) # 59.8% white
+
+# Full data
+prop.table(table(Census21$ses_female))
+18226240/36991980 # female
+prop.table(table(Census21$age, useNA = "always"))
+1831195/36991980 # age group 0-4
+prop.table(table(Census21$ethnicity))
+26689275/36328480 # not visible minority... doesn't match with white
+1547870/36328480 # quite close to #4 (Black)
+2571400/36328480 # quite close to #2 (South Asian)
 
 #### 1.2 Datagotchi PES ####
 DGFR <- read.csv("_data/DatagotchiPES/PES_prov2022_April+6,+2023_22.00.csv")
@@ -646,7 +663,7 @@ DG$female_alt[DG$ses_gender %in% c(
 DG$female_alt[DG$ses_gender %in% c(
   "Queer", "Non-binaire", "Non-binary", "Agender", "Agenre")] <- "Other"
 DG$female_alt <- factor(DG$female_alt, levels = c("Men", "Women", "Other"))
-DG$ses_female <- DG$female_alt
+DG$ses_female <- as.numeric(DG$female)
 DG$age <- as.numeric(DG$ses_age)
 table(DG$age)
 DG$age_squared <- DG$age ^ 2
@@ -660,13 +677,16 @@ DG$age_high <- NA
 DG$age_high[DG$age <= 54] <- 0
 DG$age_high[DG$age > 54] <- 1
 DG$ses_age <- NA
-DG$ses_age[DG$age < 35] <- 0
-DG$ses_age[DG$age >= 35 & DG$age <= 54] <- 1
-DG$ses_age[DG$age > 54] <- 2
+DG$ses_age[DG$age < 35] <- 1
+DG$ses_age[DG$age >= 35 & DG$age <= 54] <- 2
+DG$ses_age[DG$age > 54] <- 3
 DG$lang <- "English"
 DG$lang[DG$QlangueSplit == "Français"] <- "French"
-DG$immig <- 1
-DG$immig[DG$ses_birth_country == "Canada"] <- 0
+DG$ses_franco <- NA
+DG$ses_franco[DG$lang == "English"] <- 1
+DG$ses_franco[DG$lang == "French"] <- 2
+DG$immig <- 2
+DG$immig[DG$ses_birth_country == "Canada"] <- 1
 DG$immig[is.na(DG$ses_birth_country) | DG$ses_birth_country == ""] <- NA
 DG$ethnicity <- NA
 DG$ethnicity[DG$ses_ethnicity %in% c("Blanc", "White")] <- "White"
@@ -685,23 +705,6 @@ DG$white <- 0
 DG$white[DG$ses_ethnicity %in% c("Blanc", "White")] <- 1
 DG$white[is.na(DG$ses_ethnicity) | DG$ses_ethnicity == ""] <- NA
 DG$education <- DG$ses_education
-DG$education[DG$education == "Baccalauréat"] <- "Bachelor's degree"
-DG$education[DG$education == "Collège, CÉGEP ou Collège classique"] <-
-  "Technical, community college,\nCEGEP or College classique"
-DG$education[DG$education ==
-               "Technical, community college, CEGEP or College classique"] <-
-  "Technical, community college,\nCEGEP or College classique"
-DG$education[DG$education == "Doctorat"] <- "Doctorate"
-DG$education[DG$education == "Maîtrise"] <- "Master's degree"
-DG$education[DG$education == "Aucune scolarité"] <- "No schooling"
-DG$education[DG$education == "École primaire"] <- "Elementary school"
-DG$education[DG$education == "École secondaire"] <- "High school"
-DG$education[DG$education == ""] <- NA
-DG$education <- factor(DG$education, levels = c(
-  "No schooling", "Elementary school", "High school",
-  "Technical, community college,\nCEGEP or College classique",
-  "Bachelor's degree", "Master's degree", "Doctorate"))
-table(DG$education, useNA = "always")
 DG$educ_low <- NA
 DG$educ_low[DG$education %in% c(
   "Baccalauréat", "Bachelor's degree", "Collège, CÉGEP ou Collège classique",
@@ -726,13 +729,30 @@ DG$educ_high[DG$education %in% c(
 DG$educ_high[DG$education %in% c(
   "Baccalauréat", "Bachelor's degree", "Doctorat", "Doctorate", "Maîtrise",
   "Master's degree")] <- 1
+DG$education[DG$education == "Baccalauréat"] <- "Bachelor's degree"
+DG$education[DG$education == "Collège, CÉGEP ou Collège classique"] <-
+  "Technical, community\ncollege, CEGEP or\nCollege classique"
+DG$education[DG$education ==
+               "Technical, community college, CEGEP or College classique"] <-
+  "Technical, community\ncollege, CEGEP or\nCollege classique"
+DG$education[DG$education == "Doctorat"] <- "Doctorate"
+DG$education[DG$education == "Maîtrise"] <- "Master's degree"
+DG$education[DG$education == "Aucune scolarité"] <- "No schooling"
+DG$education[DG$education == "École primaire"] <- "Elementary school"
+DG$education[DG$education == "École secondaire"] <- "High school"
+DG$education[DG$education == ""] <- NA
+DG$education <- factor(DG$education, levels = c(
+  "No schooling", "Elementary school", "High school",
+  "Technical, community\ncollege, CEGEP or\nCollege classique",
+  "Bachelor's degree", "Master's degree", "Doctorate"))
+table(DG$education, useNA = "always")
 DG$ses_education <- NA
 DG$ses_education[DG$education %in% c(
-  "No schooling", "Elementary school", "High school")] <- 0
+  "No schooling", "Elementary school", "High school")] <- 1
 DG$ses_education[DG$education == paste0("Technical, community college,\n",
-                                        "CEGEP or College classique")] <- 1
+                                        "CEGEP or College classique")] <- 2
 DG$ses_education[DG$education %in% c(
-  "Bachelor's degree", "Doctorate", "Master's degree")] <- 2
+  "Bachelor's degree", "Doctorate", "Master's degree")] <- 3
 DG$income <- DG$ses_income
 DG$income[DG$income == "Aucun revenu"] <- "No income"
 DG$income[DG$income == "1$ à 30 000$"] <- "$1 to $30 000"
@@ -776,11 +796,11 @@ DG$income_high[DG$income %in% c(
   "Plus de 200 000$")] <- 1
 DG$ses_income <- NA
 DG$ses_income[DG$income %in% c(
-  "$1 to $30 000", "$30 001 to $60 000", "No income")] <- 0
+  "$1 to $30 000", "$30 001 to $60 000", "No income")] <- 1
 DG$ses_income[DG$income %in% c(
-  "$110 001 to $150 000", "$60 001 to $90 000", "$90 001 to $110 000")] <- 1
+  "$110 001 to $150 000", "$60 001 to $90 000", "$90 001 to $110 000")] <- 2
 DG$ses_income[DG$income %in% c(
-  "$150 001 to $200 000", "More than $200 000")] <- 2
+  "$150 001 to $200 000", "More than $200 000")] <- 3
 DG$interest <- as.numeric(DG$pol_interest_1)
 DG$interest_health <- as.numeric(DG$issues_interest_1)
 DG$interest_foreign <- as.numeric(DG$issues_interest_2)
@@ -806,27 +826,27 @@ calculate_5_unweighted_props <- function(
   Prop4 <- calculate_unweighted_props(data, variable = {{variable4}})
   Prop5 <- calculate_unweighted_props(data, variable = {{variable5}})
   DataProp <- bind_rows(Prop1, Prop2, Prop3, Prop4, Prop5) |>
-    pivot_longer(!c(n, prop), names_to = key, values_to = value) |>
+    pivot_longer(!c(n, prop)) |>
     na.omit() |>
-    select(key, value, n, prop)
+    select(name, value, n, prop)
   return(DataProp) # calculate proportions for multiple variables
 }
 add_raking_weights_column_5_var <- function(
     popData, sampleData, variable1, variable2, variable3, variable4,
     variable5) {
+  sampleData$mergeId <- 1:nrow(sampleData) # add a variable for row number
+  subsetRaking <- sampleData |> # keep only relevant variables
+    select(mergeId, {{variable1}}, {{variable2}}, {{variable3}},
+           {{variable4}}, {{variable5}}) |>
+    as.data.frame() # transform into data.frame
   popProps <- calculate_5_unweighted_props(data = popData, # population data
                                            variable1 = {{variable1}},
                                            variable2 = {{variable2}},
                                            variable3 = {{variable3}},
                                            variable4 = {{variable4}},
                                            variable5 = {{variable5}})
-  targets <- unstack(popProps, form = prop ~ key)
+  targets <- unstack(popProps, form = prop ~ name)
   # transform data.frame into list (needed for anesrake)
-  sampleData$mergeId <- 1:nrow(sampleData) # add a variable for row number
-  subsetRaking <- sampleData |> # keep only relevant variables
-    select(mergeId, {{variable1}}, {{variable2}}, {{variable3}},
-           {{variable4}}, {{variable5}}) |>
-    as.data.frame() # transform into data.frame
   raking <- anesrake::anesrake(
     inputter = targets, # target proportions from the population
     dataframe = subsetRaking, # sample data
@@ -842,14 +862,31 @@ add_raking_weights_column_5_var <- function(
   # to sample
   return(sampleData)
 }
+DG2 <- DG[complete.cases(DG$ses_income),]
 DG <- add_raking_weights_column_5_var(
   popData = Census21,
-  sampleData = DG,
-  variable1 = female,
+  sampleData = DG2,
+  variable1 = ses_female,
   variable2 = ses_education,
-  variable3 = immig,
-  variable4 = age,
+  variable3 = ses_franco,
+  #variable4 = ses_age,
   variable5 = ses_income)
+summary(DG$weightRaking)
+prop.table(table(CensusQcAdult$ses_female))
+prop.table(table(DG$ses_female))
+prop.table(questionr::wtd.table(DG$ses_female, weights = DG$weightRaking))
+prop.table(table(CensusQcAdult$ses_education))
+prop.table(table(DG$ses_education))
+prop.table(questionr::wtd.table(DG$ses_education, weights = DG$weightRaking))
+prop.table(table(CensusQcAdult$ses_franco))
+prop.table(table(DG$ses_franco))
+prop.table(questionr::wtd.table(DG$ses_franco, weights = DG$weightRaking))
+prop.table(table(CensusQcAdult$ses_age))
+prop.table(table(DG$ses_age))
+prop.table(questionr::wtd.table(DG$ses_age, weights = DG$weightRaking))
+prop.table(table(CensusQcAdult$ses_income))
+prop.table(table(DG$ses_income))
+prop.table(questionr::wtd.table(DG$ses_income, weights = DG$weightRaking))
 
 #### 1.3 CES ####
 CES97 <- readstata13::read.dta13("_data/CES/CES97/CES97.dta")
@@ -1023,117 +1060,192 @@ CES21$ethnicity[
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == 1 & CES21$cps21_vismin_10 == -99 &
-    CES21$cps21_vismin_1 == -99] <- "white"
+    CES21$cps21_vismin_1 == -99] <- "White"
 CES21$ethnicity[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == 1 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
-    CES21$cps21_vismin_1 == -99] <- "black"
+    CES21$cps21_vismin_1 == -99] <- "Black"
 CES21$ethnicity[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == 1 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
-    CES21$cps21_vismin_1 == -99] <- "westasian"
+    CES21$cps21_vismin_1 == -99] <- "West Asian"
 CES21$ethnicity[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == 1 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
-    CES21$cps21_vismin_1 == -99] <- "southeastasian"
+    CES21$cps21_vismin_1 == -99] <- "Southeast Asian"
 CES21$ethnicity[
   CES21$cps21_vismin_1 == 1 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
-    CES21$cps21_vismin_1 == -99] <- "arabic"
+    CES21$cps21_vismin_1 == -99] <- "Arabic"
 CES21$ethnicity[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == 1 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
-    CES21$cps21_vismin_1 == -99] <- "southasian"
+    CES21$cps21_vismin_1 == -99] <- "South Asian"
 CES21$ethnicity[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == 1 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
-    CES21$cps21_vismin_1 == -99] <- "hispanic"
+    CES21$cps21_vismin_1 == -99] <- "Hispanic"
 CES21$ethnicity[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == 1 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
-    CES21$cps21_vismin_1 == -99] <- "indigenous"
+    CES21$cps21_vismin_1 == -99] <- "Indigenous"
 CES21$ethnicity[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == 1 &
-    CES21$cps21_vismin_1 == -99] <- "other"
+    CES21$cps21_vismin_1 == -99] <- "Other"
 CES21$female <- NA
 CES21$female[CES21$cps21_genderid == "A man"] <- 0
 CES21$female[CES21$cps21_genderid == "A woman"] <- 1
 CES21$female <- as.factor(CES21$female)
+CES21$female_alt <- NA
+CES21$female_alt[CES21$cps21_genderid == "A man"] <- "Men"
+CES21$female_alt[CES21$cps21_genderid == "A woman"] <- "Women"
+CES21$female_alt[CES21$cps21_genderid %in% c(
+  "Non-binary", "Another gender, please specify:")] <- "Other"
+CES21$female_alt <- factor(CES21$female_alt, levels = c(
+  "Men", "Women", "Other"))
+CES21$lang <- "Allophone"
+CES21$lang[CES21$pes21_lang == "French"] <- "Francophone"
+CES21$lang[CES21$pes21_lang == "English"] <- "Anglophone"
+CES21$lang[CES21$lang %in% c("Don't know/ Prefer not to answer")] <- NA
 CES21$interest <- NA
 CES21$interest <- CES21$cps21_interest_gen * 10
 CES21$interest[CES21$interest == -990] <- NA
 # 0 uninterested in politics, 100 interested
 CES21$interest <- as.integer(CES21$interest)
 CES21$age <- CES21$cps21_age
-CES21$immigrant <- ifelse(CES21$cps21_bornin_canada == "Yes", 1,
-                          ifelse(CES21$cps21_bornin_canada == "No", 2, NA))
+CES21$immig <- ifelse(CES21$cps21_bornin_canada == "Yes", 1,
+                      ifelse(CES21$cps21_bornin_canada == "No", 2, NA))
 CES21$weight <- CES21$cps21_weight_general_all
 CES21men <- filter(CES21, female == 0)
 CES21women <- filter(CES21, female == 1)
-CES21white <- filter(CES21, ethnicity == "white")
-CES21black <- filter(CES21, ethnicity == "black")
-CES21westasian <- filter(CES21, ethnicity == "westasian")
-CES21southeastasian <- filter(CES21, ethnicity == "southeastasian")
-CES21arabic <- filter(CES21, ethnicity == "arabic")
-CES21southasian <- filter(CES21, ethnicity == "southasian")
-CES21hispanic <- filter(CES21, ethnicity == "hispanic")
-CES21indigenous <- filter(CES21, ethnicity == "indigenous")
-CES21other <- filter(CES21, ethnicity == "other")
-CES21whitemen <- filter(CES21, female == 0 & ethnicity == "white")
-CES21whitewomen <- filter(CES21, female == 1 & ethnicity == "white")
-CES21nonwhitemen <- filter(CES21, female == 0 & ethnicity != "white")
-CES21nonwhitewomen <- filter(CES21, female == 1 & ethnicity != "white")
-CES21immigrantmen <- filter(CES21, female == 0 & immigrant == 2)
-CES21immigrantwomen <- filter(CES21, female == 1 & immigrant == 2)
-CES21nonimmigrantmen <- filter(CES21, female == 0 & immigrant == 1)
-CES21nonimmigrantwomen <- filter(CES21, female == 1 & immigrant == 1)
+CES21white <- filter(CES21, ethnicity == "White")
+CES21black <- filter(CES21, ethnicity == "Black")
+CES21westasian <- filter(CES21, ethnicity == "West Asian")
+CES21southeastasian <- filter(CES21, ethnicity == "Southeast Asian")
+CES21arabic <- filter(CES21, ethnicity == "Arabic")
+CES21southasian <- filter(CES21, ethnicity == "South Asian")
+CES21hispanic <- filter(CES21, ethnicity == "Hispanic")
+CES21indigenous <- filter(CES21, ethnicity == "Indigenous")
+CES21other <- filter(CES21, ethnicity == "Other")
+CES21whitemen <- filter(CES21, female == 0 & ethnicity == "White")
+CES21whitewomen <- filter(CES21, female == 1 & ethnicity == "White")
+CES21nonwhitemen <- filter(CES21, female == 0 & ethnicity != "White")
+CES21nonwhitewomen <- filter(CES21, female == 1 & ethnicity != "White")
+CES21immigrantmen <- filter(CES21, female == 0 & immig == 2)
+CES21immigrantwomen <- filter(CES21, female == 1 & immig == 2)
+CES21nonimmigrantmen <- filter(CES21, female == 0 & immig == 1)
+CES21nonimmigrantwomen <- filter(CES21, female == 1 & immig == 1)
+CES21$education <- as.character(CES21$cps21_education)
+CES21$education[
+  CES21$education == "Don't know/ Prefer not to answer"] <- NA
+CES21$education[CES21$education == paste0(
+  "Some technical, community college, CEGEP, College Classique")] <-
+  "Some technical,\ncommunity college,\nCEGEP, College Classique"
+CES21$education[CES21$education == paste0(
+  "Completed technical, community college, CEGEP, College Classique")] <-
+  "Completed technical,\ncommunity college,\nCEGEP, College Classique"
+CES21$education[CES21$education == paste0(
+  "Some secondary/ high school")] <-
+  "Some secondary/\nhigh school"
+CES21$education[CES21$education == paste0(
+  "Some elementary school")] <-
+  "Some elementary\nschool"
+CES21$education[CES21$education == paste0(
+  "Completed secondary/ high school")] <-
+  "Completed secondary/\nhigh school"
+CES21$education[CES21$education == paste0(
+  "Completed elementary school")] <-
+  "Completed\nelementary school"
+CES21$education[CES21$education == paste0(
+  "Professional degree or doctorate")] <-
+  "Professional degree\nor doctorate"
+CES21$education <- as.factor(CES21$education)
+CES21$income <- NA
+CES21$income[CES21$cps21_income_number < 1] <- "No income"
+CES21$income[CES21$cps21_income_number >= 1 &
+               CES21$cps21_income_number < 30000] <- "$1 to $30 000"
+CES21$income[CES21$cps21_income_number >= 30000 &
+               CES21$cps21_income_number < 60000] <- "$30 001 to $60 000"
+CES21$income[CES21$cps21_income_number >= 60000 &
+               CES21$cps21_income_number < 90000] <- "$60 001 to $90 000"
+CES21$income[CES21$cps21_income_number >= 90000 &
+               CES21$cps21_income_number < 110000] <- "$90 001 to $110 000"
+CES21$income[CES21$cps21_income_number >= 110000 &
+               CES21$cps21_income_number < 150000] <- "$110 001 to $150 000"
+CES21$income[CES21$cps21_income_number >= 150000 &
+               CES21$cps21_income_number < 200000] <- "$150 001 to $200 000"
+CES21$income[CES21$cps21_income_number >= 200000] <- "More than $200 000"
+CES21$income <- factor(CES21$income, levels = c(
+  "No income", "$1 to $30 000", "$30 001 to $60 000", "$60 001 to $90 000",
+  "$90 001 to $110 000", "$110 001 to $150 000", "$150 001 to $200 000",
+  "More than $200 000"))
+CES21$province <- CES21$pes21_province # no data about territories
+CES21$province[CES21$province == "Newfoundland and Labrador"] <-
+  "Newfoundland\nand Labrador"
+CES21$province[CES21$province == "Northwest Territories"] <-
+  "Northwest\nTerritories"
+CES21$province[CES21$province == "Prince Edward Island"] <-
+  "Prince Edward\nIsland"
+prop.table(table(CES21$female))
+prop.table(table(CES21$lang))
+prop.table(table(CES21$education))
+prop.table(table(CES21$immig))
+prop.table(table(CES21$ethnicity))
+cumsum(prop.table(table(CES21$income)))
+cumsum(prop.table(table(CES21$age)))
+prop.table(table(CES21$province))
+summary(CES21$weight)
 
 #### 1.4 WVS ####
 WVS <- readRDS("_data/WVS/WVS_TimeSeries_1981_2022_Rds_v3_0.rds")
 WVS$ethnicity <- NA
-WVS$ethnicity[WVS$X051 == 124001] <- "white"
-WVS$ethnicity[WVS$X051 == 124002] <- "black"
-WVS$ethnicity[WVS$X051 == 124003] <- "westasian"
-WVS$ethnicity[WVS$X051 == 124004] <- "southeastasian"
-WVS$ethnicity[WVS$X051 == 124005] <- "arabic"
-WVS$ethnicity[WVS$X051 == 124006] <- "southasian"
-WVS$ethnicity[WVS$X051 == 124007] <- "hispanic"
-WVS$ethnicity[WVS$X051 == 124008] <- "indigenous"
-WVS$ethnicity[WVS$X051 == 124009] <- "chinese"
-WVS$ethnicity[WVS$X051 == 124010] <- "filipino"
-WVS$ethnicity[WVS$X051 == 124011] <- "korean"
-WVS$ethnicity[WVS$X051 == 124012] <- "japanese"
-WVS$ethnicity[WVS$X051 == 124999] <- "other"
-WVS$ethnicity <- haven::as_factor(WVS$ethnicity)
+WVS$ethnicity[WVS$X051 == 124001] <- "White"
+WVS$ethnicity[WVS$X051 == 124002] <- "Black"
+WVS$ethnicity[WVS$X051 == 124003] <- "West Asian"
+WVS$ethnicity[WVS$X051 == 124004] <- "Southeast Asian"
+WVS$ethnicity[WVS$X051 == 124005] <- "Arabic"
+WVS$ethnicity[WVS$X051 == 124006] <- "South Asian"
+WVS$ethnicity[WVS$X051 == 124007] <- "Hispanic"
+WVS$ethnicity[WVS$X051 == 124008] <- "Indigenous"
+WVS$ethnicity[WVS$X051 == 124009] <- "Chinese"
+WVS$ethnicity[WVS$X051 == 124010] <- "Filipino"
+WVS$ethnicity[WVS$X051 == 124011] <- "Korean"
+WVS$ethnicity[WVS$X051 == 124012] <- "Japanese"
+WVS$ethnicity[WVS$X051 == 124999] <- "Other"
+WVS$ethnicity <- as.factor(WVS$ethnicity)
 WVS$female <- NA
 WVS$female[WVS$X001 == 1] <- 0
 WVS$female[WVS$X001 == 2] <- 1
-WVS$female <- haven::as_factor(WVS$female)
+WVS$female <- as.factor(WVS$female)
+WVS$female_alt <- NA
+WVS$female_alt[WVS$female == 0] <- "Men"
+WVS$female_alt[WVS$female == 1] <- "Women"
+WVS$female_alt <- factor(WVS$female_alt, levels = c("Men", "Women"))
 WVS$interest <- NA
 WVS$interest[WVS$E023 == 4] <- 0
 WVS$interest[WVS$E023 == 3] <- (100 / 3)
@@ -1142,14 +1254,45 @@ WVS$interest[WVS$E023 == 1] <- 100
 WVS$age <- WVS$X003
 WVS$age[WVS$X003 < 0] <- NA
 WVS$age <- as.numeric(WVS$age)
-WVS$immigrant <- WVS$G027A
-WVS$immigrant[WVS$G027A < 0] <- NA
-WVS$immigrant <- haven::as_factor(WVS$immigrant)
-WVS$weight <- WVS$S017
-WVS$weight <- as.numeric(WVS$weight)
+WVS$immig <- WVS$G027A
+WVS$immig[WVS$G027A < 0] <- NA
+WVS$immig <- as.factor(WVS$immig)
+WVS$lang <- "Allophone"
+WVS$lang[WVS$G016 == 1400] <- "Francophone"
+WVS$lang[WVS$G016 == 1240] <- "Anglophone"
+WVS$lang[WVS$G016 < 0] <- NA
+WVS$lang <- as.factor(WVS$lang)
+WVS$education <- as.numeric(WVS$X025A_01)
+WVS$education[WVS$education < 0] <- NA
+WVS$education[WVS$education == 0] <-
+  "Early childhood\neducation/\nno education"
+WVS$education[WVS$education == 1] <- "Primary education"
+WVS$education[WVS$education == 2] <- "Lower secondary\neducation"
+WVS$education[WVS$education == 3] <- "Upper secondary\neducation"
+WVS$education[WVS$education == 4] <- "Post-secondary\nnon-tertiary\neducation"
+WVS$education[WVS$education == 5] <- "Short-cycle\ntertiary education"
+WVS$education[WVS$education == 6] <- "Bachelor or\nequivalent"
+WVS$education[WVS$education == 7] <- "Master or\nequivalent"
+WVS$education[WVS$education == 8] <- "Doctoral or\nequivalent"
+WVS$education <- as.factor(WVS$education)
+WVS$province <- NA
+WVS$province[as.numeric(WVS$X048ISO) == 124001] <- "Alberta"
+WVS$province[as.numeric(WVS$X048ISO) == 124002] <- "British Columbia"
+WVS$province[as.numeric(WVS$X048ISO) == 124003] <- "Manitoba"
+WVS$province[as.numeric(WVS$X048ISO) == 124004] <- "New Brunswick"
+WVS$province[as.numeric(WVS$X048ISO) == 124005] <- "Newfoundland\nand Labrador"
+WVS$province[as.numeric(WVS$X048ISO) == 124006] <- "Nova Scotia"
+WVS$province[as.numeric(WVS$X048ISO) == 124007] <- "Ontario"
+WVS$province[as.numeric(WVS$X048ISO) == 124008] <- "Prince Edward\nIsland"
+WVS$province[as.numeric(WVS$X048ISO) == 124009] <- "Quebec"
+WVS$province[as.numeric(WVS$X048ISO) == 124010] <- "Saskatchewan"
+WVS$province[as.numeric(WVS$X048ISO) == 124011] <- "Northwest\nTerritories"
+WVS$province[as.numeric(WVS$X048ISO) == 124012] <- "Nunavut"
+WVS$province[as.numeric(WVS$X048ISO) == 124013] <- "Yukon"
+WVS$province <- as.factor(WVS$province)
+WVS$weight <- as.numeric(WVS$S017)
 WVSWave7 <- filter(WVS, S020 %in% seq(2017, 2022))
 length(table(WVSWave7$COUNTRY_ALPHA))
-
 WVSWave7$canada <- 0
 WVSWave7$canada[WVSWave7$COUNTRY_ALPHA == "CAN"] <- 1
 WVSCA <- filter(WVS, COUNTRY_ALPHA == "CAN")
@@ -1199,11 +1342,18 @@ WVSCA20nonwhitemen <- filter(WVSCA20, female == 0 &
                                ethnicity != "white")
 WVSCA20nonwhitewomen <- filter(WVSCA20, female == 1 &
                                  ethnicity != "white")
-WVSCA20immigrantmen <- filter(WVSCA20, female == 0 & immigrant == 2)
-WVSCA20immigrantwomen <- filter(WVSCA20, female == 1 & immigrant == 2)
-WVSCA20nonimmigrantmen <- filter(WVSCA20, female == 0 & immigrant == 1)
-WVSCA20nonimmigrantwomen <- filter(WVSCA20, female == 1 &
-                                     immigrant == 1)
+WVSCA20immigrantmen <- filter(WVSCA20, female == 0 & immig == 2)
+WVSCA20immigrantwomen <- filter(WVSCA20, female == 1 & immig == 2)
+WVSCA20nonimmigrantmen <- filter(WVSCA20, female == 0 & immig == 1)
+WVSCA20nonimmigrantwomen <- filter(WVSCA20, female == 1 & immig == 1)
+prop.table(table(WVSCA20$female))
+prop.table(table(WVSCA20$lang))
+prop.table(table(WVSCA20$education))
+prop.table(table(WVSCA20$immig))
+prop.table(table(WVSCA20$ethnicity))
+cumsum(prop.table(table(WVSCA20$age)))
+prop.table(table(WVSCA20$province))
+summary(WVSCA20$weight)
 
 #### 1.5 GSS ####
 GSS13 <- readstata13::read.dta13("_data/GSS2013/gss-89M0032x-E-2013-c27_F1.dta")
@@ -1295,6 +1445,7 @@ GSS13$interest[GSS13$REP_05 == "Very interested"] <- 100
 GSS13$interest[GSS13$REP_05 == "Somewhat interested"] <- (2 / 3) * 100
 GSS13$interest[GSS13$REP_05 == "Not very interested"] <- (1 / 3) * 100
 GSS13$interest[GSS13$REP_05 == "Not at all interested"] <- 0
+GSS13$province <- GSS13$PRCODE # no data about territories
 GSS13$weight <- GSS13$WGHT_PER
 
 GSS20 <- read.csv(
@@ -1333,17 +1484,17 @@ GSS20$immig[GSS20$IM_05A1 == 1] <- 0
 GSS20$immig[GSS20$IM_05A1 == 2] <- 1
 GSS20$education <- GSS20$ED_05
 GSS20$education[GSS20$education == 1] <-
-  "Less than high school\ndiploma or its equivalent"
+  "Less than high\nschool diploma\nor its equivalent"
 GSS20$education[GSS20$education == 2] <-
-  "High school diploma or a high\nschool equivalency certificate"
+  "High school diploma\nor a high school\nequivalency certificate"
 GSS20$education[GSS20$education %in% c(3, 4)] <-
-  "College/CEGEP/other non-university\ncertificate or diploma"
+  "College/CEGEP/other\nnon-university\ncertificate or diploma"
 GSS20$education[GSS20$education == 5] <-
-  "University certificate or diploma\nbelow the bachelor's level"
+  "University certificate\nor diploma below\nthe bachelor's level"
 GSS20$education[GSS20$education == 6] <-
   "Bachelor's degree\n(e.g. B.A., B.Sc., LL.B.)"
 GSS20$education[GSS20$education == 7] <-
-  "University certificate, diploma,\ndegree above the BA level"
+  "University certificate,\ndiploma, degree above\nthe BA level"
 GSS20$education[GSS20$education == 99] <- NA
 GSS20$education <- as.factor(GSS20$education)
 GSS20$educ_low <- NA
@@ -1378,6 +1529,30 @@ GSS20$interest[GSS20$REP_05 == 1] <- 100
 GSS20$interest[GSS20$REP_05 == 2] <- (2 / 3) * 100
 GSS20$interest[GSS20$REP_05 == 3] <- (1 / 3) * 100
 GSS20$interest[GSS20$REP_05 == 4] <- 0
+GSS20$province <- GSS20$PRV # no data about territories
+GSS20$province[GSS20$province == 10] <- "Newfoundland\nand Labrador"
+GSS20$province[GSS20$province == 11] <- "Prince Edward\nIsland"
+GSS20$province[GSS20$province == 12] <- "Nova Scotia"
+GSS20$province[GSS20$province == 13] <- "New Brunswick"
+GSS20$province[GSS20$province == 24] <- "Quebec"
+GSS20$province[GSS20$province == 35] <- "Ontario"
+GSS20$province[GSS20$province == 46] <- "Manitoba"
+GSS20$province[GSS20$province == 47] <- "Saskatchewan"
+GSS20$province[GSS20$province == 48] <- "Alberta"
+GSS20$province[GSS20$province == 59] <- "British Columbia"
+GSS20$ethnicity <- NA
+GSS20$ethnicity[GSS20$VISMIN_C == 3] <- "Black"
+GSS20$ethnicity[GSS20$VISMIN_C == 8] <- "West Asian"
+GSS20$ethnicity[GSS20$VISMIN_C == 7] <- "Southeast Asian"
+GSS20$ethnicity[GSS20$VISMIN_C == 5] <- "Arabic"
+GSS20$ethnicity[GSS20$VISMIN_C == 1] <- "South Asian"
+GSS20$ethnicity[GSS20$VISMIN_C == 6] <- "Hispanic"
+GSS20$ethnicity[GSS20$VISMIN_C == 2] <- "Chinese"
+GSS20$ethnicity[GSS20$VISMIN_C == 4] <- "Filipino"
+GSS20$ethnicity[GSS20$VISMIN_C == 9] <- "Other"
+GSS20$ethnicity[GSS20$VISMIN_C == 10] <- "White"
+GSS20$ethnicity[GSS20$ABM_01A == 2] <- "Indigenous"
+GSS20$ethnicity <- as.factor(GSS20$ethnicity)
 GSS20$weight <- GSS20$WGHT_PER # 10.0000 - 32631.0308
 prop.table(table(GSS20$female))
 prop.table(table(GSS20$lang))
@@ -1385,6 +1560,9 @@ prop.table(table(GSS20$education))
 prop.table(table(GSS20$immig))
 cumsum(prop.table(table(GSS20$income)))
 cumsum(prop.table(table(GSS20$age)))
+prop.table(table(GSS20$province))
+prop.table(table(GSS20$ethnicity))
+summary(GSS20$weight)
 
 ##### 2. Descriptive statistics #####
 #### 2.1 CCPIS ####
@@ -1409,7 +1587,7 @@ PlotRace <- CCPIS |>
   ggplot(aes(x = ethnicity)) +
   geom_bar() +
   labs(x = "Race", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotImmigrant <- CCPIS |>
   filter(!is.na(immig)) |>
@@ -1419,18 +1597,18 @@ PlotImmigrant <- CCPIS |>
   scale_x_discrete(labels = c("Yes", "No")) +
   theme(text = element_text(family = "CM Roman"))
 PlotAgentic <- ggplot(CCPIS, aes(x = agentic)) +
-  geom_histogram(binwidth = 0.1) +
+  geom_histogram(breaks = seq(0, 1, 0.1)) +
   labs(x = "Agency scale score", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
 PlotCommunal <- ggplot(CCPIS, aes(x = communal)) +
-  geom_histogram(binwidth = 0.1) +
+  geom_histogram(breaks = seq(0, 1, 0.1)) +
   labs(x = "Communality scale score", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
 PlotFamSituation <- CCPIS |>
   ggplot(aes(x = as.factor(fam_situation_alt))) +
   geom_bar() +
   labs(x = "Family situation", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotParentDiscuss <- filter(CCPIS, !is.na(parent_discuss_alt) &
                               !is.na(female)) |>
@@ -1438,7 +1616,7 @@ PlotParentDiscuss <- filter(CCPIS, !is.na(parent_discuss_alt) &
   geom_bar() +
   facet_grid(~female_alt2) +
   labs(x = "Gender of parent who has the most discussions", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotFriendsGender <- filter(CCPIS, !is.na(friends_gender_alt) &
                               !is.na(female)) |>
@@ -1446,7 +1624,7 @@ PlotFriendsGender <- filter(CCPIS, !is.na(friends_gender_alt) &
   geom_bar() +
   facet_grid(~female_alt2) +
   labs(x = "Gender of most of friends", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotTeacherGender <- filter(CCPIS, !is.na(teacher_gender_alt) &
                               !is.na(female)) |>
@@ -1454,7 +1632,7 @@ PlotTeacherGender <- filter(CCPIS, !is.na(teacher_gender_alt) &
   geom_bar() +
   facet_grid(~female_alt2) +
   labs(x = "Gender of liked teacher", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotInfluencerGender <- filter(CCPIS, !is.na(influencer_gender_alt) &
                               !is.na(female)) |>
@@ -1462,7 +1640,7 @@ PlotInfluencerGender <- filter(CCPIS, !is.na(influencer_gender_alt) &
   geom_bar() +
   facet_grid(~female_alt2) +
   labs(x = "Gender of follower influencer", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = gridExtra::arrangeGrob(
   PlotGender, PlotAge, PlotRace, PlotLanguage, PlotImmigrant, PlotAgentic,
@@ -1555,7 +1733,7 @@ PlotRaceDG <- DG |>
   ggplot(aes(x = ethnicity)) +
   geom_bar() +
   labs(x = "Race", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotImmigrantDG <- DG |>
   filter(!is.na(immig)) |>
@@ -1569,26 +1747,137 @@ PlotIncomeDG <- DG |>
   ggplot(aes(x = as.factor(income))) +
   geom_bar() +
   labs(x = "Household yearly income", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEducationDG <- DG |>
   filter(!is.na(education)) |>
   ggplot(aes(x = as.factor(education))) +
   geom_bar() +
   labs(x = "Level of education", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = gridExtra::arrangeGrob(
   PlotGenderDG, PlotAgeDG, PlotRaceDG, PlotLanguageDG, PlotImmigrantDG,
   PlotIncomeDG, PlotEducationDG, nrow = 3, ncol = 3),
   "_graphs/DGDescriptive1.pdf", height = 8.5, width = 11)
 
+PlotAgeCES <- CES21 |>
+  filter(!is.na(age)) |>
+  ggplot(aes(x = age)) +
+  geom_bar() +
+  labs(x = "Age", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+PlotGenderCES <- CES21 |>
+  filter(!is.na(female_alt)) |>
+  ggplot(aes(x = female_alt)) +
+  geom_bar() +
+  labs(x = "Gender", y = "Frequency") +
+  theme(text = element_text(family = "CM Roman"))
+PlotLanguageCES <- CES21 |>
+  filter(!is.na(lang)) |>
+  ggplot(aes(x = lang)) +
+  geom_bar() +
+  labs(x = "Language spoken at home", y = "Frequency") +
+  theme(text = element_text(family = "CM Roman"))
+PlotImmigrantCES <- CES21 |>
+  filter(!is.na(immig)) |>
+  ggplot(aes(x = as.factor(immig))) +
+  geom_bar() +
+  labs(x = "Born in Canada?", y = "Frequency") +
+  scale_x_discrete(labels = c("Yes", "No")) +
+  theme(text = element_text(family = "CM Roman"))
+PlotIncomeCES <- CES21 |>
+  filter(!is.na(income)) |>
+  ggplot(aes(x = as.factor(income))) +
+  geom_bar() +
+  labs(x = "Household yearly income", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+PlotEducationCES <- CES21 |>
+  filter(!is.na(education)) |>
+  ggplot(aes(x = as.factor(education))) +
+  geom_bar() +
+  labs(x = "Level of education", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+PlotProvinceCES <- CES21 |>
+  filter(!is.na(province)) |>
+  ggplot(aes(x = as.factor(province))) +
+  geom_bar() +
+  labs(x = "Province of residence", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+PlotEthnicityCES <- CES21 |>
+  filter(!is.na(ethnicity)) |>
+  ggplot(aes(x = as.factor(ethnicity))) +
+  geom_bar() +
+  labs(x = "Ethnicity", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+ggsave(plot = gridExtra::arrangeGrob(
+  PlotGenderCES, PlotAgeCES, PlotLanguageCES, PlotImmigrantCES,
+  PlotIncomeCES, PlotEducationCES, PlotEthnicityCES, PlotProvinceCES,
+  nrow = 3, ncol = 3),
+  "_graphs/CESDescriptive1.pdf", height = 8.5, width = 11)
+
+PlotAgeWVS <- WVSCA20 |>
+  filter(!is.na(age)) |>
+  ggplot(aes(x = age)) +
+  geom_bar() +
+  labs(x = "Age", y = "Frequency") +
+  theme(text = element_text(family = "CM Roman"))
+PlotGenderWVS <- WVSCA20 |>
+  filter(!is.na(female_alt)) |>
+  ggplot(aes(x = female_alt)) +
+  geom_bar() +
+  labs(x = "Gender", y = "Frequency") +
+  theme(text = element_text(family = "CM Roman"))
+PlotLanguageWVS <- WVSCA20 |>
+  filter(!is.na(lang)) |>
+  ggplot(aes(x = lang)) +
+  geom_bar() +
+  labs(x = "Language spoken at home", y = "Frequency") +
+  theme(text = element_text(family = "CM Roman"))
+PlotImmigrantWVS <- WVSCA20 |>
+  filter(!is.na(immig)) |>
+  ggplot(aes(x = as.factor(immig))) +
+  geom_bar() +
+  labs(x = "Born in Canada?", y = "Frequency") +
+  scale_x_discrete(labels = c("Yes", "No")) +
+  theme(text = element_text(family = "CM Roman"))
+PlotEducationWVS <- WVSCA20 |>
+  filter(!is.na(education)) |>
+  ggplot(aes(x = as.factor(education))) +
+  geom_bar() +
+  labs(x = "Level of education", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+PlotProvinceWVS <- WVSCA20 |>
+  filter(!is.na(province)) |>
+  ggplot(aes(x = as.factor(province))) +
+  geom_bar() +
+  labs(x = "Province of residence", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+PlotEthnicityWVS <- WVSCA20 |>
+  filter(!is.na(ethnicity)) |>
+  ggplot(aes(x = as.factor(ethnicity))) +
+  geom_bar() +
+  labs(x = "Ethnicity", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+ggsave(plot = gridExtra::arrangeGrob(
+  PlotGenderWVS, PlotAgeWVS, PlotLanguageWVS, PlotImmigrantWVS,
+  PlotEducationWVS, PlotEthnicityWVS, PlotProvinceWVS, nrow = 3, ncol = 3),
+  "_graphs/WVSDescriptive1.pdf", height = 8.5, width = 11)
+
 PlotAgeGSS <- GSS20 |>
   filter(!is.na(age)) |>
   ggplot(aes(x = age)) +
   geom_bar() +
   labs(x = "Age", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotGenderGSS <- GSS20 |>
   filter(!is.na(female_alt)) |>
@@ -1614,46 +1903,63 @@ PlotIncomeGSS <- GSS20 |>
   ggplot(aes(x = as.factor(income))) +
   geom_bar() +
   labs(x = "Household yearly income", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEducationGSS <- GSS20 |>
   filter(!is.na(education)) |>
   ggplot(aes(x = as.factor(education))) +
   geom_bar() +
   labs(x = "Level of education", y = "Frequency") +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+PlotProvinceGSS <- GSS20 |>
+  filter(!is.na(province)) |>
+  ggplot(aes(x = as.factor(province))) +
+  geom_bar() +
+  labs(x = "Province of residence", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+PlotEthnicityGSS <- GSS20 |>
+  filter(!is.na(ethnicity)) |>
+  ggplot(aes(x = as.factor(ethnicity))) +
+  geom_bar() +
+  labs(x = "Ethnicity", y = "Frequency") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = gridExtra::arrangeGrob(
   PlotGenderGSS, PlotAgeGSS, PlotLanguageGSS, PlotImmigrantGSS,
-  PlotIncomeGSS, PlotEducationGSS, nrow = 2, ncol = 3),
+  PlotIncomeGSS, PlotEducationGSS, PlotEthnicityGSS, PlotProvinceGSS,
+  nrow = 3, ncol = 3),
   "_graphs/GSSDescriptive1.pdf", height = 8.5, width = 11)
 
-PlotInterestDG <- ggplot(DG, aes(x = interest)) +
+PlotInterestDG <- ggplot(DG, aes(x = interest, weight = weightRaking)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
   labs(x = "General political interest", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotHealthDG <- ggplot(DG, aes(x = interest_health)) +
+PlotHealthDG <- ggplot(DG, aes(x = interest_health, weight = weightRaking)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
   labs(x = "Interest in health care", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotForeignDG <- ggplot(DG, aes(x = interest_foreign)) +
+PlotForeignDG <- ggplot(DG, aes(x = interest_foreign, weight = weightRaking)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
   labs(x = "Interest in international affairs", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotLawDG <- ggplot(DG, aes(x = interest_law)) +
+PlotLawDG <- ggplot(DG, aes(x = interest_law, weight = weightRaking)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
   labs(x = "Interest in law and crime", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotEducationDG <- ggplot(DG, aes(x = interest_education)) +
+PlotEducationDG <- ggplot(DG, aes(x = interest_education,
+                                  weight = weightRaking)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
   labs(x = "Interest in education", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotPartisanDG <- ggplot(DG, aes(x = interest_partisan)) +
+PlotPartisanDG <- ggplot(DG, aes(x = interest_partisan,
+                                 weight = weightRaking)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
   labs(x = "Interest in partisan politics", y = "Frequency") +
@@ -1663,17 +1969,17 @@ ggsave(plot = gridExtra::arrangeGrob(
   PlotPartisanDG, nrow = 3, ncol = 2), width = 5.5, height = 4.25,
   "_graphs/DGInterest.pdf")
 
-PlotInterestCES <- ggplot(CES21, aes(x = interest)) +
+PlotInterestCES <- ggplot(CES21, aes(x = interest, weight = weight)) +
   geom_histogram(binwidth = 10) +
   labs(x = "General political interest -\n2021 CES", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotInterestWVS <- ggplot(WVSCA20, aes(x = interest)) +
+PlotInterestWVS <- ggplot(WVSCA20, aes(x = interest, weight = weight)) +
   geom_histogram(binwidth = (100/3)) +
   scale_x_continuous(breaks = c(0, 25, 50, 75, 100)) +
   labs(x = "General political interest -\n2020 WVS - Canada",
        y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotInterestGSS <- ggplot(GSS20, aes(x = interest)) +
+PlotInterestGSS <- ggplot(GSS20, aes(x = interest, weight = weight)) +
   geom_histogram(binwidth = (100/3)) +
   scale_x_continuous(breaks = c(0, 25, 50, 75, 100)) +
   labs(x = "General political interest -\n2020 GSS - Canada",
@@ -1683,6 +1989,26 @@ ggsave(plot = gridExtra::arrangeGrob(
   PlotInterestCES, PlotInterestWVS, PlotInterestGSS,
   nrow = 2, ncol = 2), width = 5.5, height = 4.25,
   "_graphs/CESWVSGSSInterest.pdf")
+mean(CCPIS$interest, na.rm=T)
+mean(CCPIS$interest_law, na.rm=T)
+mean(CCPIS$interest_education, na.rm=T)
+mean(CCPIS$interest_foreign, na.rm=T)
+mean(CCPIS$interest_partisan, na.rm=T)
+mean(CCPIS$interest_health, na.rm=T)
+mean(DG$interest, na.rm=T)
+weighted.mean(DG$interest, na.rm=T, w = DG$weight)
+weighted.mean(DG$interest_law, na.rm=T, w = DG$weight)
+weighted.mean(DG$interest_education, na.rm=T, w = DG$weight)
+weighted.mean(DG$interest_health, na.rm=T, w = DG$weight)
+weighted.mean(DG$interest_partisan, na.rm=T, w = DG$weight)
+weighted.mean(DG$interest_foreign, na.rm=T, w = DG$weight)
+mean(CES21$interest, na.rm=T)
+CES21noNA <- filter(CES21, !is.na(interest) & !is.na(weight))
+weighted.mean(CES21noNA$interest, w = CES21noNA$weight)
+mean(WVSCA20$interest, na.rm=T)
+weighted.mean(WVSCA20$interest, na.rm=T, w = WVSCA20$weight)
+mean(GSS20$interest, na.rm=T)
+weighted.mean(GSS20$interest, na.rm=T, w = GSS20$weight)
 
 ##### 3. Data analysis #####
 #### 3.1 Chapter 1 ####

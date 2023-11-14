@@ -1,5 +1,5 @@
 ---
-title: "Parent--Child Political Interest Transmission: Do Moms Influence their Daughters and Dads Influence their Sons?"
+title: "Parent--Child Political Interest Transmission: Do Moms Influence their Daughters and Dads Influence their Sons? {#sec-chap4}"
 author: "Alexandre Fortier-Chouinard"
 bibliography: Thesis.bib
 format: pdf

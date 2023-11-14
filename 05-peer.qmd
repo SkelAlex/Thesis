@@ -1,5 +1,5 @@
 ---
-title: "Homophily and Political Interest: How Do Peer Groups Create Gendered Political Interests?"
+title: "Homophily and Political Interest: How Do Peer Groups Create Gendered Political Interests? {#sec-chap5}"
 author: "Alexandre Fortier-Chouinard"
 bibliography: Thesis.bib
 format: pdf

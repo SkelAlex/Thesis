@@ -1,5 +1,5 @@
 ---
-title: "Teachers, Influencers and Political Interest: School and Social Media as Other Venues of Acquisition"
+title: "Teachers, Influencers and Political Interest: School and Social Media as Other Venues of Acquisition {#sec-chap6}"
 author: "Alexandre Fortier-Chouinard"
 bibliography: Thesis.bib
 format: pdf

@@ -1,7 +1,7 @@
 ---
 format: pdf
 ---
-# Appendix I: CCPIS English Questionnaire {.unnumbered}
+# CCPIS English Questionnaire {#sec-appendix1}
 
 TITLE OF THE RESEARCH PROJECT: Gendered Political Socialization: Why Women and Men Still Differ on Political Interest
 
@@ -335,7 +335,7 @@ ADDITIONAL INFORMATION: If you have questions about the research or the implicat
 21. We might do a follow-up survey in a few years. If you accept to be contacted by email for this survey, what is your current email address? Leave the field blank if you do not wish to be recontacted for this.
   - (Open field)
 
-# Appendix II: CCPIS French Questionnaire {.unnumbered}
+# CCPIS French Questionnaire {#sec-appendix2}
 
 TITRE DE LA RECHERCHE : Socialisation politique genrée : Pourquoi les femmes et les hommes diffèrent encore en matière d'intérêt politique
 
@@ -669,7 +669,7 @@ RENSEIGNEMENTS SUPPLÉMENTAIRES: Si vous avez des questions sur la recherche ou 
 21. Il est possible que nous faisions une enquête de suivi dans quelques années. Si tu acceptes d’être contacté(e) par courriel pour cette enquête, quelle est ton adresse courriel actuelle? Garde le champ vide si tu ne veux pas être recontacté(e) pour cela.
   - (Champ libre)
 
-# Appendix III: 2022 Quebec Datagotchi Post-Election Survey French Questionnaire {.unnumbered}
+# 2022 Quebec Datagotchi Post-Election Survey French Questionnaire {#sec-appendix3}
 
 ## Socio-Economic Status
 
@@ -1611,7 +1611,7 @@ Veuillez indiquer votre âge
 | --- | --- |
 | L'anglais |  |
 
-# Appendix IV: Topic Most Discussed with Parents by Child Gender {.unnumbered}
+# Topic Most Discussed with Parents by Child Gender {#sec-appendix4}
 
 ```{r}
 #| label: fig-parentsboys
@@ -1641,7 +1641,7 @@ knitr::include_graphics("_graphs/ParentTopicsMomDadBoys.pdf")
 knitr::include_graphics("_graphs/ParentTopicsMomDadGirls.pdf")
 ```
 
-# Appendix V: Political Interest Transmission by Parents (Control Variables Added) {.unnumbered}
+# Political Interest Transmission by Parents (Control Variables Added) {#sec-appendix5}
 
 ## Topics Parents Discuss the Most
 
@@ -1790,7 +1790,7 @@ __Note:__
 __Note:__
 ^^ Multilevel regression with random effects at the classroom level
 
-# Appendix VI: Political Interest Transmission by Peers (Control Variables Added) {.unnumbered}
+# Political Interest Transmission by Peers (Control Variables Added) {#sec-appendix6}
 
 ## Topics Most Often Discussed with Female Friends
 

@@ -1,5 +1,5 @@
 ---
-title: "Conclusion"
+title: "Conclusion {#sec-chap7}"
 author: "Alexandre Fortier-Chouinard"
 bibliography: Thesis.bib
 format: pdf
