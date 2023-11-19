@@ -1,3 +1,4 @@
+#!radian
 #devtools::install_github("clessn/clessnverse", force = T)
 #extrafont::font_import()
 #extrafont::font_install('fontcm')
@@ -2938,7 +2939,8 @@ ggsave("_graphs/InterestEthnicity20_21.pdf", height = 4.25, width = 5.5)
 ### Effect of parents (CCPIS) ####
 CCPISLonger <- pivot_longer(CCPIS,
                                cols = c(starts_with("gender_parent_")))
-ggplot(CCPISLonger, aes(x = name, fill = as.factor(value))) +
+CCPISLonger$value[is.na(CCPISLonger$value)] <- "NA"
+ggplot(CCPISLonger, aes(x = name), fill = as.factor(value)) +
   geom_bar(position = "fill") +
   scale_x_discrete("Topic", labels = c(
     "Education", "International affairs", "Health care", "Law and crime",
