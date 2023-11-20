@@ -40,13 +40,13 @@ As highlighted in @sec-chap1, social learning theory suggests that children lear
 
 Social learning theory and observer--model similarity both assume that political interest should be more strongly correlated between mothers and daughters and between fathers and sons than any other combination. While this assumption has somewhat effectively been tested in past research, mothers seem to have an overall stronger influence on the development of political interest in their children. Moreover, it remains unclear if this finding applies similarly across various political topics, or if the topics in which women typically report being more interested --- health care and education --- can better be transmitted by mothers while those topics in which men typically report being more interested --- law and crime, international affairs, and partisan politics --- can better be transmitted by fathers. Four hypotheses are therefore tested alongside each other:
 
-- ***Hypothesis 1a: Children's interest in specific political topics is more affected by political discussions with their same-gender parent(s) than other-gender parent(s).*
+- ***Hypothesis 1a**: Children's interest in specific political topics is more affected by political discussions with their same-gender parent(s) than other-gender parent(s).*
 
-- ***Hypothesis 1b: Children's interest in the politics of health care and education is more affected by political discussions with their mother(s) than father(s).*
+- ***Hypothesis 1b**: Children's interest in the politics of health care and education is more affected by political discussions with their mother(s) than father(s).*
 
-- ***Hypothesis 1c: Children's interest in law and crime, international affairs, and partisan politics is more affected by political discussions with their father(s) than mother(s).*
+- ***Hypothesis 1c**: Children's interest in law and crime, international affairs, and partisan politics is more affected by political discussions with their father(s) than mother(s).*
 
-- ***Hypothesis 1d: Children's interest in specific political topics is more affected by political discussions with their mother(s) than father(s).*
+- ***Hypothesis 1d**: Children's interest in specific political topics is more affected by political discussions with their mother(s) than father(s).*
 
 According to Hypothesis 1a, which is the one most consistent with social learning theory, a parent's interest in a specific political topic should influence interest in that topic more strongly for their same-gender children than other-gender children. On average, a mother is expected to have more transmission potential of her interest in health care issues to her daughters than sons through political discussion, for example. Given the importance of parents' role in socialization in childhood and adolescence, this transmission process would explain part of the gender gap in interest into topics such as health care and partisan politics that exists among adults.
 
@@ -54,17 +54,17 @@ The other three hypotheses provide different answers to the question of how poli
 
 While past studies have found no differences in the frequency of political discussions by child gender or parent gender, these studies have not studied whether the nature of political discussions in the family could vary by parent gender or child gender. Are fathers more likely than mothers to discuss agency-related political topics with their children? Are parents more likely to discuss communality-related political topics with their daughters than sons? Hypotheses 1e--1j provide hypotheses about the frequency of political discussions by gender in the family unit.
 
-- ***Hypothesis 1e: Mothers are as likely as fathers to discuss any specific political topic with their children.*
+- ***Hypothesis 1e**: Mothers are as likely as fathers to discuss any specific political topic with their children.*
 
-- ***Hypothesis 1f: Mothers are more likely than fathers to discuss the politics of health care and education with their children.*
+- ***Hypothesis 1f**: Mothers are more likely than fathers to discuss the politics of health care and education with their children.*
 
-- ***Hypothesis 1g: Fathers are more likely than mothers to discuss law and crime, international affairs, and partisan politics with their children.*
+- ***Hypothesis 1g**: Fathers are more likely than mothers to discuss law and crime, international affairs, and partisan politics with their children.*
 
-- ***Hypothesis 1h: Parents are as likely to discuss any specific political topic with their sons as with their daughters.*
+- ***Hypothesis 1h**: Parents are as likely to discuss any specific political topic with their sons as with their daughters.*
 
-- ***Hypothesis 1i: Parents are more likely to discuss the politics of health care and education with their daughters than sons.*
+- ***Hypothesis 1i**: Parents are more likely to discuss the politics of health care and education with their daughters than sons.*
 
-- ***Hypothesis 1j: Parents are more likely to discuss law and crime, international affairs, and partisan politics with their sons than daughters.*
+- ***Hypothesis 1j**: Parents are more likely to discuss law and crime, international affairs, and partisan politics with their sons than daughters.*
 
 Hypotheses 1e, 1f and 1g focus their attention on discrepancies between mothers' and fathers' likelihood of discussing certain topics with their children, while hypotheses 1h, 1i and 1j focus their attention on discrepancies between daughters and sons in their likelihood of discussing politics with --- or being told about politics by --- their parents. Hypotheses 1e and 1h seek to corroborate previous findings by @mayer2004 and others that political discussion frequency in the family does not vary by gender. To the contrary, hypotheses 1f and 1g suggest that parent gender is a significant factor that explains which topics will be discussed with children, and hypotheses 1i and 1j suggest that child gender is a key variable that explains which topics they will discuss with their parents.
 
