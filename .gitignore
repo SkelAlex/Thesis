@@ -1,12 +1,6 @@
 /.quarto/
 # Shared/Private folders
-_SharedFolder*
-_PrivateFolder*
-_articles
-_data
-_graphs
-_previous
-_spsa
+_*
 
 # Autre
 .Rhistory
