@@ -1,7 +1,12 @@
 /.quarto/
 # Shared/Private folders
 _*
-_*/*
+_*/*.pdf
+_spsa/*
+_spsa
+_comments
+_comments/*
+_book/*
 
 # Autre
 .Rhistory
