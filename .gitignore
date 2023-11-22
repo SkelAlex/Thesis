@@ -1,6 +1,7 @@
 /.quarto/
 # Shared/Private folders
 _*
+_*/*
 
 # Autre
 .Rhistory
