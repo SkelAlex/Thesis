@@ -1611,37 +1611,7 @@ Veuillez indiquer votre âge
 | --- | --- |
 | L'anglais |  |
 
-# Topic Most Discussed with Parents by Child Gender {#sec-appendix4}
-
-```{r}
-#| label: fig-parentsboys
-#| echo: false
-#| fig-cap: "Topic most often discussed with parents, 2023 CCPIS data"
-knitr::include_graphics("_graphs/ParentTopicsBoys.pdf")
-```
-
-```{r}
-#| label: fig-parentsgirls
-#| echo: false
-#| fig-cap: "Topic most often discussed with parents, 2023 CCPIS data"
-knitr::include_graphics("_graphs/ParentTopicsGirls.pdf")
-```
-
-```{r}
-#| label: fig-parentsmomdadboys
-#| echo: false
-#| fig-cap: "Topic most often discussed with mothers and fathers, 2023 CCPIS data"
-knitr::include_graphics("_graphs/ParentTopicsMomDadBoys.pdf")
-```
-
-```{r}
-#| label: fig-parentsmomdadgirls
-#| echo: false
-#| fig-cap: "Topic most often discussed with mothers and fathers, 2023 CCPIS data"
-knitr::include_graphics("_graphs/ParentTopicsMomDadGirls.pdf")
-```
-
-# Political Interest Transmission by Parents (Control Variables Added) {#sec-appendix5}
+# Political Interest Transmission by Parents (Control Variables Added) {#sec-appendix4}
 
 ## Topics Parents Discuss the Most
 
@@ -1790,7 +1760,7 @@ __Note:__
 __Note:__
 ^^ Multilevel regression with random effects at the classroom level
 
-# Political Interest Transmission by Peers (Control Variables Added) {#sec-appendix6}
+# Political Interest Transmission by Peers (Control Variables Added) {#sec-appendix5}
 
 ## Topics Most Often Discussed with Female Friends
 
