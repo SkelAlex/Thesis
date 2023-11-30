@@ -383,7 +383,7 @@ __Note:__
 __Note:__
 ^^ Ordinary least squares (OLS) regression
 
-@fig-datagotchi inquires about any time trends in the evolution of interest in each of the topics, including gendered aspects. No clear gender pattern emerges, beyond the finding that the gap in general political interest becomes statistically significant among Quebeckers aged 75 and over.
+@fig-datagotchi inquires about any time trends in the evolution of interest in each of the topics, including gendered aspects. No clear gender pattern emerges, beyond the finding that the gap in general political interest becomes statistically insignificant among Quebeckers aged 75 and over.
 
 ```{r}
 #| label: fig-datagotchi

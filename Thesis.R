@@ -3,7 +3,7 @@
 #extrafont::font_import()
 #extrafont::font_install('fontcm')
 #extrafont::loadfonts()
-#webshot::install_phantomjs() for saving modelsummary to png
+#webshot::install_phantomjs() for saving modelsummary to png or jpg
 library(tidyverse)
 library(extrafont)
 
@@ -273,7 +273,20 @@ table(CCPIS$peers_female, useNA = "always")
 CCPIS$malefriends_discuss_clean <- CCPIS$malefriends_discuss
 CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss %in% c(
   "Je ne sais pas/Préfère ne pas répondre",
-  "Don't know/Prefer not to answer")] <- NA
+  "Don't know/Prefer not to answer", "")] <- NA
+CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss ==
+                                  "Santé"] <- "Health care"
+CCPIS$malefriends_discuss_clean[
+  CCPIS$malefriends_discuss == "Affaires internationales"] <-
+  "International affairs"
+CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss ==
+                                  "Loi et crime"] <-
+  "Law and crime"
+CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss ==
+                                  "Éducation"] <- "Education"
+CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss ==
+                                  "Politique partisane"] <-
+  "Partisan politics"
 table(CCPIS$malefriends_discuss_clean, useNA = "always")
 CCPIS$malefriends_discuss_health <- 0
 CCPIS$malefriends_discuss_health[CCPIS$malefriends_discuss_clean %in% c(
@@ -310,7 +323,20 @@ table(CCPIS$malefriends_discuss_partisan, useNA = "always")
 CCPIS$femalefriends_discuss_clean <- CCPIS$femalefriends_discuss
 CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss %in% c(
   "Je ne sais pas/Préfère ne pas répondre",
-  "Don't know/Prefer not to answer")] <- NA
+  "Don't know/Prefer not to answer", "")] <- NA
+CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss ==
+                                    "Santé"] <- "Health care"
+CCPIS$femalefriends_discuss_clean[
+  CCPIS$femalefriends_discuss == "Affaires internationales"] <-
+  "International affairs"
+CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss ==
+                                    "Loi et crime"] <-
+  "Law and crime"
+CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss ==
+                                    "Éducation"] <- "Education"
+CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss ==
+                                    "Politique partisane"] <-
+  "Partisan politics"
 table(CCPIS$femalefriends_discuss_clean, useNA = "always")
 CCPIS$femalefriends_discuss_health <- 0
 CCPIS$femalefriends_discuss_health[
@@ -1367,7 +1393,15 @@ GSS13$female_alt <- NA
 GSS13$female_alt[GSS13$SEX == "Male"] <- "Men"
 GSS13$female_alt[GSS13$SEX == "Female"] <- "Women"
 GSS13$female_alt <- as.factor(GSS13$female_alt)
-GSS13$age <- GSS13$AGEGR10
+GSS13$age <- as.character(GSS13$AGEGR10)
+GSS13$age[GSS13$age == "15 to 24 years"] <- "15-24"
+GSS13$age[GSS13$age == "25 to 34 years"] <- "25-34"
+GSS13$age[GSS13$age == "35 to 44 years"] <- "35-44"
+GSS13$age[GSS13$age == "45 to 54 years"] <- "45-54"
+GSS13$age[GSS13$age == "55 to 64 years"] <- "55-64"
+GSS13$age[GSS13$age == "65 to 74 years"] <- "65-74"
+GSS13$age[GSS13$age == "75 years and over"] <- "75+"
+GSS13$age <- as.factor(GSS13$age)
 GSS13$age_low <- 0
 GSS13$age_low[GSS13$AGEGR10 %in% c("15 to 24 years", "25 to 34 years")] <- 1
 GSS13$age_mid <- 0
@@ -1461,13 +1495,13 @@ GSS20$female_alt[GSS20$GENDER2P == 1] <- "Men"
 GSS20$female_alt[GSS20$GENDER2P == 2] <- "Women"
 GSS20$female_alt <- as.factor(GSS20$female_alt)
 GSS20$age <- NA
-GSS20$age[GSS20$AGEGR10 == 1] <- "15 to 24 years"
-GSS20$age[GSS20$AGEGR10 == 2] <- "25 to 34 years"
-GSS20$age[GSS20$AGEGR10 == 3] <- "35 to 44 years"
-GSS20$age[GSS20$AGEGR10 == 4] <- "45 to 54 years"
-GSS20$age[GSS20$AGEGR10 == 5] <- "55 to 64 years"
-GSS20$age[GSS20$AGEGR10 == 6] <- "65 to 74 years"
-GSS20$age[GSS20$AGEGR10 == 7] <- "75 years and over"
+GSS20$age[GSS20$AGEGR10 == 1] <- "15-24"
+GSS20$age[GSS20$AGEGR10 == 2] <- "25-34"
+GSS20$age[GSS20$AGEGR10 == 3] <- "35-44"
+GSS20$age[GSS20$AGEGR10 == 4] <- "45-54"
+GSS20$age[GSS20$AGEGR10 == 5] <- "55-64"
+GSS20$age[GSS20$AGEGR10 == 6] <- "65-74"
+GSS20$age[GSS20$AGEGR10 == 7] <- "75+"
 GSS20$age_low <- 0
 GSS20$age_low[GSS20$AGEGR10 %in% c(1, 2)] <- 1
 GSS20$age_mid <- 0
@@ -2099,28 +2133,38 @@ Model06 <- nlme::lme(data = CCPIS, fixed = interest_partisan ~ female *
                        agentic + communal + school, random = ~ 1 | Class,
                      na.action = na.omit)
 modelsummary::modelsummary(models = list(
-  "Simple" = list("Politics (general)" = Model1, "Health care" = Model2,
-                  "International affairs" = Model3, "Law and crime" = Model4,
-                  "Education" = Model5, "Partisan politics" = Model6),
-  "Multiple" = list("Politics (general)" = Model01, "Health care" = Model02,
-                    "International affairs" = Model03,
-                    "Law and crime" = Model04, "Education" = Model05,
-                    "Partisan politics" = Model06)),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  notes = c("Multilevel regression with random effects at the classroom level",
-            "Reference category for language: Other languages spoken at home"),
-  title =
-    "(\\#tab:lmeInterestCCPIS) Students' political interest by gender",
+  "Politics (general)" = Model1, "Health care" = Model2,
+  "International affairs" = Model3, "Law and crime" = Model4,
+  "Education" = Model5, "Partisan politics" = Model6),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  title = paste("Interest in topic by gender {#tbl-lmeInterestCCPIS}"),
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model01, "Health care" = Model02,
+  "International affairs" = Model03, "Law and crime" = Model04,
+  "Education" = Model05, "Partisan politics" = Model06),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            #"Controls: Socio-demographic, personality traits#, schools",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"
+  ),
+  title = paste("Interest in topic by gender {#tbl-lmeInterestCCPISAlt}"),
   coef_rename = c(
-    "female1" = "Gender (1 = girls)",
+    "female1" = "Gender (1 = girl)",
     "age" = "Age",
     "age_squared" = "Age squared",
     "white" = "Race (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
-    "agentic" = "Agency scale",
-    "communal" = "Communality scale",
+    "agentic" = "Agency",
+    "communal" = "Communality",
     "schoolCollège Citoyen" = "School #4",
     "schoolCollège mariste de Québec" = "School #3",
     "schoolÉcole de la Rose-des-Vents" = "School #6",
@@ -2185,33 +2229,40 @@ Model06Young <- nlme::lme(data = CCPISYoung, fixed = interest_partisan ~
                           random = ~ 1 | Class, na.action = na.omit)
 summary(Model06Young)
 modelsummary::modelsummary(models = list(
-  "Simple" = list("Politics (general)" = Model1Young,
-                  "Health care" = Model2Young,
-                  "International affairs" = Model3Young,
-                  "Law and crime" = Model4Young,
-                  "Education" = Model5Young,
-                  "Partisan politics" = Model6Young),
-  "Multiple" = list("Politics (general)" = Model01Young,
-                    "Health care" = Model02Young,
-                    "International affairs" = Model03Young,
-                    "Law and crime" = Model04Young,
-                    "Education" = Model05Young,
-                    "Partisan politics" = Model06Young)),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  notes = c("Multilevel regression with random effects at the classroom level",
-            "Reference category for language: Other languages spoken at home"),
-  title = paste("(\\#tab:lmeInterestYoungCCPIS) Political interest by",
-                "gender (ages 10-15)"),
+  "Politics (general)" = Model1Young, "Health care" = Model2Young,
+  "International affairs" = Model3Young, "Law and crime" = Model4Young,
+  "Education" = Model5Young, "Partisan politics" = Model6Young),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  title = paste("Interest in topic by gender (ages 10-15)",
+                "{#tbl-lmeInterestYoungCCPIS}"),
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model01Young, "Health care" = Model02Young,
+  "International affairs" = Model03Young, "Law and crime" = Model04Young,
+  "Education" = Model05Young, "Partisan politics" = Model06Young),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            #"Controls: Socio-demographic, personality traits#, schools",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"
+  ),
+  title = paste("Interest in topic by gender (ages 10-15)",
+                "{#tbl-lmeInterestYoungCCPISAlt}"),
   coef_rename = c(
-    "female1" = "Gender (1 = girls)",
+    "female1" = "Gender (1 = girl)",
     "age" = "Age",
     "age_squared" = "Age squared",
     "white" = "Race (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
-    "agentic" = "Agency scale",
-    "communal" = "Communality scale",
+    "agentic" = "Agency",
+    "communal" = "Communality",
     "schoolCollège Citoyen" = "School #4",
     "schoolCollège mariste de Québec" = "School #3",
     "schoolÉcole de la Rose-des-Vents" = "School #6",
@@ -2276,30 +2327,40 @@ Model06Old <- nlme::lme(data = CCPISOld, fixed = interest_partisan ~
                           Class, na.action = na.omit)
 summary(Model06Old)
 modelsummary::modelsummary(models = list(
-  "Simple" = list("Politics (general)" = Model1Old, "Health care" = Model2Old,
-                  "International affairs" = Model3Old,
-                  "Law and crime" = Model4Old, "Education" = Model5Old,
-                  "Partisan politics" = Model6Old),
-  "Multiple" = list("Politics (general)" = Model01Old,
-                    "Health care" = Model02Old,
-                    "International affairs" = Model03Old,
-                    "Law and crime" = Model04Old, "Education" = Model05Old,
-                    "Partisan politics" = Model06Old)),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  notes = c("Multilevel regression with random effects at the classroom level",
-            "Reference category for language: Other languages spoken at home"),
-  title = paste("(\\#tab:lmeInterestOldCCPIS) Political interest by",
-                "gender (ages 16-18)"),
+  "Politics (general)" = Model1Old, "Health care" = Model2Old,
+  "International affairs" = Model3Old, "Law and crime" = Model4Old,
+  "Education" = Model5Old, "Partisan politics" = Model6Old),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  title = paste("Interest in topic by gender (ages 16-18)",
+                "{#tbl-lmeInterestOldCCPIS}"),
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model01Old, "Health care" = Model02Old,
+  "International affairs" = Model03Old, "Law and crime" = Model04Old,
+  "Education" = Model05Old, "Partisan politics" = Model06Old),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            #"Controls: Socio-demographic, personality traits#, schools",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"
+  ),
+  title = paste("Interest in topic by gender (ages 16-18)",
+                "{#tbl-lmeInterestOldCCPISAlt}"),
   coef_rename = c(
-    "female1" = "Gender (1 = girls)",
+    "female1" = "Gender (1 = girl)",
     "age" = "Age",
     "age_squared" = "Age squared",
     "white" = "Race (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
-    "agentic" = "Agency scale",
-    "communal" = "Communality scale",
+    "agentic" = "Agency",
+    "communal" = "Communality",
     "schoolCollège Citoyen" = "School #4",
     "schoolCollège mariste de Québec" = "School #3",
     "schoolÉcole de la Rose-des-Vents" = "School #6",
@@ -2476,7 +2537,8 @@ DGPlot1 <- ggplot(filter(DG, !is.na(female)),
   theme(axis.text = element_text(size = 15),
         axis.title = element_text(size = 15),
         legend.text = element_text(size = 15),
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Political interest")
 DGPlot2 <- ggplot(filter(DG, !is.na(female)),
                   aes(x = age, y = interest_health, color = female)) +
   geom_point(data = filter(GroupedDGCategory, !is.na(female)), size = 0.25,
@@ -2489,7 +2551,8 @@ DGPlot2 <- ggplot(filter(DG, !is.na(female)),
   theme(axis.text = element_text(size = 15),
         axis.title = element_text(size = 15),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Health care")
 DGPlot3 <- ggplot(filter(DG, !is.na(female)),
                   aes(x = age, y = interest_foreign, color = female)) +
   geom_point(data = filter(GroupedDGCategory, !is.na(female)), size = 0.25,
@@ -2502,7 +2565,8 @@ DGPlot3 <- ggplot(filter(DG, !is.na(female)),
   theme(axis.text = element_text(size = 15),
         axis.title = element_text(size = 15),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("International affairs")
 DGPlot4 <- ggplot(filter(DG, !is.na(female)),
                   aes(x = age, y = interest_law, color = female)) +
   geom_point(data = filter(GroupedDGCategory, !is.na(female)), size = 0.25,
@@ -2515,7 +2579,8 @@ DGPlot4 <- ggplot(filter(DG, !is.na(female)),
   theme(axis.text = element_text(size = 15),
         axis.title = element_text(size = 15),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Law and crime")
 DGPlot5 <- ggplot(filter(DG, !is.na(female)),
                   aes(x = age, y = interest_education, color = female)) +
   geom_point(data = filter(GroupedDGCategory, !is.na(female)), size = 0.25,
@@ -2529,7 +2594,8 @@ DGPlot5 <- ggplot(filter(DG, !is.na(female)),
   theme(axis.text = element_text(size = 15),
         axis.title = element_text(size = 15),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Education")
 DGPlot6 <- ggplot(filter(DG, !is.na(female)),
                   aes(x = age, y = interest_partisan, color = female)) +
   geom_point(data = filter(GroupedDGCategory, !is.na(female)), size = 0.25,
@@ -2543,7 +2609,8 @@ DGPlot6 <- ggplot(filter(DG, !is.na(female)),
   theme(axis.text = element_text(size = 15),
         axis.title = element_text(size = 15),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Partisan politics")
 ggsave(plot = ggpubr::ggarrange(
   DGPlot1, DGPlot2, DGPlot3, DGPlot4, DGPlot5, DGPlot6, nrow = 2, ncol = 3,
   common.legend = TRUE, legend = "bottom"),
@@ -3075,7 +3142,13 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model190)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
-  notes = "Multilevel regression with random effects at the classroom level",
+  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            #"Controls: Socio-demographic, personality traits#, schools",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"
+  ),
   title = paste("Interest in topic by gender of parent who discusses that",
                 "topic the most {#tbl-lmeParentAlt}"),
   coef_rename = c(
@@ -3142,7 +3215,9 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model17, "Partisan politics" = Model19)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
-  notes = "Multilevel regression with random effects at the classroom level",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
   title = paste("Interest in topic by gender of parent who discusses that",
                 "topic the most {#tbl-lmeParent}"),
   coef_rename = c(
@@ -3231,7 +3306,13 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model290)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
-  notes = "Multilevel regression with random effects at the classroom level",
+  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            #"Controls: Socio-demographic, personality traits#, schools",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"
+  ),
   title = paste("Interest in topic most often discussed with one's mother",
                 "{#tbl-lmeMotherAlt}"),
   coef_rename = c("value" = "Main topic discussed with mother?",
@@ -3298,7 +3379,9 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model27, "Partisan politics" = Model29)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
-  notes = c("Multilevel regression with random effects at the classroom level"),
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
   title = paste("Interest in topic most often discussed with one's mother",
                 "{#tbl-lmeMother}"),
   coef_rename = c("value" = "Main topic discussed with mother?",
@@ -3391,7 +3474,13 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model390)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
-  notes = "Multilevel regression with random effects at the classroom level",
+  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            #"Controls: Socio-demographic, personality traits#, schools",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"
+  ),
   title = paste("Interest in topic most often discussed with one's father",
                 "{#tbl-lmeFatherAlt}"),
   coef_rename = c("value" = "Main topic discussed with father?",
@@ -3457,7 +3546,9 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model37, "Partisan politics" = Model39)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
-  notes = c("Multilevel regression with random effects at the classroom level"),
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
   title = paste("Interest in topic most often discussed with one's father",
                 "{#tbl-lmeFather}"),
   coef_rename = c("value" = "Main topic discussed with father?",
@@ -3473,6 +3564,38 @@ modelsummary::modelsummary(models = list(
 
 #### 3.3 Chapter 5 ####
 ### Effect of peers (CCPIS) ####
+CCPISBoysPeerGraph <- CCPISBoys |>
+  pivot_longer(cols = c(femalefriends_discuss_clean,
+                        malefriends_discuss_clean)) |>
+  group_by(name) |>
+  mutate(N = n()) |>
+  group_by(name, value) |>
+  summarise(perc = n() / unique(N)) |>
+  filter(!is.na(value))
+CCPISBoysPeerGraph$sex <- "Boys"
+CCPISGirlsPeerGraph <- CCPISGirls |>
+  pivot_longer(cols = c(femalefriends_discuss_clean,
+                        malefriends_discuss_clean)) |>
+  group_by(name) |>
+  mutate(N = n()) |>
+  group_by(name, value) |>
+  summarise(perc = n() / unique(N)) |>
+  filter(!is.na(value))
+CCPISGirlsPeerGraph$sex <- "Girls"
+CCPISPeerGraph <- rbind(CCPISBoysPeerGraph, CCPISGirlsPeerGraph)
+ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~sex) +
+  scale_x_discrete("Topic most often discussed with peers") +
+  scale_y_continuous("Percent of students", labels = scales::percent) +
+  scale_fill_discrete("Peers",
+                      labels = c("Female", "Male"),
+                      type = c("orange", "purple")) +
+  theme(axis.text.x = element_text(angle = 90),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/PeersTopics.pdf", width = 5.5, height = 4.25)
+
+#### Regression models ####
 Model400 <- nlme::lme(data = CCPISBoys, fixed = interest_health ~
                         femalefriends_discuss_health + age + age_squared +
                         white + immig + lang + agentic + communal,
@@ -3552,7 +3675,13 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model470, "Partisan politics" = Model490)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
-  notes = "Multilevel regression with random effects at the classroom level",
+  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            #"Controls: Socio-demographic, personality traits#, schools",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"
+  ),
   title = paste("Interest in topic most often discussed with one's female",
                 "friends {#tbl-lmeFemaleFriendsAlt}"),
   coef_rename = c("value" = "Main topic discussed with female friends?",
@@ -3619,7 +3748,9 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model47, "Partisan politics" = Model49)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
-  notes = "Multilevel regression with random effects at the classroom level",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
   title = paste("Interest in topic most often discussed with one's female",
                 "friends {#tbl-lmeFemaleFriends}"),
   coef_rename = c("value" = "Main topic discussed with female friends?",
@@ -3713,7 +3844,13 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model570, "Partisan politics" = Model590)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models10,
-  notes = "Multilevel regression with random effects at the classroom level",
+  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            #"Controls: Socio-demographic, personality traits#, schools",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"
+  ),
   title = paste("Interest in topic most often discussed with one's male",
                 "friends {#tbl-lmeMaleFriendsAlt}"),
   coef_rename = c("value" = "Main topic discussed with male friends?",
@@ -3780,7 +3917,9 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model57, "Partisan politics" = Model59)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   add_rows = Models1,
-  notes = "Multilevel regression with random effects at the classroom level",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
   title = paste("Interest in topic most often discussed with one's male",
                 "friends {#tbl-lmeMaleFriends}"),
   coef_rename = c("value" = "Main topic discussed with male friends?",
@@ -3806,36 +3945,10 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model190)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   output = "_previous/_practice-talk/tbl-lmeParentAlt.png",
-  notes = "Multilevel regression with random effects at the classroom level",
-  title = paste("Interest in topic by gender of parent who discusses that",
-                "topic the most"),
-  coef_rename = c(
-    "value" = "Mother discusses topic more than father",
-    "gender_parent_health" = "Mother discusses topic more than father",
-    "gender_parent_foreign" = "Mother discusses topic more than father",
-    "gender_parent_law" = "Mother discusses topic more than father",
-    "gender_parent_education" = "Mother discusses topic more than father",
-    "gender_parent_partisan" = "Mother discusses topic more than father",
-    "age" = "Age",
-    "age_squared" = "Age squared",
-    "white" = "Race (1 = white)",
-    "immig" = "Immigrant",
-    "langAnglophone" = "English spoken at home",
-    "langFrancophone" = "French spoken at home",
-    "agentic" = "Agency",
-    "communal" = "Communality"))
-modelsummary::modelsummary(models = list(
-  "Boys" = list("All" = ModelParentB, "Health care" = Model10,
-                "International affairs" = Model12, "Law and crime" = Model14,
-                "Education" = Model16, "Partisan politics" = Model18),
-  "Girls" = list("All" = ModelParentG, "Health care" = Model11,
-                 "International affairs" = Model13, "Law and crime" = Model15,
-                 "Education" = Model17, "Partisan politics" = Model19)),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  output = "_previous/_practice-talk/tbl-lmeParent.png",
-  notes = "Multilevel regression with random effects at the classroom level",
-  title = paste("Interest in topic by gender of parent who discusses that",
-                "topic the most"),
+  coef_omit = "age|white|immig|lang|agentic|communal",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Socio-demographic, personality traits"),
   coef_rename = c(
     "value" = "Mother discusses topic more than father",
     "gender_parent_health" = "Mother discusses topic more than father",
@@ -3853,38 +3966,10 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model290)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   output = "_previous/_practice-talk/tbl-lmeMotherAlt.png",
-  notes = "Multilevel regression with random effects at the classroom level",
-  title = "Interest in topic most often discussed with one's mother",
-  coef_rename = c("value" = "Main topic discussed with mother?",
-                  "mother_discuss_health" =
-                    "Main topic discussed with mother?",
-                  "mother_discuss_foreign" =
-                    "Main topic discussed with mother?",
-                  "mother_discuss_law" =
-                    "Main topic discussed with mother?",
-                  "mother_discuss_education" =
-                    "Main topic discussed with mother?",
-                  "mother_discuss_partisan" =
-                    "Main topic discussed with mother?",
-                  "age" = "Age",
-                  "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
-                  "immig" = "Immigrant",
-                  "langAnglophone" = "English spoken at home",
-                  "langFrancophone" = "French spoken at home",
-                  "agentic" = "Agency",
-                  "communal" = "Communality"))
-modelsummary::modelsummary(models = list(
-  "Boys" = list("All" = ModelMotherB, "Health care" = Model20,
-                "International affairs" = Model22, "Law and crime" = Model24,
-                "Education" = Model26, "Partisan politics" = Model28),
-  "Girls" = list("All" = ModelMotherG, "Health care" = Model21,
-                 "International affairs" = Model23, "Law and crime" = Model25,
-                 "Education" = Model27, "Partisan politics" = Model29)),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  output = "_previous/_practice-talk/tbl-lmeMother.png",
-  notes = c("Multilevel regression with random effects at the classroom level"),
-  title = "Interest in topic most often discussed with one's mother",
+  coef_omit = "age|white|immig|lang|agentic|communal",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Socio-demographic, personality traits"),
   coef_rename = c("value" = "Main topic discussed with mother?",
                   "mother_discuss_health" =
                     "Main topic discussed with mother?",
@@ -3906,37 +3991,10 @@ modelsummary::modelsummary(models = list(
                  "Partisan politics" = Model390)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   output = "_previous/_practice-talk/tbl-lmeFatherAlt.png",
-  notes = "Multilevel regression with random effects at the classroom level",
-  title = "Interest in topic most often discussed with one's father",
-  coef_rename = c("value" = "Main topic discussed with father?",
-                  "father_discuss_health" =
-                    "Main topic discussed with father?",
-                  "father_discuss_foreign" =
-                    "Main topic discussed with father?",
-                  "father_discuss_law" = "Main topic discussed with father?",
-                  "father_discuss_education" =
-                    "Main topic discussed with father?",
-                  "father_discuss_partisan" =
-                    "Main topic discussed with father?",
-                  "age" = "Age",
-                  "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
-                  "immig" = "Immigrant",
-                  "langAnglophone" = "English spoken at home",
-                  "langFrancophone" = "French spoken at home",
-                  "agentic" = "Agency",
-                  "communal" = "Communality"))
-modelsummary::modelsummary(models = list(
-  "Boys" = list("All" = ModelFatherB, "Health care" = Model30,
-                "International affairs" = Model32, "Law and crime" = Model34,
-                "Education" = Model36, "Partisan politics" = Model38),
-  "Girls" = list("All" = ModelFatherG, "Health care" = Model31,
-                 "International affairs" = Model33, "Law and crime" = Model35,
-                 "Education" = Model37, "Partisan politics" = Model39)),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  output = "_previous/_practice-talk/tbl-lmeFather.png",
-  notes = c("Multilevel regression with random effects at the classroom level"),
-  title = "Interest in topic most often discussed with one's father",
+  coef_omit = "age|white|immig|lang|agentic|communal",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Socio-demographic, personality traits"),
   coef_rename = c("value" = "Main topic discussed with father?",
                   "father_discuss_health" =
                     "Main topic discussed with father?",
@@ -3956,40 +4014,10 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model470, "Partisan politics" = Model490)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   output = "_previous/_practice-talk/tbl-lmeFemaleFriendsAlt.png",
-  notes = "Multilevel regression with random effects at the classroom level",
-  title = paste("Interest in topic most often discussed with one's female",
-                "friends"),
-  coef_rename = c("value" = "Main topic discussed with female friends?",
-                  "femalefriends_discuss_health" =
-                    "Main topic discussed with female friends?",
-                  "femalefriends_discuss_foreign" =
-                    "Main topic discussed with female friends?",
-                  "femalefriends_discuss_law" =
-                    "Main topic discussed with female friends?",
-                  "femalefriends_discuss_education" =
-                    "Main topic discussed with female friends?",
-                  "femalefriends_discuss_partisan" =
-                    "Main topic discussed with female friends?",
-                  "age" = "Age",
-                  "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
-                  "immig" = "Immigrant",
-                  "langAnglophone" = "English spoken at home",
-                  "langFrancophone" = "French spoken at home",
-                  "agentic" = "Agency",
-                  "communal" = "Communality"))
-modelsummary::modelsummary(models = list(
-  "Boys" = list("All" = ModelFemaleFriendB, "Health care" = Model40,
-                "International affairs" = Model42, "Law and crime" = Model44,
-                "Education" = Model46, "Partisan politics" = Model48),
-  "Girls" = list("All" = ModelFemaleFriendG, "Health care" = Model41,
-                 "International affairs" = Model43, "Law and crime" = Model45,
-                 "Education" = Model47, "Partisan politics" = Model49)),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  output = "_previous/_practice-talk/tbl-lmeFemaleFriends.png",
-  notes = "Multilevel regression with random effects at the classroom level",
-  title = paste("Interest in topic most often discussed with one's female",
-                "friends"),
+  coef_omit = "age|white|immig|lang|agentic|communal",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Socio-demographic, personality traits"),
   coef_rename = c("value" = "Main topic discussed with female friends?",
                   "femalefriends_discuss_health" =
                     "Main topic discussed with female friends?",
@@ -4010,9 +4038,478 @@ modelsummary::modelsummary(models = list(
                  "Education" = Model570, "Partisan politics" = Model590)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   output = "_previous/_practice-talk/tbl-lmeMaleFriendsAlt.png",
-  notes = "Multilevel regression with random effects at the classroom level",
-  title = paste("Interest in topic most often discussed with one's male",
-                "friends"),
+  coef_omit = "age|white|immig|lang|agentic|communal",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Socio-demographic, personality traits"),
+  coef_rename = c("value" = "Main topic discussed with male friends?",
+                  "malefriends_discuss_health" =
+                    "Main topic discussed with male friends?",
+                  "malefriends_discuss_foreign" =
+                    "Main topic discussed with male friends?",
+                  "malefriends_discuss_law" =
+                    "Main topic discussed with male friends?",
+                  "malefriends_discuss_education" =
+                    "Main topic discussed with male friends?",
+                  "malefriends_discuss_partisan" =
+                    "Main topic discussed with male friends?"))
+Model01Young <- nlme::lme(data = CCPISYoung, fixed = interest ~ female +
+                            age + white + immig + lang +
+                            agentic + communal + school, random = ~ 1 | Class,
+                          na.action = na.omit)
+Model02Young <- nlme::lme(data = CCPISYoung, fixed = interest_health ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+Model03Young <- nlme::lme(data = CCPISYoung, fixed = interest_foreign ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+Model04Young <- nlme::lme(data = CCPISYoung, fixed = interest_law ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+Model05Young <- nlme::lme(data = CCPISYoung, fixed = interest_education ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+Model06Young <- nlme::lme(data = CCPISYoung, fixed = interest_partisan ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model01Young, "Health care" = Model02Young,
+  "International affairs" = Model03Young, "Law and crime" = Model04Young,
+  "Education" = Model05Young, "Partisan politics" = Model06Young),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  coef_omit = "age|white|immig|lang|agentic|communal|school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Socio-demographic, personality traits, schools"),
+  output = "_previous/_practice-talk/tbl-lmeInterestYoungCCPISAlt.png",
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+Model01Old <- nlme::lme(data = CCPISOld, fixed = interest ~ female +
+                            age + white + immig + lang +
+                            agentic + communal + school, random = ~ 1 | Class,
+                          na.action = na.omit)
+Model02Old <- nlme::lme(data = CCPISOld, fixed = interest_health ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+Model03Old <- nlme::lme(data = CCPISOld, fixed = interest_foreign ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+Model04Old <- nlme::lme(data = CCPISOld, fixed = interest_law ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+Model05Old <- nlme::lme(data = CCPISOld, fixed = interest_education ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+Model06Old <- nlme::lme(data = CCPISOld, fixed = interest_partisan ~
+                            female + age + white +
+                            immig + lang + agentic + communal + school,
+                          random = ~ 1 | Class, na.action = na.omit)
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model01Old, "Health care" = Model02Old,
+  "International affairs" = Model03Old, "Law and crime" = Model04Old,
+  "Education" = Model05Old, "Partisan politics" = Model06Old),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  coef_omit = "age|white|immig|lang|agentic|communal|school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Socio-demographic, personality traits, schools"),
+  output = "_previous/_practice-talk/tbl-lmeInterestOldCCPISAlt.png",
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+
+#### Only personality traits added ####
+Model01Pers <- nlme::lme(data = CCPIS, fixed = interest ~ female + agentic +
+                           communal, random = ~ 1 | Class, na.action = na.omit)
+Model02Pers <- nlme::lme(data = CCPIS, fixed = interest_health ~ female + agentic +
+                           communal, random = ~ 1 | Class, na.action = na.omit)
+Model03Pers <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ female + agentic +
+                           communal, random = ~ 1 | Class, na.action = na.omit)
+Model04Pers <- nlme::lme(data = CCPIS, fixed = interest_law ~ female + agentic +
+                           communal, random = ~ 1 | Class, na.action = na.omit)
+Model05Pers <- nlme::lme(data = CCPIS, fixed = interest_education ~ female + agentic +
+                           communal, random = ~ 1 | Class, na.action = na.omit)
+Model06Pers <- nlme::lme(data = CCPIS, fixed = interest_partisan ~ female + agentic +
+                           communal, random = ~ 1 | Class, na.action = na.omit)
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model01Pers, "Health care" = Model02Pers,
+  "International affairs" = Model03Pers, "Law and crime" = Model04Pers,
+  "Education" = Model05Pers, "Partisan politics" = Model06Pers),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  coef_omit = "agentic|communal",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Personality traits"),
+  output = "_previous/_practice-talk/tbl-lmeInterestPers.png",
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+Model1Pers <- nlme::lme(data = CCPIS, fixed = interest ~ female + agentic +
+                           communal + school, random = ~ 1 | Class,
+                        na.action = na.omit)
+Model2Pers <- nlme::lme(data = CCPIS, fixed = interest_health ~ female + agentic +
+                           communal + school, random = ~ 1 | Class,
+                        na.action = na.omit)
+Model3Pers <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ female + agentic +
+                           communal + school, random = ~ 1 | Class,
+                        na.action = na.omit)
+Model4Pers <- nlme::lme(data = CCPIS, fixed = interest_law ~ female + agentic +
+                           communal + school, random = ~ 1 | Class,
+                        na.action = na.omit)
+Model5Pers <- nlme::lme(data = CCPIS, fixed = interest_education ~ female + agentic +
+                           communal + school, random = ~ 1 | Class,
+                        na.action = na.omit)
+Model6Pers <- nlme::lme(data = CCPIS, fixed = interest_partisan ~ female + agentic +
+                           communal + school, random = ~ 1 | Class,
+                        na.action = na.omit)
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model1Pers, "Health care" = Model2Pers,
+  "International affairs" = Model3Pers, "Law and crime" = Model4Pers,
+  "Education" = Model5Pers, "Partisan politics" = Model6Pers),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  coef_omit = "agentic|communal|school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Personality traits, school"),
+  output = "_previous/_practice-talk/tbl-lmeInterestPers2.png",
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+Model10Pers <- nlme::lme(data = CCPIS, fixed = interest ~ female + agentic +
+                          communal + school + age + white + immig + lang,
+                         random = ~ 1 | Class, na.action = na.omit)
+Model20Pers <- nlme::lme(data = CCPIS, fixed = interest_health ~ female + agentic +
+                           communal + school + age + white + immig + lang,
+                         random = ~ 1 | Class, na.action = na.omit)
+Model30Pers <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ female + agentic +
+                           communal + school + age + white + immig + lang,
+                         random = ~ 1 | Class, na.action = na.omit)
+Model40Pers <- nlme::lme(data = CCPIS, fixed = interest_law ~ female + agentic +
+                           communal + school + age + white + immig + lang,
+                         random = ~ 1 | Class, na.action = na.omit)
+Model50Pers <- nlme::lme(data = CCPIS, fixed = interest_education ~ female + agentic +
+                           communal + school + age + white + immig + lang,
+                         random = ~ 1 | Class, na.action = na.omit)
+Model60Pers <- nlme::lme(data = CCPIS, fixed = interest_partisan ~ female + agentic +
+                           communal + school + age + white + immig + lang,
+                         random = ~ 1 | Class, na.action = na.omit)
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model10Pers, "Health care" = Model20Pers,
+  "International affairs" = Model30Pers, "Law and crime" = Model40Pers,
+  "Education" = Model50Pers, "Partisan politics" = Model60Pers),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  coef_omit = "agentic|communal|school",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: Socio-economic variables, personality traits, school"),
+  output = "_previous/_practice-talk/tbl-lmeInterestPers2.png",
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+
+#### No control variables ####
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelParentB, "Health care" = Model10,
+                "International affairs" = Model12, "Law and crime" = Model14,
+                "Education" = Model16, "Partisan politics" = Model18),
+  "Girls" = list("All" = ModelParentG, "Health care" = Model11,
+                 "International affairs" = Model13,
+                 "Law and crime" = Model15, "Education" = Model17,
+                 "Partisan politics" = Model19)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeParentNo.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  coef_rename = c(
+    "value" = "Mother discusses topic more than father",
+    "gender_parent_health" = "Mother discusses topic more than father",
+    "gender_parent_foreign" = "Mother discusses topic more than father",
+    "gender_parent_law" = "Mother discusses topic more than father",
+    "gender_parent_education" = "Mother discusses topic more than father",
+    "gender_parent_partisan" = "Mother discusses topic more than father"))
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelMotherB, "Health care" = Model20,
+                "International affairs" = Model22, "Law and crime" = Model24,
+                "Education" = Model26, "Partisan politics" = Model28),
+  "Girls" = list("All" = ModelMotherG, "Health care" = Model21,
+                 "International affairs" = Model23,
+                 "Law and crime" = Model25, "Education" = Model27,
+                 "Partisan politics" = Model29)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeMotherNo.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  coef_rename = c("value" = "Main topic discussed with mother?",
+                  "mother_discuss_health" =
+                    "Main topic discussed with mother?",
+                  "mother_discuss_foreign" =
+                    "Main topic discussed with mother?",
+                  "mother_discuss_law" =
+                    "Main topic discussed with mother?",
+                  "mother_discuss_education" =
+                    "Main topic discussed with mother?",
+                  "mother_discuss_partisan" =
+                    "Main topic discussed with mother?"))
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelFatherB, "Health care" = Model30,
+                "International affairs" = Model32, "Law and crime" = Model34,
+                "Education" = Model36, "Partisan politics" = Model38),
+  "Girls" = list("All" = ModelFatherG, "Health care" = Model31,
+                 "International affairs" = Model33,
+                 "Law and crime" = Model35, "Education" = Model37,
+                 "Partisan politics" = Model39)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeFatherNo.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  coef_rename = c("value" = "Main topic discussed with father?",
+                  "father_discuss_health" =
+                    "Main topic discussed with father?",
+                  "father_discuss_foreign" =
+                    "Main topic discussed with father?",
+                  "father_discuss_law" = "Main topic discussed with father?",
+                  "father_discuss_education" =
+                    "Main topic discussed with father?",
+                  "father_discuss_partisan" =
+                    "Main topic discussed with father?"))
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelFemaleFriendB, "Health care" = Model40,
+                "International affairs" = Model42, "Law and crime" = Model44,
+                "Education" = Model46, "Partisan politics" = Model48),
+  "Girls" = list("All" = ModelFemaleFriendG, "Health care" = Model41,
+                 "International affairs" = Model43, "Law and crime" = Model45,
+                 "Education" = Model47, "Partisan politics" = Model49)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeFemaleFriendsNo.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  coef_rename = c("value" = "Main topic discussed with female friends?",
+                  "femalefriends_discuss_health" =
+                    "Main topic discussed with female friends?",
+                  "femalefriends_discuss_foreign" =
+                    "Main topic discussed with female friends?",
+                  "femalefriends_discuss_law" =
+                    "Main topic discussed with female friends?",
+                  "femalefriends_discuss_education" =
+                    "Main topic discussed with female friends?",
+                  "femalefriends_discuss_partisan" =
+                    "Main topic discussed with female friends?"))
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelMaleFriendB, "Health care" = Model50,
+                "International affairs" = Model52, "Law and crime" = Model54,
+                "Education" = Model56, "Partisan politics" = Model58),
+  "Girls" = list("All" = ModelMaleFriendG, "Health care" = Model51,
+                 "International affairs" = Model53, "Law and crime" = Model55,
+                 "Education" = Model57, "Partisan politics" = Model59)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeMaleFriendsNo.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  coef_rename = c("value" = "Main topic discussed with male friends?",
+                  "malefriends_discuss_health" =
+                    "Main topic discussed with male friends?",
+                  "malefriends_discuss_foreign" =
+                    "Main topic discussed with male friends?",
+                  "malefriends_discuss_law" =
+                    "Main topic discussed with male friends?",
+                  "malefriends_discuss_education" =
+                    "Main topic discussed with male friends?",
+                  "malefriends_discuss_partisan" =
+                    "Main topic discussed with male friends?"))
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model1Young, "Health care" = Model2Young,
+  "International affairs" = Model3Young, "Law and crime" = Model4Young,
+  "Education" = Model5Young, "Partisan politics" = Model6Young),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  output = "_previous/_practice-talk/tbl-lmeInterestYoungCCPISNo.png",
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model1Old, "Health care" = Model2Old,
+  "International affairs" = Model3Old, "Law and crime" = Model4Old,
+  "Education" = Model5Old, "Partisan politics" = Model6Old),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  output = "_previous/_practice-talk/tbl-lmeInterestOldCCPISNo.png",
+  coef_rename = c("female1" = "Gender (1 = girl)"))
+
+#### All reg variables shown (appendix) ####
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelAllParentB, "Health care" = Model100,
+                "International affairs" = Model120, "Law and crime" = Model140,
+                "Education" = Model160, "Partisan politics" = Model180),
+  "Girls" = list("All" = ModelAllParentG, "Health care" = Model110,
+                 "International affairs" = Model130,
+                 "Law and crime" = Model150, "Education" = Model170,
+                 "Partisan politics" = Model190)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeParent.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"),
+  coef_rename = c(
+    "value" = "Mother discusses topic more than father",
+    "gender_parent_health" = "Mother discusses topic more than father",
+    "gender_parent_foreign" = "Mother discusses topic more than father",
+    "gender_parent_law" = "Mother discusses topic more than father",
+    "gender_parent_education" = "Mother discusses topic more than father",
+    "gender_parent_partisan" = "Mother discusses topic more than father",
+    "age" = "Age",
+    "age_squared" = "Age squared",
+    "white" = "Race (1 = white)",
+    "immig" = "Immigrant",
+    "langAnglophone" = "English spoken at home",
+    "langFrancophone" = "French spoken at home",
+    "agentic" = "Agency",
+    "communal" = "Communality",
+    "schoolCollège Citoyen" = "School #4",
+    "schoolCollège mariste de Québec" = "School #3",
+    "schoolÉcole de la Rose-des-Vents" = "School #6",
+    "schoolÉcole Jean-de-Brébeuf" = "School #2",
+    "schoolJaya International High School" = "School #5",
+    "schoolRenfrew County DSB Student Senate" = "School #8",
+    "schoolUrban Village Academy" = "School #7"))
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelAllMotherB, "Health care" = Model200,
+                "International affairs" = Model220, "Law and crime" = Model240,
+                "Education" = Model260, "Partisan politics" = Model280),
+  "Girls" = list("All" = ModelAllMotherG, "Health care" = Model210,
+                 "International affairs" = Model230,
+                 "Law and crime" = Model250, "Education" = Model270,
+                 "Partisan politics" = Model290)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeMother.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"),
+  coef_rename = c("value" = "Main topic discussed with mother?",
+                  "mother_discuss_health" =
+                    "Main topic discussed with mother?",
+                  "mother_discuss_foreign" =
+                    "Main topic discussed with mother?",
+                  "mother_discuss_law" =
+                    "Main topic discussed with mother?",
+                  "mother_discuss_education" =
+                    "Main topic discussed with mother?",
+                  "mother_discuss_partisan" =
+                    "Main topic discussed with mother?",
+                  "age" = "Age",
+                  "age_squared" = "Age squared",
+                  "white" = "Race (1 = white)",
+                  "immig" = "Immigrant",
+                  "langAnglophone" = "English spoken at home",
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality",
+                  "schoolCollège Citoyen" = "School #4",
+                  "schoolCollège mariste de Québec" = "School #3",
+                  "schoolÉcole de la Rose-des-Vents" = "School #6",
+                  "schoolÉcole Jean-de-Brébeuf" = "School #2",
+                  "schoolJaya International High School" = "School #5",
+                  "schoolRenfrew County DSB Student Senate" = "School #8",
+                  "schoolUrban Village Academy" = "School #7"))
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelAllFatherB, "Health care" = Model300,
+                "International affairs" = Model320, "Law and crime" = Model340,
+                "Education" = Model360, "Partisan politics" = Model380),
+  "Girls" = list("All" = ModelAllFatherG, "Health care" = Model310,
+                 "International affairs" = Model330,
+                 "Law and crime" = Model350, "Education" = Model370,
+                 "Partisan politics" = Model390)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeFather.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"),
+  coef_rename = c("value" = "Main topic discussed with father?",
+                  "father_discuss_health" =
+                    "Main topic discussed with father?",
+                  "father_discuss_foreign" =
+                    "Main topic discussed with father?",
+                  "father_discuss_law" = "Main topic discussed with father?",
+                  "father_discuss_education" =
+                    "Main topic discussed with father?",
+                  "father_discuss_partisan" =
+                    "Main topic discussed with father?",
+                  "age" = "Age",
+                  "age_squared" = "Age squared",
+                  "white" = "Race (1 = white)",
+                  "immig" = "Immigrant",
+                  "langAnglophone" = "English spoken at home",
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality",
+                  "schoolCollège Citoyen" = "School #4",
+                  "schoolCollège mariste de Québec" = "School #3",
+                  "schoolÉcole de la Rose-des-Vents" = "School #6",
+                  "schoolÉcole Jean-de-Brébeuf" = "School #2",
+                  "schoolJaya International High School" = "School #5",
+                  "schoolRenfrew County DSB Student Senate" = "School #8",
+                  "schoolUrban Village Academy" = "School #7"))
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelAllFemaleFriendB, "Health care" = Model400,
+                "International affairs" = Model420, "Law and crime" = Model440,
+                "Education" = Model460, "Partisan politics" = Model480),
+  "Girls" = list("All" = ModelAllFemaleFriendG, "Health care" = Model410,
+                 "International affairs" = Model430, "Law and crime" = Model450,
+                 "Education" = Model470, "Partisan politics" = Model490)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeFemaleFriends.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"),
+  coef_rename = c("value" = "Main topic discussed with female friends?",
+                  "femalefriends_discuss_health" =
+                    "Main topic discussed with female friends?",
+                  "femalefriends_discuss_foreign" =
+                    "Main topic discussed with female friends?",
+                  "femalefriends_discuss_law" =
+                    "Main topic discussed with female friends?",
+                  "femalefriends_discuss_education" =
+                    "Main topic discussed with female friends?",
+                  "femalefriends_discuss_partisan" =
+                    "Main topic discussed with female friends?",
+                  "age" = "Age",
+                  "age_squared" = "Age squared",
+                  "white" = "Race (1 = white)",
+                  "immig" = "Immigrant",
+                  "langAnglophone" = "English spoken at home",
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality",
+                  "schoolCollège Citoyen" = "School #4",
+                  "schoolCollège mariste de Québec" = "School #3",
+                  "schoolÉcole de la Rose-des-Vents" = "School #6",
+                  "schoolÉcole Jean-de-Brébeuf" = "School #2",
+                  "schoolJaya International High School" = "School #5",
+                  "schoolRenfrew County DSB Student Senate" = "School #8",
+                  "schoolUrban Village Academy" = "School #7"))
+modelsummary::modelsummary(models = list(
+  "Boys" = list("All" = ModelAllMaleFriendB, "Health care" = Model500,
+                "International affairs" = Model520, "Law and crime" = Model540,
+                "Education" = Model560, "Partisan politics" = Model580),
+  "Girls" = list("All" = ModelAllMaleFriendG, "Health care" = Model510,
+                 "International affairs" = Model530, "Law and crime" = Model550,
+                 "Education" = Model570, "Partisan politics" = Model590)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "_previous/_practice-talk/tbl-lmeMaleFriends.png",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"),
   coef_rename = c("value" = "Main topic discussed with male friends?",
                   "malefriends_discuss_health" =
                     "Main topic discussed with male friends?",
@@ -4031,27 +4528,63 @@ modelsummary::modelsummary(models = list(
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
                   "agentic" = "Agency",
-                  "communal" = "Communality"))
+                  "communal" = "Communality",
+                  "schoolCollège Citoyen" = "School #4",
+                  "schoolCollège mariste de Québec" = "School #3",
+                  "schoolÉcole de la Rose-des-Vents" = "School #6",
+                  "schoolÉcole Jean-de-Brébeuf" = "School #2",
+                  "schoolJaya International High School" = "School #5",
+                  "schoolRenfrew County DSB Student Senate" = "School #8",
+                  "schoolUrban Village Academy" = "School #7"))
 modelsummary::modelsummary(models = list(
-  "Boys" = list("All" = ModelMaleFriendB, "Health care" = Model50,
-                "International affairs" = Model52, "Law and crime" = Model54,
-                "Education" = Model56, "Partisan politics" = Model58),
-  "Girls" = list("All" = ModelMaleFriendG, "Health care" = Model51,
-                 "International affairs" = Model53, "Law and crime" = Model55,
-                 "Education" = Model57, "Partisan politics" = Model59)),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  output = "_previous/_practice-talk/tbl-lmeMaleFriends.png",
-  notes = "Multilevel regression with random effects at the classroom level",
-  title = paste("Interest in topic most often discussed with one's male",
-                "friends"),
-  coef_rename = c("value" = "Main topic discussed with male friends?",
-                  "malefriends_discuss_health" =
-                    "Main topic discussed with male friends?",
-                  "malefriends_discuss_foreign" =
-                    "Main topic discussed with male friends?",
-                  "malefriends_discuss_law" =
-                    "Main topic discussed with male friends?",
-                  "malefriends_discuss_education" =
-                    "Main topic discussed with male friends?",
-                  "malefriends_discuss_partisan" =
-                    "Main topic discussed with male friends?"))
+  "Politics (general)" = Model01Young, "Health care" = Model02Young,
+  "International affairs" = Model03Young, "Law and crime" = Model04Young,
+  "Education" = Model05Young, "Partisan politics" = Model06Young),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"),
+  output = "_previous/_practice-talk/tbl-lmeInterestYoungCCPIS.png",
+  coef_rename = c("female1" = "Gender (1 = girl)",
+                  "age" = "Age",
+                  "age_squared" = "Age squared",
+                  "white" = "Race (1 = white)",
+                  "immig" = "Immigrant",
+                  "langAnglophone" = "English spoken at home",
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality",
+                  "schoolCollège Citoyen" = "School #4",
+                  "schoolCollège mariste de Québec" = "School #3",
+                  "schoolÉcole de la Rose-des-Vents" = "School #6",
+                  "schoolÉcole Jean-de-Brébeuf" = "School #2",
+                  "schoolJaya International High School" = "School #5",
+                  "schoolRenfrew County DSB Student Senate" = "School #8",
+                  "schoolUrban Village Academy" = "School #7"))
+modelsummary::modelsummary(models = list(
+  "Politics (general)" = Model01Old, "Health care" = Model02Old,
+  "International affairs" = Model03Old, "Law and crime" = Model04Old,
+  "Education" = Model05Old, "Partisan politics" = Model06Old),
+  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Reference Category for Language: Other languages spoken at home",
+            "Reference Category for School: School #1"),
+  output = "_previous/_practice-talk/tbl-lmeInterestOldCCPIS.png",
+  coef_rename = c("female1" = "Gender (1 = girl)",
+                  "age" = "Age",
+                  "age_squared" = "Age squared",
+                  "white" = "Race (1 = white)",
+                  "immig" = "Immigrant",
+                  "langAnglophone" = "English spoken at home",
+                  "langFrancophone" = "French spoken at home",
+                  "agentic" = "Agency",
+                  "communal" = "Communality",
+                  "schoolCollège Citoyen" = "School #4",
+                  "schoolCollège mariste de Québec" = "School #3",
+                  "schoolÉcole de la Rose-des-Vents" = "School #6",
+                  "schoolÉcole Jean-de-Brébeuf" = "School #2",
+                  "schoolJaya International High School" = "School #5",
+                  "schoolRenfrew County DSB Student Senate" = "School #8",
+                  "schoolUrban Village Academy" = "School #7"))
