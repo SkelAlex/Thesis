@@ -1602,21 +1602,15 @@ summary(GSS20$weight)
 
 ##### 2. Descriptive statistics #####
 #### 2.1 CCPIS ####
-PlotAge <- ggplot(CCPIS, aes(x = age)) +
-  geom_histogram(binwidth = 1) +
-  labs(x = "Age", y = "Frequency") +
-  theme(text = element_text(family = "CM Roman"))
 PlotGender <- CCPIS |>
   filter(!is.na(female_alt)) |>
   ggplot(aes(x = female_alt)) +
   geom_bar() +
   labs(x = "Gender", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotLanguage <- CCPIS |>
-  filter(!is.na(lang)) |>
-  ggplot(aes(x = lang)) +
-  geom_bar() +
-  labs(x = "Language spoken at home", y = "Frequency") +
+PlotAge <- ggplot(CCPIS, aes(x = age)) +
+  geom_histogram(binwidth = 1) +
+  labs(x = "Age", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
 PlotRace <- CCPIS |>
   filter(!is.na(ethnicity)) |>
@@ -1625,6 +1619,12 @@ PlotRace <- CCPIS |>
   labs(x = "Race", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
+PlotLanguage <- CCPIS |>
+  filter(!is.na(lang)) |>
+  ggplot(aes(x = lang)) +
+  geom_bar() +
+  labs(x = "Language spoken at home", y = "Frequency") +
+  theme(text = element_text(family = "CM Roman"))
 PlotImmigrant <- CCPIS |>
   filter(!is.na(immig)) |>
   ggplot(aes(x = as.factor(immig))) +
@@ -4588,3 +4588,56 @@ modelsummary::modelsummary(models = list(
                   "schoolJaya International High School" = "School #5",
                   "schoolRenfrew County DSB Student Senate" = "School #8",
                   "schoolUrban Village Academy" = "School #7"))
+
+### 1.1.2 Abandoned (Indices de défavorisation) ####
+Defav <- openxlsx::read.xlsx(
+  "_data/MinistèreÉducation/Indices-defavorisations_2021-2022.xlsx")
+colnames(Defav) <- c("CodeEcole", "Ecole", "X", "Y", "ISFR", "RangSFR", "Z",
+                     "AA", "AB", "IMSE", "AC", "RangMSE", "AD", "AE", "AF",
+                     "NombreEleves", "AG")
+Defav <- Defav[7:3083,]
+Defav$ISFR[Defav$ISFR == "Indice du seuil de faible revenu"] <- NA
+Defav <- filter(Defav, !is.na(ISFR))
+Defav$Ecole_alt <- str_remove_all(Defav$Ecole, "\\s\\(\\d+\\)")
+Defav$ISFR <- as.numeric(str_replace_all(Defav$ISFR, ",", "."))
+Defav$IMSE <- as.numeric(str_replace_all(Defav$IMSE, ",", "."))
+Defav$RangSFR <- as.numeric(str_replace_all(Defav$RangSFR, ",", "."))
+Defav$RangMSE <- as.numeric(str_replace_all(Defav$RangMSE, ",", "."))
+unique(CCPIS$school)
+CCPIS$ISFR <- qdap::mgsub(text.var = CCPIS$school,
+                          pattern = Defav$Ecole_alt,
+                          replacement = Defav$ISFR)
+CCPIS$ISFR <- as.numeric(CCPIS$ISFR)
+CCPIS$RangSFR <- qdap::mgsub(text.var = EQ2022$ID_alt,
+                             pattern = Defav$Ecole,
+                             replacement = Defav$RangSFR)
+EQ2022$RangSFR <- as.numeric(EQ2022$RangSFR)
+EQ2022$IMSE <- qdap::mgsub(text.var = EQ2022$ID_alt,
+                           pattern = Defav$Ecole,
+                           replacement = Defav$IMSE)
+EQ2022$IMSE <- as.numeric(EQ2022$IMSE)
+EQ2022$RangMSE <- qdap::mgsub(text.var = EQ2022$ID_alt,
+                              pattern = Defav$Ecole,
+                              replacement = Defav$RangMSE)
+EQ2022$RangMSE <- as.numeric(EQ2022$RangMSE)
+mean(EQ2022$RangSFR, na.rm = TRUE)
+mean(EQ2022$RangMSE, na.rm = TRUE)
+
+### Confidence intervals plots ####
+CCPISGender <- table(CCPIS$female_alt) |>
+  as.data.frame()
+CCPISGender$Prop <- CCPISGender$Freq / sum(CCPISGender$Freq)
+CCPISGender$SE <- sqrt((CCPISGender$Prop * (1 - CCPISGender$Prop)) /
+                         sum(CCPISGender$Freq))
+z_critical <- qnorm((1 + 0.95) / 2)
+CCPISGender$margin_of_error <- z_critical * CCPISGender$SE
+CCPISGender$ci_lower <- CCPISGender$Prop - CCPISGender$margin_of_error
+CCPISGender$ci_upper <- CCPISGender$Prop + CCPISGender$margin_of_error
+CCPISGender$ci_lower_freq <- CCPISGender$ci_lower * sum(CCPISGender$Freq)
+CCPISGender$ci_upper_freq <- CCPISGender$ci_upper * sum(CCPISGender$Freq)
+PlotGender <- ggplot(CCPISGender, aes(x = Var1, y = Freq)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(aes(ymin = ci_lower_freq, ymax = ci_upper_freq),
+                width = 0.1) +
+  labs(x = "Gender", y = "Frequency") +
+  theme(text = element_text(family = "CM Roman"))
