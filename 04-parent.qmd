@@ -117,7 +117,7 @@ Table: Interest in topic by gender of parent who discusses that topic the most {
 |                                         |  (1.515) |   (2.647)   |        (2.240)        |    (3.169)    |  (2.748)  |      (3.018)      | 
 | Age squared                             |   0.013  |    0.048    |         -0.050        |     0.023     |   0.185+  |       0.086       | 
 |                                         |  (0.051) |   (0.090)   |        (0.076)        |    (0.109)    |  (0.094)  |      (0.104)      | 
-| Race (1 = white)                        |  0.463*  |    0.305    |        1.082**        |     0.171     |   -0.337  |       0.437       | 
+| Ethnicity (1 = white)                        |  0.463*  |    0.305    |        1.082**        |     0.171     |   -0.337  |       0.437       | 
 |                                         |  (0.221) |   (0.442)   |        (0.385)        |    (0.474)    |  (0.466)  |      (0.564)      | 
 | Immigrant                               |  -0.761* |    -0.443   |        -1.025*        |     -0.310    |  -1.148+  |       -1.081      | 
 |                                         |  (0.319) |   (0.617)   |        (0.519)        |    (0.695)    |  (0.672)  |      (0.839)      | 
@@ -143,7 +143,7 @@ Table: Interest in topic by gender of parent who discusses that topic the most {
 |                                         |  (1.158) |   (1.989)   |        (2.026)        |    (2.199)    |  (1.914)  |      (3.303)      | 
 | Age squared                             |   0.025  |    -0.041   |         0.108         |     0.059     |   0.010   |       0.126       | 
 |                                         |  (0.040) |   (0.068)   |        (0.070)        |    (0.076)    |  (0.066)  |      (0.113)      | 
-| Race (1 = white)                        |  -0.362  |    -0.055   |         -0.424        |     -0.333    |   -0.611  |       0.034       | 
+| Ethnicity (1 = white)                        |  -0.362  |    -0.055   |         -0.424        |     -0.333    |   -0.611  |       0.034       | 
 |                                         |  (0.246) |   (0.435)   |        (0.535)        |    (0.518)    |  (0.469)  |      (0.660)      | 
 | Immigrant                               |  -0.390  |    -0.325   |         -0.528        |    -1.533+    |   0.517   |       -0.220      | 
 |                                         |  (0.354) |   (0.628)   |        (0.777)        |    (0.835)    |  (0.667)  |      (0.876)      | 
@@ -184,7 +184,7 @@ Table: Interest in topic most often discussed with one's mother {#tbl-lmeMotherA
 |                                         |  (1.345) |   (2.395)   |        (2.382)        |    (2.419)    |  (2.592)  |      (2.583)      | 
 | Age squared                             |   0.050  |    0.031    |         0.045         |     0.100     |   0.139   |       0.111       | 
 |                                         |  (0.046) |   (0.082)   |        (0.081)        |    (0.083)    |  (0.089)  |      (0.089)      | 
-| Race (1 = white)                        |  0.388+  |    0.472    |        1.246**        |     -0.027    |   -0.261  |       0.207       | 
+| Ethnicity (1 = white)                        |  0.388+  |    0.472    |        1.246**        |     -0.027    |   -0.261  |       0.207       | 
 |                                         |  (0.218) |   (0.420)   |        (0.439)        |    (0.451)    |  (0.468)  |      (0.506)      | 
 | Immigrant                               |  -0.570+ |    -0.169   |        -1.419*        |     -0.661    |   -0.840  |       -0.787      | 
 |                                         |  (0.313) |   (0.599)   |        (0.629)        |    (0.647)    |  (0.667)  |      (0.712)      | 
@@ -210,7 +210,7 @@ Table: Interest in topic most often discussed with one's mother {#tbl-lmeMotherA
 |                                         |  (1.082) |   (1.834)   |        (2.076)        |    (2.045)    |  (2.054)  |      (1.962)      | 
 | Age squared                             |   0.044  |    -0.053   |         0.125+        |     0.016     |   0.034   |      0.182**      | 
 |                                         |  (0.037) |   (0.063)   |        (0.071)        |    (0.070)    |  (0.070)  |      (0.067)      | 
-| Race (1 = white)                        |  -0.355  |    0.004    |         -0.174        |     -0.561    |   -0.612  |       -0.456      | 
+| Ethnicity (1 = white)                        |  -0.355  |    0.004    |         -0.174        |     -0.561    |   -0.612  |       -0.456      | 
 |                                         |  (0.234) |   (0.427)   |        (0.479)        |    (0.490)    |  (0.467)  |      (0.480)      | 
 | Immigrant                               |  -0.452  |    -0.130   |         -0.677        |    -1.981**   |   0.715   |       -0.373      | 
 |                                         |  (0.313) |   (0.572)   |        (0.650)        |    (0.674)    |  (0.621)  |      (0.649)      | 
@@ -251,7 +251,7 @@ Table: Interest in topic most often discussed with one's father {#tbl-lmeFatherA
 |                                         |  (1.357) |   (2.359)   |        (2.458)        |    (2.450)    |  (2.629)  |      (2.538)      | 
 | Age squared                             |   0.035  |    0.026    |         0.006         |     0.098     |   0.149   |       0.151+      | 
 |                                         |  (0.046) |   (0.081)   |        (0.084)        |    (0.084)    |  (0.090)  |      (0.087)      | 
-| Race (1 = white)                        |  0.371+  |    0.206    |        1.258**        |     0.191     |   -0.285  |       0.127       | 
+| Ethnicity (1 = white)                        |  0.371+  |    0.206    |        1.258**        |     0.191     |   -0.285  |       0.127       | 
 |                                         |  (0.211) |   (0.423)   |        (0.445)        |    (0.437)    |  (0.478)  |      (0.475)      | 
 | Immigrant                               |  -0.603+ |    -0.208   |        -1.400*        |     -0.050    |   -1.107  |       -0.750      | 
 |                                         |  (0.307) |   (0.597)   |        (0.639)        |    (0.634)    |  (0.689)  |      (0.683)      | 
@@ -277,7 +277,7 @@ Table: Interest in topic most often discussed with one's father {#tbl-lmeFatherA
 |                                         |  (1.075) |   (1.681)   |        (1.972)        |    (1.909)    |  (1.943)  |      (1.954)      | 
 | Age squared                             |   0.021  |    0.014    |         0.096         |     0.018     |   -0.018  |       0.140*      | 
 |                                         |  (0.037) |   (0.058)   |        (0.068)        |    (0.066)    |  (0.067)  |      (0.067)      | 
-| Race (1 = white)                        |  -0.256  |    0.112    |         0.240         |     -0.678    |   -0.588  |       -0.502      | 
+| Ethnicity (1 = white)                        |  -0.256  |    0.112    |         0.240         |     -0.678    |   -0.588  |       -0.502      | 
 |                                         |  (0.237) |   (0.421)   |        (0.491)        |    (0.496)    |  (0.463)  |      (0.491)      | 
 | Immigrant                               |  -0.206  |    -0.334   |         -0.647        |    -1.679*    |   1.133+  |       -0.160      | 
 |                                         |  (0.339) |   (0.616)   |        (0.724)        |    (0.718)    |  (0.661)  |      (0.711)      | 
@@ -300,7 +300,7 @@ __Note:__
 __Note:__
 Multilevel regression with random effects at the classroom level
 
-Results from @tbl-lmeParent, @tbl-lmeMother and @tbl-lmeFather are somewhat intriguing. On the one hand, whichever parent discusses a topic with them has little impact on students' interest in that topic. Moreover, parents' interest in law and crime seems to be transmitted to their children in a consistent way, while interest in health care and international relations seems to have little to do with parents' discussion of these topics at home. It is relevant to note that substantively, daughters seem to be more influenced by their parents' discussion of law and crime than boys: their rating of law and crime increases by 1.6--3.1 points on the 11-point scale, compared with 1--1.7 points for boys.^[@sec-appendix4 reproduces @tbl-lmeParent, @tbl-lmeMother and @tbl-lmeFather while adding controls for age, age squared, language, immigrant status and race. The same relationships are found. Mother--daughter international affairs interest transmission also becomes marginally significant at the *p*<0.05 level.]
+Results from @tbl-lmeParent, @tbl-lmeMother and @tbl-lmeFather are somewhat intriguing. On the one hand, whichever parent discusses a topic with them has little impact on students' interest in that topic. Moreover, parents' interest in law and crime seems to be transmitted to their children in a consistent way, while interest in health care and international relations seems to have little to do with parents' discussion of these topics at home. It is relevant to note that substantively, daughters seem to be more influenced by their parents' discussion of law and crime than boys: their rating of law and crime increases by 1.6--3.1 points on the 11-point scale, compared with 1--1.7 points for boys.^[@sec-appendix4 reproduces @tbl-lmeParent, @tbl-lmeMother and @tbl-lmeFather while adding controls for age, age squared, language, immigrant status and ethnicity. The same relationships are found. Mother--daughter international affairs interest transmission also becomes marginally significant at the *p*<0.05 level.]
 
 On the other hand, social learning theory partly seems to apply for the transmission of interest in education and partisan politics. Mothers' frequent discussion of --- and perhaps higher interest in --- education seems to trickle down to their daughters but not their sons, while fathers' discussion of education is unrelated to their children's interest in the topic. The opposite pattern can be observed for partisan politics: fathers' frequent discussion of it --- and perhaps higher interest in partisan politics --- is associated with their sons' higher interest in the topic, but not their daughters', while mothers' discussion of partisan politics is unrelated to their children's interest in the topic. Since adult women are generally more interested in education and men in partisan politics, these patterns match with the theory --- but nothing similar can be said for international affairs and health care. It may be the case that for these topics other socialization agents have more influence.
 

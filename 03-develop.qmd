@@ -97,7 +97,7 @@ After age 50, both men and women start reporting higher levels of interest in po
 
 How does Canada compare with other countries? Across all 57 countries surveyed during wave 7 of the WVS (2017--22), the average political interest was 4.8/10 for men and 4/10 for women, and while political interest increased with people's age, the size of the gender gap remained relatively similar with age. Among Canadian WVS respondents, the average political interest was 6.2/10 for men and 5/10 for women: this gender gap is 0.35 points larger than the WVS average and is statistically significant (*p*<0.001). Moreover, as mentioned previously, the age pattern was somewhat different in the Canadian WVS compared with the WVS's cross-country results, becoming statistically insignificant around age 75. However, sample sizes are smaller for people aged 75 and over, and age averages vary substantially from year to year as the CES and WVS scatterplots show. The fact that all three surveys show a shrinking of the gap at that age, however, reinforces confidence in that finding.
 
-@fig-yearceswvs and @fig-yearraceceswvs
+@fig-yearceswvs and @fig-yearethnicityceswvs
 
 ```{r}
 #| label: fig-yearceswvs
@@ -107,9 +107,9 @@ knitr::include_graphics("_graphs/InterestYearGender.pdf")
 ```
 
 ```{r}
-#| label: fig-yearraceceswvs
+#| label: fig-yearethnicityceswvs
 #| echo: false
-#| fig-cap: "General Political Interest by Year, Gender and Race Among Canadian Adults, 2021 CES and 2020 WVS (Canada) \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
+#| fig-cap: "General Political Interest by Year, Gender and Ethnicity Among Canadian Adults, 2021 CES and 2020 WVS (Canada) \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
 knitr::include_graphics("_graphs/InterestWaveGroup.pdf")
 ```
 
@@ -119,7 +119,7 @@ What kinds of political topics are children and adolescents interested in? Are t
 
 In the upper half of the table, taking into account classroom fixed effects, boys generally report being more interested in politics than girls, but the gender gap is relatively minimal, standing at 0.43 for the 11-point political interest scale (*p*<0.05). Boys' interest in international affairs and partisan politics is higher than girls' (1-point and 0.85-point difference respectively; both *p*<0.001). This seems to be in line with the results among adult respondents. However, girls' interest in law and crime is also slightly higher (0.5 point, *p*<0.05). This result is more surprising given previous literature showing the contrary. Results for the other two topics, health care and education, are almost even between the genders, and not statistically significant, despite adult women usually reporting higher levels of interest in these two topics across studies.
 
-However, in the lower half of the table, controlling for socio-demographic factors, all relationships between gender and interest disappear. It might be the case that girls are less interested in some of these topics by virtue of other socio-demographic characteristics, but there does not seem to be one other socio-demographic variable that reliably predicts interest in any of the topics. These multiple regression results might be tainted by some multicollinearity between race, immigrant status and language.
+However, in the lower half of the table, controlling for socio-demographic factors, all relationships between gender and interest disappear. It might be the case that girls are less interested in some of these topics by virtue of other socio-demographic characteristics, but there does not seem to be one other socio-demographic variable that reliably predicts interest in any of the topics. These multiple regression results might be tainted by some multicollinearity between ethnicity, immigrant status and language.
 
 Table: Students' political interest by gender {#tbl-lmeInterestCCPIS}
 
@@ -142,7 +142,7 @@ Table: Students' political interest by gender {#tbl-lmeInterestCCPIS}
 |                                     |       (1.796)      |   (1.736)   |        (1.994)        |    (2.080)    |  (2.008)  |      (1.932)      | 
 | Age squared                         |        0.000       |    -0.003   |         0.000         |     0.022     |   0.129+  |       0.045       | 
 |                                     |       (0.060)      |   (0.058)   |        (0.066)        |    (0.069)    |  (0.066)  |      (0.064)      | 
-| Race (1 = white)                    |       0.659+       |    0.154    |         0.860*        |     -0.203    |   0.049   |       0.356       | 
+| Ethnicity (1 = white)                    |       0.659+       |    0.154    |         0.860*        |     -0.203    |   0.049   |       0.356       | 
 |                                     |       (0.378)      |   (0.356)   |        (0.409)        |    (0.411)    |  (0.395)  |      (0.422)      | 
 | Immigrant                           |       -0.072       |    -0.165   |        -0.748+        |    -0.956*    |   -0.179  |       -0.428      | 
 |                                     |       (0.421)      |   (0.392)   |        (0.452)        |    (0.458)    |  (0.433)  |      (0.467)      | 
@@ -170,7 +170,7 @@ Table: Students' political interest by gender {#tbl-lmeInterestCCPIS}
 |                                     |       (2.045)      |   (1.957)   |        (2.891)        |    (2.923)    |  (2.843)  |      (2.950)      | 
 | Gender (1 = girls):Age              |       -0.174       |    0.050    |         0.173         |     0.030     |   -0.030  |       -0.095      | 
 |                                     |       (0.167)      |   (0.156)   |        (0.178)        |    (0.179)    |  (0.170)  |      (0.183)      | 
-| Gender (1 = girls):Race (1 = white) |       -1.191*      |    -0.542   |         -0.718        |     -0.355    |  -1.035+  |      -0.962+      | 
+| Gender (1 = girls):Ethnicity (1 = white) |       -1.191*      |    -0.542   |         -0.718        |     -0.355    |  -1.035+  |      -0.962+      | 
 |                                     |       (0.520)      |   (0.488)   |        (0.560)        |    (0.563)    |  (0.538)  |      (0.579)      | 
 | SD (Intercept Class)                |        0.001       |    0.432    |         0.450         |     0.571     |   0.706   |       0.001       | 
 | SD (Observations)                   |        2.460       |    2.297    |         2.647         |     2.646     |   2.524   |       2.758       | 
@@ -210,7 +210,7 @@ Table: Political interest by gender (ages 10-15) {#tbl-lmeInterestYoungCCPIS}
 |                                     |       (6.914)      |   (6.771)   |        (8.072)        |    (8.166)    |  (7.808)  |      (8.029)      | 
 | Age squared                         |        0.123       |    -0.023   |         -0.303        |     -0.357    |   0.082   |       0.050       | 
 |                                     |       (0.257)      |   (0.252)   |        (0.299)        |    (0.303)    |  (0.290)  |      (0.298)      | 
-| Race (1 = white)                    |        0.798       |    0.386    |         1.214         |     -0.307    |   1.312   |       0.185       | 
+| Ethnicity (1 = white)                    |        0.798       |    0.386    |         1.214         |     -0.307    |   1.312   |       0.185       | 
 |                                     |       (0.770)      |   (0.741)   |        (0.830)        |    (0.844)    |  (0.815)  |      (0.838)      | 
 | Immigrant                           |        0.683       |    -0.430   |         -0.171        |     2.142+    |   0.835   |       0.416       | 
 |                                     |       (1.110)      |   (1.087)   |        (1.237)        |    (1.254)    |  (1.204)  |      (1.238)      | 
@@ -238,7 +238,7 @@ Table: Political interest by gender (ages 10-15) {#tbl-lmeInterestYoungCCPIS}
 |                                     |       (2.416)      |   (2.311)   |        (3.249)        |    (3.325)    |  (3.122)  |      (3.211)      | 
 | Gender (1 = girls):Age              |       -0.102       |    0.184    |         0.238         |     0.444     |   0.098   |       -0.074      | 
 |                                     |       (0.341)      |   (0.332)   |        (0.376)        |    (0.379)    |  (0.363)  |      (0.373)      | 
-| Gender (1 = girls):Race (1 = white) |       -1.261       |    -1.049   |         -0.264        |     -0.967    |  -1.985+  |       -0.387      | 
+| Gender (1 = girls):Ethnicity (1 = white) |       -1.261       |    -1.049   |         -0.264        |     -0.967    |  -1.985+  |       -0.387      | 
 |                                     |       (0.986)      |   (0.956)   |        (1.073)        |    (1.087)    |  (1.051)  |      (1.080)      | 
 | SD (Intercept Class)                |        0.587       |    0.482    |         0.336         |     0.499     |   0.000   |       0.000       | 
 | SD (Observations)                   |        2.516       |    2.468    |         2.826         |     2.860     |   2.746   |       2.823       | 
@@ -276,7 +276,7 @@ Table: Political interest by gender (ages 16-18) {#tbl-lmeInterestOldCCPIS}
 |                                     |      (18.852)      |   (16.517)  |        (19.446)       |    (20.234)   |  (17.927) |      (19.758)     | 
 | Age squared                         |       -0.494       |    -0.094   |         0.525         |     0.399     |   0.836   |       -0.884      | 
 |                                     |       (0.566)      |   (0.496)   |        (0.584)        |    (0.609)    |  (0.538)  |      (0.593)      | 
-| Race (1 = white)                    |        0.552       |    0.026    |         0.722         |     -0.086    |   -0.382  |       0.448       | 
+| Ethnicity (1 = white)                    |        0.552       |    0.026    |         0.722         |     -0.086    |   -0.382  |       0.448       | 
 |                                     |       (0.440)      |   (0.412)   |        (0.472)        |    (0.463)    |  (0.448)  |      (0.491)      | 
 | Immigrant                           |       -0.172       |    0.094    |        -1.108*        |    -1.520**   |   -0.366  |       -0.490      | 
 |                                     |       (0.467)      |   (0.430)   |        (0.493)        |    (0.492)    |  (0.466)  |      (0.516)      | 
@@ -298,7 +298,7 @@ Table: Political interest by gender (ages 16-18) {#tbl-lmeInterestOldCCPIS}
 |                                     |       (1.056)      |   (1.107)   |        (1.221)        |    (1.184)    |  (1.358)  |      (1.177)      | 
 | Gender (1 = girls):Age              |        0.054       |    -0.326   |         0.226         |     -0.899    |   -0.322  |       -0.163      | 
 |                                     |       (0.598)      |   (0.547)   |        (0.631)        |    (0.643)    |  (0.594)  |      (0.653)      | 
-| Gender (1 = girls):Race (1 = white) |       -1.343*      |    -0.186   |        -1.164+        |     -0.536    |   -0.736  |      -1.486*      | 
+| Gender (1 = girls):Ethnicity (1 = white) |       -1.343*      |    -0.186   |        -1.164+        |     -0.536    |   -0.736  |      -1.486*      | 
 |                                     |       (0.638)      |   (0.591)   |        (0.677)        |    (0.667)    |  (0.640)  |      (0.707)      | 
 | SD (Intercept Class)                |        0.000       |    0.460    |         0.426         |     0.386     |   0.758   |       0.000       | 
 | SD (Observations)                   |        2.423       |    2.229    |         2.562         |     2.513     |   2.400   |       2.700       | 
@@ -352,7 +352,7 @@ Table: Political interest by gender {#tbl-olsInterestDg}
 |                                     |       (0.019)      |   (0.023)   |        (0.022)        |    (0.024)    |  (0.023)  |      (0.026)      | 
 | Age squared                         |       0.000*       |    0.000    |         0.000         |     0.000     |   0.000   |       0.001*      | 
 |                                     |       (0.000)      |   (0.000)   |        (0.000)        |    (0.000)    |  (0.000)  |      (0.000)      | 
-| Race (1 = white)                    |        0.496       |    -0.262   |         -0.244        |    -0.936+    |   -0.449  |       0.558       | 
+| Ethnicity (1 = white)                    |        0.496       |    -0.262   |         -0.244        |    -0.936+    |   -0.449  |       0.558       | 
 |                                     |       (0.443)      |   (0.518)   |        (0.493)        |    (0.552)    |  (0.523)  |      (0.587)      | 
 | Immigrant                           |       -0.354+      |    0.345    |         0.262         |    -0.463+    |   0.139   |       -0.332      | 
 |                                     |       (0.207)      |   (0.242)   |        (0.230)        |    (0.258)    |  (0.244)  |      (0.274)      | 
@@ -368,7 +368,7 @@ Table: Political interest by gender {#tbl-olsInterestDg}
 |                                     |       (0.185)      |   (0.216)   |        (0.206)        |    (0.230)    |  (0.218)  |      (0.245)      | 
 | Gender (1 = women):Age              |       0.018**      |    0.005    |        0.019**        |     -0.011    |   -0.001  |      0.026***     | 
 |                                     |       (0.006)      |   (0.007)   |        (0.006)        |    (0.007)    |  (0.007)  |      (0.008)      | 
-| Gender (1 = women):Race (1 = white) |       -1.119+      |    -1.014   |         -0.953        |     0.369     |   0.840   |       -0.806      | 
+| Gender (1 = women):Ethnicity (1 = white) |       -1.119+      |    -1.014   |         -0.953        |     0.369     |   0.840   |       -0.806      | 
 |                                     |       (0.592)      |   (0.692)   |        (0.659)        |    (0.737)    |  (0.698)  |      (0.785)      | 
 | Num.Obs.                            |        1800        |     1800    |          1800         |      1800     |    1800   |        1800       | 
 | R2                                  |        0.071       |    0.087    |         0.075         |     0.019     |   0.050   |       0.030       | 

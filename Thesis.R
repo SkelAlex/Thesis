@@ -95,7 +95,7 @@ names(CCPIS)[20:77] <- c(
   "mother_discuss", "father_discuss", "friends_gender", "malefriends_discuss",
   "femalefriends_discuss", "teacher_discuss", "teacher_gender",
   "influencer_discuss", "influencer_gender", "gender", "yob", "language",
-  "lang_aboriginal", "lang_other", "race", "race_other", "born_canada",
+  "lang_aboriginal", "lang_other", "ethnicity", "ethnicity_other", "born_canada",
   "sexrole_independent", "sexrole_passive", "sexrole_competitive",
   "sexrole_easydecisions", "sexrole_giveup", "sexrole_selfconfident",
   "sexrole_inferior", "sexrole_underpressure", "sexrole_emotional",
@@ -131,32 +131,32 @@ table(CCPIS$lang, useNA = "always")
 CCPIS$immig <- NA
 CCPIS$immig[CCPIS$born_canada %in% c("Yes", "Oui")] <- 0
 CCPIS$immig[CCPIS$born_canada %in% c("No", "Non")] <- 1
-CCPIS$ethnicity[CCPIS$race %in% c("Blanc(he)", "White")] <- "White"
-CCPIS$ethnicity[CCPIS$race == "Noir(e)"] <- "Black"
-CCPIS$ethnicity[CCPIS$race == paste(
+CCPIS$ethn[CCPIS$ethnicity %in% c("Blanc(he)", "White")] <- "White"
+CCPIS$ethn[CCPIS$ethnicity == "Noir(e)"] <- "Black"
+CCPIS$ethn[CCPIS$ethnicity == paste(
   "Asiatique occidental(e) (e.g., Iranien(ne), Afghan(e), etc.)")] <-
   "West Asian"
-CCPIS$ethnicity[CCPIS$race == paste(
+CCPIS$ethn[CCPIS$ethnicity == paste(
   "Asiatique du Sud-Est (ex.: Vietnamien(ne), Cambodgien(ne), Laotien(ne),",
   "Thaïlandais(e), etc.)")] <- "Southeast Asian"
-CCPIS$ethnicity[CCPIS$race == "Arabe"] <- "Arabic"
-CCPIS$ethnicity[CCPIS$race == paste(
+CCPIS$ethn[CCPIS$ethnicity == "Arabe"] <- "Arabic"
+CCPIS$ethn[CCPIS$ethnicity == paste(
   "Sud-Asiatique (ex.: Indien(ne) de l’Inde, Pakistanais(e),",
   "Sri-Lankais(e), etc.)")] <- "South Asian"
-CCPIS$ethnicity[CCPIS$race == "Latino-Américain(e)"] <- "Hispanic"
-CCPIS$ethnicity[CCPIS$race == paste(
+CCPIS$ethn[CCPIS$ethnicity == "Latino-Américain(e)"] <- "Hispanic"
+CCPIS$ethn[CCPIS$ethnicity == paste(
   "Première Nation (Indien(ne) de l’Amérique du Nord), Métis(se) ou",
   "Inuk (Inuit)")] <- "Indigenous"
-CCPIS$ethnicity[CCPIS$race %in% c("Chinese", "Chinois(e)")] <- "Chinese"
-CCPIS$ethnicity[CCPIS$race == "Philippin(e)"] <- "Filipino"
-CCPIS$ethnicity[CCPIS$race == "Coréen(ne)"] <- "Korean"
-CCPIS$ethnicity[CCPIS$race == "Japonais(e)"] <- "Japanese"
-CCPIS$ethnicity[CCPIS$race %in% c("Autre (veuillez spécifier)",
+CCPIS$ethn[CCPIS$ethnicity %in% c("Chinese", "Chinois(e)")] <- "Chinese"
+CCPIS$ethn[CCPIS$ethnicity == "Philippin(e)"] <- "Filipino"
+CCPIS$ethn[CCPIS$ethnicity == "Coréen(ne)"] <- "Korean"
+CCPIS$ethn[CCPIS$ethnicity == "Japonais(e)"] <- "Japanese"
+CCPIS$ethn[CCPIS$ethnicity %in% c("Autre (veuillez spécifier)",
                                         "Other (please specify)")] <- "Other"
-table(CCPIS$ethnicity, useNA = "always")
+table(CCPIS$ethn, useNA = "always")
 CCPIS$white <- 0
-CCPIS$white[CCPIS$ethnicity == "White"] <- 1
-CCPIS$white[is.na(CCPIS$ethnicity)] <- NA
+CCPIS$white[CCPIS$ethn == "White"] <- 1
+CCPIS$white[is.na(CCPIS$ethn)] <- NA
 table(CCPIS$white, useNA = "always")
 CCPIS$interest <- as.numeric(CCPIS$interest)
 CCPIS$interest_health <- as.numeric(CCPIS$interest_health)
@@ -606,10 +606,10 @@ Census21$ses_franco[Census21$FOL == 2] <- 2
 Census21$immig <- Census21$IMMSTAT
 Census21$immig[Census21$immig == 88] <- NA
 Census21$immig[Census21$immig == 3] <- 2
-Census21$ethnicity <- Census21$DPGRSUM
-Census21$ethnicity[Census21$ethnicity == 88] <- NA
-Census21$white[Census21$ethnicity == 1] <- 2
-Census21$white[Census21$ethnicity > 1] <- 1
+Census21$ethn <- Census21$DPGRSUM
+Census21$ethn[Census21$ethn == 88] <- NA
+Census21$white[Census21$ethn == 1] <- 2
+Census21$white[Census21$ethn > 1] <- 1
 Census21$education <- Census21$HDGREE
 Census21$education[Census21$education == 88] <- NA
 Census21$ses_education <- NA
@@ -630,7 +630,7 @@ cumsum(prop.table(table(CensusAdult$age))) # median age: 45-49
 prop.table(table(CensusAdult$lang, useNA = "always")) # 63.4% anglo,
 # 19.2% franco, 16.5% allo (first language spoken at home)
 prop.table(table(CensusAdult$immig)) # 70.5% born in Canada
-prop.table(table(CensusAdult$ethnicity)) # 70.2% white
+prop.table(table(CensusAdult$ethn)) # 70.2% white
 prop.table(table(CensusAdult$PR)) # 22.9% Quebec, 38.8% Ontario
 cumsum(prop.table(table(CensusAdult$education))) # 30.7% university degree
 cumsum(prop.table(table(CensusAdult$income))) # yearly median between
@@ -643,7 +643,7 @@ cumsum(prop.table(table(CensusQcAdult$age))) # median age: 50-54
 prop.table(table(CensusQcAdult$lang, useNA = "always")) # 10.5% anglo,
 # 77.6% franco, 10.2% allo (first language spoken at home)
 prop.table(table(CensusQcAdult$immig)) # 80.7% born in Canada
-prop.table(table(CensusQcAdult$ethnicity)) # 82.1% white
+prop.table(table(CensusQcAdult$ethn)) # 82.1% white
 cumsum(prop.table(table(CensusQcAdult$education))) # 28.2% university degree
 cumsum(prop.table(table(CensusQcAdult$income))) # yearly median between
 # $80000 and $84999 (before tax)
@@ -659,14 +659,14 @@ prop.table(table(CensusTeen$ses_female)) # 51.5% of men
 prop.table(table(CensusTeen$lang, useNA = "always")) # 67.6% anglo,
 # 18.3% franco, 13.2% allo (first language spoken at home)
 prop.table(table(CensusTeen$immig)) # 86.8% born in Canada
-prop.table(table(CensusTeen$ethnicity)) # 59.8% white
+prop.table(table(CensusTeen$ethn)) # 59.8% white
 
 # Full data
 prop.table(table(Census21$ses_female))
 18226240/36991980 # female
 prop.table(table(Census21$age, useNA = "always"))
 1831195/36991980 # age group 0-4
-prop.table(table(Census21$ethnicity))
+prop.table(table(Census21$ethn))
 26689275/36328480 # not visible minority... doesn't match with white
 1547870/36328480 # quite close to #4 (Black)
 2571400/36328480 # quite close to #2 (South Asian)
@@ -716,22 +716,22 @@ DG$ses_franco[DG$lang == "French"] <- 2
 DG$immig <- 2
 DG$immig[DG$ses_birth_country == "Canada"] <- 1
 DG$immig[is.na(DG$ses_birth_country) | DG$ses_birth_country == ""] <- NA
-DG$ethnicity <- NA
-DG$ethnicity[DG$ses_ethnicity %in% c("Blanc", "White")] <- "White"
-DG$ethnicity[DG$ses_ethnicity == "Noir"] <- "Black"
-DG$ethnicity[DG$ses_ethnicity %in% c("Asian", "Asiatique")] <- "Asian"
-DG$ethnicity[DG$ses_ethnicity %in% c("Arab", "Arabe")] <- "Arabic"
-DG$ethnicity[DG$ses_ethnicity %in% c("Hispanic", "Hispanique")] <- "Hispanic"
-DG$ethnicity[DG$ses_ethnicity == "Autochtone"] <- "Indigenous"
-DG$ethnicity[DG$ses_ethnicity %in% c("Autre", "Other")] <- "Other"
-table(DG$ethnicity, useNA = "always")
+DG$ethn <- NA
+DG$ethn[DG$ses_ethn %in% c("Blanc", "White")] <- "White"
+DG$ethn[DG$ses_ethn == "Noir"] <- "Black"
+DG$ethn[DG$ses_ethn %in% c("Asian", "Asiatique")] <- "Asian"
+DG$ethn[DG$ses_ethn %in% c("Arab", "Arabe")] <- "Arabic"
+DG$ethn[DG$ses_ethn %in% c("Hispanic", "Hispanique")] <- "Hispanic"
+DG$ethn[DG$ses_ethn == "Autochtone"] <- "Indigenous"
+DG$ethn[DG$ses_ethn %in% c("Autre", "Other")] <- "Other"
+table(DG$ethn, useNA = "always")
 DG$white <- 0
-DG$white[DG$ethnicity == "White"] <- 1
-DG$white[is.na(DG$ethnicity)] <- NA
+DG$white[DG$ethn == "White"] <- 1
+DG$white[is.na(DG$ethn)] <- NA
 table(DG$white, useNA = "always")
 DG$white <- 0
-DG$white[DG$ses_ethnicity %in% c("Blanc", "White")] <- 1
-DG$white[is.na(DG$ses_ethnicity) | DG$ses_ethnicity == ""] <- NA
+DG$white[DG$ses_ethn %in% c("Blanc", "White")] <- 1
+DG$white[is.na(DG$ses_ethn) | DG$ses_ethn == ""] <- NA
 DG$education <- DG$ses_education
 DG$educ_low <- NA
 DG$educ_low[DG$education %in% c(
@@ -1081,64 +1081,64 @@ CES19men <- filter(CES19, female == 0)
 CES19women <- filter(CES19, female == 1)
 
 CES21 <- readstata13::read.dta13("_data/CES/CES21/CES21.dta")
-CES21$ethnicity <- NA
-CES21$ethnicity[
+CES21$ethn <- NA
+CES21$ethn[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == 1 & CES21$cps21_vismin_10 == -99 &
     CES21$cps21_vismin_1 == -99] <- "White"
-CES21$ethnicity[
+CES21$ethn[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == 1 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
     CES21$cps21_vismin_1 == -99] <- "Black"
-CES21$ethnicity[
+CES21$ethn[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == 1 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
     CES21$cps21_vismin_1 == -99] <- "West Asian"
-CES21$ethnicity[
+CES21$ethn[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == 1 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
     CES21$cps21_vismin_1 == -99] <- "Southeast Asian"
-CES21$ethnicity[
+CES21$ethn[
   CES21$cps21_vismin_1 == 1 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
     CES21$cps21_vismin_1 == -99] <- "Arabic"
-CES21$ethnicity[
+CES21$ethn[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == 1 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
     CES21$cps21_vismin_1 == -99] <- "South Asian"
-CES21$ethnicity[
+CES21$ethn[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == 1 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
     CES21$cps21_vismin_1 == -99] <- "Hispanic"
-CES21$ethnicity[
+CES21$ethn[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == 1 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
     CES21$cps21_vismin_7 == -99 & CES21$cps21_vismin_8 == -99 &
     CES21$cps21_vismin_9 == -99 & CES21$cps21_vismin_10 == -99 &
     CES21$cps21_vismin_1 == -99] <- "Indigenous"
-CES21$ethnicity[
+CES21$ethn[
   CES21$cps21_vismin_1 == -99 & CES21$cps21_vismin_2 == -99 &
     CES21$cps21_vismin_3 == -99 & CES21$cps21_vismin_4 == -99 &
     CES21$cps21_vismin_5 == -99 & CES21$cps21_vismin_6 == -99 &
@@ -1171,19 +1171,19 @@ CES21$immig <- ifelse(CES21$cps21_bornin_canada == "Yes", 1,
 CES21$weight <- CES21$cps21_weight_general_all
 CES21men <- filter(CES21, female == 0)
 CES21women <- filter(CES21, female == 1)
-CES21white <- filter(CES21, ethnicity == "White")
-CES21black <- filter(CES21, ethnicity == "Black")
-CES21westasian <- filter(CES21, ethnicity == "West Asian")
-CES21southeastasian <- filter(CES21, ethnicity == "Southeast Asian")
-CES21arabic <- filter(CES21, ethnicity == "Arabic")
-CES21southasian <- filter(CES21, ethnicity == "South Asian")
-CES21hispanic <- filter(CES21, ethnicity == "Hispanic")
-CES21indigenous <- filter(CES21, ethnicity == "Indigenous")
-CES21other <- filter(CES21, ethnicity == "Other")
-CES21whitemen <- filter(CES21, female == 0 & ethnicity == "White")
-CES21whitewomen <- filter(CES21, female == 1 & ethnicity == "White")
-CES21nonwhitemen <- filter(CES21, female == 0 & ethnicity != "White")
-CES21nonwhitewomen <- filter(CES21, female == 1 & ethnicity != "White")
+CES21white <- filter(CES21, ethn == "White")
+CES21black <- filter(CES21, ethn == "Black")
+CES21westasian <- filter(CES21, ethn == "West Asian")
+CES21southeastasian <- filter(CES21, ethn == "Southeast Asian")
+CES21arabic <- filter(CES21, ethn == "Arabic")
+CES21southasian <- filter(CES21, ethn == "South Asian")
+CES21hispanic <- filter(CES21, ethn == "Hispanic")
+CES21indigenous <- filter(CES21, ethn == "Indigenous")
+CES21other <- filter(CES21, ethn == "Other")
+CES21whitemen <- filter(CES21, female == 0 & ethn == "White")
+CES21whitewomen <- filter(CES21, female == 1 & ethn == "White")
+CES21nonwhitemen <- filter(CES21, female == 0 & ethn != "White")
+CES21nonwhitewomen <- filter(CES21, female == 1 & ethn != "White")
 CES21immigrantmen <- filter(CES21, female == 0 & immig == 2)
 CES21immigrantwomen <- filter(CES21, female == 1 & immig == 2)
 CES21nonimmigrantmen <- filter(CES21, female == 0 & immig == 1)
@@ -1243,7 +1243,7 @@ prop.table(table(CES21$female))
 prop.table(table(CES21$lang))
 prop.table(table(CES21$education))
 prop.table(table(CES21$immig))
-prop.table(table(CES21$ethnicity))
+prop.table(table(CES21$ethn))
 cumsum(prop.table(table(CES21$income)))
 cumsum(prop.table(table(CES21$age)))
 prop.table(table(CES21$province))
@@ -1251,21 +1251,21 @@ summary(CES21$weight)
 
 #### 1.4 WVS ####
 WVS <- readRDS("_data/WVS/WVS_TimeSeries_1981_2022_Rds_v3_0.rds")
-WVS$ethnicity <- NA
-WVS$ethnicity[WVS$X051 == 124001] <- "White"
-WVS$ethnicity[WVS$X051 == 124002] <- "Black"
-WVS$ethnicity[WVS$X051 == 124003] <- "West Asian"
-WVS$ethnicity[WVS$X051 == 124004] <- "Southeast Asian"
-WVS$ethnicity[WVS$X051 == 124005] <- "Arabic"
-WVS$ethnicity[WVS$X051 == 124006] <- "South Asian"
-WVS$ethnicity[WVS$X051 == 124007] <- "Hispanic"
-WVS$ethnicity[WVS$X051 == 124008] <- "Indigenous"
-WVS$ethnicity[WVS$X051 == 124009] <- "Chinese"
-WVS$ethnicity[WVS$X051 == 124010] <- "Filipino"
-WVS$ethnicity[WVS$X051 == 124011] <- "Korean"
-WVS$ethnicity[WVS$X051 == 124012] <- "Japanese"
-WVS$ethnicity[WVS$X051 == 124999] <- "Other"
-WVS$ethnicity <- as.factor(WVS$ethnicity)
+WVS$ethn <- NA
+WVS$ethn[WVS$X051 == 124001] <- "White"
+WVS$ethn[WVS$X051 == 124002] <- "Black"
+WVS$ethn[WVS$X051 == 124003] <- "West Asian"
+WVS$ethn[WVS$X051 == 124004] <- "Southeast Asian"
+WVS$ethn[WVS$X051 == 124005] <- "Arabic"
+WVS$ethn[WVS$X051 == 124006] <- "South Asian"
+WVS$ethn[WVS$X051 == 124007] <- "Hispanic"
+WVS$ethn[WVS$X051 == 124008] <- "Indigenous"
+WVS$ethn[WVS$X051 == 124009] <- "Chinese"
+WVS$ethn[WVS$X051 == 124010] <- "Filipino"
+WVS$ethn[WVS$X051 == 124011] <- "Korean"
+WVS$ethn[WVS$X051 == 124012] <- "Japanese"
+WVS$ethn[WVS$X051 == 124999] <- "Other"
+WVS$ethn <- as.factor(WVS$ethn)
 WVS$female <- NA
 WVS$female[WVS$X001 == 1] <- 0
 WVS$female[WVS$X001 == 2] <- 1
@@ -1324,52 +1324,52 @@ length(table(WVSWave7$COUNTRY_ALPHA))
 WVSWave7$canada <- 0
 WVSWave7$canada[WVSWave7$COUNTRY_ALPHA == "CAN"] <- 1
 WVSCA <- filter(WVS, COUNTRY_ALPHA == "CAN")
-WVSCA90 <- filter(WVSCA, S020 == 1990) # no ethnicity variable
+WVSCA90 <- filter(WVSCA, S020 == 1990) # no ethn variable
 WVSCA90men <- filter(WVSCA90, female == 0)
 WVSCA90women <- filter(WVSCA90, female == 1)
 WVSCA00 <- filter(WVSCA, S020 == 2000)
 WVSCA00men <- filter(WVSCA00, female == 0)
 WVSCA00women <- filter(WVSCA00, female == 1)
-WVSCA00whitemen <- filter(WVSCA00, female == 0 & ethnicity == "white")
+WVSCA00whitemen <- filter(WVSCA00, female == 0 & ethn == "white")
 WVSCA00whitewomen <- filter(WVSCA00, female == 1 &
-                              ethnicity == "white")
+                              ethn == "white")
 WVSCA00nonwhitemen <- filter(WVSCA00, female == 0 &
-                               ethnicity != "white")
+                               ethn != "white")
 WVSCA00nonwhitewomen <- filter(WVSCA00, female == 1 &
-                                 ethnicity != "white")
+                                 ethn != "white")
 WVSCA06 <- filter(WVSCA, S020 == 2006)
 WVSCA06men <- filter(WVSCA06, female == 0)
 WVSCA06women <- filter(WVSCA06, female == 1)
-WVSCA06whitemen <- filter(WVSCA06, female == 0 & ethnicity == "white")
+WVSCA06whitemen <- filter(WVSCA06, female == 0 & ethn == "white")
 WVSCA06whitewomen <- filter(WVSCA06, female == 1 &
-                              ethnicity == "white")
+                              ethn == "white")
 WVSCA06nonwhitemen <- filter(WVSCA06, female == 0 &
-                               ethnicity != "white")
+                               ethn != "white")
 WVSCA06nonwhitewomen <- filter(WVSCA06, female == 1 &
-                                 ethnicity != "white")
+                                 ethn != "white")
 WVSCA20 <- filter(WVSCA, S020 == 2020)
 WVSCA20men <- filter(WVSCA20, female == 0)
 WVSCA20women <- filter(WVSCA20, female == 1)
-WVSCA20white <- filter(WVSCA20, ethnicity == "white")
-WVSCA20black <- filter(WVSCA20, ethnicity == "black")
-WVSCA20westasian <- filter(WVSCA20, ethnicity == "westasian")
-WVSCA20southeastasian <- filter(WVSCA20, ethnicity == "southeastasian")
-WVSCA20arabic <- filter(WVSCA20, ethnicity == "arabic")
-WVSCA20southasian <- filter(WVSCA20, ethnicity == "southasian")
-WVSCA20hispanic <- filter(WVSCA20, ethnicity == "hispanic")
-WVSCA20indigenous <- filter(WVSCA20, ethnicity == "indigenous")
-WVSCA20chinese <- filter(WVSCA20, ethnicity == "chinese")
-WVSCA20filipino <- filter(WVSCA20, ethnicity == "filipino")
-WVSCA20korean <- filter(WVSCA20, ethnicity == "korean")
-WVSCA20japanese <- filter(WVSCA20, ethnicity == "japanese")
-WVSCA20other <- filter(WVSCA20, ethnicity == "other")
-WVSCA20whitemen <- filter(WVSCA20, female == 0 & ethnicity == "white")
+WVSCA20white <- filter(WVSCA20, ethn == "white")
+WVSCA20black <- filter(WVSCA20, ethn == "black")
+WVSCA20westasian <- filter(WVSCA20, ethn == "westasian")
+WVSCA20southeastasian <- filter(WVSCA20, ethn == "southeastasian")
+WVSCA20arabic <- filter(WVSCA20, ethn == "arabic")
+WVSCA20southasian <- filter(WVSCA20, ethn == "southasian")
+WVSCA20hispanic <- filter(WVSCA20, ethn == "hispanic")
+WVSCA20indigenous <- filter(WVSCA20, ethn == "indigenous")
+WVSCA20chinese <- filter(WVSCA20, ethn == "chinese")
+WVSCA20filipino <- filter(WVSCA20, ethn == "filipino")
+WVSCA20korean <- filter(WVSCA20, ethn == "korean")
+WVSCA20japanese <- filter(WVSCA20, ethn == "japanese")
+WVSCA20other <- filter(WVSCA20, ethn == "other")
+WVSCA20whitemen <- filter(WVSCA20, female == 0 & ethn == "white")
 WVSCA20whitewomen <- filter(WVSCA20, female == 1 &
-                              ethnicity == "white")
+                              ethn == "white")
 WVSCA20nonwhitemen <- filter(WVSCA20, female == 0 &
-                               ethnicity != "white")
+                               ethn != "white")
 WVSCA20nonwhitewomen <- filter(WVSCA20, female == 1 &
-                                 ethnicity != "white")
+                                 ethn != "white")
 WVSCA20immigrantmen <- filter(WVSCA20, female == 0 & immig == 2)
 WVSCA20immigrantwomen <- filter(WVSCA20, female == 1 & immig == 2)
 WVSCA20nonimmigrantmen <- filter(WVSCA20, female == 0 & immig == 1)
@@ -1378,7 +1378,7 @@ prop.table(table(WVSCA20$female))
 prop.table(table(WVSCA20$lang))
 prop.table(table(WVSCA20$education))
 prop.table(table(WVSCA20$immig))
-prop.table(table(WVSCA20$ethnicity))
+prop.table(table(WVSCA20$ethn))
 cumsum(prop.table(table(WVSCA20$age)))
 prop.table(table(WVSCA20$province))
 summary(WVSCA20$weight)
@@ -1576,19 +1576,19 @@ GSS20$province[GSS20$province == 46] <- "Manitoba"
 GSS20$province[GSS20$province == 47] <- "Saskatchewan"
 GSS20$province[GSS20$province == 48] <- "Alberta"
 GSS20$province[GSS20$province == 59] <- "British Columbia"
-GSS20$ethnicity <- NA
-GSS20$ethnicity[GSS20$VISMIN_C == 3] <- "Black"
-GSS20$ethnicity[GSS20$VISMIN_C == 8] <- "West Asian"
-GSS20$ethnicity[GSS20$VISMIN_C == 7] <- "Southeast Asian"
-GSS20$ethnicity[GSS20$VISMIN_C == 5] <- "Arabic"
-GSS20$ethnicity[GSS20$VISMIN_C == 1] <- "South Asian"
-GSS20$ethnicity[GSS20$VISMIN_C == 6] <- "Hispanic"
-GSS20$ethnicity[GSS20$VISMIN_C == 2] <- "Chinese"
-GSS20$ethnicity[GSS20$VISMIN_C == 4] <- "Filipino"
-GSS20$ethnicity[GSS20$VISMIN_C == 9] <- "Other"
-GSS20$ethnicity[GSS20$VISMIN_C == 10] <- "White"
-GSS20$ethnicity[GSS20$ABM_01A == 2] <- "Indigenous"
-GSS20$ethnicity <- as.factor(GSS20$ethnicity)
+GSS20$ethn <- NA
+GSS20$ethn[GSS20$VISMIN_C == 3] <- "Black"
+GSS20$ethn[GSS20$VISMIN_C == 8] <- "West Asian"
+GSS20$ethn[GSS20$VISMIN_C == 7] <- "Southeast Asian"
+GSS20$ethn[GSS20$VISMIN_C == 5] <- "Arabic"
+GSS20$ethn[GSS20$VISMIN_C == 1] <- "South Asian"
+GSS20$ethn[GSS20$VISMIN_C == 6] <- "Hispanic"
+GSS20$ethn[GSS20$VISMIN_C == 2] <- "Chinese"
+GSS20$ethn[GSS20$VISMIN_C == 4] <- "Filipino"
+GSS20$ethn[GSS20$VISMIN_C == 9] <- "Other"
+GSS20$ethn[GSS20$VISMIN_C == 10] <- "White"
+GSS20$ethn[GSS20$ABM_01A == 2] <- "Indigenous"
+GSS20$ethn <- as.factor(GSS20$ethn)
 GSS20$weight <- GSS20$WGHT_PER # 10.0000 - 32631.0308
 prop.table(table(GSS20$female))
 prop.table(table(GSS20$lang))
@@ -1597,7 +1597,7 @@ prop.table(table(GSS20$immig))
 cumsum(prop.table(table(GSS20$income)))
 cumsum(prop.table(table(GSS20$age)))
 prop.table(table(GSS20$province))
-prop.table(table(GSS20$ethnicity))
+prop.table(table(GSS20$ethn))
 summary(GSS20$weight)
 
 ##### 2. Descriptive statistics #####
@@ -1612,11 +1612,11 @@ PlotAge <- ggplot(CCPIS, aes(x = age)) +
   geom_histogram(binwidth = 1) +
   labs(x = "Age", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotRace <- CCPIS |>
-  filter(!is.na(ethnicity)) |>
-  ggplot(aes(x = ethnicity)) +
+PlotEthnicity <- CCPIS |>
+  filter(!is.na(ethn)) |>
+  ggplot(aes(x = ethn)) +
   geom_bar() +
-  labs(x = "Race", y = "Frequency") +
+  labs(x = "Ethnicity", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotLanguage <- CCPIS |>
@@ -1679,7 +1679,7 @@ PlotInfluencerGender <- filter(CCPIS, !is.na(influencer_gender_alt) &
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
-  PlotGender, PlotAge, PlotRace, PlotLanguage, PlotImmigrant, PlotAgentic,
+  PlotGender, PlotAge, PlotEthnicity, PlotLanguage, PlotImmigrant, PlotAgentic,
   PlotCommunal, PlotFamSituation, nrow = 3, ncol = 3),
   "_graphs/CCPISDescriptive1.pdf", height = 8.5, width = 11)
 
@@ -1764,11 +1764,11 @@ PlotLanguageDG <- DG |>
   geom_bar() +
   labs(x = "Language of the survey", y = "Frequency") +
   theme(text = element_text(family = "CM Roman"))
-PlotRaceDG <- DG |>
-  filter(!is.na(ethnicity)) |>
-  ggplot(aes(x = ethnicity)) +
+PlotEthnicityDG <- DG |>
+  filter(!is.na(ethn)) |>
+  ggplot(aes(x = ethn)) +
   geom_bar() +
-  labs(x = "Race", y = "Frequency") +
+  labs(x = "Ethnicity", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotImmigrantDG <- DG |>
@@ -1793,7 +1793,7 @@ PlotEducationDG <- DG |>
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
-  PlotGenderDG, PlotAgeDG, PlotRaceDG, PlotLanguageDG, PlotImmigrantDG,
+  PlotGenderDG, PlotAgeDG, PlotEthnicityDG, PlotLanguageDG, PlotImmigrantDG,
   PlotIncomeDG, PlotEducationDG, nrow = 3, ncol = 3),
   "_graphs/DGDescriptive1.pdf", height = 8.5, width = 11)
 
@@ -1845,8 +1845,8 @@ PlotProvinceCES <- CES21 |>
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEthnicityCES <- CES21 |>
-  filter(!is.na(ethnicity)) |>
-  ggplot(aes(x = as.factor(ethnicity))) +
+  filter(!is.na(ethn)) |>
+  ggplot(aes(x = as.factor(ethn))) +
   geom_bar() +
   labs(x = "Ethnicity", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
@@ -1897,8 +1897,8 @@ PlotProvinceWVS <- WVSCA20 |>
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEthnicityWVS <- WVSCA20 |>
-  filter(!is.na(ethnicity)) |>
-  ggplot(aes(x = as.factor(ethnicity))) +
+  filter(!is.na(ethn)) |>
+  ggplot(aes(x = as.factor(ethn))) +
   geom_bar() +
   labs(x = "Ethnicity", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
@@ -1956,8 +1956,8 @@ PlotProvinceGSS <- GSS20 |>
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEthnicityGSS <- GSS20 |>
-  filter(!is.na(ethnicity)) |>
-  ggplot(aes(x = as.factor(ethnicity))) +
+  filter(!is.na(ethn)) |>
+  ggplot(aes(x = as.factor(ethn))) +
   geom_bar() +
   labs(x = "Ethnicity", y = "Frequency") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
@@ -2159,7 +2159,7 @@ modelsummary::modelsummary(models = list(
     "female1" = "Gender (1 = girl)",
     "age" = "Age",
     "age_squared" = "Age squared",
-    "white" = "Race (1 = white)",
+    "white" = "Ethnicity (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
@@ -2257,7 +2257,7 @@ modelsummary::modelsummary(models = list(
     "female1" = "Gender (1 = girl)",
     "age" = "Age",
     "age_squared" = "Age squared",
-    "white" = "Race (1 = white)",
+    "white" = "Ethnicity (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
@@ -2355,7 +2355,7 @@ modelsummary::modelsummary(models = list(
     "female1" = "Gender (1 = girl)",
     "age" = "Age",
     "age_squared" = "Age squared",
-    "white" = "Race (1 = white)",
+    "white" = "Ethnicity (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
@@ -2506,7 +2506,7 @@ modelsummary::modelsummary(models = list(
     "female1" = "Gender (1 = women)",
     "age" = "Age",
     "age_squared" = "Age squared",
-    "white" = "Race (1 = white)",
+    "white" = "Ethnicity (1 = white)",
     "immig" = "Immigrant",
     "langFrancophone" = "French spoken at home",
     "income_mid" = "Income between \\$60,000 and \\$150,000",
@@ -2787,7 +2787,7 @@ summary(lm(data = InterestWVSGenderData, formula = interest ~ female))
 # in all WVS waves: women's political interest = 47%;
 # men's political interest = 56%; p<0.05
 
-### 3.1.3 Political interest by year, gender & race (CES & WVS) ####
+### 3.1.3 Political interest by year, gender & ethnicity (CES & WVS) ####
 GenderEthnicityInterest <- data.frame(
   group = as.factor(c(rep(c("White men", "White women",
                             "Nonwhite men", "Nonwhite women"), 3),
@@ -2896,9 +2896,9 @@ ggplot(GenderEthnicityInterest, aes(x = group, y = interest,
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/InterestWaveGroup.pdf", height = 4.25, width = 5.5)
 
-### 3.1.4 Political interest by race (2017-22 CES & WVS) ####
+### 3.1.4 Political interest by ethnicity (2017-22 CES & WVS) ####
 EthnicityInterestWVS <- data.frame(
-  ethnicity = as.factor(c("White", "Black", "West Asian",
+  ethn = as.factor(c("White", "Black", "West Asian",
                           "Southeast Asian", "Arabic", "South Asian",
                           "Hispanic", "Indigenous", "Chinese",
                           "Filipino", "Korean", "Japanese", "Other")),
@@ -2947,7 +2947,7 @@ EthnicityInterestWVS$interest.lb <- EthnicityInterestWVS$interest +
 EthnicityInterestWVS$interest.ub <- EthnicityInterestWVS$interest +
   qnorm(0.975) * EthnicityInterestWVS$interest.se
 EthnicityInterestCES <- data.frame(
-  ethnicity = as.factor(c("White", "Black", "West Asian",
+  ethn = as.factor(c("White", "Black", "West Asian",
                           "Southeast Asian", "Arabic", "South Asian",
                           "Hispanic", "Indigenous", "Other")),
   interest = c(Hmisc::wtd.mean(CES21white$interest,
@@ -2984,12 +2984,12 @@ EthnicityInterestCES$interest.ub <- EthnicityInterestCES$interest +
   qnorm(0.975) * EthnicityInterestCES$interest.se
 EthnicityInterest <- rbind(EthnicityInterestCES, EthnicityInterestWVS)
 EthnicityInterest$survey <- c(rep("CES 2021", 9), rep("WVS 2020", 13))
-EthnicityInterest$ethnicity <- factor(
-  EthnicityInterest$ethnicity,
+EthnicityInterest$ethn <- factor(
+  EthnicityInterest$ethn,
   levels = c("Arabic", "Black", "Chinese", "Filipino", "Hispanic",
              "Indigenous", "Japanese", "Korean", "South Asian",
              "Southeast Asian", "West Asian", "White", "Other"))
-ggplot(EthnicityInterest, aes(x = ethnicity, y = interest,
+ggplot(EthnicityInterest, aes(x = ethn, y = interest,
                               color = survey)) +
   geom_point(position = position_dodge(width = 0.75), size = 0.75) +
   geom_errorbar(aes(ymin = interest.lb, ymax = interest.ub),
@@ -3160,7 +3160,7 @@ modelsummary::modelsummary(models = list(
     "gender_parent_partisan" = "Mother discusses topic more than father",
     "age" = "Age",
     "age_squared" = "Age squared",
-    "white" = "Race (1 = white)",
+    "white" = "Ethnicity (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
@@ -3328,7 +3328,7 @@ modelsummary::modelsummary(models = list(
                     "Main topic discussed with mother?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -3495,7 +3495,7 @@ modelsummary::modelsummary(models = list(
                     "Main topic discussed with father?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -3697,7 +3697,7 @@ modelsummary::modelsummary(models = list(
                     "Main topic discussed with female friends?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -3866,7 +3866,7 @@ modelsummary::modelsummary(models = list(
                     "Main topic discussed with male friends?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -4366,7 +4366,7 @@ modelsummary::modelsummary(models = list(
     "gender_parent_partisan" = "Mother discusses topic more than father",
     "age" = "Age",
     "age_squared" = "Age squared",
-    "white" = "Race (1 = white)",
+    "white" = "Ethnicity (1 = white)",
     "immig" = "Immigrant",
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
@@ -4406,7 +4406,7 @@ modelsummary::modelsummary(models = list(
                     "Main topic discussed with mother?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -4445,7 +4445,7 @@ modelsummary::modelsummary(models = list(
                     "Main topic discussed with father?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -4484,7 +4484,7 @@ modelsummary::modelsummary(models = list(
                     "Main topic discussed with female friends?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -4523,7 +4523,7 @@ modelsummary::modelsummary(models = list(
                     "Main topic discussed with male friends?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -4549,7 +4549,7 @@ modelsummary::modelsummary(models = list(
   coef_rename = c("female1" = "Gender (1 = girl)",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
@@ -4575,7 +4575,7 @@ modelsummary::modelsummary(models = list(
   coef_rename = c("female1" = "Gender (1 = girl)",
                   "age" = "Age",
                   "age_squared" = "Age squared",
-                  "white" = "Race (1 = white)",
+                  "white" = "Ethnicity (1 = white)",
                   "immig" = "Immigrant",
                   "langAnglophone" = "English spoken at home",
                   "langFrancophone" = "French spoken at home",
