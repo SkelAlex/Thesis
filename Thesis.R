@@ -3202,6 +3202,151 @@ ModelParentB <- nlme::lme(data = CCPISBoysParentLonger, fixed =
 ModelParentG <- nlme::lme(data = CCPISGirlsParentLonger, fixed =
                             interest_all ~ value,
                           random = ~ 1 | Class, na.action = na.omit)
+get_ci <- function(model) {
+  mod_int <- intervals(model)
+  c(mod_int[1]$fixed[2], mod_int[1]$fixed[4], mod_int[1]$fixed[6])
+}
+CCPISPred <- data.frame(pred_health_b = get_ci(Model10))
+CCPISPred$pred_health_g <- get_ci(Model11)
+CCPISPred$pred_foreign_b <- get_ci(Model12)
+CCPISPred$pred_foreign_g <- get_ci(Model13)
+CCPISPred$pred_law_b <- get_ci(Model14)
+CCPISPred$pred_law_g <- get_ci(Model15)
+CCPISPred$pred_education_b <- get_ci(Model16)
+CCPISPred$pred_education_g <- get_ci(Model17)
+CCPISPred$pred_partisan_b <- get_ci(Model18)
+CCPISPred$pred_partisan_g <- get_ci(Model19)
+CCPISPred$pred_all_b <- get_ci(ModelParentB)
+CCPISPred$pred_all_g <- get_ci(ModelParentG)
+rownames(CCPISPred) <- c("ci_l", "pred", "ci_u")
+CCPISPred <- as.data.frame(t(CCPISPred))
+CCPISPred$gender <- rep(c("Boys", "Girls"), 6)
+CCPISPred$issue <- c(rep("Health care", 2),
+                     rep("International affairs", 2),
+                     rep("Law and crime", 2),
+                     rep("Education", 2),
+                     rep("Partisan politics", 2),
+                     rep("All topics", 2))
+ggplot(CCPISPred, aes(x = pred, y = issue)) +
+  geom_point() +
+  facet_wrap(~ gender) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous("\nGender of parent who discusses that topic the most",
+                     breaks = c(-1, 0, 1), labels = c(
+                     "-1\nFather", "0\nBoth equally",
+                     "1\nMother")) +
+  scale_y_discrete("Issues") +
+  theme(axis.text.y = element_text(color = c("red", rep("black", 5))))
+ggsave("_graphs/CCPISPred.pdf", height = 4.25, width = 5.5)
+
+# CCPISPred <- data.frame(value = c(0, 1),
+#                         gender_parent_health = c(0, 1),
+#                         gender_parent_foreign = c(0, 1),
+#                         gender_parent_law = c(0, 1),
+#                         gender_parent_education = c(0, 1),
+#                         gender_parent_partisan = c(0, 1))
+# #remotes::install_github("bsurial/bernr")
+# predictlme <- function(mod_name) {
+#   bernr::bolker_ci(mod_name, newdat = CCPISPred, conf_level = 0.95)$pred
+# }
+# predictlmese <- function(mod_name) {
+#   bernr::bolker_ci(mod_name, newdat = CCPISPred, conf_level = 0.95)$se
+# }
+# CCPISPred$pred_health_b <- predictlme(Model10)
+# CCPISPred$pred_health_b_se <- predictlmese(Model10)
+# CCPISPred$pred_health_g <- predictlme(Model11)
+# CCPISPred$pred_health_g_se <- predictlmese(Model11)
+# CCPISPred$pred_foreign_b <- predictlme(Model12)
+# CCPISPred$pred_foreign_b_se <- predictlmese(Model12)
+# CCPISPred$pred_foreign_g <- predictlme(Model13)
+# CCPISPred$pred_foreign_g_se <- predictlmese(Model13)
+# CCPISPred$pred_law_b <- predictlme(Model14)
+# CCPISPred$pred_law_b_se <- predictlmese(Model14)
+# CCPISPred$pred_law_g <- predictlme(Model15)
+# CCPISPred$pred_law_g_se <- predictlmese(Model15)
+# CCPISPred$pred_education_b <- predictlme(Model16)
+# CCPISPred$pred_education_b_se <- predictlmese(Model16)
+# CCPISPred$pred_education_g <- predictlme(Model17)
+# CCPISPred$pred_education_g_se <- predictlmese(Model17)
+# CCPISPred$pred_partisan_b <- predictlme(Model18)
+# CCPISPred$pred_partisan_b_se <- predictlmese(Model18)
+# CCPISPred$pred_partisan_g <- predictlme(Model19)
+# CCPISPred$pred_partisan_g_se <- predictlmese(Model19)
+# CCPISPred$pred_all_b <- predictlme(ModelParentB)
+# CCPISPred$pred_all_b_se <- predictlmese(ModelParentB)
+# CCPISPred$pred_all_g <- predictlme(ModelParentG)
+# CCPISPred$pred_all_g_se <- predictlmese(ModelParentG)
+# CCPISPred <- rbind(CCPISPred, CCPISPred)
+# CCPISPred$gender <- c(rep("male", nrow(CCPISPred) / 2),
+#                       rep("female", nrow(CCPISPred) / 2))
+# CCPISPred$id <- 1:nrow(CCPISPred)
+# CCPISLong <- pivot_longer(CCPISPred, cols = 1:6)
+# create_predorse_column <- function(
+#   original1, original2, original3, original4, original5, original6,
+#   original7, original8, original9, original10, original11, original12) {
+#   case_when(
+#     CCPISLong$name == "value" & CCPISLong$gender == "male" ~ original1,
+#     CCPISLong$name == "value" & CCPISLong$gender == "female" ~ original2,
+#     CCPISLong$name == "gender_parent_health" & CCPISLong$gender == "male" ~
+#       original3,
+#     CCPISLong$name == "gender_parent_health" & CCPISLong$gender == "female" ~
+#       original4,
+#     CCPISLong$name == "gender_parent_foreign" & CCPISLong$gender == "male" ~
+#       original5,
+#     CCPISLong$name == "gender_parent_foreign" & CCPISLong$gender == "female" ~
+#       original6,
+#     CCPISLong$name == "gender_parent_law" & CCPISLong$gender == "male" ~
+#       original7,
+#     CCPISLong$name == "gender_parent_law" & CCPISLong$gender == "female" ~
+#       original8,
+#     CCPISLong$name == "gender_parent_education" & CCPISLong$gender == "male" ~
+#       original9,
+#     CCPISLong$name == "gender_parent_education" & CCPISLong$gender == "female" ~
+#       original10,
+#     CCPISLong$name == "gender_parent_partisan" & CCPISLong$gender == "male" ~
+#       original11,
+#     CCPISLong$name == "gender_parent_partisan" & CCPISLong$gender == "female" ~
+#       original12)
+#   } 
+# CCPISLong$pred <- create_predorse_column(
+#   CCPISLong$pred_all_b, CCPISLong$pred_all_g, CCPISLong$pred_health_b,
+#   CCPISLong$pred_health_g, CCPISLong$pred_foreign_b, CCPISLong$pred_foreign_g,
+#   CCPISLong$pred_law_b, CCPISLong$pred_law_g, CCPISLong$pred_education_b,
+#   CCPISLong$pred_education_g, CCPISLong$pred_partisan_b,
+#   CCPISLong$pred_partisan_g)
+# CCPISLong$se <- create_predorse_column(
+#   CCPISLong$pred_all_b_se, CCPISLong$pred_all_g_se,
+#   CCPISLong$pred_health_b_se, CCPISLong$pred_health_g_se,
+#   CCPISLong$pred_foreign_b_se, CCPISLong$pred_foreign_g_se,
+#   CCPISLong$pred_law_b_se, CCPISLong$pred_law_g_se,
+#    CCPISLong$pred_education_b_se, CCPISLong$pred_education_g_se,
+#    CCPISLong$pred_partisan_b_se, CCPISLong$pred_partisan_g_se)
+# create_graph_pred <- function(gender) {
+#   filter(CCPISLong, gender == {{gender}}) |>
+#     ggplot(aes(x = value, y = pred)) +
+#     geom_line() +
+#     geom_ribbon(aes(ymin = pred - qnorm(0.975) * se, ymax = pred +
+#                 qnorm(0.975) * se), alpha = 0.3) +  # Add 95% confidence interval
+#     facet_wrap(~ name, labeller = labeller(name = c(
+#       "gender_parent_health" = "Health care",
+#       "gender_parent_foreign" = "International affairs",
+#       "gender_parent_law" = "Law and crime",
+#       "gender_parent_education" = "Education",
+#       "gender_parent_partisan" = "Partisan politics",
+#       "value" = "All"))) +
+#     scale_y_continuous("Predicted level of interest (0-10)", limits = c(0, 10),
+#                        breaks = seq(0, 10, by = 2)) +
+#     scale_x_continuous("Mother discusses topic more than father",
+#                        breaks = c(0.2, 0.8), labels = c("No", "Yes"))
+# }
+# create_graph_pred("female")
+# ggsave("_graphs/CCPISGirlPred.pdf", height = 4.25, width = 5.5)
+# create_graph_pred("male")
+# ggsave("_graphs/CCPISBoyPred.pdf", height = 4.25, width = 5.5)
+# PlotMale <- cbind(ggplot_build(create_graph_pred("male"))$data[[1]],
+#                   ggplot_build(create_graph_pred("male"))$data[[2]])
+
 Models1 <- tibble::tribble(~a, ~b, ~c, ~d, ~e, ~f, ~g,
                            "**Results among boys**", '', '', '', '', '', '',
                            '**Results among girls**', '', '', '', '', '', '')
