@@ -21,6 +21,9 @@ book:
 bibliography: Thesis.bib
 filters:
   - section-bibliographies
+header-includes:
+  - \widowpenalty10000
+  - \clubpenalty10000
 format:
   pdf:
     documentclass: scrreprt

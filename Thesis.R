@@ -509,17 +509,25 @@ ggplot(data.frame(AgencyVariableNames, AgencyFactorLoadings),
         panel.grid = element_blank(),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/AgencyScale.pdf", width = 11, height = 4.25)
-CCPIS$agentic <- (
-  CCPIS$sexrole_independent * AgencyFactorLoadings[1] +
-    CCPIS$sexrole_passive * AgencyFactorLoadings[2] +
-    CCPIS$sexrole_competitive * AgencyFactorLoadings[3] +
-    CCPIS$sexrole_easydecisions_rev * AgencyFactorLoadings[4] +
-    CCPIS$sexrole_giveup * AgencyFactorLoadings[5] +
-    CCPIS$sexrole_selfconfident * AgencyFactorLoadings[6] +
-    CCPIS$sexrole_inferior * AgencyFactorLoadings[7] +
-    CCPIS$sexrole_underpressure * AgencyFactorLoadings[8]) /
-  sum(AgencyFactorLoadings) # 0 = not agentic, 1 = agentic
-length(na.omit(CCPIS$agentic)) / nrow(CCPIS) * 100 # 72% available data
+
+delete_rows_na <- function(row, loadings) {
+  if (sum(is.na(row)) <= 5) {
+    # Perform element-wise multiplication for each variable and its loading
+    variable_contributions <- row * loadings
+    return(sum(variable_contributions, na.rm = TRUE) /
+           sum(loadings, na.rm = TRUE))
+  } else {
+    return(NA)
+  }
+}
+# Apply the function to each row and create a new column agentic
+agencyVariables <- c("sexrole_independent", "sexrole_passive",
+                     "sexrole_competitive", "sexrole_easydecisions_rev",
+                     "sexrole_giveup", "sexrole_selfconfident",
+                     "sexrole_inferior", "sexrole_underpressure")
+CCPIS$agentic <- apply(CCPIS[agencyVariables], 1, delete_rows_na,
+                       loadings = AgencyFactorLoadings)
+length(na.omit(CCPIS$agentic)) / nrow(CCPIS) * 100 # 90% available data
 CommunalityScale <- na.omit(CCPIS[, c(
   "sexrole_emotional", "sexrole_devote", "sexrole_gentle", "sexrole_helpful",
   "sexrole_kind", "sexrole_awarefeelings", "sexrole_understanding",
@@ -559,17 +567,15 @@ ggplot(data.frame(CommunalityVariableNames, CommunalityFactorLoadings),
         panel.grid = element_blank(),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/CommunalityScale.pdf", width = 11, height = 4.25)
-CCPIS$communal <- (
-  CCPIS$sexrole_emotional * CommunalityFactorLoadings[1] +
-    CCPIS$sexrole_devote * CommunalityFactorLoadings[2] +
-    CCPIS$sexrole_gentle * CommunalityFactorLoadings[3] +
-    CCPIS$sexrole_helpful * CommunalityFactorLoadings[4] +
-    CCPIS$sexrole_kind * CommunalityFactorLoadings[5] +
-    CCPIS$sexrole_awarefeelings * CommunalityFactorLoadings[6] +
-    CCPIS$sexrole_understanding * CommunalityFactorLoadings[7] +
-    CCPIS$sexrole_warm * CommunalityFactorLoadings[8]) /
-  sum(CommunalityFactorLoadings) # 0 = not communal, 1 = communal
-length(na.omit(CCPIS$communal)) / nrow(CCPIS) * 100 # 73% available data
+# Apply the function to each row and create a new column agentic
+communalVariables <- c("sexrole_emotional", "sexrole_devote", "sexrole_gentle",
+                       "sexrole_helpful", "sexrole_kind",
+                       "sexrole_awarefeelings", "sexrole_understanding",
+                       "sexrole_warm")
+CCPIS$communal <- apply(CCPIS[communalVariables], 1, delete_rows_na,
+                        loadings = CommunalityFactorLoadings)
+ # 0 = not communal, 1 = communal
+length(na.omit(CCPIS$communal)) / nrow(CCPIS) * 100 # 89% available data
 CCPISBoys <- filter(CCPIS, female == 0)
 CCPISGirls <- filter(CCPIS, female == 1)
 CCPISYoung <- CCPIS |> filter(age > 9 & age <= 15)
@@ -2065,9 +2071,10 @@ summary(Model1)
 # girls' political interest = 4.1/10; boys' political interest = 4.6/10; p<0.05
 Model01 <- nlme::lme(data = CCPIS, fixed = interest ~ female * age +
                        age_squared + female * white + immig + lang + agentic +
-                       communal + school, random = ~ 1 | Class,
+                       communal, random = ~ 1 | Class,
                      na.action = na.omit)
 summary(Model01)
+car::vif(Model01)
 ModelHealth <- nlme::lme(data = CCPIS, fixed = interest_health ~ 1,
                     random = ~ 1 | Class, na.action = na.omit) # empty model
 ModelHealtheffects <- nlme::VarCorr(ModelHealth)
@@ -2079,7 +2086,7 @@ Model2 <- nlme::lme(data = CCPIS, fixed = interest_health ~ female,
 summary(Model2) # N.S.
 Model02 <- nlme::lme(data = CCPIS, fixed = interest_health ~ female * age +
                        age_squared + female * white + immig + lang + agentic +
-                       communal + school, random = ~ 1 | Class,
+                       communal, random = ~ 1 | Class,
                      na.action = na.omit)
 ModelForeign <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ 1,
                          random = ~ 1 | Class, na.action = na.omit) # empty model
@@ -2093,8 +2100,9 @@ Model3 <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ female,
 summary(Model3) # p<0.001
 Model03 <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ female * age +
                        age_squared + female * white + immig + lang + agentic +
-                       communal + school, random = ~ 1 | Class,
+                       communal, random = ~ 1 | Class,
                      na.action = na.omit)
+car::vif(Model03)
 ModelLaw <- nlme::lme(data = CCPIS, fixed = interest_law ~ 1, # empty model
                           random = ~ 1 | Class, na.action = na.omit)
 ModelLaweffects <- nlme::VarCorr(ModelLaw)
@@ -2107,7 +2115,7 @@ Model4 <- nlme::lme(data = CCPIS, fixed = interest_law ~ female,
 summary(Model4) # p<0.05
 Model04 <- nlme::lme(data = CCPIS, fixed = interest_law ~ female * age +
                        age_squared + female * white + immig + lang + agentic +
-                       communal + school, random = ~ 1 | Class,
+                       communal, random = ~ 1 | Class,
                      na.action = na.omit)
 ModelEducation <- nlme::lme(data = CCPIS, fixed = interest_education ~ 1,
                           random = ~ 1 | Class, na.action = na.omit) # empty model
@@ -2120,7 +2128,7 @@ Model5 <- nlme::lme(data = CCPIS, fixed = interest_education ~ female,
 summary(Model5) # N.S.
 Model05 <- nlme::lme(data = CCPIS, fixed = interest_education ~
                        female * age + age_squared + female * white + immig +
-                       lang + agentic + communal + school, random = ~ 1 |
+                       lang + agentic + communal, random = ~ 1 |
                        Class, na.action = na.omit)
 ModelPartisan <- nlme::lme(data = CCPIS, fixed = interest_partisan ~ 1,
                           random = ~ 1 | Class, na.action = na.omit) # empty model
@@ -2134,31 +2142,22 @@ Model6 <- nlme::lme(data = CCPIS, fixed = interest_partisan ~ female,
 summary(Model6) # p<0.001
 Model06 <- nlme::lme(data = CCPIS, fixed = interest_partisan ~ female *
                        age + age_squared + female * white + immig + lang +
-                       agentic + communal + school, random = ~ 1 | Class,
+                       agentic + communal, random = ~ 1 | Class,
                      na.action = na.omit)
 modelsummary::modelsummary(models = list(
-  "Politics (general)" = Model1, "Health care" = Model2,
-  "International affairs" = Model3, "Law and crime" = Model4,
-  "Education" = Model5, "Partisan politics" = Model6),
-  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  "Without Controls" = list(
+    "Politics (general)" = Model1, "Health care" = Model2,
+    "International affairs" = Model3, "Law and crime" = Model4,
+    "Education" = Model5, "Partisan politics" = Model6),
+  "With Controls" = list(
+    "Politics (general)" = Model01, "Health care" = Model02,
+    "International affairs" = Model03, "Law and crime" = Model04,
+    "Education" = Model05, "Partisan politics" = Model06)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
-            "Controls: None"),
-  title = paste("Interest in topic by gender {#tbl-lmeInterestCCPIS}"),
-  coef_rename = c("female1" = "Gender (1 = girl)"))
-modelsummary::modelsummary(models = list(
-  "Politics (general)" = Model01, "Health care" = Model02,
-  "International affairs" = Model03, "Law and crime" = Model04,
-  "Education" = Model05, "Partisan politics" = Model06),
-  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
-  notes = c("Method: Multilevel linear regression",
-            "Fixed Effects: Classroom",
-            #"Controls: Socio-demographic, personality traits#, schools",
-            "Reference Category for Language: Other languages spoken at home",
-            "Reference Category for School: School #1"
-  ),
-  title = paste("Interest in topic by gender {#tbl-lmeInterestCCPISAlt}"),
+            "Reference Category for Language: Other languages spoken at home"),
+  title = paste("Interest in topic by gender \\label{tab:lmeInterestCCPIS}"),
   coef_rename = c(
     "female1" = "Gender (1 = girl)",
     "age" = "Age",
@@ -2168,14 +2167,9 @@ modelsummary::modelsummary(models = list(
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
     "agentic" = "Agency",
-    "communal" = "Communality",
-    "schoolCollège Citoyen" = "School #4",
-    "schoolCollège mariste de Québec" = "School #3",
-    "schoolÉcole de la Rose-des-Vents" = "School #6",
-    "schoolÉcole Jean-de-Brébeuf" = "School #2",
-    "schoolJaya International High School" = "School #5",
-    "schoolRenfrew County DSB Student Senate" = "School #8",
-    "schoolUrban Village Academy" = "School #7"))
+    "communal" = "Communality"),
+  output = "latex") |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 Model0Young <- nlme::lme(data = CCPISYoung, fixed = interest ~ # empty model
                            1, random = ~ 1 | Class, na.action = na.omit)
 Model0Youngeffects <- nlme::VarCorr(Model0Young)
@@ -2235,18 +2229,20 @@ modelsummary::modelsummary(models = list(
   "Politics (general)" = Model1Young, "Health care" = Model2Young,
   "International affairs" = Model3Young, "Law and crime" = Model4Young,
   "Education" = Model5Young, "Partisan politics" = Model6Young),
-  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Controls: None"),
   title = paste("Interest in topic by gender (ages 10-15)",
-                "{#tbl-lmeInterestYoungCCPIS}"),
-  coef_rename = c("female1" = "Gender (1 = girl)"))
+                "\\label{tab:lmeInterestYoungCCPIS}"),
+  coef_rename = c("female1" = "Gender (1 = girl)"),
+  output = "latex") |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 modelsummary::modelsummary(models = list(
   "Politics (general)" = Model01Young, "Health care" = Model02Young,
   "International affairs" = Model03Young, "Law and crime" = Model04Young,
   "Education" = Model05Young, "Partisan politics" = Model06Young),
-  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   #coef_omit = "age|white|immig|lang|agentic|communal|#school",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
@@ -2255,7 +2251,7 @@ modelsummary::modelsummary(models = list(
             "Reference Category for School: School #1"
   ),
   title = paste("Interest in topic by gender (ages 10-15)",
-                "{#tbl-lmeInterestYoungCCPISAlt}"),
+                "\\label{tab:lmeInterestYoungCCPISAlt}"),
   coef_rename = c(
     "female1" = "Gender (1 = girl)",
     "age" = "Age",
@@ -2272,7 +2268,9 @@ modelsummary::modelsummary(models = list(
     "schoolÉcole Jean-de-Brébeuf" = "School #2",
     "schoolJaya International High School" = "School #5",
     "schoolRenfrew County DSB Student Senate" = "School #8",
-    "schoolUrban Village Academy" = "School #7"))
+    "schoolUrban Village Academy" = "School #7"),
+  output = "latex") |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 Model0Old <- nlme::lme(data = CCPISOld, fixed = interest ~ # empty model
                          1, random = ~ 1 | Class, na.action = na.omit)
 Model0Oldeffects <- nlme::VarCorr(Model0Old)
@@ -2329,21 +2327,28 @@ Model06Old <- nlme::lme(data = CCPISOld, fixed = interest_partisan ~
                           Class, na.action = na.omit)
 summary(Model06Old)
 modelsummary::modelsummary(models = list(
-  "Politics (general)" = Model1Old, "Health care" = Model2Old,
-  "International affairs" = Model3Old, "Law and crime" = Model4Old,
-  "Education" = Model5Old, "Partisan politics" = Model6Old),
-  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  "Ages 10-15" = list(
+    "Politics (general)" = Model1Young, "Health care" = Model2Young,
+    "International affairs" = Model3Young, "Law and crime" = Model4Young,
+    "Education" = Model5Young, "Partisan politics" = Model6Young),
+  "Ages 16-18" = list(
+    "Politics (general)" = Model1Old, "Health care" = Model2Old,
+    "International affairs" = Model3Old, "Law and crime" = Model4Old,
+    "Education" = Model5Old, "Partisan politics" = Model6Old)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Controls: None"),
-  title = paste("Interest in topic by gender (ages 16-18)",
-                "{#tbl-lmeInterestOldCCPIS}"),
-  coef_rename = c("female1" = "Gender (1 = girl)"))
+  title = paste("Interest in topic by gender",
+                "\\label{tab:lmeInterestYoungOldCCPIS}"),
+  coef_rename = c("female1" = "Gender (1 = girl)"),
+  output = "latex") |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 modelsummary::modelsummary(models = list(
   "Politics (general)" = Model01Old, "Health care" = Model02Old,
   "International affairs" = Model03Old, "Law and crime" = Model04Old,
   "Education" = Model05Old, "Partisan politics" = Model06Old),
-  stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   #coef_omit = "age|white|immig|lang|agentic|communal|#school",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
@@ -2352,7 +2357,7 @@ modelsummary::modelsummary(models = list(
             "Reference Category for School: School #1"
   ),
   title = paste("Interest in topic by gender (ages 16-18)",
-                "{#tbl-lmeInterestOldCCPISAlt}"),
+                "\\label{tab:lmeInterestOldCCPISAlt}"),
   coef_rename = c(
     "female1" = "Gender (1 = girl)",
     "age" = "Age",
@@ -2369,7 +2374,9 @@ modelsummary::modelsummary(models = list(
     "schoolÉcole Jean-de-Brébeuf" = "School #2",
     "schoolJaya International High School" = "School #5",
     "schoolRenfrew County DSB Student Senate" = "School #8",
-    "schoolUrban Village Academy" = "School #7"))
+    "schoolUrban Village Academy" = "School #7"),
+  output = "latex") |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 
 CCPISGrouped <- CCPIS |>
   group_by(age, female) |>
@@ -2514,7 +2521,9 @@ modelsummary::modelsummary(models = list(
     "income_mid" = "Income between \\$60,000 and \\$150,000",
     "income_high" = "Income above \\$150,000",
     "educ_mid" = "Education: college",
-    "educ_high" = "Education: university"))
+    "educ_high" = "Education: university"),
+  output = "latex") |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 
 DGgrouped <- DG |>
   group_by(age, female) |>
@@ -3019,11 +3028,11 @@ CCPISGirlsLonger$sex <- "Girls"
 CCPISLonger <- rbind(CCPISBoysLonger, CCPISGirlsLonger)
 CCPISLonger$topic <- case_when(
   CCPISLonger$name == "gender_parent_health" ~ "Health\ncare",
-  CCPISLonger$name == "gender_parent_education" ~ "Edu-\ncation",
+  CCPISLonger$name == "gender_parent_education" ~ "Education",
   CCPISLonger$name == "gender_parent_law" ~ "Law and\ncrime",
-  CCPISLonger$name == "gender_parent_foreign" ~ "Inter-\nnational\naffairs",
+  CCPISLonger$name == "gender_parent_foreign" ~ "International\naffairs",
   CCPISLonger$name == "gender_parent_partisan" ~ "Partisan\npolitics",
-  CCPISLonger$name == "parent_discuss_alt" ~ "All dis-\ncussions")
+  CCPISLonger$name == "parent_discuss_alt" ~ "All\ndiscussions")
 ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
   geom_bar(position = "fill") +
   facet_wrap(~topic, ncol = 6) +
@@ -3034,9 +3043,9 @@ ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
                                  paste0("Don't know/\nPrefer not\nto answer/",
                                         "\nMissing")),
                       type = c("purple", "orange", "white")) +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 45),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/ParentTopics.pdf", width = 5.5, height = 4.25)
+ggsave("_graphs/ParentTopics.pdf", width = 8.5, height = 4.25)
 
 CCPISBoysGraph <- CCPISBoys |>
   pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
@@ -3063,9 +3072,9 @@ ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
   scale_fill_discrete("Parent",
                       labels = c("Father", "Mother"),
                       type = c("purple", "orange")) +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/ParentTopicsMomDad.pdf", width = 5.5, height = 4.25)
+ggsave("_graphs/ParentTopicsMomDad.pdf", width = 8.5, height = 4.25)
 
 ## Peers
 CCPISBoysPeerGraph <- CCPISBoys |>
@@ -3193,30 +3202,36 @@ CCPISYoungBoysMaleFriendsLonger <- longer_malefriends(CCPISYoungBoys)
 CCPISYoungGirlsMaleFriendsLonger <- longer_malefriends(CCPISYoungGirls)
 CCPISOldBoysMaleFriendsLonger <- longer_malefriends(CCPISOldBoys)
 CCPISOldGirlsMaleFriendsLonger <- longer_malefriends(CCPISOldGirls)
-CCPISBoysAgentsLonger <- CCPISBoysMotherLonger |>
-  left_join(CCPISBoysFatherLonger, relationship = "many-to-many") |>
-  left_join(CCPISBoysFemaleFriendsLonger, relationship = "many-to-many") |>
-  left_join(CCPISBoysMaleFriendsLonger, relationship = "many-to-many")
-CCPISGirlsAgentsLonger <- CCPISGirlsMotherLonger |>
-  left_join(CCPISGirlsFatherLonger, relationship = "many-to-many") |>
-  left_join(CCPISGirlsFemaleFriendsLonger, relationship = "many-to-many") |>
-  left_join(CCPISGirlsMaleFriendsLonger, relationship = "many-to-many")
-CCPISYoungBoysAgentsLonger <- CCPISYoungBoysMotherLonger |>
-  left_join(CCPISYoungBoysFatherLonger, relationship = "many-to-many") |>
-  left_join(CCPISYoungBoysFemaleFriendsLonger, relationship = "many-to-many") |>
-  left_join(CCPISYoungBoysMaleFriendsLonger, relationship = "many-to-many")
-CCPISYoungGirlsAgentsLonger <- CCPISYoungGirlsMotherLonger |>
-  left_join(CCPISYoungGirlsFatherLonger, relationship = "many-to-many") |>
-  left_join(CCPISYoungGirlsFemaleFriendsLonger, relationship = "many-to-many") |>
-  left_join(CCPISYoungGirlsMaleFriendsLonger, relationship = "many-to-many")
-CCPISOldBoysAgentsLonger <- CCPISOldBoysMotherLonger |>
-  left_join(CCPISOldBoysFatherLonger, relationship = "many-to-many") |>
-  left_join(CCPISOldBoysFemaleFriendsLonger, relationship = "many-to-many") |>
-  left_join(CCPISOldBoysMaleFriendsLonger, relationship = "many-to-many")
-CCPISOldGirlsAgentsLonger <- CCPISOldGirlsMotherLonger |>
-  left_join(CCPISOldGirlsFatherLonger, relationship = "many-to-many") |>
-  left_join(CCPISOldGirlsFemaleFriendsLonger, relationship = "many-to-many") |>
-  left_join(CCPISOldGirlsMaleFriendsLonger, relationship = "many-to-many")
+CCPISBoysAgentsLonger <- cbind(
+  CCPISBoysMotherLonger, CCPISBoysFatherLonger, CCPISBoysFemaleFriendsLonger,
+  CCPISBoysMaleFriendsLonger)
+CCPISBoysAgentsLonger <- CCPISBoysAgentsLonger[,
+ !duplicated(colnames(CCPISBoysAgentsLonger), fromLast = TRUE)]
+CCPISGirlsAgentsLonger <- cbind(
+  CCPISGirlsMotherLonger, CCPISGirlsFatherLonger,
+  CCPISGirlsFemaleFriendsLonger, CCPISGirlsMaleFriendsLonger)
+CCPISGirlsAgentsLonger <- CCPISGirlsAgentsLonger[,
+ !duplicated(colnames(CCPISGirlsAgentsLonger), fromLast = TRUE)]
+CCPISYoungBoysAgentsLonger <- cbind(
+  CCPISYoungBoysMotherLonger, CCPISYoungBoysFatherLonger,
+  CCPISYoungBoysFemaleFriendsLonger, CCPISYoungBoysMaleFriendsLonger)
+CCPISYoungBoysAgentsLonger <- CCPISYoungBoysAgentsLonger[,
+ !duplicated(colnames(CCPISYoungBoysAgentsLonger), fromLast = TRUE)]
+CCPISYoungGirlsAgentsLonger <- cbind(
+  CCPISYoungGirlsMotherLonger, CCPISYoungGirlsFatherLonger,
+  CCPISYoungGirlsFemaleFriendsLonger, CCPISYoungGirlsMaleFriendsLonger)
+CCPISYoungGirlsAgentsLonger <- CCPISYoungGirlsAgentsLonger[,
+ !duplicated(colnames(CCPISYoungGirlsAgentsLonger), fromLast = TRUE)]
+CCPISOldBoysAgentsLonger <- cbind(
+  CCPISOldBoysMotherLonger, CCPISOldBoysFatherLonger,
+  CCPISOldBoysFemaleFriendsLonger, CCPISOldBoysMaleFriendsLonger)
+CCPISOldBoysAgentsLonger <- CCPISOldBoysAgentsLonger[,
+ !duplicated(colnames(CCPISOldBoysAgentsLonger), fromLast = TRUE)]
+CCPISOldGirlsAgentsLonger <- cbind(
+  CCPISOldGirlsMotherLonger, CCPISOldGirlsFatherLonger,
+  CCPISOldGirlsFemaleFriendsLonger, CCPISOldGirlsMaleFriendsLonger)
+CCPISOldGirlsAgentsLonger <- CCPISOldGirlsAgentsLonger[,
+ !duplicated(colnames(CCPISOldGirlsAgentsLonger), fromLast = TRUE)]
 
 #### 2. Create regression models with controls ####
 lme_no_ctrl <- function(data, x, y) {
@@ -3498,11 +3513,6 @@ ModelOldGirlsAgentsCtrl <- lme_ses_personality_allagents(
   x3 = "value_femalefriends", x4 = "value_malefriends", y = "interest_all")
 
 #### 3. Create regression tables ####
-ModelsAgents <- tibble::tribble(
-  ~a, ~b, ~c, ~d, ~e, ~f, ~g,
-  "**Results among boys**", '', '', '', '', '', '',
-  "**Results among girls**", '', '', '', '', '', '')
-attr(ModelsAgents, 'position') <- c(1, 10)
 modelsummary::modelsummary(models = list(
   "Boys" = list("All" = ModelBoysAllGenderParent,
                 "Health care" = ModelBoysHealthGenderParent,
@@ -3517,18 +3527,14 @@ modelsummary::modelsummary(models = list(
                  "Education" = ModelGirlsEducationGenderParent,
                  "Partisan politics" = ModelGirlsPartisanGenderParent)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  add_rows = ModelsAgents,
+  output = "latex",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Controls: None"),
   title = paste("Interest in topic by gender of parent who discusses that",
-                "topic the most {#tbl-lmeParent}"),
-  coef_rename = c("x" = "Mother discusses topic more than father"))
-ModelsParentCtrl <- tibble::tribble(
-  ~a, ~b, ~c, ~d, ~e, ~f, ~g,
-  "**Results among boys**", '', '', '', '', '', '',
-  "**Results among girls**", '', '', '', '', '', '')
-attr(ModelsParentCtrl, 'position') <- c(1, 26)
+                "topic the most \\label{tab:lmeParent}"),
+  coef_rename = c("x" = "Mother discusses topic more than father")) |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 modelsummary::modelsummary(models = list(
   "Boys" = list("All" = ModelBoysAllGenderParentCtrl,
                 "Health care" = ModelBoysHealthGenderParentCtrl,
@@ -3543,12 +3549,12 @@ modelsummary::modelsummary(models = list(
                  "Education" = ModelGirlsEducationGenderParentCtrl,
                  "Partisan politics" = ModelGirlsPartisanGenderParentCtrl)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  add_rows = ModelsParentCtrl,
+  output = "latex",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
   title = paste("Interest in topic by gender of parent who discusses that",
-                "topic the most {#tbl-lmeParentCtrl}"),
+                "topic the most \\label{tab:lmeParentCtrl}"),
   coef_rename = c(
     "x" = "Mother discusses topic more than father",
     "age" = "Age",
@@ -3558,7 +3564,8 @@ modelsummary::modelsummary(models = list(
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
     "agentic" = "Agency",
-    "communal" = "Communality"))
+    "communal" = "Communality")) |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 modelsummary::modelsummary(models = list(
   "Boys" = list("All" = ModelBoysAllMother,
                 "Health care" = ModelBoysHealthMother,
@@ -3573,13 +3580,14 @@ modelsummary::modelsummary(models = list(
                  "Education" = ModelGirlsEducationMother,
                  "Partisan politics" = ModelGirlsPartisanMother)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  add_rows = ModelsAgents,
+  output = "latex",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Controls: None"),
   title = paste("Interest in topic most often discussed with one's mother",
-                "{#tbl-lmeMother}"),
-  coef_rename = c("x" = "Topic most discussed with mother?"))
+                "\\label{tab:lmeMother}"),
+  coef_rename = c("x" = "Topic most discussed with mother?")) |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 modelsummary::modelsummary(models = list(
   "Boys" = list("All" = ModelBoysAllFather,
                 "Health care" = ModelBoysHealthFather,
@@ -3594,13 +3602,14 @@ modelsummary::modelsummary(models = list(
                  "Education" = ModelGirlsEducationFather,
                  "Partisan politics" = ModelGirlsPartisanFather)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  add_rows = ModelsAgents,
+  output = "latex",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Controls: None"),
   title = paste("Interest in topic most often discussed with one's father",
-                "{#tbl-lmeFather}"),
-  coef_rename = c("x" = "Topic most discussed with father?"))
+                "\\label{tab:lmeFather}"),
+  coef_rename = c("x" = "Topic most discussed with father?")) |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 modelsummary::modelsummary(models = list(
   "Boys" = list("All" = ModelBoysAllFemaleFriends,
                 "Health care" = ModelBoysHealthFemaleFriends,
@@ -3615,13 +3624,14 @@ modelsummary::modelsummary(models = list(
                  "Education" = ModelGirlsEducationFemaleFriends,
                  "Partisan politics" = ModelGirlsPartisanFemaleFriends)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  add_rows = ModelsAgents,
+  output = "latex",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Controls: None"),
   title = paste("Interest in topic most often discussed with one's female",
-                "friends {#tbl-lmeFemaleFriends}"),
-  coef_rename = c("x" = "Topic most discussed with female friends?"))
+                "friends \\label{tab:lmeFemaleFriends}"),
+  coef_rename = c("x" = "Topic most discussed with female friends?")) |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 modelsummary::modelsummary(models = list(
   "Boys" = list("All" = ModelBoysAllMaleFriends,
                 "Health care" = ModelBoysHealthMaleFriends,
@@ -3636,18 +3646,14 @@ modelsummary::modelsummary(models = list(
                  "Education" = ModelGirlsEducationMaleFriends,
                  "Partisan politics" = ModelGirlsPartisanMaleFriends)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  add_rows = ModelsAgents,
+  output = "latex",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Controls: None"),
   title = paste("Interest in topic most often discussed with one's male",
-                "friends {#tbl-lmeMaleFriends}"),
-  coef_rename = c("x" = "Topic most discussed with male friends?"))
-ModelsAgentsCtrl <- tibble::tribble(
-  ~a, ~b, ~c, ~d, ~e, ~f, ~g,
-  "**Results among boys**", '', '', '', '', '', '',
-  "**Results among girls**", '', '', '', '', '', '')
-attr(ModelsAgentsCtrl, 'position') <- c(1, 32)
+                "friends \\label{tab:lmeMaleFriends}"),
+  coef_rename = c("x" = "Topic most discussed with male friends?")) |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 modelsummary::modelsummary(models = list(
   "Boys" = list("All" = ModelBoysAllAgentsCtrl,
                 "Health care" = ModelBoysHealthAgentsCtrl,
@@ -3662,16 +3668,16 @@ modelsummary::modelsummary(models = list(
                  "Education" = ModelGirlsEducationAgentsCtrl,
                  "Partisan politics" = ModelGirlsPartisanAgentsCtrl)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  output = "latex", #add_rows = ModelsAgentsCtrl, 
+  output = "latex",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
   title = paste("Interest in topic most often discussed with role models",
-                "{#tbl-lmeAgentsCtrl}"),
-  coef_rename = c("x1" = "Topic most discussed\\with mother?",
-                  "x2" = "Topic most discussed\\with father?",
-                  "x3" = "Topic most discussed\\with female friends?",
-                  "x4" = "Topic most discussed\\with male friends?",
+                "\\label{tab:lmeAgentsCtrl}"),
+  coef_rename = c("x1" = "Topic most discussed with mother?",
+                  "x2" = "Topic most discussed with father?",
+                  "x3" = "Topic most discussed with female friends?",
+                  "x4" = "Topic most discussed with male friends?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
                   "white" = "Ethnicity (1 = white)",
@@ -3994,31 +4000,37 @@ AgentsYOCtrlData$agents <- c(rep("Mother", 4), rep("Father", 4),
 AgentsYOCtrlData$age <- rep(c(rep("10-15", 2), rep("16-18", 2)), 4)
 
 DiscussYOData <- rbind(GenderParentYOData, AgentsYOData)
+DiscussYOData$agents <- factor(DiscussYOData$agents, levels = c(
+  "Parent", "Mother", "Father", "Female friends", "Male friends"))
 DiscussYOCtrlData <- rbind(GenderParentYOCtrlData, AgentsYOCtrlData)
+DiscussYOCtrlData$agents <- factor(DiscussYOCtrlData$agents, levels = c(
+  "Parent", "Mother", "Father", "Female friends", "Male friends"))
 
-ggplot(DiscussYOData, aes(x = pred, y = age)) +
+DiscussYOData |>
+  filter(agents %in% c("Parent", "Mother", "Father")) |>
+  ggplot(aes(x = pred, y = age)) +
   geom_point() +
-  facet_wrap(~ gender + agents, ncol = 5) +
+  facet_wrap(~ gender + agents, ncol = 3) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
   geom_vline(aes(xintercept = 0), linetype = "dashed") +
   scale_x_continuous(paste0(
     "\nTopic most often discussed with mother or father\n",
     "(vs. other topics)\n",
-    "For Parent: Gender of parent who discusses that topic the most"),
-    breaks = c(-1, 0, 1)) +
+    "For Parent: Gender of parent who discusses that topic the most")) +
   scale_y_discrete("Age", limits = rev) +
   theme(axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")))
 ggsave("_graphs/DiscussYO.pdf", height = 4.25, width = 5.5)
-ggplot(DiscussYOCtrlData, aes(x = pred, y = age)) +
+DiscussYOCtrlData |>
+  filter(agents %in% c("Parent", "Mother", "Father")) |>
+  ggplot(aes(x = pred, y = age)) +
   geom_point() +
-  facet_wrap(~ gender + agents, ncol = 5) +
+  facet_wrap(~ gender + agents, ncol = 3) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
   geom_vline(aes(xintercept = 0), linetype = "dashed") +
   scale_x_continuous(paste0(
     "\nTopic most often discussed with mother or father\n",
     "(vs. other topics)\n",
-    "For Parent: Gender of parent who discusses that topic the most"),
-    breaks = c(-1, 0, 1)) +
+    "For Parent: Gender of parent who discusses that topic the most")) +
   scale_y_discrete("Age", limits = rev) +
   theme(axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")))
 ggsave("_graphs/DiscussYOCtrl.pdf", height = 4.25, width = 5.5)

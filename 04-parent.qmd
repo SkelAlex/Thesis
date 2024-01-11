@@ -114,81 +114,69 @@ Regardless, the fact that results among boys and girls both strongly point in th
 
 ### Topics Parents Discuss the Most
 
-When it comes to parents' role in political interest transmission, @tbl-lmeParentCtrl shows the relationship between students' interest in each of the five topics and the gender of the parent who discusses the topic with them the most. Children's interest in either of the five topics does not seem to be related to the gender of the parent who discusses the topic the most; the topic-by-topic analysis shows all relationships are statistically insignificant. However, when aggregated, the fact that their father discusses a topic more than their mother increases sons' interest in that topic by an average of 0.5 point on an 11-point scale. The gender of the parent who discusses more a topic does not have a significant effect on daughters' interest in that topic.^[@sec-appendix4 shows very similar findings without controls.]
+When it comes to parents' role in political interest transmission, Table \ref{tab:lmeParentCtrl} shows the relationship between students' interest in each of the five topics and the gender of the parent who discusses the topic with them the most. Children's interest in either of the five topics does not seem to be related to the gender of the parent who discusses the topic the most; the topic-by-topic analysis shows all relationships are statistically insignificant. However, when aggregated, the fact that their father discusses a topic more than their mother increases sons' interest in that topic by an average of 0.5 point on an 11-point scale (*p*<0.001). The gender of the parent who discusses more a topic does not have a significant effect on daughters' interest in that topic.^[@sec-appendix4 shows very similar findings when control variables are removed.]
 
 \begin{table}
 
-\caption{Interest in topic most often discussed with role models \{\#tbl-lmeAgentsCtrl\}}
+\caption{Interest in topic by gender of parent who discusses that topic the most \label{tab:lmeParentCtrl}}
 \centering
-\fontsize{6}{10}\selectfont
+\fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
 \toprule
   & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
 \midrule
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Boys}}\\
-\midrule \hspace{1em}(Intercept) & -90.110*** & -4.220 & -5.771 & 10.075 & 29.651 & 12.239\\
-\hspace{1em} & (4.810) & (28.330) & (24.696) & (23.680) & (28.501) & (29.069)\\
-\hspace{1em}Main topic discussed with mother? & -0.182** & 0.750 & 0.622 & 1.638 & -0.838 & -0.592\\
-\hspace{1em} & (0.059) & (0.610) & (0.986) & (1.088) & (0.586) & (1.669)\\
-\hspace{1em}Main topic discussed with father? & 0.732*** & 1.020 & 0.003 & 1.401* & -0.207 & 2.556*\\
-\hspace{1em} & (0.060) & (1.432) & (0.520) & (0.569) & (0.681) & (0.999)\\
-\hspace{1em}Main topic discussed with female friends? & 0.200*** & -0.164 & -0.642 & 1.941* & 1.617** & -0.110\\
-\hspace{1em} & (0.060) & (0.804) & (0.615) & (0.852) & (0.585) & (1.647)\\
-\hspace{1em}Main topic discussed with male friends? & 0.528*** & -1.662 & 1.213* & 0.558 & -0.163 & 1.849\\
-\hspace{1em} & (0.060) & (1.267) & (0.551) & (0.603) & (0.688) & (1.197)\\
-\hspace{1em}Age & 10.254*** & 0.211 & 1.286 & -2.044 & -4.544 & -1.709\\
-\hspace{1em} & (0.637) & (3.915) & (3.384) & (3.255) & (3.933) & (4.010)\\
-\hspace{1em}Age squared & -0.296*** & -0.001 & -0.041 & 0.080 & 0.169 & 0.061\\
-\hspace{1em} & (0.021) & (0.135) & (0.116) & (0.112) & (0.136) & (0.138)\\
-\hspace{1em}Ethnicity (1 = white) & 1.398*** & 0.029 & 1.546* & 0.534 & -0.579 & 0.978\\
-\hspace{1em} & (0.077) & (0.652) & (0.606) & (0.551) & (0.632) & (0.690)\\
-\hspace{1em}Immigrant & -0.763*** & -1.235 & -1.526+ & 0.583 & -1.964* & -0.761\\
-\hspace{1em} & (0.116) & (0.968) & (0.874) & (0.806) & (0.958) & (1.006)\\
-\hspace{1em}English spoken at home & 2.493*** & -0.442 & -1.917 & 0.756 & 0.203 & -0.295\\
-\hspace{1em} & (0.211) & (1.507) & (1.311) & (1.253) & (1.516) & (1.580)\\
-\hspace{1em}French spoken at home & 2.536*** & 0.771 & -1.047 & 1.279 & -0.051 & 0.810\\
-\hspace{1em} & (0.124) & (0.957) & (0.839) & (0.776) & (0.954) & (0.992)\\
-\hspace{1em}Agency & 7.420*** & 4.194* & 1.842 & 4.879** & 0.707 & 2.908\\
-\hspace{1em} & (0.282) & (1.999) & (1.788) & (1.634) & (1.937) & (2.049)\\
-\hspace{1em}Communality & 0.623* & 3.511+ & 1.523 & 3.573* & 7.574*** & 1.414\\
-\hspace{1em} & (0.300) & (2.041) & (1.800) & (1.610) & (2.016) & (2.102)\\
-\hspace{1em}SD (Intercept Class) & 3.081 & 0.587 & 0.257 & 0.262 & 0.921 & 0.611\\
-\hspace{1em}SD (Observations) & 1.427 & 2.520 & 2.260 & 2.115 & 2.416 & 2.643\\
-\hspace{1em}Num.Obs. & 4077 & 93 & 93 & 93 & 93 & 93\\
-\hspace{1em}R2 Marg. & 0.770 & 0.158 & 0.204 & 0.309 & 0.263 & 0.181\\
+\midrule \hspace{1em}(Intercept) & 5.105 & 13.767 & -12.026 & -2.620 & 23.735 & 28.086\\
+\hspace{1em} & (8.972) & (15.655) & (17.015) & (17.533) & (15.222) & (19.914)\\
+\hspace{1em}Mother discusses topic more than father & -0.616*** & -0.498 & -0.244 & -0.400 & 0.211 & 0.199\\
+\hspace{1em} & (0.163) & (0.404) & (0.389) & (0.400) & (0.390) & (0.470)\\
+\hspace{1em}Age & -0.463 & -1.776 & 2.166 & 0.778 & -3.321 & -3.943\\
+\hspace{1em} & (1.224) & (2.160) & (2.310) & (2.425) & (2.091) & (2.721)\\
+\hspace{1em}Age squared & 0.020 & 0.068 & -0.078 & -0.020 & 0.121+ & 0.134\\
+\hspace{1em} & (0.042) & (0.074) & (0.078) & (0.083) & (0.071) & (0.093)\\
+\hspace{1em}Ethnicity (1 = white) & 0.419* & 0.226 & 1.227** & 0.035 & -0.250 & 0.658\\
+\hspace{1em} & (0.195) & (0.381) & (0.387) & (0.421) & (0.403) & (0.502)\\
+\hspace{1em}Immigrant & -0.332 & 0.125 & -1.149* & -0.017 & -0.686 & -0.676\\
+\hspace{1em} & (0.269) & (0.516) & (0.532) & (0.567) & (0.548) & (0.717)\\
+\hspace{1em}English spoken at home & -0.271 & -0.336 & -1.193 & -0.426 & -0.466 & 0.752\\
+\hspace{1em} & (0.414) & (0.798) & (0.812) & (0.862) & (0.829) & (1.137)\\
+\hspace{1em}French spoken at home & -0.012 & 0.198 & -0.911* & -0.030 & -0.066 & 0.476\\
+\hspace{1em} & (0.234) & (0.453) & (0.455) & (0.494) & (0.473) & (0.593)\\
+\hspace{1em}Agency & 2.668*** & 3.071** & 2.633* & 1.363 & 1.617 & 5.279***\\
+\hspace{1em} & (0.514) & (0.962) & (1.050) & (1.113) & (1.037) & (1.344)\\
+\hspace{1em}Communality & 1.018 & -0.043 & 3.155* & 0.284 & 3.284* & 1.448\\
+\hspace{1em} & (0.623) & (1.179) & (1.273) & (1.312) & (1.294) & (1.602)\\
+\hspace{1em}SD (Intercept Class) & 0.657 & 0.523 & 0.747 & 0.373 & 0.252 & 0.000\\
+\hspace{1em}SD (Observations) & 2.605 & 2.324 & 2.345 & 2.636 & 2.646 & 2.812\\
+\hspace{1em}Num.Obs. & 1058 & 223 & 211 & 212 & 236 & 176\\
+\hspace{1em}R2 Marg. & 0.060 & 0.076 & 0.137 & 0.028 & 0.093 & 0.144\\
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Girls}}\\
-\midrule \hspace{1em}(Intercept) & 243.245*** & -28.154 & 9.493 & 12.721 & -28.051 & 40.969+\\
-\hspace{1em} & (21.545) & (17.494) & (22.847) & (20.605) & (18.047) & (20.766)\\
-\hspace{1em}Main topic discussed with mother? & 0.175** & 0.619 & 0.923 & 2.089* & 1.328* & 4.958+\\
-\hspace{1em} & (0.061) & (0.476) & (1.278) & (0.962) & (0.517) & (2.632)\\
-\hspace{1em}Main topic discussed with father? & 0.282*** & 0.973 & -0.212 & 2.005** & 0.176 & -1.332\\
-\hspace{1em} & (0.060) & (0.758) & (0.667) & (0.694) & (0.582) & (1.075)\\
-\hspace{1em}Main topic discussed with female friends? & 0.238*** & -0.360 & 1.128 & -0.431 & 0.984+ & 3.871+\\
-\hspace{1em} & (0.062) & (0.547) & (0.828) & (0.759) & (0.522) & (2.062)\\
-\hspace{1em}Main topic discussed with male friends? & 0.085 & -0.354 & -0.705 & -0.881 & 0.961 & 1.726\\
-\hspace{1em} & (0.063) & (0.789) & (0.740) & (0.606) & (0.576) & (1.325)\\
-\hspace{1em}Age & -29.989*** & 3.735 & -0.501 & -0.962 & 3.450 & -5.147+\\
-\hspace{1em} & (2.699) & (2.421) & (3.176) & (2.866) & (2.478) & (2.873)\\
-\hspace{1em}Age squared & 0.919*** & -0.107 & 0.016 & 0.036 & -0.101 & 0.173+\\
-\hspace{1em} & (0.083) & (0.084) & (0.111) & (0.100) & (0.086) & (0.100)\\
-\hspace{1em}Ethnicity (1 = white) & -0.149 & 0.799 & -0.698 & -1.001 & 0.443 & -0.267\\
-\hspace{1em} & (0.107) & (0.557) & (0.707) & (0.670) & (0.586) & (0.693)\\
-\hspace{1em}Immigrant & 0.144 & 0.074 & -1.493 & -1.959* & 1.020 & 0.682\\
-\hspace{1em} & (0.116) & (0.710) & (0.932) & (0.899) & (0.714) & (0.881)\\
-\hspace{1em}English spoken at home & -0.392* & 0.150 & -0.493 & -0.787 & 0.795 & 0.811\\
-\hspace{1em} & (0.181) & (0.861) & (1.099) & (0.976) & (0.901) & (1.040)\\
-\hspace{1em}French spoken at home & 1.975*** & 0.754 & 0.619 & 0.202 & 1.756* & 0.587\\
-\hspace{1em} & (0.129) & (0.665) & (0.876) & (0.784) & (0.665) & (0.824)\\
-\hspace{1em}Agency & 3.202*** & -2.363 & -0.716 & 0.959 & 1.479 & 0.678\\
-\hspace{1em} & (0.326) & (1.633) & (2.147) & (1.949) & (1.694) & (2.040)\\
-\hspace{1em}Communality & -2.825*** & 1.317 & 0.391 & -0.863 & -0.329 & -0.773\\
-\hspace{1em} & (0.393) & (1.776) & (2.271) & (1.995) & (1.826) & (2.149)\\
-\hspace{1em}SD (Intercept Class) & 8.791 & 1.041 & 0.735 & 0.473 & 1.146 & 0.939\\
-\hspace{1em}SD (Observations) & 1.415 & 1.927 & 2.614 & 2.392 & 1.948 & 2.440\\
-\hspace{1em}Num.Obs. & 3477 & 86 & 85 & 84 & 86 & 86\\
-\hspace{1em}R2 Marg. & 0.905 & 0.226 & 0.084 & 0.229 & 0.261 & 0.176\\
+\midrule \hspace{1em}(Intercept) & 11.982 & 11.059 & 24.421+ & 10.076 & 15.288 & 40.801*\\
+\hspace{1em} & (7.486) & (12.077) & (13.769) & (13.763) & (12.531) & (20.218)\\
+\hspace{1em}Mother discusses topic more than father & -0.209 & 0.171 & 0.081 & 0.141 & -0.381 & -0.054\\
+\hspace{1em} & (0.178) & (0.454) & (0.439) & (0.428) & (0.453) & (0.493)\\
+\hspace{1em}Age & -1.127 & -1.253 & -2.974 & -0.571 & -1.768 & -5.302+\\
+\hspace{1em} & (1.034) & (1.674) & (1.924) & (1.914) & (1.746) & (2.772)\\
+\hspace{1em}Age squared & 0.043 & 0.051 & 0.106 & 0.024 & 0.069 & 0.182+\\
+\hspace{1em} & (0.036) & (0.058) & (0.067) & (0.067) & (0.061) & (0.095)\\
+\hspace{1em}Ethnicity (1 = white) & -0.347 & -0.309 & 0.184 & -0.264 & -0.435 & -0.140\\
+\hspace{1em} & (0.221) & (0.401) & (0.488) & (0.469) & (0.428) & (0.572)\\
+\hspace{1em}Immigrant & -0.199 & 0.172 & -0.505 & -1.182+ & 0.686 & -0.126\\
+\hspace{1em} & (0.294) & (0.534) & (0.667) & (0.675) & (0.570) & (0.709)\\
+\hspace{1em}English spoken at home & -0.507 & -0.061 & -0.372 & -1.248 & 0.165 & -0.010\\
+\hspace{1em} & (0.381) & (0.645) & (0.819) & (0.764) & (0.743) & (0.884)\\
+\hspace{1em}French spoken at home & 0.071 & 0.227 & -0.104 & -0.797 & 0.373 & 0.572\\
+\hspace{1em} & (0.245) & (0.445) & (0.536) & (0.532) & (0.479) & (0.623)\\
+\hspace{1em}Agency & 0.065 & -0.477 & 0.037 & 1.359 & -0.100 & 1.326\\
+\hspace{1em} & (0.607) & (1.110) & (1.343) & (1.379) & (1.189) & (1.564)\\
+\hspace{1em}Communality & 0.060 & 1.022 & 1.568 & -1.836 & 0.084 & -0.413\\
+\hspace{1em} & (0.582) & (1.037) & (1.242) & (1.279) & (1.140) & (1.548)\\
+\hspace{1em}SD (Intercept Class) & 0.694 & 0.672 & 0.001 & 0.565 & 0.757 & 0.231\\
+\hspace{1em}SD (Observations) & 2.688 & 2.376 & 2.756 & 2.799 & 2.596 & 2.734\\
+\hspace{1em}Num.Obs. & 978 & 222 & 189 & 200 & 218 & 149\\
+\hspace{1em}R2 Marg. & 0.015 & 0.035 & 0.027 & 0.044 & 0.049 & 0.042\\
 \bottomrule
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
@@ -197,161 +185,83 @@ When it comes to parents' role in political interest transmission, @tbl-lmeParen
 \end{tabular}
 \end{table}
 
-Table: Interest in topic by gender of parent who discusses that topic the most {#tbl-lmeParentCtrl}
-
-|                                         |    All   | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:----------------------------------------|---------:|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**                  |          |             |                       |               |           |                   | 
-| (Intercept)                             |   1.437  |    7.825    |         -8.230        |     2.568     |  36.781+  |       17.051      | 
-|                                         | (11.191) |   (19.394)  |        (19.134)       |    (23.200)   |  (20.133) |      (21.989)     | 
-| Mother discusses topic more than father | -0.489** |    -0.244   |         -0.111        |     -0.065    |   0.180   |       0.221       | 
-|                                         |  (0.179) |   (0.468)   |        (0.425)        |    (0.432)    |  (0.442)  |      (0.524)      | 
-| Age                                     |  -0.165  |    -1.156   |         1.414         |     -0.417    |  -5.153+  |       -2.456      | 
-|                                         |  (1.515) |   (2.647)   |        (2.608)        |    (3.169)    |  (2.748)  |      (3.018)      | 
-| Age squared                             |   0.013  |    0.048    |         -0.046        |     0.023     |   0.185+  |       0.086       | 
-|                                         |  (0.051) |   (0.090)   |        (0.089)        |    (0.109)    |  (0.094)  |      (0.104)      | 
-| Ethnicity (1 = white)                   |  0.463*  |    0.305    |        1.389**        |     0.171     |   -0.337  |       0.437       | 
-|                                         |  (0.221) |   (0.442)   |        (0.434)        |    (0.474)    |  (0.466)  |      (0.564)      | 
-| Immigrant                               |  -0.761* |    -0.443   |        -1.515*        |     -0.310    |  -1.148+  |       -1.081      | 
-|                                         |  (0.319) |   (0.617)   |        (0.620)        |    (0.695)    |  (0.672)  |      (0.839)      | 
-| English spoken at home                  |  -0.220  |    -0.392   |        -1.822+        |     0.156     |   -0.535  |       0.630       | 
-|                                         |  (0.469) |   (0.901)   |        (0.924)        |    (0.948)    |  (0.933)  |      (1.258)      | 
-| French spoken at home                   |  -0.077  |    0.238    |        -1.501**       |     0.364     |   -0.076  |       0.035       | 
-|                                         |  (0.276) |   (0.539)   |        (0.537)        |    (0.594)    |  (0.578)  |      (0.692)      | 
-| Agency                                  | 3.009*** |   3.580**   |         2.175+        |     2.976*    |   1.450   |      4.552**      | 
-|                                         |  (0.602) |   (1.163)   |        (1.267)        |    (1.309)    |  (1.253)  |      (1.588)      | 
-| Communality                             |  1.793*  |    0.476    |        4.394**        |     2.174     |   3.515*  |       2.407       | 
-|                                         |  (0.697) |   (1.355)   |        (1.417)        |    (1.527)    |  (1.466)  |      (1.749)      | 
-| SD (Intercept Class)                    |   0.761  |    0.482    |         0.550         |     0.174     |   0.425   |       0.000       | 
-| SD (Observations)                       |   2.549  |    2.314    |         2.364         |     2.582     |   2.634   |       2.821       | 
-| Num.Obs.                                |    850   |     178     |          172          |      166      |    187    |        147        | 
-| R2 Marg.                                |   0.071  |    0.087    |         0.171         |     0.072     |   0.100   |       0.101       | 
-|:----------------------------------------|---------:|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls**                 |          |             |                       |               |           |                   | 
-| (Intercept)                             |   6.187  |   -11.514   |        25.110+        |     14.368    |   1.183   |       28.707      | 
-|                                         |  (8.435) |   (14.607)  |        (14.569)       |    (15.973)   |  (13.913) |      (24.214)     | 
-| Mother discusses topic more than father |  -0.022  |    0.505    |         0.453         |     0.297     |   0.004   |       0.314       | 
-|                                         |  (0.192) |   (0.518)   |        (0.494)        |    (0.475)    |  (0.486)  |      (0.561)      | 
-| Age                                     |  -0.512  |    1.587    |         -3.060        |     -1.506    |   0.049   |       -3.633      | 
-|                                         |  (1.158) |   (1.989)   |        (2.026)        |    (2.199)    |  (1.914)  |      (3.303)      | 
-| Age squared                             |   0.025  |    -0.041   |         0.108         |     0.059     |   0.010   |       0.126       | 
-|                                         |  (0.040) |   (0.068)   |        (0.070)        |    (0.076)    |  (0.066)  |      (0.113)      | 
-| Ethnicity (1 = white)                   |  -0.362  |    -0.055   |         -0.424        |     -0.333    |   -0.611  |       0.034       | 
-|                                         |  (0.246) |   (0.435)   |        (0.535)        |    (0.518)    |  (0.469)  |      (0.660)      | 
-| Immigrant                               |  -0.390  |    -0.325   |         -0.528        |    -1.533+    |   0.517   |       -0.220      | 
-|                                         |  (0.354) |   (0.628)   |        (0.777)        |    (0.835)    |  (0.667)  |      (0.876)      | 
-| English spoken at home                  |  -0.354  |    -0.567   |         0.306         |     -0.849    |   0.305   |       0.304       | 
-|                                         |  (0.430) |   (0.711)   |        (0.889)        |    (0.845)    |  (0.808)  |      (1.039)      | 
-| French spoken at home                   |   0.120  |    0.213    |         0.185         |     -0.262    |   0.248   |       0.168       | 
-|                                         |  (0.269) |   (0.485)   |        (0.594)        |    (0.595)    |  (0.517)  |      (0.717)      | 
-| Agency                                  |  -0.386  |    -0.781   |         -0.256        |     0.139     |   -0.070  |       0.748       | 
-|                                         |  (0.695) |   (1.279)   |        (1.588)        |    (1.558)    |  (1.358)  |      (1.812)      | 
-| Communality                             |   1.164  |    1.856    |         1.938         |     1.077     |   0.115   |       -0.024      | 
-|                                         |  (0.754) |   (1.295)   |        (1.607)        |    (1.621)    |  (1.499)  |      (2.027)      | 
-| SD (Intercept Class)                    |   0.769  |    0.857    |         0.000         |     0.674     |   0.758   |       0.796       | 
-| SD (Observations)                       |   2.521  |    2.172    |         2.631         |     2.668     |   2.416   |       2.597       | 
-| Num.Obs.                                |    732   |     164     |          144          |      151      |    160    |        113        | 
-| R2 Marg.                                |   0.026  |    0.082    |         0.039         |     0.046     |   0.077   |       0.022       | 
-|:----------------------------------------|---------:|------------:|----------------------:|--------------:|----------:|------------------:|
-
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
-
-__Note:__
-^^ Method: Multilevel linear regression
-
-__Note:__
-^^ Fixed Effects: Classroom
-
-__Note:__
-^^ Reference Category for Language: Other languages spoken at home
-
 ### Topics Most Often Discussed with Mothers
 
-@tbl-lmeAgentsCtrl shows students' interest in a specific topic depending on it being the topic they most often discuss with various role models, starting with mothers. For both boys and girls, interest in law and crime is related to their mothers discussing law and crime (*p*<0.1 and *p*<0.001 respectively). If a girl's mother discusses mostly law and crime among the five topics, her interest in law and crime is expected to increase by a large 3.1 points on the 11-point scale. For boys, the expected increase is 1.6 points. For girls, interest in education is also related to their mothers discussing the topic at home (*p*<0.01), but not for boys. If a girl's mother discusses mostly education among the five topics, her interest in this topic is expected to increase by 0.9 points. All other relationships are non-significant at the *p*<0.05 level. Overall, mothers discussing a certain topic more than others seems to increase daughters' interest in that topic by an average of 0.9 point on an 11-point scale (*p*<0.001), but does not seem to have any effect on sons' interest in that topic.
+Table \ref{tab:lmeAgentsCtrl} shows students' interest in each of the five topics depending on whether this topic is the one they most often discuss with various role models, starting with mothers. For boys, interest in either of the five topics or their aggregate is unrelated to their discussion of these topics with their mothers. For girls, interest in law and crime is related to their mothers discussing law and crime (*p*<0.01), and the same is true for education (*p*<0.01), partisan politics (*p*<0.05) and health care (*p*<0.1) are all positively predicted by their mothers discussing these topics with them. Only when it comes to international affairs is there no statistically significant effect --- but the effect size is still largely positive. In the aggregate, if a girl's mother discusses mostly one of the five topics, her interest in that topic is expected to increase by 0.9 points on the 11-point scale (*p*<0.001).
 
 \begin{table}
 
-\caption{Interest in topic most often discussed with role models \{\#tbl-lmeAgentsCtrl\}}
+\caption{Interest in topic most often discussed with role models \label{tab:lmeAgentsCtrl}}
 \centering
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
 \toprule
-  & All & Health & International & Law and & Education & Partisan\\
-  &  & care & affairs & crime &  & politics\\
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
 \midrule
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Boys}}\\
-\midrule \hspace{1em}(Intercept) & -90.110*** & -4.220 & -5.771 & 10.075 & 29.651 & 12.239\\
-\hspace{1em} & (4.810) & (28.330) & (24.696) & (23.680) & (28.501) & (29.069)\\
-Topic most discussed
-\hspace{1em}with mother? & -0.182** & 0.750 & 0.622 & 1.638 & -0.838 & -0.592\\
-\hspace{1em} & (0.059) & (0.610) & (0.986) & (1.088) & (0.586) & (1.669)\\
-Topic most discussed
-\hspace{1em}with father? & 0.732*** & 1.020 & 0.003 & 1.401* & -0.207 & 2.556*\\
-\hspace{1em} & (0.060) & (1.432) & (0.520) & (0.569) & (0.681) & (0.999)\\
-Topic most discussed
-\hspace{1em}with female friends? & 0.200*** & -0.164 & -0.642 & 1.941* & 1.617** & -0.110\\
-\hspace{1em} & (0.060) & (0.804) & (0.615) & (0.852) & (0.585) & (1.647)\\
-Topic most discussed
-\hspace{1em}with male friends? & 0.528*** & -1.662 & 1.213* & 0.558 & -0.163 & 1.849\\
-\hspace{1em} & (0.060) & (1.267) & (0.551) & (0.603) & (0.688) & (1.197)\\
-\hspace{1em}Age & 10.254*** & 0.211 & 1.286 & -2.044 & -4.544 & -1.709\\
-\hspace{1em} & (0.637) & (3.915) & (3.384) & (3.255) & (3.933) & (4.010)\\
-\hspace{1em}Age squared & -0.296*** & -0.001 & -0.041 & 0.080 & 0.169 & 0.061\\
-\hspace{1em} & (0.021) & (0.135) & (0.116) & (0.112) & (0.136) & (0.138)\\
-\hspace{1em}Ethnicity (1 = white) & 1.398*** & 0.029 & 1.546* & 0.534 & -0.579 & 0.978\\
-\hspace{1em} & (0.077) & (0.652) & (0.606) & (0.551) & (0.632) & (0.690)\\
-\hspace{1em}Immigrant & -0.763*** & -1.235 & -1.526+ & 0.583 & -1.964* & -0.761\\
-\hspace{1em} & (0.116) & (0.968) & (0.874) & (0.806) & (0.958) & (1.006)\\
-\hspace{1em}English spoken at home & 2.493*** & -0.442 & -1.917 & 0.756 & 0.203 & -0.295\\
-\hspace{1em} & (0.211) & (1.507) & (1.311) & (1.253) & (1.516) & (1.580)\\
-\hspace{1em}French spoken at home & 2.536*** & 0.771 & -1.047 & 1.279 & -0.051 & 0.810\\
-\hspace{1em} & (0.124) & (0.957) & (0.839) & (0.776) & (0.954) & (0.992)\\
-\hspace{1em}Agency & 7.420*** & 4.194* & 1.842 & 4.879** & 0.707 & 2.908\\
-\hspace{1em} & (0.282) & (1.999) & (1.788) & (1.634) & (1.937) & (2.049)\\
-\hspace{1em}Communality & 0.623* & 3.511+ & 1.523 & 3.573* & 7.574*** & 1.414\\
-\hspace{1em} & (0.300) & (2.041) & (1.800) & (1.610) & (2.016) & (2.102)\\
-\hspace{1em}SD (Intercept Class) & 3.081 & 0.587 & 0.257 & 0.262 & 0.921 & 0.611\\
-\hspace{1em}SD (Observations) & 1.427 & 2.520 & 2.260 & 2.115 & 2.416 & 2.643\\
-\hspace{1em}Num.Obs. & 4077 & 93 & 93 & 93 & 93 & 93\\
-\hspace{1em}R2 Marg. & 0.770 & 0.158 & 0.204 & 0.309 & 0.263 & 0.181\\
+\midrule \hspace{1em}(Intercept) & -15.368 & -3.663 & -24.250 & -9.486 & 19.580 & -2.943\\
+\hspace{1em} & (11.253) & (22.801) & (19.529) & (20.741) & (22.085) & (22.591)\\
+\hspace{1em}Topic most discussed with mother? & -0.328 & 0.114 & 0.659 & 1.721 & -0.528 & -0.286\\
+\hspace{1em} & (0.274) & (0.553) & (0.961) & (1.148) & (0.517) & (1.374)\\
+\hspace{1em}Topic most discussed with father? & 0.902*** & 2.217+ & 0.359 & 0.866 & 0.336 & 2.595**\\
+\hspace{1em} & (0.271) & (1.319) & (0.464) & (0.536) & (0.632) & (0.959)\\
+\hspace{1em}Topic most discussed with female friends? & 0.569* & -0.086 & -0.031 & 1.821* & 1.048+ & -0.468\\
+\hspace{1em} & (0.284) & (0.761) & (0.548) & (0.788) & (0.528) & (1.595)\\
+\hspace{1em}Topic most discussed with male friends? & 0.951*** & -2.133+ & 1.008* & 0.847 & 0.069 & 2.019+\\
+\hspace{1em} & (0.281) & (1.253) & (0.476) & (0.596) & (0.629) & (1.061)\\
+\hspace{1em}Age & 2.155 & 0.471 & 3.772 & 1.350 & -2.873 & 0.449\\
+\hspace{1em} & (1.566) & (3.187) & (2.723) & (2.887) & (3.075) & (3.157)\\
+\hspace{1em}Age squared & -0.069 & -0.013 & -0.129 & -0.040 & 0.107 & -0.016\\
+\hspace{1em} & (0.054) & (0.110) & (0.094) & (0.099) & (0.106) & (0.109)\\
+\hspace{1em}Ethnicity (1 = white) & 0.188 & -0.106 & 0.811 & 0.120 & -0.301 & 0.594\\
+\hspace{1em} & (0.262) & (0.592) & (0.529) & (0.504) & (0.585) & (0.582)\\
+\hspace{1em}Immigrant & -0.755* & 0.321 & -1.933** & 0.273 & -1.645* & -1.128\\
+\hspace{1em} & (0.370) & (0.823) & (0.722) & (0.697) & (0.824) & (0.815)\\
+\hspace{1em}English spoken at home & -0.428 & -0.232 & -0.971 & -0.897 & -0.540 & -0.786\\
+\hspace{1em} & (0.606) & (1.313) & (1.136) & (1.180) & (1.309) & (1.306)\\
+\hspace{1em}French spoken at home & 0.509 & 0.568 & -0.403 & 0.600 & -0.637 & 0.945\\
+\hspace{1em} & (0.346) & (0.786) & (0.663) & (0.656) & (0.748) & (0.748)\\
+\hspace{1em}Agency & 2.150** & 3.452* & 2.623+ & 2.086 & 0.027 & 3.383*\\
+\hspace{1em} & (0.740) & (1.674) & (1.418) & (1.426) & (1.600) & (1.581)\\
+\hspace{1em}Communality & 2.871*** & 2.226 & 1.923 & 2.132 & 7.357*** & 2.025\\
+\hspace{1em} & (0.828) & (1.811) & (1.582) & (1.504) & (1.820) & (1.789)\\
+\hspace{1em}SD (Intercept Class) & 0.716 & 0.783 & 0.282 & 0.948 & 0.454 & 0.759\\
+\hspace{1em}SD (Observations) & 2.510 & 2.556 & 2.302 & 2.206 & 2.591 & 2.550\\
+\hspace{1em}Num.Obs. & 570 & 113 & 114 & 115 & 114 & 114\\
+\hspace{1em}R2 Marg. & 0.155 & 0.132 & 0.221 & 0.202 & 0.212 & 0.230\\
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Girls}}\\
-\midrule \hspace{1em}(Intercept) & 243.245*** & -28.154 & 9.493 & 12.721 & -28.051 & 40.969+\\
-\hspace{1em} & (21.545) & (17.494) & (22.847) & (20.605) & (18.047) & (20.766)\\
-Topic most discussed
-\hspace{1em}with mother? & 0.175** & 0.619 & 0.923 & 2.089* & 1.328* & 4.958+\\
-\hspace{1em} & (0.061) & (0.476) & (1.278) & (0.962) & (0.517) & (2.632)\\
-Topic most discussed
-\hspace{1em}with father? & 0.282*** & 0.973 & -0.212 & 2.005** & 0.176 & -1.332\\
-\hspace{1em} & (0.060) & (0.758) & (0.667) & (0.694) & (0.582) & (1.075)\\
-Topic most discussed
-\hspace{1em}with female friends? & 0.238*** & -0.360 & 1.128 & -0.431 & 0.984+ & 3.871+\\
-\hspace{1em} & (0.062) & (0.547) & (0.828) & (0.759) & (0.522) & (2.062)\\
-Topic most discussed
-\hspace{1em}with male friends? & 0.085 & -0.354 & -0.705 & -0.881 & 0.961 & 1.726\\
-\hspace{1em} & (0.063) & (0.789) & (0.740) & (0.606) & (0.576) & (1.325)\\
-\hspace{1em}Age & -29.989*** & 3.735 & -0.501 & -0.962 & 3.450 & -5.147+\\
-\hspace{1em} & (2.699) & (2.421) & (3.176) & (2.866) & (2.478) & (2.873)\\
-\hspace{1em}Age squared & 0.919*** & -0.107 & 0.016 & 0.036 & -0.101 & 0.173+\\
-\hspace{1em} & (0.083) & (0.084) & (0.111) & (0.100) & (0.086) & (0.100)\\
-\hspace{1em}Ethnicity (1 = white) & -0.149 & 0.799 & -0.698 & -1.001 & 0.443 & -0.267\\
-\hspace{1em} & (0.107) & (0.557) & (0.707) & (0.670) & (0.586) & (0.693)\\
-\hspace{1em}Immigrant & 0.144 & 0.074 & -1.493 & -1.959* & 1.020 & 0.682\\
-\hspace{1em} & (0.116) & (0.710) & (0.932) & (0.899) & (0.714) & (0.881)\\
-\hspace{1em}English spoken at home & -0.392* & 0.150 & -0.493 & -0.787 & 0.795 & 0.811\\
-\hspace{1em} & (0.181) & (0.861) & (1.099) & (0.976) & (0.901) & (1.040)\\
-\hspace{1em}French spoken at home & 1.975*** & 0.754 & 0.619 & 0.202 & 1.756* & 0.587\\
-\hspace{1em} & (0.129) & (0.665) & (0.876) & (0.784) & (0.665) & (0.824)\\
-\hspace{1em}Agency & 3.202*** & -2.363 & -0.716 & 0.959 & 1.479 & 0.678\\
-\hspace{1em} & (0.326) & (1.633) & (2.147) & (1.949) & (1.694) & (2.040)\\
-\hspace{1em}Communality & -2.825*** & 1.317 & 0.391 & -0.863 & -0.329 & -0.773\\
-\hspace{1em} & (0.393) & (1.776) & (2.271) & (1.995) & (1.826) & (2.149)\\
-\hspace{1em}SD (Intercept Class) & 8.791 & 1.041 & 0.735 & 0.473 & 1.146 & 0.939\\
-\hspace{1em}SD (Observations) & 1.415 & 1.927 & 2.614 & 2.392 & 1.948 & 2.440\\
-\hspace{1em}Num.Obs. & 3477 & 86 & 85 & 84 & 86 & 86\\
-\hspace{1em}R2 Marg. & 0.905 & 0.226 & 0.084 & 0.229 & 0.261 & 0.176\\
+\midrule \hspace{1em}(Intercept) & -11.178 & -19.274 & 4.961 & 8.957 & -30.007+ & 38.590+\\
+\hspace{1em} & (11.263) & (17.209) & (21.684) & (20.017) & (17.650) & (19.968)\\
+\hspace{1em}Topic most discussed with mother? & 0.867** & 0.828+ & 0.884 & 2.441** & 1.360** & 4.002*\\
+\hspace{1em} & (0.284) & (0.477) & (1.257) & (0.880) & (0.482) & (1.936)\\
+\hspace{1em}Topic most discussed with father? & 0.486+ & 0.903 & -0.398 & 2.146** & -0.020 & -0.210\\
+\hspace{1em} & (0.279) & (0.705) & (0.617) & (0.692) & (0.569) & (0.977)\\
+\hspace{1em}Topic most discussed with female friends? & 0.483+ & -0.535 & 1.006 & -0.526 & 0.981+ & 3.038\\
+\hspace{1em} & (0.288) & (0.554) & (0.742) & (0.705) & (0.490) & (2.074)\\
+\hspace{1em}Topic most discussed with male friends? & 0.660* & 0.200 & -0.087 & -0.643 & 0.811 & 2.021+\\
+\hspace{1em} & (0.277) & (0.762) & (0.683) & (0.568) & (0.560) & (1.199)\\
+\hspace{1em}Age & 2.040 & 2.678 & -0.001 & -0.390 & 3.718 & -4.871+\\
+\hspace{1em} & (1.541) & (2.380) & (3.015) & (2.785) & (2.419) & (2.768)\\
+\hspace{1em}Age squared & -0.068 & -0.073 & 0.001 & 0.014 & -0.112 & 0.163+\\
+\hspace{1em} & (0.053) & (0.082) & (0.105) & (0.097) & (0.083) & (0.096)\\
+\hspace{1em}Ethnicity (1 = white) & -0.328 & 0.529 & -0.605 & -0.869 & 0.199 & -0.195\\
+\hspace{1em} & (0.311) & (0.540) & (0.661) & (0.640) & (0.559) & (0.644)\\
+\hspace{1em}Immigrant & -0.246 & -0.365 & -1.306 & -1.743* & 0.799 & 0.455\\
+\hspace{1em} & (0.379) & (0.694) & (0.895) & (0.863) & (0.684) & (0.835)\\
+\hspace{1em}English spoken at home & -0.335 & 0.239 & -0.786 & -0.729 & 0.245 & -0.291\\
+\hspace{1em} & (0.477) & (0.796) & (0.985) & (0.903) & (0.828) & (0.926)\\
+\hspace{1em}French spoken at home & 0.716* & 0.674 & 0.720 & -0.032 & 1.297* & 0.064\\
+\hspace{1em} & (0.359) & (0.627) & (0.796) & (0.729) & (0.626) & (0.757)\\
+\hspace{1em}Agency & 1.672+ & -0.763 & 1.593 & 2.853 & 2.920+ & 2.511\\
+\hspace{1em} & (0.888) & (1.586) & (1.935) & (1.778) & (1.621) & (1.924)\\
+\hspace{1em}Communality & -1.322 & -0.828 & -1.256 & -2.360 & -0.004 & -1.185\\
+\hspace{1em} & (0.932) & (1.494) & (1.855) & (1.652) & (1.548) & (1.944)\\
+\hspace{1em}SD (Intercept Class) & 1.139 & 0.750 & 0.219 & 0.000 & 1.024 & 0.307\\
+\hspace{1em}SD (Observations) & 2.442 & 2.103 & 2.709 & 2.501 & 2.051 & 2.603\\
+\hspace{1em}Num.Obs. & 504 & 102 & 100 & 99 & 102 & 101\\
+\hspace{1em}R2 Marg. & 0.082 & 0.182 & 0.092 & 0.229 & 0.254 & 0.171\\
 \bottomrule
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
@@ -360,98 +270,17 @@ Topic most discussed
 \end{tabular}
 \end{table}
 
-Table: Interest in topic most often discussed with role models {#tbl-lmeAgentsCtrl}
-
-|                                           |     All    | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------------------------|-----------:|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**                    |            |             |                       |               |           |                   | 
-| (Intercept)                               | -90.110*** |    -4.220   |         -5.771        |     10.075    |   29.651  |       12.239      | 
-|                                           |   (4.810)  |   (28.330)  |        (24.696)       |    (23.680)   |  (28.501) |      (29.069)     | 
-| Main topic discussed with mother?         |  -0.182**  |    0.750    |         0.622         |     1.638     |   -0.838  |       -0.592      | 
-|                                           |   (0.059)  |   (0.610)   |        (0.986)        |    (1.088)    |  (0.586)  |      (1.669)      | 
-| Main topic discussed with father?         |  0.732***  |    1.020    |         0.003         |     1.401*    |   -0.207  |       2.556*      | 
-|                                           |   (0.060)  |   (1.432)   |        (0.520)        |    (0.569)    |  (0.681)  |      (0.999)      | 
-| Main topic discussed with female friends? |  0.200***  |    -0.164   |         -0.642        |     1.941*    |  1.617**  |       -0.110      | 
-|                                           |   (0.060)  |   (0.804)   |        (0.615)        |    (0.852)    |  (0.585)  |      (1.647)      | 
-| Main topic discussed with male friends?   |  0.528***  |    -1.662   |         1.213*        |     0.558     |   -0.163  |       1.849       | 
-|                                           |   (0.060)  |   (1.267)   |        (0.551)        |    (0.603)    |  (0.688)  |      (1.197)      | 
-| Age                                       |  10.254*** |    0.211    |         1.286         |     -2.044    |   -4.544  |       -1.709      | 
-|                                           |   (0.637)  |   (3.915)   |        (3.384)        |    (3.255)    |  (3.933)  |      (4.010)      | 
-| Age squared                               |  -0.296*** |    -0.001   |         -0.041        |     0.080     |   0.169   |       0.061       | 
-|                                           |   (0.021)  |   (0.135)   |        (0.116)        |    (0.112)    |  (0.136)  |      (0.138)      | 
-| Ethnicity (1 = white)                     |  1.398***  |    0.029    |         1.546*        |     0.534     |   -0.579  |       0.978       | 
-|                                           |   (0.077)  |   (0.652)   |        (0.606)        |    (0.551)    |  (0.632)  |      (0.690)      | 
-| Immigrant                                 |  -0.763*** |    -1.235   |        -1.526+        |     0.583     |  -1.964*  |       -0.761      | 
-|                                           |   (0.116)  |   (0.968)   |        (0.874)        |    (0.806)    |  (0.958)  |      (1.006)      | 
-| English spoken at home                    |  2.493***  |    -0.442   |         -1.917        |     0.756     |   0.203   |       -0.295      | 
-|                                           |   (0.211)  |   (1.507)   |        (1.311)        |    (1.253)    |  (1.516)  |      (1.580)      | 
-| French spoken at home                     |  2.536***  |    0.771    |         -1.047        |     1.279     |   -0.051  |       0.810       | 
-|                                           |   (0.124)  |   (0.957)   |        (0.839)        |    (0.776)    |  (0.954)  |      (0.992)      | 
-| Agency                                    |  7.420***  |    4.194*   |         1.842         |    4.879**    |   0.707   |       2.908       | 
-|                                           |   (0.282)  |   (1.999)   |        (1.788)        |    (1.634)    |  (1.937)  |      (2.049)      | 
-| Communality                               |   0.623*   |    3.511+   |         1.523         |     3.573*    |  7.574*** |       1.414       | 
-|                                           |   (0.300)  |   (2.041)   |        (1.800)        |    (1.610)    |  (2.016)  |      (2.102)      | 
-| SD (Intercept Class)                      |    3.081   |    0.587    |         0.257         |     0.262     |   0.921   |       0.611       | 
-| SD (Observations)                         |    1.427   |    2.520    |         2.260         |     2.115     |   2.416   |       2.643       | 
-| Num.Obs.                                  |    4077    |      93     |           93          |       93      |     93    |         93        | 
-| R2 Marg.                                  |    0.770   |    0.158    |         0.204         |     0.309     |   0.263   |       0.181       | 
-|:------------------------------------------|-----------:|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls**                   |            |             |                       |               |           |                   | 
-| (Intercept)                               | 243.245*** |   -28.154   |         9.493         |     12.721    |  -28.051  |      40.969+      | 
-|                                           |  (21.545)  |   (17.494)  |        (22.847)       |    (20.605)   |  (18.047) |      (20.766)     | 
-| Main topic discussed with mother?         |   0.175**  |    0.619    |         0.923         |     2.089*    |   1.328*  |       4.958+      | 
-|                                           |   (0.061)  |   (0.476)   |        (1.278)        |    (0.962)    |  (0.517)  |      (2.632)      | 
-| Main topic discussed with father?         |  0.282***  |    0.973    |         -0.212        |    2.005**    |   0.176   |       -1.332      | 
-|                                           |   (0.060)  |   (0.758)   |        (0.667)        |    (0.694)    |  (0.582)  |      (1.075)      | 
-| Main topic discussed with female friends? |  0.238***  |    -0.360   |         1.128         |     -0.431    |   0.984+  |       3.871+      | 
-|                                           |   (0.062)  |   (0.547)   |        (0.828)        |    (0.759)    |  (0.522)  |      (2.062)      | 
-| Main topic discussed with male friends?   |    0.085   |    -0.354   |         -0.705        |     -0.881    |   0.961   |       1.726       | 
-|                                           |   (0.063)  |   (0.789)   |        (0.740)        |    (0.606)    |  (0.576)  |      (1.325)      | 
-| Age                                       | -29.989*** |    3.735    |         -0.501        |     -0.962    |   3.450   |      -5.147+      | 
-|                                           |   (2.699)  |   (2.421)   |        (3.176)        |    (2.866)    |  (2.478)  |      (2.873)      | 
-| Age squared                               |  0.919***  |    -0.107   |         0.016         |     0.036     |   -0.101  |       0.173+      | 
-|                                           |   (0.083)  |   (0.084)   |        (0.111)        |    (0.100)    |  (0.086)  |      (0.100)      | 
-| Ethnicity (1 = white)                     |   -0.149   |    0.799    |         -0.698        |     -1.001    |   0.443   |       -0.267      | 
-|                                           |   (0.107)  |   (0.557)   |        (0.707)        |    (0.670)    |  (0.586)  |      (0.693)      | 
-| Immigrant                                 |    0.144   |    0.074    |         -1.493        |    -1.959*    |   1.020   |       0.682       | 
-|                                           |   (0.116)  |   (0.710)   |        (0.932)        |    (0.899)    |  (0.714)  |      (0.881)      | 
-| English spoken at home                    |   -0.392*  |    0.150    |         -0.493        |     -0.787    |   0.795   |       0.811       | 
-|                                           |   (0.181)  |   (0.861)   |        (1.099)        |    (0.976)    |  (0.901)  |      (1.040)      | 
-| French spoken at home                     |  1.975***  |    0.754    |         0.619         |     0.202     |   1.756*  |       0.587       | 
-|                                           |   (0.129)  |   (0.665)   |        (0.876)        |    (0.784)    |  (0.665)  |      (0.824)      | 
-| Agency                                    |  3.202***  |    -2.363   |         -0.716        |     0.959     |   1.479   |       0.678       | 
-|                                           |   (0.326)  |   (1.633)   |        (2.147)        |    (1.949)    |  (1.694)  |      (2.040)      | 
-| Communality                               |  -2.825*** |    1.317    |         0.391         |     -0.863    |   -0.329  |       -0.773      | 
-|                                           |   (0.393)  |   (1.776)   |        (2.271)        |    (1.995)    |  (1.826)  |      (2.149)      | 
-| SD (Intercept Class)                      |    8.791   |    1.041    |         0.735         |     0.473     |   1.146   |       0.939       | 
-| SD (Observations)                         |    1.415   |    1.927    |         2.614         |     2.392     |   1.948   |       2.440       | 
-| Num.Obs.                                  |    3477    |      86     |           85          |       84      |     86    |         86        | 
-| R2 Marg.                                  |    0.905   |    0.226    |         0.084         |     0.229     |   0.261   |       0.176       | 
-|:------------------------------------------|-----------:|------------:|----------------------:|--------------:|----------:|------------------:|
-
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
-
-__Note:__
-^^ Method: Multilevel linear regression
-
-__Note:__
-^^ Fixed Effects: Classroom
-
-__Note:__
-^^ Reference Category for Language: Other languages spoken at home
-
 ### Topics Most Often Discussed with Fathers
 
-@tbl-lmeAgentsCtrl then shows students' interest in a specific topic depending on it being the topic they most often discuss with their father(s). Again, for both boys and girls, interest in law and crime is related to their fathers discussing law and crime (*p*<0.05 and *p*<0.001 respectively). If a girl's father discusses mostly law and crime among the five topics, her interest in law and crime is expected to increase by 1.6 points on the 11-point scale. For boys, the expected increase is 1 point. Boys' interest in partisan politics is also related to their fathers discussing the topic at home (*p*<0.01), but the same result does not apply to girls. If a boy's father discusses mostly partisan politics among the five topics, his interest in this topic is expected to increase by 1.9 points. All other relationships are non-significant at the *p*<0.05 level. Overall, fathers discussing a certain topic more than others seems to increase daughters' interest in that topic by an average of 0.7 point on an 11-point scale (*p*<0.01), and sons' interest in that topic by an even larger 1 point (*p*<0.001).
+Table \ref{tab:lmeAgentsCtrl} then shows students' interest in a specific topic depending on it being the topic they most often discuss with their father(s). For boys, interest in partisan politics is related to their fathers discussing partisan politics (*p*<0.01), and the same is true for health care (*p*<0.1). At the aggregate level, if a boy's father discusses mostly one of the five topics, their interest in that topic is expected to increase by 0.9 point on an 11-point interest scale (*p*<0.001). For girls, interest in law and crime is related to their fathers discussing law and crime (*p*<0.01). At the aggregate level, if a girl's father discusses mostly one of the five topics, their interest in that topic is expected to increase by 0.5 point on an 11-point interest scale (*p*<0.1). None of the other topic-specific father--son and father--daughter relationships are statistically significant at the 90% confidence level.
 
-Results from @tbl-lmeParentCtrl and @tbl-lmeAgentsCtrl are somewhat intriguing. On the one hand, whichever parent discusses a topic with them has little impact on students' interest in that topic. Moreover, parents' interest in law and crime seems to be transmitted to their children consistently, while interest in health care and international relations seems to have little to do with parents' discussion of these topics at home. It is relevant to note that substantively, daughters seem to be more influenced by their parents' discussion of law and crime than boys: their rating of law and crime increases by 1.6--3.1 points on the 11-point scale, compared with 1--1.7 points for boys.^[@sec-appendix4 reproduces @tbl-lmeParentCtrl and @tbl-lmeAgentsCtrl without controls. The same relationships are found. Mother--daughter international affairs interest transmission also becomes marginally significant at the *p*<0.05 level.]
+Overall, results from Table \ref{tab:lmeAgentsCtrl} lend support to Hypothesis 1a, which suggests that children's interest in a given political topic should be more related to their same-gender parent discussing that topic with them than their other-gender parent discussing it with them. Fathers' influence on sons seems to be similar to mothers' influence on daughters, contrary to some past research in which the influence of mothers on political interest development was deemed to be generally stronger than fathers. Table \ref{tab:lmeParentCtrl} also shows that when a topic is discussed by their father rather than their mother, their interest in that topic is more likely to increase. For girls, whichever parent discusses a topic more does not significantly predict their interest in that topic when the question is asked this way. Overall, none of the relationships tested lend support to Hypothesis 1d, that mothers' influence in the transmission of interest in political topics would be greater than fathers.
 
-On the other hand, social learning theory partly seems to apply to the transmission of interest in education and partisan politics. Mothers' frequent discussion of --- and perhaps higher interest in --- education seems to trickle down to their daughters but not their sons, while fathers' discussion of education is unrelated to their children's interest in the topic. The opposite pattern can be observed for partisan politics: fathers' frequent discussion of it --- and perhaps higher interest in partisan politics --- is associated with their sons' higher interest in the topic, but not their daughters', while mothers' discussion of partisan politics is unrelated to their children's interest in the topic. Since adult women are generally more interested in education and men in partisan politics, these patterns match with the theory --- but nothing similar can be said for international affairs and health care. It may be the case that for these topics other socialization agents have more influence.
+The topic-by-topic analysis does not show a consistent pattern, and it does not appear that interest in cooperation-oriented topics such as health care and education is more likely to be transmitted by mothers while interest in assertion-oriented topics is more likely to be transmitted by fathers. Consequently, Hypotheses 1b and 1c are not corroborated.^[@sec-appendix4 reproduces Tables \ref{tab:lmeParentCtrl} and \ref{tab:lmeAgentsCtrl} without controls. Generally, the same relationships are found. Father--daughter interest transmission at the aggregate level increases to *p*<0.01 but remains substantively smaller than both father--son and mother--daughter transmission. Mother--daughter interest transmission for certain topics seems to decline, while it increases for other topics. Mother--son and father--son law and crime interest transmission also both become marginally significant at the *p*<0.05 level.]
 
 ### Age Trends
 
-@fig-discussyoctrl shows relationships between parents' discussion of certain topics and children's interest in those topics broken down by age group. For the sake of simplicity and to avoid small sample sizes, topic-by-topic analyses are excluded, with all analyses aggregating each parent-child discussion-interest pair. Results show that older teenagers (ages 16--18) are more influenced by their parents' discussion of certain topics than 10--15-year-olds, for which no significant parent--child relationship in the transmission of political interest appears. These results confirm Hypothesis 1k. However, the fact that no significant parental influence is found for the 10--15 age group could indicate that early parental socialization is more limited than what was previously thought. It could be the case that due to a more limited sample size, smaller effect sizes are present but do not reach statistical significance. This would be consistent with the finding that, for all significant parent--child interest relationships found among 16--18-year-olds, the direction of the relationship among 10--15-year-olds is the same --- despite none of them reaching statistical significance at the 95% confidence level for that age group. When using a 90% confidence range instead, father--son and mother--daughter relationships are significant among 10--15-year-olds. Moreover, again confirming Hypothesis 1a, the largest effect sizes among both 10--15-year-olds and 16--18-year-olds are for mother--daughter and father--son transmission. Substantively, when a topic is the one their mother discusses the most, daughters' interest in that topic increases on average by 0.6 point (10--15) to 1.1 points (16--18). Similarly, when a topic is the one their father discusses the most, sons' interest in that topic increases on average by 0.8 point (10--15) to 1.1 points (16--18).
+@fig-discussyoctrl shows relationships between parents' discussion of certain topics and children's interest in those topics broken down by age group. For the sake of simplicity and to avoid small sample sizes, topic-by-topic analyses are excluded, with all analyses aggregating each parent discussion--child interest pair. Results are mixed, but seem to show that in some respects, older teenagers (ages 16--18) are more influenced by their parents' discussion of certain topics than 10--15-year-olds. Notably, for girls, the influence of both their father and mother is only statistically significant among 16--18 year-olds, and it grows in size compared with girls aged 10--15. No such difference between age groups is found among boys. However, for boys aged 16--18, when their parent most interested in a specific topic is their father, they become more interested in that topic, while this relationship is weaker and non-significant for boys aged 10--15. These results provide mixed evidence for Hypothesis 1k: aging makes more statistically significant relationships emerge, but the effect sizes only become somewhat wider between age groups. Yet, among 10--15-year-olds, only father--son political interest transmission is statistically significant, which could indicate that early parental socialization is more limited than what was previously thought. It could be the case that due to a more limited sample size, smaller effect sizes are present but do not reach statistical significance. This would be consistent with the finding that, for all significant parent--child interest relationships found among 16--18-year-olds, the direction of the relationship among 10--15-year-olds is the same --- but the coefficient is larger. Moreover, again confirming Hypothesis 1a, the largest effect sizes among 16--18-year-olds are for mother--daughter and father--son transmission. Substantively, when a topic is the one their mother discusses the most, 16--18-year-old daughters' interest in that topic increases on average by 1.2 points. Similarly, when a topic is the one their father discusses the most, 16--18-year-old sons' interest in that topic increases on average by 1 point.
 
 ```{r}
 #| label: fig-discussyoctrl
@@ -462,13 +291,13 @@ knitr::include_graphics("_graphs/DiscussYOCtrl.pdf")
 
 ## Discussion
 
-Our results generally confirm the main hypotheses put forward, with a few minor caveats. Broadly, it seems that social learning theory applies just as well when political interest transmission is evaluated across a range of political topics. 
+Overall, the analysis generally confirms the main hypotheses put forward, with a few minor caveats. Broadly, it seems that social learning theory applies just as well when political interest transmission is evaluated across a range of political topics --- but not necessarily for each topic measured individually.
 
 Descriptive results show a clear trend: mothers are much more likely to speak about education and health care, while fathers are more likely to speak about the other three topics. These trends mirror previous literature on interest in these topics.
 
-Moreover, fathers' discussion of various political topics is related to their sons' interest in these topics, while mothers' discussion of various political topics is related to their daughters' interest in these topics. Mothers also seem to have a weaker impact on sons' political interest, while fathers seem to lack influence over their daughters' political interest.
+Moreover, fathers' discussion of various political topics is related to their sons' interest in these topics, while mothers' discussion of various political topics is related to their daughters' interest in these topics. Mothers also seem to have a weaker impact on sons' political interest, while fathers seem to lack influence over their daughters' political interest. Political interest seems to trickle down from parents to children in gendered ways.
 
-However, other findings show the limitations of this theory, since transmission of interest in health care and international relations does not seem to happen in the family. Moreover, when students are interested in one specific topic, it does not seem that this interest is necessarily related to a parent's gender --- it only is for boys, and only when all topics are aggregated together.
+Results by age groups seem to indicate political interest grows with time, but these results also seem to apply to girls more than to boys --- and the increase seem rather limited. Future studies conducted among a larger number of children may be able to see more clearly time trends for the growth of parent--child political interest transmission potential.
 
 Results highlight the transmission potential of parents for interest in various political topics to their children and they reinforce the idea that, in some respects, there are different socialization routes for girls and boys.
 
