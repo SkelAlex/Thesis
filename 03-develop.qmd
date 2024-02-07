@@ -54,29 +54,29 @@ Political interest has generally been found to be higher in Canada than in other
 
 ## Theorizing Change Over Time
 
-It seems worthwhile to study political socialization in the period of life where political interest is developed since there seems to be some level of path dependency in individuals' political interest afterwards. A focus on teenagers is also warranted because gender differences seem to become starker at that moment: the early increase in political interest seems to be stronger for men [@jennings1981, 276], and political socialization seems to be faster-paced during the teenage years. @fraile2020 suggest that "the development of gender roles during early childhood is a crucial phase in the source of the gender gap, deserving further attention from scholars" (89). Moreover, no study has measured the evolution of interest in various political topics with age among children or adults. 
+It seems worthwhile to study political socialization in the period of life where political interest is developed --- chuldhood to early adulthood --- since there seems to be some level of path dependency in individuals' political interest afterwards. Gender differences also seem to become starker at that moment: the early increase in self-reported political interest seems to be stronger for men [@jennings1981, 276], and political socialization seems to be faster-paced during the teenage years. @fraile2020 suggest that "the development of gender roles during early childhood is a crucial phase in the source of the gender gap, deserving further attention from scholars" (89). Moreover, no study has measured the evolution of interest in various political topics with age among children or adults.
 
 ***Hypothesis 0a**: Interest in specific political topics starts rising around age 15 and increases until age 25, after which it stabilizes.*
 
-***Hypothesis 0b**: Gender differences in interest in specific political topics arise around age 15 and increase until age 25, after which they stabilize.*
+***Hypothesis 0b**: Gender differences in interest in specific political topics start rising around age 15 and increase until age 25, after which they stabilize.*
 
-***Hypothesis 0c**: Between ages 15 and 25, boys develop more interest in assertion-focused political topics such as law and crime, international affairs, and partisan politics, while girls develop more interest in cooperation-focused political topics such as health care and education politics. These differences then carry on at the adult age.*
+Given findings among adults that women and men are interested in different topics depending on these topics being assertion-focused or cooperation-focused, Hypotheses 0c and 0d provide two alternative views about when these differences should start to occur. Hypothesis 0c suggests such differences in interest exist prior to the increase in self-reported political interest around age 15, perhaps as a result of tendencies towards agency and communality which start developing early.^[Gender differences in assertive speech use may develop between 1 and 2 years old, as @fagot1985 suggest, or may not have already developed at that age, as @brownell2006 suggest. A meta-analysis of studies done by @leaper2004 including children from various age groups more generally finds that boys use more assertive speech than girls, although this is not the case in mixed-gender interactions. @noakes2006 also find that, among boys and girls aged 9--14, boys reported having more interpersonal disagreements related to status and hierarchy, and girls were more likely to use cooperative conflict resolution strategies. Finally, @caravita2012 find that, among 9--15-year-old girls and boys, boys appear to have more agentic goals and girls appear to have more communal goals, although aging makes the gender gap in agency appear and the gap in communality disappear, which could be due to a relatively small sample size.] Hypothesis 0d instead suggests that --- likely as a result of cognitive maturation --- personality traits only start fostering interest in assertion-focused or cooperation-focused political topics between ages 15 and 25.
 
-***Hypothesis 0d**: Gender differences in interest in specific political topics already exist prior to age 15, with boys already more interested in assertion-focused political topics and girls more interested in cooperation-focused political topics at 10--15 years old.*
+***Hypothesis 0c**: Gender differences in interest in specific political topics already exist prior to age 15, with boys already more interested in assertion-focused political topics and girls more interested in cooperation-focused political topics at 10--15 years old.*
 
-***Hypothesis 0e**: Political interest in general starts rising around age 15 and increases until age 25, after which it stabilizes.*
+***Hypothesis 0d**: Between ages 15 and 25, boys develop more interest in assertion-focused political topics such as law and crime, international affairs, and partisan politics, while girls develop more interest in cooperation-focused political topics such as health care and education politics. These differences then carry on at the adult age.*
 
-***Hypothesis 0f**: Between ages 15 and 25, boys develop more political interest than girls. This difference then carries on at the adult age, although the gender gap stabilizes around age 25.*
+Hypothesis 0a, 0b and 0c should apply to interest in the five topics used throughout this book: health care, education, partisan politics, law and crime, and international affairs. They should also apply, as shown in previous studies, to the self-reported measure of political interest, since this measure is mostly associated to interest in partisan politics --- an assertion-focused topic.
 
-0f is due to partisan politics
+Hypothesis 0e suggests, again as a result of the cognitive maturation theory laid out by @russo2017, that issues related to partisan politics --- such as elections and parties --- are more political than other not explicitly partisan issues such as the working conditions of nurses or tuition fees. This would be congruent with Hypothesis 0d.
 
-***Hypothesis 0g**: Gender differences in political interest already exist prior to age 15, with boys already more interested at 10--15 years old.*
+***Hypothesis 0e**: Boys and girls both see issues related to partisan politics as more political than other political issues starting at age 15.*
 
-***Hypothesis 0h**: Other indicators of political engagement, such as political knowledge and political efficacy, mostly increase at the same time --- ages 15--25 --- as political interest does.*
+Studies have found strong causal or correlational associations between political interest, political knowledge, political efficacy, and other indicators of political engagement [@bennett1989; @coffe2010; @coffe2013; @ondercin2011; @prior2019] --- who are sometimes bundled together to create general political engagement scales. Therefore, Hypotheses 0f and 0g suggest that the value of these indicators tend to covary by age, and that gender differences in these indicators should also emerge within similar time frames.
 
-***Hypothesis 0i**: Gender differences in other indicators of political engagement, such as political knowledge and political efficacy, when they exist, mostly arise at the same time --- ages 15--25 --- as gender differences in political interest do.*
+***Hypothesis 0f**: Various indicators of political engagement, such as political interest, political knowledge and political efficacy, mostly increase at the same time --- ages 15--25.*
 
-***Hypothesis 0j**: Boys and girls both see topics related to partisan politics as more political than other political topics starting at age 15.*
+***Hypothesis 0g**: Gender differences in various indicators of political engagement, such as political interest, political knowledge and political efficacy, when they exist, mostly arise at the same time --- ages 15--25.*
 
 ## Data Analysis
 
@@ -87,7 +87,7 @@ In order to explore what level of general political interest Canadian men and wo
 ```{r}
 #| label: fig-timeceswvsgss
 #| echo: false
-#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, 2020 WVS (Canada) and 2013 Canadian GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. CES, WVS and GSS weights are applied."
+#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. CES, WVS and GSS weights are applied."
 knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
 ```
 
@@ -102,7 +102,7 @@ How does Canada compare with other countries? Across all 57 countries surveyed d
 ```{r}
 #| label: fig-yearceswvs
 #| echo: false
-#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, 2021 CES and 2020 WVS (Canada) \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
 knitr::include_graphics("_graphs/InterestYearGender.pdf")
 ```
 
@@ -322,7 +322,7 @@ For health care and education, results among Canadian children --- which show no
 ```{r}
 #| label: fig-political
 #| echo: false
-#| fig-cap: "Views of Topics as Political or Non-Political By Canadian Students, 2022"
+#| fig-cap: "Views of Topics as Political or Non-Political By Canadian Students, 2022 CCPIS"
 knitr::include_graphics("_graphs/CCPISPolitical.pdf")
 ```
 
