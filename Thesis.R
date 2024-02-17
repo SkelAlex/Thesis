@@ -586,6 +586,29 @@ CCPISOldBoys <- filter(CCPISOld, female == 0)
 CCPISOldGirls <- filter(CCPISOld, female == 1)
 mean(CCPIS$agentic, na.rm= T)
 mean(CCPIS$communal, na.rm= T)
+CCPISReview <- data.frame(pol_meaning = CCPIS$pol_meaning)
+CCPISReview$governing_government <- NA
+CCPISReview$power <- NA
+CCPISReview$communication_speeches <- NA
+CCPISReview$leadership <- NA
+CCPISReview$conflict <- NA
+CCPISReview$disagreement <- NA
+CCPISReview$controversy_debate <- NA
+CCPISReview$competition <- NA
+CCPISReview$partisan_game <- NA
+CCPISReview$elections_voting_democracy <- NA
+CCPISReview$rules_laws <- NA
+CCPISReview$legislating <- NA
+CCPISReview$specific_political_issue <- NA
+CCPISReview$cooperation <- NA
+CCPISReview$political_parties <- NA
+CCPISReview$resource_distribution <- NA
+CCPISReview$interest_groups <- NA
+CCPISReview$specific_people <- NA
+CCPISReview$mistake_other_concept <- NA
+CCPISReview$too_vague <- NA
+CCPISReview$no_real_answer <- NA
+#openxlsx::write.xlsx(CCPISReview, "_data/CCPIS/CCPISReview.xlsx")
 
 ### 1.2.0 Census ####
 #Census16 <- readstata13::read.dta13( # Census microdata for raking
@@ -940,6 +963,8 @@ CES97$interest <- as.integer(CES97$interest)
 CES97$age <- CES97$cpsage
 CES97$age[CES97$cpsage > 1979] <- NA
 CES97$age <- 1997 - CES97$age
+CES97$weight <- CES97$cpsnwgt1
+summary(CES97$weight)
 CES97men <- filter(CES97, female == 0)
 CES97women <- filter(CES97, female == 1)
 
@@ -956,6 +981,14 @@ CES00$interest <- as.integer(CES00$interest)
 CES00$age <- CES00$cpsage
 CES00$age[CES00$cpsage > 1982] <- NA
 CES00$age <- 2000 - CES00$age
+#CES00$weight <- CES00$weshhwgt
+#CES00$weight <- CES00$wespwgt
+#CES00$weight <- CES00$wesnwgt
+CES00$weight <- CES00$ceshhwgt
+#CES00$weight <- CES00$rocnwgt
+#CES00$weight <- CES00$cesnwgt
+#CES00$weight <- CES00$cespwgt
+summary(CES00$weight)
 CES00men <- filter(CES00, female == 0)
 CES00women <- filter(CES00, female == 1)
 
@@ -974,6 +1007,12 @@ CES04$interest <- as.integer(CES04$interest)
 CES04$age <- CES04$YEARofBIRTH
 CES04$age[CES04$YEARofBIRTH > 1986] <- NA
 CES04$age <- 2004 - CES04$age
+#CES04$weight <- CES04$ces04_CESPWGT
+#CES04$weight <- CES04$ces04_CESNWGT
+#CES04$weight <- CES04$ces04_RDDHHWGT
+#CES04$weight <- CES04$ces04_ROCNWGT
+CES04$weight <- CES04$ces04_CESHHWGT
+summary(CES04$weight)
 CES04men <- filter(CES04, female == 0)
 CES04women <- filter(CES04, female == 1)
 CES06 <- filter(CES0411, str_detect(CES0411$Survey_Type04060811,
@@ -990,6 +1029,11 @@ CES06$interest <- as.integer(CES06$interest)
 CES06$age <- CES06$YEARofBIRTH
 CES06$age[CES06$YEARofBIRTH > 1988] <- NA
 CES06$age <- 2006 - CES06$age
+#CES06$weight <- CES06$ces06_CESPWGT
+#CES06$weight <- CES06$ces06_CESNWGT
+#CES06$weight <- CES06$ces06_RDDHHWGT
+CES06$weight <- CES06$ces06_CESHHWGT
+summary(CES06$weight)
 CES06men <- filter(CES06, female == 0)
 CES06women <- filter(CES06, female == 1)
 CES08 <- filter(CES0411, str_detect(CES0411$Survey_Type04060811,
@@ -1006,6 +1050,9 @@ CES08$interest <- as.integer(CES08$interest)
 CES08$age <- CES08$YEARofBIRTH
 CES08$age[CES08$YEARofBIRTH > 1990] <- NA
 CES08$age <- 2008 - CES08$age
+#CES08$weight <- CES08$ces08_PROVWGT
+CES08$weight <- CES08$ces08_NATWGT
+summary(CES08$weight)
 CES08men <- filter(CES08, female == 0)
 CES08women <- filter(CES08, female == 1)
 CES11 <- filter(CES0411, str_detect(CES0411$Survey_Type04060811,
@@ -1022,6 +1069,11 @@ CES11$interest <- as.integer(CES11$interest)
 CES11$age <- CES11$YEARofBIRTH
 CES11$age[CES11$YEARofBIRTH > 1993] <- NA
 CES11$age <- 2011 - CES11$age
+#CES11$weight <- CES11$NATIONAL_WGTPOP11
+#CES11$weight <- CES11$WeightBYNadults_and_TotPopn
+CES11$weight <- CES11$HOUSEHOLD_WGTSAMP11
+#CES11$weight <- CES11$PROVINCIAL_WEIGHT11
+summary(CES11$weight)
 CES11men <- filter(CES11, female == 0)
 CES11women <- filter(CES11, female == 1)
 
@@ -1042,6 +1094,7 @@ CES15$interest[CES15$interest > 100] <- NA
 CES15$interest <- as.integer(CES15$interest)
 CES15$age[CES15$age > 1997 | CES15$age < 1900] <- NA
 CES15$age <- 2015 - CES15$age
+CES15$weight <- CES15$CombWgt
 CES15men <- filter(CES15, female == 0)
 CES15women <- filter(CES15, female == 1)
 
@@ -1242,13 +1295,23 @@ CES21$income <- factor(CES21$income, levels = c(
   "No income", "$1 to $30 000", "$30 001 to $60 000", "$60 001 to $90 000",
   "$90 001 to $110 000", "$110 001 to $150 000", "$150 001 to $200 000",
   "More than $200 000"))
-CES21$province <- CES21$pes21_province # no data about territories
+CES21$province <- as.character(CES21$pes21_province) # no data about territories
 CES21$province[CES21$province == "Newfoundland and Labrador"] <-
   "Newfoundland\nand Labrador"
 CES21$province[CES21$province == "Northwest Territories"] <-
   "Northwest\nTerritories"
 CES21$province[CES21$province == "Prince Edward Island"] <-
   "Prince Edward\nIsland"
+CES21$province <- as.factor(CES21$province)
+CES97$year <- 1997
+CES00$year <- 2000
+CES04$year <- 2004
+CES06$year <- 2006
+CES08$year <- 2008
+CES11$year <- 2011
+CES15$year <- 2015
+CES19$year <- 2019
+CES21$year <- 2021
 prop.table(table(CES21$female))
 prop.table(table(CES21$lang))
 prop.table(table(CES21$education))
@@ -1258,6 +1321,17 @@ cumsum(prop.table(table(CES21$income)))
 cumsum(prop.table(table(CES21$age)))
 prop.table(table(CES21$province))
 summary(CES21$weight)
+CES97clean <- select(CES97, interest, female, year, age, weight)
+CES00clean <- select(CES00, interest, female, year, age, weight)
+CES04clean <- select(CES04, interest, female, year, age, weight)
+CES06clean <- select(CES06, interest, female, year, age, weight)
+CES08clean <- select(CES08, interest, female, year, age, weight)
+CES11clean <- select(CES11, interest, female, year, age, weight)
+CES15clean <- select(CES15, interest, female, year, age, weight)
+CES19clean <- select(CES19, interest, female, year, age, weight)
+CES21clean <- select(CES21, interest, female, year, age, weight)
+CES <- bind_rows(CES97clean, CES00clean, CES04clean, CES06clean, CES08clean,
+                 CES11clean, CES15clean, CES19clean, CES21clean)
 
 #### 1.4 WVS ####
 WVS <- readRDS("_data/WVS/WVS_TimeSeries_1981_2022_Rds_v3_0.rds")
@@ -1340,46 +1414,46 @@ WVSCA90women <- filter(WVSCA90, female == 1)
 WVSCA00 <- filter(WVSCA, S020 == 2000)
 WVSCA00men <- filter(WVSCA00, female == 0)
 WVSCA00women <- filter(WVSCA00, female == 1)
-WVSCA00whitemen <- filter(WVSCA00, female == 0 & ethn == "white")
+WVSCA00whitemen <- filter(WVSCA00, female == 0 & ethn == "White")
 WVSCA00whitewomen <- filter(WVSCA00, female == 1 &
-                              ethn == "white")
+                              ethn == "White")
 WVSCA00nonwhitemen <- filter(WVSCA00, female == 0 &
-                               ethn != "white")
+                               ethn != "White")
 WVSCA00nonwhitewomen <- filter(WVSCA00, female == 1 &
-                                 ethn != "white")
+                                 ethn != "White")
 WVSCA06 <- filter(WVSCA, S020 == 2006)
 WVSCA06men <- filter(WVSCA06, female == 0)
 WVSCA06women <- filter(WVSCA06, female == 1)
-WVSCA06whitemen <- filter(WVSCA06, female == 0 & ethn == "white")
+WVSCA06whitemen <- filter(WVSCA06, female == 0 & ethn == "White")
 WVSCA06whitewomen <- filter(WVSCA06, female == 1 &
-                              ethn == "white")
+                              ethn == "White")
 WVSCA06nonwhitemen <- filter(WVSCA06, female == 0 &
-                               ethn != "white")
+                               ethn != "White")
 WVSCA06nonwhitewomen <- filter(WVSCA06, female == 1 &
-                                 ethn != "white")
+                                 ethn != "White")
 WVSCA20 <- filter(WVSCA, S020 == 2020)
 WVSCA20men <- filter(WVSCA20, female == 0)
 WVSCA20women <- filter(WVSCA20, female == 1)
-WVSCA20white <- filter(WVSCA20, ethn == "white")
-WVSCA20black <- filter(WVSCA20, ethn == "black")
-WVSCA20westasian <- filter(WVSCA20, ethn == "westasian")
-WVSCA20southeastasian <- filter(WVSCA20, ethn == "southeastasian")
-WVSCA20arabic <- filter(WVSCA20, ethn == "arabic")
-WVSCA20southasian <- filter(WVSCA20, ethn == "southasian")
-WVSCA20hispanic <- filter(WVSCA20, ethn == "hispanic")
-WVSCA20indigenous <- filter(WVSCA20, ethn == "indigenous")
-WVSCA20chinese <- filter(WVSCA20, ethn == "chinese")
-WVSCA20filipino <- filter(WVSCA20, ethn == "filipino")
-WVSCA20korean <- filter(WVSCA20, ethn == "korean")
-WVSCA20japanese <- filter(WVSCA20, ethn == "japanese")
-WVSCA20other <- filter(WVSCA20, ethn == "other")
-WVSCA20whitemen <- filter(WVSCA20, female == 0 & ethn == "white")
+WVSCA20white <- filter(WVSCA20, ethn == "White")
+WVSCA20black <- filter(WVSCA20, ethn == "Black")
+WVSCA20westasian <- filter(WVSCA20, ethn == "West Asian")
+WVSCA20southeastasian <- filter(WVSCA20, ethn == "Southeast Asian")
+WVSCA20arabic <- filter(WVSCA20, ethn == "Arabic")
+WVSCA20southasian <- filter(WVSCA20, ethn == "South Asian")
+WVSCA20hispanic <- filter(WVSCA20, ethn == "Hispanic")
+WVSCA20indigenous <- filter(WVSCA20, ethn == "Indigenous")
+WVSCA20chinese <- filter(WVSCA20, ethn == "Chinese")
+WVSCA20filipino <- filter(WVSCA20, ethn == "Filipino")
+WVSCA20korean <- filter(WVSCA20, ethn == "Korean")
+WVSCA20japanese <- filter(WVSCA20, ethn == "Japanese")
+WVSCA20other <- filter(WVSCA20, ethn == "Other")
+WVSCA20whitemen <- filter(WVSCA20, female == 0 & ethn == "White")
 WVSCA20whitewomen <- filter(WVSCA20, female == 1 &
-                              ethn == "white")
+                              ethn == "White")
 WVSCA20nonwhitemen <- filter(WVSCA20, female == 0 &
-                               ethn != "white")
+                               ethn != "White")
 WVSCA20nonwhitewomen <- filter(WVSCA20, female == 1 &
-                                 ethn != "white")
+                                 ethn != "White")
 WVSCA20immigrantmen <- filter(WVSCA20, female == 0 & immig == 2)
 WVSCA20immigrantwomen <- filter(WVSCA20, female == 1 & immig == 2)
 WVSCA20nonimmigrantmen <- filter(WVSCA20, female == 0 & immig == 1)
@@ -1599,7 +1673,8 @@ GSS20$ethn[GSS20$VISMIN_C == 9] <- "Other"
 GSS20$ethn[GSS20$VISMIN_C == 10] <- "White"
 GSS20$ethn[GSS20$ABM_01A == 2] <- "Indigenous"
 GSS20$ethn <- as.factor(GSS20$ethn)
-GSS20$weight <- GSS20$WGHT_PER # 10.0000 - 32631.0308
+GSS20$weight <- GSS20$WGHT_PER / (sum(GSS20$WGHT_PER) / nrow(GSS20))
+ # 10.0000 - 32631.0308 before adjustment
 prop.table(table(GSS20$female))
 prop.table(table(GSS20$lang))
 prop.table(table(GSS20$education))
@@ -2107,9 +2182,11 @@ PlotInterestWVS <- ggplot(WVSCA20, aes(x = interest, weight = weight)) +
        y = "Frequency") +
   theme_minimal() +
   theme(text = element_text(family = "CM Roman"))
+
 PlotInterestGSS <- ggplot(GSS20, aes(x = interest, weight = weight)) +
   geom_histogram(binwidth = (100/3)) +
   scale_x_continuous(breaks = c(0, 25, 50, 75, 100)) +
+  scale_y_continuous(labels = scales::comma) +
   labs(x = "General political interest -\n2020 GSS - Canada",
        y = "Frequency") +
   theme_minimal() +
@@ -2265,7 +2342,7 @@ Model1Young <- nlme::lme(data = CCPISYoung, fixed = interest ~ female,
 summary(Model1Young) # N.S.
 Model01Young <- nlme::lme(data = CCPISYoung, fixed = interest ~ female *
                             age + age_squared + female * white + immig + lang +
-                            agentic + communal + school, random = ~ 1 | Class,
+                            agentic + communal, random = ~ 1 | Class,
                           na.action = na.omit)
 summary(Model01Young)
 Model2Young <- nlme::lme(data = CCPISYoung, fixed = interest_health ~
@@ -2273,7 +2350,7 @@ Model2Young <- nlme::lme(data = CCPISYoung, fixed = interest_health ~
 summary(Model2Young) # N.S.
 Model02Young <- nlme::lme(data = CCPISYoung, fixed = interest_health ~
                             female * age + age_squared + female * white +
-                            immig + lang + agentic + communal + school,
+                            immig + lang + agentic + communal,
                           random = ~ 1 | Class, na.action = na.omit)
 summary(Model02Young)
 Model3Young <- nlme::lme(data = CCPISYoung, fixed = interest_foreign ~
@@ -2281,7 +2358,7 @@ Model3Young <- nlme::lme(data = CCPISYoung, fixed = interest_foreign ~
 summary(Model3Young) # p<0.05
 Model03Young <- nlme::lme(data = CCPISYoung, fixed = interest_foreign ~
                             female * age + age_squared + female * white +
-                            immig + lang + agentic + communal + school,
+                            immig + lang + agentic + communal,
                           random = ~ 1 | Class, na.action = na.omit)
 summary(Model03Young)
 Model4Young <- nlme::lme(data = CCPISYoung, fixed = interest_law ~
@@ -2289,7 +2366,7 @@ Model4Young <- nlme::lme(data = CCPISYoung, fixed = interest_law ~
 summary(Model4Young) # p<0.1 girls higher!
 Model04Young <- nlme::lme(data = CCPISYoung, fixed = interest_law ~
                             female * age + age_squared + female * white +
-                            immig + lang + agentic + communal + school,
+                            immig + lang + agentic + communal,
                           random = ~ 1 | Class, na.action = na.omit)
 summary(Model04Young)
 Model5Young <- nlme::lme(data = CCPISYoung, fixed = interest_education ~
@@ -2297,7 +2374,7 @@ Model5Young <- nlme::lme(data = CCPISYoung, fixed = interest_education ~
 summary(Model5Young) # N.S.
 Model05Young <- nlme::lme(data = CCPISYoung, fixed = interest_education ~
                             female * age + age_squared + female * white +
-                            immig + lang + agentic + communal + school,
+                            immig + lang + agentic + communal,
                           random = ~ 1 | Class, na.action = na.omit)
 summary(Model05Young)
 Model6Young <- nlme::lme(data = CCPISYoung, fixed = interest_partisan ~
@@ -2305,55 +2382,10 @@ Model6Young <- nlme::lme(data = CCPISYoung, fixed = interest_partisan ~
 summary(Model6Young) # p<0.05
 Model06Young <- nlme::lme(data = CCPISYoung, fixed = interest_partisan ~
                             female * age + age_squared + female * white +
-                            immig + lang + agentic + communal + school,
+                            immig + lang + agentic + communal,
                           random = ~ 1 | Class, na.action = na.omit)
 summary(Model06Young)
-modelsummary::modelsummary(models = list(
-  "Politics (general)" = Model1Young, "Health care" = Model2Young,
-  "International affairs" = Model3Young, "Law and crime" = Model4Young,
-  "Education" = Model5Young, "Partisan politics" = Model6Young),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  notes = c("Method: Multilevel linear regression",
-            "Fixed Effects: Classroom",
-            "Controls: None"),
-  title = paste("Interest in topic by gender (ages 10-15)",
-                "\\label{tab:lmeInterestYoungCCPIS}"),
-  coef_rename = c("female1" = "Gender (1 = girl)"),
-  output = "latex") |>
-    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
-modelsummary::modelsummary(models = list(
-  "Politics (general)" = Model01Young, "Health care" = Model02Young,
-  "International affairs" = Model03Young, "Law and crime" = Model04Young,
-  "Education" = Model05Young, "Partisan politics" = Model06Young),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
-  notes = c("Method: Multilevel linear regression",
-            "Fixed Effects: Classroom",
-            #"Controls: Socio-demographic, personality traits#, schools",
-            "Reference Category for Language: Other languages spoken at home",
-            "Reference Category for School: School #1"
-  ),
-  title = paste("Interest in topic by gender (ages 10-15)",
-                "\\label{tab:lmeInterestYoungCCPISAlt}"),
-  coef_rename = c(
-    "female1" = "Gender (1 = girl)",
-    "age" = "Age",
-    "age_squared" = "Age squared",
-    "white" = "Ethnicity (1 = white)",
-    "immig" = "Immigrant",
-    "langAnglophone" = "English spoken at home",
-    "langFrancophone" = "French spoken at home",
-    "agentic" = "Agency",
-    "communal" = "Communality",
-    "schoolCollège Citoyen" = "School #4",
-    "schoolCollège mariste de Québec" = "School #3",
-    "schoolÉcole de la Rose-des-Vents" = "School #6",
-    "schoolÉcole Jean-de-Brébeuf" = "School #2",
-    "schoolJaya International High School" = "School #5",
-    "schoolRenfrew County DSB Student Senate" = "School #8",
-    "schoolUrban Village Academy" = "School #7"),
-  output = "latex") |>
-    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
+
 Model0Old <- nlme::lme(data = CCPISOld, fixed = interest ~ # empty model
                          1, random = ~ 1 | Class, na.action = na.omit)
 Model0Oldeffects <- nlme::VarCorr(Model0Old)
@@ -2366,7 +2398,7 @@ Model1Old <- nlme::lme(data = CCPISOld, fixed = interest ~ female,
 summary(Model1Old) # p<0.05
 Model01Old <- nlme::lme(data = CCPISOld, fixed = interest ~ female * age +
                           age_squared + female * white + immig + lang +
-                          agentic + communal + school, random = ~ 1 | Class,
+                          agentic + communal, random = ~ 1 | Class,
                         na.action = na.omit)
 summary(Model01Old)
 Model2Old <- nlme::lme(data = CCPISOld, fixed = interest_health ~
@@ -2374,7 +2406,7 @@ Model2Old <- nlme::lme(data = CCPISOld, fixed = interest_health ~
 summary(Model2Old) # N.S.
 Model02Old <- nlme::lme(data = CCPISOld, fixed = interest_health ~ female *
                           age + age_squared + female * white + immig + lang +
-                          agentic + communal + school, random = ~ 1 | Class,
+                          agentic + communal, random = ~ 1 | Class,
                         na.action = na.omit)
 summary(Model02Old)
 Model3Old <- nlme::lme(data = CCPISOld, fixed = interest_foreign ~
@@ -2382,7 +2414,7 @@ Model3Old <- nlme::lme(data = CCPISOld, fixed = interest_foreign ~
 summary(Model3Old) # p<0.01
 Model03Old <- nlme::lme(data = CCPISOld, fixed = interest_foreign ~ female *
                           age + age_squared + female * white + immig + lang +
-                          agentic + communal + school, random = ~ 1 | Class,
+                          agentic + communal, random = ~ 1 | Class,
                         na.action = na.omit)
 summary(Model03Old)
 Model4Old <- nlme::lme(data = CCPISOld, fixed = interest_law ~
@@ -2390,7 +2422,7 @@ Model4Old <- nlme::lme(data = CCPISOld, fixed = interest_law ~
 summary(Model4Old) # N.S.
 Model04Old <- nlme::lme(data = CCPISOld, fixed = interest_law ~ female *
                           age + age_squared + female * white + immig + lang +
-                          agentic + communal + school, random = ~ 1 | Class,
+                          agentic + communal, random = ~ 1 | Class,
                         na.action = na.omit)
 summary(Model04Old)
 Model5Old <- nlme::lme(data = CCPISOld, fixed = interest_education ~
@@ -2398,7 +2430,7 @@ Model5Old <- nlme::lme(data = CCPISOld, fixed = interest_education ~
 summary(Model5Old) # N.S.
 Model05Old <- nlme::lme(data = CCPISOld, fixed = interest_education ~
                           female * age + age_squared + female * white + immig +
-                          lang + agentic + communal + school, random = ~ 1 |
+                          lang + agentic + communal, random = ~ 1 |
                           Class, na.action = na.omit)
 summary(Model05Old)
 Model6Old <- nlme::lme(data = CCPISOld, fixed = interest_partisan ~
@@ -2406,41 +2438,25 @@ Model6Old <- nlme::lme(data = CCPISOld, fixed = interest_partisan ~
 summary(Model6Old) # p<0.01
 Model06Old <- nlme::lme(data = CCPISOld, fixed = interest_partisan ~
                           female * age + age_squared + female * white + immig +
-                          lang + agentic + communal + school, random = ~ 1 |
+                          lang + agentic + communal, random = ~ 1 |
                           Class, na.action = na.omit)
 summary(Model06Old)
+
 modelsummary::modelsummary(models = list(
-  "Ages 10-15" = list(
-    "Politics (general)" = Model1Young, "Health care" = Model2Young,
-    "International affairs" = Model3Young, "Law and crime" = Model4Young,
-    "Education" = Model5Young, "Partisan politics" = Model6Young),
-  "Ages 16-18" = list(
-    "Politics (general)" = Model1Old, "Health care" = Model2Old,
-    "International affairs" = Model3Old, "Law and crime" = Model4Old,
-    "Education" = Model5Old, "Partisan politics" = Model6Old)),
+  "Ages 10--15" = list(
+    "Politics (general)" = Model01Young, "Health care" = Model02Young,
+    "International affairs" = Model03Young, "Law and crime" = Model04Young,
+    "Education" = Model05Young, "Partisan politics" = Model06Young),
+  "Ages 15--18" = list(
+    "Politics (general)" = Model01Old, "Health care" = Model02Old,
+    "International affairs" = Model03Old, "Law and crime" = Model04Old,
+    "Education" = Model05Old, "Partisan politics" = Model06Old)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
-            "Controls: None"),
+            "Reference Category for Language: Other languages spoken at home"),
   title = paste("Interest in topic by gender",
-                "\\label{tab:lmeInterestYoungOldCCPIS}"),
-  coef_rename = c("female1" = "Gender (1 = girl)"),
-  output = "latex") |>
-    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
-modelsummary::modelsummary(models = list(
-  "Politics (general)" = Model01Old, "Health care" = Model02Old,
-  "International affairs" = Model03Old, "Law and crime" = Model04Old,
-  "Education" = Model05Old, "Partisan politics" = Model06Old),
-  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  #coef_omit = "age|white|immig|lang|agentic|communal|#school",
-  notes = c("Method: Multilevel linear regression",
-            "Fixed Effects: Classroom",
-            #"Controls: Socio-demographic, personality traits#, schools",
-            "Reference Category for Language: Other languages spoken at home",
-            "Reference Category for School: School #1"
-  ),
-  title = paste("Interest in topic by gender (ages 16-18)",
-                "\\label{tab:lmeInterestOldCCPISAlt}"),
+               "\\label{tab:lmeInterestYoungOldCCPISCtrl}"),
   coef_rename = c(
     "female1" = "Gender (1 = girl)",
     "age" = "Age",
@@ -2450,16 +2466,30 @@ modelsummary::modelsummary(models = list(
     "langAnglophone" = "English spoken at home",
     "langFrancophone" = "French spoken at home",
     "agentic" = "Agency",
-    "communal" = "Communality",
-    "schoolCollège Citoyen" = "School #4",
-    "schoolCollège mariste de Québec" = "School #3",
-    "schoolÉcole de la Rose-des-Vents" = "School #6",
-    "schoolÉcole Jean-de-Brébeuf" = "School #2",
-    "schoolJaya International High School" = "School #5",
-    "schoolRenfrew County DSB Student Senate" = "School #8",
-    "schoolUrban Village Academy" = "School #7"),
+    "communal" = "Communality"),
   output = "latex") |>
     kableExtra::kable_styling(font_size = 6, full_width = FALSE)
+modelsummary::modelsummary(models = list(
+  "Ages 10--15" = list(
+    "Politics (general)" = Model1Young, "Health care" = Model2Young,
+    "International affairs" = Model3Young, "Law and crime" = Model4Young,
+    "Education" = Model5Young, "Partisan politics" = Model6Young),
+  "Ages 16--18" = list(
+    "Politics (general)" = Model1Old, "Health care" = Model2Old,
+    "International affairs" = Model3Old, "Law and crime" = Model4Old,
+    "Education" = Model5Old, "Partisan politics" = Model6Old),
+  ),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  title = paste("Interest in topic by gender",
+               "\\label{tab:lmeInterestYoungOldCCPIS}"),
+  coef_rename = c(
+    "female1" = "Gender (1 = girl)"),
+  output = "latex") |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
+
 
 CCPISGrouped <- CCPIS |>
   group_by(age, female) |>
@@ -2588,25 +2618,27 @@ Model06DG <- lm(data = DG, formula = interest_partisan ~ female * age +
                   age_squared + female * white + immig + lang + income_mid +
                   income_high + educ_mid + educ_high)
 modelsummary::modelsummary(models = list(
-  "Simple" = list("Politics (general)" = Model1DG, "Health care" = Model2DG,
-                  "International affairs" = Model3DG,
-                  "Law and crime" = Model4DG, "Education" = Model5DG,
-                  "Partisan politics" = Model6DG),
-  "Multiple" = list("Politics (general)" = Model01DG,
-                    "Health care" = Model02DG,
-                    "International affairs" = Model03DG,
-                    "Law and crime" = Model04DG, "Education" = Model05DG,
-                    "Partisan politics" = Model06DG)),
+  "Without Controls" = list("Politics (general)" = Model1DG,
+                            "Health care" = Model2DG,
+                            "International affairs" = Model3DG,
+                            "Law and crime" = Model4DG,
+                            "Education" = Model5DG,
+                            "Partisan politics" = Model6DG),
+  "With Controls" = list("Politics (general)" = Model01DG,
+                        "Health care" = Model02DG,
+                        "International affairs" = Model03DG,
+                        "Law and crime" = Model04DG, "Education" = Model05DG,
+                        "Partisan politics" = Model06DG)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
   notes = "Ordinary least squares (OLS) regression",
-  title = "(\\#tab:olsInterestDg) Political interest by gender",
+  title = paste("Interest in topic by gender \\label{tab:olsInterestDg}"),
   coef_rename = c(
     "female1" = "Gender (1 = women)",
     "age" = "Age",
     "age_squared" = "Age squared",
     "white" = "Ethnicity (1 = white)",
     "immig" = "Immigrant",
-    "langFrancophone" = "French spoken at home",
+    "langFrench" = "French spoken at home",
     "income_mid" = "Income between \\$60,000 and \\$150,000",
     "income_high" = "Income above \\$150,000",
     "educ_mid" = "Education: college",
@@ -2821,6 +2853,53 @@ ggsave(plot = ggpubr::ggarrange(
   "_graphs/TimeCESWVSGSS.pdf", height = 4.25, width = 5.5)
 
 summary(lm(data = GSS20, formula = interest / 10 ~ female, weights = weight))
+
+### 3.1.1.1 Political interest by gender and province ####
+prop.table(table(GSS20$province, GSS20$female, GSS20$interest))
+ProvinceData <- CES21 |>
+  filter(!is.na(female) & !is.na(province)) |>
+  group_by(province, female) |>
+  summarise(interest_ces = weighted.mean(interest, w = weight, na.rm = TRUE)) |>
+  filter(!is.na(interest_ces))
+WVSCAProv <- WVSCA20 |>
+  filter(!is.na(female) & !is.na(province)) |>
+  group_by(province, female) |>
+  summarise(interest = weighted.mean(interest, w = weight, na.rm = TRUE))
+ProvinceData$interest_wvsca <- WVSCAProv$interest
+GSSProv <- GSS20 |>
+  filter(!is.na(female) & !is.na(province)) |>
+  group_by(province, female) |>
+  summarise(interest = weighted.mean(interest, w = weight, na.rm = TRUE))
+ProvinceData$interest_gss <- GSSProv$interest
+#openxlsx::write.xlsx(ProvinceData, "_data/InterestByGenderAndProvince.xlsx")
+
+### 3.1.1.2 Political interest by gender gap by year and age ####
+CESGapYearAge <- CES |>
+  filter(!is.na(female) & !is.na(weight)) |>
+  group_by(female, year, age) |>
+  reframe(interest = weighted.mean(interest, w = weight, na.rm = TRUE),
+          n = n()) |>
+  group_by(year, age) |>
+  reframe(interest_gap = interest[female == 1] - interest[female == 0],
+          n = sum(n, na.rm = T))
+ggplot(CESGapYearAge,
+       aes(x = age, y = interest_gap / 10, color = as.factor(year), weight = n,
+           group = as.factor(year), linetype = as.factor(year))) +
+  geom_smooth(aes(weight = NULL), linewidth = 0.25, alpha = 0.1, se = F) +
+  geom_hline(yintercept = 0) +
+  scale_y_continuous(name = "General political interest gender gap") +
+  scale_x_discrete(name = "Age, 2021 CES") +
+  scale_color_manual(name = "Year", values = c(
+    "1997" = "grey20", "2000" = "grey20", "2004" = "grey20", "2006" = "grey50",
+    "2008" = "grey50", "2011" = "grey50", "2015" = "grey80", "2019" = "grey80",
+    "2021" = "grey80")) +
+  scale_linetype_manual(name = "Year", values = c(
+    "1997" = "solid", "2000" = "dotted", "2004" = "dashed", "2006" = "solid",
+    "2008" = "dotted", "2011" = "dashed", "2015" = "solid", "2019" = "dotted",
+    "2021" = "dashed")) +
+  theme_minimal() +
+  theme(text = element_text(family = "CM Roman"))
+ggsave("_graphs/CESGapYearAge.pdf", height = 4.25, width = 5.5)
 
 ### 3.1.2 Political interest by year & gender (CES & WVS) ####
 weighted.interest.se <- function(data) {
@@ -3090,14 +3169,19 @@ GenderEthnicityInterest$group <- factor(
              "Nonwhite women", "Immigrant men", "Immigrant women",
              "Nonimmigrant men", "Nonimmigrant women"))
 ggplot(GenderEthnicityInterest, aes(x = group, y = interest,
-                                    color = year, )) +
+                                    color = year, shape = year)) +
   geom_point(position = position_dodge(width = 0.5), size = 0.75) +
   geom_errorbar(aes(ymin = interest.lb, ymax = interest.ub),
-                width = 0.5, position = position_dodge(width = 0.5)) +
+                width = 0, position = position_dodge(width = 0.5)) +
   scale_y_continuous(name = "General political interest",
                      limits = c(0, 100)) +
   scale_x_discrete(name = "Group") +
-  scale_color_grey(name = "Wave") +
+  scale_color_manual(name = "Wave", values = c(
+    "CES 2021" = "grey20", "GSS 2013" = "grey50", "GSS 2020" = "grey20",
+    "WVS 2000" = "grey80", "WVS 2006" = "grey50", "WVS 2020" = "grey20")) +
+  scale_shape_manual(name = "Wave", values = c(
+    "CES 2021" = 1, "GSS 2013" = 2, "GSS 2020" = 2,
+    "WVS 2000" = 3, "WVS 2006" = 3, "WVS 2020" = 3)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
@@ -3244,6 +3328,20 @@ ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
   theme(axis.text.x = element_text(angle = 45),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopics.pdf", width = 8.5, height = 4.25)
+ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
+  geom_bar(position = "fill") +
+  facet_wrap(~topic, ncol = 6) +
+  scale_x_discrete("Gender") +
+  scale_y_continuous("Percent of students", labels = scales::percent) +
+  scale_fill_grey("Parent who\ndiscusses the\ntopic most often",
+                      labels = c("Father", "Mother",
+                                 paste0("Don't know/\nPrefer not\nto answer/",
+                                        "\nMissing")),
+                      start = 0.2, end = 0.6, na.value = "grey90") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/ParentTopicsGrey.pdf", width = 8.5, height = 4.25)
 
 CCPISBoysGraph <- CCPISBoys |>
   pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
@@ -3274,6 +3372,17 @@ ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopicsMomDad.pdf", width = 8.5, height = 4.25)
+ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~sex) +
+  scale_x_discrete("Topic most often discussed with parent") +
+  scale_y_continuous("Percent of students", labels = scales::percent) +
+  scale_fill_grey("Parent",
+                      labels = c("Father", "Mother")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/ParentTopicsMomDadGrey.pdf", width = 8.5, height = 4.25)
 
 ## Peers
 CCPISBoysPeerGraph <- CCPISBoys |>
@@ -3307,6 +3416,17 @@ ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/PeersTopics.pdf", width = 5.5, height = 4.25)
+ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  facet_wrap(~sex) +
+  scale_x_discrete("Topic most often discussed with peers") +
+  scale_y_continuous("Percent of students", labels = scales::percent) +
+  scale_fill_grey("Peers", start = 0.8, end = 0.2,
+                      labels = c("Female", "Male")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/PeersTopicsGrey.pdf", width = 5.5, height = 4.25)
 
 #### Regression models ####
 #### 1. Create longer versions of each dataset ####

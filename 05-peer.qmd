@@ -18,6 +18,13 @@ Questions are also asked about students' peers and interests. First, students ar
 
 Gender homophily holds among the sample of students: when excluding students who say they have as many friends of both genders, no less than 95% of boys and 91% of girls report that most of their friends are of the same genders as theirs.
 
+```{r}
+#| label: fig-peers
+#| echo: false
+#| fig-cap: "Topic most often discussed with peers by child gender, 2023 CCPIS data"
+knitr::include_graphics("_graphs/PeersTopicsGrey.pdf")
+```
+
 ### Topics Most Often Discussed with Female Friends
 
 @tbl-femalefriends shows students' interest in a specific topic depending on it being the topic they most often discuss with their female friends. For both boys and girls, interest in law and crime is related to their female friends discussing law and crime (*p*<0.05). If a girl's female friends discuss mostly law and crime among the five topics, her interest in law and crime is expected to increase by 1.6 points on the 11-point scale. For boys, the expected increase is 1.1 points. For girls, interest in international affairs and partisan politics is also related to their female friends discussing the topic with them (*p*<0.05 and *p*<0.01 respectively), but not for boys. If a girl's female friends discuss mostly international affairs among the five topics, her interest in this topic is expected to increase by 1.2 points. If her female friends discuss mostly partisan politics, her interest in that topic is expected to increase by a large 6.4 points. All other relationships are non-significant at the *p*<0.05 level.

@@ -96,7 +96,7 @@ All multilevel regression results presented in this chapter include controls for
 #| label: fig-parents
 #| echo: false
 #| fig-cap: "Topic most often discussed with parents by child gender, 2023 CCPIS data"
-knitr::include_graphics("_graphs/ParentTopics.pdf")
+knitr::include_graphics("_graphs/ParentTopicsGrey.pdf")
 ```
 
 These results match with what previous literature has found about women reporting more interest in education and health care, and men reporting more interest in partisan politics, law and crime, and international affairs. Hypotheses 1b and 1c are therefore corroborated, as opposed to Hypothesis 1a. Also in line with the literature, parents seem to talk about various political topics just as much with their sons as with their daughters. Hypothesis 1d is therefore corroborated, as opposed to Hypotheses 1e and 1f, which hypothesized agency-related topics would be more prevalent in discussions with sons while communality-related topics would be more prevalent in discussions with daughters.
@@ -107,7 +107,7 @@ These results match with what previous literature has found about women reportin
 #| label: fig-parentsmomdad
 #| echo: false
 #| fig-cap: "Topic most often discussed by mothers and fathers, 2023 CCPIS data"
-knitr::include_graphics("_graphs/ParentTopicsMomDad.pdf")
+knitr::include_graphics("_graphs/ParentTopicsMomDadGrey.pdf")
 ```
 
 The gender gap in political topics discussed is pretty stark between mothers and fathers, according to their children's assessments. It is important to specify that given the question's phrasing, it is not clear if these interactions are initiated by parents or by their children, and if it is reflective of top-down or trickle-up political socialization [@mcdevitt2002]. Moreover, the question does not ask children to specify a percentage of interactions about each topic started by the mother or father; it simply asks them to pick the parent most likely to have these discussions with them. There is no assumption that mothers are the only ones talking about health care and fathers the only ones to talk about international affairs, but on average, they are more likely to raise this topic than the other-gender parent --- with the caveat that children may have been thinking about health care and education in a broader sense than simply their political aspects, despite prior prompting that should encourage them to think about political aspects.
