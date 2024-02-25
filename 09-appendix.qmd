@@ -1611,84 +1611,21 @@ Veuillez indiquer votre âge
 | --- | --- |
 | L'anglais |  |
 
-# Political Interest by Gender (Without Controls) {#sec-appendix4}
+# Political Interest by Gender {#sec-appendix4}
 
-\begin{table}
+```{r}
+#| label: fig-interestccpis
+#| echo: false
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Children, 2022 CCPIS"
+knitr::include_graphics("_graphs/GenderCCPIS.pdf")
+```
 
-\caption{Interest in topic by gender \label{tab:lmeInterestYoungOldCCPISCtrl}}
-\centering
-\fontsize{6}{8}\selectfont
-\begin{tabular}[t]{lcccccc}
-\toprule
-  & Politics (general) & Health care & International affairs & Law and crime & Education & Partisan politics\\
-\midrule
-\addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{Ages 10--15}}\\
-\midrule \hspace{1em}(Intercept) & 5.112 & 18.491 & 13.014 & 18.434 & 29.447 & 31.890\\
-\hspace{1em} & (20.424) & (18.230) & (21.161) & (23.012) & (20.589) & (20.751)\\
-\hspace{1em}Gender (1 = girl) & 2.209 & 1.639 & -0.719 & -4.107 & 2.164 & 0.157\\
-\hspace{1em} & (3.782) & (3.654) & (4.183) & (4.443) & (4.226) & (4.145)\\
-\hspace{1em}Age & -0.917 & -2.466 & -1.402 & -1.945 & -4.101 & -4.335\\
-\hspace{1em} & (3.078) & (2.743) & (3.179) & (3.459) & (3.083) & (3.114)\\
-\hspace{1em}Age squared & 0.042 & 0.091 & 0.043 & 0.061 & 0.153 & 0.148\\
-\hspace{1em} & (0.116) & (0.103) & (0.120) & (0.130) & (0.116) & (0.117)\\
-\hspace{1em}Ethnicity (1 = white) & 0.651 & 0.490 & 1.333* & -0.097 & 1.159+ & 0.674\\
-\hspace{1em} & (0.571) & (0.563) & (0.628) & (0.671) & (0.641) & (0.630)\\
-\hspace{1em}Immigrant & 0.001 & 0.354 & -0.131 & 1.423+ & 1.355+ & 0.153\\
-\hspace{1em} & (0.618) & (0.620) & (0.701) & (0.750) & (0.718) & (0.697)\\
-\hspace{1em}English spoken at home & -1.075 & -0.844 & -2.490** & -0.440 & -1.134 & -1.342+\\
-\hspace{1em} & (0.709) & (0.685) & (0.801) & (0.845) & (0.791) & (0.794)\\
-\hspace{1em}French spoken at home & 0.244 & -0.218 & -0.664 & -0.365 & -0.379 & 0.646\\
-\hspace{1em} & (0.480) & (0.473) & (0.532) & (0.567) & (0.531) & (0.526)\\
-\hspace{1em}Agency & 3.303** & 1.783+ & 2.386* & 3.067* & 1.059 & 2.688*\\
-\hspace{1em} & (1.048) & (1.028) & (1.167) & (1.252) & (1.183) & (1.156)\\
-\hspace{1em}Communality & 2.113* & 0.940 & 3.235** & -0.624 & 0.507 & 1.817\\
-\hspace{1em} & (1.038) & (1.049) & (1.194) & (1.256) & (1.206) & (1.192)\\
-\hspace{1em}Gender (1 = girl):Age & -0.130 & -0.055 & -0.008 & 0.372 & -0.100 & -0.044\\
-\hspace{1em} & (0.266) & (0.259) & (0.297) & (0.315) & (0.300) & (0.294)\\
-\hspace{1em}Gender (1 = girl):Ethnicity (1 = white) & -1.044 & -1.217+ & -0.540 & -0.186 & -1.466+ & -0.793\\
-\hspace{1em} & (0.709) & (0.697) & (0.781) & (0.839) & (0.800) & (0.782)\\
-\hspace{1em}SD (Intercept Class) & 0.657 & 0.289 & 0.378 & 0.474 & 0.000 & 0.280\\
-\hspace{1em}SD (Observations) & 2.426 & 2.445 & 2.759 & 2.957 & 2.811 & 2.746\\
-\hspace{1em}Num.Obs. & 233 & 234 & 231 & 234 & 232 & 231\\
-\hspace{1em}R2 Marg. & 0.125 & 0.052 & 0.184 & 0.062 & 0.057 & 0.171\\
-\addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{Ages 15--18}}\\
-\midrule \hspace{1em}(Intercept) & -78.879 & -107.542 & 139.391 & 81.430 & 262.004* & -155.624\\
-\hspace{1em} & (134.429) & (123.503) & (140.695) & (142.891) & (132.406) & (139.744)\\
-\hspace{1em}Gender (1 = girl) & -6.509 & -1.767 & -11.013 & 10.504 & 2.762 & 1.292\\
-\hspace{1em} & (8.458) & (8.049) & (9.098) & (9.186) & (8.614) & (9.154)\\
-\hspace{1em}Age & 9.926 & 13.065 & -15.755 & -9.562 & -31.733* & 18.750\\
-\hspace{1em} & (16.109) & (14.781) & (16.842) & (17.129) & (15.845) & (16.728)\\
-\hspace{1em}Age squared & -0.304 & -0.386 & 0.456 & 0.298 & 0.968* & -0.561\\
-\hspace{1em} & (0.482) & (0.442) & (0.503) & (0.513) & (0.473) & (0.500)\\
-\hspace{1em}Ethnicity (1 = white) & 0.574 & 0.063 & 0.661 & 0.017 & -0.388 & 0.579\\
-\hspace{1em} & (0.388) & (0.386) & (0.429) & (0.426) & (0.415) & (0.435)\\
-\hspace{1em}Immigrant & -0.244 & 0.260 & -1.003* & -1.401*** & -0.130 & -0.626\\
-\hspace{1em} & (0.382) & (0.376) & (0.417) & (0.417) & (0.402) & (0.425)\\
-\hspace{1em}English spoken at home & 0.317 & 0.170 & -0.957 & -0.409 & 1.451* & 0.761\\
-\hspace{1em} & (0.556) & (0.572) & (0.617) & (0.615) & (0.630) & (0.623)\\
-\hspace{1em}French spoken at home & -0.248 & 0.316 & -0.233 & -0.203 & 0.876* & 0.507\\
-\hspace{1em} & (0.344) & (0.343) & (0.378) & (0.378) & (0.369) & (0.383)\\
-\hspace{1em}Agency & 3.210*** & 0.957 & 2.036* & 1.891* & 1.462+ & 3.407***\\
-\hspace{1em} & (0.815) & (0.801) & (0.895) & (0.888) & (0.858) & (0.920)\\
-\hspace{1em}Communality & 1.332 & 1.131 & 1.348 & -0.199 & 1.741+ & 0.673\\
-\hspace{1em} & (0.871) & (0.870) & (0.958) & (0.957) & (0.925) & (0.996)\\
-\hspace{1em}Gender (1 = girl):Age & 0.391 & 0.123 & 0.660 & -0.597 & -0.168 & -0.075\\
-\hspace{1em} & (0.517) & (0.491) & (0.555) & (0.561) & (0.526) & (0.559)\\
-\hspace{1em}Gender (1 = girl):Ethnicity (1 = white) & -0.631 & -0.023 & -0.942 & -0.327 & -0.102 & -1.300*\\
-\hspace{1em} & (0.544) & (0.540) & (0.599) & (0.597) & (0.579) & (0.608)\\
-\hspace{1em}SD (Intercept Class) & 0.000 & 0.465 & 0.213 & 0.271 & 0.725 & 0.000\\
-\hspace{1em}SD (Observations) & 2.388 & 2.338 & 2.632 & 2.602 & 2.488 & 2.692\\
-\hspace{1em}Num.Obs. & 325 & 329 & 328 & 325 & 329 & 330\\
-\hspace{1em}R2 Marg. & 0.086 & 0.021 & 0.089 & 0.057 & 0.065 & 0.093\\
-\bottomrule
-\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Reference Category for Language: Other languages spoken at home}\\
-\end{tabular}
-\end{table}
+```{r}
+#| label: fig-interestdg
+#| echo: false
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Adults, 2023 Datagotchi PES"
+knitr::include_graphics("_graphs/GenderDG.pdf")
+```
 
 # Political Interest Transmission by Parents (Control Variables Added) {#sec-appendix5}
 

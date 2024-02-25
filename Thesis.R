@@ -6,7 +6,7 @@
 #webshot::install_phantomjs() for saving modelsummary to png or jpg
 pacman::p_load(tidyverse, extrafont, ggtext, openxlsx, qdap, psy, kableExtra,
                readstata13, haven, anesrake, questionr, ggpubr, nlme,
-               modelsummary, Hmisc, scales, ggtext, tribble, pwr, lme4)
+               modelsummary, Hmisc, scales, ggtext, pwr, lme4, lmtest)
 
 ### 1. Data cleaning ####
 #### 1.1 CCPIS ####
@@ -488,7 +488,8 @@ AgencyVariableNames <- c(
 AgencyFactorLoadings <- AgencyFactorAnalysis$loadings[, 1]
 AgencyFirstEigenvalue <- round(eigen(cor(AgencyScale))$values[1], digits = 2)
 ggplot(data.frame(AgencyVariableNames, AgencyFactorLoadings),
-       aes(x = AgencyVariableNames, y = AgencyFactorLoadings)) +
+       aes(x = reorder(AgencyVariableNames, desc(AgencyVariableNames)),
+           y = AgencyFactorLoadings)) +
   coord_flip() +
   geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
            width = 0.4) +
@@ -510,8 +511,8 @@ ggplot(data.frame(AgencyVariableNames, AgencyFactorLoadings),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/AgencyScale.pdf", width = 11, height = 4.25)
 
-delete_rows_na <- function(row, loadings) {
-  if (sum(is.na(row)) <= 5) {
+delete_rows_na <- function(row, loadings, number_na_allowed = 5) {
+  if (sum(is.na(row)) <= number_na_allowed) {
     # Perform element-wise multiplication for each variable and its loading
     variable_contributions <- row * loadings
     return(sum(variable_contributions, na.rm = TRUE) /
@@ -544,7 +545,8 @@ CommunalityFactorLoadings <- CommunalityFactorAnalysis$loadings[, 1]
 CommunalityFirstEigenvalue <- round(eigen(cor(CommunalityScale))$values[1],
                                     digits = 2)
 ggplot(data.frame(CommunalityVariableNames, CommunalityFactorLoadings),
-       aes(x = CommunalityVariableNames, y = CommunalityFactorLoadings)) +
+       aes(x = reorder(CommunalityVariableNames, desc(CommunalityVariableNames)),
+           y = CommunalityFactorLoadings)) +
   coord_flip() +
   geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
            width = 0.4) +
@@ -1232,25 +1234,6 @@ CES21$age <- CES21$cps21_age
 CES21$immig <- ifelse(CES21$cps21_bornin_canada == "Yes", 1,
                       ifelse(CES21$cps21_bornin_canada == "No", 2, NA))
 CES21$weight <- CES21$cps21_weight_general_all
-CES21men <- filter(CES21, female == 0)
-CES21women <- filter(CES21, female == 1)
-CES21white <- filter(CES21, ethn == "White")
-CES21black <- filter(CES21, ethn == "Black")
-CES21westasian <- filter(CES21, ethn == "West Asian")
-CES21southeastasian <- filter(CES21, ethn == "Southeast Asian")
-CES21arabic <- filter(CES21, ethn == "Arabic")
-CES21southasian <- filter(CES21, ethn == "South Asian")
-CES21hispanic <- filter(CES21, ethn == "Hispanic")
-CES21indigenous <- filter(CES21, ethn == "Indigenous")
-CES21other <- filter(CES21, ethn == "Other")
-CES21whitemen <- filter(CES21, female == 0 & ethn == "White")
-CES21whitewomen <- filter(CES21, female == 1 & ethn == "White")
-CES21nonwhitemen <- filter(CES21, female == 0 & ethn != "White")
-CES21nonwhitewomen <- filter(CES21, female == 1 & ethn != "White")
-CES21immigrantmen <- filter(CES21, female == 0 & immig == 2)
-CES21immigrantwomen <- filter(CES21, female == 1 & immig == 2)
-CES21nonimmigrantmen <- filter(CES21, female == 0 & immig == 1)
-CES21nonimmigrantwomen <- filter(CES21, female == 1 & immig == 1)
 CES21$education <- as.character(CES21$cps21_education)
 CES21$education[
   CES21$education == "Don't know/ Prefer not to answer"] <- NA
@@ -1312,6 +1295,231 @@ CES11$year <- 2011
 CES15$year <- 2015
 CES19$year <- 2019
 CES21$year <- 2021
+CES21$internal_efficacy <- case_when(
+  CES21$cps21_govt_confusing == "Strongly agree" ~ 0,
+  CES21$cps21_govt_confusing == "Somewhat agree" ~ (1 / 3),
+  CES21$cps21_govt_confusing == "Somewhat disagree" ~ (2 / 3),
+  CES21$cps21_govt_confusing == "Strongly disagree" ~ 1)
+CES21$external_efficacy_pre <- case_when(
+  CES21$cps21_govt_say == "Strongly agree" ~ 0,
+  CES21$cps21_govt_say == "Somewhat agree" ~ (1 / 3),
+  CES21$cps21_govt_say == "Somewhat disagree" ~ (2 / 3),
+  CES21$cps21_govt_say == "Strongly disagree" ~ 1)
+CES21$external_efficacy_post <- case_when(
+  CES21$pes21_govtcare == "Strongly agree" ~ 0,
+  CES21$pes21_govtcare == "Somewhat agree" ~ 0.25,
+  CES21$pes21_govtcare == "Neither agree nor disagree" ~ 0.5,
+  CES21$pes21_govtcare == "Somewhat disagree" ~ 0.75,
+  CES21$pes21_govtcare == "Strongly disagree" ~ 1)
+CES21$external_efficacy <- (CES21$external_efficacy_pre +
+                            CES21$external_efficacy_post) / 2
+CES21$know_premier_name <- 0
+CES21$know_premier_name[CES21$cps21_premier_name %in% c(
+  "Sandy Silver_(21)", "Caroline Cochrane_(19)", "Joe Savikataaq_(23)",
+  "John Horgan_(9)", "Jason Kenney_(15)", "Scott Moe_(13)",
+  "Brian Pallister_(1)", "Doug Ford_(25)", "François Legault_(3)",
+  "Blaine Higgs_(7)", "Dennis King_(11)", "Tim Houston_(6)",
+  "Andrew Furey_(17)")] <- 1
+CES21$know_premier_name[CES21$cps21_premier_name %in% c(
+  "I don't know", "Prefer not to answer")] <- NA
+table(CES21$know_premier_name, useNA = "always")
+CES21$know_finmin_name <- 0
+CES21$know_finmin_name[CES21$cps21_finmin_name == "Chrystia Freeland"] <- 1
+CES21$know_finmin_name[CES21$cps21_finmin_name %in% c(
+  "I don't know", "Prefer not to answer")] <- NA
+table(CES21$know_finmin_name, useNA = "always")
+CES21$know_govgen_name <- 0
+CES21$know_govgen_name[CES21$cps21_govgen_name == "Mary Simon"] <- 1
+CES21$know_govgen_name[CES21$cps21_govgen_name %in% c(
+  "I don't know", "Prefer not to answer")] <- NA
+table(CES21$know_govgen_name, useNA = "always")
+clean_participation_scale <- function(x){
+  CES21$x <- CES21[[x]]
+  case_when(CES21$x == "More than five times" ~ 1,
+            CES21$x == "A few times" ~ (2 / 3),
+            CES21$x == "Just once" ~ (1 / 3),
+            CES21$x == "Never" ~ 0)
+}
+CES21$volunteer_community <- clean_participation_scale("cps21_volunteer")
+CES21$attend_meeting_speech <- clean_participation_scale("pes21_partic1_1")
+CES21$attend_protest <- clean_participation_scale("pes21_partic1_2")
+CES21$boycott <- clean_participation_scale("pes21_partic1_3")
+CES21$petition <- clean_participation_scale("pes21_partic1_4")
+CES21$politician_social_media <- clean_participation_scale("pes21_partic2_1")
+CES21$volunteer_partisan <- clean_participation_scale("pes21_partic2_2")
+CES21$contact_politician <- clean_participation_scale("pes21_partic2_3")
+CES21$donation_partisan <- clean_participation_scale("pes21_partic2_4")
+CES21$donation_cause <- clean_participation_scale("pes21_partic3_1")
+CES21$group_partic <- clean_participation_scale("pes21_partic3_2")
+CES21$comment_politics <- clean_participation_scale("pes21_partic3_3")
+CES21$talk_issue_social_media <- clean_participation_scale("pes21_partic3_4")
+
+##### 1.4.1 Factor analysis #####
+EfficacyScale <- na.omit(CES21[, c(
+  "internal_efficacy", "external_efficacy_pre", "external_efficacy_post")])
+EfficacyCronbach <- round(as.numeric(psy::cronbach(EfficacyScale)[3]),
+                          digits = 2)
+EfficacyFactorAnalysis <- factanal(EfficacyScale, factors = 1)
+EfficacyVariableNames <- c(
+  paste("Sometimes, politics and\ngovernment seem so\ncomplicated that a\n",
+        "person like me can't\nreally understand\nwhat's going on"),
+  "People like me don't\nhave any say about\nwhat the government does",
+  "The government does not\ncare much about\nwhat people\nlike me think")
+EfficacyFactorLoadings <- EfficacyFactorAnalysis$loadings[, 1]
+EfficacyFirstEigenvalue <- round(eigen(cor(EfficacyScale))$values[1],
+                                 digits = 2)
+ggplot(data.frame(EfficacyVariableNames, EfficacyFactorLoadings),
+       aes(x = reorder(EfficacyVariableNames, desc(EfficacyVariableNames)),
+           y = EfficacyFactorLoadings)) +
+  coord_flip() +
+  geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
+           width = 0.4) +
+  geom_text(aes(label = as.character(round(
+    EfficacyFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
+    family = "CM Roman") +
+  geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
+  annotate("text", label = paste("Cronbach's alpha =", as.character(
+    EfficacyCronbach)), x = 1.1, y = 0.85, size = 3.8,
+    family = "CM Roman") +
+  annotate("text", label = paste("First eigenvalue =", as.character(
+    EfficacyFirstEigenvalue)), x = 0.9, y = 0.85, size = 3.8,
+    family = "CM Roman") +
+  scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
+                     breaks = seq(-0.1, 1, by = 0.1)) +
+  xlab("") +
+  theme_linedraw() +
+  theme(axis.text.y = element_text(size = 14),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17, size = 14),
+        panel.grid = element_blank(),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/EfficacyScale.pdf", width = 11, height = 4.25)
+# Apply the function to each row and create a new column agentic
+efficacyVariables <- c("internal_efficacy", "external_efficacy_pre",
+                       "external_efficacy_post")
+CES21$efficacy <- apply(CES21[efficacyVariables], 1, delete_rows_na,
+                        loadings = EfficacyFactorLoadings,
+                        number_na_allowed = 1)
+# 0 = efficacious, 1 = not efficacious, at least two answers out of 3 questions
+length(na.omit(CES21$efficacy)) / nrow(CES21) * 100 # 98% available data
+
+KnowScale <- na.omit(CES21[, c(
+  "know_premier_name", "know_finmin_name", "know_govgen_name")])
+KnowCronbach <- round(as.numeric(psy::cronbach(KnowScale)[3]),
+                          digits = 2)
+KnowFactorAnalysis <- factanal(KnowScale, factors = 1)
+KnowVariableNames <- c("Name of Prime Minister", "Name of Finance Minister",
+                       "Name of Governor General")
+KnowFactorLoadings <- KnowFactorAnalysis$loadings[, 1]
+KnowFirstEigenvalue <- round(eigen(cor(KnowScale))$values[1],
+                                 digits = 2)
+ggplot(data.frame(KnowVariableNames, KnowFactorLoadings),
+       aes(x = reorder(KnowVariableNames, desc(KnowVariableNames)),
+           y = KnowFactorLoadings)) +
+  coord_flip() +
+  geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
+           width = 0.4) +
+  geom_text(aes(label = as.character(round(
+    KnowFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
+    family = "CM Roman") +
+  geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
+  annotate("text", label = paste("Cronbach's alpha =", as.character(
+    KnowCronbach)), x = 1.1, y = 0.85, size = 3.8,
+    family = "CM Roman") +
+  annotate("text", label = paste("First eigenvalue =", as.character(
+    KnowFirstEigenvalue)), x = 0.9, y = 0.85, size = 3.8,
+    family = "CM Roman") +
+  scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
+                     breaks = seq(-0.1, 1, by = 0.1)) +
+  xlab("") +
+  theme_linedraw() +
+  theme(axis.text.y = element_text(size = 14),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17, size = 14),
+        panel.grid = element_blank(),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/KnowScale.pdf", width = 11, height = 4.25)
+# Apply the function to each row and create a new column agentic
+knowVariables <- c("know_premier_name", "know_finmin_name",
+                   "know_govgen_name")
+CES21$knowledge <- apply(CES21[knowVariables], 1, delete_rows_na,
+                         loadings = KnowFactorLoadings,
+                         number_na_allowed = 1)
+# 0 = efficacious, 1 = not efficacious, at least two answers out of 3 questions
+length(na.omit(CES21$knowledge)) / nrow(CES21) * 100 # 84% available data
+
+ParticScale <- na.omit(CES21[, c(
+  "volunteer_community", "attend_meeting_speech", "attend_protest", "boycott",
+  "petition", "politician_social_media", "volunteer_partisan",
+  "contact_politician", "donation_partisan", "donation_cause", "group_partic",
+  "comment_politics", "talk_issue_social_media")])
+ParticCronbach <- round(as.numeric(psy::cronbach(ParticScale)[3]),
+                        digits = 2)
+ParticFactorAnalysis <- factanal(ParticScale, factors = 1)
+ParticVariableNames <- c(
+  "Volunteer for group/organization", "Attend political meeting/speech",
+  "Attend protest", "Boycott", "Sign petition",
+  "Follow politician social media", "Volunteer politician",
+  "Contact elected official", "Donation to candidate", "Donation to cause",
+  "Group active membership", "Comment political content",
+  "Discuss politics social media")
+ParticFactorLoadings <- ParticFactorAnalysis$loadings[, 1]
+ParticFirstEigenvalue <- round(eigen(cor(ParticScale))$values[1],
+                               digits = 2)
+ggplot(data.frame(ParticVariableNames, ParticFactorLoadings),
+       aes(x = reorder(ParticVariableNames, desc(ParticVariableNames)),
+           y = ParticFactorLoadings)) +
+  coord_flip() +
+  geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
+           width = 0.4) +
+  geom_text(aes(label = as.character(round(
+    ParticFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
+    family = "CM Roman") +
+  geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
+  annotate("text", label = paste("Cronbach's alpha =", as.character(
+    ParticCronbach)), x = 1.4, y = 0.85, size = 3.8,
+    family = "CM Roman") +
+  annotate("text", label = paste("First eigenvalue =", as.character(
+    ParticFirstEigenvalue)), x = 0.8, y = 0.85, size = 3.8,
+    family = "CM Roman") +
+  scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
+                     breaks = seq(-0.1, 1, by = 0.1)) +
+  xlab("") +
+  theme_linedraw() +
+  theme(axis.text.y = element_text(size = 14),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17, size = 14),
+        panel.grid = element_blank(),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/ParticScale.pdf", width = 11, height = 4.25)
+# Apply the function to each row and create a new column agentic
+particVariables <- c(
+  "volunteer_community", "attend_meeting_speech", "attend_protest", "boycott",
+  "petition", "politician_social_media", "volunteer_partisan",
+  "contact_politician", "donation_partisan", "donation_cause", "group_partic",
+  "comment_politics", "talk_issue_social_media")
+CES21$participation <- apply(CES21[particVariables], 1, delete_rows_na,
+                         loadings = ParticFactorLoadings,
+                         number_na_allowed = 10)
+# 0 = efficacious, 1 = not efficacious, at least two answers out of 3 questions
+length(na.omit(CES21$participation)) / nrow(CES21) * 100 # 71% available data
+
+CES21men <- filter(CES21, female == 0)
+CES21women <- filter(CES21, female == 1)
+CES21white <- filter(CES21, ethn == "White")
+CES21black <- filter(CES21, ethn == "Black")
+CES21westasian <- filter(CES21, ethn == "West Asian")
+CES21southeastasian <- filter(CES21, ethn == "Southeast Asian")
+CES21arabic <- filter(CES21, ethn == "Arabic")
+CES21southasian <- filter(CES21, ethn == "South Asian")
+CES21hispanic <- filter(CES21, ethn == "Hispanic")
+CES21indigenous <- filter(CES21, ethn == "Indigenous")
+CES21other <- filter(CES21, ethn == "Other")
+CES21whitemen <- filter(CES21, female == 0 & ethn == "White")
+CES21whitewomen <- filter(CES21, female == 1 & ethn == "White")
+CES21nonwhitemen <- filter(CES21, female == 0 & ethn != "White")
+CES21nonwhitewomen <- filter(CES21, female == 1 & ethn != "White")
+CES21immigrantmen <- filter(CES21, female == 0 & immig == 2)
+CES21immigrantwomen <- filter(CES21, female == 1 & immig == 2)
+CES21nonimmigrantmen <- filter(CES21, female == 0 & immig == 1)
+CES21nonimmigrantwomen <- filter(CES21, female == 1 & immig == 1)
 prop.table(table(CES21$female))
 prop.table(table(CES21$lang))
 prop.table(table(CES21$education))
@@ -2440,7 +2648,15 @@ ggsave(plot = ggpubr::ggarrange(
 
 CES21grouped <- CES21 |>
   group_by(age, female) |>
-  summarise(interest = weighted.mean(interest, w = weight, na.rm = TRUE))
+  reframe(interest = weighted.mean(interest, w = weight, na.rm = TRUE),
+          efficacy = weighted.mean(efficacy, w = weight, na.rm = TRUE),
+          internal_efficacy = weighted.mean(
+            internal_efficacy, w = weight, na.rm = TRUE),
+          external_efficacy = weighted.mean(
+            external_efficacy, w = weight, na.rm = TRUE),
+          knowledge = weighted.mean(knowledge, w = weight, na.rm = TRUE),
+          participation = weighted.mean(
+            participation, w = weight, na.rm = TRUE))
 PlotTimeCES <- ggplot(filter(CES21, !is.na(female)),
        aes(x = age, y = interest / 10, color = female, weight = weight)) +
   geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
@@ -2459,6 +2675,66 @@ summary(lm(data = CES21, formula = interest / 10 ~ female,
            weights = weight))
 # women's political interest = 5.4/10; men's political interest = 6.8/10;
 # p<0.001
+
+PlotTimeInterest <- PlotTimeCES +
+  scale_x_continuous(name = "Age", limits = c(18, 105))
+PlotTimeEfficacy <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = efficacy * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = efficacy * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "Political efficacy",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(text = element_text(family = "CM Roman"))
+PlotTimeInternalEfficacy <- ggplot(
+  filter(CES21, !is.na(female)),
+  aes(x = age, y = internal_efficacy * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = internal_efficacy * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "Internal\npolitical efficacy",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(text = element_text(family = "CM Roman"))
+PlotTimeExternalEfficacy <- ggplot(
+  filter(CES21, !is.na(female)),
+  aes(x = age, y = external_efficacy * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = external_efficacy * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "External\npolitical efficacy",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(text = element_text(family = "CM Roman"))
+PlotTimeKnowledge <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = knowledge * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = knowledge * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "Knowledge of political\nfigures' names",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(text = element_text(family = "CM Roman"))
+PlotTimeParticipation <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = participation * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = participation * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "Political participation",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(text = element_text(family = "CM Roman"))
 
 WVSCA20grouped <- WVSCA20 |>
   group_by(age, female) |>
@@ -2523,8 +2799,62 @@ ggsave(plot = ggpubr::ggarrange(
   PlotTimeCES, PlotTimeWVS, PlotTimeWVSCA, PlotTimeGSS,
   nrow = 2, ncol = 2, common.legend = TRUE, legend = "bottom"),
   "_graphs/TimeCESWVSGSS.pdf", height = 4.25, width = 5.5)
+ggsave(plot = ggpubr::ggarrange(
+  PlotTimeInternalEfficacy, PlotTimeExternalEfficacy, PlotTimeKnowledge,
+  PlotTimeParticipation, nrow = 2, ncol = 2, common.legend = TRUE, legend = "bottom"),
+  "_graphs/TimePoliticalEngagement.pdf", height = 4.25, width = 5.5)
 
 summary(lm(data = GSS20, formula = interest / 10 ~ female, weights = weight))
+
+##### 3.1.1 Political engagement correlations ####
+CES21numeric <- mutate_all(CES21, ~as.numeric(factor(.)))
+missing_vars <- sapply(CES21numeric, function(x) mean(is.na(x)) > 0.75)
+# Remove variables with more than 75% missing values
+CES21numeric <- CES21numeric[, !missing_vars]
+zero_sd_vars <- sapply(CES21numeric, function(x) sd(x, na.rm = TRUE) == 0)
+# Remove variables with zero standard deviation
+CES21numeric <- CES21numeric[, !zero_sd_vars] |>
+  select(-interest, -cps21_interest_gen_1)
+corTests <- map(CES21numeric, cor.test, y = CES21$interest)
+CorrelateVariablesData <- data.frame(
+  lapply(CES21numeric, function(x) as.numeric(as.character(x))))
+varNames <- names(CorrelateVariablesData)
+CorrelateData <- data.frame(varNames)
+CorrelateData$pearCor <- map(corTests, `[`("estimate")) |>
+  map_dbl(`[`("cor"))
+CorrelateData$confIntLB <- map(corTests, `[`("conf.int")) |>
+  map_dbl(`[`(1))
+CorrelateData$confIntUB <- map(corTests, `[`("conf.int")) |>
+  map_dbl(`[`(2))
+CorrelateData$absPearCor <- abs(CorrelateData$pearCor)
+GraphData <- CorrelateData |>
+  arrange(absPearCor) |>
+  na.omit() |>
+  top_n(100)
+ggplot(GraphData, aes(x = reorder(varNames, absPearCor), y = pearCor)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = confIntLB, ymax = confIntUB)) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_x_discrete("") +
+  scale_y_continuous("Pearson's correlation") +
+  coord_flip() +
+  theme_minimal() +
+  theme(text = element_text(family = "CM Roman"))
+ggsave("_graphs/CorTests.pdf", height = 14.25, width = 5.5)
+ModelInternalEfficacy <- lm(data = CES21, interest ~ internal_efficacy)
+ModelExternalEfficacy <- lm(data = CES21, interest ~ external_efficacy)
+ModelKnowledge <- lm(data = CES21, interest ~ knowledge)
+ModelParticipation <- lm(data = CES21, interest ~ participation)
+EngagementModels <- list(ModelInternalEfficacy, ModelExternalEfficacy,
+                         ModelKnowledge, ModelParticipation)
+print(map(EngagementModels, ~bptest(.x)[[4]]))
+ # Breusch-Pagan test for heteroscedasticity. All values below 0.05
+print(map(EngagementModels, ~dwtest(.x)[[4]]))
+ # Durbin-Watson test for autocorrelation. All values above 0.05
+summary(lm(data = CES21, interest ~ internal_efficacy, weights = weight))
+summary(lm(data = CES21, interest ~ external_efficacy, weights = weight))
+summary(lm(data = CES21, interest ~ knowledge, weights = weight))
+summary(lm(data = CES21, interest ~ participation, weights = weight))
 
 #### 3.2 Political interest by gender and province ####
 prop.table(table(GSS20$province, GSS20$female, GSS20$interest))
@@ -3330,6 +3660,7 @@ ModelPartisanGenderOld <- lme_no_ctrl(
 ModelInterestGenderDG <- lm(data = DG, formula = interest ~ female)
 # women's political interest = 6.9/10; men's political interest = 7.7; p<0.001
 ModelHealthGenderDG <- lm(data = DG, formula = interest_health ~ female)
+# if one of these tests gives p<0.05, I should use WLS instead of WLS
 ModelForeignGenderDG <- lm(data = DG, formula = interest_foreign ~ female)
 ModelLawGenderDG <- lm(data = DG, formula = interest_law ~ female)
 ModelEducationGenderDG <- lm(data = DG, formula = interest_education ~ female)
@@ -3498,15 +3829,75 @@ ModelOldGirlsMaleFriends <- lme_no_ctrl(
 #### 4.4 Create models with SES only ####
 lme_ses <- function(data, y) {
   data$y <- data[[y]]
-  lm(data = data, formula = y ~ female + age + white + immig + lang +
-  income_mid + income_high + educ_mid + educ_high)
+  nlme::lme(data = data, fixed = y ~ female + age + white + immig + lang,
+            random = ~ 1 | Class, na.action = na.omit)
 }
-ModelInterestGenderDGSES <- lme_ses(data = DG, y = "interest")
-ModelHealthGenderDGSES <- lme_ses(data = DG, y = "interest_health")
-ModelForeignGenderDGSES <- lme_ses(data = DG, y = "interest_foreign")
-ModelLawGenderDGSES <- lme_ses(data = DG, y = "interest_law")
-ModelEducationGenderDGSES <- lme_ses(data = DG, y = "interest_education")
-ModelPartisanGenderDGSES <- lme_ses(data = DG, y = "interest_partisan")
+ModelInterestGenderSES <- lme_ses(data = CCPIS, y = "interest")
+ModelHealthGenderSES <- lme_ses(data = CCPIS, y = "interest_health")
+ModelForeignGenderSES <- lme_ses(data = CCPIS, y = "interest_foreign")
+ModelLawGenderSES <- lme_ses(data = CCPIS, y = "interest_law")
+ModelEducationGenderSES <- lme_ses(data = CCPIS, y = "interest_education")
+ModelPartisanGenderSES <- lme_ses(data = CCPIS, y = "interest_partisan")
+lme_ses_dg <- function(data, y) {
+  data$y <- data[[y]]
+  lm(data = data, formula = y ~ female + age + white + immig + lang +
+     income_mid + income_high + educ_mid + educ_high)
+}
+lme_ses_dg_weighted <- function(data, y) {
+  data$y <- data[[y]]
+  lm(data = data, formula = y ~ female + age + white + immig + lang +
+     income_mid + income_high + educ_mid + educ_high, weights = weight)
+}
+ModelInterestGenderDGSES <- lme_ses_dg(data = DG, y = "interest")
+ModelHealthGenderDGSES <- lme_ses_dg_weighted(data = DG, y = "interest_health")
+ModelForeignGenderDGSES <- lme_ses_dg_weighted(
+  data = DG, y = "interest_foreign")
+ModelLawGenderDGSES <- lme_ses_dg(data = DG, y = "interest_law")
+ModelEducationGenderDGSES <- lme_ses_dg_weighted(
+  data = DG, y = "interest_education")
+ModelPartisanGenderDGSES <- lme_ses_dg_weighted(
+  data = DG, y = "interest_partisan")
+lme_ses_interactions <- function(data, y) {
+  data$y <- data[[y]]
+  nlme::lme(data = data, fixed = y ~ female * age + age_squared +
+            female * white + immig + lang,
+            random = ~ 1 | Class, na.action = na.omit)
+}
+ModelInterestGenderSESInterac <- lme_ses_interactions(
+  data = CCPIS, y = "interest")
+ModelHealthGenderSESInterac <- lme_ses_interactions(
+  data = CCPIS, y = "interest_health")
+ModelForeignGenderSESInterac <- lme_ses_interactions(
+  data = CCPIS, y = "interest_foreign")
+ModelLawGenderSESInterac <- lme_ses_interactions(
+  data = CCPIS, y = "interest_law")
+ModelEducationGenderSESInterac <- lme_ses_interactions(
+  data = CCPIS, y = "interest_education")
+ModelPartisanGenderSESInterac <- lme_ses_interactions(
+  data = CCPIS, y = "interest_partisan")
+lme_ses_interactions_dg <- function(data, y) {
+  data$y <- data[[y]]
+  lm(data = data, formula = y ~ female * age + age_squared + female * white +
+     immig + lang + income_mid + income_high + educ_mid + educ_high)
+}
+lme_ses_interactions_dg_weighted <- function(data, y) {
+  data$y <- data[[y]]
+  lm(data = data, formula = y ~ female * age + age_squared + female * white +
+     immig + lang + income_mid + income_high + educ_mid + educ_high,
+     weights = weight)
+}
+ModelInterestGenderDGSESInterac <- lme_ses_interactions_dg(
+  data = DG, y = "interest")
+ModelHealthGenderDGSESInterac <- lme_ses_interactions_dg_weighted(
+  data = DG, y = "interest_health")
+ModelForeignGenderDGSESInterac <- lme_ses_interactions_dg_weighted(
+  data = DG, y = "interest_foreign")
+ModelLawGenderDGSESInterac <- lme_ses_interactions_dg(
+  data = DG, y = "interest_law")
+ModelEducationGenderDGSESInterac <- lme_ses_interactions_dg_weighted(
+  data = DG, y = "interest_education")
+ModelPartisanGenderDGSESInterac <- lme_ses_interactions_dg_weighted(
+  data = DG, y = "interest_partisan")
 
 #### 4.5 Create models with SES, personality and interactions ####
 lme_ses_personality_interactions <- function(data, y) {
@@ -3551,33 +3942,27 @@ ModelEducationGenderOldCtrl <- lme_ses_personality_interactions(
   data = CCPISOld, y = "interest_education")
 ModelPartisanGenderOldCtrl <- lme_ses_personality_interactions(
   data = CCPISOld, y = "interest_partisan")
-lme_ses_interactions <- function(data, y) {
-  data$y <- data[[y]]
-  lm(data = data, formula = y ~ female * age + age_squared + female * white +
-     immig + lang + income_mid + income_high + educ_mid + educ_high)
-}
-ModelInterestGenderDGCtrl <- lme_ses_interactions(data = DG, y = "interest")
-ModelHealthGenderDGCtrl <- lme_ses_interactions(
-  data = DG, y = "interest_health")
-ModelForeignGenderDGCtrl <- lme_ses_interactions(
-  data = DG, y = "interest_foreign")
-ModelLawGenderDGCtrl <- lme_ses_interactions(data = DG, y = "interest_law")
-ModelEducationGenderDGCtrl <- lme_ses_interactions(
-  data = DG, y = "interest_education")
-ModelPartisanGenderDGCtrl <- lme_ses_interactions(
-  data = DG, y = "interest_partisan")
 map(list(ModelInterestGenderCtrl, ModelHealthGenderCtrl,
          ModelForeignGenderCtrl, ModelLawGenderCtrl,
-         ModelEducationGenderCtrl, ModelPartisanGenderCtrl,
-         ModelInterestGenderDGCtrl, ModelHealthGenderDGCtrl,
-         ModelForeignGenderDGCtrl, ModelLawGenderDGCtrl,
-         ModelEducationGenderDGCtrl, ModelPartisanGenderDGCtrl), car::vif)
+         ModelEducationGenderCtrl, ModelPartisanGenderCtrl), car::vif)
 lme_ses_personality <- function(data, x, y) {
   data$x <- data[[x]]
   data$y <- data[[y]]
   nlme::lme(data = data, fixed = y ~ x + age + age_squared + white + immig +
   lang + agentic + communal, random = ~ 1 | Class, na.action = na.omit)
 }
+ModelInterestGenderSESPersonality <- lme_ses_personality(
+  data = CCPIS, x = "female", y = "interest")
+ModelHealthGenderSESPersonality <- lme_ses_personality(
+  data = CCPIS, x = "female", y = "interest_health")
+ModelForeignGenderSESPersonality <- lme_ses_personality(
+  data = CCPIS, x = "female", y = "interest_foreign")
+ModelLawGenderSESPersonality <- lme_ses_personality(
+  data = CCPIS, x = "female", y = "interest_law")
+ModelEducationGenderSESPersonality <- lme_ses_personality(
+  data = CCPIS, x = "female", y = "interest_education")
+ModelPartisanGenderSESPersonality <- lme_ses_personality(
+  data = CCPIS, x = "female", y = "interest_partisan")
 ModelBoysHealthGenderParentCtrl <- lme_ses_personality(
   data = CCPISBoys, x = "gender_parent_health", y = "interest_health")
 ModelGirlsHealthGenderParentCtrl <- lme_ses_personality(
@@ -3682,6 +4067,18 @@ ModelOldBoysAgentsCtrl <- lme4::lmer(
 ModelOldGirlsAgentsCtrl <- lme_ses_personality_allagents(
   data = CCPISOldGirlsAgentsLonger, x1 = "value_mother", x2 = "value_father",
   x3 = "value_femalefriends", x4 = "value_malefriends", y = "interest_all")
+DGModels <- list(
+  ModelInterestGenderDG, ModelHealthGenderDG, ModelForeignGenderDG,
+  ModelLawGenderDG, ModelEducationGenderDG, ModelPartisanGenderDG,
+  ModelInterestGenderDGSES, ModelHealthGenderDGSES, ModelForeignGenderDGSES,
+  ModelLawGenderDGSES, ModelEducationGenderDGSES, ModelPartisanGenderDGSES,
+  ModelInterestGenderDGSESInterac, ModelHealthGenderDGSESInterac,
+  ModelForeignGenderDGSESInterac, ModelLawGenderDGSESInterac,
+  ModelEducationGenderDGSESInterac, ModelPartisanGenderDGSESInterac)
+print(map(DGModels, ~bptest(.x)[[4]]))
+ # Breusch-Pagan test for heteroscedasticity
+print(map(DGModels, ~dwtest(.x)[[4]]))
+ # Durbin-Watson test for autocorrelation. All values above 0.05
 
 #### 4.6 Create regression tables ####
 modelsummary::modelsummary(models = list(
@@ -3782,14 +4179,16 @@ modelsummary::modelsummary(models = list(
     "Education" = ModelEducationGenderDG,
     "Partisan politics" = ModelPartisanGenderDG),
   "With Controls" = list(
-    "Politics (general)" = ModelInterestGenderDGCtrl,
-    "Health care" = ModelHealthGenderDGCtrl,
-    "International affairs" = ModelForeignGenderDGCtrl,
-    "Law and crime" = ModelLawGenderDGCtrl,
-    "Education" = ModelEducationGenderDGCtrl,
-    "Partisan politics" = ModelPartisanGenderDGCtrl)),
+    "Politics (general)" = ModelInterestGenderDGSESInterac,
+    "Health care" = ModelHealthGenderDGSESInterac,
+    "International affairs" = ModelForeignGenderDGSESInterac,
+    "Law and crime" = ModelLawGenderDGSESInterac,
+    "Education" = ModelEducationGenderDGSESInterac,
+    "Partisan politics" = ModelPartisanGenderDGSESInterac)),
   shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
-  notes = "Ordinary least squares (OLS) regression",
+  notes = c("Without controls: Ordinary least squares (OLS) regressions",
+           paste("With controls: OLS for Politics (general) and Law and Crime;",
+                 "Weighted least squares (WLS) for other regressions")),
   title = paste("Interest in topic by gender \\label{tab:olsInterestDg}"),
   coef_rename = c(
     "female1" = "Gender (1 = women)",
@@ -3984,6 +4383,89 @@ get_ci <- function(model, var_order, level = 0.95) {
   mod_int <- nlme::intervals(model, which = "fixed", level = level)
   c(mod_int[1]$fixed[var_order + 1,]) # extract est. and ci for 1st IV only
 }
+GenderCCPISData <- data.frame(
+  pred_interest = get_ci(ModelInterestGender, 1),
+  pred_interest_ses = get_ci(ModelInterestGenderSES, 1),
+  pred_interest_ses_personality = get_ci(ModelInterestGenderSESPersonality, 1),
+  pred_interest_ctrl = get_ci(ModelInterestGenderCtrl, 1),
+  pred_health = get_ci(ModelHealthGender, 1),
+  pred_health_ses = get_ci(ModelHealthGenderSES, 1),
+  pred_health_ses_personality = get_ci(ModelHealthGenderSESPersonality, 1),
+  pred_health_ctrl = get_ci(ModelHealthGenderCtrl, 1),
+  pred_foreign = get_ci(ModelForeignGender, 1),
+  pred_foreign_ses = get_ci(ModelForeignGenderSES, 1),
+  pred_foreign_ses_personality = get_ci(ModelForeignGenderSESPersonality, 1),
+  pred_foreign_ctrl = get_ci(ModelForeignGenderCtrl, 1),
+  pred_law = get_ci(ModelLawGender, 1),
+  pred_law_ses = get_ci(ModelLawGenderSES, 1),
+  pred_law_ses_personality = get_ci(ModelLawGenderSESPersonality, 1),
+  pred_law_ctrl = get_ci(ModelLawGenderCtrl, 1),
+  pred_education = get_ci(ModelEducationGender, 1),
+  pred_education_ses = get_ci(ModelEducationGenderSES, 1),
+  pred_education_ses_personality = get_ci(ModelEducationGenderSESPersonality, 1),
+  pred_education_ctrl = get_ci(ModelEducationGenderCtrl, 1),
+  pred_partisan = get_ci(ModelPartisanGender, 1),
+  pred_partisan_ses = get_ci(ModelPartisanGenderSES, 1),
+  pred_partisan_ses_personality = get_ci(ModelPartisanGenderSESPersonality, 1),
+  pred_partisan_ctrl = get_ci(ModelPartisanGenderCtrl, 1))
+rownames(GenderCCPISData) <- c("ci_l", "pred", "ci_u")
+GenderCCPISData <- as.data.frame(t(GenderCCPISData))
+GenderCCPISData$ctrl <- rep(c(
+  "Without Controls", "With Controls for SES",
+  "With Controls for SES and Personality Traits",
+  "With Controls for SES, Interactions and Personality Traits"), 6)
+GenderCCPISData$ctrl <- factor(GenderCCPISData$ctrl, levels = c(
+  "Without Controls", "With Controls for SES",
+  "With Controls for SES and Personality Traits",
+  "With Controls for SES, Interactions and Personality Traits"))
+GenderCCPISData$topic <- c(
+  rep("Politics (general)", 4), rep("Health care", 4),
+  rep("International affairs", 4), rep("Law and crime", 4),
+  rep("Education", 4), rep("Partisan politics", 4))
+ggplot(GenderCCPISData, aes(x = pred, y = topic)) +
+  geom_point() +
+  facet_wrap(~ ctrl) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous("\nGender most interested in that topic (Boys <--------> Girls)") +
+  scale_y_discrete("Topics", limits = rev) +
+  theme_minimal() +
+  theme(axis.text.y = ggtext::element_markdown(
+    color = c("red", rep("black", 5))),
+    text = element_text(family = "CM Roman"))
+ggsave("_graphs/GenderCCPIS.pdf", width = 11, height = 4.25)
+GenderCCPISYOData <- data.frame(
+  pred_interest_y = get_ci(ModelInterestGenderYoung, 1),
+  pred_interest_o = get_ci(ModelInterestGenderOld, 1),
+  pred_health_y = get_ci(ModelHealthGenderYoung, 1),
+  pred_health_o = get_ci(ModelHealthGenderOld, 1),
+  pred_foreign_y = get_ci(ModelForeignGenderYoung, 1),
+  pred_foreign_o = get_ci(ModelForeignGenderOld, 1),
+  pred_law_y = get_ci(ModelLawGenderYoung, 1),
+  pred_law_o = get_ci(ModelLawGenderOld, 1),
+  pred_education_y = get_ci(ModelEducationGenderYoung, 1),
+  pred_education_o = get_ci(ModelEducationGenderOld, 1),
+  pred_partisan_y = get_ci(ModelPartisanGenderYoung, 1),
+  pred_partisan_o = get_ci(ModelPartisanGenderOld, 1))
+rownames(GenderCCPISYOData) <- c("ci_l", "pred", "ci_u")
+GenderCCPISYOData <- as.data.frame(t(GenderCCPISYOData))
+GenderCCPISYOData$age <- rep(c("10-15", "16-18"), 6)
+GenderCCPISYOData$topic <- c(
+  rep("Politics (general)", 2), rep("Health care", 2),
+  rep("International affairs", 2), rep("Law and crime", 2),
+  rep("Education", 2), rep("Partisan politics", 2))
+ggplot(GenderCCPISYOData, aes(x = pred, y = topic)) +
+  geom_point() +
+  facet_wrap(~ age) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous("\nGender most interested in that topic (Boys <--------> Girls)") +
+  scale_y_discrete("Topics", limits = rev) +
+  theme_minimal() +
+  theme(axis.text.y = ggtext::element_markdown(
+    color = c("red", rep("black", 5))),
+    text = element_text(family = "CM Roman"))
+ggsave("_graphs/GenderCCPISYO.pdf", width = 11, height = 4.25)
 get_ci_lm <- function(model, var_order, level = 0.95) {
   mod_int <- confint(model, level = level)
   c(mod_int[var_order + 1, 1], model[[1]][var_order + 1],
@@ -3993,22 +4475,22 @@ get_ci_lm <- function(model, var_order, level = 0.95) {
 GenderDGData <- data.frame(
   pred_interest = get_ci_lm(ModelInterestGenderDG, 1),
   pred_interest_ses = get_ci_lm(ModelInterestGenderDGSES, 1),
-  pred_interest_ctrl = get_ci_lm(ModelInterestGenderDGCtrl, 1),
+  pred_interest_ctrl = get_ci_lm(ModelInterestGenderDGSESInterac, 1),
   pred_health = get_ci_lm(ModelHealthGenderDG, 1),
   pred_health_ses = get_ci_lm(ModelHealthGenderDGSES, 1),
-  pred_health_ctrl = get_ci_lm(ModelHealthGenderDGCtrl, 1),
+  pred_health_ctrl = get_ci_lm(ModelHealthGenderDGSESInterac, 1),
   pred_foreign = get_ci_lm(ModelForeignGenderDG, 1),
   pred_foreign_ses = get_ci_lm(ModelForeignGenderDGSES, 1),
-  pred_foreign_ctrl = get_ci_lm(ModelForeignGenderDGCtrl, 1),
+  pred_foreign_ctrl = get_ci_lm(ModelForeignGenderDGSESInterac, 1),
   pred_law = get_ci_lm(ModelLawGenderDG, 1),
   pred_law_ses = get_ci_lm(ModelLawGenderDGSES, 1),
-  pred_law_ctrl = get_ci_lm(ModelLawGenderDGCtrl, 1),
+  pred_law_ctrl = get_ci_lm(ModelLawGenderDGSESInterac, 1),
   pred_education = get_ci_lm(ModelEducationGenderDG, 1),
   pred_education_ses = get_ci_lm(ModelEducationGenderDGSES, 1),
-  pred_education_ctrl = get_ci_lm(ModelEducationGenderDGCtrl, 1),
+  pred_education_ctrl = get_ci_lm(ModelEducationGenderDGSESInterac, 1),
   pred_partisan = get_ci_lm(ModelPartisanGenderDG, 1),
   pred_partisan_ses = get_ci_lm(ModelPartisanGenderDGSES, 1),
-  pred_partisan_ctrl = get_ci_lm(ModelPartisanGenderDGCtrl, 1))
+  pred_partisan_ctrl = get_ci_lm(ModelPartisanGenderDGSESInterac, 1))
 rownames(GenderDGData) <- c("ci_l", "pred", "ci_u")
 GenderDGData <- as.data.frame(t(GenderDGData))
 GenderDGData$ctrl <- rep(c("Without Controls", "With Controls for SES",
@@ -4025,7 +4507,7 @@ ggplot(GenderDGData, aes(x = pred, y = topic)) +
   facet_wrap(~ ctrl) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
   geom_vline(aes(xintercept = 0), linetype = "dashed") +
-  scale_x_continuous("\nGender most interested in that topic (Boys <--------> Girls)") +
+  scale_x_continuous("\nGender most interested in that topic (Men <--------> Women)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
   theme(axis.text.y = ggtext::element_markdown(
