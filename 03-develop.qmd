@@ -144,7 +144,7 @@ What kinds of political topics are children and adolescents interested in? Are t
 \multicolumn{7}{l}{\textit{Without Controls}}\\
 \midrule \hspace{1em}(Intercept) & 4.579*** & 4.041*** & 5.724*** & 4.956*** & 4.219*** & 4.007***\\
 \hspace{1em} & (0.184) & (0.167) & (0.180) & (0.173) & (0.206) & (0.171)\\
-\hspace{1em}Gender (1 = girl) & -0.434* & 0.128 & -0.980*** & 0.488* & -0.103 & -0.854***\\
+\hspace{1em}x1 & -0.434* & 0.128 & -0.980*** & 0.488* & -0.103 & -0.854***\\
 \hspace{1em} & (0.207) & (0.197) & (0.229) & (0.231) & (0.223) & (0.232)\\
 \hspace{1em}SD (Intercept Class) & 0.651 & 0.542 & 0.473 & 0.377 & 0.771 & 0.344\\
 \hspace{1em}SD (Observations) & 2.499 & 2.397 & 2.802 & 2.837 & 2.701 & 2.855\\
