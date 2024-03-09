@@ -60,13 +60,13 @@ It seems worthwhile to study political socialization in the period of life where
 
 ***Hypothesis 0b**: Gender differences in interest in specific political topics start rising around age 15 and increase until age 25, after which they stabilize.*
 
-Given findings among adults that women and men are interested in different topics depending on these topics being assertion-focused or cooperation-focused, Hypotheses 0c and 0d provide two alternative views about when these differences should start to occur. Hypothesis 0c suggests such differences in interest exist prior to the increase in self-reported political interest around age 15, perhaps as a result of tendencies towards agency and communality which start developing early.^[Gender differences in assertive speech use may develop between 1 and 2 years old, as @fagot1985 suggest, or may not have already developed at that age, as @brownell2006 suggest. A meta-analysis of studies done by @leaper2004 including children from various age groups more generally finds that boys use more assertive speech than girls, although this is not the case in mixed-gender interactions. @noakes2006 also find that, among boys and girls aged 9--14, boys reported having more interpersonal disagreements related to status and hierarchy, and girls were more likely to use cooperative conflict resolution strategies. Finally, @caravita2012 find that, among 9--15-year-old girls and boys, boys appear to have more agentic goals and girls appear to have more communal goals, although aging makes the gender gap in agency appear and the gap in communality disappear, which could be due to a relatively small sample size.] Hypothesis 0d instead suggests that --- likely as a result of cognitive maturation --- personality traits only start fostering interest in assertion-focused or cooperation-focused political topics between ages 15 and 25.
+Given findings among adults that women and men are interested in different topics depending on these topics being assertion-focused or cooperation-focused (see @sec-chap1), Hypotheses 0c and 0d provide two alternative views about when these differences should start to occur. Hypothesis 0c suggests such differences in interest exist prior to the increase in self-reported political interest around age 15, perhaps as a result of tendencies towards agency and communality which start developing early.^[Gender differences in assertive speech use may develop between 1 and 2 years old, as @fagot1985 suggest, or may not have already developed at that age, as @brownell2006 suggest. A meta-analysis of studies done by @leaper2004 including children from various age groups more generally finds that boys use more assertive speech than girls, although this is not the case in mixed-gender interactions. @noakes2006 also find that, among boys and girls aged 9--14, boys reported having more interpersonal disagreements related to status and hierarchy, and girls were more likely to use cooperative conflict resolution strategies. Finally, @caravita2012 find that, among 9--15-year-old girls and boys, boys appear to have more agentic goals and girls appear to have more communal goals, although aging makes the gender gap in agency appear and the gap in communality disappear, which could be due to a relatively small sample size.] Hypothesis 0d instead suggests that --- likely as a result of cognitive maturation --- personality traits only start fostering interest in assertion-focused or cooperation-focused political topics between ages 15 and 25.
 
-***Hypothesis 0c**: Gender differences in interest in specific political topics already exist prior to age 15, with boys already more interested in assertion-focused political topics and girls more interested in cooperation-focused political topics at 10--15 years old.*
+***Hypothesis 0c**: Gender differences in interest in specific political topics already exist prior to age 15, with boys already more interested in assertion-focused political topics such as law and crime, international affairs and partisan politics, and girls more interested in cooperation-focused political topics such as health care and education politics at 10--15 years old.*
 
-***Hypothesis 0d**: Between ages 15 and 25, boys develop more interest in assertion-focused political topics such as law and crime, international affairs, and partisan politics, while girls develop more interest in cooperation-focused political topics such as health care and education politics. These differences then carry on at the adult age.*
+***Hypothesis 0d**: Between ages 15 and 25, boys develop more interest in assertion-focused political topics, while girls develop more interest in cooperation-focused political topics. These differences then carry on at the adult age.*
 
-Hypothesis 0a, 0b and 0c should apply to interest in the five topics used throughout this book: health care, education, partisan politics, law and crime, and international affairs. They should also apply, as shown in previous studies, to the self-reported measure of political interest, since this measure is mostly associated to interest in partisan politics --- an assertion-focused topic.
+Hypothesis 0a, 0b and 0c should apply to interest in the five topics used throughout this book: health care, education, partisan politics, law and crime, and international affairs. Since past studies have found the self-reported measure of political interest is mostly associated with interest in partisan politics [@campbellrosie2008], it should be treated as an assertion-focused political topic.
 
 Hypothesis 0e suggests, again as a result of the cognitive maturation theory laid out by @russo2017, that issues related to partisan politics --- such as elections and parties --- are more political than other not explicitly partisan issues such as the working conditions of nurses or tuition fees. This would be congruent with Hypothesis 0d.
 
@@ -78,11 +78,26 @@ Studies have found strong causal or correlational associations between political
 
 ***Hypothesis 0g**: Gender differences in various indicators of political engagement, such as political interest, political knowledge and political efficacy, when they exist, mostly arise at the same time --- ages 15--25.*
 
+## Data and Methods
+
+This chapter wants to portray the evolution of political interest by age and through time, and therefore relies on five datasets across several survey years: the Canadian Children Political Interest Survey (CCPIS), the Datagotchi Post-Election Survey (Datagotchi PES), the Canadian Election Study (CES), the World Values Survey (WVS) and the Canadian General Social Survey (GSS). The CCPIS includes survey data collected among 8-to-18--year-olds in 2022, while the Datagotchi PES includes data collected among Quebec adults in 2023. More about these datasets is explained in @sec-chap2. Both the CCPIS and Datagotchi PES include questions about interests in specific political topics, which can better measure the concept. While the CES, WVS and GSS do not ask these specific political topics, they each have unique advantages. The CES includes the most survey years --- with a question on political interest being asked in surveys from 1997 to 2021 --- makes it possible to measure other indicators of political engagement than political interest, including political knowledge, efficacy, and participation. The WVS makes it possible to compare Canadians' level of interest with other countries. Finally, two GSS surveys --- 2013 and 2020 --- provide the largest datasets and, since it is not designed as a political survey per survey, may provide more accurate measures of Canadians' level of interest in politics --- despite the limitations of a single-item measure.
+
 ## Data Analysis
 
-### Pan-Canadian Surveys among Adults
+### The Evolution of Self-Reported Political Interest Among Adults
 
-In order to explore what level of general political interest Canadian men and women report, three datasets are mobilized: the 2021 Canadian Election Study (CES), the World Values Survey (WVS)'s Wave 7 and the 2020 General Social Survey (GSS). @fig-timeceswvsgss shows average self-reported political interest by age and gender among Canadians, using a local regression model (LOESS). The trends among all three surveys are very similar and match to some degree with cross-country WVS results as well.
+In order to explore what level of general (self-reported) political interest Canadian men and women report, three datasets are mobilized: the 2021 CES, the WVS's Wave 7 (2017--22) and the 2020 GSS. @fig-yeargender shows the evolution in Canadians' average level of political interest by gender from 1990 to 2021. In general, CES respondents are the most interested in politics according to these data --- 6.3/10 --- which is unsurprising given these surveys are conducted during election campaigns, and ask questions of a more clearly political nature. WVS respondents are the least interested --- 4.5/10 --- with GSS respondents sitting somewhere in between --- 5.8/10. Between-survey differences are therefore twice as large as gender differences in political interest. In general, political interest seems to have increased between 2000 and 2021, with an average interest of 4.9/10 in the 2000 CES and WVS and an average interest of 6.1/10 in the 2019--20 CES, WVS and GSS.
+
+```{r}
+#| label: fig-yeargender
+#| echo: false
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
+knitr::include_graphics("_graphs/InterestYearGender.pdf")
+```
+
+Despite fluctuations in the level of political interest between surveys *and* within surveys taken at different times, the gender gap in self-reported political interest remains relatively constant through time, with a notable exception in the 2021 CES, where a sharp drop in women's political interest occurs while men's political interest remains largely stable, bringing the largest gender gap of these studies --- 1.3/10 points. The size of the gender gap slightly varies between studies, standing on average at 0.6 points in the GSS, 0.7 points in the CES and 0.9 points in the WVS. In every survey and every year, men are significantly more likely to report being interested in politics.
+
+Again relying on data from the CES, WVS and GSS, @fig-timeceswvsgss shows average self-reported political interest by age and gender among Canadians, using a local regression model (LOESS). The trends among all three surveys are very similar and match to some degree with cross-country WVS results as well.
 
 ```{r}
 #| label: fig-timeceswvsgss
@@ -95,9 +110,20 @@ In all three datasets, interest in politics increases as people age, but it does
 
 After age 50, both men and women start reporting higher levels of interest in politics, and this interest keeps increasing through their 60s, 70s, 80s and 90s. Moreover, again starting at age 50, the gender gap progressively reduces, as women's political interest increases more quickly than men's. Around age 75--80, the gap becomes statistically non-significant, although confidence intervals also become wider due to smaller sample sizes. For instance, in their early 90s, CES data shows that the average interest in politics stands at 8/10 for both men and women. Overall, throughout people's life course, CES data shows that women's political interest averages 5.4, while men's averages 6.8 (*p*<0.001).
 
-How does Canada compare with other countries? Across all 57 countries surveyed during wave 7 of the WVS (2017--22), the average political interest was 4.8/10 for men and 4/10 for women (*p*<0.001), and while political interest increased with people's age, the size of the gender gap remained relatively similar with age. Among Canadian WVS respondents, the average political interest was 6.2/10 for men and 5/10 for women: this gender gap is 0.35 points *larger* than the WVS average and is statistically significant (*p*<0.001). Moreover, as mentioned previously, the age pattern was somewhat different in the Canadian WVS compared with the WVS's cross-country results, becoming statistically insignificant around age 75. However, sample sizes are smaller for people aged 75 and over, and age averages vary substantially from year to year as the CES and WVS scatterplots show. The fact that all three surveys show a shrinking of the gap at that age, however, reinforces confidence in that finding. Within Canada, across all three studies, average political interest was higher in larger provinces, with an average of 6.1/10 in Alberta, 6/10 in Quebec and Ontario, and 5.9/10 in British Columbia, and New Brunswick stood last at 5.5/10, but between-study differences were large.
+How does Canada compare with other countries? Across all 57 countries surveyed during wave 7 of the WVS, the average political interest was 4.8/10 for men and 4/10 for women (*p*<0.001), and while political interest increased with people's age, the size of the gender gap remained relatively similar with age. Among Canadian WVS respondents, the average political interest was 6.2/10 for men and 5/10 for women: this gender gap is 0.35 points *larger* than the WVS average and is statistically significant (*p*<0.001). Moreover, the age pattern was somewhat different in the Canadian WVS compared with the WVS's cross-country results, becoming statistically insignificant around age 75. Despite smaller sample sizes for people aged 75 and over in all surveys, all of them show a shrinking of the gap at that age in Canada, which reinforces confidence in that finding.
 
-@fig-timepoliticalengagement, @fig-cesgapyearage, @fig-yearceswvs and @fig-yearethnicityceswvs
+Within Canada, across all three studies, average political interest was higher in larger provinces, with an average of 6.1/10 in Alberta, 6/10 in Quebec and Ontario, and 5.9/10 in British Columbia. New Brunswick stood last at 5.5/10. Between-study differences were large, suggesting these results need to be interpreted with caution.
+
+@fig-cesgapyearage looks at the size of the gender gap by age for each CES, making it possible to assess the presence of generational effects. Positive values indicate women report being more interested, while negative values indicate men report being more interested. The 2021 CES stands out as having the largest gender gap in political interest on average between 20 and 80 years old. All other election studies are associated with similar trends in the evolution of the gender gap with age: the gap slowly reduces with time. Values tend to diverge more importantly among older and younger voters, as a result of smaller sample sizes at the extremes of the age distribution. When respondents aged 18--20 and those aged 85 and over are removed from the sample, differences between surveys become smaller.
+
+```{r}
+#| label: fig-cesgapyearage
+#| echo: false
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested."
+knitr::include_graphics("_graphs/CESGapYearAge.pdf")
+```
+
+@fig-timepoliticalengagement shows the level of political engagement among 2021 CES respondents. Levels of external political efficacy and political participation remain low and stable for respondents aged 18 to 90, and no statistically significant gender gap is found. Conversely, large 20-point gaps in internal political efficacy and knowledge of political figures' names are found. These gaps become smaller as respondents' age increases.
 
 ```{r}
 #| label: fig-timepoliticalengagement
@@ -106,19 +132,9 @@ How does Canada compare with other countries? Across all 57 countries surveyed d
 knitr::include_graphics("_graphs/TimePoliticalEngagement.pdf")
 ```
 
-```{r}
-#| label: fig-cesgapyearage
-#| echo: false
-#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values = women more interested, negative values = men more interested."
-knitr::include_graphics("_graphs/CESGapYearAge.pdf")
-```
+Some of these trends mirror quite closely what is found for political interest among these same CES respondents. Notably, large gender gaps in knowledge of political figures' names and internal political efficacy appear among younger respondents. These gaps are larger than the 13-point gap in political interest. Similar to political interest, these gaps also seem to progressively fade among older respondents, and after age 80--85, the level of political interest seems to be the same for women and men. With regards to knowledge, the gap was to be expected and mirrors findings from past research (notably @stolle2010), as recalling the names of political figures is closely tied to partisan politics and assertion as opposed to cooperation.
 
-```{r}
-#| label: fig-yearceswvs
-#| echo: false
-#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
-knitr::include_graphics("_graphs/InterestYearGender.pdf")
-```
+@fig-yearethnicityceswvs looks at the gender differences through an intersectional lens, with gender--ethnicity pairs and gender--immigrant status pairs included across several survey-years for which the information was available. While this chapter focuses on the gender gap in self-reported political interest, different groups of women also differ in political interest.^[For instance, in the Dominican Republic, @spierings2012 found that Protestant women report levels of political interest similar to men and higher than Catholic women, while Mestizo women report lower levels of political interest than Indigenous women.]
 
 ```{r}
 #| label: fig-yearethnicityceswvs

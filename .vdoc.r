@@ -89,87 +89,141 @@
 #
 #
 #
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#| label: fig-ccpis1
+#| label: fig-yeargender
 #| echo: false
-#| fig-cap: "CCPIS Descriptive Statistics - General"
-knitr::include_graphics("_graphs/CCPISDescriptive1.pdf")
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
+knitr::include_graphics("_graphs/InterestYearGender.pdf")
 #
 #
 #
 #
 #
-#| label: fig-factor1
+#
+#
+#| label: fig-timeceswvsgss
 #| echo: false
-#| fig-cap: "CCPIS Factor Analysis: Agency Scale"
-knitr::include_graphics("_graphs/AgencyScale.pdf")
+#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. CES, WVS and GSS weights are applied."
+knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
 #
 #
 #
-#| label: fig-factor2
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#| label: fig-cesgapyearage
 #| echo: false
-#| fig-cap: "CCPIS Factor Analysis: Communality Scale"
-knitr::include_graphics("_graphs/CommunalityScale.pdf")
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values = women more interested, negative values = men more interested."
+knitr::include_graphics("_graphs/CESGapYearAge.pdf")
 #
 #
 #
 #
 #
-#| label: fig-dg
+#| label: fig-timepoliticalengagement
 #| echo: false
-#| fig-cap: "Datagotchi PES Descriptive Statistics - General"
-knitr::include_graphics("_graphs/DGDescriptive1.pdf")
+#| fig-cap: "Level of Political Engagement Across Several Measures Among Canadian Adults, 2021 CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no engagement at all, and 10 = a great deal of engagement. Dots represent average interest by age and gender. CES weights are applied."
+knitr::include_graphics("_graphs/TimePoliticalEngagement.pdf")
 #
 #
 #
 #
 #
-#
-#
-#| label: fig-ces
+#| label: fig-yearethnicityceswvs
 #| echo: false
-#| fig-cap: "2021 CES Descriptive Statistics - General"
-knitr::include_graphics("_graphs/CESDescriptive1.pdf")
+#| fig-cap: "General Political Interest by Year, Gender and Ethnicity Among Canadian Adults, 2021 CES and 2020 WVS (Canada) \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
+knitr::include_graphics("_graphs/InterestWaveGroup.pdf")
 #
 #
 #
 #
 #
-#| label: fig-wvs
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#| label: fig-interestyoungold
 #| echo: false
-#| fig-cap: "2020 WVS Descriptive Statistics - General"
-knitr::include_graphics("_graphs/WVSDescriptive1.pdf")
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics by Age Group Among Canadian Children, 2022 CCPIS \\newline \\textit{Notes}: No controls are added."
+knitr::include_graphics("_graphs/GenderCCPISYO.pdf")
 #
 #
 #
 #
 #
-#| label: fig-gss
+#
+#
+#| label: fig-political
 #| echo: false
-#| fig-cap: "2020 GSS Descriptive Statistics (Cycle 35 - Social Identity) - General"
-knitr::include_graphics("_graphs/GSSDescriptive1.pdf")
+#| fig-cap: "Views of Topics as Political or Non-Political By Canadian Students, 2022 CCPIS"
+knitr::include_graphics("_graphs/CCPISPolitical.pdf")
 #
 #
 #
@@ -181,26 +235,71 @@ knitr::include_graphics("_graphs/GSSDescriptive1.pdf")
 #
 #
 #
-#| label: fig-ccpis2
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#| label: fig-datagotchi
 #| echo: false
-#| fig-cap: "CCPIS Descriptive Statistics - Political Interest"
-knitr::include_graphics("_graphs/CCPISDescriptive2.pdf")
+#| fig-cap: "Self-Reported Level of Interest in Various Topics by Age Among Canadian Adults, 2022 Datagotchi PES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. No weights are currently applied."
+knitr::include_graphics("_graphs/InterestAgeGenderDGPanel.pdf")
 #
 #
 #
 #
-#
-#| label: fig-dginterest
-#| echo: false
-#| fig-cap: "Datagotchi PES Descriptive Statistics - Political Interest"
-knitr::include_graphics("_graphs/DGInterest.pdf")
-#
-#
-#
-#| label: fig-ceswvsgssinterest
-#| echo: false
-#| fig-cap: "CES, WVS and GSS Descriptive Statistics - Political Interest"
-knitr::include_graphics("_graphs/CESWVSGSSInterest.pdf")
 #
 #
 #

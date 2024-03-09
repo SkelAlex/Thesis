@@ -438,16 +438,16 @@ CCPIS$fam_situation_alt[CCPIS$fam_situation == "Deux pères"] <-
 CCPIS$fam_situation_alt[CCPIS$fam_situation == "Autre"] <- "Other"
 CCPIS$fam_situation_alt[CCPIS$fam_situation ==
                              "Une mère, un père et au moins un beau-parent"] <-
-  "One mother, one\nfather and at least\none stepparent"
+  "Mother, father\nand stepparent(s)"
 CCPIS$fam_situation_alt[CCPIS$fam_situation == paste(
   "One mother, one father and at least one stepparent")] <-
-  "One mother, one\nfather and at least\none stepparent"
+  "Mother, father\nand stepparent(s)"
 CCPIS$fam_situation_alt[CCPIS$fam_situation ==
                              "Une mère, un père et aucun beau-parent"] <-
-  "One mother, one \nfather and no\nstepparents"
+  "Mother and father"
 CCPIS$fam_situation_alt[CCPIS$fam_situation ==
                              "One mother, one father and no stepparents"] <-
-  "One mother, one \nfather and no\nstepparents"
+  "Mother and father"
 table(CCPIS$fam_situation_alt, useNA = "always")
 CCPIS$friends_gender_alt <- CCPIS$friends_gender
 CCPIS$friends_gender_alt[CCPIS$friends_gender == "Filles"] <- "Girls"
@@ -545,19 +545,20 @@ ggplot(data.frame(AgencyVariableNames, AgencyFactorLoadings),
   geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
            width = 0.4) +
   geom_text(aes(label = as.character(round(AgencyFactorLoadings, digits = 2))),
-            vjust = 0.35, hjust = -0.3, family = "CM Roman") +
+            vjust = 0.35, hjust = -0.3, size = 6, family = "CM Roman") +
   geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
   annotate("text", label = paste("Cronbach's alpha =", as.character(
-    AgencyCronbach)), x = 1.2, y = 0.85, size = 3.8, family = "CM Roman") +
+    AgencyCronbach)), x = 2.25, y = 0.85, size = 6, family = "CM Roman") +
   annotate("text", label = paste("First eigenvalue =", as.character(
-    AgencyFirstEigenvalue)), x = 0.8, y = 0.85, size = 3.8,
+    AgencyFirstEigenvalue)), x = 1.75, y = 0.85, size = 6,
     family = "CM Roman") +
   scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
                      breaks = seq(-0.1, 1, by = 0.1)) +
   xlab("") +
   theme_linedraw() +
-  theme(axis.text.y = element_text(size = 14),
-        axis.title.x = element_text(hjust = 0.3, vjust = -0.17, size = 14),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
         panel.grid = element_blank(),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/AgencyScale.pdf", width = 11, height = 4.25)
@@ -603,20 +604,21 @@ ggplot(data.frame(CommunalityVariableNames, CommunalityFactorLoadings),
            width = 0.4) +
   geom_text(aes(label = as.character(round(
     CommunalityFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
-    family = "CM Roman") +
+    family = "CM Roman", size = 6) +
   geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
   annotate("text", label = paste("Cronbach's alpha =", as.character(
-    CommunalityCronbach)), x = 1.2, y = 0.85, size = 3.8,
+    CommunalityCronbach)), x = 1.25, y = 0.85, size = 6,
     family = "CM Roman") +
   annotate("text", label = paste("First eigenvalue =", as.character(
-    CommunalityFirstEigenvalue)), x = 0.8, y = 0.85, size = 3.8,
+    CommunalityFirstEigenvalue)), x = 0.75, y = 0.85, size = 6,
     family = "CM Roman") +
   scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
                      breaks = seq(-0.1, 1, by = 0.1)) +
   xlab("") +
   theme_linedraw() +
-  theme(axis.text.y = element_text(size = 14),
-        axis.title.x = element_text(hjust = 0.3, vjust = -0.17, size = 14),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
         panel.grid = element_blank(),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/CommunalityScale.pdf", width = 11, height = 4.25)
@@ -633,6 +635,9 @@ CCPISBoys <- filter(CCPIS, female == 0)
 CCPISGirls <- filter(CCPIS, female == 1)
 CCPISYoung <- CCPIS |> filter(age > 9 & age <= 15)
 CCPISOld <- CCPIS |> filter(age >= 16 & age < 19)
+CCPISYoung$agegrp <- "Ages 10-15"
+CCPISOld$agegrp <- "Ages 16-18"
+CCPISOldYoung <- rbind(CCPISYoung, CCPISOld)
 CCPISYoungBoys <- filter(CCPISYoung, female == 0)
 CCPISYoungGirls <- filter(CCPISYoung, female == 1)
 CCPISOldBoys <- filter(CCPISOld, female == 0)
@@ -845,10 +850,10 @@ DG$educ_high[DG$education %in% c(
   "Master's degree")] <- 1
 DG$education[DG$education == "Baccalauréat"] <- "Bachelor's degree"
 DG$education[DG$education == "Collège, CÉGEP ou Collège classique"] <-
-  "Technical, community\ncollege, CEGEP or\nCollege classique"
+  "Technical, college\nor CEGEP"
 DG$education[DG$education ==
                "Technical, community college, CEGEP or College classique"] <-
-  "Technical, community\ncollege, CEGEP or\nCollege classique"
+  "Technical, college\nor CEGEP"
 DG$education[DG$education == "Doctorat"] <- "Doctorate"
 DG$education[DG$education == "Maîtrise"] <- "Master's degree"
 DG$education[DG$education == "Aucune scolarité"] <- "No schooling"
@@ -857,64 +862,59 @@ DG$education[DG$education == "École secondaire"] <- "High school"
 DG$education[DG$education == ""] <- NA
 DG$education <- factor(DG$education, levels = c(
   "No schooling", "Elementary school", "High school",
-  "Technical, community\ncollege, CEGEP or\nCollege classique",
-  "Bachelor's degree", "Master's degree", "Doctorate"))
+  "Technical, college\nor CEGEP", "Bachelor's degree", "Master's degree",
+  "Doctorate"))
 table(DG$education, useNA = "always")
 DG$ses_education <- NA
 DG$ses_education[DG$education %in% c(
   "No schooling", "Elementary school", "High school")] <- 1
-DG$ses_education[DG$education == paste0("Technical, community college,\n",
-                                        "CEGEP or College classique")] <- 2
+DG$ses_education[DG$education == "Technical, college\nor CEGEP"] <- 2
 DG$ses_education[DG$education %in% c(
   "Bachelor's degree", "Doctorate", "Master's degree")] <- 3
 DG$income <- DG$ses_income
 DG$income[DG$income == "Aucun revenu"] <- "No income"
-DG$income[DG$income == "1$ à 30 000$"] <- "$1 to $30 000"
-DG$income[DG$income == "30 001$ à 60 000$"] <- "$30 001 to $60 000"
-DG$income[DG$income == "60 001$ à 90 000$"] <- "$60 001 to $90 000"
-DG$income[DG$income == "90 001 à 110 000$"] <- "$90 001 to $110 000"
-DG$income[DG$income == "110 001$ à 150 000$"] <- "$110 001 to $150 000"
-DG$income[DG$income == "150 001$ à 200 000$"] <- "$150 001 to $200 000"
-DG$income[DG$income == "Plus de 200 000$"] <- "More than $200 000"
+DG$income[DG$income %in% c("1$ à 30 000$", "$1 to $30 000")] <- "$1-30,000"
+DG$income[DG$income %in% c("30 001$ à 60 000$", "$30 001 to $60 000")] <-
+ "$30,001-60,000"
+DG$income[DG$income %in% c("60 001$ à 90 000$", "$60 001 to $90 000")] <-
+ "$60,001-90,000"
+DG$income[DG$income %in% c("90 001 à 110 000$", "$90 001 to $110 000")] <-
+ "$90,001-110,000"
+DG$income[DG$income %in% c("110 001$ à 150 000$", "$110 001 to $150 000")] <-
+ "$110,001-150,000"
+DG$income[DG$income %in% c("150 001$ à 200 000$", "$150 001 to $200 000")] <-
+ "$150,001-200,000"
+DG$income[DG$income %in% c("Plus de 200 000$", "More than $200 000")] <-
+ "$200,000+"
 DG$income[DG$income == ""] <- NA
 DG$income <- factor(DG$income, levels = c(
-  "No income", "$1 to $30 000", "$30 001 to $60 000", "$60 001 to $90 000",
-  "$90 001 to $110 000", "$110 001 to $150 000", "$150 001 to $200 000",
-  "More than $200 000"))
+  "No income", "$1-30,000", "$30,001-60,000", "$60,001-90,000",
+  "$90,001-110,000", "$110,001-150,000", "$150,001-200,000", "$200,000+"))
 table(DG$income, useNA = "always")
 DG$income_low <- NA
 DG$income_low[DG$income %in% c(
-  "$110 001 to $150 000", "$150 001 to $200 000", "$60 001 to $90 000",
-  "$90 001 to $110 000", "110 001$ à 150 000$", "150 001$ à 200 000$",
-  "60 001$ à 90 000$", "90 001 à 110 000$", "More than $200 000",
-  "Plus de 200 000$")] <- 0
+  "$110,001-150,000", "$150,001-200,000", "$60,001-90,000",
+  "$90,001-110,000", "$200,000+")] <- 0
 DG$income_low[DG$income %in% c(
-  "$1 to $30 000", "$30 001 to $60 000", "1$ à 30 000$", "30 001$ à 60 000$",
-  "Aucun revenu", "No income")] <- 1
+  "$1-30,000", "$30,001-60,000", "No income")] <- 1
 DG$income_mid <- NA
 DG$income_mid[DG$income %in% c(
-  "$1 to $30 000", "$30 001 to $60 000", "1$ à 30 000$", "30 001$ à 60 000$",
-  "Aucun revenu", "No income", "$150 001 to $200 000", "150 001$ à 200 000$",
-  "More than $200 000", "Plus de 200 000$")] <- 0
+  "$1-30,000", "$30,001-60,000", "No income", "$150,001-200,000",
+  "$200,000+")] <- 0
 DG$income_mid[DG$income %in% c(
-  "$110 001 to $150 000", "$60 001 to $90 000", "$90 001 to $110 000",
-  "110 001$ à 150 000$", "60 001$ à 90 000$", "90 001 à 110 000$")] <- 1
+  "$110,001-150,000", "$60,001-90,000", "$90,001-110,000")] <- 1
 DG$income_high <- NA
 DG$income_high[DG$income %in% c(
-  "$1 to $30 000", "$30 001 to $60 000", "1$ à 30 000$", "30 001$ à 60 000$",
-  "Aucun revenu", "No income", "$110 001 to $150 000", "$60 001 to $90 000",
-  "$90 001 to $110 000", "110 001$ à 150 000$", "60 001$ à 90 000$",
-  "90 001 à 110 000$")] <- 0
-DG$income_high[DG$income %in% c(
-  "$150 001 to $200 000", "150 001$ à 200 000$", "More than $200 000",
-  "Plus de 200 000$")] <- 1
+  "$1-30,000", "$30,001-60,000", "No income", "$110,001-150,000",
+  "$60,001-90,000", "$90,001-110,000")] <- 0
+DG$income_high[DG$income %in% c("$150,001-200,000", "$200,000+")] <- 1
 DG$ses_income <- NA
 DG$ses_income[DG$income %in% c(
-  "$1 to $30 000", "$30 001 to $60 000", "No income")] <- 1
+  "$1-30,000", "$30,001-60,000", "No income")] <- 1
 DG$ses_income[DG$income %in% c(
-  "$110 001 to $150 000", "$60 001 to $90 000", "$90 001 to $110 000")] <- 2
+  "$110,001-150,000", "$60,001-90,000", "$90,001-110,000")] <- 2
 DG$ses_income[DG$income %in% c(
-  "$150 001 to $200 000", "More than $200 000")] <- 3
+  "$150,001-200,000", "More than $200,000")] <- 3
 DG$interest <- as.numeric(DG$pol_interest_1)
 DG$interest_health <- as.numeric(DG$issues_interest_1)
 DG$interest_foreign <- as.numeric(DG$issues_interest_2)
@@ -1290,10 +1290,10 @@ CES21$education[
   CES21$education == "Don't know/ Prefer not to answer"] <- NA
 CES21$education[CES21$education == paste0(
   "Some technical, community college, CEGEP, College Classique")] <-
-  "Some technical,\ncommunity college,\nCEGEP, College Classique"
+  "Some technical,\ncollege or CEGEP"
 CES21$education[CES21$education == paste0(
   "Completed technical, community college, CEGEP, College Classique")] <-
-  "Completed technical,\ncommunity college,\nCEGEP, College Classique"
+  "Completed technical,\ncollege\nor CEGEP"
 CES21$education[CES21$education == paste0(
   "Some secondary/ high school")] <-
   "Some secondary/\nhigh school"
@@ -1313,29 +1313,29 @@ CES21$education <- as.factor(CES21$education)
 CES21$income <- NA
 CES21$income[CES21$cps21_income_number < 1] <- "No income"
 CES21$income[CES21$cps21_income_number >= 1 &
-               CES21$cps21_income_number < 30000] <- "$1 to $30 000"
+               CES21$cps21_income_number < 30000] <- "$1-30,000"
 CES21$income[CES21$cps21_income_number >= 30000 &
-               CES21$cps21_income_number < 60000] <- "$30 001 to $60 000"
+               CES21$cps21_income_number < 60000] <- "$30,001-60,000"
 CES21$income[CES21$cps21_income_number >= 60000 &
-               CES21$cps21_income_number < 90000] <- "$60 001 to $90 000"
+               CES21$cps21_income_number < 90000] <- "$60,001-90,000"
 CES21$income[CES21$cps21_income_number >= 90000 &
-               CES21$cps21_income_number < 110000] <- "$90 001 to $110 000"
+               CES21$cps21_income_number < 110000] <- "$90,001-110,000"
 CES21$income[CES21$cps21_income_number >= 110000 &
-               CES21$cps21_income_number < 150000] <- "$110 001 to $150 000"
+               CES21$cps21_income_number < 150000] <- "$110,001-150,000"
 CES21$income[CES21$cps21_income_number >= 150000 &
-               CES21$cps21_income_number < 200000] <- "$150 001 to $200 000"
-CES21$income[CES21$cps21_income_number >= 200000] <- "More than $200 000"
+               CES21$cps21_income_number < 200000] <- "$150,001-200,000"
+CES21$income[CES21$cps21_income_number >= 200000] <- "$200,000+"
 CES21$income <- factor(CES21$income, levels = c(
-  "No income", "$1 to $30 000", "$30 001 to $60 000", "$60 001 to $90 000",
-  "$90 001 to $110 000", "$110 001 to $150 000", "$150 001 to $200 000",
-  "More than $200 000"))
+  "No income", "$1-30,000", "$30,001-60,000", "$60,001-90,000",
+  "$90,001-110,000", "$110,001-150,000", "$150,001-200,000",
+  "$200,000+"))
 CES21$province <- as.character(CES21$pes21_province) # no data about territories
 CES21$province[CES21$province == "Newfoundland and Labrador"] <-
-  "Newfoundland\nand Labrador"
+  "N&L"
 CES21$province[CES21$province == "Northwest Territories"] <-
-  "Northwest\nTerritories"
+  "NWT"
 CES21$province[CES21$province == "Prince Edward Island"] <-
-  "Prince Edward\nIsland"
+  "PEI"
 CES21$province <- as.factor(CES21$province)
 CES97$year <- 1997
 CES00$year <- 2000
@@ -1412,8 +1412,8 @@ EfficacyCronbach <- round(as.numeric(psy::cronbach(EfficacyScale)[3]),
                           digits = 2)
 EfficacyFactorAnalysis <- factanal(EfficacyScale, factors = 1)
 EfficacyVariableNames <- c(
-  paste("Sometimes, politics and\ngovernment seem so\ncomplicated that a\n",
-        "person like me can't\nreally understand\nwhat's going on"),
+  paste("Sometimes, politics and\ngovernment seem so\ncomplicated that a",
+        "person\nlike me can't really\nunderstand what's going on"),
   "People like me don't\nhave any say about\nwhat the government does",
   "The government does not\ncare much about\nwhat people\nlike me think")
 EfficacyFactorLoadings <- EfficacyFactorAnalysis$loadings[, 1]
@@ -1427,20 +1427,21 @@ ggplot(data.frame(EfficacyVariableNames, EfficacyFactorLoadings),
            width = 0.4) +
   geom_text(aes(label = as.character(round(
     EfficacyFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
-    family = "CM Roman") +
+    family = "CM Roman", size = 6) +
   geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
   annotate("text", label = paste("Cronbach's alpha =", as.character(
-    EfficacyCronbach)), x = 1.1, y = 0.85, size = 3.8,
+    EfficacyCronbach)), x = 1.1, y = 0.85, size = 6,
     family = "CM Roman") +
   annotate("text", label = paste("First eigenvalue =", as.character(
-    EfficacyFirstEigenvalue)), x = 0.9, y = 0.85, size = 3.8,
+    EfficacyFirstEigenvalue)), x = 0.9, y = 0.85, size = 6,
     family = "CM Roman") +
   scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
                      breaks = seq(-0.1, 1, by = 0.1)) +
   xlab("") +
   theme_linedraw() +
-  theme(axis.text.y = element_text(size = 14),
-        axis.title.x = element_text(hjust = 0.3, vjust = -0.17, size = 14),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
         panel.grid = element_blank(),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/EfficacyScale.pdf", width = 11, height = 4.25)
@@ -1471,20 +1472,21 @@ ggplot(data.frame(KnowVariableNames, KnowFactorLoadings),
            width = 0.4) +
   geom_text(aes(label = as.character(round(
     KnowFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
-    family = "CM Roman") +
+    family = "CM Roman", size = 6) +
   geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
   annotate("text", label = paste("Cronbach's alpha =", as.character(
-    KnowCronbach)), x = 1.1, y = 0.85, size = 3.8,
+    KnowCronbach)), x = 1.1, y = 0.85, size = 6,
     family = "CM Roman") +
   annotate("text", label = paste("First eigenvalue =", as.character(
-    KnowFirstEigenvalue)), x = 0.9, y = 0.85, size = 3.8,
+    KnowFirstEigenvalue)), x = 0.9, y = 0.85, size = 6,
     family = "CM Roman") +
   scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
                      breaks = seq(-0.1, 1, by = 0.1)) +
   xlab("") +
   theme_linedraw() +
-  theme(axis.text.y = element_text(size = 14),
-        axis.title.x = element_text(hjust = 0.3, vjust = -0.17, size = 14),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
         panel.grid = element_blank(),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/KnowScale.pdf", width = 11, height = 4.25)
@@ -1523,20 +1525,21 @@ ggplot(data.frame(ParticVariableNames, ParticFactorLoadings),
            width = 0.4) +
   geom_text(aes(label = as.character(round(
     ParticFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
-    family = "CM Roman") +
+    family = "CM Roman", size = 6) +
   geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
   annotate("text", label = paste("Cronbach's alpha =", as.character(
-    ParticCronbach)), x = 1.4, y = 0.85, size = 3.8,
+    ParticCronbach)), x = 4, y = 0.85, size = 6,
     family = "CM Roman") +
   annotate("text", label = paste("First eigenvalue =", as.character(
-    ParticFirstEigenvalue)), x = 0.8, y = 0.85, size = 3.8,
+    ParticFirstEigenvalue)), x = 2, y = 0.85, size = 6,
     family = "CM Roman") +
   scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
                      breaks = seq(-0.1, 1, by = 0.1)) +
   xlab("") +
   theme_linedraw() +
-  theme(axis.text.y = element_text(size = 14),
-        axis.title.x = element_text(hjust = 0.3, vjust = -0.17, size = 14),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
         panel.grid = element_blank(),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParticScale.pdf", width = 11, height = 4.25)
@@ -1968,12 +1971,16 @@ PlotGender <- CCPIS |>
   geom_bar() +
   labs(x = "Gender", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotAge <- ggplot(CCPIS, aes(x = age)) +
   geom_histogram(binwidth = 1) +
   labs(x = "Age", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotEthnicity <- CCPIS |>
   filter(!is.na(ethn)) |>
   ggplot(aes(x = ethn)) +
@@ -1981,6 +1988,8 @@ PlotEthnicity <- CCPIS |>
   labs(x = "Ethnicity", y = "Frequency") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
 PlotLanguage <- CCPIS |>
   filter(!is.na(lang)) |>
@@ -1988,7 +1997,10 @@ PlotLanguage <- CCPIS |>
   geom_bar() +
   labs(x = "Language spoken at home", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotImmigrant <- CCPIS |>
   filter(!is.na(immig)) |>
   ggplot(aes(x = as.factor(immig))) +
@@ -1996,44 +2008,38 @@ PlotImmigrant <- CCPIS |>
   labs(x = "Born in Canada?", y = "Frequency") +
   theme_minimal() +
   scale_x_discrete(labels = c("Yes", "No")) +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotAgentic <- ggplot(CCPIS, aes(x = agentic)) +
   geom_histogram(breaks = seq(0, 1, 0.1)) +
   labs(x = "Agency scale score", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotCommunal <- ggplot(CCPIS, aes(x = communal)) +
   geom_histogram(breaks = seq(0, 1, 0.1)) +
   labs(x = "Communality scale score", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotFamSituation <- CCPIS |>
   ggplot(aes(x = as.factor(fam_situation_alt))) +
   geom_bar() +
   labs(x = "Family situation", y = "Frequency") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+        axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotParentDiscuss <- filter(CCPIS, !is.na(parent_discuss_alt) &
-                              !is.na(female)) |>
-  ggplot(aes(x = as.factor(parent_discuss_alt))) +
-  geom_bar() +
-  facet_grid(~female_alt2) +
-  labs(x = "Gender of parent who has the most discussions", y = "Frequency") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
-        text = element_text(family = "CM Roman"))
-PlotFriendsGender <- filter(CCPIS, !is.na(friends_gender_alt) &
-                              !is.na(female)) |>
-  ggplot(aes(x = as.factor(friends_gender_alt))) +
-  geom_bar() +
-  facet_grid(~female_alt2) +
-  labs(x = "Gender of most of friends", y = "Frequency") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
-        text = element_text(family = "CM Roman"))
-PlotTeacherGender <- filter(CCPIS, !is.na(teacher_gender_alt) &
-                              !is.na(female)) |>
+ggsave(plot = ggpubr::ggarrange(
+  PlotGender, PlotAge, PlotEthnicity, PlotLanguage, PlotImmigrant, PlotAgentic,
+  PlotCommunal, PlotFamSituation, nrow = 3, ncol = 3),
+  "_graphs/CCPISDescriptive1.pdf", width = 11, height = 12.75)
+
+filter(CCPIS, !is.na(teacher_gender_alt) & !is.na(female)) |>
   ggplot(aes(x = as.factor(teacher_gender_alt))) +
   geom_bar() +
   facet_grid(~female_alt2) +
@@ -2041,8 +2047,7 @@ PlotTeacherGender <- filter(CCPIS, !is.na(teacher_gender_alt) &
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
-PlotInfluencerGender <- filter(CCPIS, !is.na(influencer_gender_alt) &
-                              !is.na(female)) |>
+filter(CCPIS, !is.na(influencer_gender_alt) & !is.na(female)) |>
   ggplot(aes(x = as.factor(influencer_gender_alt))) +
   geom_bar() +
   facet_grid(~female_alt2) +
@@ -2050,50 +2055,58 @@ PlotInfluencerGender <- filter(CCPIS, !is.na(influencer_gender_alt) &
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
-ggsave(plot = ggpubr::ggarrange(
-  PlotGender, PlotAge, PlotEthnicity, PlotLanguage, PlotImmigrant, PlotAgentic,
-  PlotCommunal, PlotFamSituation, nrow = 3, ncol = 3),
-  "_graphs/CCPISDescriptive1.pdf", height = 8.5, width = 11)
 
 PlotInterest <- ggplot(CCPIS, aes(x = interest)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
-  labs(x = "General political interest", y = "Frequency") +
+  labs(x = "General\npolitical interest", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotHealth <- ggplot(CCPIS, aes(x = interest_health)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
-  labs(x = "Interest in health care", y = "Frequency") +
+  labs(x = "Interest in\nhealth care", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotForeign <- ggplot(CCPIS, aes(x = interest_foreign)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
-  labs(x = "Interest in international relations", y = "Frequency") +
+  labs(x = "Interest in\ninternational relations", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotLaw <- ggplot(CCPIS, aes(x = interest_law)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
-  labs(x = "Interest in law and crime", y = "Frequency") +
+  labs(x = "Interest in\nlaw and crime", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotEducation <- ggplot(CCPIS, aes(x = interest_education)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
-  labs(x = "Interest in education", y = "Frequency") +
+  labs(x = "Interest in\neducation", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotPartisan <- ggplot(CCPIS, aes(x = interest_partisan)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
-  labs(x = "Interest in partisan politics", y = "Frequency") +
+  labs(x = "Interest in\npartisan politics", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotInterest, PlotHealth, PlotForeign, PlotLaw, PlotEducation, PlotPartisan,
-  nrow = 3, ncol = 2), width = 5.5, height = 4.25,
+  nrow = 2, ncol = 3), width = 11, height = 4.25,
   "_graphs/CCPISDescriptive2.pdf")
 
 PoliticalGraphData <- pivot_longer(
@@ -2106,12 +2119,12 @@ PoliticalGraphData <- pivot_longer(
 PoliticalGraphData$name_full <- case_when(
   PoliticalGraphData$name == "lockdown_political_alt" ~ "Pandemic restrictions",
   PoliticalGraphData$name == "nurses_political_alt" ~
-    "Working conditions of nurses",
+    "Working conditions\nof nurses",
   PoliticalGraphData$name == "china_political_alt" ~
-    "Diplomatic disputes\nbetween Canada and China",
+    "Diplomatic disputes\nbetween Canada\nand China",
   PoliticalGraphData$name == "ukraine_political_alt" ~ "Ukrainian war",
   PoliticalGraphData$name == "police_political_alt" ~ "Police funding",
-  PoliticalGraphData$name == "crime_political_alt" ~ "Sentences for violent crimes",
+  PoliticalGraphData$name == "crime_political_alt" ~ "Sentences for\nviolent crimes",
   PoliticalGraphData$name == "tuition_political_alt" ~ "University tuition",
   PoliticalGraphData$name == "privateschool_political_alt" ~
     "Funding of public\nand private schools",
@@ -2126,42 +2139,52 @@ ggplot(PoliticalGraphData, aes(x = reorder(name_full, -value), y = value)) +
   geom_point() +
   geom_errorbar(aes(ymin = value.lb, ymax = value.ub), width = 0.5) +
   geom_hline(yintercept = 0.5) +
-  scale_y_continuous("Average view of students", limits = c(0, 1),
+  scale_y_continuous("Average view\nof students", limits = c(0, 1),
                      breaks = c(0, 0.25, 0.5, 0.75, 1),
                      labels = c("Non-political", "", "", "", "Political")) +
   scale_x_discrete("Issue") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 66.7, vjust = 0.5),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/CCPISPolitical.pdf", width = 5.5, height = 4.25)
+ggsave("_graphs/CCPISPolitical.pdf", width = 11, height = 4.25)
 
 #### 2.2 Datagotchi PES, CES, WVS and GSS ####
 PlotAgeDG <- ggplot(DG, aes(x = age)) +
   geom_histogram(binwidth = 1) +
   labs(x = "Age", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotGenderDG <- DG |>
   filter(!is.na(female_alt)) |>
   ggplot(aes(x = female_alt)) +
   geom_bar() +
   labs(x = "Gender", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotLanguageDG <- DG |>
   filter(!is.na(lang)) |>
   ggplot(aes(x = lang)) +
   geom_bar() +
   labs(x = "Language of the survey", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotEthnicityDG <- DG |>
   filter(!is.na(ethn)) |>
   ggplot(aes(x = ethn)) +
   geom_bar() +
   labs(x = "Ethnicity", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotImmigrantDG <- DG |>
   filter(!is.na(immig)) |>
@@ -2170,27 +2193,35 @@ PlotImmigrantDG <- DG |>
   scale_x_discrete(labels = c("Yes", "No")) +
   labs(x = "Born in Canada?", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotIncomeDG <- DG |>
   filter(!is.na(income)) |>
   ggplot(aes(x = as.factor(income))) +
   geom_bar() +
   labs(x = "Household yearly income", y = "Frequency") +
+  scale_y_continuous(breaks = c(0, 300)) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEducationDG <- DG |>
   filter(!is.na(education)) |>
   ggplot(aes(x = as.factor(education))) +
   geom_bar() +
   labs(x = "Level of education", y = "Frequency") +
+  scale_y_continuous(breaks = c(0, 600)) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotGenderDG, PlotAgeDG, PlotEthnicityDG, PlotLanguageDG, PlotImmigrantDG,
   PlotIncomeDG, PlotEducationDG, nrow = 3, ncol = 3),
-  "_graphs/DGDescriptive1.pdf", height = 8.5, width = 11)
+  "_graphs/DGDescriptive1.pdf", width = 11, height = 8.5)
 
 PlotAgeCES <- CES21 |>
   filter(!is.na(age)) |>
@@ -2198,7 +2229,9 @@ PlotAgeCES <- CES21 |>
   geom_bar() +
   labs(x = "Age", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotGenderCES <- CES21 |>
   filter(!is.na(female_alt)) |>
@@ -2206,14 +2239,19 @@ PlotGenderCES <- CES21 |>
   geom_bar() +
   labs(x = "Gender", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotLanguageCES <- CES21 |>
   filter(!is.na(lang)) |>
   ggplot(aes(x = lang)) +
   geom_bar() +
   labs(x = "Language spoken at home", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
 PlotImmigrantCES <- CES21 |>
   filter(!is.na(immig)) |>
   ggplot(aes(x = as.factor(immig))) +
@@ -2221,14 +2259,18 @@ PlotImmigrantCES <- CES21 |>
   scale_x_discrete(labels = c("Yes", "No")) +
   labs(x = "Born in Canada?", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotIncomeCES <- CES21 |>
   filter(!is.na(income)) |>
   ggplot(aes(x = as.factor(income))) +
   geom_bar() +
   labs(x = "Household yearly income", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEducationCES <- CES21 |>
   filter(!is.na(education)) |>
@@ -2236,7 +2278,9 @@ PlotEducationCES <- CES21 |>
   geom_bar() +
   labs(x = "Level of education", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotProvinceCES <- CES21 |>
   filter(!is.na(province)) |>
@@ -2244,21 +2288,26 @@ PlotProvinceCES <- CES21 |>
   geom_bar() +
   labs(x = "Province of residence", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEthnicityCES <- CES21 |>
   filter(!is.na(ethn)) |>
   ggplot(aes(x = as.factor(ethn))) +
   geom_bar() +
   labs(x = "Ethnicity", y = "Frequency") +
+  scale_y_continuous(breaks = c(0, 10000)) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotGenderCES, PlotAgeCES, PlotLanguageCES, PlotImmigrantCES,
   PlotIncomeCES, PlotEducationCES, PlotEthnicityCES, PlotProvinceCES,
   nrow = 3, ncol = 3),
-  "_graphs/CESDescriptive1.pdf", height = 8.5, width = 11)
+  "_graphs/CESDescriptive1.pdf", width = 11, height = 8.5)
 
 PlotAgeWVS <- WVSCA20 |>
   filter(!is.na(age)) |>
@@ -2316,7 +2365,7 @@ PlotEthnicityWVS <- WVSCA20 |>
 ggsave(plot = ggpubr::ggarrange(
   PlotGenderWVS, PlotAgeWVS, PlotLanguageWVS, PlotImmigrantWVS,
   PlotEducationWVS, PlotEthnicityWVS, PlotProvinceWVS, nrow = 3, ncol = 3),
-  "_graphs/WVSDescriptive1.pdf", height = 8.5, width = 11)
+  "_graphs/WVSDescriptive1.pdf", width = 11, height = 8.5)
 
 PlotAgeGSS <- GSS20 |>
   filter(!is.na(age)) |>
@@ -2384,7 +2433,7 @@ ggsave(plot = ggpubr::ggarrange(
   PlotGenderGSS, PlotAgeGSS, PlotLanguageGSS, PlotImmigrantGSS,
   PlotIncomeGSS, PlotEducationGSS, PlotEthnicityGSS, PlotProvinceGSS,
   nrow = 3, ncol = 3),
-  "_graphs/GSSDescriptive1.pdf", height = 8.5, width = 11)
+  "_graphs/GSSDescriptive1.pdf", width = 11, height = 8.5)
 
 PlotInterestDG <- ggplot(DG, aes(x = interest, weight = weight)) +
   geom_histogram(binwidth = 1) +
@@ -2426,25 +2475,24 @@ PlotPartisanDG <- ggplot(DG, aes(x = interest_partisan,
   theme(text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotInterestDG, PlotHealthDG, PlotForeignDG, PlotLawDG, PlotEducationDG,
-  PlotPartisanDG, nrow = 3, ncol = 2), width = 5.5, height = 4.25,
+  PlotPartisanDG, nrow = 2, ncol = 3), width = 11, height = 4.25,
   "_graphs/DGInterest.pdf")
 
-PlotInterestCES <- ggplot(CES21, aes(x = interest, weight = weight)) +
-  geom_histogram(binwidth = 10) +
+PlotInterestCES <- ggplot(CES21, aes(x = interest / 10, weight = weight)) +
+  geom_histogram(binwidth = 1) +
   labs(x = "General political interest -\n2021 CES", y = "Frequency") +
   theme_minimal() +
   theme(text = element_text(family = "CM Roman"))
-PlotInterestWVS <- ggplot(WVSCA20, aes(x = interest, weight = weight)) +
-  geom_histogram(binwidth = (100/3)) +
-  scale_x_continuous(breaks = c(0, 25, 50, 75, 100)) +
+PlotInterestWVS <- ggplot(WVSCA20, aes(x = interest / 10, weight = weight)) +
+  geom_histogram(binwidth = (10/3)) +
+  scale_x_continuous(breaks = c(0, 2.5, 5, 7.5, 10)) +
   labs(x = "General political interest -\n2020 WVS - Canada",
        y = "Frequency") +
   theme_minimal() +
   theme(text = element_text(family = "CM Roman"))
-
-PlotInterestGSS <- ggplot(GSS20, aes(x = interest, weight = weight)) +
-  geom_histogram(binwidth = (100/3)) +
-  scale_x_continuous(breaks = c(0, 25, 50, 75, 100)) +
+PlotInterestGSS <- ggplot(GSS20, aes(x = interest / 10, weight = weight)) +
+  geom_histogram(binwidth = (10/3)) +
+  scale_x_continuous(breaks = c(0, 2.5, 5, 7.5, 10)) +
   scale_y_continuous(labels = scales::comma) +
   labs(x = "General political interest -\n2020 GSS - Canada",
        y = "Frequency") +
@@ -2452,7 +2500,7 @@ PlotInterestGSS <- ggplot(GSS20, aes(x = interest, weight = weight)) +
   theme(text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotInterestCES, PlotInterestWVS, PlotInterestGSS,
-  nrow = 2, ncol = 2), width = 5.5, height = 4.25,
+  nrow = 2, ncol = 2), width = 11, height = 4.25,
   "_graphs/CESWVSGSSInterest.pdf")
 mean(CCPIS$interest, na.rm=T)
 mean(CCPIS$interest_law, na.rm=T)
@@ -2849,11 +2897,11 @@ PlotTimeGSS <- ggplot(filter(GSS20, !is.na(female)),
 ggsave(plot = ggpubr::ggarrange(
   PlotTimeCES, PlotTimeWVS, PlotTimeWVSCA, PlotTimeGSS,
   nrow = 2, ncol = 2, common.legend = TRUE, legend = "bottom"),
-  "_graphs/TimeCESWVSGSS.pdf", height = 4.25, width = 5.5)
+  "_graphs/TimeCESWVSGSS.pdf", width = 11, height = 4.25)
 ggsave(plot = ggpubr::ggarrange(
   PlotTimeInternalEfficacy, PlotTimeExternalEfficacy, PlotTimeKnowledge,
   PlotTimeParticipation, nrow = 2, ncol = 2, common.legend = TRUE, legend = "bottom"),
-  "_graphs/TimePoliticalEngagement.pdf", height = 4.25, width = 5.5)
+  "_graphs/TimePoliticalEngagement.pdf", width = 11, height = 4.25)
 
 summary(lm(data = GSS20, formula = interest / 10 ~ female, weights = weight))
 
@@ -2891,7 +2939,7 @@ ggplot(GraphData, aes(x = reorder(varNames, absPearCor), y = pearCor)) +
   coord_flip() +
   theme_minimal() +
   theme(text = element_text(family = "CM Roman"))
-ggsave("_graphs/CorTests.pdf", height = 14.25, width = 5.5)
+ggsave("_graphs/CorTests.pdf", width = 11, height = 14.25)
 ModelInternalEfficacy <- lm(data = CES21, interest ~ internal_efficacy)
 ModelExternalEfficacy <- lm(data = CES21, interest ~ external_efficacy)
 ModelKnowledge <- lm(data = CES21, interest ~ knowledge)
@@ -2941,7 +2989,7 @@ ggplot(CESGapYearAge,
   geom_smooth(aes(weight = NULL), linewidth = 0.25, alpha = 0.1, se = F) +
   geom_hline(yintercept = 0) +
   scale_y_continuous(name = "General political interest gender gap") +
-  scale_x_discrete(name = "Age, 2021 CES") +
+  scale_x_continuous(name = "Age, 2021 CES") +
   scale_color_manual(name = "Year", values = c(
     "1997" = "grey20", "2000" = "grey20", "2004" = "grey20", "2006" = "grey50",
     "2008" = "grey50", "2011" = "grey50", "2015" = "grey80", "2019" = "grey80",
@@ -2952,7 +3000,7 @@ ggplot(CESGapYearAge,
     "2021" = "dashed")) +
   theme_minimal() +
   theme(text = element_text(family = "CM Roman"))
-ggsave("_graphs/CESGapYearAge.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/CESGapYearAge.pdf", width = 11, height = 4.25)
 
 #### 3.4 Political interest by year & gender (CES & WVS) ####
 weighted.interest.se <- function(data) {
@@ -3067,19 +3115,19 @@ InterestGenderData$interest.lb <-
   InterestGenderData$interest + qnorm(0.025) * InterestGenderData$interest.se
 InterestGenderData$interest.ub <-
   InterestGenderData$interest + qnorm(0.975) * InterestGenderData$interest.se
-ggplot(InterestGenderData, aes(x = year, y = interest, color = female,
+ggplot(InterestGenderData, aes(x = year, y = interest / 10, color = female,
                                linetype = survey, group = interaction(female, survey))) +
   geom_line() +
-  geom_ribbon(aes(ymin = interest.lb, ymax = interest.ub), alpha = 0.25,
+  geom_ribbon(aes(ymin = interest.lb / 10, ymax = interest.ub / 10), alpha = 0.25,
               color = NA) +
   scale_y_continuous(name = "General political interest",
-                     limits = c(0, 100)) +
+                     limits = c(0, 10)) +
   scale_x_continuous(name = "Year") +
   scale_color_grey(name = "Gender", end = 0.75, labels = c("Men", "Women")) +
   scale_linetype(name = "Survey") +
   theme_minimal() +
   theme(text = element_text(family = "CM Roman"))
-ggsave("_graphs/InterestYearGender.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/InterestYearGender.pdf", width = 11, height = 4.25)
 
 summary(lm(data = InterestCESGenderData, formula = interest ~ female))
 # in all CES waves: women's political interest = 56%;
@@ -3221,13 +3269,13 @@ GenderEthnicityInterest$group <- factor(
   levels = c("White men", "White women", "Nonwhite men",
              "Nonwhite women", "Immigrant men", "Immigrant women",
              "Nonimmigrant men", "Nonimmigrant women"))
-ggplot(GenderEthnicityInterest, aes(x = group, y = interest,
+ggplot(GenderEthnicityInterest, aes(x = group, y = interest / 10,
                                     color = year, shape = year)) +
   geom_point(position = position_dodge(width = 0.5), size = 0.75) +
-  geom_errorbar(aes(ymin = interest.lb, ymax = interest.ub),
+  geom_errorbar(aes(ymin = interest.lb / 10, ymax = interest.ub / 10),
                 width = 0, position = position_dodge(width = 0.5)) +
   scale_y_continuous(name = "General political interest",
-                     limits = c(0, 100)) +
+                     limits = c(0, 10)) +
   scale_x_discrete(name = "Group") +
   scale_color_manual(name = "Wave", values = c(
     "CES 2021" = "grey20", "GSS 2013" = "grey50", "GSS 2020" = "grey20",
@@ -3238,7 +3286,7 @@ ggplot(GenderEthnicityInterest, aes(x = group, y = interest,
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/InterestWaveGroup.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/InterestWaveGroup.pdf", width = 11, height = 4.25)
 
 #### 3.6 Political interest by ethnicity (2017-22 CES & WVS) ####
 EthnicityInterestWVS <- data.frame(
@@ -3345,7 +3393,7 @@ ggplot(EthnicityInterest, aes(x = ethn, y = interest,
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman")) +
   scale_color_grey(name = "Survey", end = 0.5)
-ggsave("_graphs/InterestEthnicity20_21.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/InterestEthnicity20_21.pdf", width = 11, height = 4.25)
 
 #### 3.7 Parents ####
 CCPISBoysLonger <- pivot_longer(CCPISBoys,
@@ -3377,7 +3425,7 @@ ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/ParentTopics.pdf", width = 8.5, height = 4.25)
+ggsave("_graphs/ParentTopics.pdf", width = 11, height = 4.25)
 ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
   geom_bar(position = "fill") +
   facet_wrap(~topic, ncol = 6) +
@@ -3391,7 +3439,7 @@ ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/ParentTopicsGrey.pdf", width = 8.5, height = 4.25)
+ggsave("_graphs/ParentTopicsGrey.pdf", width = 11, height = 4.25)
 
 CCPISBoysGraph <- CCPISBoys |>
   pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
@@ -3421,7 +3469,7 @@ ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/ParentTopicsMomDad.pdf", width = 8.5, height = 4.25)
+ggsave("_graphs/ParentTopicsMomDad.pdf", width = 11, height = 4.25)
 ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
   geom_bar(position = "dodge", stat = "identity") +
   facet_wrap(~sex) +
@@ -3432,7 +3480,7 @@ ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/ParentTopicsMomDadGrey.pdf", width = 8.5, height = 4.25)
+ggsave("_graphs/ParentTopicsMomDadGrey.pdf", width = 11, height = 4.25)
 
 #### 3.8 Peers ####
 CCPISBoysPeerGraph <- CCPISBoys |>
@@ -3465,7 +3513,7 @@ ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/PeersTopics.pdf", width = 5.5, height = 4.25)
+ggsave("_graphs/PeersTopics.pdf", width = 11, height = 4.25)
 ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   geom_bar(position = "dodge", stat = "identity") +
   facet_wrap(~sex) +
@@ -3476,7 +3524,18 @@ ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/PeersTopicsGrey.pdf", width = 5.5, height = 4.25)
+ggsave("_graphs/PeersTopicsGrey.pdf", width = 11, height = 4.25)
+filter(CCPISOldYoung, !is.na(friends_gender_alt) & !is.na(female)) |>
+  ggplot(aes(x = female_alt, fill = as.factor(friends_gender_alt))) +
+  geom_bar(position = "fill") +
+  facet_wrap(~agegrp) +
+  scale_x_discrete("Gender") +
+  scale_y_continuous("Percent of students", labels = scales::percent) +
+  scale_fill_grey("Gender of most friends", na.value = "grey") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/PeersGenderAge.pdf", width = 11, height = 4.25)
 
 ### 4. Regression models ####
 #### 4.1 Create longer versions of each dataset ####
@@ -4876,7 +4935,7 @@ ggplot(GenderParentData, aes(x = pred, y = topic)) +
   theme(axis.text.y = ggtext::element_markdown(
     color = c(rep("black", 5), "red")),
     text = element_text(family = "CM Roman"))
-ggsave("_graphs/GenderParent.pdf", width = 5.5, height = 4.25)
+ggsave("_graphs/GenderParent.pdf", width = 11, height = 4.25)
 GenderParentCtrlData <- data.frame(
   pred_health_b = get_ci(ModelBoysHealthGenderParentCtrl, 1),
   pred_health_g = get_ci(ModelGirlsHealthGenderParentCtrl, 1),
@@ -4909,7 +4968,7 @@ ggplot(GenderParentCtrlData, aes(x = pred, y = topic)) +
   theme(axis.text.y = ggtext::element_markdown(
     color = c(rep("black", 5), "red")),
     text = element_text(family = "CM Roman"))
-ggsave("_graphs/GenderParentCtrl.pdf", width = 5.5, height = 4.25)
+ggsave("_graphs/GenderParentCtrl.pdf", width = 11, height = 4.25)
 
 AgentsData <- data.frame(
   mother_health_b = get_ci(ModelBoysHealthMother, 1),
@@ -4969,6 +5028,12 @@ AgentsData$topic <- c(rep(c(
   rep("All topics", 2)), 4))
 AgentsData$agents <- c(rep("Mother", 12), rep("Father", 12),
                        rep("Female friends", 12), rep("Male friends", 12))
+get_ci_lmer <- function(model, var_order, level = 0.95) {
+  mod_int <- confint(model, level = level)
+  c(mod_int[var_order + 3, 1], fixef(model)[var_order + 1],
+    mod_int[var_order + 3, 2])
+# extract est. and ci for 1st IV only
+}
 AgentsCtrlData <- data.frame(
   mother_health_b = get_ci(ModelBoysHealthAgentsCtrl, 1),
   mother_health_g = get_ci(ModelGirlsHealthAgentsCtrl, 1),
@@ -4979,7 +5044,7 @@ AgentsCtrlData <- data.frame(
   mother_education_b = get_ci(ModelBoysEducationAgentsCtrl, 1),
   mother_education_g = get_ci(ModelGirlsEducationAgentsCtrl, 1),
   mother_partisan_b = get_ci(ModelBoysPartisanAgentsCtrl, 1),
-  mother_partisan_g = get_ci(ModelGirlsPartisanAgentsCtrl, 1),
+  mother_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 1),
   mother_all_b = get_ci(ModelBoysAllAgentsCtrl, 1),
   mother_all_g = get_ci(ModelGirlsAllAgentsCtrl, 1),
   father_health_b = get_ci(ModelBoysHealthAgentsCtrl, 2),
@@ -4991,7 +5056,7 @@ AgentsCtrlData <- data.frame(
   father_education_b = get_ci(ModelBoysEducationAgentsCtrl, 2),
   father_education_g = get_ci(ModelGirlsEducationAgentsCtrl, 2),
   father_partisan_b = get_ci(ModelBoysPartisanAgentsCtrl, 2),
-  father_partisan_g = get_ci(ModelGirlsPartisanAgentsCtrl, 2),
+  father_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 2),
   father_all_b = get_ci(ModelBoysAllAgentsCtrl, 2),
   father_all_g = get_ci(ModelGirlsAllAgentsCtrl, 2),
   femalefriends_health_b = get_ci(ModelBoysHealthAgentsCtrl, 3),
@@ -5003,7 +5068,7 @@ AgentsCtrlData <- data.frame(
   femalefriends_education_b = get_ci(ModelBoysEducationAgentsCtrl, 3),
   femalefriends_education_g = get_ci(ModelGirlsEducationAgentsCtrl, 3),
   femalefriends_partisan_b = get_ci(ModelBoysPartisanAgentsCtrl, 3),
-  femalefriends_partisan_g = get_ci(ModelGirlsPartisanAgentsCtrl, 3),
+  femalefriends_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 3),
   femalefriends_all_b = get_ci(ModelBoysAllAgentsCtrl, 3),
   femalefriends_all_g = get_ci(ModelGirlsAllAgentsCtrl, 3),
   malefriends_health_b = get_ci(ModelBoysHealthAgentsCtrl, 4),
@@ -5015,7 +5080,7 @@ AgentsCtrlData <- data.frame(
   malefriends_education_b = get_ci(ModelBoysEducationAgentsCtrl, 4),
   malefriends_education_g = get_ci(ModelGirlsEducationAgentsCtrl, 4),
   malefriends_partisan_b = get_ci(ModelBoysPartisanAgentsCtrl, 4),
-  malefriends_partisan_g = get_ci(ModelGirlsPartisanAgentsCtrl, 4),
+  malefriends_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 4),
   malefriends_all_b = get_ci(ModelBoysAllAgentsCtrl, 4),
   malefriends_all_g = get_ci(ModelGirlsAllAgentsCtrl, 4))
 rownames(AgentsCtrlData) <- c("ci_l", "pred", "ci_u")
@@ -5041,7 +5106,7 @@ AgentsData |>
   theme(axis.text.y = ggtext::element_markdown(
     color = c(rep("black", 5), "red")),
     text = element_text(family = "CM Roman"))
-ggsave("_graphs/MotherDiscuss.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/MotherDiscuss.pdf", width = 11, height = 4.25)
 AgentsCtrlData |>
   filter(agents == "Mother") |>
   ggplot(aes(x = pred, y = topic)) +
@@ -5056,7 +5121,7 @@ AgentsCtrlData |>
   theme(axis.text.y = ggtext::element_markdown(
     color = c(rep("black", 5), "red")),
     text = element_text(family = "CM Roman"))
-ggsave("_graphs/MotherDiscussCtrl.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/MotherDiscussCtrl.pdf", width = 11, height = 4.25)
 AgentsData |>
   filter(agents == "Father") |>
   ggplot(aes(x = pred, y = topic)) +
@@ -5071,7 +5136,7 @@ AgentsData |>
   theme(axis.text.y = ggtext::element_markdown(
     color = c(rep("black", 5), "red")),
     text = element_text(family = "CM Roman"))
-ggsave("_graphs/FatherDiscuss.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/FatherDiscuss.pdf", width = 11, height = 4.25)
 AgentsCtrlData |>
   filter(agents == "Father") |>
   ggplot(aes(x = pred, y = topic)) +
@@ -5086,7 +5151,67 @@ AgentsCtrlData |>
   theme(axis.text.y = ggtext::element_markdown(
     color = c(rep("black", 5), "red")),
     text = element_text(family = "CM Roman"))
-ggsave("_graphs/FatherDiscussCtrl.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/FatherDiscussCtrl.pdf", width = 11, height = 4.25)
+AgentsData |>
+  filter(agents == "Female friends") |>
+  ggplot(aes(x = pred, y = topic)) +
+  geom_point() +
+  facet_wrap(~ gender) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous(
+    "\nTopic most often discussed with female friends\n(vs. other topics)") +
+  scale_y_discrete("Topics", limits = rev) +
+  theme_minimal() +
+  theme(axis.text.y = ggtext::element_markdown(
+    color = c(rep("black", 5), "red")),
+    text = element_text(family = "CM Roman"))
+ggsave("_graphs/FemaleFriendsDiscuss.pdf", width = 11, height = 4.25)
+AgentsCtrlData |>
+  filter(agents == "Female friends") |>
+  ggplot(aes(x = pred, y = topic)) +
+  geom_point() +
+  facet_wrap(~ gender) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous(
+    "\nTopic most often discussed with female friends\n(vs. other topics)") +
+  scale_y_discrete("Topics", limits = rev) +
+  theme_minimal() +
+  theme(axis.text.y = ggtext::element_markdown(
+    color = c(rep("black", 5), "red")),
+    text = element_text(family = "CM Roman"))
+ggsave("_graphs/FemaleFriendsDiscussCtrl.pdf", width = 11, height = 4.25)
+AgentsData |>
+  filter(agents == "Male friends") |>
+  ggplot(aes(x = pred, y = topic)) +
+  geom_point() +
+  facet_wrap(~ gender) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous(
+    "\nTopic most often discussed with male friends\n(vs. other topics)") +
+  scale_y_discrete("Topics", limits = rev) +
+  theme_minimal() +
+  theme(axis.text.y = ggtext::element_markdown(
+    color = c(rep("black", 5), "red")),
+    text = element_text(family = "CM Roman"))
+ggsave("_graphs/MaleFriendsDiscuss.pdf", width = 11, height = 4.25)
+AgentsCtrlData |>
+  filter(agents == "Male friends") |>
+  ggplot(aes(x = pred, y = topic)) +
+  geom_point() +
+  facet_wrap(~ gender) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous(
+    "\nTopic most often discussed with male friends\n(vs. other topics)") +
+  scale_y_discrete("Topics", limits = rev) +
+  theme_minimal() +
+  theme(axis.text.y = ggtext::element_markdown(
+    color = c(rep("black", 5), "red")),
+    text = element_text(family = "CM Roman"))
+ggsave("_graphs/MaleFriendsDiscussCtrl.pdf", width = 11, height = 4.25)
 GenderParentYOData <- data.frame(
   pred_yb = get_ci(ModelYoungBoysGenderParent, 1),
   pred_yg = get_ci(ModelYoungGirlsGenderParent, 1),
@@ -5183,7 +5308,7 @@ DiscussYOData |>
   theme_minimal() +
   theme(axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/DiscussYO.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/DiscussYO.pdf", width = 11, height = 4.25)
 DiscussYOCtrlData |>
   filter(agents %in% c("Parent", "Mother", "Father")) |>
   ggplot(aes(x = pred, y = age)) +
@@ -5200,4 +5325,4 @@ DiscussYOCtrlData |>
   theme_minimal() +
   theme(axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/DiscussYOCtrl.pdf", height = 4.25, width = 5.5)
+ggsave("_graphs/DiscussYOCtrl.pdf", width = 11, height = 4.25)

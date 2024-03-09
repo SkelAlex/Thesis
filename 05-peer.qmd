@@ -18,8 +18,19 @@ Questions are also asked about students' peers and interests. First, students ar
 
 Gender homophily holds among the sample of students: when excluding students who say they have as many friends of both genders, no less than 95% of boys and 91% of girls report that most of their friends are of the same genders as theirs.
 
+@fig-peers-genderage shows that 
+
 ```{r}
-#| label: fig-peers
+#| label: fig-peers-genderage
+#| echo: false
+#| fig-cap: "Children's peers by gender and age group, 2023 CCPIS data"
+knitr::include_graphics("_graphs/PeersGenderAge.pdf")
+```
+
+@fig-peers-topics shows that 
+
+```{r}
+#| label: fig-peers-topics
 #| echo: false
 #| fig-cap: "Topic most often discussed with peers by child gender, 2023 CCPIS data"
 knitr::include_graphics("_graphs/PeersTopicsGrey.pdf")
@@ -27,107 +38,45 @@ knitr::include_graphics("_graphs/PeersTopicsGrey.pdf")
 
 ### Topics Most Often Discussed with Female Friends
 
-@tbl-femalefriends shows students' interest in a specific topic depending on it being the topic they most often discuss with their female friends. For both boys and girls, interest in law and crime is related to their female friends discussing law and crime (*p*<0.05). If a girl's female friends discuss mostly law and crime among the five topics, her interest in law and crime is expected to increase by 1.6 points on the 11-point scale. For boys, the expected increase is 1.1 points. For girls, interest in international affairs and partisan politics is also related to their female friends discussing the topic with them (*p*<0.05 and *p*<0.01 respectively), but not for boys. If a girl's female friends discuss mostly international affairs among the five topics, her interest in this topic is expected to increase by 1.2 points. If her female friends discuss mostly partisan politics, her interest in that topic is expected to increase by a large 6.4 points. All other relationships are non-significant at the *p*<0.05 level.
+@fig-femalefriends shows students' interest in a specific topic depending on it being the topic they most often discuss with their female friends. For both boys and girls, interest in law and crime is related to their female friends discussing law and crime (*p*<0.05). If a girl's female friends discuss mostly law and crime among the five topics, her interest in law and crime is expected to increase by 1.6 points on the 11-point scale. For boys, the expected increase is 1.1 points. For girls, interest in international affairs and partisan politics is also related to their female friends discussing the topic with them (*p*<0.05 and *p*<0.01 respectively), but not for boys. If a girl's female friends discuss mostly international affairs among the five topics, her interest in this topic is expected to increase by 1.2 points. If her female friends discuss mostly partisan politics, her interest in that topic is expected to increase by a large 6.4 points. All other relationships are non-significant at the *p*<0.05 level.
 
-Table: Interest in topic most often discussed with one's female friends {#tbl-femalefriends}
+```{r}
+#| label: fig-femalefriends
+#| echo: false
+#| fig-cap: "Interest in topic most often discussed with one's female friends (without controls)"
+knitr::include_graphics("_graphs/FemaleFriendsDiscuss.pdf")
+```
 
-|                         | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**  |             |                       |               |           |                   | 
-| (Intercept)             |   4.474***  |        6.297***       |    5.068***   |  4.459*** |      4.576***     | 
-|                         |   (0.273)   |        (0.242)        |    (0.250)    |  (0.316)  |      (0.250)      | 
-| Health care             |    -0.078   |                       |               |           |                   | 
-|                         |   (0.547)   |                       |               |           |                   | 
-| International affairs   |             |         0.267         |               |           |                   | 
-|                         |             |        (0.486)        |               |           |                   | 
-| Law and crime           |             |                       |     1.605*    |           |                   | 
-|                         |             |                       |    (0.659)    |           |                   | 
-| Education               |             |                       |               |   0.752   |                   | 
-|                         |             |                       |               |  (0.458)  |                   | 
-| Partisan politics       |             |                       |               |           |       -1.114      | 
-|                         |             |                       |               |           |      (1.127)      | 
-| SD (Intercept Class)    |    0.745    |         0.034         |     0.625     |   0.638   |       0.400       | 
-| SD (Observations)       |    2.568    |         2.630         |     2.564     |   2.756   |       2.896       | 
-| Num.Obs.                |     155     |          157          |      157      |    157    |        157        | 
-| R2 Marg.                |    0.000    |         0.002         |     0.036     |   0.017   |       0.006       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls** |             |                       |               |           |                   | 
-| (Intercept)             |   4.246***  |        4.687***       |    5.477***   |  4.249*** |      3.376***     | 
-|                         |   (0.268)   |        (0.238)        |    (0.251)    |  (0.296)  |      (0.201)      | 
-| Health care             |    0.151    |                       |               |           |                   | 
-|                         |   (0.423)   |                       |               |           |                   | 
-| International affairs   |             |         1.195*        |               |           |                   | 
-|                         |             |        (0.533)        |               |           |                   | 
-| Law and crime           |             |                       |     1.085*    |           |                   | 
-|                         |             |                       |    (0.511)    |           |                   | 
-| Education               |             |                       |               |   0.274   |                   | 
-|                         |             |                       |               |  (0.400)  |                   | 
-| Partisan politics       |             |                       |               |           |      4.624**      | 
-|                         |             |                       |               |           |      (1.570)      | 
-| SD (Intercept Class)    |    1.010    |         0.567         |     0.478     |   0.946   |       0.000       | 
-| SD (Observations)       |    2.214    |         2.616         |     2.788     |   2.506   |       2.698       | 
-| Num.Obs.                |     183     |          182          |      181      |    184    |        184        | 
-| R2 Marg.                |    0.001    |         0.027         |     0.024     |   0.002   |       0.045       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
+@fig-femalefriendsctrl
 
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
-
-__Note:__
-^^ Multilevel regression with random effects at the classroom level
+```{r}
+#| label: fig-femalefriendsctrl
+#| echo: false
+#| fig-cap: "Interest in topic most often discussed with one's female friends (with controls)"
+knitr::include_graphics("_graphs/FemaleFriendsDiscussCtrl.pdf")
+```
 
 ### Topics Most Often Discussed with Male Friends
 
-@tbl-malefriends shows students' interest in a specific topic depending on it being the topic they most often discuss with their male friends. For boys, interest in law and crime is related to their male friends discussing law and crime (*p*<0.001), but not for girls. If a boy's male friends discuss mostly law and crime among the five topics, his interest in law and crime is expected to increase by 1.5 points on the 11-point scale. Interest in international relations among boys is also related to their male friends discussing the topic with them (*p*<0.001), but not among girls. If a boy's male friends discuss mostly international relations, his interest in that topic is expected to increase by 1.6 points. For girls, interest in partisan politics is predicted by their male friends discussing the topic (2-point gain, *p*<0.05), but not for boys. All other relationships are non-significant at the *p*<0.05 level.
+@fig-malefriends shows students' interest in a specific topic depending on it being the topic they most often discuss with their male friends. For boys, interest in law and crime is related to their male friends discussing law and crime (*p*<0.001), but not for girls. If a boy's male friends discuss mostly law and crime among the five topics, his interest in law and crime is expected to increase by 1.5 points on the 11-point scale. Interest in international relations among boys is also related to their male friends discussing the topic with them (*p*<0.001), but not among girls. If a boy's male friends discuss mostly international relations, his interest in that topic is expected to increase by 1.6 points. For girls, interest in partisan politics is predicted by their male friends discussing the topic (2-point gain, *p*<0.05), but not for boys. All other relationships are non-significant at the *p*<0.05 level.
 
-Table: Interest in topic most often discussed with one's male friends {#tbl-malefriends}
+```{r}
+#| label: fig-malefriends
+#| echo: false
+#| fig-cap: "Interest in topic most often discussed with one's male friends (without controls)"
+knitr::include_graphics("_graphs/MaleFriendsDiscuss.pdf")
+```
 
-|                         | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**  |             |                       |               |           |                   | 
-| (Intercept)             |   4.432***  |        5.474***       |    5.023***   |  4.449*** |      4.175***     | 
-|                         |   (0.232)   |        (0.239)        |    (0.197)    |  (0.230)  |      (0.239)      | 
-| Health care             |   -1.111+   |                       |               |           |                   | 
-|                         |   (0.669)   |                       |               |           |                   | 
-| International affairs   |             |        1.586***       |               |           |                   | 
-|                         |             |        (0.356)        |               |           |                   | 
-| Law and crime           |             |                       |    1.503***   |           |                   | 
-|                         |             |                       |    (0.397)    |           |                   | 
-| Education               |             |                       |               |   0.626   |                   | 
-|                         |             |                       |               |  (0.443)  |                   | 
-| Partisan politics       |             |                       |               |           |       1.509+      | 
-|                         |             |                       |               |           |      (0.810)      | 
-| SD (Intercept Class)    |    0.860    |         0.301         |     0.000     |   0.528   |       0.685       | 
-| SD (Observations)       |    2.365    |         2.673         |     2.604     |   2.743   |       2.900       | 
-| Num.Obs.                |     230     |          233          |      232      |    232    |        231        | 
-| R2 Marg.                |    0.011    |         0.079         |     0.058     |   0.008   |       0.014       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls** |             |                       |               |           |                   | 
-| (Intercept)             |   4.387***  |        5.133***       |    5.876***   |  4.313*** |      3.592***     | 
-|                         |   (0.211)   |        (0.298)        |    (0.293)    |  (0.289)  |      (0.231)      | 
-| Health care             |    0.070    |                       |               |           |                   | 
-|                         |   (0.656)   |                       |               |           |                   | 
-| International affairs   |             |         0.871+        |               |           |                   | 
-|                         |             |        (0.512)        |               |           |                   | 
-| Law and crime           |             |                       |     -0.343    |           |                   | 
-|                         |             |                       |    (0.462)    |           |                   | 
-| Education               |             |                       |               |   0.638   |                   | 
-|                         |             |                       |               |  (0.515)  |                   | 
-| Partisan politics       |             |                       |               |           |       2.033*      | 
-|                         |             |                       |               |           |      (1.000)      | 
-| SD (Intercept Class)    |    0.410    |         0.858         |     0.000     |   0.961   |       0.000       | 
-| SD (Observations)       |    2.297    |         2.595         |     2.768     |   2.444   |       2.751       | 
-| Num.Obs.                |     153     |          149          |      149      |    152    |        150        | 
-| R2 Marg.                |    0.000    |         0.019         |     0.004     |   0.010   |       0.027       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
+@fig-malefriendsctrl
 
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
+```{r}
+#| label: fig-malefriendsctrl
+#| echo: false
+#| fig-cap: "Interest in topic most often discussed with one's male friends (with controls)"
+knitr::include_graphics("_graphs/MaleFriendsDiscussCtrl.pdf")
+```
 
-__Note:__
-^^ Multilevel regression with random effects at the classroom level
-
-Patterns from @tbl-femalefriends and @tbl-malefriends are somewhat complex to understand and do not seem consistent with gender homophily theory. While having male friends who discuss international politics strongly increases boys' interest in that topic, for girls, having female friends who discuss the topic also increases their interest. For boys, having friends who discuss law and crime strongly increases their interest, while for girls, the same can be said about partisan politics. Therefore, gendered factors seem to be at play, but hypothesis 2 cannot be confirmed on the basis of these results.^[@sec-appendix6 reproduces @tbl-femalefriends and @tbl-malefriends while adding controls for age, age squared, language, immigrant status and race. The same relationships are found. Female friends--girl law and crime interest transmission loses statistical significance, while male friends--boy partisan politics transmission becomes statistically significant (*p*<0.05).]
+Patterns from @fig-femalefriends and @fig-malefriends are somewhat complex to understand and do not seem consistent with gender homophily theory. While having male friends who discuss international politics strongly increases boys' interest in that topic, for girls, having female friends who discuss the topic also increases their interest. For boys, having friends who discuss law and crime strongly increases their interest, while for girls, the same can be said about partisan politics. Therefore, gendered factors seem to be at play, but hypothesis 2 cannot be confirmed on the basis of these results.^[@sec-appendix6 reproduces @fig-femalefriends and @fig-malefriends while adding controls for age, age squared, language, immigrant status and race. The same relationships are found. Female friends--girl law and crime interest transmission loses statistical significance, while male friends--boy partisan politics transmission becomes statistically significant (*p*<0.05).]
 
 For the two topics for which adult women report more interest than adult men --- health care and education --- peers seem to have no effect on the development of interest in these topics. It could be the case that health care and education become relevant to women as they grow older and start caring for children and elderly people --- something quite different in nature than the kinds of conversations teenagers presumably have about education and health care.
 
