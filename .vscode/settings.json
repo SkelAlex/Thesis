@@ -1,8 +1,5 @@
 {
-    "cSpell.words": [
-        "CCPIS",
-        "CCPISEN",
-        "CCPISFR"
-    ],
-    "grammarly.config.documentDialect": "canadian"
+    "quarto.visualEditor.spellingDictionary": "en_CA",
+    "ltex.language": "en-CA",
+    "ltex.additionalRules.motherTongue": "fr"
 }

@@ -74,13 +74,35 @@ Hypothesis 0e suggests, again as a result of the cognitive maturation theory lai
 
 Studies have found strong causal or correlational associations between political interest, political knowledge, political efficacy, and other indicators of political engagement [@bennett1989; @coffe2010; @coffe2013; @ondercin2011; @prior2019] --- who are sometimes bundled together to create general political engagement scales. Therefore, Hypotheses 0f and 0g suggest that the value of these indicators tend to covary by age, and that gender differences in these indicators should also emerge within similar time frames.
 
-***Hypothesis 0f**: Various indicators of political engagement, such as political interest, political knowledge and political efficacy, mostly increase at the same time --- ages 15--25.*
+***Hypothesis 0f**: Various indicators of political engagement, such as political interest, political knowledge and political efficacy, mostly increase at the same time --- under age 25.*
 
-***Hypothesis 0g**: Gender differences in various indicators of political engagement, such as political interest, political knowledge and political efficacy, when they exist, mostly arise at the same time --- ages 15--25.*
+***Hypothesis 0g**: Gender differences in various indicators of political engagement, such as political interest, political knowledge and political efficacy, when they exist, mostly arise at the same time --- under age 25.*
 
 ## Data and Methods
 
 This chapter wants to portray the evolution of political interest by age and through time, and therefore relies on five datasets across several survey years: the Canadian Children Political Interest Survey (CCPIS), the Datagotchi Post-Election Survey (Datagotchi PES), the Canadian Election Study (CES), the World Values Survey (WVS) and the Canadian General Social Survey (GSS). The CCPIS includes survey data collected among 8-to-18--year-olds in 2022, while the Datagotchi PES includes data collected among Quebec adults in 2023. More about these datasets is explained in @sec-chap2. Both the CCPIS and Datagotchi PES include questions about interests in specific political topics, which can better measure the concept. While the CES, WVS and GSS do not ask these specific political topics, they each have unique advantages. The CES includes the most survey years --- with a question on political interest being asked in surveys from 1997 to 2021 --- makes it possible to measure other indicators of political engagement than political interest, including political knowledge, efficacy, and participation. The WVS makes it possible to compare Canadians' level of interest with other countries. Finally, two GSS surveys --- 2013 and 2020 --- provide the largest datasets and, since it is not designed as a political survey per survey, may provide more accurate measures of Canadians' level of interest in politics --- despite the limitations of a single-item measure.
+
+Apart from questions about political interest, this chapter also relies on four other measures of political engagement taken from the Canadian Election Studies: internal political efficacy, external political efficacy, knowledge of political figures' names, and political participation.
+
+*Internal political efficacy* is defined as "individuals' self-perceptions that they are capable of understanding politics and competent enough to participate in political acts such as voting", while *external political efficacy* is individuals' belief that the public can influence political outcomes because government leaders and institutions are responsive to their needs (@craig1982, 86). Internal efficacy is measured by the degree of agreement with the following statement: "Sometimes, politics and government seem so complicated that a person like me can't really understand what's going on." [@ces2021]. External efficacy is measured by the degree of agreement with the following statement: "People like me don't have any say about what the government does." [@ces2021]. Both questions are reverse-coded, with more agreement associated with higher political efficacy.
+
+Knowledge of political figures' names is measured by correct answers to questions about who the minister of Finance, governor general of Canada, and their provincial premier are. Political participation is measured by a scale including 13 items: volunteering for groups and organizations, attending political meetings and speeches, attending protests, boycotting products, signing petitions, following politicians on social media, volunteering for politicians, contacting elected officials, donating to candidates, donating to causes, being a group's active member, commenting political content, and discussing politics on social media. CES respondents were asked how often they had done these activities in the past 12 months.
+
+Factor analysis for knowledge of political figures' names (@fig-factor3) and for the political participation scale (@fig-factor4) show that items generally scale well together, with factor loadings at least medium --- above 0.3 [@shevlin2000] --- for all elements of the political participation scale and two out of three of the knowledge scale, and first eigenvalues larger than the conventionally accepted value of 1 [@williams2010]. The Cronbach's alpha for the knowledge scale (0.39) is under the 0.7 to 0.9 range suggested by scholars [@tavakol2011], while it is within that range for the political participation scale (0.84), therefore meeting the standard benchmarks for valid and reliable scales established in peer-reviewed studies about measurement scales.
+
+```{r}
+#| label: fig-factor3
+#| echo: false
+#| fig-cap: "CCPIS Factor Analysis: Knowledge Scale"
+knitr::include_graphics("_graphs/KnowScale.pdf")
+```
+
+```{r}
+#| label: fig-factor4
+#| echo: false
+#| fig-cap: "CCPIS Factor Analysis: Political Participation Scale"
+knitr::include_graphics("_graphs/ParticScale.pdf")
+```
 
 ## Data Analysis
 
@@ -106,7 +128,9 @@ Again relying on data from the CES, WVS and GSS, @fig-timeceswvsgss shows averag
 knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
 ```
 
-In all three datasets, interest in politics increases as people age, but it does so relatively slowly from 18 to 50 years old --- or not at all, according to CES data. A large gender gap also appears for those within that age group in all three datasets. For instance, CES data shows that on average, women aged 18 to 50 report being neither interested nor disinterested in politics --- 5/10; men, on the other hand, report being somewhat interested in politics --- 6.5/10. This 1.5-point gap is statistically significant (*p*<0.001).
+In all three datasets, interest in politics increases as people age, but it does so relatively slowly from 18 to 50 years old --- or not at all, according to CES data. Findings from the GSS seem partially consistent with Hypothesis 0a, with a slightly larger increase in interest between ages 15 and 24 than afterwards, but CES data and WVS data from Canada are both inconsistent with Hypothesis 0a, with the WVS even showing a decrease in political interest between ages 18 and 25.
+
+A large gender gap also appears for those within that age group in all three datasets. For instance, CES data shows that on average, women aged 18 to 50 report being neither interested nor disinterested in politics --- 5/10; men, on the other hand, report being somewhat interested in politics --- 6.5/10. This 1.5-point gap is statistically significant (*p*<0.001). The gender gap seems to increase mostly between ages 15 and 25 in the GSS and WVS data, corroborating Hypothesis 0b, although CES data rather shows stability within that age range.
 
 After age 50, both men and women start reporting higher levels of interest in politics, and this interest keeps increasing through their 60s, 70s, 80s and 90s. Moreover, again starting at age 50, the gender gap progressively reduces, as women's political interest increases more quickly than men's. Around age 75--80, the gap becomes statistically non-significant, although confidence intervals also become wider due to smaller sample sizes. For instance, in their early 90s, CES data shows that the average interest in politics stands at 8/10 for both men and women. Overall, throughout people's life course, CES data shows that women's political interest averages 5.4, while men's averages 6.8 (*p*<0.001).
 
@@ -114,7 +138,7 @@ How does Canada compare with other countries? Across all 57 countries surveyed d
 
 Within Canada, across all three studies, average political interest was higher in larger provinces, with an average of 6.1/10 in Alberta, 6/10 in Quebec and Ontario, and 5.9/10 in British Columbia. New Brunswick stood last at 5.5/10. Between-study differences were large, suggesting these results need to be interpreted with caution.
 
-@fig-cesgapyearage looks at the size of the gender gap by age for each CES, making it possible to assess the presence of generational effects. Positive values indicate women report being more interested, while negative values indicate men report being more interested. The 2021 CES stands out as having the largest gender gap in political interest on average between 20 and 80 years old. All other election studies are associated with similar trends in the evolution of the gender gap with age: the gap slowly reduces with time. Values tend to diverge more importantly among older and younger voters, as a result of smaller sample sizes at the extremes of the age distribution. When respondents aged 18--20 and those aged 85 and over are removed from the sample, differences between surveys become smaller.
+@fig-cesgapyearage looks at the size of the gender gap by age for each CES, making it possible to assess the presence of generational effects. Positive values indicate women report being more interested, while negative values indicate men report being more interested. The 2021 CES stands out as having the largest gender gap in political interest on average between 20 and 80 years old. All other Canadian Election Studies are associated with similar trends in the evolution of the gender gap with age: the gap slowly reduces with time. Values tend to be less consistent among older and younger voters, as a result of smaller sample sizes at the extremes of the age distribution. When respondents aged 18--20 and those aged 85 and over are removed from the sample, differences between surveys become smaller.
 
 ```{r}
 #| label: fig-cesgapyearage
@@ -132,9 +156,13 @@ knitr::include_graphics("_graphs/CESGapYearAge.pdf")
 knitr::include_graphics("_graphs/TimePoliticalEngagement.pdf")
 ```
 
-Some of these trends mirror quite closely what is found for political interest among these same CES respondents. Notably, large gender gaps in knowledge of political figures' names and internal political efficacy appear among younger respondents. These gaps are larger than the 13-point gap in political interest. Similar to political interest, these gaps also seem to progressively fade among older respondents, and after age 80--85, the level of political interest seems to be the same for women and men. With regards to knowledge, the gap was to be expected and mirrors findings from past research (notably @stolle2010), as recalling the names of political figures is closely tied to partisan politics and assertion as opposed to cooperation.
+Some of these trends mirror quite closely what is found for political interest among these same CES respondents. Notably, large gender gaps in knowledge of political figures' names and internal political efficacy appear among younger respondents. These gaps are larger than the 13-point gap in political interest. Similar to political interest, these gaps also seem to progressively fade among older respondents, and after age 80--85, the level of political engagement seems to be the same for women and men across all indicators. With regards to knowledge, the gap was to be expected and mirrors findings from past research (notably @stolle2010), as recalling the names of political figures is closely tied to partisan politics and assertion as opposed to cooperation. Unfortunately, the data does not allow to assess respondents' knowledge about health care or education policy, but @stolle2010 suggest that the gender gap should be expected to be in the opposite direction, with women more knowledgeable about these topics on average.
 
-@fig-yearethnicityceswvs looks at the gender differences through an intersectional lens, with gender--ethnicity pairs and gender--immigrant status pairs included across several survey-years for which the information was available. While this chapter focuses on the gender gap in self-reported political interest, different groups of women also differ in political interest.^[For instance, in the Dominican Republic, @spierings2012 found that Protestant women report levels of political interest similar to men and higher than Catholic women, while Mestizo women report lower levels of political interest than Indigenous women.]
+Hypothesis 0f suggested that the various indicators of political engagement were likely to vary simultaneously, with a notable increase between ages 18 and 25. @fig-timepoliticalengagement does not corroborate this claim: internal political efficacy increases at a relatively even pace until age 40, the knowledge scale also increases constantly until age 75, while external efficacy and political participation both slightly *decline* between ages 18 and 25. These findings, while inconsistent with Hypothesis 0f, are consistent with the finding that political interest is also stable, not increasing, until age 25 --- in the CES at least.
+
+Hypothesis 0g is also not corroborated by the data: the gender gap in internal political efficacy is stable, not increasing, among 18-to-25--year-olds, while for knowledge of political figures' names, the gap starts shrinking within that age group.
+
+@fig-yearethnicityceswvs looks at gender differences through an intersectional lens, with gender--ethnicity pairs and gender--immigrant status pairs included across several survey-years for which the information was available. While this chapter focuses on the gender gap in self-reported political interest, different groups of women also differ in political interest.^[For instance, in the Dominican Republic, @spierings2012 found that Protestant women report levels of political interest similar to men and higher than Catholic women, while Mestizo women report lower levels of political interest than Indigenous women.]
 
 ```{r}
 #| label: fig-yearethnicityceswvs
@@ -297,7 +325,7 @@ How do these interests change when people reach adulthood? This question is best
 #| label: fig-datagotchi
 #| echo: false
 #| fig-cap: "Self-Reported Level of Interest in Various Topics by Age Among Canadian Adults, 2022 Datagotchi PES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. No weights are currently applied."
-knitr::include_graphics("_graphs/InterestAgeGenderDGPanel.pdf")
+knitr::include_graphics("_graphs/InterestAgeGenderDG.pdf")
 ```
 
 ## Discussion

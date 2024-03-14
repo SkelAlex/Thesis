@@ -5,7 +5,7 @@ bibliography: Thesis.bib
 format: pdf
 toc: true
 toc-depth: 5
-abstract: "This chapter seeks to explain the dissertation's datasets, methods, and analyse descriptive statistics about the main explanatory and outcome variables used in the next chapters. It seeks to answer the following question: How can we study the development of political interest through gendered socialization processes? The types of analyses, survey weights, and decisions about which variables to include are provided."
+abstract: "This chapter seeks to explain the dissertation's datasets and methods, and analyze descriptive statistics about the main explanatory and outcome variables used in the next chapters. It seeks to answer the following question: How can we study the development of political interest through gendered socialization processes? The types of analyses, survey weights, and decisions about which variables to include are provided."
 ---
 @sec-chap1 has established that political interest is an important predictor of political discussion and of more concrete forms of political engagement, which makes this concept worthy of scientific inquiry. Measuring political interest, its development, and the socialization processes that lead to it requires a methodological approach that relies on data collected among both children and adults. It also requires the data collected among children to inquire about all potential sources of socialization --- parents, peers, media, and schools. The measurement of gendered personality traits among children --- self-assertion for boys and co-operation for girls --- is also an important factor that may explain how transmission processes work. This chapter answers the following question: *How can we study the development of political interest through gendered socialization processes?* It starts by detailing the datasets and methods that will be used throughout the chapters of this dissertation. It also provides descriptive statistics about some of the main variables that will be used, notably those related to political interest as well as socio-economic status. Before doing so, it provides a brief explanation of the case selection.
 
@@ -115,7 +115,7 @@ Before analyzing average levels of interest in politics in each of the datasets,
 #| label: fig-ccpis1
 #| echo: false
 #| fig-cap: "CCPIS Descriptive Statistics - General"
-knitr::include_graphics("_graphs/CCPISDescriptive1.pdf")
+knitr::include_graphics("_graphs/CCPISDescriptive.pdf")
 ```
 
 For agency and communality, scales are replicated from @ward2006. Factor analysis in @fig-factor1 and @fig-factor2 show that, with one exception on the agency list --- an item that was reverse-coded^[This could be a data quality issue, since this is the only question for which the agentic pole is reverse-coded among the first eight questions asked to children, and none of the communality scale questions are reverse-coded. This means some children might have paid less attention to the actual question and responded quickly. However, given the fact that the non-reverse-coded measure is also unrelated to other elements of the scale, and since children responded differently to the agency and communality scales, this seems to be a minor concern. The scale is an exact replication of the one used by @ward2006.] --- all items scale well together, with factor loadings at least medium --- above 0.3 [@shevlin2000] --- and first eigenvalues larger than the conventionally accepted value of 1 [@williams2010]. The Cronbach's alpha for the agency scale (0.63) is slightly under the 0.7 to 0.9 range suggested by scholars [@tavakol2011], while it is within that range for the communality scale (0.78), therefore meeting the standard benchmarks for valid and reliable scales established in peer-reviewed studies about measurement scales.
@@ -140,7 +140,7 @@ knitr::include_graphics("_graphs/CommunalityScale.pdf")
 #| label: fig-dg
 #| echo: false
 #| fig-cap: "Datagotchi PES Descriptive Statistics - General"
-knitr::include_graphics("_graphs/DGDescriptive1.pdf")
+knitr::include_graphics("_graphs/DGDescriptive.pdf")
 ```
 
 Given the mismatch between many of these characteristics --- notably gender, level of education and ethnicity --- and the Quebec population, survey weights are created and used to make the the Datagotchi PES sample more representative of the Quebec population as per the 2021 Census [@census2022] on these two aspects, as well as income and age. Using the `anesrake` package which is used to weight results from the American National Election Studies [@pasek2018], a raking procedure is used to produce these weights, which range from 0 to 5. Default settings of the `anesrake` function are used. After using this procedure, the population percentages match with sample percentages within 10 percentage points --- and typically less than 5 --- for each category of the five variables.
@@ -151,7 +151,7 @@ Given the mismatch between many of these characteristics --- notably gender, lev
 #| label: fig-ces
 #| echo: false
 #| fig-cap: "2021 CES Descriptive Statistics - General"
-knitr::include_graphics("_graphs/CESDescriptive1.pdf")
+knitr::include_graphics("_graphs/CESDescriptive.pdf")
 ```
 
 @fig-wvs shows descriptive statistics for the 2020 WVS in Canada. Compared to 2021 Canadian Census data collected among adults, the unweighted sample includes a similar proportion of women --- 48.8% vs. 51.1% --- an under-representation of Allophones --- 6.0% vs. 16.5% --- and an over-representation of university-educated people --- 55.5% vs. 30.7% --- of white people --- 80.5% vs. 70.2% --- and of people born in Canada --- 82.1% vs. 70.5%. The median age is 45, which broadly matches with the median 45--49 age range for the adult Canadian population. Respondents from Ontario are under-represented --- 25.0% vs. 38.6%. Given the mismatch between many of these characteristics --- notably province and education --- and the Canadian population, the WVS's survey weights for Canada based on the 2016 Census, which account for age, gender, education, and region, are used. These weights' values vary between 0.12 and 3.69. After using this procedure, the population percentages match with sample percentages on these aspects.
@@ -160,7 +160,7 @@ knitr::include_graphics("_graphs/CESDescriptive1.pdf")
 #| label: fig-wvs
 #| echo: false
 #| fig-cap: "2020 WVS Descriptive Statistics - General"
-knitr::include_graphics("_graphs/WVSDescriptive1.pdf")
+knitr::include_graphics("_graphs/WVSDescriptive.pdf")
 ```
 
 @fig-gss shows descriptive statistics for the 2020 GSS. Compared to 2021 Canadian Census data collected among adults [@census2022], the unweighted sample includes a similar proportion of women --- 51% vs. 51.1% --- an over-representation of Allophones --- 23.1% vs. 16.5% --- of university-educated people --- 40.8% vs. 30.7% --- of visible minorities --- 42% vs. 29.8% --- and of immigrants --- 41.1% vs. 29.5%. The median yearly household income is within the \$50,000--\$74,999 range, compared with the higher \$85,000 to \$89,999 median range among adult Canadians. The median age is within the 45--54 age range, which broadly matches with the median 45--49 age range for the adult Canadian population. Respondents from Ontario are slightly under-represented --- 34.4% vs. 38.6%. Given the mismatch between many of these characteristics and the Canadian population, the GSS's survey weights based on the 2016 Census, which account for gender, age, province, CMA, and visible minority status, are used. These weights' values vary between 1 and 32,631. After using this procedure, the population percentages match with sample percentages on these aspects.
@@ -169,7 +169,7 @@ knitr::include_graphics("_graphs/WVSDescriptive1.pdf")
 #| label: fig-gss
 #| echo: false
 #| fig-cap: "2020 GSS Descriptive Statistics (Cycle 35 - Social Identity) - General"
-knitr::include_graphics("_graphs/GSSDescriptive1.pdf")
+knitr::include_graphics("_graphs/GSSDescriptive.pdf")
 ```
 
 Overall, the four studies conducted among adults have samples that vary from each other. Some of them over-sample immigrants while others under-sample them; some over-sample older citizens while others under-sample them. A common theme in the three studies of Canadian adults --- CES, WVS and GSS --- is the under-sampling of Ontarians. However, all these variations are corrected using raking or post-stratification weights.
@@ -184,7 +184,7 @@ After survey weights are applied, what is the average level of political interes
 #| label: fig-ccpis2
 #| echo: false
 #| fig-cap: "CCPIS Descriptive Statistics - Political Interest"
-knitr::include_graphics("_graphs/CCPISDescriptive2.pdf")
+knitr::include_graphics("_graphs/CCPISInterest.pdf")
 ```
 
 @fig-dginterest and @fig-ceswvsgssinterest show the level of interest in politics among the four adult Canadian surveys, including interest in the five topics in the case of the Datagotchi PES, after survey weights are applied. While adult Quebeckers (Datagotchi PES) report being more interested in each of the five topics compared with Canadian students (CCPIS), interest in law and crime (5.5/10) is lower than for other topics, followed by partisan politics (5.9/10). General political interest (7.1/10) is higher on average than interest in any of the five topics. Interest in the five political topics also follows a more bell-shaped, normal distribution than what CCPIS found among Canadian youth, although a negative skew can be found for all topics. Canadian WVS respondents are slightly less interested in politics (5.6/10) than those to the 2020 GSS and 2021 CES (6.0/10 and 6.1/10 respectively). Datagotchi PES respondents score an even higher average general political interest score of 7.1/10, which might not be surprising given the fact that these respondents are former users of the Datagotchi Web app. Analyses using the Datagotchi PES throughout this dissertation can therefore be considered to be a high bar for level of interest in each of the political topics.

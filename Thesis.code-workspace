@@ -5,6 +5,9 @@
 		}
 	],
 	"settings": {
-		"grammarly.config.documentDialect": "canadian"
+		"grammarly.config.documentDialect": "canadian",
+		"quarto.visualEditor.spellingDictionary": "en_CA",
+		"ltex.language": "en-CA",
+		"ltex.additionalRules.motherTongue": "fr"
 	}
 }

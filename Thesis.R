@@ -1289,27 +1289,30 @@ CES21$education <- as.character(CES21$cps21_education)
 CES21$education[
   CES21$education == "Don't know/ Prefer not to answer"] <- NA
 CES21$education[CES21$education == paste0(
-  "Some technical, community college, CEGEP, College Classique")] <-
-  "Some technical,\ncollege or CEGEP"
-CES21$education[CES21$education == paste0(
-  "Completed technical, community college, CEGEP, College Classique")] <-
-  "Completed technical,\ncollege\nor CEGEP"
-CES21$education[CES21$education == paste0(
-  "Some secondary/ high school")] <-
-  "Some secondary/\nhigh school"
-CES21$education[CES21$education == paste0(
   "Some elementary school")] <-
-  "Some elementary\nschool"
-CES21$education[CES21$education == paste0(
-  "Completed secondary/ high school")] <-
-  "Completed secondary/\nhigh school"
+  "Elementary school"
 CES21$education[CES21$education == paste0(
   "Completed elementary school")] <-
-  "Completed\nelementary school"
+  "Elementary school"
+CES21$education[CES21$education == paste0(
+  "Some secondary/ high school")] <-
+  "Elementary school"
+CES21$education[CES21$education == paste0(
+  "Completed secondary/ high school")] <-
+  "High school"
+CES21$education[CES21$education == paste0(
+  "Some technical, community college, CEGEP, College Classique")] <-
+  "High school"
+CES21$education[CES21$education == paste0(
+  "Completed technical, community college, CEGEP, College Classique")] <-
+  "Technical, college\nor CEGEP"
 CES21$education[CES21$education == paste0(
   "Professional degree or doctorate")] <-
-  "Professional degree\nor doctorate"
-CES21$education <- as.factor(CES21$education)
+  "Doctorate"
+CES21$education <- factor(CES21$education, levels = c(
+  "No schooling", "Elementary school", "High school",
+  "Technical, college\nor CEGEP", "Bachelor's degree", "Master's degree",
+  "Doctorate"))
 CES21$income <- NA
 CES21$income[CES21$cps21_income_number < 1] <- "No income"
 CES21$income[CES21$cps21_income_number >= 1 &
@@ -1362,8 +1365,7 @@ CES21$external_efficacy_post <- case_when(
   CES21$pes21_govtcare == "Neither agree nor disagree" ~ 0.5,
   CES21$pes21_govtcare == "Somewhat disagree" ~ 0.75,
   CES21$pes21_govtcare == "Strongly disagree" ~ 1)
-CES21$external_efficacy <- (CES21$external_efficacy_pre +
-                            CES21$external_efficacy_post) / 2
+CES21$external_efficacy <- CES21$external_efficacy_pre
 CES21$know_premier_name <- 0
 CES21$know_premier_name[CES21$cps21_premier_name %in% c(
   "Sandy Silver_(21)", "Caroline Cochrane_(19)", "Joe Savikataaq_(23)",
@@ -1459,7 +1461,7 @@ KnowScale <- na.omit(CES21[, c(
 KnowCronbach <- round(as.numeric(psy::cronbach(KnowScale)[3]),
                           digits = 2)
 KnowFactorAnalysis <- factanal(KnowScale, factors = 1)
-KnowVariableNames <- c("Name of Prime Minister", "Name of Finance Minister",
+KnowVariableNames <- c("Name of Provincial Premier", "Name of Finance Minister",
                        "Name of Governor General")
 KnowFactorLoadings <- KnowFactorAnalysis$loadings[, 1]
 KnowFirstEigenvalue <- round(eigen(cor(KnowScale))$values[1],
@@ -1528,10 +1530,10 @@ ggplot(data.frame(ParticVariableNames, ParticFactorLoadings),
     family = "CM Roman", size = 6) +
   geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
   annotate("text", label = paste("Cronbach's alpha =", as.character(
-    ParticCronbach)), x = 4, y = 0.85, size = 6,
+    ParticCronbach)), x = 4, y = 0.825, size = 6,
     family = "CM Roman") +
   annotate("text", label = paste("First eigenvalue =", as.character(
-    ParticFirstEigenvalue)), x = 2, y = 0.85, size = 6,
+    ParticFirstEigenvalue)), x = 2, y = 0.825, size = 6,
     family = "CM Roman") +
   scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
                      breaks = seq(-0.1, 1, by = 0.1)) +
@@ -1638,29 +1640,29 @@ WVS$lang[WVS$G016 < 0] <- NA
 WVS$lang <- as.factor(WVS$lang)
 WVS$education <- as.numeric(WVS$X025A_01)
 WVS$education[WVS$education < 0] <- NA
-WVS$education[WVS$education == 0] <-
-  "Early childhood\neducation/\nno education"
-WVS$education[WVS$education == 1] <- "Primary education"
-WVS$education[WVS$education == 2] <- "Lower secondary\neducation"
-WVS$education[WVS$education == 3] <- "Upper secondary\neducation"
-WVS$education[WVS$education == 4] <- "Post-secondary\nnon-tertiary\neducation"
-WVS$education[WVS$education == 5] <- "Short-cycle\ntertiary education"
-WVS$education[WVS$education == 6] <- "Bachelor or\nequivalent"
-WVS$education[WVS$education == 7] <- "Master or\nequivalent"
-WVS$education[WVS$education == 8] <- "Doctoral or\nequivalent"
-WVS$education <- as.factor(WVS$education)
+WVS$education[WVS$education == 0] <- "No schooling"
+WVS$education[WVS$education == 1] <- "Elementary school"
+WVS$education[WVS$education %in% c(2, 3)] <- "High school"
+WVS$education[WVS$education %in% c(4, 5)] <- "Technical, college\nor CEGEP"
+WVS$education[WVS$education == 6] <- "Bachelor's degree"
+WVS$education[WVS$education == 7] <- "Master's degree"
+WVS$education[WVS$education == 8] <- "Doctorate"
+WVS$education <- factor(WVS$education, levels = c(
+  "No schooling", "Elementary school", "High school",
+  "Technical, college\nor CEGEP", "Bachelor's degree", "Master's degree",
+  "Doctorate"))
 WVS$province <- NA
 WVS$province[as.numeric(WVS$X048ISO) == 124001] <- "Alberta"
 WVS$province[as.numeric(WVS$X048ISO) == 124002] <- "British Columbia"
 WVS$province[as.numeric(WVS$X048ISO) == 124003] <- "Manitoba"
 WVS$province[as.numeric(WVS$X048ISO) == 124004] <- "New Brunswick"
-WVS$province[as.numeric(WVS$X048ISO) == 124005] <- "Newfoundland\nand Labrador"
+WVS$province[as.numeric(WVS$X048ISO) == 124005] <- "N&L"
 WVS$province[as.numeric(WVS$X048ISO) == 124006] <- "Nova Scotia"
 WVS$province[as.numeric(WVS$X048ISO) == 124007] <- "Ontario"
-WVS$province[as.numeric(WVS$X048ISO) == 124008] <- "Prince Edward\nIsland"
+WVS$province[as.numeric(WVS$X048ISO) == 124008] <- "PEI"
 WVS$province[as.numeric(WVS$X048ISO) == 124009] <- "Quebec"
 WVS$province[as.numeric(WVS$X048ISO) == 124010] <- "Saskatchewan"
-WVS$province[as.numeric(WVS$X048ISO) == 124011] <- "Northwest\nTerritories"
+WVS$province[as.numeric(WVS$X048ISO) == 124011] <- "NWT"
 WVS$province[as.numeric(WVS$X048ISO) == 124012] <- "Nunavut"
 WVS$province[as.numeric(WVS$X048ISO) == 124013] <- "Yukon"
 WVS$province <- as.factor(WVS$province)
@@ -1769,29 +1771,30 @@ GSS13$immig[GSS13$BRTHCAN == "Born in Canada"] <- 0
 GSS13$immig[GSS13$BRTHCAN == "Born outside Canada"] <- 1
 GSS13$education <- as.character(GSS13$EHG_ALL)
 GSS13$education[
-  GSS13$education == "Bachelor's degree (e.g. B.A., B.Sc., LL.B.)"] <-
-  "Bachelor's degree\n(e.g. B.A., B.Sc., LL.B.)"
-GSS13$education[
   GSS13$education ==
-    "College/CEGEP/other non-university certificate or diploma"] <-
-  "College/CEGEP/other non-university\ncertificate or diploma"
-GSS13$education[
-  GSS13$education ==
-    "University certificate, diploma, degree above the BA level"] <-
-  "University certificate, diploma,\ndegree above the BA level"
-GSS13$education[
-  GSS13$education ==
-    "University certificate or diploma below the bachelor's level"] <-
-  "University certificate or diploma\nbelow the bachelor's level"
-GSS13$education[
-  GSS13$education ==
-    "Less than high school diploma or its equivalent"] <-
-  "Less than high school\ndiploma or its equivalent"
+    "Less than high school diploma or its equivalent"] <- "No schooling"
 GSS13$education[
   GSS13$education ==
     "High school diploma or a high school equivalency certificate"] <-
-  "High school diploma or a high\nschool equivalency certificate"
-GSS13$education <- as.factor(GSS13$education)
+  "High school"
+GSS13$education[
+  GSS13$education ==
+    "College/CEGEP/other non-university certificate or diploma"] <-
+  "Technical, college\nor CEGEP"
+GSS13$education[
+  GSS13$education ==
+    "University certificate or diploma below the bachelor's level"] <-
+  "Technical, college\nor CEGEP"
+GSS13$education[
+  GSS13$education == "Bachelor's degree (e.g. B.A., B.Sc., LL.B.)"] <-
+  "Bachelor's degree"
+GSS13$education[
+  GSS13$education ==
+    "University certificate, diploma, degree above the BA level"] <-
+  "Master's degree"
+GSS13$education <- factor(GSS13$education, levels = c(
+  "No schooling", "High school",
+  "Technical, college\nor CEGEP", "Bachelor's degree", "Master's degree"))
 table(GSS13$education, useNA = "always")
 GSS13$educ_low <- NA
 GSS13$educ_low[GSS13$DH1GED %in% c(
@@ -1865,19 +1868,16 @@ GSS20$immig <- NA
 GSS20$immig[GSS20$IM_05A1 == 1] <- 0
 GSS20$immig[GSS20$IM_05A1 == 2] <- 1
 GSS20$education <- GSS20$ED_05
-GSS20$education[GSS20$education == 1] <-
-  "Less than high\nschool diploma\nor its equivalent"
-GSS20$education[GSS20$education == 2] <-
-  "High school diploma\nor a high school\nequivalency certificate"
-GSS20$education[GSS20$education %in% c(3, 4)] <-
-  "College/CEGEP/other\nnon-university\ncertificate or diploma"
-GSS20$education[GSS20$education == 5] <-
-  "University certificate\nor diploma below\nthe bachelor's level"
-GSS20$education[GSS20$education == 6] <-
-  "Bachelor's degree\n(e.g. B.A., B.Sc., LL.B.)"
-GSS20$education[GSS20$education == 7] <-
-  "University certificate,\ndiploma, degree above\nthe BA level"
+GSS20$education[GSS20$education == 1] <- "No schooling"
+GSS20$education[GSS20$education == 2] <- "High school"
+GSS20$education[GSS20$education %in% c(3, 4)] <- "Technical, college\nor CEGEP"
+GSS20$education[GSS20$education == 5] <- "Technical, college\nor CEGEP"
+GSS20$education[GSS20$education == 6] <- "Bachelor's degree"
+GSS20$education[GSS20$education == 7] <- "Master's degree"
 GSS20$education[GSS20$education == 99] <- NA
+GSS20$education <- factor(GSS20$education, levels = c(
+  "No schooling", "High school",
+  "Technical, college\nor CEGEP", "Bachelor's degree", "Master's degree"))
 GSS20$education <- as.factor(GSS20$education)
 GSS20$educ_low <- NA
 GSS20$educ_low[GSS20$ED_05 %in% c(3, 4, 5, 6, 7)] <- 0
@@ -1889,14 +1889,14 @@ GSS20$educ_high <- NA
 GSS20$educ_high[GSS20$ED_05 %in% c(1, 2, 3, 4)] <- 0
 GSS20$educ_high[GSS20$ED_05 %in% c(5, 6, 7)] <- 1
 GSS20$income <- GSS20$FAMINC_C
-GSS20$income[GSS20$income == 1] <- "Less than $24,999"
-GSS20$income[GSS20$income == 2] <- "$25,000 to $49,999"
-GSS20$income[GSS20$income == 3] <- "$50,000 to $74,999"
-GSS20$income[GSS20$income == 4] <- "$75,000 to $99,999"
-GSS20$income[GSS20$income == 5] <- "$100,000 and over"
+GSS20$income[GSS20$income == 1] <- "$24,999-"
+GSS20$income[GSS20$income == 2] <- "$25,000-49,999"
+GSS20$income[GSS20$income == 3] <- "$50,000-74,999"
+GSS20$income[GSS20$income == 4] <- "$75,000-99,999"
+GSS20$income[GSS20$income == 5] <- "$100,000+"
 GSS20$income <- factor(GSS20$income, levels = c(
-  "Less than $24,999", "$25,000 to $49,999", "$50,000 to $74,999",
-  "$75,000 to $99,999", "$100,000 and over"))
+  "$24,999-", "$25,000-49,999", "$50,000-74,999",
+  "$75,000-99,999", "$100,000+"))
 GSS20$income_low <- 0
 GSS20$income_low[GSS20$FAMINC_C %in% c(1, 2)] <- 1
 GSS20$income_low[is.na(GSS20$FAMINC_C)] <- NA
@@ -1912,8 +1912,8 @@ GSS20$interest[GSS20$REP_05 == 2] <- (2 / 3) * 100
 GSS20$interest[GSS20$REP_05 == 3] <- (1 / 3) * 100
 GSS20$interest[GSS20$REP_05 == 4] <- 0
 GSS20$province <- GSS20$PRV # no data about territories
-GSS20$province[GSS20$province == 10] <- "Newfoundland\nand Labrador"
-GSS20$province[GSS20$province == 11] <- "Prince Edward\nIsland"
+GSS20$province[GSS20$province == 10] <- "N&L"
+GSS20$province[GSS20$province == 11] <- "PEI"
 GSS20$province[GSS20$province == 12] <- "Nova Scotia"
 GSS20$province[GSS20$province == 13] <- "New Brunswick"
 GSS20$province[GSS20$province == 24] <- "Quebec"
@@ -2037,7 +2037,7 @@ PlotFamSituation <- CCPIS |>
 ggsave(plot = ggpubr::ggarrange(
   PlotGender, PlotAge, PlotEthnicity, PlotLanguage, PlotImmigrant, PlotAgentic,
   PlotCommunal, PlotFamSituation, nrow = 3, ncol = 3),
-  "_graphs/CCPISDescriptive1.pdf", width = 11, height = 12.75)
+  "_graphs/CCPISDescriptive.pdf", width = 11, height = 12.75)
 
 filter(CCPIS, !is.na(teacher_gender_alt) & !is.na(female)) |>
   ggplot(aes(x = as.factor(teacher_gender_alt))) +
@@ -2106,8 +2106,8 @@ PlotPartisan <- ggplot(CCPIS, aes(x = interest_partisan)) +
         text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotInterest, PlotHealth, PlotForeign, PlotLaw, PlotEducation, PlotPartisan,
-  nrow = 2, ncol = 3), width = 11, height = 4.25,
-  "_graphs/CCPISDescriptive2.pdf")
+  nrow = 2, ncol = 3), width = 11, height = 8.5,
+  "_graphs/CCPISInterest.pdf")
 
 PoliticalGraphData <- pivot_longer(
   CCPIS, cols = lockdown_political_alt:parties_political_alt,
@@ -2140,7 +2140,7 @@ ggplot(PoliticalGraphData, aes(x = reorder(name_full, -value), y = value)) +
   geom_errorbar(aes(ymin = value.lb, ymax = value.ub), width = 0.5) +
   geom_hline(yintercept = 0.5) +
   scale_y_continuous("Average view\nof students", limits = c(0, 1),
-                     breaks = c(0, 0.25, 0.5, 0.75, 1),
+                     breaks = seq(0, 1, by = 0.25),
                      labels = c("Non-political", "", "", "", "Political")) +
   scale_x_discrete("Issue") +
   theme_minimal() +
@@ -2201,7 +2201,6 @@ PlotIncomeDG <- DG |>
   ggplot(aes(x = as.factor(income))) +
   geom_bar() +
   labs(x = "Household yearly income", y = "Frequency") +
-  scale_y_continuous(breaks = c(0, 300)) +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
@@ -2212,7 +2211,6 @@ PlotEducationDG <- DG |>
   ggplot(aes(x = as.factor(education))) +
   geom_bar() +
   labs(x = "Level of education", y = "Frequency") +
-  scale_y_continuous(breaks = c(0, 600)) +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
@@ -2221,7 +2219,7 @@ PlotEducationDG <- DG |>
 ggsave(plot = ggpubr::ggarrange(
   PlotGenderDG, PlotAgeDG, PlotEthnicityDG, PlotLanguageDG, PlotImmigrantDG,
   PlotIncomeDG, PlotEducationDG, nrow = 3, ncol = 3),
-  "_graphs/DGDescriptive1.pdf", width = 11, height = 8.5)
+  "_graphs/DGDescriptive.pdf", width = 11, height = 12.75)
 
 PlotAgeCES <- CES21 |>
   filter(!is.na(age)) |>
@@ -2297,7 +2295,6 @@ PlotEthnicityCES <- CES21 |>
   ggplot(aes(x = as.factor(ethn))) +
   geom_bar() +
   labs(x = "Ethnicity", y = "Frequency") +
-  scale_y_continuous(breaks = c(0, 10000)) +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
@@ -2307,7 +2304,7 @@ ggsave(plot = ggpubr::ggarrange(
   PlotGenderCES, PlotAgeCES, PlotLanguageCES, PlotImmigrantCES,
   PlotIncomeCES, PlotEducationCES, PlotEthnicityCES, PlotProvinceCES,
   nrow = 3, ncol = 3),
-  "_graphs/CESDescriptive1.pdf", width = 11, height = 8.5)
+  "_graphs/CESDescriptive.pdf", width = 11, height = 12.75)
 
 PlotAgeWVS <- WVSCA20 |>
   filter(!is.na(age)) |>
@@ -2315,21 +2312,28 @@ PlotAgeWVS <- WVSCA20 |>
   geom_bar() +
   labs(x = "Age", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotGenderWVS <- WVSCA20 |>
   filter(!is.na(female_alt)) |>
   ggplot(aes(x = female_alt)) +
   geom_bar() +
   labs(x = "Gender", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotLanguageWVS <- WVSCA20 |>
   filter(!is.na(lang)) |>
   ggplot(aes(x = lang)) +
   geom_bar() +
   labs(x = "Language spoken at home", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
 PlotImmigrantWVS <- WVSCA20 |>
   filter(!is.na(immig)) |>
   ggplot(aes(x = as.factor(immig))) +
@@ -2337,14 +2341,18 @@ PlotImmigrantWVS <- WVSCA20 |>
   scale_x_discrete(labels = c("Yes", "No")) +
   labs(x = "Born in Canada?", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotEducationWVS <- WVSCA20 |>
   filter(!is.na(education)) |>
   ggplot(aes(x = as.factor(education))) +
   geom_bar() +
   labs(x = "Level of education", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotProvinceWVS <- WVSCA20 |>
   filter(!is.na(province)) |>
@@ -2352,7 +2360,9 @@ PlotProvinceWVS <- WVSCA20 |>
   geom_bar() +
   labs(x = "Province of residence", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEthnicityWVS <- WVSCA20 |>
   filter(!is.na(ethn)) |>
@@ -2360,12 +2370,14 @@ PlotEthnicityWVS <- WVSCA20 |>
   geom_bar() +
   labs(x = "Ethnicity", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotGenderWVS, PlotAgeWVS, PlotLanguageWVS, PlotImmigrantWVS,
   PlotEducationWVS, PlotEthnicityWVS, PlotProvinceWVS, nrow = 3, ncol = 3),
-  "_graphs/WVSDescriptive1.pdf", width = 11, height = 8.5)
+  "_graphs/WVSDescriptive.pdf", width = 11, height = 12.75)
 
 PlotAgeGSS <- GSS20 |>
   filter(!is.na(age)) |>
@@ -2373,7 +2385,9 @@ PlotAgeGSS <- GSS20 |>
   geom_bar() +
   labs(x = "Age", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotGenderGSS <- GSS20 |>
   filter(!is.na(female_alt)) |>
@@ -2381,14 +2395,19 @@ PlotGenderGSS <- GSS20 |>
   geom_bar() +
   labs(x = "Gender", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotLanguageGSS <- GSS20 |>
   filter(!is.na(lang)) |>
   ggplot(aes(x = lang)) +
   geom_bar() +
   labs(x = "Language spoken at home", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
+        text = element_text(family = "CM Roman"))
 PlotImmigrantGSS <- GSS20 |>
   filter(!is.na(immig)) |>
   ggplot(aes(x = as.factor(immig))) +
@@ -2396,14 +2415,18 @@ PlotImmigrantGSS <- GSS20 |>
   scale_x_discrete(labels = c("Yes", "No")) +
   labs(x = "Born in Canada?", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotIncomeGSS <- GSS20 |>
   filter(!is.na(income)) |>
   ggplot(aes(x = as.factor(income))) +
   geom_bar() +
   labs(x = "Household yearly income", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEducationGSS <- GSS20 |>
   filter(!is.na(education)) |>
@@ -2411,7 +2434,9 @@ PlotEducationGSS <- GSS20 |>
   geom_bar() +
   labs(x = "Level of education", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotProvinceGSS <- GSS20 |>
   filter(!is.na(province)) |>
@@ -2419,7 +2444,9 @@ PlotProvinceGSS <- GSS20 |>
   geom_bar() +
   labs(x = "Province of residence", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 PlotEthnicityGSS <- GSS20 |>
   filter(!is.na(ethn)) |>
@@ -2427,80 +2454,100 @@ PlotEthnicityGSS <- GSS20 |>
   geom_bar() +
   labs(x = "Ethnicity", y = "Frequency") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotGenderGSS, PlotAgeGSS, PlotLanguageGSS, PlotImmigrantGSS,
   PlotIncomeGSS, PlotEducationGSS, PlotEthnicityGSS, PlotProvinceGSS,
   nrow = 3, ncol = 3),
-  "_graphs/GSSDescriptive1.pdf", width = 11, height = 8.5)
+  "_graphs/GSSDescriptive.pdf", width = 11, height = 12.75)
 
 PlotInterestDG <- ggplot(DG, aes(x = interest, weight = weight)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
-  labs(x = "General political interest", y = "Frequency") +
+  labs(x = "General\npolitical interest", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotHealthDG <- ggplot(DG, aes(x = interest_health, weight = weight)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
-  labs(x = "Interest in health care", y = "Frequency") +
+  labs(x = "Interest in\nhealth care", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotForeignDG <- ggplot(DG, aes(x = interest_foreign, weight = weight)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
-  labs(x = "Interest in international affairs", y = "Frequency") +
+  labs(x = "Interest in\ninternational affairs", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotLawDG <- ggplot(DG, aes(x = interest_law, weight = weight)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
-  labs(x = "Interest in law and crime", y = "Frequency") +
+  labs(x = "Interest in\nlaw and crime", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotEducationDG <- ggplot(DG, aes(x = interest_education,
                                   weight = weight)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
-  labs(x = "Interest in education", y = "Frequency") +
+  labs(x = "Interest in\neducation", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotPartisanDG <- ggplot(DG, aes(x = interest_partisan,
                                  weight = weight)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 450)) +
-  labs(x = "Interest in partisan politics", y = "Frequency") +
+  labs(x = "Interest in\npartisan politics", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotInterestDG, PlotHealthDG, PlotForeignDG, PlotLawDG, PlotEducationDG,
-  PlotPartisanDG, nrow = 2, ncol = 3), width = 11, height = 4.25,
+  PlotPartisanDG, nrow = 2, ncol = 3), width = 11, height = 8.5,
   "_graphs/DGInterest.pdf")
 
 PlotInterestCES <- ggplot(CES21, aes(x = interest / 10, weight = weight)) +
   geom_histogram(binwidth = 1) +
   labs(x = "General political interest -\n2021 CES", y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotInterestWVS <- ggplot(WVSCA20, aes(x = interest / 10, weight = weight)) +
   geom_histogram(binwidth = (10/3)) +
-  scale_x_continuous(breaks = c(0, 2.5, 5, 7.5, 10)) +
+  scale_x_continuous(breaks = seq(0, 10, by = 2.5)) +
   labs(x = "General political interest -\n2020 WVS - Canada",
        y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 PlotInterestGSS <- ggplot(GSS20, aes(x = interest / 10, weight = weight)) +
   geom_histogram(binwidth = (10/3)) +
-  scale_x_continuous(breaks = c(0, 2.5, 5, 7.5, 10)) +
+  scale_x_continuous(breaks = seq(0, 10, by = 2.5)) +
   scale_y_continuous(labels = scales::comma) +
   labs(x = "General political interest -\n2020 GSS - Canada",
        y = "Frequency") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 ggsave(plot = ggpubr::ggarrange(
   PlotInterestCES, PlotInterestWVS, PlotInterestGSS,
-  nrow = 2, ncol = 2), width = 11, height = 4.25,
+  nrow = 2, ncol = 2), width = 11, height = 8.5,
   "_graphs/CESWVSGSSInterest.pdf")
 mean(CCPIS$interest, na.rm=T)
 mean(CCPIS$interest_law, na.rm=T)
@@ -2541,87 +2588,99 @@ Plot1 <- ggplot(filter(CCPIS, !is.na(female)),
   geom_point(data = filter(CCPISGrouped, !is.na(female)), size = 0.25,
              aes(x = age, y = interest, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "General political interest",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age") +
   scale_color_grey(name = "", end = 0.5, labels = c("Boys", "Girls")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
-        legend.text = element_text(size = 15),
-        text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("General")
 Plot2 <- ggplot(filter(CCPIS, !is.na(female)),
        aes(x = age, y = interest_health, color = female)) +
   geom_point(data = filter(CCPISGroupedCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_health, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in health care",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age") +
   scale_color_grey(name = "", end = 0.5, labels = c("Boys", "Girls")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Health care")
 Plot3 <- ggplot(filter(CCPIS, !is.na(female)),
                 aes(x = age, y = interest_foreign, color = female)) +
   geom_point(data = filter(CCPISGroupedCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_foreign, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in international affairs",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age") +
   scale_color_grey(name = "", end = 0.5, labels = c("Boys", "Girls")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("International affairs")
 Plot4 <- ggplot(filter(CCPIS, !is.na(female)),
                 aes(x = age, y = interest_law, color = female)) +
   geom_point(data = filter(CCPISGroupedCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_law, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in law and crime",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age") +
   scale_color_grey(name = "", end = 0.5, labels = c("Boys", "Girls")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Law and crime")
 Plot5 <- ggplot(filter(CCPIS, !is.na(female)),
                 aes(x = age, y = interest_education, color = female)) +
   geom_point(data = filter(CCPISGroupedCategory, !is.na(female)),
              size = 0.25, aes(x = age, y = interest_education, color = female,
                               weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in education",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age") +
   scale_color_grey(name = "", end = 0.5, labels = c("Boys", "Girls")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Education")
 Plot6 <- ggplot(filter(CCPIS, !is.na(female)),
                 aes(x = age, y = interest_partisan, color = female)) +
   geom_point(data = filter(CCPISGroupedCategory, !is.na(female)),
              size = 0.25, aes(x = age, y = interest_partisan, color = female,
                               weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in partisan politics",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age") +
   scale_color_grey(name = "", end = 0.5, labels = c("Boys", "Girls")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
-        text = element_text(family = "CM Roman"))
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Partisan politics")
 ggsave(plot = ggpubr::ggarrange(Plot1, Plot2, Plot3, Plot4, Plot5, Plot6,
        nrow = 2, ncol = 3, common.legend = TRUE, legend = "bottom"),
        "_graphs/InterestAgeGenderCCPIS.pdf", width = 11, height = 8.5)
@@ -2648,29 +2707,31 @@ DGPlot1 <- ggplot(filter(DG, !is.na(female)),
   geom_point(data = filter(DGgrouped, !is.na(female)), size = 0.25,
              aes(x = age, y = interest, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "General political interest",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
-        legend.text = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
         text = element_text(family = "CM Roman")) +
-  ggtitle("Political interest")
+  ggtitle("General")
 DGPlot2 <- ggplot(filter(DG, !is.na(female)),
                   aes(x = age, y = interest_health, color = female,
                       weight = weight)) +
   geom_point(data = filter(GroupedDGCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_health, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in health care",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("Health care")
@@ -2680,13 +2741,14 @@ DGPlot3 <- ggplot(filter(DG, !is.na(female)),
   geom_point(data = filter(GroupedDGCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_foreign, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in international affairs",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("International affairs")
@@ -2696,13 +2758,14 @@ DGPlot4 <- ggplot(filter(DG, !is.na(female)),
   geom_point(data = filter(GroupedDGCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_law, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in law and crime",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("Law and crime")
@@ -2713,13 +2776,14 @@ DGPlot5 <- ggplot(filter(DG, !is.na(female)),
              aes(x = age, y = interest_education, color = female,
                  weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in education",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("Education")
@@ -2730,20 +2794,21 @@ DGPlot6 <- ggplot(filter(DG, !is.na(female)),
              aes(x = age, y = interest_partisan, color = female,
                  weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Interest in partisan politics",
+  scale_y_continuous(name = "",
                      limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   scale_x_continuous(name = "Age", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 15),
-        axis.title = element_text(size = 15),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("Partisan politics")
 ggsave(plot = ggpubr::ggarrange(
   DGPlot1, DGPlot2, DGPlot3, DGPlot4, DGPlot5, DGPlot6, nrow = 2, ncol = 3,
   common.legend = TRUE, legend = "bottom"),
-  "_graphs/InterestAgeGenderDGPanel.pdf", width = 11, height = 8.5)
+  "_graphs/InterestAgeGenderDG.pdf", width = 11, height = 8.5)
 
 CES21grouped <- CES21 |>
   group_by(age, female) |>
@@ -2761,12 +2826,17 @@ PlotTimeCES <- ggplot(filter(CES21, !is.na(female)),
   geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
              aes(x = age, y = interest / 10, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "General political\ninterest",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
   scale_x_continuous(name = "Age, 2021 CES", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("General political interest")
 
 summary(lm(data = filter(CES21, age <= 50), formula = interest / 10 ~ female,
            weights = weight))
@@ -2774,66 +2844,6 @@ summary(lm(data = CES21, formula = interest / 10 ~ female,
            weights = weight))
 # women's political interest = 5.4/10; men's political interest = 6.8/10;
 # p<0.001
-
-PlotTimeInterest <- PlotTimeCES +
-  scale_x_continuous(name = "Age", limits = c(18, 105))
-PlotTimeEfficacy <- ggplot(filter(CES21, !is.na(female)),
-       aes(x = age, y = efficacy * 10, color = female, weight = weight)) +
-  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
-             aes(x = age, y = efficacy * 10, color = female, weight = NULL)) +
-  geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Political efficacy",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
-  scale_x_continuous(name = "Age", limits = c(18, 105)) +
-  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
-  theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
-PlotTimeInternalEfficacy <- ggplot(
-  filter(CES21, !is.na(female)),
-  aes(x = age, y = internal_efficacy * 10, color = female, weight = weight)) +
-  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
-             aes(x = age, y = internal_efficacy * 10, color = female, weight = NULL)) +
-  geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Internal\npolitical efficacy",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
-  scale_x_continuous(name = "Age", limits = c(18, 105)) +
-  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
-  theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
-PlotTimeExternalEfficacy <- ggplot(
-  filter(CES21, !is.na(female)),
-  aes(x = age, y = external_efficacy * 10, color = female, weight = weight)) +
-  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
-             aes(x = age, y = external_efficacy * 10, color = female, weight = NULL)) +
-  geom_smooth(method = "loess") +
-  scale_y_continuous(name = "External\npolitical efficacy",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
-  scale_x_continuous(name = "Age", limits = c(18, 105)) +
-  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
-  theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
-PlotTimeKnowledge <- ggplot(filter(CES21, !is.na(female)),
-       aes(x = age, y = knowledge * 10, color = female, weight = weight)) +
-  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
-             aes(x = age, y = knowledge * 10, color = female, weight = NULL)) +
-  geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Knowledge of political\nfigures' names",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
-  scale_x_continuous(name = "Age", limits = c(18, 105)) +
-  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
-  theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
-PlotTimeParticipation <- ggplot(filter(CES21, !is.na(female)),
-       aes(x = age, y = participation * 10, color = female, weight = weight)) +
-  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
-             aes(x = age, y = participation * 10, color = female, weight = NULL)) +
-  geom_smooth(method = "loess") +
-  scale_y_continuous(name = "Political participation",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
-  scale_x_continuous(name = "Age", limits = c(18, 105)) +
-  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
-  theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
 
 WVSCA20grouped <- WVSCA20 |>
   group_by(age, female) |>
@@ -2843,12 +2853,16 @@ PlotTimeWVSCA <- ggplot(filter(WVSCA20, !is.na(female)),
   geom_point(data = filter(WVSCA20grouped, !is.na(female)), size = 0.25,
              aes(x = age, y = interest / 10, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
-  scale_y_continuous(name = "General political\ninterest",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
   scale_x_continuous(name = "Age, 2020 WVS, Canada", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("General political interest")
 
 summary(lm(data = WVSCA20, formula = interest / 10 ~ female, weights = weight))
 # women's political interest = 5/10; men's political interest = 6.2/10;
@@ -2863,12 +2877,16 @@ PlotTimeWVS <- ggplot(filter(WVSWave7, !is.na(female)),
   geom_point(data = filter(WVSWave7grouped, !is.na(female)), size = 0.25,
              aes(x = age, y = interest / 10, color = female, weight = NULL)) +
   geom_smooth() +
-  scale_y_continuous(name = "General political\ninterest",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
   scale_x_continuous(name = "Age, 2017/22 WVS", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("General political interest")
 
 summary(lm(data = WVSWave7, formula = interest / 10 ~ female,
            weights = weight))
@@ -2883,25 +2901,109 @@ GSSgrouped <- GSS20 |>
 PlotTimeGSS <- ggplot(filter(GSS20, !is.na(female)),
        aes(x = age, y = interest / 10, color = female, weight = weight,
            group = as.factor(female))) +
-  geom_smooth(data = filter(GSSgrouped, !is.na(female)), linewidth = 0.25,
+  geom_smooth(data = filter(GSSgrouped, !is.na(female)), linewidth = 0.25, method = "lm",
             aes(x = age, y = interest / 10, color = female, weight = NULL)) +
   geom_point(data = filter(GSSgrouped, !is.na(female)), size = 0.25,
              aes(x = age, y = interest / 10, color = female, weight = NULL)) +
-  scale_y_continuous(name = "General political\ninterest",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = c(0, 10)) +
   scale_x_discrete(name = "Age, 2020 GSS, Canada") +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90),
-        text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("General political interest")
 ggsave(plot = ggpubr::ggarrange(
   PlotTimeCES, PlotTimeWVS, PlotTimeWVSCA, PlotTimeGSS,
   nrow = 2, ncol = 2, common.legend = TRUE, legend = "bottom"),
-  "_graphs/TimeCESWVSGSS.pdf", width = 11, height = 4.25)
+  "_graphs/TimeCESWVSGSS.pdf", width = 11, height = 8.5)
+
+PlotTimeInterest <- PlotTimeCES +
+  scale_x_continuous(name = "Age", limits = c(18, 105))
+PlotTimeEfficacy <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = efficacy * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = efficacy * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "Political efficacy",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
+PlotTimeInternalEfficacy <- ggplot(
+  filter(CES21, !is.na(female)),
+  aes(x = age, y = internal_efficacy * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = internal_efficacy * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Internal political efficacy")
+PlotTimeExternalEfficacy <- ggplot(
+  filter(CES21, !is.na(female)),
+  aes(x = age, y = external_efficacy * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = external_efficacy * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("External political efficacy")
+PlotTimeKnowledge <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = knowledge * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = knowledge * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 5)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Knowledge of political\nfigures' names")
+PlotTimeParticipation <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = participation * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = participation * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Political participation")
 ggsave(plot = ggpubr::ggarrange(
   PlotTimeInternalEfficacy, PlotTimeExternalEfficacy, PlotTimeKnowledge,
   PlotTimeParticipation, nrow = 2, ncol = 2, common.legend = TRUE, legend = "bottom"),
-  "_graphs/TimePoliticalEngagement.pdf", width = 11, height = 4.25)
+  "_graphs/TimePoliticalEngagement.pdf", width = 11, height = 8.5)
 
 summary(lm(data = GSS20, formula = interest / 10 ~ female, weights = weight))
 
@@ -2988,7 +3090,7 @@ ggplot(CESGapYearAge,
            group = as.factor(year), linetype = as.factor(year))) +
   geom_smooth(aes(weight = NULL), linewidth = 0.25, alpha = 0.1, se = F) +
   geom_hline(yintercept = 0) +
-  scale_y_continuous(name = "General political interest gender gap") +
+  scale_y_continuous(name = "General political interest\ngender gap") +
   scale_x_continuous(name = "Age, 2021 CES") +
   scale_color_manual(name = "Year", values = c(
     "1997" = "grey20", "2000" = "grey20", "2004" = "grey20", "2006" = "grey50",
@@ -2999,7 +3101,11 @@ ggplot(CESGapYearAge,
     "2008" = "dotted", "2011" = "dashed", "2015" = "solid", "2019" = "dotted",
     "2021" = "dashed")) +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 ggsave("_graphs/CESGapYearAge.pdf", width = 11, height = 4.25)
 
 #### 3.4 Political interest by year & gender (CES & WVS) ####
@@ -3126,7 +3232,11 @@ ggplot(InterestGenderData, aes(x = year, y = interest / 10, color = female,
   scale_color_grey(name = "Gender", end = 0.75, labels = c("Men", "Women")) +
   scale_linetype(name = "Survey") +
   theme_minimal() +
-  theme(text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
 ggsave("_graphs/InterestYearGender.pdf", width = 11, height = 4.25)
 
 summary(lm(data = InterestCESGenderData, formula = interest ~ female))
@@ -3140,9 +3250,9 @@ summary(lm(data = InterestGSSGenderData, formula = interest ~ female))
 # men's political interest = 62%; N.S.
 
 #### 3.5 Political interest by year, gender & ethnicity (CES & WVS) ####
-whites <- c("White men", "White women", "Nonwhite men", "Nonwhite women")
-immigs <- c("Immigrant men", "Immigrant women", "Nonimmigrant men",
-            "Nonimmigrant women")
+whites <- c("White\nmen", "White\nwomen", "Nonwhite\nmen", "Nonwhite\nwomen")
+immigs <- c("Immigrant\nmen", "Immigrant\nwomen", "Nonimmigrant\nmen",
+            "Nonimmigrant\nwomen")
 GenderEthnicityInterest <- data.frame(
   group = as.factor(c(rep(whites, 3), immigs, whites, rep(immigs, 2),
                      whites, immigs)),
@@ -3266,15 +3376,15 @@ GenderEthnicityInterest$interest.ub <-
   qnorm(0.975) * GenderEthnicityInterest$interest.se
 GenderEthnicityInterest$group <- factor(
   GenderEthnicityInterest$group,
-  levels = c("White men", "White women", "Nonwhite men",
-             "Nonwhite women", "Immigrant men", "Immigrant women",
-             "Nonimmigrant men", "Nonimmigrant women"))
+  levels = c("White\nmen", "White\nwomen", "Nonwhite\nmen",
+             "Nonwhite\nwomen", "Immigrant\nmen", "Immigrant\nwomen",
+             "Nonimmigrant\nmen", "Nonimmigrant\nwomen"))
 ggplot(GenderEthnicityInterest, aes(x = group, y = interest / 10,
                                     color = year, shape = year)) +
   geom_point(position = position_dodge(width = 0.5), size = 0.75) +
   geom_errorbar(aes(ymin = interest.lb / 10, ymax = interest.ub / 10),
                 width = 0, position = position_dodge(width = 0.5)) +
-  scale_y_continuous(name = "General political interest",
+  scale_y_continuous(name = "General\npolitical interest",
                      limits = c(0, 10)) +
   scale_x_discrete(name = "Group") +
   scale_color_manual(name = "Wave", values = c(
@@ -3284,7 +3394,11 @@ ggplot(GenderEthnicityInterest, aes(x = group, y = interest / 10,
     "CES 2021" = 1, "GSS 2013" = 2, "GSS 2020" = 2,
     "WVS 2000" = 3, "WVS 2006" = 3, "WVS 2020" = 3)) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/InterestWaveGroup.pdf", width = 11, height = 4.25)
 
@@ -3386,11 +3500,15 @@ ggplot(EthnicityInterest, aes(x = ethn, y = interest,
   geom_point(position = position_dodge(width = 0.75), size = 0.75) +
   geom_errorbar(aes(ymin = interest.lb, ymax = interest.ub),
                 width = 0.5, position = position_dodge(width = 0.75)) +
-  scale_y_continuous(name = "General political interest",
+  scale_y_continuous(name = "General\npolitical interest",
                      limits = c(0, 100)) +
   scale_x_discrete(name = "Ethnicity") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman")) +
   scale_color_grey(name = "Survey", end = 0.5)
 ggsave("_graphs/InterestEthnicity20_21.pdf", width = 11, height = 4.25)
@@ -3409,7 +3527,7 @@ CCPISLonger$topic <- case_when(
   CCPISLonger$name == "gender_parent_health" ~ "Health\ncare",
   CCPISLonger$name == "gender_parent_education" ~ "Education",
   CCPISLonger$name == "gender_parent_law" ~ "Law and\ncrime",
-  CCPISLonger$name == "gender_parent_foreign" ~ "International\naffairs",
+  CCPISLonger$name == "gender_parent_foreign" ~ "Inter-\nnational\naffairs",
   CCPISLonger$name == "gender_parent_partisan" ~ "Partisan\npolitics",
   CCPISLonger$name == "parent_discuss_alt" ~ "All\ndiscussions")
 ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
@@ -3423,7 +3541,12 @@ ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
                                         "\nMissing")),
                       type = c("purple", "orange", "white")) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 45),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopics.pdf", width = 11, height = 4.25)
 ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
@@ -3437,7 +3560,12 @@ ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
                                         "\nMissing")),
                       start = 0.2, end = 0.6, na.value = "grey90") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 45),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopicsGrey.pdf", width = 11, height = 4.25)
 
@@ -3467,7 +3595,12 @@ ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
                       labels = c("Father", "Mother"),
                       type = c("purple", "orange")) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 45, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopicsMomDad.pdf", width = 11, height = 4.25)
 ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
@@ -3478,7 +3611,12 @@ ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
   scale_fill_grey("Parent",
                       labels = c("Father", "Mother")) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, vjust = 0.5),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 45, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopicsMomDadGrey.pdf", width = 11, height = 4.25)
 
@@ -3511,7 +3649,12 @@ ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
                       labels = c("Female", "Male"),
                       type = c("orange", "purple")) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/PeersTopics.pdf", width = 11, height = 4.25)
 ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
@@ -3522,7 +3665,12 @@ ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   scale_fill_grey("Peers", start = 0.8, end = 0.2,
                       labels = c("Female", "Male")) +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/PeersTopicsGrey.pdf", width = 11, height = 4.25)
 filter(CCPISOldYoung, !is.na(friends_gender_alt) & !is.na(female)) |>
@@ -3533,7 +3681,12 @@ filter(CCPISOldYoung, !is.na(friends_gender_alt) & !is.na(female)) |>
   scale_y_continuous("Percent of students", labels = scales::percent) +
   scale_fill_grey("Gender of most friends", na.value = "grey") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/PeersGenderAge.pdf", width = 11, height = 4.25)
 
@@ -4801,12 +4954,12 @@ rownames(GenderCCPISData) <- c("ci_l", "pred", "ci_u")
 GenderCCPISData <- as.data.frame(t(GenderCCPISData))
 GenderCCPISData$ctrl <- rep(c(
   "Without Controls", "With Controls for SES",
-  "With Controls for SES and Personality Traits",
-  "With Controls for SES, Interactions and Personality Traits"), 6)
+  "With Controls for SES\nand Personality Traits",
+  "With Controls for SES, Interactions\nand Personality Traits"), 6)
 GenderCCPISData$ctrl <- factor(GenderCCPISData$ctrl, levels = c(
   "Without Controls", "With Controls for SES",
-  "With Controls for SES and Personality Traits",
-  "With Controls for SES, Interactions and Personality Traits"))
+  "With Controls for SES\nand Personality Traits",
+  "With Controls for SES, Interactions\nand Personality Traits"))
 GenderCCPISData$topic <- c(
   rep("Politics (general)", 4), rep("Health care", 4),
   rep("International affairs", 4), rep("Law and crime", 4),
@@ -4819,9 +4972,14 @@ ggplot(GenderCCPISData, aes(x = pred, y = topic)) +
   scale_x_continuous("\nGender most interested in that topic (Boys <--------> Girls)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c("red", rep("black", 5))),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c("red", rep("black", 5))),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/GenderCCPIS.pdf", width = 11, height = 4.25)
 GenderCCPISYOData <- data.frame(
   pred_interest_y = get_ci(ModelInterestGenderYoung, 1),
@@ -4851,9 +5009,14 @@ ggplot(GenderCCPISYOData, aes(x = pred, y = topic)) +
   scale_x_continuous("\nGender most interested in that topic (Boys <--------> Girls)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c("red", rep("black", 5))),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c("red", rep("black", 5))),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/GenderCCPISYO.pdf", width = 11, height = 4.25)
 get_ci_lm <- function(model, var_order, level = 0.95) {
   mod_int <- confint(model, level = level)
@@ -4883,10 +5046,10 @@ GenderDGData <- data.frame(
 rownames(GenderDGData) <- c("ci_l", "pred", "ci_u")
 GenderDGData <- as.data.frame(t(GenderDGData))
 GenderDGData$ctrl <- rep(c("Without Controls", "With Controls for SES",
-                           "With Controls for SES and Interactions"), 6)
+                           "With Controls for SES\nand Interactions"), 6)
 GenderDGData$ctrl <- factor(GenderDGData$ctrl, levels = c(
   "Without Controls", "With Controls for SES",
-  "With Controls for SES and Interactions"))
+  "With Controls for SES\nand Interactions"))
 GenderDGData$topic <- c(
   rep("Politics (general)", 3), rep("Health care", 3),
   rep("International affairs", 3), rep("Law and crime", 3),
@@ -4899,9 +5062,14 @@ ggplot(GenderDGData, aes(x = pred, y = topic)) +
   scale_x_continuous("\nGender most interested in that topic (Men <--------> Women)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c("red", rep("black", 5))),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c("red", rep("black", 5))),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/GenderDG.pdf", width = 11, height = 4.25)
 GenderParentData <- data.frame(
   pred_health_b = get_ci(ModelBoysHealthGenderParent, 1),
@@ -4932,9 +5100,14 @@ ggplot(GenderParentData, aes(x = pred, y = topic)) +
                      breaks = 0, labels = "Father<---------->Mother") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/GenderParent.pdf", width = 11, height = 4.25)
 GenderParentCtrlData <- data.frame(
   pred_health_b = get_ci(ModelBoysHealthGenderParentCtrl, 1),
@@ -4965,9 +5138,14 @@ ggplot(GenderParentCtrlData, aes(x = pred, y = topic)) +
                      breaks = 0, labels = "Father<---------->Mother") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/GenderParentCtrl.pdf", width = 11, height = 4.25)
 
 AgentsData <- data.frame(
@@ -5103,9 +5281,14 @@ AgentsData |>
     "\nTopic most often discussed with mother\n(vs. other topics)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/MotherDiscuss.pdf", width = 11, height = 4.25)
 AgentsCtrlData |>
   filter(agents == "Mother") |>
@@ -5118,9 +5301,14 @@ AgentsCtrlData |>
     "\nTopic most often discussed with mother\n(vs. other topics)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/MotherDiscussCtrl.pdf", width = 11, height = 4.25)
 AgentsData |>
   filter(agents == "Father") |>
@@ -5133,9 +5321,14 @@ AgentsData |>
     "\nTopic most often discussed with father\n(vs. other topics)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/FatherDiscuss.pdf", width = 11, height = 4.25)
 AgentsCtrlData |>
   filter(agents == "Father") |>
@@ -5148,9 +5341,14 @@ AgentsCtrlData |>
     "\nTopic most often discussed with father\n(vs. other topics)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/FatherDiscussCtrl.pdf", width = 11, height = 4.25)
 AgentsData |>
   filter(agents == "Female friends") |>
@@ -5163,9 +5361,14 @@ AgentsData |>
     "\nTopic most often discussed with female friends\n(vs. other topics)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/FemaleFriendsDiscuss.pdf", width = 11, height = 4.25)
 AgentsCtrlData |>
   filter(agents == "Female friends") |>
@@ -5178,9 +5381,14 @@ AgentsCtrlData |>
     "\nTopic most often discussed with female friends\n(vs. other topics)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/FemaleFriendsDiscussCtrl.pdf", width = 11, height = 4.25)
 AgentsData |>
   filter(agents == "Male friends") |>
@@ -5193,9 +5401,14 @@ AgentsData |>
     "\nTopic most often discussed with male friends\n(vs. other topics)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/MaleFriendsDiscuss.pdf", width = 11, height = 4.25)
 AgentsCtrlData |>
   filter(agents == "Male friends") |>
@@ -5208,9 +5421,14 @@ AgentsCtrlData |>
     "\nTopic most often discussed with male friends\n(vs. other topics)") +
   scale_y_discrete("Topics", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(
-    color = c(rep("black", 5), "red")),
-    text = element_text(family = "CM Roman"))
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(
+          color = c(rep("black", 5), "red")),
+          text = element_text(family = "CM Roman"))
 ggsave("_graphs/MaleFriendsDiscussCtrl.pdf", width = 11, height = 4.25)
 GenderParentYOData <- data.frame(
   pred_yb = get_ci(ModelYoungBoysGenderParent, 1),
@@ -5306,7 +5524,12 @@ DiscussYOData |>
     "Left: Father, Right: Mother")) +
   scale_y_discrete("Age", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/DiscussYO.pdf", width = 11, height = 4.25)
 DiscussYOCtrlData |>
@@ -5323,6 +5546,11 @@ DiscussYOCtrlData |>
     "Left: Father, Right: Mother")) +
   scale_y_discrete("Age", limits = rev) +
   theme_minimal() +
-  theme(axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/DiscussYOCtrl.pdf", width = 11, height = 4.25)
