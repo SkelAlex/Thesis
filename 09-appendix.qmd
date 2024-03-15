@@ -1614,17 +1614,17 @@ Veuillez indiquer votre âge
 # Political Interest by Gender {#sec-appendix4}
 
 ```{r}
-#| label: fig-interestccpis
-#| echo: false
-#| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Children, 2022 CCPIS"
-knitr::include_graphics("_graphs/GenderCCPIS.pdf")
-```
-
-```{r}
 #| label: fig-interestdg
 #| echo: false
 #| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Adults, 2023 Datagotchi PES"
 knitr::include_graphics("_graphs/GenderDG.pdf")
+```
+
+```{r}
+#| label: fig-interestccpis
+#| echo: false
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Children, 2022 CCPIS"
+knitr::include_graphics("_graphs/GenderCCPIS.pdf")
 ```
 
 # Political Interest Transmission by Parents (Control Variables Added) {#sec-appendix5}

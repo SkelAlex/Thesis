@@ -72,7 +72,7 @@ Hypothesis 0e suggests, again as a result of the cognitive maturation theory lai
 
 ***Hypothesis 0e**: Boys and girls both see issues related to partisan politics as more political than other political issues starting at age 15.*
 
-Studies have found strong causal or correlational associations between political interest, political knowledge, political efficacy, and other indicators of political engagement [@bennett1989; @coffe2010; @coffe2013; @ondercin2011; @prior2019] --- who are sometimes bundled together to create general political engagement scales. Therefore, Hypotheses 0f and 0g suggest that the value of these indicators tend to covary by age, and that gender differences in these indicators should also emerge within similar time frames.
+Studies have found strong causal or correlational associations between political interest, political knowledge, political efficacy, and other indicators of political engagement [@bennett1989; @coffe2010; @coffe2013; @ondercin2011; @prior2019] --- who are sometimes bundled together to create general political engagement scales. @prior2019 notably finds modest positive correlations between political interest and a measure of political efficacy in three countries, and positive bidirectional causal links between efficacy and interest in one of these countries --- Switzerland. Therefore, Hypotheses 0f and 0g suggest that the value of these indicators tends to covary with age and that gender differences in these indicators should also emerge within similar time frames.
 
 ***Hypothesis 0f**: Various indicators of political engagement, such as political interest, political knowledge and political efficacy, mostly increase at the same time --- under age 25.*
 
@@ -80,7 +80,7 @@ Studies have found strong causal or correlational associations between political
 
 ## Data and Methods
 
-This chapter wants to portray the evolution of political interest by age and through time, and therefore relies on five datasets across several survey years: the Canadian Children Political Interest Survey (CCPIS), the Datagotchi Post-Election Survey (Datagotchi PES), the Canadian Election Study (CES), the World Values Survey (WVS) and the Canadian General Social Survey (GSS). The CCPIS includes survey data collected among 8-to-18--year-olds in 2022, while the Datagotchi PES includes data collected among Quebec adults in 2023. More about these datasets is explained in @sec-chap2. Both the CCPIS and Datagotchi PES include questions about interests in specific political topics, which can better measure the concept. While the CES, WVS and GSS do not ask these specific political topics, they each have unique advantages. The CES includes the most survey years --- with a question on political interest being asked in surveys from 1997 to 2021 --- makes it possible to measure other indicators of political engagement than political interest, including political knowledge, efficacy, and participation. The WVS makes it possible to compare Canadians' level of interest with other countries. Finally, two GSS surveys --- 2013 and 2020 --- provide the largest datasets and, since it is not designed as a political survey per survey, may provide more accurate measures of Canadians' level of interest in politics --- despite the limitations of a single-item measure.
+This chapter wants to portray the evolution of political interest by age and through time, and therefore relies on five datasets across several survey years: the Canadian Children Political Interest Survey (CCPIS), the Datagotchi Post-Election Survey (Datagotchi PES), the Canadian Election Study (CES), the World Values Survey (WVS) and the Canadian General Social Survey (GSS). The CCPIS includes survey data collected among 9-to-18--year-olds in school settings in 2022, while the Datagotchi PES includes data collected among Quebec adults in 2023. More about these datasets is explained in @sec-chap2. Both the CCPIS and Datagotchi PES include questions about interests in specific political topics, which can better measure the concept. These datasets are therefore used to assess the relationship between gender and interest in five topics: health care, international affairs, law and crime, education, and partisan politics. OLS and WLS regressions are used with Datagotchi PES data, while multilevel regressions with classroom fixed effects are used for CCPIS data. While the CES, WVS and GSS do not ask these specific political topics, they each have unique advantages. The CES includes the most survey years --- with a question on political interest being asked in surveys from 1997 to 2021 --- making it possible to measure other indicators of political engagement than political interest, including political knowledge, efficacy, and participation. The WVS makes it possible to compare Canadians' level of interest with other countries. Finally, two GSS surveys --- 2013 and 2020 --- provide the largest datasets and, since it is not designed as a political survey per survey, may provide more accurate measures of Canadians' level of interest in politics --- despite the limitations of a single-item measure.
 
 Apart from questions about political interest, this chapter also relies on four other measures of political engagement taken from the Canadian Election Studies: internal political efficacy, external political efficacy, knowledge of political figures' names, and political participation.
 
@@ -106,14 +106,14 @@ knitr::include_graphics("_graphs/ParticScale.pdf")
 
 ## Data Analysis
 
-### The Evolution of Self-Reported Political Interest Among Adults
+### Evolution of Political Interest Among Adults
 
 In order to explore what level of general (self-reported) political interest Canadian men and women report, three datasets are mobilized: the 2021 CES, the WVS's Wave 7 (2017--22) and the 2020 GSS. @fig-yeargender shows the evolution in Canadians' average level of political interest by gender from 1990 to 2021. In general, CES respondents are the most interested in politics according to these data --- 6.3/10 --- which is unsurprising given these surveys are conducted during election campaigns, and ask questions of a more clearly political nature. WVS respondents are the least interested --- 4.5/10 --- with GSS respondents sitting somewhere in between --- 5.8/10. Between-survey differences are therefore twice as large as gender differences in political interest. In general, political interest seems to have increased between 2000 and 2021, with an average interest of 4.9/10 in the 2000 CES and WVS and an average interest of 6.1/10 in the 2019--20 CES, WVS and GSS.
 
 ```{r}
 #| label: fig-yeargender
 #| echo: false
-#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied."
 knitr::include_graphics("_graphs/InterestYearGender.pdf")
 ```
 
@@ -124,7 +124,7 @@ Again relying on data from the CES, WVS and GSS, @fig-timeceswvsgss shows averag
 ```{r}
 #| label: fig-timeceswvsgss
 #| echo: false
-#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. CES, WVS and GSS weights are applied."
+#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied."
 knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
 ```
 
@@ -143,7 +143,7 @@ Within Canada, across all three studies, average political interest was higher i
 ```{r}
 #| label: fig-cesgapyearage
 #| echo: false
-#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested."
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. CES weights are applied."
 knitr::include_graphics("_graphs/CESGapYearAge.pdf")
 ```
 
@@ -152,32 +152,107 @@ knitr::include_graphics("_graphs/CESGapYearAge.pdf")
 ```{r}
 #| label: fig-timepoliticalengagement
 #| echo: false
-#| fig-cap: "Level of Political Engagement Across Several Measures Among Canadian Adults, 2021 CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no engagement at all, and 10 = a great deal of engagement. Dots represent average interest by age and gender. CES weights are applied."
+#| fig-cap: "Level of Political Engagement Across Several Measures Among Canadian Adults, 2021 CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no engagement at all, and 10 = a great deal of engagement. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES weights are applied."
 knitr::include_graphics("_graphs/TimePoliticalEngagement.pdf")
 ```
 
 Some of these trends mirror quite closely what is found for political interest among these same CES respondents. Notably, large gender gaps in knowledge of political figures' names and internal political efficacy appear among younger respondents. These gaps are larger than the 13-point gap in political interest. Similar to political interest, these gaps also seem to progressively fade among older respondents, and after age 80--85, the level of political engagement seems to be the same for women and men across all indicators. With regards to knowledge, the gap was to be expected and mirrors findings from past research (notably @stolle2010), as recalling the names of political figures is closely tied to partisan politics and assertion as opposed to cooperation. Unfortunately, the data does not allow to assess respondents' knowledge about health care or education policy, but @stolle2010 suggest that the gender gap should be expected to be in the opposite direction, with women more knowledgeable about these topics on average.
 
-Hypothesis 0f suggested that the various indicators of political engagement were likely to vary simultaneously, with a notable increase between ages 18 and 25. @fig-timepoliticalengagement does not corroborate this claim: internal political efficacy increases at a relatively even pace until age 40, the knowledge scale also increases constantly until age 75, while external efficacy and political participation both slightly *decline* between ages 18 and 25. These findings, while inconsistent with Hypothesis 0f, are consistent with the finding that political interest is also stable, not increasing, until age 25 --- in the CES at least.
+Hypothesis 0f suggested that the various indicators of political engagement were likely to vary simultaneously, with a notable increase between ages 18 and 25. @fig-timepoliticalengagement does not corroborate this claim: internal political efficacy increases at a relatively even pace until age 40, the knowledge scale also increases constantly until age 75, while external efficacy and political participation both slightly *decline* between ages 18 and 25. These findings, while inconsistent with Hypothesis 0f, are consistent with the finding that political interest is also stable, not increasing, until age 25 --- in the CES at least. However, these results do not indicate that various indicators of political engagement are unrelated to each other. Indeed, correlations of political interest with internal political efficacy (0.42), external political efficacy (0.15), knowledge of political figures' names (0.34) and political participation (0.39) are all positive and significant at the 99.9% confidence level. Correlations between political efficacy and interest are somewhat higher than the correlations of 0.09 to 0.27 found by @prior2019 in three countries while aggregating both internal and external dimensions. Correlations between several indicators political participation and interest are also higher than the correlations of 0.07 to 0.31 found by @grechyna2023 in the EU and the UK.
 
-Hypothesis 0g is also not corroborated by the data: the gender gap in internal political efficacy is stable, not increasing, among 18-to-25--year-olds, while for knowledge of political figures' names, the gap starts shrinking within that age group.
+Hypothesis 0g is also not corroborated by the data: the gender gap in internal political efficacy is stable, not increasing, among 18-to-25--year-olds, while for knowledge of political figures' names, the gap starts shrinking within that age group. External political efficacy and political participation do not display any notable gender gap for that age groups nor for other age groups.
 
-@fig-yearethnicityceswvs looks at gender differences through an intersectional lens, with gender--ethnicity pairs and gender--immigrant status pairs included across several survey-years for which the information was available. While this chapter focuses on the gender gap in self-reported political interest, different groups of women also differ in political interest.^[For instance, in the Dominican Republic, @spierings2012 found that Protestant women report levels of political interest similar to men and higher than Catholic women, while Mestizo women report lower levels of political interest than Indigenous women.]
+Is this gender gap concentrated among certain demographics only? @fig-interestwavegroup provides a robustness check to the existence of a gender gap in self-reported political interest by looking at gender differences through an intersectional lens, with gender--ethnicity pairs and gender--immigrant status pairs included across several surveys and years for which the information was available. Within each survey--year, self-reported political interest is higher among white men than white women, and non-white men than non-white women. The same applies to the gender gap among immigrants and non-immigrants. By comparison, differences in interest between Caucasians and non-Caucasians are found to be smaller, and there are no differences in interest between people born in Canada and those born abroad. The gender gap in interest therefore seems to trump other socio-demographic characteristics such as ethnicity and immigrant status, which reinforces the need to understand how gendered socialization shapes this gap.^[These results are consistent with the findings of previous studies, which found no significant difference between levels of political interest of immigrants and non-immigrants [@hochman2019], while @prior2018 find higher levels of interest in politics among white than black Americans. In the Dominican Republic, @spierings2012 found that Protestant women report levels of political interest similar to men and higher than Catholic women, while Mestizo women report lower levels of political interest than Indigenous women.]
 
 ```{r}
-#| label: fig-yearethnicityceswvs
+#| label: fig-interestwavegroup
 #| echo: false
-#| fig-cap: "General Political Interest by Year, Gender and Ethnicity Among Canadian Adults, 2021 CES and 2020 WVS (Canada) \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. CES and WVS weights are applied."
+#| fig-cap: "General Political Interest by Year, Gender, Ethnicity and Immigrant Status Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals shown. CES, WVS and GSS weights are applied. Not all surveys included here asked questions about both ethnicity and immigrant status."
 knitr::include_graphics("_graphs/InterestWaveGroup.pdf")
 ```
 
-### Canadian Children Political Interest Survey
-
-What kinds of political topics are children and adolescents interested in? Are there gender differences in how interested they are in these topics? Does gender predict political interest in itself, or is it only a proxy for other variables? Data from the Canadian Children Political Interest Survey (CCPIS), described in further detail in @sec-chap2, is used to answer these questions. \ref{tab:lmeInterestCCPIS} shows the link between gender and interest in each of the topics among elementary and high school students. The upper part includes gender as the only predictor, while the lower part includes controls for socio-demographic variables and personality traits.^[@fig-interestccpis in @sec-appendix4 shows the gender coefficient for two intermediate models, one with SES controls and one with SES and personality traits but no interactions. Before adding interactions between (i) gender and age, (ii) gender and ethnicity, and (iii) age squared, coefficients from the simple regression model remain significant.]
+Now, how do adults' interest in various political topics change depending on age and gender? This question is best answered using Datagotchi PES data. As Table \ref{tab:olsInterestDG} shows, in models without controls, Quebec men generally report being more interested in politics than women. Men's interest in international affairs and partisan politics is also higher than women's (0.7-point and 0.6-point difference respectively; both *p*<0.001). However, women are significantly more interested in health care and education (0.7-point and 0.5-point difference respectively, both *p*<0.001) than men are. Women's interest in law and crime is also slightly higher (0.2 point, *p*<0.1).^[@fig-interestdg in @sec-appendix4 shows the gender coefficient for an intermediate model with SES controls but no interactions. Before adding interactions between (i) gender and age, (ii) gender and ethnicity, and (iii) age squared, coefficients from the simple regression model remain significant.]
 
 \begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender, Datagotchi PES \label{tab:olsInterestDG}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & Politics (general) & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Without Controls}}\\
+\midrule \hspace{1em}(Intercept) & 7.724*** & 6.449*** & 7.453*** & 5.421*** & 6.586*** & 6.334***\\
+\hspace{1em} & (0.064) & (0.075) & (0.071) & (0.079) & (0.075) & (0.084)\\
+\hspace{1em}Gender (1 = women) & -0.877*** & 0.690*** & -0.592*** & 0.104 & 0.517*** & -0.645***\\
+\hspace{1em} & (0.097) & (0.116) & (0.109) & (0.121) & (0.116) & (0.128)\\
+\hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & \vphantom{1} 1575\\
+\hspace{1em}R2 & 0.049 & 0.022 & 0.018 & 0.000 & 0.013 & 0.016\\
+\hspace{1em}R2 Adj. & 0.048 & 0.022 & 0.018 & 0.000 & 0.012 & 0.015\\
+\hspace{1em}Log.Lik. & -3254.524 & -3523.301 & -3437.633 & -3591.294 & -3524.218 & -3687.310\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{With Controls}}\\
+\midrule \hspace{1em}(Intercept) & 7.751*** & 4.166*** & 7.652*** & 6.469*** & 5.947*** & 8.463***\\
+\hspace{1em} & (0.819) & (0.815) & (0.834) & (1.020) & (0.841) & (0.941)\\
+\hspace{1em}Gender (1 = women) & -0.580 & 1.733* & -2.020* & -0.251 & -1.744* & -3.951***\\
+\hspace{1em} & (0.694) & (0.836) & (0.856) & (0.865) & (0.864) & (0.966)\\
+\hspace{1em}Age & -0.030 & -0.005 & -0.042+ & 0.013 & -0.055* & -0.144***\\
+\hspace{1em} & (0.020) & (0.023) & (0.024) & (0.025) & (0.024) & (0.027)\\
+\hspace{1em}Age squared & 0.000+ & 0.000 & 0.001* & 0.000 & 0.001* & 0.001***\\
+\hspace{1em} & (0.000) & (0.000) & (0.000) & (0.000) & (0.000) & (0.000)\\
+\hspace{1em}Ethnicity (1 = white) & 0.503 & -0.957* & -0.833+ & -1.305* & -0.722 & 0.056\\
+\hspace{1em} & (0.504) & (0.477) & (0.488) & (0.628) & (0.492) & (0.551)\\
+\hspace{1em}Immigrant & -0.443+ & 1.361*** & 0.057 & -0.428 & 1.035*** & 0.045\\
+\hspace{1em} & (0.229) & (0.298) & (0.305) & (0.285) & (0.308) & (0.344)\\
+\hspace{1em}French spoken at home & 0.106 & 0.659** & 0.324 & -0.243 & 0.307 & 0.237\\
+\hspace{1em} & (0.340) & (0.224) & (0.229) & (0.423) & (0.231) & (0.259)\\
+\hspace{1em}Income between \$60,000 and \$150,000 & 0.040 & 0.371+ & 0.182 & 0.257 & 0.360+ & 0.987***\\
+\hspace{1em} & (0.125) & (0.190) & (0.194) & (0.156) & (0.196) & (0.219)\\
+\hspace{1em}Income above \$150,000 & 0.122 & 0.172 & 0.433* & 0.439* & 0.395* & 0.622**\\
+\hspace{1em} & (0.163) & (0.182) & (0.186) & (0.203) & (0.188) & (0.210)\\
+\hspace{1em}Education: college & 0.118 & 0.335+ & 0.273 & 0.180 & 0.472** & 0.254\\
+\hspace{1em} & (0.206) & (0.175) & (0.179) & (0.256) & (0.181) & (0.203)\\
+\hspace{1em}Education: university & 0.466* & 0.735*** & 0.529* & -0.124 & 1.396*** & 0.802***\\
+\hspace{1em} & (0.192) & (0.204) & (0.209) & (0.239) & (0.211) & (0.236)\\
+\hspace{1em}Gender (1 = women):Age & 0.018** & 0.021** & 0.020** & -0.009 & 0.017* & 0.039***\\
+\hspace{1em} & (0.006) & (0.007) & (0.007) & (0.007) & (0.007) & (0.008)\\
+\hspace{1em}Gender (1 = women):Ethnicity (1 = white) & -1.181+ & -1.872* & 0.775 & 0.863 & 1.764* & 1.551+\\
+\hspace{1em} & (0.657) & (0.802) & (0.821) & (0.819) & (0.828) & (0.926)\\
+\hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & 1575\\
+\hspace{1em}R2 & 0.076 & 0.129 & 0.053 & 0.017 & 0.128 & 0.065\\
+\hspace{1em}R2 Adj. & 0.069 & 0.122 & 0.046 & 0.010 & 0.121 & 0.057\\
+\hspace{1em}Log.Lik. & -3232.057 & -39061.721 & -39098.369 & -3578.081 & -39112.301 & -39288.383\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Without controls: Ordinary least squares (OLS) regressions}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}With controls: OLS for Politics (general) and Law and Crime; Weighted least squares (WLS) for other regressions}\\
+\end{tabular}
+\end{table}
 
-\caption{Interest in topic by gender \label{tab:lmeInterestCCPIS}}
+In models with controls for socio-demographic variables and interaction terms for gender and ethnicity as well as gender and age, Table \ref{tab:olsInterestDg} shows some of the relationships found in models without controls remain significant while others lose significance. Self-reported political interest is not associated with being a man, and it is positively associated with being an older woman and marginally negatively associated with being a white woman. Women remain more likely to be interested in health care politics under these specifications, again, there is a positive association with being an older woman and a negative association with being a white woman. International affairs are positively associated with being a man in general, but there is again a positive association with being an older woman. Interest in law and crime remains unlinked with gender, while interest in partisan politics is again strongly associated with being a man --- also with a significant impact of being an older woman, however. The coefficients for interest in education politics are notable, as being a white woman and being an older woman are both positively related to the outcome, but the coefficient for gender is now negative, suggesting that men are expected to be more interested in education politics after controlling for interactions between gender, ethnicity and age.
+
+@fig-datagotchi inquires further into age trends in the evolution of interest in each of the topics, including gendered aspects of these age trends. Similar to @fig-ceswvsgssinterest, the gender gap in self-reported political interest diminishes among older respondents, as women tend to become more interested as they age. This trend of increased interest in politics among older women compared with younger ones can also be observed in interest in health care, international affairs, law and crime, and partisan politics. After age 50, men are no more likely than women to report being interested in partisan politics or international affairs, despite a significant gender gap among younger respondents.
+
+```{r}
+#| label: fig-datagotchi
+#| echo: false
+#| fig-cap: "Self-Reported Level of Interest in Various Topics by Age Among Canadian Adults, 2022 Datagotchi PES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender."
+knitr::include_graphics("_graphs/InterestAgeGenderDG.pdf")
+```
+
+Among Quebec men, there seems to be a general increase in the level of political interest among older respondents for general political interest, interest in health care and international affairs. Interest in law and crime seems to be mostly stable, while a downward trend is found for partisan politics. Large variations among older respondents can be due to smaller sample sizes. This decline in interest in partisan politics is difficult to explain. One possibility is that this is the result of lower levels of college attendance among men than women.
+
+Interest in the politics of education shows a unique trajectory, with a shape that resembles a cubic equation function for both women and men. One potential explanation for this trend is that education increases quickly between ages 25--40 as women and men become parents and care about the potential effects of education policy on their children. As children grow older, parents lose interest in education policy, but after retiring around age 65, women and men often become grandparents and start caring about the education of their grandchildren. While @campbellrosie2008 find that parenthood is associated with lower general political interest in the UK context, while @grechyna2023 find no statistically significant relationship, but none of these studies test specifically for interest in education politics.
+
+### Evolution of Political Interest Among Children
+
+What kinds of political topics are children and adolescents interested in? Are there gender differences in how interested they are in these topics? Does gender predict political interest in itself, or is it only a proxy for other variables? Data from the CCPIS is used to answer these questions. Table \ref{tab:lmeInterestCCPIS} shows the link between gender and interest in each of the topics among elementary and high school students. The upper part includes gender as the only predictor, while the lower part includes controls for socio-demographic variables and personality traits.
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender, CCPIS \label{tab:lmeInterestCCPIS}}
 \centering
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
@@ -188,7 +263,7 @@ What kinds of political topics are children and adolescents interested in? Are t
 \multicolumn{7}{l}{\textit{Without Controls}}\\
 \midrule \hspace{1em}(Intercept) & 4.579*** & 4.041*** & 5.724*** & 4.956*** & 4.219*** & 4.007***\\
 \hspace{1em} & (0.184) & (0.167) & (0.180) & (0.173) & (0.206) & (0.171)\\
-\hspace{1em}x1 & -0.434* & 0.128 & -0.980*** & 0.488* & -0.103 & -0.854***\\
+\hspace{1em}Gender (1 = girl) & -0.434* & 0.128 & -0.980*** & 0.488* & -0.103 & -0.854***\\
 \hspace{1em} & (0.207) & (0.197) & (0.229) & (0.231) & (0.223) & (0.232)\\
 \hspace{1em}SD (Intercept Class) & 0.651 & 0.542 & 0.473 & 0.377 & 0.771 & 0.344\\
 \hspace{1em}SD (Observations) & 2.499 & 2.397 & 2.802 & 2.837 & 2.701 & 2.855\\
@@ -232,11 +307,11 @@ What kinds of political topics are children and adolescents interested in? Are t
 \end{tabular}
 \end{table}
 
-In the upper half of the table, taking into account classroom fixed effects, boys generally report being more interested in politics than girls, but the gender gap is relatively minimal, standing at 0.43 for the 11-point political interest scale (*p*<0.05). Boys' interest in international affairs and partisan politics is higher than girls' (1-point and 0.85-point difference respectively; both *p*<0.001). This seems to be in line with the results among adult respondents. However, girls' interest in law and crime is also slightly higher (0.5 point, *p*<0.05). This result is more surprising given previous literature showing the contrary. Results for the other two topics, health care and education, are almost even between the genders, and not statistically significant, despite adult women usually reporting higher levels of interest in these two topics across studies.
+In the upper half of the table, taking into account classroom fixed effects, boys generally report being more interested in politics than girls, but the gender gap is relatively minimal, standing at 0.4 for the 11-point political interest scale (*p*<0.05). Boys' interest in international affairs and partisan politics is higher than girls' (1-point and 0.9-point difference respectively; both *p*<0.001). This seems to be in line with the results among adult respondents. However, girls' interest in law and crime is also slightly higher (0.5 point, *p*<0.05). This result is more surprising given previous literature showing the contrary. Yet, relationships for these three topics match those found among Datagotchi PES respondents. Interest in the other two topics, health care and education, are almost even between the genders. Coupled with Datagotchi PES data showing significant gaps for both of these topics only emerge after age 25, when women become more interested than men in both cases, this suggests socialization for these two topics may happen well into the adult age rather than during the formative years, while gender patterns for interest in partisan politics and international affairs emerge early and may fade after age 50. The experiences of several women as mothers and caregivers later in life might be the elements that shape the importance they start giving to both issues.
 
-However, in the lower half of the table, controlling for socio-demographic factors, all relationships between gender and interest disappear. It might be the case that girls are less interested in some of these topics by virtue of other socio-demographic characteristics, but there does not seem to be one other socio-demographic variable that reliably predicts interest in any of the topics. These multiple regression results might be tainted by some multicollinearity between ethnicity, immigrant status and language.
+However, when controlling for socio-demographic factors and personality traits and adding interactions for gender and age as well as gender and ethnicity, all relationships between gender and interest disappear, as the lower part of Table \ref{tab:lmeInterestCCPIS} shows. Moreover, none of the interaction terms are significant at the *p*<0.05 level. Yet, when interaction terms are removed but other control variables are kept, coefficients from the simple regression model remain significant except for general political interest, which marginally loses statistical significance.^[@fig-interestccpis in @sec-appendix4 shows the gender coefficient for two intermediate models, one with SES controls and one with SES and personality traits but no interactions.] These results may therefore be an artifact of high multicollinearity.
 
-@fig-interestyoungold re-analyzes those results for children aged 10--14 (*n*=200) and those aged 15--18 (*n*=446). Among younger students, the gender gap in self-reported political interest is 0.06/10 (not statistically significant). Among those aged 15--18, this gap grows to 0.53/10 (*p*<0.05). Notably, among both groups, both interest in international affairs and interest in partisan politics are higher among boys than girls, suggesting some gender differences in interests might take place before adolescence.
+@fig-interestyoungold re-analyzes those results for children aged 9--15 (*n*=277) and teenagers aged 16--18 (*n*=365). Among younger students, the gender gap in self-reported political interest is 0.1/10 (not statistically significant). Among those aged 16--18, this gap grows to 0.5/10 (*p*<0.05). Notably, among both groups, both interest in international affairs and interest in partisan politics are higher among boys than girls, suggesting some gender differences in interests may already exist before adolescence.
 
 ```{r}
 #| label: fig-interestyoungold
@@ -245,87 +320,13 @@ However, in the lower half of the table, controlling for socio-demographic facto
 knitr::include_graphics("_graphs/GenderCCPISYO.pdf")
 ```
 
-For health care and education, results among Canadian children --- which show no gender gap --- might come as a surprise given the number of studies that show adult women report being more interested in the political aspects of these topics in various contexts. Still, the experiences of several women as mothers and caregivers later in life might be the elements that shape the importance they give to both issues.
-
-@fig-political shows how students view each of the 10 concrete issues associated with the 5 topics as political or non-political. As expected, the two issues related to partisan politics are almost universally seen as political, followed by issues related to international affairs. These are the two topics for which boys report being more interested. Findings for issues related to the other three topics are perceived by 25% to 60% of students as being non-political --- substantially large proportions. @campbellrosie2008 and @ferrin2020 had similarly found that issues related to partisan politics were seen as more political than those related to other topics. Visibly, this trend also applies to Canadian children, which suggests that topics which are seen as political are also those for which men typically report a higher degree of interest.
+@fig-political shows how students view each of the 10 concrete issues associated with the 5 topics as political or non-political. As expected, the two issues related to partisan politics are almost universally seen as political, followed by issues related to international affairs. These are the two topics for which boys report being more interested. Issues related to the other three topics are perceived by 25% to 60% of students as being non-political --- substantially large proportions. @campbellrosie2008 and @ferrin2020 had similarly found that issues related to partisan politics were seen as more political than those related to other topics. Visibly, this trend also applies to Canadian children, which suggests that topics which are seen as political are also those for which men typically report a higher degree of interest.
 
 ```{r}
 #| label: fig-political
 #| echo: false
 #| fig-cap: "Views of Topics as Political or Non-Political By Canadian Students, 2022 CCPIS"
 knitr::include_graphics("_graphs/CCPISPolitical.pdf")
-```
-
-### Datagotchi PES
-
-How do these interests change when people reach adulthood? This question is best answered using Datagotchi PES data. As \ref{tab:olsInterestDg} shows, Quebec men generally report being more interested in politics than women. Men's interest in international affairs and partisan politics is also higher than women's (0.7-point and 0.6-point difference respectively; both *p*<0.001). Men's interest in law and order is also slightly higher (0.2 point, *p*<0.1). However, women are significantly more interested in health care and education (0.7-point and 0.5-point difference respectively, both *p*<0.001) than men are.^[@fig-interestdg in @sec-appendix4 shows the gender coefficient for an intermediate model with SES controls but no interactions. Before adding interactions between (i) gender and age, (ii) gender and ethnicity, and (iii) age squared, coefficients from the simple regression model remain significant.]
-
-\begin{table}
-
-\caption{Interest in topic by gender \label{tab:olsInterestDg}}
-\centering
-\fontsize{6}{8}\selectfont
-\begin{tabular}[t]{lcccccc}
-\toprule
-  & Politics (general) & Health care & International affairs & Law and crime & Education & Partisan politics\\
-\midrule
-\addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{Without Controls}}\\
-\midrule \hspace{1em}(Intercept) & 7.736*** & 6.473*** & 7.517*** & 5.408*** & 6.607*** & 6.342***\\
-\hspace{1em} & (0.059) & (0.070) & (0.066) & (0.073) & (0.070) & (0.077)\\
-\hspace{1em}Gender (1 = women) & -0.828*** & 0.706*** & -0.653*** & 0.184+ & 0.530*** & -0.565***\\
-\hspace{1em} & (0.090) & (0.108) & (0.102) & (0.112) & (0.107) & (0.119)\\
-\hspace{1em}Num.Obs. & 1800 & 1800 & 1800 & 1800 & 1800 & \vphantom{1} 1800\\
-\hspace{1em}R2 & 0.045 & 0.023 & 0.022 & 0.002 & 0.013 & 0.012\\
-\hspace{1em}R2 Adj. & 0.044 & 0.023 & 0.022 & 0.001 & 0.013 & 0.012\\
-\hspace{1em}Log.Lik. & -3702.748 & -4020.146 & -3922.656 & -4088.971 & -4010.567 & -4202.267\\
-\hspace{1em}F & 83.948 & 42.885 & 40.871 & 2.710 & 24.381 & 22.384\\
-\addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{With Controls}}\\
-\midrule \hspace{1em}(Intercept) & 7.619*** & 4.478*** & 7.088*** & 5.854*** & 6.720*** & 8.522***\\
-\hspace{1em} & (0.732) & (0.711) & (0.748) & (0.912) & (0.773) & (0.844)\\
-\hspace{1em}Gender (1 = women) & -0.557 & 0.426 & -1.415* & 0.426 & -3.230*** & -3.960***\\
-\hspace{1em} & (0.627) & (0.655) & (0.690) & (0.781) & (0.712) & (0.778)\\
-\hspace{1em}Age & -0.034+ & 0.012 & -0.046* & 0.014 & -0.066** & -0.162***\\
-\hspace{1em} & (0.019) & (0.020) & (0.021) & (0.024) & (0.021) & (0.023)\\
-\hspace{1em}Age squared & 0.000* & 0.000 & 0.001** & 0.000 & 0.001** & 0.002***\\
-\hspace{1em} & (0.000) & (0.000) & (0.000) & (0.000) & (0.000) & (0.000)\\
-\hspace{1em}Ethnicity (1 = white) & 0.496 & -0.958* & -0.886+ & -0.936+ & -1.023* & -0.018\\
-\hspace{1em} & (0.443) & (0.455) & (0.478) & (0.552) & (0.494) & (0.540)\\
-\hspace{1em}Immigrant & -0.354+ & 0.904*** & 0.448+ & -0.463+ & 0.694* & 0.105\\
-\hspace{1em} & (0.207) & (0.248) & (0.261) & (0.258) & (0.269) & (0.294)\\
-\hspace{1em}French spoken at home & 0.163 & 0.437* & 0.426* & -0.058 & 0.387* & 0.537*\\
-\hspace{1em} & (0.292) & (0.181) & (0.190) & (0.363) & (0.197) & (0.215)\\
-\hspace{1em}Income between \$60,000 and \$150,000 & 0.054 & 0.365* & 0.205 & 0.263+ & 0.204 & 1.050***\\
-\hspace{1em} & (0.123) & (0.164) & (0.173) & (0.154) & (0.179) & (0.195)\\
-\hspace{1em}Income above \$150,000 & 0.232 & 0.252+ & 0.337* & 0.482** & 0.329* & 0.641***\\
-\hspace{1em} & (0.143) & (0.135) & (0.142) & (0.178) & (0.146) & (0.160)\\
-\hspace{1em}Education: college & 0.164 & 0.341* & 0.471** & 0.201 & 0.510** & 0.479**\\
-\hspace{1em} & (0.199) & (0.146) & (0.154) & (0.248) & (0.159) & (0.174)\\
-\hspace{1em}Education: university & 0.485** & 0.682*** & 0.561** & -0.121 & 1.382*** & 0.922***\\
-\hspace{1em} & (0.185) & (0.170) & (0.179) & (0.230) & (0.184) & (0.201)\\
-\hspace{1em}Gender (1 = women):Age & 0.018** & 0.025*** & 0.019** & -0.011 & 0.013+ & 0.039***\\
-\hspace{1em} & (0.006) & (0.006) & (0.006) & (0.007) & (0.007) & (0.007)\\
-\hspace{1em}Gender (1 = women):Ethnicity (1 = white) & -1.119+ & -0.940 & 0.191 & 0.369 & 3.320*** & 1.699*\\
-\hspace{1em} & (0.592) & (0.622) & (0.654) & (0.737) & (0.676) & (0.738)\\
-\hspace{1em}Num.Obs. & 1800 & 1800 & 1800 & 1800 & 1800 & 1800\\
-\hspace{1em}R2 & 0.071 & 0.140 & 0.064 & 0.019 & 0.098 & 0.065\\
-\hspace{1em}R2 Adj. & 0.065 & 0.134 & 0.058 & 0.012 & 0.092 & 0.059\\
-\hspace{1em}Log.Lik. & -3677.474 & -10956.607 & -11048.224 & -4073.506 & -11106.402 & -11265.697\\
-\bottomrule
-\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Without controls: Ordinary least squares (OLS) regressions}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}With controls: OLS for Politics (general) and Law and Crime; Weighted least squares (WLS) for other regressions}\\
-\end{tabular}
-\end{table}
-
-@fig-datagotchi inquires about any time trends in the evolution of interest in each of the topics, including gendered aspects. No clear gender pattern emerges, beyond the finding that the gap in general political interest becomes statistically insignificant among Quebeckers aged 75 and over.
-
-```{r}
-#| label: fig-datagotchi
-#| echo: false
-#| fig-cap: "Self-Reported Level of Interest in Various Topics by Age Among Canadian Adults, 2022 Datagotchi PES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. No weights are currently applied."
-knitr::include_graphics("_graphs/InterestAgeGenderDG.pdf")
 ```
 
 ## Discussion
