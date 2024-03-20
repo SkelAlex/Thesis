@@ -1627,315 +1627,345 @@ knitr::include_graphics("_graphs/GenderDG.pdf")
 knitr::include_graphics("_graphs/GenderCCPIS.pdf")
 ```
 
-# Political Interest Transmission by Parents (Control Variables Added) {#sec-appendix5}
+# Political Interest Transmission (With Interaction Terms, Boys and Girls Together) {#sec-appendix5}
 
-## Topics Parents Discuss the Most
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most (With Interactions) \label{tab:lmeParentCtrlInterac}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+ & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+(Intercept) & 7.161 & 10.839 & 11.161 & 3.305 & 19.727* & 24.890\\
+\hspace{1em} & (5.906) & (9.560) & (11.141) & (10.783) & (10.011) & (15.098)\\
+Mother discusses topic more than father & -0.417*** & -0.144 & -0.096 & -0.114 & 0.032 & 0.117\\
+\hspace{1em} & (0.121) & (0.299) & (0.294) & (0.290) & (0.293) & (0.340)\\
+Gender (1 = girl) & 0.007 & 0.169 & -3.255 & 2.377 & -0.679 & -0.157\\
+\hspace{1em} & (1.290) & (2.397) & (2.809) & (2.879) & (2.586) & (3.354)\\
+Age & -0.616 & -1.336 & -0.909 & 0.034 & -2.600+ & -3.335\\
+\hspace{1em} & (0.798) & (1.305) & (1.506) & (1.473) & (1.362) & (2.048)\\
+Age squared & 0.024 & 0.052 & 0.027 & 0.006 & 0.096* & 0.114\\
+\hspace{1em} & (0.027) & (0.045) & (0.051) & (0.050) & (0.046) & (0.070)\\
+Ethnicity (1 = white) & 0.364+ & 0.156 & 1.034* & 0.046 & -0.073 & 0.663\\
+\hspace{1em} & (0.189) & (0.365) & (0.400) & (0.415) & (0.387) & (0.474)\\
+Immigrant & -0.225 & 0.165 & -0.745+ & -0.510 & 0.048 & -0.255\\
+\hspace{1em} & (0.194) & (0.367) & (0.416) & (0.429) & (0.392) & (0.492)\\
+English spoken at home & -0.395 & -0.198 & -0.741 & -0.793 & -0.041 & 0.308\\
+\hspace{1em} & (0.277) & (0.490) & (0.580) & (0.555) & (0.548) & (0.688)\\
+French spoken at home & 0.056 & 0.193 & -0.475 & -0.410 & 0.226 & 0.650\\
+\hspace{1em} & (0.166) & (0.315) & (0.348) & (0.360) & (0.335) & (0.425)\\
+Agency & 1.696*** & 1.495* & 1.492+ & 1.541+ & 1.125 & 3.676***\\
+\hspace{1em} & (0.387) & (0.719) & (0.833) & (0.858) & (0.779) & (1.006)\\
+Communality & 0.887* & 0.901 & 2.239* & -0.702 & 1.519+ & 0.702\\
+\hspace{1em} & (0.411) & (0.759) & (0.877) & (0.897) & (0.847) & (1.088)\\
+Gender (1 = girl):Age & 0.012 & 0.014 & 0.165 & -0.114 & 0.049 & -0.009\\
+\hspace{1em} & (0.082) & (0.153) & (0.178) & (0.183) & (0.164) & (0.212)\\
+Gender (1 = girl):Ethnicity (1 = white) & -0.712** & -0.441 & -0.828 & -0.357 & -0.396 & -0.895\\
+\hspace{1em} & (0.254) & (0.474) & (0.544) & (0.557) & (0.521) & (0.653)\\
+\hspace{1em}SD (Intercept Class) & 0.595 & 0.407 & 0.474 & 0.352 & 0.535 & 0.529\\
+\hspace{1em}SD (Observations) & 2.671 & 2.384 & 2.567 & 2.723 & 2.636 & 2.732\\
+\midrule
+\hspace{1em}Num.Obs. & 2036 & 445 & 400 & 412 & 454 & 325\\
+\hspace{1em}R2 Marg. & 0.035 & 0.045 & 0.110 & 0.029 & 0.052 & 0.108\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Reference Category for Language: Other languages spoken at home}\\
+\end{tabular}
+\end{table}
 
-Table: Interest in topic by gender of parent who discusses that topic the most {#tbl-lmeParent}
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with Role Models (With Interactions) \label{tab:lmeAgentsCtrlInterac}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+ & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+(Intercept) & -13.304 & -12.115 & -23.329 & 7.461 & 4.325 & 0.921\\
+\hspace{1em} & (9.414) & (17.197) & (16.302) & (17.065) & (17.518) & (18.381)\\
+Gender (1 = girl) & -2.392 & -6.739 & -3.920 & 7.129 & -5.966 & 0.149\\
+\hspace{1em} & (2.147) & (4.489) & (4.433) & (4.517) & (5.097) & (4.611)\\
+Topic most discussed with mother? & -0.218 & 0.990+ & 0.166 & -0.203 & -0.597 & 0.395\\
+\hspace{1em} & (0.299) & (0.555) & (0.938) & (1.334) & (0.557) & (1.516)\\
+Topic most discussed with father? & 0.810** & 1.197 & 0.099 & 0.998 & 0.105 & 2.149*\\
+\hspace{1em} & (0.301) & (1.239) & (0.525) & (0.627) & (0.698) & (0.986)\\
+Topic most discussed with female friends? & 0.695* & -0.220 & -0.696 & 2.627** & 1.850** & 1.758\\
+\hspace{1em} & (0.308) & (0.749) & (0.577) & (0.885) & (0.563) & (2.020)\\
+Topic most discussed with male friends? & 0.614+ & -2.922* & 0.606 & 0.490 & 0.150 & 2.794*\\
+\hspace{1em} & (0.323) & (1.169) & (0.544) & (0.697) & (0.717) & (1.363)\\
+Topic most discussed by teacher? & 0.357 & 1.292 & 1.500** & -1.045 & 0.022 & 0.160\\
+\hspace{1em} & (0.310) & (0.991) & (0.554) & (1.265) & (0.633) & (1.267)\\
+Topic most discussed by social media influencer? & 0.752* & 1.061 & 0.273 & 0.345 & 1.395 & -1.777\\
+\hspace{1em} & (0.304) & (0.660) & (0.521) & (0.711) & (1.095) & (1.996)\\
+Age & 2.047 & 2.055 & 3.808+ & -1.112 & -0.673 & 0.119\\
+\hspace{1em} & (1.299) & (2.398) & (2.272) & (2.378) & (2.402) & (2.563)\\
+Age squared & -0.064 & -0.067 & -0.133+ & 0.050 & 0.032 & 0.000\\
+\hspace{1em} & (0.044) & (0.083) & (0.079) & (0.082) & (0.083) & (0.089)\\
+Ethnicity (1 = white) & 0.134 & -0.708 & 0.544 & 0.371 & -0.326 & 0.758\\
+\hspace{1em} & (0.278) & (0.595) & (0.593) & (0.580) & (0.620) & (0.625)\\
+Immigrant & -0.635* & -0.111 & -1.200* & -0.796 & -0.203 & -0.887\\
+\hspace{1em} & (0.286) & (0.595) & (0.592) & (0.614) & (0.614) & (0.630)\\
+English spoken at home & 0.022 & 0.018 & -0.965 & -0.255 & 0.242 & 0.055\\
+\hspace{1em} & (0.381) & (0.755) & (0.711) & (0.734) & (0.776) & (0.780)\\
+French spoken at home & 0.409 & 0.200 & -0.405 & -0.054 & 0.051 & 0.416\\
+\hspace{1em} & (0.267) & (0.558) & (0.521) & (0.540) & (0.559) & (0.579)\\
+Agency & 1.266* & 0.237 & 2.510* & 2.235+ & 0.790 & 2.457+\\
+\hspace{1em} & (0.608) & (1.295) & (1.244) & (1.240) & (1.332) & (1.286)\\
+Communality & 1.530* & 1.449 & 1.395 & 1.552 & 4.254** & -0.512\\
+\hspace{1em} & (0.642) & (1.350) & (1.256) & (1.301) & (1.403) & (1.356)\\
+Gender (1 = girl):Topic\\
+most discussed with mother? & 0.941* & -0.730 & 0.518 & 1.814 & 2.596** & \\
+\hspace{1em} & (0.440) & (0.808) & (1.780) & (1.642) & (0.853) & \\
+Gender (1 = girl):Topic\\
+most discussed with father? & -0.349 & -0.844 & -0.201 & 1.097 & 0.538 & -2.226\\
+\hspace{1em} & (0.437) & (1.518) & (0.798) & (0.960) & (1.014) & (1.439)\\
+Gender (1 = girl):Topic\\
+most discussed with female friends? & -0.228 & 0.082 & 1.677+ & -2.825* & -1.482+ & 0.162\\
+\hspace{1em} & (0.448) & (1.024) & (0.922) & (1.163) & (0.840) & (3.374)\\
+Gender (1 = girl):Topic\\
+most discussed with male friends? & 0.026 & 2.112 & -0.685 & -1.074 & 0.072 & 0.433\\
+\hspace{1em} & (0.449) & (1.464) & (0.830) & (0.893) & (1.071) & (1.787)\\
+Gender (1 = girl):Topic\\
+most discussed by teacher? & -0.270 & -2.473 & -1.354 & 0.547 & 0.384 & 2.754+\\
+\hspace{1em} & (0.440) & (1.619) & (0.864) & (1.465) & (0.875) & (1.487)\\
+Gender (1 = girl):Topic\\
+most discussed by social media influencer? & 0.058 & 0.015 & -0.636 & 1.427 & -3.440* & 3.256\\
+\hspace{1em} & (0.437) & (0.965) & (0.799) & (1.000) & (1.475) & (2.538)\\
+Gender (1 = girl):Age & 0.109 & 0.392 & 0.235 & -0.429 & 0.251 & -0.073\\
+\hspace{1em} & (0.133) & (0.280) & (0.276) & (0.281) & (0.311) & (0.289)\\
+Gender (1 = girl):Ethnicity (1 = white) & -0.351 & 1.209 & -0.753 & -0.520 & 0.560 & -1.583+\\
+\hspace{1em} & (0.387) & (0.825) & (0.788) & (0.820) & (0.846) & (0.833)\\
+\hspace{1em}SD (Intercept Class) & 0.746 & 0.676 & 0.000 & 0.315 & 0.486 & 0.675\\
+\hspace{1em}SD (Observations) & 2.415 & 2.294 & 2.253 & 2.301 & 2.419 & 2.368\\
+\midrule
+\hspace{1em}Num.Obs. & 831 & 166 & 166 & 165 & 167 & 167\\
+\hspace{1em}R2 Marg. & 0.151 & 0.173 & 0.284 & 0.250 & 0.250 & 0.307\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Reference Category for Language: Other languages spoken at home}\\
+\end{tabular}
+\end{table}
 
-|                                    | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:-----------------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**             |             |                       |               |           |                   | 
-| (Intercept)                        |   4.631***  |        6.333***       |    5.504***   |  4.260*** |      4.601***     | 
-|                                    |   (0.379)   |        (0.251)        |    (0.222)    |  (0.340)  |      (0.286)      | 
-| Health care (1 = mother)           |    -0.411   |                       |               |           |                   | 
-|                                    |   (0.401)   |                       |               |           |                   | 
-| International affairs (1 = mother) |             |         -0.332        |               |           |                   | 
-|                                    |             |        (0.401)        |               |           |                   | 
-| Law and crime (1 = mother)         |             |                       |     -0.242    |           |                   | 
-|                                    |             |                       |    (0.381)    |           |                   | 
-| Education (1 = mother)             |             |                       |               |   0.286   |                   | 
-|                                    |             |                       |               |  (0.379)  |                   | 
-| Partisan politics (1 = mother)     |             |                       |               |           |       -0.182      | 
-|                                    |             |                       |               |           |      (0.480)      | 
-| SD (Intercept Class)               |    0.705    |         0.820         |     0.349     |   0.649   |       0.582       | 
-| SD (Observations)                  |    2.361    |         2.483         |     2.638     |   2.694   |       2.973       | 
-| Num.Obs.                           |     241     |          225          |      228      |    252    |        192        | 
-| R2 Marg.                           |    0.004    |         0.003         |     0.002     |   0.002   |       0.001       | 
-|:-----------------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls**            |             |                       |               |           |                   | 
-| (Intercept)                        |   4.138***  |        5.057***       |    5.652***   |  4.602*** |      3.449***     | 
-|                                    |   (0.424)   |        (0.240)        |    (0.265)    |  (0.423)  |      (0.279)      | 
-| Health care (1 = mother)           |    0.158    |                       |               |           |                   | 
-|                                    |   (0.442)   |                       |               |           |                   | 
-| International affairs (1 = mother) |             |         -0.118        |               |           |                   | 
-|                                    |             |        (0.415)        |               |           |                   | 
-| Law and crime (1 = mother)         |             |                       |     0.047     |           |                   | 
-|                                    |             |                       |    (0.397)    |           |                   | 
-| Education (1 = mother)             |             |                       |               |   -0.434  |                   | 
-|                                    |             |                       |               |  (0.445)  |                   | 
-| Partisan politics (1 = mother)     |             |                       |               |           |       0.110       | 
-|                                    |             |                       |               |           |      (0.475)      | 
-| SD (Intercept Class)               |    0.665    |         0.345         |     0.492     |   0.849   |       0.360       | 
-| SD (Observations)                  |    2.376    |         2.687         |     2.777     |   2.599   |       2.748       | 
-| Num.Obs.                           |     237     |          199          |      212      |    228    |        156        | 
-| R2 Marg.                           |    0.001    |         0.000         |     0.000     |   0.004   |       0.000       | 
-|:-----------------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
+```{r}
+#| label: fig-mother
+#| echo: false
+#| fig-cap: "Interest in topic most often discussed with one's mother"
+knitr::include_graphics("_graphs/MotherDiscuss.pdf")
+```
 
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
+```{r}
+#| label: fig-father
+#| echo: false
+#| fig-cap: "Interest in topic most often discussed with one's father"
+knitr::include_graphics("_graphs/FatherDiscuss.pdf")
+```
 
-__Note:__
-^^ Multilevel regression with random effects at the classroom level
+# Political Interest Transmission by Parents (Without Control Variables) {#sec-appendix6}
 
-## Topics Most Often Discussed with Mothers
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most \label{tab:lmeParent}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 5.289*** & 4.631*** & 6.333*** & 5.504*** & 4.260*** & 4.601***\\
+\hspace{1em} & (0.180) & (0.379) & (0.251) & (0.222) & (0.340) & (0.286)\\
+\hspace{1em}Mother discusses topic more than father & -0.665*** & -0.411 & -0.332 & -0.242 & 0.286 & -0.182\\
+\hspace{1em} & (0.161) & (0.401) & (0.401) & (0.381) & (0.379) & (0.480)\\
+\hspace{1em}SD (Intercept Class) & 0.763 & 0.705 & 0.820 & 0.349 & 0.649 & 0.582\\
+\hspace{1em}SD (Observations) & 2.671 & 2.361 & 2.483 & 2.638 & 2.694 & 2.973\\
+\hspace{1em}Num.Obs. & 1138 & 241 & 225 & 228 & 252 & 192\\
+\hspace{1em}R2 Marg. & 0.014 & 0.004 & 0.003 & 0.002 & 0.002 & 0.001\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.749*** & 4.138*** & 5.057*** & 5.652*** & 4.602*** & 3.449***\\
+\hspace{1em} & (0.174) & (0.424) & (0.240) & (0.265) & (0.423) & (0.279)\\
+\hspace{1em}Mother discusses topic more than father & -0.254 & 0.158 & -0.118 & 0.047 & -0.434 & 0.110\\
+\hspace{1em} & (0.173) & (0.442) & (0.415) & (0.397) & (0.445) & (0.475)\\
+\hspace{1em}SD (Intercept Class) & 0.645 & 0.665 & 0.345 & 0.492 & 0.849 & 0.360\\
+\hspace{1em}SD (Observations) & 2.703 & 2.376 & 2.687 & 2.777 & 2.599 & 2.748\\
+\hspace{1em}Num.Obs. & 1032 & 237 & 199 & 212 & 228 & 156\\
+\hspace{1em}R2 Marg. & 0.002 & 0.001 & 0.000 & 0.000 & 0.004 & 0.000\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
 
-Table: Interest in topic most often discussed with one's mother {#tbl-lmeMother}
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with One's Mother \label{tab:lmeMother}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 4.810*** & 4.059*** & 5.981*** & 5.091*** & 4.372*** & 4.139***\\
+\hspace{1em} & (0.154) & (0.241) & (0.211) & (0.173) & (0.261) & (0.199)\\
+\hspace{1em}Topic most discussed with mother? & -0.009 & 0.391 & 1.087 & 1.731* & 0.223 & 1.548\\
+\hspace{1em} & (0.190) & (0.310) & (0.726) & (0.675) & (0.338) & (1.231)\\
+\hspace{1em}SD (Intercept Class) & 0.693 & 0.757 & 0.642 & 0.149 & 0.614 & 0.388\\
+\hspace{1em}SD (Observations) & 2.767 & 2.398 & 2.690 & 2.689 & 2.717 & 2.948\\
+\hspace{1em}Num.Obs. & 1320 & 262 & 265 & 265 & 264 & 264\\
+\hspace{1em}R2 Marg. & 0.000 & 0.006 & 0.008 & 0.024 & 0.002 & 0.006\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.215*** & 4.014*** & 4.735*** & 5.160*** & 3.802*** & 3.099***\\
+\hspace{1em} & (0.139) & (0.221) & (0.215) & (0.189) & (0.273) & (0.168)\\
+\hspace{1em}Topic most discussed with mother? & 0.813*** & 0.336 & 1.215+ & 3.145*** & 0.893** & 2.901+\\
+\hspace{1em} & (0.191) & (0.314) & (0.636) & (0.616) & (0.336) & (1.553)\\
+\hspace{1em}SD (Intercept Class) & 0.605 & 0.586 & 0.704 & 0.284 & 0.915 & 0.000\\
+\hspace{1em}SD (Observations) & 2.721 & 2.384 & 2.597 & 2.749 & 2.524 & 2.674\\
+\hspace{1em}Num.Obs. & 1277 & 258 & 255 & 254 & 255 & 255\\
+\hspace{1em}R2 Marg. & 0.013 & 0.004 & 0.014 & 0.093 & 0.027 & 0.014\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
 
-|                         | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**  |             |                       |               |           |                   | 
-| (Intercept)             |   4.093***  |        5.981***       |    5.077***   |  4.339*** |      4.210***     | 
-|                         |   (0.227)   |        (0.208)        |    (0.167)    |  (0.249)  |      (0.207)      | 
-| Health care             |    0.355    |                       |               |           |                   | 
-|                         |   (0.303)   |                       |               |           |                   | 
-| International affairs   |             |         1.113         |               |           |                   | 
-|                         |             |        (0.733)        |               |           |                   | 
-| Law and crime           |             |                       |     1.747*    |           |                   | 
-|                         |             |                       |    (0.677)    |           |                   | 
-| Education               |             |                       |               |   0.253   |                   | 
-|                         |             |                       |               |  (0.335)  |                   | 
-| Partisan politics       |             |                       |               |           |       1.519       | 
-|                         |             |                       |               |           |      (1.231)      | 
-| SD (Intercept Class)    |    0.706    |         0.631         |     0.000     |   0.567   |       0.537       | 
-| SD (Observations)       |    2.377    |         2.722         |     2.706     |   2.744   |       2.931       | 
-| Num.Obs.                |     275     |          277          |      278      |    277    |        277        | 
-| R2 Marg.                |    0.005    |         0.008         |     0.023     |   0.002   |       0.005       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls** |             |                       |               |           |                   | 
-| (Intercept)             |   4.046***  |        4.739***       |    5.226***   |  3.834*** |      3.136***     | 
-|                         |   (0.225)   |        (0.202)        |    (0.196)    |  (0.277)  |      (0.167)      | 
-| Health care             |    0.278    |                       |               |           |                   | 
-|                         |   (0.310)   |                       |               |           |                   | 
-| International affairs   |             |         1.226+        |               |           |                   | 
-|                         |             |        (0.644)        |               |           |                   | 
-| Law and crime           |             |                       |    3.057***   |           |                   | 
-|                         |             |                       |    (0.620)    |           |                   | 
-| Education               |             |                       |               |  0.881**  |                   | 
-|                         |             |                       |               |  (0.338)  |                   | 
-| Partisan politics       |             |                       |               |           |       2.864+      | 
-|                         |             |                       |               |           |      (1.579)      | 
-| SD (Intercept Class)    |    0.691    |         0.590         |     0.438     |   0.974   |       0.000       | 
-| SD (Observations)       |    2.370    |         2.651         |     2.761     |   2.579   |       2.719       | 
-| Num.Obs.                |     270     |          267          |      265      |    267    |        267        | 
-| R2 Marg.                |    0.003    |         0.013         |     0.084     |   0.024   |       0.012       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with One's Father \label{tab:lmeFather}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 4.678*** & 4.294*** & 5.883*** & 5.078*** & 4.488*** & 4.056***\\
+\hspace{1em} & (0.150) & (0.212) & (0.228) & (0.185) & (0.230) & (0.219)\\
+\hspace{1em}Topic most discussed with father? & 0.929*** & -0.227 & 0.504 & 0.922* & 0.025 & 1.960**\\
+\hspace{1em} & (0.190) & (0.512) & (0.346) & (0.425) & (0.409) & (0.645)\\
+\hspace{1em}SD (Intercept Class) & 0.659 & 0.722 & 0.379 & 0.000 & 0.613 & 0.568\\
+\hspace{1em}SD (Observations) & 2.704 & 2.376 & 2.672 & 2.652 & 2.698 & 2.841\\
+\hspace{1em}Num.Obs. & 1262 & 250 & 254 & 253 & 253 & 252\\
+\hspace{1em}R2 Marg. & 0.018 & 0.001 & 0.008 & 0.018 & 0.000 & 0.035\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.188*** & 4.109*** & 4.796*** & 5.124*** & 4.030*** & 3.137***\\
+\hspace{1em} & (0.161) & (0.216) & (0.248) & (0.203) & (0.266) & (0.206)\\
+\hspace{1em}Topic most discussed with father? & 0.616** & 0.341 & 0.028 & 1.652** & 0.060 & 0.291\\
+\hspace{1em} & (0.199) & (0.449) & (0.377) & (0.507) & (0.397) & (0.644)\\
+\hspace{1em}SD (Intercept Class) & 0.753 & 0.733 & 0.634 & 0.177 & 0.959 & 0.502\\
+\hspace{1em}SD (Observations) & 2.690 & 2.335 & 2.660 & 2.790 & 2.536 & 2.650\\
+\hspace{1em}Num.Obs. & 1154 & 233 & 230 & 230 & 231 & 230\\
+\hspace{1em}R2 Marg. & 0.008 & 0.002 & 0.000 & 0.044 & 0.000 & 0.001\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
 
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
+```{r}
+#| label: fig-discussparentyo
+#| echo: false
+#| fig-cap: "Interest in topics by gender, age and discussion with parents"
+knitr::include_graphics("_graphs/DiscussParentYO.pdf")
+```
 
-__Note:__
-^^ Multilevel regression with random effects at the classroom level
+# Political Interest Transmission by Peers (Without Control Variables) {#sec-appendix7}
 
-## Topics Most Often Discussed with Fathers
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with one's Female Friends \label{tab:lmeFemaleFriends}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 4.929*** & 4.474*** & 6.297*** & 5.068*** & 4.459*** & 4.576***\\
+\hspace{1em} & (0.163) & (0.273) & (0.242) & (0.250) & (0.316) & (0.250)\\
+\hspace{1em}Topic most discussed with female friends? & 0.541* & -0.078 & 0.267 & 1.605* & 0.752 & -1.114\\
+\hspace{1em} & (0.245) & (0.547) & (0.486) & (0.659) & (0.458) & (1.127)\\
+\hspace{1em}SD (Intercept Class) & 0.643 & 0.745 & 0.034 & 0.625 & 0.638 & 0.400\\
+\hspace{1em}SD (Observations) & 2.750 & 2.568 & 2.630 & 2.564 & 2.756 & 2.896\\
+\hspace{1em}Num.Obs. & 783 & 155 & 157 & 157 & 157 & 157\\
+\hspace{1em}R2 Marg. & 0.006 & 0.000 & 0.002 & 0.036 & 0.017 & 0.006\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.370*** & 4.246*** & 4.687*** & 5.477*** & 4.249*** & 3.376***\\
+\hspace{1em} & (0.155) & (0.268) & (0.238) & (0.251) & (0.296) & (0.201)\\
+\hspace{1em}Topic most discussed with female friends? & 0.902*** & 0.151 & 1.195* & 1.085* & 0.274 & 4.624**\\
+\hspace{1em} & (0.223) & (0.423) & (0.533) & (0.511) & (0.400) & (1.570)\\
+\hspace{1em}SD (Intercept Class) & 0.647 & 1.010 & 0.567 & 0.478 & 0.946 & 0.000\\
+\hspace{1em}SD (Observations) & 2.687 & 2.214 & 2.616 & 2.788 & 2.506 & 2.698\\
+\hspace{1em}Num.Obs. & 914 & 183 & 182 & 181 & 184 & 184\\
+\hspace{1em}R2 Marg. & 0.017 & 0.001 & 0.027 & 0.024 & 0.002 & 0.045\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
 
-Table: Interest in topic most often discussed with one's father {#tbl-lmeFather}
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with One's Male Friends \label{tab:lmeMaleFriends}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 4.615*** & 4.432*** & 5.474*** & 5.023*** & 4.449*** & 4.175***\\
+\hspace{1em} & (0.155) & (0.232) & (0.239) & (0.197) & (0.230) & (0.239)\\
+\hspace{1em}Topic most discussed with male friends? & 1.541*** & -1.111+ & 1.586*** & 1.503*** & 0.626 & 1.509+\\
+\hspace{1em} & (0.198) & (0.669) & (0.356) & (0.397) & (0.443) & (0.810)\\
+\hspace{1em}SD (Intercept Class) & 0.680 & 0.860 & 0.301 & 0.000 & 0.528 & 0.685\\
+\hspace{1em}SD (Observations) & 2.701 & 2.365 & 2.673 & 2.604 & 2.743 & 2.900\\
+\hspace{1em}Num.Obs. & 1158 & 230 & 233 & 232 & 232 & 231\\
+\hspace{1em}R2 Marg. & 0.047 & 0.011 & 0.079 & 0.058 & 0.008 & 0.014\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.516*** & 4.387*** & 5.133*** & 5.876*** & 4.313*** & 3.592***\\
+\hspace{1em} & (0.167) & (0.211) & (0.298) & (0.293) & (0.289) & (0.231)\\
+\hspace{1em}Topic most discussed with male friends? & 0.944*** & 0.070 & 0.871+ & -0.343 & 0.638 & 2.033*\\
+\hspace{1em} & (0.242) & (0.656) & (0.512) & (0.462) & (0.515) & (1.000)\\
+\hspace{1em}SD (Intercept Class) & 0.691 & 0.410 & 0.858 & 0.000 & 0.961 & 0.000\\
+\hspace{1em}SD (Observations) & 2.646 & 2.297 & 2.595 & 2.768 & 2.444 & 2.751\\
+\hspace{1em}Num.Obs. & 753 & 153 & 149 & 149 & 152 & 150\\
+\hspace{1em}R2 Marg. & 0.019 & 0.000 & 0.019 & 0.004 & 0.010 & 0.027\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
 
-|                         | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**  |             |                       |               |           |                   | 
-| (Intercept)             |   4.275***  |        5.838***       |    4.987***   |  4.479*** |      4.110***     | 
-|                         |   (0.194)   |        (0.215)        |    (0.175)    |  (0.219)  |      (0.215)      | 
-| Health care             |    -0.206   |                       |               |           |                   | 
-|                         |   (0.499)   |                       |               |           |                   | 
-| International affairs   |             |         0.557         |               |           |                   | 
-|                         |             |        (0.343)        |               |           |                   | 
-| Law and crime           |             |                       |     1.013*    |           |                   | 
-|                         |             |                       |    (0.424)    |           |                   | 
-| Education               |             |                       |               |   0.037   |                   | 
-|                         |             |                       |               |  (0.405)  |                   | 
-| Partisan politics       |             |                       |               |           |      1.887**      | 
-|                         |             |                       |               |           |      (0.644)      | 
-| SD (Intercept Class)    |    0.650    |         0.370         |     0.000     |   0.614   |       0.626       | 
-| SD (Observations)       |    2.336    |         2.730         |     2.677     |   2.715   |       2.849       | 
-| Num.Obs.                |     278     |          281          |      281      |    281    |        280        | 
-| R2 Marg.                |    0.001    |         0.009         |     0.020     |   0.000   |       0.030       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among girls** |             |                       |               |           |                   | 
-| (Intercept)             |   4.057***  |        4.816***       |    5.213***   |  4.052*** |      3.167***     | 
-|                         |   (0.205)   |        (0.238)        |    (0.214)    |  (0.261)  |      (0.185)      | 
-| Health care             |    0.383    |                       |               |           |                   | 
-|                         |   (0.444)   |                       |               |           |                   | 
-| International affairs   |             |         -0.018        |               |           |                   | 
-|                         |             |        (0.371)        |               |           |                   | 
-| Law and crime           |             |                       |    1.559**    |           |                   | 
-|                         |             |                       |    (0.507)    |           |                   | 
-| Education               |             |                       |               |   0.036   |                   | 
-|                         |             |                       |               |  (0.395)  |                   | 
-| Partisan politics       |             |                       |               |           |       0.199       | 
-|                         |             |                       |               |           |      (0.653)      | 
-| SD (Intercept Class)    |    0.704    |         0.674         |     0.537     |   0.994   |       0.290       | 
-| SD (Observations)       |    2.341    |         2.678         |     2.787     |   2.578   |       2.724       | 
-| Num.Obs.                |     259     |          257          |      256      |    257    |        257        | 
-| R2 Marg.                |    0.003    |         0.000         |     0.035     |   0.000   |       0.000       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
-
-__Note:__
-^^ Multilevel regression with random effects at the classroom level
-
-# Political Interest Transmission by Peers (Control Variables Added) {#sec-appendix6}
-
-## Topics Most Often Discussed with Female Friends
-
-Table: Interest in topic most often discussed with one's female friends {#tbl-lmeFemaleFriendsAlt}
-
-|                         | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**  |             |                       |               |           |                   | 
-| (Intercept)             |    -0.009   |         13.435        |     13.722    |   -2.720  |      -17.730      | 
-|                         |   (18.237)  |        (17.524)       |    (16.447)   |  (18.508) |      (19.181)     | 
-| Health care             |    -0.488   |                       |               |           |                   | 
-|                         |   (0.645)   |                       |               |           |                   | 
-| Age                     |    -0.054   |         -1.319        |     -1.903    |   -0.224  |       2.666       | 
-|                         |   (2.535)   |        (2.448)        |    (2.294)    |  (2.572)  |      (2.679)      | 
-| Age squared             |    0.004    |         0.043         |     0.065     |   0.020   |       -0.094      | 
-|                         |   (0.088)   |        (0.085)        |    (0.080)    |  (0.089)  |      (0.093)      | 
-| Race (1 = white)        |    -0.162   |         0.796         |     -0.178    |   -0.516  |       0.345       | 
-|                         |   (0.547)   |        (0.565)        |    (0.515)    |  (0.540)  |      (0.612)      | 
-| Immigrant               |    -1.125   |         -1.352        |     -0.092    |   -1.278  |       -1.028      | 
-|                         |   (0.839)   |        (0.846)        |    (0.780)    |  (0.835)  |      (0.922)      | 
-| English spoken at home  |    -0.439   |         -1.140        |     -0.657    |   1.554   |       0.819       | 
-|                         |   (1.320)   |        (1.283)        |    (1.194)    |  (1.327)  |      (1.403)      | 
-| French spoken at home   |    0.370    |         -0.534        |     0.262     |   0.803   |       1.229       | 
-|                         |   (0.802)   |        (0.799)        |    (0.740)    |  (0.801)  |      (0.874)      | 
-| Agency                  |    4.059*   |         1.161         |     3.824*    |   2.434   |       2.181       | 
-|                         |   (1.706)   |        (1.688)        |    (1.536)    |  (1.643)  |      (1.825)      | 
-| Communality             |    2.593    |         3.612*        |     3.847*    |  5.945*** |       2.040       | 
-|                         |   (1.687)   |        (1.662)        |    (1.523)    |  (1.665)  |      (1.799)      | 
-| International affairs   |             |         0.168         |               |           |                   | 
-|                         |             |        (0.553)        |               |           |                   | 
-| Law and crime           |             |                       |     1.522*    |           |                   | 
-|                         |             |                       |    (0.670)    |           |                   | 
-| Education               |             |                       |               |  1.297**  |                   | 
-|                         |             |                       |               |  (0.479)  |                   | 
-| Partisan politics       |             |                       |               |           |       0.172       | 
-|                         |             |                       |               |           |      (1.256)      | 
-| **Results among girls** |             |                       |               |           |                   | 
-| SD (Intercept Class)    |    0.801    |         0.000         |     0.439     |   1.059   |       0.000       | 
-| SD (Observations)       |    2.397    |         2.503         |     2.272     |   2.347   |       2.740       | 
-| Num.Obs.                |     116     |          116          |      116      |    116    |        116        | 
-| R2 Marg.                |    0.085    |         0.096         |     0.161     |   0.230   |       0.094       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| (Intercept)             |    -7.187   |         12.921        |     -8.833    |   -6.657  |      35.292*      | 
-|                         |   (13.199)  |        (14.961)       |    (16.039)   |  (14.911) |      (14.656)     | 
-| Health care             |    0.303    |                       |               |           |                   | 
-|                         |   (0.466)   |                       |               |           |                   | 
-| Age                     |    1.111    |         -1.313        |     1.865     |   1.137   |      -4.333*      | 
-|                         |   (1.843)   |        (2.093)        |    (2.249)    |  (2.077)  |      (2.046)      | 
-| Age squared             |    -0.027   |         0.046         |     -0.060    |   -0.028  |       0.146*      | 
-|                         |   (0.064)   |        (0.073)        |    (0.078)    |  (0.072)  |      (0.071)      | 
-| Race (1 = white)        |    0.261    |         0.184         |     -0.455    |   -0.038  |       -0.141      | 
-|                         |   (0.465)   |        (0.526)        |    (0.547)    |  (0.515)  |      (0.538)      | 
-| Immigrant               |    -0.337   |         -1.058        |    -2.367**   |   0.426   |       -0.220      | 
-|                         |   (0.634)   |        (0.740)        |    (0.760)    |  (0.697)  |      (0.749)      | 
-| English spoken at home  |    -0.109   |        -1.613+        |     -0.934    |   0.559   |       -0.342      | 
-|                         |   (0.771)   |        (0.850)        |    (0.902)    |  (0.868)  |      (0.841)      | 
-| French spoken at home   |    0.061    |         -0.397        |     -0.362    |   0.888   |       -0.036      | 
-|                         |   (0.541)   |        (0.628)        |    (0.643)    |  (0.593)  |      (0.640)      | 
-| Agency                  |    -0.522   |         1.366         |     2.103     |   -0.336  |       1.597       | 
-|                         |   (1.331)   |        (1.538)        |    (1.561)    |  (1.458)  |      (1.580)      | 
-| Communality             |    1.514    |         1.023         |     -0.048    |   -0.279  |       -1.041      | 
-|                         |   (1.377)   |        (1.551)        |    (1.616)    |  (1.523)  |      (1.600)      | 
-| International affairs   |             |        1.813**        |               |           |                   | 
-|                         |             |        (0.639)        |               |           |                   | 
-| Law and crime           |             |                       |     0.522     |           |                   | 
-|                         |             |                       |    (0.568)    |           |                   | 
-| Education               |             |                       |               |   0.330   |                   | 
-|                         |             |                       |               |  (0.447)  |                   | 
-| Partisan politics       |             |                       |               |           |       4.166*      | 
-|                         |             |                       |               |           |      (1.602)      | 
-| SD (Intercept Class)    |    0.704    |         0.449         |     0.826     |   0.966   |       0.000       | 
-| SD (Observations)       |    2.156    |         2.532         |     2.517     |   2.341   |       2.640       | 
-| Num.Obs.                |     136     |          134          |      134      |    136    |        136        | 
-| R2 Marg.                |    0.067    |         0.106         |     0.107     |   0.057   |       0.104       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
-
-__Note:__
-^^ Multilevel regression with random effects at the classroom level
-
-## Topics Most Often Discussed with Male Friends
-
-Table: Interest in topic most often discussed with one's male friends {#tbl-lmeMaleFriendsAlt}
-
-|                         | Health care | International affairs | Law and crime | Education | Partisan politics | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| **Results among boys**  |             |                       |               |           |                   | 
-| (Intercept)             |    -8.307   |         0.569         |     10.252    |   0.908   |      -11.642      | 
-|                         |   (15.056)  |        (15.175)       |    (15.430)   |  (17.084) |      (17.410)     | 
-| Health care             |    -0.649   |                       |               |           |                   | 
-|                         |   (0.698)   |                       |               |           |                   | 
-| Age                     |    1.120    |         0.143         |     -1.284    |   -0.474  |       1.695       | 
-|                         |   (2.068)   |        (2.083)        |    (2.123)    |  (2.343)  |      (2.391)      | 
-| Age squared             |    -0.034   |         -0.008        |     0.046     |   0.030   |       -0.061      | 
-|                         |   (0.071)   |        (0.072)        |    (0.073)    |  (0.081)  |      (0.082)      | 
-| Race (1 = white)        |    0.294    |        1.238**        |     -0.245    |   -0.245  |       0.491       | 
-|                         |   (0.433)   |        (0.456)        |    (0.448)    |  (0.498)  |      (0.533)      | 
-| Immigrant               |    -0.702   |        -1.312+        |    -1.443*    |  -1.311+  |       -0.792      | 
-|                         |   (0.644)   |        (0.694)        |    (0.670)    |  (0.740)  |      (0.785)      | 
-| English spoken at home  |    -1.069   |         -1.513        |     -0.422    |   0.388   |       0.180       | 
-|                         |   (0.893)   |        (0.919)        |    (0.899)    |  (1.008)  |      (1.063)      | 
-| French spoken at home   |    0.211    |         -0.785        |     0.026     |   0.446   |       0.914       | 
-|                         |   (0.559)   |        (0.584)        |    (0.573)    |  (0.634)  |      (0.671)      | 
-| Agency                  |   3.410**   |        3.650**        |    3.281**    |   1.659   |       3.254*      | 
-|                         |   (1.175)   |        (1.244)        |    (1.220)    |  (1.343)  |      (1.429)      | 
-| Communality             |    1.854    |        3.826**        |     2.880*    |  3.863**  |       2.400       | 
-|                         |   (1.277)   |        (1.356)        |    (1.294)    |  (1.464)  |      (1.534)      | 
-| International affairs   |             |        1.128**        |               |           |                   | 
-|                         |             |        (0.392)        |               |           |                   | 
-| Law and crime           |             |                       |    1.333**    |           |                   | 
-|                         |             |                       |    (0.431)    |           |                   | 
-| Education               |             |                       |               |   0.874+  |                   | 
-|                         |             |                       |               |  (0.516)  |                   | 
-| Partisan politics       |             |                       |               |           |       1.430       | 
-|                         |             |                       |               |           |      (0.900)      | 
-| **Results among girls** |             |                       |               |           |                   | 
-| SD (Intercept Class)    |    0.753    |         0.222         |     0.000     |   0.793   |       0.000       | 
-| SD (Observations)       |    2.232    |         2.430         |     2.387     |   2.562   |       2.800       | 
-| Num.Obs.                |     171     |          172          |      171      |    171    |        171        | 
-| R2 Marg.                |    0.100    |         0.216         |     0.150     |   0.125   |       0.094       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-| (Intercept)             |   -23.389   |         22.422        |     7.096     |   -0.350  |      41.624*      | 
-|                         |   (15.133)  |        (18.476)       |    (18.125)   |  (16.385) |      (17.237)     | 
-| Health care             |    -0.210   |                       |               |           |                   | 
-|                         |   (0.779)   |                       |               |           |                   | 
-| Age                     |    3.392    |         -2.511        |     -0.549    |   0.192   |      -5.234*      | 
-|                         |   (2.092)   |        (2.559)        |    (2.504)    |  (2.261)  |      (2.377)      | 
-| Age squared             |    -0.102   |         0.086         |     0.031     |   0.008   |       0.172*      | 
-|                         |   (0.072)   |        (0.088)        |    (0.086)    |  (0.078)  |      (0.082)      | 
-| Race (1 = white)        |    0.319    |         -0.563        |     -0.586    |   -0.157  |       -0.083      | 
-|                         |   (0.525)   |        (0.632)        |    (0.633)    |  (0.572)  |      (0.621)      | 
-| Immigrant               |    -0.284   |         -0.590        |    -2.081*    |   0.852   |       -0.031      | 
-|                         |   (0.643)   |        (0.780)        |    (0.787)    |  (0.682)  |      (0.760)      | 
-| English spoken at home  |    -0.339   |         -1.374        |     -0.189    |   0.717   |       -0.312      | 
-|                         |   (0.764)   |        (0.927)        |    (0.890)    |  (0.852)  |      (0.863)      | 
-| French spoken at home   |    -0.021   |         0.189         |     0.324     |   0.911   |       0.450       | 
-|                         |   (0.583)   |        (0.707)        |    (0.707)    |  (0.617)  |      (0.691)      | 
-| Agency                  |    -0.162   |         1.243         |     -0.123    |   0.242   |       2.051       | 
-|                         |   (1.410)   |        (1.698)        |    (1.705)    |  (1.480)  |      (1.685)      | 
-| Communality             |    0.126    |         0.769         |     0.559     |   -1.241  |       -0.120      | 
-|                         |   (1.445)   |        (1.744)        |    (1.737)    |  (1.566)  |      (1.685)      | 
-| International affairs   |             |         0.679         |               |           |                   | 
-|                         |             |        (0.597)        |               |           |                   | 
-| Law and crime           |             |                       |     -0.595    |           |                   | 
-|                         |             |                       |    (0.541)    |           |                   | 
-| Education               |             |                       |               |   0.485   |                   | 
-|                         |             |                       |               |  (0.551)  |                   | 
-| Partisan politics       |             |                       |               |           |       2.332+      | 
-|                         |             |                       |               |           |      (1.268)      | 
-| SD (Intercept Class)    |    0.499    |         0.610         |     0.283     |   0.898   |       0.000       | 
-| SD (Observations)       |    2.204    |         2.650         |     2.674     |   2.277   |       2.651       | 
-| Num.Obs.                |     115     |          114          |      113      |    115    |        115        | 
-| R2 Marg.                |    0.088    |         0.086         |     0.100     |   0.104   |       0.108       | 
-|:------------------------|------------:|----------------------:|--------------:|----------:|------------------:|
-
-__Note:__
-^^ + p < 0.1, * p < 0.05, ** p < 0.01, *** p < 0.001
-
-__Note:__
-^^ Multilevel regression with random effects at the classroom level
+```{r}
+#| label: fig-discusspeersyo
+#| echo: false
+#| fig-cap: "Interest in topics by gender, age and discussion with peers"
+knitr::include_graphics("_graphs/DiscussPeersYO.pdf")
+```

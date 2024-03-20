@@ -13,14 +13,13 @@ book:
     - 03-develop.qmd
     - 04-parent.qmd
     - 05-peer.qmd
-    - 06-mediaschool.qmd
-    - 07-conclu.qmd
-    - 08-references.qmd
+    - 06-conclu.qmd
+    - 07-references.qmd
   appendices:
-    - 09-appendix.qmd
+    - 08-appendix.qmd
 bibliography: Thesis.bib
-filters:
-  - section-bibliographies
+#filters:
+#  - section-bibliographies
 header-includes:
   - \widowpenalty10000
   - \clubpenalty10000

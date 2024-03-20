@@ -6,17 +6,35 @@ format: pdf
 toc: true
 toc-depth: 5
 ---
-Gender homophily and social learning both suggest that children are influenced by same-gender models. These models include parents, as social learning theory finds it, and peers, as gender homophily theory finds it. However, it might be the case that other role models, including teachers and social media influencers, also have a broader influence on children of their gender. This would be coherent with the idea that observer-model similarity encourages children to model their behaviour on people who resemble them. Is gender homophily just one example among many of social learning through observer-model similarity?
+Peers play a crucial role in children's socialization, especially during adolescence. This chapter aims to decipher peer-to-peer political interest transmission and the role gender can play in that transmission. To what extent do female peers and friends influence political interest development? Does that influence grow as children age? Do female friends peers have a greater influence in transmitting political interest to male friends or female friends? What about male peers? Do these results hold for different political topics, when political interest is measured by sector? The chapter relies on gender homophily theory and social learning. It seeks to test this dissertation's second hypothesis highlighted in @sec-chap1: *Children's interest in specific political topics is more related to political discussions with their same-gender peer(s) than other-gender peer(s).*
 
-Friends and acquaintances can contribute to the development of political interest, mainly through political discussions. Political discussions with friends and acquaintances increase political interest among child and adult respondents [@klofstad2007; @shehata2019]. Peer-group diversity can also contribute to the development of political interest. The size of one's social network has been found to have a positive relationship with political interest, while political disagreement is not related to it [@pattie2009].
+As @sec-chap1 lays it out, theories of gender homophily and social learning suggest that children are influenced by role models, especially those who share their gender, and this finding applies to attitudes such as political interest. Gender homophily can lead to social learning with observer--model similarity: as children and teenagers stick with other children who resemble them --- mostly of their gender --- they can start imitating their habits, attitudes and behaviours, including interests in various political topics.
 
-Political discussions among peers typically exhibit gender effects. Among adults, leaving aside relatives, 84% of men report discussing politics only with men, while 64% of women report discussing politics only with women [@huckfeldt1995]. This could be a by-product of gender homophily since people generally spend more time with other people of the same gender.
+## Peer Political Interest Transmission
 
-## Data Analysis
+Friends and acquaintances can contribute to the development of political interest, mainly through political discussions. This can be especially true among adolescents since this period of life is associated with increased social interactions between peers [@berndt1982]. More specifically, @oswald1998 find that teenagers become more likely to discuss politics with best friends, other friends, and classmates between ages 16 and 18, while increases in political discussions with other socialization agents remain more modest. These results are confirmed by @shehata2019, who show that political discussions with parents and friends increase with age, but discussions with friends increase the most between ages 13 and 18. Both of these studies still find more political discussions happen within the family than within friend groups. Yet, children have been found to report having more political discussions with parents and teachers than with their friends [@dostiegoulet2009en, @hess1967], and the influence of friends' political interest on personal political interest does not increase and may even decrease as children age [@dostiegoulet2009en].
+
+Indeed, political discussions with friends and acquaintances increase political interest among child and adult respondents. @dostiegoulet2009en finds 14-to-17--year-old children's political interest is explained both by their parents' political interest and by their friends' political interest, despite the former parents being more significant. She also finds evidence that changes in political interest from one year to the next are linked to changes in the number of political discussions with friends just as much as changes in the number of such discussions with parents. @janmaat2022 also find that having politically interested friends reduces the influence of parental education on young teenagers' political interest evolution. @klofstad2007 finds that, among first-year college students sharing their dormitory with a randomly assigned roommate, there is a strong correlation (0.46, *p*<0.001) between discussing politics and current events often with that roommate and saying discussions with that roommate have increased their political interest. @koskimaa2015 find that friends' interest in politics and political discussions with these friends influence 16-to-18--year-old Finnish teenagers' political interest to a greater extent than the influence of family and school. @shehata2019 find that, using a two-way fixed effects panel model, changes in children's frequency of political discussions with peers are related to their changes in political interest just as much as the frequency of political discussions with parents. However, they also find that political discussions with peers at ages 14--15 do not lead to more political interest two years later, after controlling for initial levels of political interest and frequency of political discussions with parents, suggesting parents play a more important role in the socialization process over the long run. @stattin2022 further temper the results of this literature by showing that adolescents' initial level of political interest can predict changes in their perceptions of their peers' political interest, while their peers' initial political interest (as perceived by the child) does not predict changes in their own future political interest.
+
+Other than political discussions, friends can also contribute to children's political interest development in other ways. @shehata2019 find that children reporting more peers who are interested in what happens in the world and consume news is related to yearly increases in political interest --- and the same goes for decreases. They find that this consumption of news by friends encourages children to watch more political news, but a direct long-term impact of friends' news consumption on adolescent political interest several years later is not found. Yet, they find stronger longer-term effects for the influence of parents than peers. Peer-group diversity can also contribute to the development of political interest. The size of one's social network has been found to have a positive relationship with political interest, while political disagreement is not related to it [@pattie2009].
+
+## Gender Differences in Peer Transmission
+
+Political discussions among peers typically exhibit gender effects. While @hess1967 find children are as likely to discuss politics with their peers regardless of their gender and @dowse1971 find boys and girls are just as likely to have heated political arguments with their friends, @lawless2013 find among United States college students aged 18--25 that 20% of women and 27% of men report discussing politics frequently with friends, and a similar significant 6-point gap is found for discussion of current events with friends.
+
+Among adults, leaving aside relatives, 84% of men report discussing politics only with men, while 64% of women report discussing politics only with women [@huckfeldt1995]. This could be a by-product of gender homophily since people generally spend more time with other people of the same gender.
+
+@kittilson2012 show that, among 29 countries located on different continents, there is a gender gap in how often women and men discuss politics with their friends, with men being on average 7 percentage points more likely to do so than women. Among Canadian respondents, the gap was 9 percentage points.
+
+## Data and Methods
 
 Questions are also asked about students' peers and interests. First, students are asked "What is the gender of most of your friends?" They can choose either girls, boys, or "About the same for both genders". Second, the following question is asked: "Among these five topics, which one do you discuss most often with your male friends?" Each of the five topics is listed, and the same question is then asked for female friends.
 
-Gender homophily holds among the sample of students: when excluding students who say they have as many friends of both genders, no less than 95% of boys and 91% of girls report that most of their friends are of the same genders as theirs.
+## Results
+
+### Peer-to-Peer Political Discussions by Gender
+
+Gender homophily holds among the sample of students: when excluding students who say they have as many friends of both genders, no less than 95% of boys and 91% of girls report that most of their friends are of the same gender as theirs.
 
 @fig-peers-genderage shows that 
 
@@ -43,17 +61,8 @@ knitr::include_graphics("_graphs/PeersTopicsGrey.pdf")
 ```{r}
 #| label: fig-femalefriends
 #| echo: false
-#| fig-cap: "Interest in topic most often discussed with one's female friends (without controls)"
+#| fig-cap: "Interest in topic most often discussed with one's female friends"
 knitr::include_graphics("_graphs/FemaleFriendsDiscuss.pdf")
-```
-
-@fig-femalefriendsctrl
-
-```{r}
-#| label: fig-femalefriendsctrl
-#| echo: false
-#| fig-cap: "Interest in topic most often discussed with one's female friends (with controls)"
-knitr::include_graphics("_graphs/FemaleFriendsDiscussCtrl.pdf")
 ```
 
 ### Topics Most Often Discussed with Male Friends
@@ -63,25 +72,25 @@ knitr::include_graphics("_graphs/FemaleFriendsDiscussCtrl.pdf")
 ```{r}
 #| label: fig-malefriends
 #| echo: false
-#| fig-cap: "Interest in topic most often discussed with one's male friends (without controls)"
+#| fig-cap: "Interest in topic most often discussed with one's male friends"
 knitr::include_graphics("_graphs/MaleFriendsDiscuss.pdf")
 ```
 
-@fig-malefriendsctrl
+Patterns from @fig-femalefriends and @fig-malefriends are somewhat complex to understand and do not seem consistent with gender homophily theory. While having male friends who discuss international politics strongly increases boys' interest in that topic, for girls, having female friends who discuss the topic also increases their interest. For boys, having friends who discuss law and crime strongly increases their interest, while for girls, the same can be said about partisan politics. Therefore, gendered factors seem to be at play, but hypothesis 2 cannot be confirmed based on these results.^[@sec-appendix5 reproduces @fig-femalefriends and @fig-malefriends while adding controls for age, age squared, language, immigrant status and race. The same relationships are found. Female friends--girl law and crime interest transmission loses statistical significance, while male friends--boy partisan politics transmission becomes statistically significant (*p*<0.05).]
+
+For the two topics for which adult women report more interest than adult men --- health care and education --- peers seem to not affect the development of interest in these topics. It could be the case that health care and education become relevant to women as they grow older and start caring for children and elderly people --- something quite different in nature than the kinds of conversations teenagers presumably have about education and health care.
+
+### Age Trends
+
+@fig-discusspeersyoctrl .^[@fig-discusspeersyo in @sec-appendix6 finds . . . when controls are removed.]
 
 ```{r}
-#| label: fig-malefriendsctrl
+#| label: fig-discusspeersyoctrl
 #| echo: false
-#| fig-cap: "Interest in topic most often discussed with one's male friends (with controls)"
-knitr::include_graphics("_graphs/MaleFriendsDiscussCtrl.pdf")
+#| fig-cap: "Interest in topics by gender, age and discussion with peers"
+knitr::include_graphics("_graphs/DiscussPeersYOCtrl.pdf")
 ```
-
-Patterns from @fig-femalefriends and @fig-malefriends are somewhat complex to understand and do not seem consistent with gender homophily theory. While having male friends who discuss international politics strongly increases boys' interest in that topic, for girls, having female friends who discuss the topic also increases their interest. For boys, having friends who discuss law and crime strongly increases their interest, while for girls, the same can be said about partisan politics. Therefore, gendered factors seem to be at play, but hypothesis 2 cannot be confirmed on the basis of these results.^[@sec-appendix6 reproduces @fig-femalefriends and @fig-malefriends while adding controls for age, age squared, language, immigrant status and race. The same relationships are found. Female friends--girl law and crime interest transmission loses statistical significance, while male friends--boy partisan politics transmission becomes statistically significant (*p*<0.05).]
-
-For the two topics for which adult women report more interest than adult men --- health care and education --- peers seem to have no effect on the development of interest in these topics. It could be the case that health care and education become relevant to women as they grow older and start caring for children and elderly people --- something quite different in nature than the kinds of conversations teenagers presumably have about education and health care.
 
 ## Discussion
 
-For gender homophily theory, again, the main descriptive results highlight the importance of this phenomenon: among those who say their friends are mostly of one gender, more than 90% of students, both girls and boys, report they have more friends of their own gender. Yet, multilevel regression results are not straightforward to analyze. Girls and boys seem to be interested in some topics their peers discuss but not others, and these topics tend to be different for children of both genders.
-
-## References
+For gender homophily theory, again, the main descriptive results highlight the importance of this phenomenon: among those who say their friends are mostly of one gender, more than 90% of students, both girls and boys, report they have more friends of their own gender. Yet, multilevel regression results are not straightforward to analyze. Girls and boys seem to be interested in some topics their peers discuss but not others and these topics tend to be different for children of both genders.

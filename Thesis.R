@@ -4150,17 +4150,119 @@ ModelOldGirlsMaleFriends <- lme_no_ctrl(
   data = CCPISOldGirlsMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
 
 #### 4.4 Create models with SES only ####
-lme_ses <- function(data, y) {
+lme_ses <- function(data, x, y) {
+  data$x <- data[[x]]
   data$y <- data[[y]]
-  nlme::lme(data = data, fixed = y ~ female + age + white + immig + lang,
+  nlme::lme(data = data, fixed = y ~ x + age + white + immig + lang,
             random = ~ 1 | Class, na.action = na.omit)
 }
-ModelInterestGenderSES <- lme_ses(data = CCPIS, y = "interest")
-ModelHealthGenderSES <- lme_ses(data = CCPIS, y = "interest_health")
-ModelForeignGenderSES <- lme_ses(data = CCPIS, y = "interest_foreign")
-ModelLawGenderSES <- lme_ses(data = CCPIS, y = "interest_law")
-ModelEducationGenderSES <- lme_ses(data = CCPIS, y = "interest_education")
-ModelPartisanGenderSES <- lme_ses(data = CCPIS, y = "interest_partisan")
+ModelInterestGenderSES <- lme_ses(data = CCPIS, x = "female", y = "interest")
+ModelHealthGenderSES <- lme_ses(data = CCPIS, x = "female",
+ y = "interest_health")
+ModelForeignGenderSES <- lme_ses(data = CCPIS, x = "female",
+ y = "interest_foreign")
+ModelLawGenderSES <- lme_ses(data = CCPIS, x = "female",
+ y = "interest_law")
+ModelEducationGenderSES <- lme_ses(data = CCPIS, x = "female",
+ y = "interest_education")
+ModelPartisanGenderSES <- lme_ses(data = CCPIS, x = "female",
+ y = "interest_partisan")
+ModelBoysHealthMotherSES <- lme_ses(data = CCPISBoys,
+ x = "mother_discuss_health", y = "interest_health")
+ModelBoysForeignMotherSES <- lme_ses(data = CCPISBoys,
+ x = "mother_discuss_foreign", y = "interest_foreign")
+ModelBoysLawMotherSES <- lme_ses(data = CCPISBoys, x = "mother_discuss_law",
+ y = "interest_law")
+ModelBoysEducationMotherSES <- lme_ses(data = CCPISBoys,
+ x = "mother_discuss_education", y = "interest_education")
+ModelBoysPartisanMotherSES <- lme_ses(data = CCPISBoys,
+ x = "mother_discuss_partisan", y = "interest_partisan")
+ModelBoysAllMotherSES <- lme_ses(data = CCPISBoysMotherLonger,
+ x = "value_mother", y = "interest_all")
+ModelBoysHealthFatherSES <- lme_ses(data = CCPISBoys,
+ x = "father_discuss_health", y = "interest_health")
+ModelBoysForeignFatherSES <- lme_ses(data = CCPISBoys,
+ x = "father_discuss_foreign", y = "interest_foreign")
+ModelBoysLawFatherSES <- lme_ses(data = CCPISBoys, x = "father_discuss_law",
+ y = "interest_law")
+ModelBoysEducationFatherSES <- lme_ses(data = CCPISBoys,
+ x = "father_discuss_education", y = "interest_education")
+ModelBoysPartisanFatherSES <- lme_ses(data = CCPISBoys,
+ x = "father_discuss_partisan", y = "interest_partisan")
+ModelBoysAllFatherSES <- lme_ses(data = CCPISBoysFatherLonger,
+ x = "value_father", y = "interest_all")
+ModelGirlsHealthMotherSES <- lme_ses(data = CCPISGirls,
+ x = "mother_discuss_health", y = "interest_health")
+ModelGirlsForeignMotherSES <- lme_ses(data = CCPISGirls,
+ x = "mother_discuss_foreign", y = "interest_foreign")
+ModelGirlsLawMotherSES <- lme_ses(data = CCPISGirls, x = "mother_discuss_law",
+ y = "interest_law")
+ModelGirlsEducationMotherSES <- lme_ses(data = CCPISGirls,
+ x = "mother_discuss_education", y = "interest_education")
+ModelGirlsPartisanMotherSES <- lme_ses(data = CCPISGirls,
+ x = "mother_discuss_partisan", y = "interest_partisan")
+ModelGirlsAllMotherSES <- lme_ses(data = CCPISGirlsMotherLonger,
+ x = "value_mother", y = "interest_all")
+ModelGirlsHealthFatherSES <- lme_ses(data = CCPISGirls,
+ x = "father_discuss_health", y = "interest_health")
+ModelGirlsForeignFatherSES <- lme_ses(data = CCPISGirls,
+ x = "father_discuss_foreign", y = "interest_foreign")
+ModelGirlsLawFatherSES <- lme_ses(data = CCPISGirls, x = "father_discuss_law",
+ y = "interest_law")
+ModelGirlsEducationFatherSES <- lme_ses(data = CCPISGirls,
+ x = "father_discuss_education", y = "interest_education")
+ModelGirlsPartisanFatherSES <- lme_ses(data = CCPISGirls,
+ x = "father_discuss_partisan", y = "interest_partisan")
+ModelGirlsAllFatherSES <- lme_ses(data = CCPISGirlsFatherLonger,
+ x = "value_father", y = "interest_all")
+ModelBoysHealthMaleFriendsSES <- lme_ses(data = CCPISBoys,
+ x = "malefriends_discuss_health", y = "interest_health")
+ModelBoysForeignMaleFriendsSES <- lme_ses(data = CCPISBoys,
+ x = "malefriends_discuss_foreign", y = "interest_foreign")
+ModelBoysLawMaleFriendsSES <- lme_ses(data = CCPISBoys, x = "malefriends_discuss_law",
+ y = "interest_law")
+ModelBoysEducationMaleFriendsSES <- lme_ses(data = CCPISBoys,
+ x = "malefriends_discuss_education", y = "interest_education")
+ModelBoysPartisanMaleFriendsSES <- lme_ses(data = CCPISBoys,
+ x = "malefriends_discuss_partisan", y = "interest_partisan")
+ModelBoysAllMaleFriendsSES <- lme_ses(data = CCPISBoysMaleFriendsLonger,
+ x = "value_malefriends", y = "interest_all")
+ModelBoysHealthFemaleFriendsSES <- lme_ses(data = CCPISBoys,
+ x = "femalefriends_discuss_health", y = "interest_health")
+ModelBoysForeignFemaleFriendsSES <- lme_ses(data = CCPISBoys,
+ x = "femalefriends_discuss_foreign", y = "interest_foreign")
+ModelBoysLawFemaleFriendsSES <- lme_ses(data = CCPISBoys, x = "femalefriends_discuss_law",
+ y = "interest_law")
+ModelBoysEducationFemaleFriendsSES <- lme_ses(data = CCPISBoys,
+ x = "femalefriends_discuss_education", y = "interest_education")
+ModelBoysPartisanFemaleFriendsSES <- lme_ses(data = CCPISBoys,
+ x = "femalefriends_discuss_partisan", y = "interest_partisan")
+ModelBoysAllFemaleFriendsSES <- lme_ses(data = CCPISBoysFemaleFriendsLonger,
+ x = "value_femalefriends", y = "interest_all")
+ModelGirlsHealthMaleFriendsSES <- lme_ses(data = CCPISGirls,
+ x = "malefriends_discuss_health", y = "interest_health")
+ModelGirlsForeignMaleFriendsSES <- lme_ses(data = CCPISGirls,
+ x = "malefriends_discuss_foreign", y = "interest_foreign")
+ModelGirlsLawMaleFriendsSES <- lme_ses(data = CCPISGirls, x = "malefriends_discuss_law",
+ y = "interest_law")
+ModelGirlsEducationMaleFriendsSES <- lme_ses(data = CCPISGirls,
+ x = "malefriends_discuss_education", y = "interest_education")
+ModelGirlsPartisanMaleFriendsSES <- lme_ses(data = CCPISGirls,
+ x = "malefriends_discuss_partisan", y = "interest_partisan")
+ModelGirlsAllMaleFriendsSES <- lme_ses(data = CCPISGirlsMaleFriendsLonger,
+ x = "value_malefriends", y = "interest_all")
+ModelGirlsHealthFemaleFriendsSES <- lme_ses(data = CCPISGirls,
+ x = "femalefriends_discuss_health", y = "interest_health")
+ModelGirlsForeignFemaleFriendsSES <- lme_ses(data = CCPISGirls,
+ x = "femalefriends_discuss_foreign", y = "interest_foreign")
+ModelGirlsLawFemaleFriendsSES <- lme_ses(data = CCPISGirls, x = "femalefriends_discuss_law",
+ y = "interest_law")
+ModelGirlsEducationFemaleFriendsSES <- lme_ses(data = CCPISGirls,
+ x = "femalefriends_discuss_education", y = "interest_education")
+ModelGirlsPartisanFemaleFriendsSES <- lme_ses(data = CCPISGirls,
+ x = "femalefriends_discuss_partisan", y = "interest_partisan")
+ModelGirlsAllFemaleFriendsSES <- lme_ses(data = CCPISGirlsFemaleFriendsLonger,
+ x = "value_femalefriends", y = "interest_all")
 lme_ses_dg <- function(data, y) {
   data$y <- data[[y]]
   lm(data = data, formula = y ~ female + age + white + immig + lang +
@@ -4297,6 +4399,102 @@ ModelOldBoysGenderParentCtrl <- lme_ses_personality(
   data = CCPISOldBoysParentLonger, x = "value_parent", y = "interest_all")
 ModelOldGirlsGenderParentCtrl <- lme_ses_personality(
   data = CCPISOldGirlsParentLonger, x = "value_parent", y = "interest_all")
+ModelBoysHealthMotherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "mother_discuss_health", y = "interest_health")
+ModelBoysForeignMotherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "mother_discuss_foreign", y = "interest_foreign")
+ModelBoysLawMotherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "mother_discuss_law", y = "interest_law")
+ModelBoysEducationMotherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "mother_discuss_education", y = "interest_education")
+ModelBoysPartisanMotherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "mother_discuss_partisan", y = "interest_partisan")
+ModelBoysAllMotherSESPersonality <- lme_ses_personality(
+  data = CCPISBoysMotherLonger, x = "value_mother", y = "interest_all")
+ModelBoysHealthFatherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "father_discuss_health", y = "interest_health")
+ModelBoysForeignFatherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "father_discuss_foreign", y = "interest_foreign")
+ModelBoysLawFatherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "father_discuss_law", y = "interest_law")
+ModelBoysEducationFatherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "father_discuss_education", y = "interest_education")
+ModelBoysPartisanFatherSESPersonality <- lme_ses_personality(
+  data = CCPISBoys, x = "father_discuss_partisan", y = "interest_partisan")
+ModelBoysAllFatherSESPersonality <- lme_ses_personality(
+  data = CCPISBoysFatherLonger, x = "value_father", y = "interest_all")
+ModelGirlsHealthMotherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "mother_discuss_health", y = "interest_health")
+ModelGirlsForeignMotherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "mother_discuss_foreign", y = "interest_foreign")
+ModelGirlsLawMotherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "mother_discuss_law", y = "interest_law")
+ModelGirlsEducationMotherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "mother_discuss_education", y = "interest_education")
+ModelGirlsPartisanMotherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "mother_discuss_partisan", y = "interest_partisan")
+ModelGirlsAllMotherSESPersonality <- lme_ses_personality(
+  data = CCPISGirlsMotherLonger, x = "value_mother", y = "interest_all")
+ModelGirlsHealthFatherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "father_discuss_health", y = "interest_health")
+ModelGirlsForeignFatherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "father_discuss_foreign", y = "interest_foreign")
+ModelGirlsLawFatherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "father_discuss_law", y = "interest_law")
+ModelGirlsEducationFatherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "father_discuss_education", y = "interest_education")
+ModelGirlsPartisanFatherSESPersonality <- lme_ses_personality(
+  data = CCPISGirls, x = "father_discuss_partisan", y = "interest_partisan")
+ModelGirlsAllFatherSESPersonality <- lme_ses_personality(
+  data = CCPISGirlsFatherLonger, x = "value_father", y = "interest_all")
+ModelBoysHealthMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ x = "malefriends_discuss_health", y = "interest_health")
+ModelBoysForeignMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ x = "malefriends_discuss_foreign", y = "interest_foreign")
+ModelBoysLawMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys, x = "malefriends_discuss_law",
+ y = "interest_law")
+ModelBoysEducationMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ x = "malefriends_discuss_education", y = "interest_education")
+ModelBoysPartisanMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ x = "malefriends_discuss_partisan", y = "interest_partisan")
+ModelBoysAllMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoysMaleFriendsLonger,
+ x = "value_malefriends", y = "interest_all")
+ModelBoysHealthFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ x = "femalefriends_discuss_health", y = "interest_health")
+ModelBoysForeignFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ x = "femalefriends_discuss_foreign", y = "interest_foreign")
+ModelBoysLawFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys, x = "femalefriends_discuss_law",
+ y = "interest_law")
+ModelBoysEducationFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ x = "femalefriends_discuss_education", y = "interest_education")
+ModelBoysPartisanFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ x = "femalefriends_discuss_partisan", y = "interest_partisan")
+ModelBoysAllFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoysFemaleFriendsLonger,
+ x = "value_femalefriends", y = "interest_all")
+ModelGirlsHealthMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ x = "malefriends_discuss_health", y = "interest_health")
+ModelGirlsForeignMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ x = "malefriends_discuss_foreign", y = "interest_foreign")
+ModelGirlsLawMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls, x = "malefriends_discuss_law",
+ y = "interest_law")
+ModelGirlsEducationMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ x = "malefriends_discuss_education", y = "interest_education")
+ModelGirlsPartisanMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ x = "malefriends_discuss_partisan", y = "interest_partisan")
+ModelGirlsAllMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirlsMaleFriendsLonger,
+ x = "value_malefriends", y = "interest_all")
+ModelGirlsHealthFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ x = "femalefriends_discuss_health", y = "interest_health")
+ModelGirlsForeignFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ x = "femalefriends_discuss_foreign", y = "interest_foreign")
+ModelGirlsLawFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls, x = "femalefriends_discuss_law",
+ y = "interest_law")
+ModelGirlsEducationFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ x = "femalefriends_discuss_education", y = "interest_education")
+ModelGirlsPartisanFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ x = "femalefriends_discuss_partisan", y = "interest_partisan")
+ModelGirlsAllFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirlsFemaleFriendsLonger,
+ x = "value_femalefriends", y = "interest_all")
 lme_ses_personality_boysgirls <- function(data, x, y) {
   data$x <- data[[x]]
   data$y <- data[[y]]
@@ -4530,7 +4728,7 @@ ModelAllAgentsCtrl <- lme_ses_personality_allagents_boysgirls(
   x3 = "value_femalefriends", x4 = "value_malefriends", x5 = "value_teacher",
   x6 = "value_influencer", y = "interest_all")
 
-#### 4.6  ####
+#### 4.6 Test models for multicollinearity, heteroskedasticity and autocorrelation ####
 CCPISModels <- list(
   ModelInterestGender, ModelHealthGender, ModelForeignGender,
   ModelLawGender, ModelEducationGender, ModelPartisanGender,
@@ -4576,6 +4774,30 @@ CCPISAgentsModels <- list(
   ModelGirlsHealthMaleFriends, ModelGirlsForeignMaleFriends,
   ModelGirlsLawMaleFriends, ModelGirlsEducationMaleFriends,
   ModelGirlsPartisanMaleFriends, ModelGirlsAllMaleFriends,
+  ModelBoysHealthMotherSES, ModelBoysForeignMotherSES,
+  ModelBoysLawMotherSES, ModelBoysEducationMotherSES,
+  ModelBoysPartisanMotherSES, ModelBoysAllMotherSES,
+  ModelBoysHealthFatherSES, ModelBoysForeignFatherSES,
+  ModelBoysLawFatherSES, ModelBoysEducationFatherSES,
+  ModelBoysPartisanFatherSES, ModelBoysAllFatherSES,
+  ModelGirlsHealthMotherSES, ModelGirlsForeignMotherSES,
+  ModelGirlsLawMotherSES, ModelGirlsEducationMotherSES,
+  ModelGirlsPartisanMotherSES, ModelGirlsAllMotherSES,
+  ModelGirlsHealthFatherSES, ModelGirlsForeignFatherSES,
+  ModelGirlsLawFatherSES, ModelGirlsEducationFatherSES,
+  ModelGirlsPartisanFatherSES, ModelGirlsAllFatherSES,
+  ModelBoysHealthMotherSESPersonality, ModelBoysForeignMotherSESPersonality,
+  ModelBoysLawMotherSESPersonality, ModelBoysEducationMotherSESPersonality,
+  ModelBoysPartisanMotherSESPersonality, ModelBoysAllMotherSESPersonality,
+  ModelBoysHealthFatherSESPersonality, ModelBoysForeignFatherSESPersonality,
+  ModelBoysLawFatherSESPersonality, ModelBoysEducationFatherSESPersonality,
+  ModelBoysPartisanFatherSESPersonality, ModelBoysAllFatherSESPersonality,
+  ModelGirlsHealthMotherSESPersonality, ModelGirlsForeignMotherSESPersonality,
+  ModelGirlsLawMotherSESPersonality, ModelGirlsEducationMotherSESPersonality,
+  ModelGirlsPartisanMotherSESPersonality, ModelGirlsAllMotherSESPersonality,
+  ModelGirlsHealthFatherSESPersonality, ModelGirlsForeignFatherSESPersonality,
+  ModelGirlsLawFatherSESPersonality, ModelGirlsEducationFatherSESPersonality,
+  ModelGirlsPartisanFatherSESPersonality, ModelGirlsAllFatherSESPersonality,
   ModelBoysHealthGenderParentCtrl, ModelBoysForeignGenderParentCtrl,
   ModelBoysLawGenderParentCtrl, ModelBoysEducationGenderParentCtrl,
   ModelBoysPartisanGenderParentCtrl, ModelBoysAllGenderParentCtrl,
@@ -4594,6 +4816,31 @@ CCPISAgentsModels <- list(
   ModelHealthAgentsCtrl, ModelForeignAgentsCtrl,
   ModelLawAgentsCtrl, ModelEducationAgentsCtrl,
   ModelPartisanAgentsCtrl, ModelAllAgentsCtrl)
+  CCPISAgentsModels2 <- list(
+    ModelBoysHealthMaleFriendsSES, ModelBoysForeignMaleFriendsSES,
+  ModelBoysLawMaleFriendsSES, ModelBoysEducationMaleFriendsSES,
+  ModelBoysPartisanMaleFriendsSES, ModelBoysAllMaleFriendsSES,
+  ModelBoysHealthFemaleFriendsSES, ModelBoysForeignFemaleFriendsSES,
+  ModelBoysLawFemaleFriendsSES, ModelBoysEducationFemaleFriendsSES,
+  ModelBoysPartisanFemaleFriendsSES, ModelBoysAllFemaleFriendsSES,
+  ModelGirlsHealthMaleFriendsSES, ModelGirlsForeignMaleFriendsSES,
+  ModelGirlsLawMaleFriendsSES, ModelGirlsEducationMaleFriendsSES,
+  ModelGirlsPartisanMaleFriendsSES, ModelGirlsAllMaleFriendsSES,
+  ModelGirlsHealthFemaleFriendsSES, ModelGirlsForeignFemaleFriendsSES,
+  ModelGirlsLawFemaleFriendsSES, ModelGirlsEducationFemaleFriendsSES,
+  ModelGirlsPartisanFemaleFriendsSES, ModelGirlsAllFemaleFriendsSES,
+  ModelBoysHealthMaleFriendsSESPersonality, ModelBoysForeignMaleFriendsSESPersonality,
+  ModelBoysLawMaleFriendsSESPersonality, ModelBoysEducationMaleFriendsSESPersonality,
+  ModelBoysPartisanMaleFriendsSESPersonality, ModelBoysAllMaleFriendsSESPersonality,
+  ModelBoysHealthFemaleFriendsSESPersonality, ModelBoysForeignFemaleFriendsSESPersonality,
+  ModelBoysLawFemaleFriendsSESPersonality, ModelBoysEducationFemaleFriendsSESPersonality,
+  ModelBoysPartisanFemaleFriendsSESPersonality, ModelBoysAllFemaleFriendsSESPersonality,
+  ModelGirlsHealthMaleFriendsSESPersonality, ModelGirlsForeignMaleFriendsSESPersonality,
+  ModelGirlsLawMaleFriendsSESPersonality, ModelGirlsEducationMaleFriendsSESPersonality,
+  ModelGirlsPartisanMaleFriendsSESPersonality, ModelGirlsAllMaleFriendsSESPersonality,
+  ModelGirlsHealthFemaleFriendsSESPersonality, ModelGirlsForeignFemaleFriendsSESPersonality,
+  ModelGirlsLawFemaleFriendsSESPersonality, ModelGirlsEducationFemaleFriendsSESPersonality,
+  ModelGirlsPartisanFemaleFriendsSESPersonality, ModelGirlsAllFemaleFriendsSESPersonality)
 DGModels <- list(
   ModelInterestGenderDG, ModelHealthGenderDG, ModelForeignGenderDG,
   ModelLawGenderDG, ModelEducationGenderDG, ModelPartisanGenderDG,
@@ -4604,6 +4851,7 @@ DGModels <- list(
   ModelEducationGenderDGSESInterac, ModelPartisanGenderDGSESInterac)
 map(CCPISModels[7:length(CCPISModels)], car::vif)
 map(CCPISAgentsModels[61:length(CCPISAgentsModels)], car::vif)
+map(CCPISAgentsModels2, car::vif)
 map(DGModels[7:length(DGModels)], car::vif)
 print(map(DGModels, ~bptest(.x)[[4]]))
  # Breusch-Pagan test for heteroscedasticity
@@ -4787,7 +5035,7 @@ modelsummary::modelsummary(models = list(
     "agentic" = "Agency",
     "communal" = "Communality")) |>
     kableExtra::kable_styling(font_size = 6, full_width = FALSE)
-modelsummary::modelsummary(models = list(
+result <- modelsummary::modelsummary(models = list(
   "All" = ModelAllGenderParentCtrl,
   "Health care" = ModelHealthGenderParentCtrl,
   "International affairs" = ModelForeignGenderParentCtrl,
@@ -4800,7 +5048,7 @@ modelsummary::modelsummary(models = list(
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
   title = paste("Interest in Topic by Gender of Parent who Discusses that",
-                "Topic the Most (With Interactions) \\label{tab:lmeParentCtrl}"),
+                "Topic the Most (With Interactions) \\label{tab:lmeParentCtrlInterac}"),
   coef_rename = c(
     "female1" = "Gender (1 = girl)",
     "x" = "Mother discusses topic more than father",
@@ -4812,7 +5060,17 @@ modelsummary::modelsummary(models = list(
     "langFrancophone" = "French spoken at home",
     "agentic" = "Agency",
     "communal" = "Communality")) |>
-    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
+  kableExtra::kable_styling(font_size = 6, full_width = FALSE)
+result <- gsub("\\\\num\\{([^}]+)\\}", "\\1", result)
+result <- gsub("estimates? & ", "\\1", result)
+result <- gsub("ccccccccc", "lcccccc", result)
+result <- gsub("part & term & statistic", "\\1", result)
+result <- gsub("gof & ", "\\\\hspace{1em}", result)
+result <- gsub("multicolumn\\{9\\}", "multicolumn\\{7\\}", result)
+result <- gsub(" & std.error", "\\\\hspace{1em}", result)
+result <- gsub("SD", "\\\\hspace{1em}SD", result)
+result <- gsub("R2 Marg. & ", "R2 Marg.", result)
+gsub("Num.Obs. & ", "Num.Obs.", result)
 modelsummary::modelsummary(models = list(
   "Boys" = list("All" = ModelBoysAllMother,
                 "Health care" = ModelBoysHealthMother,
@@ -4948,7 +5206,7 @@ modelsummary::modelsummary(models = list(
                   "agentic" = "Agency",
                   "communal" = "Communality")) |>
     kableExtra::kable_styling(font_size = 6, full_width = FALSE)
-modelsummary::modelsummary(models = list(
+result2 <- modelsummary::modelsummary(models = list(
   "All" = ModelAllAgentsCtrl,
   "Health care" = ModelHealthAgentsCtrl,
   "International affairs" = ModelForeignAgentsCtrl,
@@ -4961,7 +5219,7 @@ modelsummary::modelsummary(models = list(
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
   title = paste("Interest in Topic Most Often Discussed with Role Models",
-                "(With Interactions) \\label{tab:lmeAgentsCtrl}"),
+                "(With Interactions) \\label{tab:lmeAgentsCtrlInterac}"),
   coef_rename = c("female1" = "Gender (1 = girl)",
                   "x1" = "Topic most discussed with mother?",
                   "x2" = "Topic most discussed with father?",
@@ -4969,6 +5227,12 @@ modelsummary::modelsummary(models = list(
                   "x4" = "Topic most discussed with male friends?",
                   "x5" = "Topic most discussed by teacher?",
                   "x6" = "Topic most discussed by social media influencer?",
+                  "mother_discuss_partisan" = "Topic most discussed with mother?",
+                  "father_discuss_partisan" = "Topic most discussed with father?",
+                  "femalefriends_discuss_partisan" = "Topic most discussed with female friends?",
+                  "malefriends_discuss_partisan" = "Topic most discussed with male friends?",
+                  "teacher_discuss_partisan" = "Topic most discussed by teacher?",
+                  "influencer_discuss_partisan" = "Topic most discussed by social media influencer?",
                   "age" = "Age",
                   "age_squared" = "Age squared",
                   "white" = "Ethnicity (1 = white)",
@@ -4978,8 +5242,18 @@ modelsummary::modelsummary(models = list(
                   "agentic" = "Agency",
                   "communal" = "Communality")) |>
     kableExtra::kable_styling(font_size = 6, full_width = FALSE)
+result2 <- gsub("\\\\num\\{([^}]+)\\}", "\\1", result2)
+result2 <- gsub("estimates? & ", "\\1", result2)
+result2 <- gsub("ccccccccc", "lcccccc", result2)
+result2 <- gsub("part & term & statistic", "\\1", result2)
+result2 <- gsub("gof & ", "\\\\hspace{1em}", result2)
+result2 <- gsub("multicolumn\\{9\\}", "multicolumn\\{7\\}", result2)
+result2 <- gsub(" & std.error", "\\\\hspace{1em}", result2)
+result2 <- gsub("SD", "\\\\hspace{1em}SD", result2)
+result2 <- gsub("R2 Marg. & ", "R2 Marg.", result2)
+gsub("Num.Obs. & ", "Num.Obs.", result2)
 
-#### 4.7 Create confidence intervals graphs ####
+#### 4.8 Create confidence intervals graphs ####
 get_ci <- function(model, var_order, level = 0.95) {
   mod_int <- nlme::intervals(model, which = "fixed", level = level)
   c(mod_int[1]$fixed[var_order + 1,]) # extract est. and ci for 1st IV only
@@ -5267,6 +5541,125 @@ AgentsData$topic <- c(rep(c(
   rep("All topics", 2)), 4))
 AgentsData$agents <- c(rep("Mother", 12), rep("Father", 12),
                        rep("Female friends", 12), rep("Male friends", 12))
+AgentsData$controls <- "Without Controls"
+AgentsSESData <- data.frame(
+  mother_health_b = get_ci(ModelBoysHealthMotherSES, 1),
+  mother_health_g = get_ci(ModelGirlsHealthMotherSES, 1),
+  mother_foreign_b = get_ci(ModelBoysForeignMotherSES, 1),
+  mother_foreign_g = get_ci(ModelGirlsForeignMotherSES, 1),
+  mother_law_b = get_ci(ModelBoysLawMotherSES, 1),
+  mother_law_g = get_ci(ModelGirlsLawMotherSES, 1),
+  mother_education_b = get_ci(ModelBoysEducationMotherSES, 1),
+  mother_education_g = get_ci(ModelGirlsEducationMotherSES, 1),
+  mother_partisan_b = get_ci(ModelBoysPartisanMotherSES, 1),
+  mother_partisan_g = get_ci(ModelGirlsPartisanMotherSES, 1),
+  mother_all_b = get_ci(ModelBoysAllMotherSES, 1),
+  mother_all_g = get_ci(ModelGirlsAllMotherSES, 1),
+  father_health_b = get_ci(ModelBoysHealthFatherSES, 1),
+  father_health_g = get_ci(ModelGirlsHealthFatherSES, 1),
+  father_foreign_b = get_ci(ModelBoysForeignFatherSES, 1),
+  father_foreign_g = get_ci(ModelGirlsForeignFatherSES, 1),
+  father_law_b = get_ci(ModelBoysLawFatherSES, 1),
+  father_law_g = get_ci(ModelGirlsLawFatherSES, 1),
+  father_education_b = get_ci(ModelBoysEducationFatherSES, 1),
+  father_education_g = get_ci(ModelGirlsEducationFatherSES, 1),
+  father_partisan_b = get_ci(ModelBoysPartisanFatherSES, 1),
+  father_partisan_g = get_ci(ModelGirlsPartisanFatherSES, 1),
+  father_all_b = get_ci(ModelBoysAllFatherSES, 1),
+  father_all_g = get_ci(ModelGirlsAllFatherSES, 1),
+  femalefriends_health_b = get_ci(ModelBoysHealthFemaleFriendsSES, 1),
+  femalefriends_health_g = get_ci(ModelGirlsHealthFemaleFriendsSES, 1),
+  femalefriends_foreign_b = get_ci(ModelBoysForeignFemaleFriendsSES, 1),
+  femalefriends_foreign_g = get_ci(ModelGirlsForeignFemaleFriendsSES, 1),
+  femalefriends_law_b = get_ci(ModelBoysLawFemaleFriendsSES, 1),
+  femalefriends_law_g = get_ci(ModelGirlsLawFemaleFriendsSES, 1),
+  femalefriends_education_b = get_ci(ModelBoysEducationFemaleFriendsSES, 1),
+  femalefriends_education_g = get_ci(ModelGirlsEducationFemaleFriendsSES, 1),
+  femalefriends_partisan_b = get_ci(ModelBoysPartisanFemaleFriendsSES, 1),
+  femalefriends_partisan_g = get_ci(ModelGirlsPartisanFemaleFriendsSES, 1),
+  femalefriends_all_b = get_ci(ModelBoysAllFemaleFriendsSES, 1),
+  femalefriends_all_g = get_ci(ModelGirlsAllFemaleFriendsSES, 1),
+  malefriends_health_b = get_ci(ModelBoysHealthMaleFriendsSES, 1),
+  malefriends_health_g = get_ci(ModelGirlsHealthMaleFriendsSES, 1),
+  malefriends_foreign_b = get_ci(ModelBoysForeignMaleFriendsSES, 1),
+  malefriends_foreign_g = get_ci(ModelGirlsForeignMaleFriendsSES, 1),
+  malefriends_law_b = get_ci(ModelBoysLawMaleFriendsSES, 1),
+  malefriends_law_g = get_ci(ModelGirlsLawMaleFriendsSES, 1),
+  malefriends_education_b = get_ci(ModelBoysEducationMaleFriendsSES, 1),
+  malefriends_education_g = get_ci(ModelGirlsEducationMaleFriendsSES, 1),
+  malefriends_partisan_b = get_ci(ModelBoysPartisanMaleFriendsSES, 1),
+  malefriends_partisan_g = get_ci(ModelGirlsPartisanMaleFriendsSES, 1),
+  malefriends_all_b = get_ci(ModelBoysAllMaleFriendsSES, 1),
+  malefriends_all_g = get_ci(ModelGirlsAllMaleFriendsSES, 1))
+rownames(AgentsSESData) <- c("ci_l", "pred", "ci_u")
+AgentsSESData <- as.data.frame(t(AgentsSESData))
+AgentsSESData$gender <- rep(c("Boys", "Girls"), nrow(AgentsSESData) / 2)
+AgentsSESData$topic <- c(rep(c(
+  rep("Health care", 2), rep("International affairs", 2),
+  rep("Law and crime", 2), rep("Education", 2), rep("Partisan politics", 2),
+  rep("All topics", 2)), 4))
+AgentsSESData$agents <- c(rep("Mother", 12), rep("Father", 12),
+                          rep("Female friends", 12), rep("Male friends", 12))
+AgentsSESData$controls <- "With Controls for SES"
+AgentsSESPersonalityData <- data.frame(
+  mother_health_b = get_ci(ModelBoysHealthMotherSESPersonality, 1),
+  mother_health_g = get_ci(ModelGirlsHealthMotherSESPersonality, 1),
+  mother_foreign_b = get_ci(ModelBoysForeignMotherSESPersonality, 1),
+  mother_foreign_g = get_ci(ModelGirlsForeignMotherSESPersonality, 1),
+  mother_law_b = get_ci(ModelBoysLawMotherSESPersonality, 1),
+  mother_law_g = get_ci(ModelGirlsLawMotherSESPersonality, 1),
+  mother_education_b = get_ci(ModelBoysEducationMotherSESPersonality, 1),
+  mother_education_g = get_ci(ModelGirlsEducationMotherSESPersonality, 1),
+  mother_partisan_b = get_ci(ModelBoysPartisanMotherSESPersonality, 1),
+  mother_partisan_g = get_ci(ModelGirlsPartisanMotherSESPersonality, 1),
+  mother_all_b = get_ci(ModelBoysAllMotherSESPersonality, 1),
+  mother_all_g = get_ci(ModelGirlsAllMotherSESPersonality, 1),
+  father_health_b = get_ci(ModelBoysHealthFatherSESPersonality, 1),
+  father_health_g = get_ci(ModelGirlsHealthFatherSESPersonality, 1),
+  father_foreign_b = get_ci(ModelBoysForeignFatherSESPersonality, 1),
+  father_foreign_g = get_ci(ModelGirlsForeignFatherSESPersonality, 1),
+  father_law_b = get_ci(ModelBoysLawFatherSESPersonality, 1),
+  father_law_g = get_ci(ModelGirlsLawFatherSESPersonality, 1),
+  father_education_b = get_ci(ModelBoysEducationFatherSESPersonality, 1),
+  father_education_g = get_ci(ModelGirlsEducationFatherSESPersonality, 1),
+  father_partisan_b = get_ci(ModelBoysPartisanFatherSESPersonality, 1),
+  father_partisan_g = get_ci(ModelGirlsPartisanFatherSESPersonality, 1),
+  father_all_b = get_ci(ModelBoysAllFatherSESPersonality, 1),
+  father_all_g = get_ci(ModelGirlsAllFatherSESPersonality, 1),
+  femalefriends_health_b = get_ci(ModelBoysHealthFemaleFriendsSESPersonality, 1),
+  femalefriends_health_g = get_ci(ModelGirlsHealthFemaleFriendsSESPersonality, 1),
+  femalefriends_foreign_b = get_ci(ModelBoysForeignFemaleFriendsSESPersonality, 1),
+  femalefriends_foreign_g = get_ci(ModelGirlsForeignFemaleFriendsSESPersonality, 1),
+  femalefriends_law_b = get_ci(ModelBoysLawFemaleFriendsSESPersonality, 1),
+  femalefriends_law_g = get_ci(ModelGirlsLawFemaleFriendsSESPersonality, 1),
+  femalefriends_education_b = get_ci(ModelBoysEducationFemaleFriendsSESPersonality, 1),
+  femalefriends_education_g = get_ci(ModelGirlsEducationFemaleFriendsSESPersonality, 1),
+  femalefriends_partisan_b = get_ci(ModelBoysPartisanFemaleFriendsSESPersonality, 1),
+  femalefriends_partisan_g = get_ci(ModelGirlsPartisanFemaleFriendsSESPersonality, 1),
+  femalefriends_all_b = get_ci(ModelBoysAllFemaleFriendsSESPersonality, 1),
+  femalefriends_all_g = get_ci(ModelGirlsAllFemaleFriendsSESPersonality, 1),
+  malefriends_health_b = get_ci(ModelBoysHealthMaleFriendsSESPersonality, 1),
+  malefriends_health_g = get_ci(ModelGirlsHealthMaleFriendsSESPersonality, 1),
+  malefriends_foreign_b = get_ci(ModelBoysForeignMaleFriendsSESPersonality, 1),
+  malefriends_foreign_g = get_ci(ModelGirlsForeignMaleFriendsSESPersonality, 1),
+  malefriends_law_b = get_ci(ModelBoysLawMaleFriendsSESPersonality, 1),
+  malefriends_law_g = get_ci(ModelGirlsLawMaleFriendsSESPersonality, 1),
+  malefriends_education_b = get_ci(ModelBoysEducationMaleFriendsSESPersonality, 1),
+  malefriends_education_g = get_ci(ModelGirlsEducationMaleFriendsSESPersonality, 1),
+  malefriends_partisan_b = get_ci(ModelBoysPartisanMaleFriendsSESPersonality, 1),
+  malefriends_partisan_g = get_ci(ModelGirlsPartisanMaleFriendsSESPersonality, 1),
+  malefriends_all_b = get_ci(ModelBoysAllMaleFriendsSESPersonality, 1),
+  malefriends_all_g = get_ci(ModelGirlsAllMaleFriendsSESPersonality, 1))
+rownames(AgentsSESPersonalityData) <- c("ci_l", "pred", "ci_u")
+AgentsSESPersonalityData <- as.data.frame(t(AgentsSESPersonalityData))
+AgentsSESPersonalityData$gender <- rep(c("Boys", "Girls"), nrow(AgentsSESPersonalityData) / 2)
+AgentsSESPersonalityData$topic <- c(rep(c(
+  rep("Health care", 2), rep("International affairs", 2),
+  rep("Law and crime", 2), rep("Education", 2), rep("Partisan politics", 2),
+  rep("All topics", 2)), 4))
+AgentsSESPersonalityData$agents <- c(rep("Mother", 12), rep("Father", 12),
+                                     rep("Female friends", 12), rep("Male friends", 12))
+AgentsSESPersonalityData$controls <- "With Controls for SES\nand Personality Traits"
 get_ci_lmer <- function(model, var_order, level = 0.95) {
   mod_int <- confint(model, level = level)
   c(mod_int[var_order + 3, 1], fixef(model)[var_order + 1],
@@ -5283,7 +5676,7 @@ AgentsCtrlData <- data.frame(
   mother_education_b = get_ci(ModelBoysEducationAgentsCtrl, 1),
   mother_education_g = get_ci(ModelGirlsEducationAgentsCtrl, 1),
   mother_partisan_b = get_ci(ModelBoysPartisanAgentsCtrl, 1),
-  mother_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 1),
+  mother_partisan_g = c(NA, NA, NA),
   mother_all_b = get_ci(ModelBoysAllAgentsCtrl, 1),
   mother_all_g = get_ci(ModelGirlsAllAgentsCtrl, 1),
   father_health_b = get_ci(ModelBoysHealthAgentsCtrl, 2),
@@ -5295,7 +5688,7 @@ AgentsCtrlData <- data.frame(
   father_education_b = get_ci(ModelBoysEducationAgentsCtrl, 2),
   father_education_g = get_ci(ModelGirlsEducationAgentsCtrl, 2),
   father_partisan_b = get_ci(ModelBoysPartisanAgentsCtrl, 2),
-  father_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 2),
+  father_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 1),
   father_all_b = get_ci(ModelBoysAllAgentsCtrl, 2),
   father_all_g = get_ci(ModelGirlsAllAgentsCtrl, 2),
   femalefriends_health_b = get_ci(ModelBoysHealthAgentsCtrl, 3),
@@ -5307,7 +5700,7 @@ AgentsCtrlData <- data.frame(
   femalefriends_education_b = get_ci(ModelBoysEducationAgentsCtrl, 3),
   femalefriends_education_g = get_ci(ModelGirlsEducationAgentsCtrl, 3),
   femalefriends_partisan_b = get_ci(ModelBoysPartisanAgentsCtrl, 3),
-  femalefriends_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 3),
+  femalefriends_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 2),
   femalefriends_all_b = get_ci(ModelBoysAllAgentsCtrl, 3),
   femalefriends_all_g = get_ci(ModelGirlsAllAgentsCtrl, 3),
   malefriends_health_b = get_ci(ModelBoysHealthAgentsCtrl, 4),
@@ -5319,7 +5712,7 @@ AgentsCtrlData <- data.frame(
   malefriends_education_b = get_ci(ModelBoysEducationAgentsCtrl, 4),
   malefriends_education_g = get_ci(ModelGirlsEducationAgentsCtrl, 4),
   malefriends_partisan_b = get_ci(ModelBoysPartisanAgentsCtrl, 4),
-  malefriends_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 4),
+  malefriends_partisan_g = get_ci_lmer(ModelGirlsPartisanAgentsCtrl, 3),
   malefriends_all_b = get_ci(ModelBoysAllAgentsCtrl, 4),
   malefriends_all_g = get_ci(ModelGirlsAllAgentsCtrl, 4))
 rownames(AgentsCtrlData) <- c("ci_l", "pred", "ci_u")
@@ -5331,11 +5724,20 @@ AgentsCtrlData$topic <- c(rep(c(
   rep("All topics", 2)), 4))
 AgentsCtrlData$agents <- c(rep("Mother", 12), rep("Father", 12),
                            rep("Female friends", 12), rep("Male friends", 12))
-AgentsData |>
+AgentsCtrlData$controls <- paste0("With Controls for SES,\nPersonality Traits ",
+                                  "and\nDiscussions with\nOther Role Models")
+AgentsDataAll <- rbind(AgentsData, AgentsSESData, AgentsSESPersonalityData,
+                       AgentsCtrlData)
+AgentsDataAll$controls <- factor(AgentsDataAll$controls, levels = c(
+  "Without Controls", "With Controls for SES",
+  "With Controls for SES\nand Personality Traits",
+  paste0("With Controls for SES,\nPersonality Traits ",
+         "and\nDiscussions with\nOther Role Models")))
+AgentsDataAll |>
   filter(agents == "Mother") |>
   ggplot(aes(x = pred, y = topic)) +
   geom_point() +
-  facet_wrap(~ gender) +
+  facet_grid(rows = vars(controls), cols = vars(gender)) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
   geom_vline(aes(xintercept = 0), linetype = "dashed") +
   scale_x_continuous(
@@ -5346,36 +5748,16 @@ AgentsData |>
         axis.title = element_text(size = 17.5),
         legend.text = element_text(size = 17.5),
         legend.title = element_text(size = 17.5),
-        strip.text.x = element_text(size = 17.5),
+        strip.text = element_text(size = 17.5),
         axis.text.y = ggtext::element_markdown(
           color = c(rep("black", 5), "red")),
           text = element_text(family = "CM Roman"))
-ggsave("_graphs/MotherDiscuss.pdf", width = 11, height = 4.25)
-AgentsCtrlData |>
-  filter(agents == "Mother") |>
-  ggplot(aes(x = pred, y = topic)) +
-  geom_point() +
-  facet_wrap(~ gender) +
-  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
-  geom_vline(aes(xintercept = 0), linetype = "dashed") +
-  scale_x_continuous(
-    "\nTopic most often discussed with mother\n(vs. other topics)") +
-  scale_y_discrete("Topics", limits = rev) +
-  theme_minimal() +
-  theme(axis.text = element_text(size = 17.5),
-        axis.title = element_text(size = 17.5),
-        legend.text = element_text(size = 17.5),
-        legend.title = element_text(size = 17.5),
-        strip.text.x = element_text(size = 17.5),
-        axis.text.y = ggtext::element_markdown(
-          color = c(rep("black", 5), "red")),
-          text = element_text(family = "CM Roman"))
-ggsave("_graphs/MotherDiscussCtrl.pdf", width = 11, height = 4.25)
-AgentsData |>
+ggsave("_graphs/MotherDiscuss.pdf", width = 11, height = 17)
+AgentsDataAll |>
   filter(agents == "Father") |>
   ggplot(aes(x = pred, y = topic)) +
   geom_point() +
-  facet_wrap(~ gender) +
+  facet_grid(rows = vars(controls), cols = vars(gender)) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
   geom_vline(aes(xintercept = 0), linetype = "dashed") +
   scale_x_continuous(
@@ -5386,36 +5768,16 @@ AgentsData |>
         axis.title = element_text(size = 17.5),
         legend.text = element_text(size = 17.5),
         legend.title = element_text(size = 17.5),
-        strip.text.x = element_text(size = 17.5),
+        strip.text = element_text(size = 17.5),
         axis.text.y = ggtext::element_markdown(
           color = c(rep("black", 5), "red")),
           text = element_text(family = "CM Roman"))
-ggsave("_graphs/FatherDiscuss.pdf", width = 11, height = 4.25)
-AgentsCtrlData |>
-  filter(agents == "Father") |>
-  ggplot(aes(x = pred, y = topic)) +
-  geom_point() +
-  facet_wrap(~ gender) +
-  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
-  geom_vline(aes(xintercept = 0), linetype = "dashed") +
-  scale_x_continuous(
-    "\nTopic most often discussed with father\n(vs. other topics)") +
-  scale_y_discrete("Topics", limits = rev) +
-  theme_minimal() +
-  theme(axis.text = element_text(size = 17.5),
-        axis.title = element_text(size = 17.5),
-        legend.text = element_text(size = 17.5),
-        legend.title = element_text(size = 17.5),
-        strip.text.x = element_text(size = 17.5),
-        axis.text.y = ggtext::element_markdown(
-          color = c(rep("black", 5), "red")),
-          text = element_text(family = "CM Roman"))
-ggsave("_graphs/FatherDiscussCtrl.pdf", width = 11, height = 4.25)
-AgentsData |>
+ggsave("_graphs/FatherDiscuss.pdf", width = 11, height = 17)
+AgentsDataAll |>
   filter(agents == "Female friends") |>
   ggplot(aes(x = pred, y = topic)) +
   geom_point() +
-  facet_wrap(~ gender) +
+  facet_grid(rows = vars(controls), cols = vars(gender)) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
   geom_vline(aes(xintercept = 0), linetype = "dashed") +
   scale_x_continuous(
@@ -5426,36 +5788,16 @@ AgentsData |>
         axis.title = element_text(size = 17.5),
         legend.text = element_text(size = 17.5),
         legend.title = element_text(size = 17.5),
-        strip.text.x = element_text(size = 17.5),
+        strip.text = element_text(size = 17.5),
         axis.text.y = ggtext::element_markdown(
           color = c(rep("black", 5), "red")),
           text = element_text(family = "CM Roman"))
-ggsave("_graphs/FemaleFriendsDiscuss.pdf", width = 11, height = 4.25)
-AgentsCtrlData |>
-  filter(agents == "Female friends") |>
-  ggplot(aes(x = pred, y = topic)) +
-  geom_point() +
-  facet_wrap(~ gender) +
-  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
-  geom_vline(aes(xintercept = 0), linetype = "dashed") +
-  scale_x_continuous(
-    "\nTopic most often discussed with female friends\n(vs. other topics)") +
-  scale_y_discrete("Topics", limits = rev) +
-  theme_minimal() +
-  theme(axis.text = element_text(size = 17.5),
-        axis.title = element_text(size = 17.5),
-        legend.text = element_text(size = 17.5),
-        legend.title = element_text(size = 17.5),
-        strip.text.x = element_text(size = 17.5),
-        axis.text.y = ggtext::element_markdown(
-          color = c(rep("black", 5), "red")),
-          text = element_text(family = "CM Roman"))
-ggsave("_graphs/FemaleFriendsDiscussCtrl.pdf", width = 11, height = 4.25)
-AgentsData |>
+ggsave("_graphs/FemaleFriendsDiscuss.pdf", width = 11, height = 17)
+AgentsDataAll |>
   filter(agents == "Male friends") |>
   ggplot(aes(x = pred, y = topic)) +
   geom_point() +
-  facet_wrap(~ gender) +
+  facet_grid(rows = vars(controls), cols = vars(gender)) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
   geom_vline(aes(xintercept = 0), linetype = "dashed") +
   scale_x_continuous(
@@ -5466,31 +5808,11 @@ AgentsData |>
         axis.title = element_text(size = 17.5),
         legend.text = element_text(size = 17.5),
         legend.title = element_text(size = 17.5),
-        strip.text.x = element_text(size = 17.5),
+        strip.text = element_text(size = 17.5),
         axis.text.y = ggtext::element_markdown(
           color = c(rep("black", 5), "red")),
           text = element_text(family = "CM Roman"))
-ggsave("_graphs/MaleFriendsDiscuss.pdf", width = 11, height = 4.25)
-AgentsCtrlData |>
-  filter(agents == "Male friends") |>
-  ggplot(aes(x = pred, y = topic)) +
-  geom_point() +
-  facet_wrap(~ gender) +
-  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
-  geom_vline(aes(xintercept = 0), linetype = "dashed") +
-  scale_x_continuous(
-    "\nTopic most often discussed with male friends\n(vs. other topics)") +
-  scale_y_discrete("Topics", limits = rev) +
-  theme_minimal() +
-  theme(axis.text = element_text(size = 17.5),
-        axis.title = element_text(size = 17.5),
-        legend.text = element_text(size = 17.5),
-        legend.title = element_text(size = 17.5),
-        strip.text.x = element_text(size = 17.5),
-        axis.text.y = ggtext::element_markdown(
-          color = c(rep("black", 5), "red")),
-          text = element_text(family = "CM Roman"))
-ggsave("_graphs/MaleFriendsDiscussCtrl.pdf", width = 11, height = 4.25)
+ggsave("_graphs/MaleFriendsDiscuss.pdf", width = 11, height = 17)
 GenderParentYOData <- data.frame(
   pred_yb = get_ci(ModelYoungBoysGenderParent, 1),
   pred_yg = get_ci(ModelYoungGirlsGenderParent, 1),
@@ -5564,14 +5886,14 @@ AgentsYOCtrlData$agents <- c(rep("Mother", 4), rep("Father", 4),
                              rep("Female friends", 4), rep("Male friends", 4))
 AgentsYOCtrlData$age <- rep(c(rep("9-15", 2), rep("16-18", 2)), 4)
 
-DiscussYOData <- rbind(GenderParentYOData, AgentsYOData)
-DiscussYOData$agents <- factor(DiscussYOData$agents, levels = c(
+DiscussParentYOData <- rbind(GenderParentYOData, AgentsYOData)
+DiscussParentYOData$agents <- factor(DiscussParentYOData$agents, levels = c(
   "Parent", "Mother", "Father", "Female friends", "Male friends"))
-DiscussYOCtrlData <- rbind(GenderParentYOCtrlData, AgentsYOCtrlData)
-DiscussYOCtrlData$agents <- factor(DiscussYOCtrlData$agents, levels = c(
+DiscussParentYOCtrlData <- rbind(GenderParentYOCtrlData, AgentsYOCtrlData)
+DiscussParentYOCtrlData$agents <- factor(DiscussParentYOCtrlData$agents, levels = c(
   "Parent", "Mother", "Father", "Female friends", "Male friends"))
 
-DiscussYOData |>
+DiscussParentYOData |>
   filter(agents %in% c("Parent", "Mother", "Father")) |>
   ggplot(aes(x = pred, y = age)) +
   geom_point() +
@@ -5592,8 +5914,8 @@ DiscussYOData |>
         strip.text.x = element_text(size = 17.5),
         axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/DiscussYO.pdf", width = 11, height = 4.25)
-DiscussYOCtrlData |>
+ggsave("_graphs/DiscussParentYO.pdf", width = 11, height = 4.25)
+DiscussParentYOCtrlData |>
   filter(agents %in% c("Parent", "Mother", "Father")) |>
   ggplot(aes(x = pred, y = age)) +
   geom_point() +
@@ -5614,4 +5936,44 @@ DiscussYOCtrlData |>
         strip.text.x = element_text(size = 17.5),
         axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/DiscussYOCtrl.pdf", width = 11, height = 4.25)
+ggsave("_graphs/DiscussParentYOCtrl.pdf", width = 11, height = 4.25)
+DiscussParentYOData |>
+  filter(agents %in% c("Female friends", "Male friends")) |>
+  ggplot(aes(x = pred, y = age)) +
+  geom_point() +
+  facet_wrap(~ gender + agents, ncol = 2) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous(paste0(
+    "\nTopic most often discussed with female friends or\n",
+    "male friends (vs. other topics)")) +
+  scale_y_discrete("Age", limits = rev) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/DiscussPeersYO.pdf", width = 11, height = 4.25)
+DiscussParentYOCtrlData |>
+  filter(agents %in% c("Female friends", "Male friends")) |>
+  ggplot(aes(x = pred, y = age)) +
+  geom_point() +
+  facet_wrap(~ gender + agents, ncol = 2) +
+  geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
+  geom_vline(aes(xintercept = 0), linetype = "dashed") +
+  scale_x_continuous(paste0(
+    "\nTopic most often discussed with female friends or\n",
+    "male friends (vs. other topics)")) +
+  scale_y_discrete("Age", limits = rev) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/DiscussPeersYOCtrl.pdf", width = 11, height = 4.25)
