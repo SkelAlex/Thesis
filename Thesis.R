@@ -638,6 +638,8 @@ CCPISOld <- CCPIS |> filter(age >= 16 & age < 19)
 CCPISYoung$agegrp <- "Ages 9-15"
 CCPISOld$agegrp <- "Ages 16-18"
 CCPISOldYoung <- rbind(CCPISYoung, CCPISOld)
+CCPISOldYoung$agegrp <- factor(CCPISOldYoung$agegrp, levels = c(
+  "Ages 9-15", "Ages 16-18"))
 CCPISYoungBoys <- filter(CCPISYoung, female == 0)
 CCPISYoungGirls <- filter(CCPISYoung, female == 1)
 CCPISOldBoys <- filter(CCPISOld, female == 0)
@@ -3647,9 +3649,9 @@ CCPISPeerGraph <- rbind(CCPISBoysPeerGraph, CCPISGirlsPeerGraph)
 ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   geom_bar(position = "dodge", stat = "identity") +
   facet_wrap(~sex) +
-  scale_x_discrete("Topic most often discussed with peers") +
+  scale_x_discrete("Topic most often discussed") +
   scale_y_continuous("Percent of students", labels = scales::percent) +
-  scale_fill_discrete("Peers",
+  scale_fill_discrete("Friends' gender",
                       labels = c("Female", "Male"),
                       type = c("orange", "purple")) +
   theme_minimal() +
@@ -3664,9 +3666,9 @@ ggsave("_graphs/PeersTopics.pdf", width = 11, height = 4.25)
 ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   geom_bar(position = "dodge", stat = "identity") +
   facet_wrap(~sex) +
-  scale_x_discrete("Topic most often discussed with peers") +
+  scale_x_discrete("Topic most often discussed") +
   scale_y_continuous("Percent of students", labels = scales::percent) +
-  scale_fill_grey("Peers", start = 0.8, end = 0.2,
+  scale_fill_grey("Friends' gender", start = 0.8, end = 0.2,
                       labels = c("Female", "Male")) +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5),
@@ -3693,6 +3695,12 @@ filter(CCPISOldYoung, !is.na(friends_gender_alt) & !is.na(female)) |>
         axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/PeersGenderAge.pdf", width = 11, height = 4.25)
+CCPISOldYoungBoys <- filter(CCPISOldYoung, female == 0)
+CCPISOldYoungGirls <- filter(CCPISOldYoung, female == 1)
+prop.table(table(CCPISOldYoungBoys$agegrp,
+ CCPISOldYoungBoys$friends_gender_alt), margin = 1)
+prop.table(table(CCPISOldYoungGirls$agegrp,
+ CCPISOldYoungGirls$friends_gender_alt), margin = 1)
 
 ### 4. Regression models ####
 #### 4.1 Create longer versions of each dataset ####
@@ -5823,6 +5831,8 @@ GenderParentYOData <- as.data.frame(t(GenderParentYOData))
 GenderParentYOData$gender <- rep(c("Boys", "Girls"), 2)
 GenderParentYOData$agents <- "Parent"
 GenderParentYOData$age <- c(rep("9-15", 2), rep("16-18", 2))
+GenderParentYOData$age <- factor(GenderParentYOData$age, levels = c(
+  "9-15", "16-18"))
 GenderParentYOCtrlData <- data.frame(
   pred_yb = get_ci(ModelYoungBoysGenderParentCtrl, 1),
   pred_yg = get_ci(ModelYoungGirlsGenderParentCtrl, 1),
@@ -5833,6 +5843,8 @@ GenderParentYOCtrlData <- as.data.frame(t(GenderParentYOCtrlData))
 GenderParentYOCtrlData$gender <- rep(c("Boys", "Girls"), 2)
 GenderParentYOCtrlData$agents <- "Parent"
 GenderParentYOCtrlData$age <- c(rep("9-15", 2), rep("16-18", 2))
+GenderParentYOCtrlData$age <- factor(GenderParentYOCtrlData$age, levels = c(
+  "9-15", "16-18"))
 
 AgentsYOData <- data.frame(
   mother_yb = get_ci(ModelYoungBoysMother, 1),
@@ -5857,6 +5869,8 @@ AgentsYOData$gender <- rep(c("Boys", "Girls"), nrow(AgentsYOData) / 2)
 AgentsYOData$agents <- c(rep("Mother", 4), rep("Father", 4),
                          rep("Female friends", 4), rep("Male friends", 4))
 AgentsYOData$age <- rep(c(rep("9-15", 2), rep("16-18", 2)), 4)
+AgentsYOData$age <- factor(AgentsYOData$age, levels = c(
+  "9-15", "16-18"))
 confint <- confint(ModelOldBoysAgentsCtrl)
 AgentsYOCtrlData <- data.frame(
   mother_yb = get_ci(ModelYoungBoysAgentsCtrl, 1),
@@ -5885,6 +5899,8 @@ AgentsYOCtrlData$gender <- rep(c("Boys", "Girls"), nrow(AgentsYOCtrlData) / 2)
 AgentsYOCtrlData$agents <- c(rep("Mother", 4), rep("Father", 4),
                              rep("Female friends", 4), rep("Male friends", 4))
 AgentsYOCtrlData$age <- rep(c(rep("9-15", 2), rep("16-18", 2)), 4)
+AgentsYOCtrlData$age <- factor(AgentsYOCtrlData$age, levels = c(
+  "9-15", "16-18"))
 
 DiscussParentYOData <- rbind(GenderParentYOData, AgentsYOData)
 DiscussParentYOData$agents <- factor(DiscussParentYOData$agents, levels = c(
