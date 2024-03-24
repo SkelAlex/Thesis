@@ -4,10 +4,28 @@
 			"path": "."
 		}
 	],
+	"ltex.enabled": [
+        "bibtex",
+        "context",
+        "context.tex",
+        "html",
+        "latex",
+        "markdown",
+        "org",
+        "restructuredtext",
+        "rsweave",
+        "Quarto",
+        "quarto",
+        "qmd",
+        "tex",
+        "bib"
+    ],
 	"settings": {
 		"grammarly.config.documentDialect": "canadian",
 		"quarto.visualEditor.spellingDictionary": "en_CA",
 		"ltex.language": "en-CA",
-		"ltex.additionalRules.motherTongue": "fr"
+		"ltex.additionalRules.motherTongue": "fr",
+		"languageTool.language": "en-CA",
+		"cSpell.language": "en,fr,en-CA"
 	}
 }

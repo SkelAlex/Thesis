@@ -118,7 +118,7 @@ Before analyzing average levels of interest in politics in each of the datasets,
 ```{r}
 #| label: fig-ccpis1
 #| echo: false
-#| fig-cap: "CCPIS Descriptive Statistics - General"
+#| fig-cap: "CCPIS Descriptive Statistics --- General"
 knitr::include_graphics("_graphs/CCPISDescriptive.pdf")
 ```
 
@@ -143,7 +143,7 @@ knitr::include_graphics("_graphs/CommunalityScale.pdf")
 ```{r}
 #| label: fig-dg
 #| echo: false
-#| fig-cap: "Datagotchi PES Descriptive Statistics - General"
+#| fig-cap: "Datagotchi PES Descriptive Statistics --- General"
 knitr::include_graphics("_graphs/DGDescriptive.pdf")
 ```
 
@@ -163,7 +163,7 @@ knitr::include_graphics("_graphs/CESDescriptive.pdf")
 ```{r}
 #| label: fig-wvs
 #| echo: false
-#| fig-cap: "2020 WVS Descriptive Statistics - General"
+#| fig-cap: "2020 WVS Descriptive Statistics --- General"
 knitr::include_graphics("_graphs/WVSDescriptive.pdf")
 ```
 
@@ -172,7 +172,7 @@ knitr::include_graphics("_graphs/WVSDescriptive.pdf")
 ```{r}
 #| label: fig-gss
 #| echo: false
-#| fig-cap: "2020 GSS Descriptive Statistics (Cycle 35 - Social Identity) - General"
+#| fig-cap: "2020 GSS Descriptive Statistics (Cycle 35 - Social Identity) --- General"
 knitr::include_graphics("_graphs/GSSDescriptive.pdf")
 ```
 
@@ -187,7 +187,7 @@ After survey weights are applied, what is the average level of political interes
 ```{r}
 #| label: fig-ccpis2
 #| echo: false
-#| fig-cap: "CCPIS Descriptive Statistics - Political Interest"
+#| fig-cap: "CCPIS Descriptive Statistics --- Political Interest"
 knitr::include_graphics("_graphs/CCPISInterest.pdf")
 ```
 
@@ -196,14 +196,14 @@ knitr::include_graphics("_graphs/CCPISInterest.pdf")
 ```{r}
 #| label: fig-dginterest
 #| echo: false
-#| fig-cap: "Datagotchi PES Descriptive Statistics - Political Interest"
+#| fig-cap: "Datagotchi PES Descriptive Statistics --- Political Interest"
 knitr::include_graphics("_graphs/DGInterest.pdf")
 ```
 
 ```{r}
 #| label: fig-ceswvsgssinterest
 #| echo: false
-#| fig-cap: "CES, WVS and GSS Descriptive Statistics - Political Interest"
+#| fig-cap: "CES, WVS and GSS Descriptive Statistics --- Political Interest"
 knitr::include_graphics("_graphs/CESWVSGSSInterest.pdf")
 ```
 

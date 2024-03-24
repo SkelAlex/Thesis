@@ -6,7 +6,18 @@
 #webshot::install_phantomjs() for saving modelsummary to png or jpg
 pacman::p_load(tidyverse, extrafont, ggtext, openxlsx, qdap, psy, kableExtra,
                readstata13, haven, anesrake, questionr, ggpubr, nlme,
-               modelsummary, Hmisc, scales, ggtext, pwr, lme4, lmtest)
+               modelsummary, Hmisc, scales, ggtext, pwr, lme4, lmtest,
+               ggcorrplot)
+delete_rows_na <- function(row, loadings, number_na_allowed = 5) {
+  if (sum(is.na(row)) <= number_na_allowed) {
+    # Perform element-wise multiplication for each variable and its loading
+    variable_contributions <- row * loadings
+    return(sum(variable_contributions, na.rm = TRUE) /
+           sum(loadings, na.rm = TRUE))
+  } else {
+    return(NA)
+  }
+}
 
 ### 1. Data cleaning ####
 #### 1.1 CCPIS ####
@@ -563,16 +574,6 @@ ggplot(data.frame(AgencyVariableNames, AgencyFactorLoadings),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/AgencyScale.pdf", width = 11, height = 4.25)
 
-delete_rows_na <- function(row, loadings, number_na_allowed = 5) {
-  if (sum(is.na(row)) <= number_na_allowed) {
-    # Perform element-wise multiplication for each variable and its loading
-    variable_contributions <- row * loadings
-    return(sum(variable_contributions, na.rm = TRUE) /
-           sum(loadings, na.rm = TRUE))
-  } else {
-    return(NA)
-  }
-}
 # Apply the function to each row and create a new column agentic
 agencyVariables <- c("sexrole_independent", "sexrole_passive",
                      "sexrole_competitive", "sexrole_easydecisions_rev",
@@ -2112,24 +2113,24 @@ ggsave(plot = ggpubr::ggarrange(
   "_graphs/CCPISInterest.pdf")
 
 PoliticalGraphData <- pivot_longer(
-  CCPIS, cols = lockdown_political_alt:parties_political_alt,
+  CCPISOldYoung, cols = lockdown_political_alt:parties_political_alt,
   names_to = "name", values_to = "value") |>
   filter(!is.na(value)) |>
-  group_by(name) |>
+  group_by(name, agegrp) |>
   summarise(value = mean(value, na.rm = T),
             n = n())
 PoliticalGraphData$name_full <- case_when(
   PoliticalGraphData$name == "lockdown_political_alt" ~ "Pandemic restrictions",
   PoliticalGraphData$name == "nurses_political_alt" ~
-    "Working conditions\nof nurses",
+    "Working conditions of nurses",
   PoliticalGraphData$name == "china_political_alt" ~
-    "Diplomatic disputes\nbetween Canada\nand China",
+    "Diplomatic disputes between Canada and China",
   PoliticalGraphData$name == "ukraine_political_alt" ~ "Ukrainian war",
   PoliticalGraphData$name == "police_political_alt" ~ "Police funding",
-  PoliticalGraphData$name == "crime_political_alt" ~ "Sentences for\nviolent crimes",
+  PoliticalGraphData$name == "crime_political_alt" ~ "Sentences for violent crimes",
   PoliticalGraphData$name == "tuition_political_alt" ~ "University tuition",
   PoliticalGraphData$name == "privateschool_political_alt" ~
-    "Funding of public\nand private schools",
+    "Funding of public and private schools",
   PoliticalGraphData$name == "elections_political_alt" ~ "Federal elections",
   PoliticalGraphData$name == "parties_political_alt" ~ "Political parties")
 value.se <- sd(PoliticalGraphData$value) / sqrt(PoliticalGraphData$n)
@@ -2137,18 +2138,20 @@ PoliticalGraphData$value.lb <-
   PoliticalGraphData$value + qnorm(0.025) * value.se
 PoliticalGraphData$value.ub <-
   PoliticalGraphData$value + qnorm(0.975) * value.se
-ggplot(PoliticalGraphData, aes(x = reorder(name_full, -value), y = value)) +
+ggplot(PoliticalGraphData, aes(x = value, y = reorder(name_full, value))) +
   geom_point() +
-  geom_errorbar(aes(ymin = value.lb, ymax = value.ub), width = 0.5) +
-  geom_hline(yintercept = 0.5) +
-  scale_y_continuous("Average view\nof students", limits = c(0, 1),
-                     breaks = seq(0, 1, by = 0.25),
-                     labels = c("Non-political", "", "", "", "Political")) +
-  scale_x_discrete("Issue") +
+  facet_wrap(~agegrp) +
+  geom_errorbar(aes(xmin = value.lb, xmax = value.ub), width = 0.5) +
+  geom_vline(xintercept = 0.5) +
+  scale_x_continuous("Average view\nof students", limits = c(0, 1),
+                     breaks = c(0.1, 0.9),
+                     labels = c("Non-political", "Political")) +
+  scale_y_discrete("Issue") +
   theme_minimal() +
-  theme(axis.text = element_text(size = 17.5),
+  theme(strip.text.x = element_text(size = 17.5),
+        axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
-        axis.text.x = element_text(angle = 66.7, vjust = 0.5),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/CCPISPolitical.pdf", width = 11, height = 4.25)
 
@@ -2979,7 +2982,7 @@ PlotTimeKnowledge <- ggplot(filter(CES21, !is.na(female)),
              aes(x = age, y = knowledge * 10, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
   scale_y_continuous(name = "",
-                     limits = c(0, 10), breaks = seq(0, 10, by = 5)) +
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
   scale_x_continuous(name = "Age", limits = c(18, 105)) +
   scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
   theme_minimal() +
@@ -5993,3 +5996,57 @@ DiscussParentYOCtrlData |>
         axis.text.y = ggtext::element_markdown(color = c(rep("black", 5), "red")),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/DiscussPeersYOCtrl.pdf", width = 11, height = 4.25)
+
+### 5. T-tests ####
+t.test(CCPIS$femalefriends_discuss_health,
+ CCPIS$malefriends_discuss_health)
+t.test(CCPIS$femalefriends_discuss_foreign,
+ CCPIS$malefriends_discuss_foreign)
+t.test(CCPIS$femalefriends_discuss_law,
+ CCPIS$malefriends_discuss_law)
+t.test(CCPIS$femalefriends_discuss_education,
+ CCPIS$malefriends_discuss_education)
+t.test(CCPISBoys$femalefriends_discuss_partisan,
+ CCPISGirls$malefriends_discuss_partisan)
+t.test(CCPISYoung$interest, CCPISOld$interest) # interest higher for 16-18-year-olds
+t.test(CCPISYoung$interest_health, CCPISOld$interest_health) # interest higher for 16-18-year-olds
+t.test(CCPISYoung$interest_foreign, CCPISOld$interest_foreign) # interest higher for 16-18-year-olds
+t.test(CCPISYoung$interest_law, CCPISOld$interest_law) # interest higher for 16-18-year-olds
+t.test(CCPISYoung$interest_education, CCPISOld$interest_education) # interest higher for 16-18-year-olds
+t.test(CCPISYoung$interest_partisan, CCPISOld$interest_partisan) # N.S.
+
+### 6. Correlations ####
+CorrCCPIS <- CCPIS[c(21, 32:36)]
+names(CorrCCPIS) <- c("General", "Health care", "International affairs",
+                      "Law and crime", "Education", "Partisan politics")
+CorMatrixCCPIS <- cor(CorrCCPIS, use = "pairwise.complete.obs") # imputation
+diag(CorMatrixCCPIS) <- NA
+ggcorrplot::ggcorrplot(CorMatrixCCPIS, method = "circle",
+                       legend.title = "Correlation") +
+  labs(x = "", y = "") +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/CorMatrixCCPIS.pdf", width = 11, height = 8.5)
+CorrDG <- DG[191:196]
+names(CorrDG) <- c("General", "Health care", "International affairs",
+                   "Law and crime", "Education", "Partisan politics")
+CorMatrixDG <- cor(CorrDG, use = "pairwise.complete.obs") # imputation
+diag(CorMatrixDG) <- NA
+ggcorrplot::ggcorrplot(CorMatrixDG, method = "circle",
+                       legend.title = "Correlation") +
+  labs(x = "", y = "") +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
+        strip.text.x = element_text(size = 17.5),
+        axis.text.x = element_text(angle = 90),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/CorMatrixDG.pdf", width = 11, height = 8.5)

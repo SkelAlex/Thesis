@@ -1,5 +1,27 @@
 {
+    "ltex.enabled": [
+        "bibtex",
+        "context",
+        "context.tex",
+        "html",
+        "latex",
+        "markdown",
+        "org",
+        "restructuredtext",
+        "rsweave",
+        "Quarto",
+        "quarto",
+        "qmd",
+        "tex",
+        "bib"
+    ],
     "quarto.visualEditor.spellingDictionary": "en_CA",
     "ltex.language": "en-CA",
-    "ltex.additionalRules.motherTongue": "fr"
+    "ltex.additionalRules.motherTongue": "fr",
+    "ltex.bibtex.fields": {
+        "title": true,
+        "journal": true,
+        "booktitle": true
+    },
+    "cSpell.language": "en,fr,en-CA"
 }

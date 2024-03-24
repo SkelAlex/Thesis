@@ -55,9 +55,13 @@
 #
 #
 #
+#
+#
+#
+#
 #| label: fig-peers-genderage
 #| echo: false
-#| fig-cap: "Children's friends by gender and age group, 2023 CCPIS data"
+#| fig-cap: "Children's Friends by Gender and Age Group, 2022 CCPIS"
 knitr::include_graphics("_graphs/PeersGenderAge.pdf")
 #
 #
@@ -77,6 +81,8 @@ knitr::include_graphics("_graphs/PeersTopicsGrey.pdf")
 #
 #
 #
+#
+#
 #| label: fig-femalefriends
 #| echo: false
 #| fig-cap: "Interest in topic most often discussed with one's female friends"
@@ -88,9 +94,11 @@ knitr::include_graphics("_graphs/FemaleFriendsDiscuss.pdf")
 #
 #
 #
+#
+#
 #| label: fig-malefriends
 #| echo: false
-#| fig-cap: "Interest in topic most often discussed with one's male friends"
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Male Friends, 2022 CCPIS"
 knitr::include_graphics("_graphs/MaleFriendsDiscuss.pdf")
 #
 #
@@ -105,8 +113,13 @@ knitr::include_graphics("_graphs/MaleFriendsDiscuss.pdf")
 #
 #| label: fig-discusspeersyoctrl
 #| echo: false
-#| fig-cap: "Interest in topics by gender, age and discussion with peers"
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CCPIS"
 knitr::include_graphics("_graphs/DiscussPeersYOCtrl.pdf")
+#
+#
+#
+#
+#
 #
 #
 #

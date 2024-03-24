@@ -1,0 +1,1 @@
+{"rule":"ENGLISH_WORD_REPEAT_BEGINNING_RULE","sentence":"^\\QFor partisan politics and international affairs, young boys already express significantly more interest in these topics than young girls, and the gender gaps disappear around age 50 --- the same moment where .\\E$"}

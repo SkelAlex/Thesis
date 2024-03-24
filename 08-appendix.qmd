@@ -1627,6 +1627,43 @@ knitr::include_graphics("_graphs/GenderDG.pdf")
 knitr::include_graphics("_graphs/GenderCCPIS.pdf")
 ```
 
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender and Age Group, CCPIS \label{tab:lmeInterestYoungOldCCPIS}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & Politics (general) & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Ages 9--15}}\\
+\midrule \hspace{1em}(Intercept) & 3.990*** & 3.638*** & 5.356*** & 4.519*** & 3.569*** & 3.854***\\
+\hspace{1em} & (0.294) & (0.232) & (0.310) & (0.293) & (0.257) & (0.321)\\
+\hspace{1em}Gender (1 = girl) & -0.113 & 0.077 & -0.891* & 0.630+ & -0.073 & -0.755*\\
+\hspace{1em} & (0.319) & (0.309) & (0.375) & (0.379) & (0.357) & (0.364)\\
+\hspace{1em}SD (Intercept Class) & 0.703 & 0.205 & 0.561 & 0.392 & 0.000 & 0.707\\
+\hspace{1em}SD (Observations) & 2.527 & 2.467 & 2.965 & 3.022 & 2.847 & 2.860\\
+\hspace{1em}Num.Obs. & 256 & 256 & 253 & 256 & 254 & 251\\
+\hspace{1em}R2 Marg. & 0.000 & 0.000 & 0.021 & 0.011 & 0.000 & 0.016\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Ages 16--18}}\\
+\midrule \hspace{1em}(Intercept) & 4.997*** & 4.365*** & 5.903*** & 5.291*** & 4.621*** & 4.097***\\
+\hspace{1em} & (0.184) & (0.202) & (0.209) & (0.208) & (0.247) & (0.202)\\
+\hspace{1em}Gender (1 = girl) & -0.546* & 0.213 & -0.932** & 0.473 & -0.013 & -0.886**\\
+\hspace{1em} & (0.271) & (0.261) & (0.293) & (0.293) & (0.293) & (0.302)\\
+\hspace{1em}SD (Intercept Class) & 0.174 & 0.458 & 0.318 & 0.321 & 0.674 & 0.000\\
+\hspace{1em}SD (Observations) & 2.484 & 2.354 & 2.682 & 2.659 & 2.621 & 2.815\\
+\hspace{1em}Num.Obs. & 345 & 349 & 349 & 345 & 351 & 351\\
+\hspace{1em}R2 Marg. & 0.012 & 0.002 & 0.029 & 0.008 & 0.000 & 0.024\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
+
 # Political Interest Transmission (With Interaction Terms, Boys and Girls Together) {#sec-appendix5}
 
 \begin{table}
@@ -1756,14 +1793,14 @@ Gender (1 = girl):Ethnicity (1 = white) & -0.351 & 1.209 & -0.753 & -0.520 & 0.5
 ```{r}
 #| label: fig-mother
 #| echo: false
-#| fig-cap: "Interest in topic most often discussed with one's mother"
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Mother"
 knitr::include_graphics("_graphs/MotherDiscuss.pdf")
 ```
 
 ```{r}
 #| label: fig-father
 #| echo: false
-#| fig-cap: "Interest in topic most often discussed with one's father"
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Father, 2022 CCPIS"
 knitr::include_graphics("_graphs/FatherDiscuss.pdf")
 ```
 
@@ -1883,7 +1920,7 @@ knitr::include_graphics("_graphs/FatherDiscuss.pdf")
 ```{r}
 #| label: fig-discussparentyo
 #| echo: false
-#| fig-cap: "Interest in topics by gender, age and discussion with parents"
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Parents, 2022 CCPIS"
 knitr::include_graphics("_graphs/DiscussParentYO.pdf")
 ```
 
@@ -1966,6 +2003,22 @@ knitr::include_graphics("_graphs/DiscussParentYO.pdf")
 ```{r}
 #| label: fig-discusspeersyo
 #| echo: false
-#| fig-cap: "Interest in topics by gender, age and discussion with peers"
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CCPIS"
 knitr::include_graphics("_graphs/DiscussPeersYO.pdf")
+```
+
+# Correlation Matrixes {#sec-appendix8}
+
+```{r}
+#| label: fig-corccpis
+#| echo: false
+#| fig-cap: "Correlation Matrix for Interest in Topics, 2022 CCPIS"
+knitr::include_graphics("_graphs/CorMatrixDG.pdf")
+```
+
+```{r}
+#| label: fig-cordg
+#| echo: false
+#| fig-cap: "Correlation Matrix for Interest in Topics, 2023 Datagotchi PES"
+knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 ```

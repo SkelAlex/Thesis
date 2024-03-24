@@ -6,19 +6,31 @@ format: pdf
 toc: true
 toc-depth: 5
 ---
+This dissertation started by asking one question: *How do men and women differ with regard to political interest, and why?* For the "how" question, boys and girls, and later women and men, tend to be interested in different political topics. These gender differences intersect with age: older women are particularly interested in the politics of education and health care, while younger men and boys tend to report high interest in partisan politics and international relations. For the *why* question, socialization by parents and peers has often been found to be the most important predictor in countries where norms about gender equality are more widely shared. This dissertation has clarified the role of parents and peers in children's political interest development: parents can transmit interest in various political topics to their children who share their gender, while peers' role seems to be as important regardless of gender congruence.
+
+## Contributions to the Scholarly Literature
+
+What this dissertation makes clear is that developing interest in health care politics, law and crime, or another issue, is not something that happens *solely* in the formative years of 10--15. Although interest in most of these topics does increase through adolescence, a general increase throughout adulthood can also be seen for all topics except partisan politics. Some later developments in life seem to be associated with the appearance of gender gaps in interest in health care and education politics, which only appear in the mid-30s. Women and men's life-cycle experiences in caring and raising children remain different in countries like Canada and seem to be the most plausible explanations for the emergence of gender gaps in interest in health care and education.
+
+This dissertation contributes to the literature on social learning theory. One of the implications of social learning theory is that children's attitudes and interests should be influenced by role models who share their gender. This assumption was tested among parents and confirmed for interest in several political topics. It had, however, never been tested among friends. Results here show that friends' gender does not matter as much as parents' gender in predicting children's political interests. This result is surprising given the fact that, as predicted by gender homophily theory, children overwhelmingly tend to stick with other children of the same gender. They also tend to discuss different topics depending on other children's gender, but this does not translate into higher transmission potential of friends from one gender compared with friends of another gender.
+
+The analysis presented here also contributes to the literature about political interest by clarifying, in the vein of recent studies by @campbellrosie2008 and @ferrin2020, that gender differences in political interest are not only about the *level* of political interest but also about the *type* of political interest. The level of political interest as well as the gender gaps vary between each of the five topics tested --- health care, international affairs, law and crime, education, and partisan politics. While all interest associations between topics are positive, the majority of correlation coefficients are under 0.4 among children and adults (see @fig-cordg and @fig-corccpis in @sec-appendix8), which suggests relatively weak associations between interest in one political topic and interest in another topic [@akoglu2018]. People who are interested in the politics of health care may not be interested in international relations or partisan politics, and so on. Political interest can be divided into several components, and despite its close association with partisan politics, both measures remain different.
+
+For parents, what these findings suggest is that parental education matters. Political topics discussed at home have a significant influence over children's interests, and this is particularly the case for mother--daughter and father--son discussions. However, parents are only one source of socialization for children among many others. Other than parents and peers, two other socialization influences were tested in full models used in @sec-chap4 and @sec-chap5: teachers and social media influencers. These findings deserve further interest.
+
 ## Media
 
-Research has been done on the influence of political news on the development of political interest among adolescents. Although political interest can influence news media consumption, studies have shown the relationship also works in the other direction: watching more political news on traditional media and social media has a positive effect on political interest [@holt2013; @shehata2019].
+Tested alongside other influences, influencers' discussion of a specific topic is actually the strongest overall predictor of children's interest in that same topic in \ref{tab:lmeAgentsCtrl}. By contrast, the influence of teachers is not statistically significant. Other research about the role of media has generally found they play an important role in socialization.
 
-Websites can also have a positive influence on people's political interest, although this literature might be somewhat old. @lupia2005 find young adults can gain political interest by visiting informative websites under certain conditions.
+Recent research about influencers...
 
-Studies mostly find boys use the Internet more frequently than girls. @willoughby2008 finds that boys use the Internet just as frequently as girls in early high school, but girls' Internet use decreases in late high school, notably due to a decline in gaming, making older teenage boys more active on the Internet than girls. @tsai2010 also find boys use the Internet more than girls in junior high school, but purpose-wise, girls use the Internet for communication while boys use it more for Web exploration.
+With regards to media, research has been done on the influence of political news on the development of political interest among adolescents. Although political interest can influence news media consumption, studies have shown the relationship also works in the other direction: watching more political news on traditional media and social media has a positive effect on political interest [@holt2013; @shehata2019]. Websites can also have a positive influence on people's political interest, although this literature might be somewhat old. @lupia2005 find young adults can gain political interest by visiting informative websites under certain conditions.
 
-Online political engagement is more prevalent among boys than girls according to @cicognani2012, but @livingstone2005 find that girls visit more political and civic websites.
+Studies mostly find boys use the Internet more frequently than girls. @willoughby2008 finds that boys use the Internet just as frequently as girls in early high school, but girls' Internet use decreases in late high school, notably due to a decline in gaming, making older teenage boys more active on the Internet than girls. @tsai2010 also find boys use the Internet more than girls in junior high school, but purpose-wise, girls use the Internet for communication while boys use it more for Web exploration. Online political engagement is more prevalent among boys than girls according to @cicognani2012, but @livingstone2005 find that girls visit more political and civic websites.
 
 ## Schools
 
-Schools can influence childhood socialization in many ways, including citizenship education classes, classroom political discussions, extracurricular activities, and active learning strategies.
+Tested alongside other influences, teachers' discussion of a specific topic is not significantly related to children's interest in that same topic in \ref{tab:lmeAgentsCtrl}. While teachers do not have a distinct influence on interest into particular topics in this study, the broader influence of schools on political interest development has been assessed time and again in various studies. Schools can influence childhood socialization in many ways, including citizenship education classes, classroom political discussions, extracurricular activities, and active learning strategies.
 
 While earlier studies found only weak links between citizenship education classes and political interest [@langton1968], more recent studies find a positive link [@dassonneville2012; @maheo2019; @neundorf2016]. *Citizenship education* and *civic education* classes include classes teaching facts about government and politics but also promoting political engagement [@althof2006; @themistokleous2016].
 
@@ -27,3 +39,37 @@ Extracurricular and active learning activities can affect youth political intere
 Classroom political discussions in general can also increase students' political interest. For instance, students' perceptions of an *open classroom climate* marginally increase their political interest [@dassonneville2012]. An *open classroom climate* is one in which "students experience the discussion of social and political issues while in class and \[in which\] they feel comfortable contributing their own opinions during such discussions" [@campbell2007, p. 62].
 
 The role of classroom political discussions in political socialization might be gendered. For instance, @mahony1985 finds that girls are less likely to participate in classroom discussions of politics because boys make the classroom climate aggressive. However, @rosenthal2003 show that, while girls' presence has a slightly positive impact on girls' speaking time, interruptions occur as frequently between adolescents whatever their gender and studies find that 8th- to 12th-grade girls are *more* likely than boys to report an open classroom climate [@blankenship1990; @campbell2007; @maurissen2018].^[Among adults, @karpowitz2014 and @beauvais2020 also show that women's and men's relative speaking time in a deliberative and decision-making setting depends on the number of women. When decisions are made by a majority, the presence of more women leads to more speaking time for each woman.]
+
+For political actors who seek to focused a more gender-balanced set of interests (see chap 1), these results can mean a few different things. Discussing health care politics and education politics in an open classroom climate could be a productive way for educators, organizations and political actors to foster long-lasting interest in health care and education politics, although more research would be needed. By linking these topics to those of partisan politics and international affairs, teachers may also be able to hook boys, whose interest in these topics seems to be relatively high at a young age. On the other hand, discussing partisan politics and international affairs in class may also increase girls' interest in these topics. In Quebec, there is no compulsory civics class, and it is only compulsory for half a year in Ontario.
+
+For interest in partisan politics, the fact that younger men report more interest may partly explain their overall higher intention to run for office later in life. Having programs in high school that aim to make students more interested and in particular young girls could therefore make running for office an option easier to consider for young women when they are adults.
+
+Yet, some of the change happens at the adult age.
+
+## Limitations
+
+This dissertation has some limitations.
+
+First, age trends should be interpreted with caution. None of the data used are panel data. It is therefore difficult to distinguish age effects from generational effects and life-cycle effects. While the data makes it possible to say the gender gap in interest in health care seems to increase with age, it is not possible to tell whether this is the result of older generations having a larger gender gap or whether similar patterns will happen in today's youth.
+
+Another related issue is that not students from the same schools. Some schools include students from several school years, but not all of them. Schools are therefore not all comparable to each other.
+
+For that reason, longitudinal studies would be warranted.
+
+Second, given the lack of representativity of the student dats, inferences are limited. Descriptive statistics from the CES, WVS and GSS should however be broadly representative of the Canadian population.
+
+Third, no causal links are assessed in this dissertation.
+
+Fourth and finally, @stattin2022 suggest that personal political interest can influence perceptions of others' political interest or perceptions of the frequency of discussions with others. This could 
+
+## Ideology
+
+Is interest in some topics *solely* a proxy for ideology? No.
+
+Do liberal mothers discuss health care more? In other words, does interest in specific issues simply indicate a certain ideological leaning?
+
+Partisanship: would sovereigntists and francophones talk the same about politics than anglophones and federalists?
+
+## Areas of Future Research
+
+## Grammar Check
