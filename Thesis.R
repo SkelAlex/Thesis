@@ -39,7 +39,7 @@ CCPIS$Class <- CCPIS$Classe
 CCPIS$Class[is.na(CCPIS$Class)] <- CCPIS$Class.ID[
   is.na(CCPIS$Class)]
 CCPIS$Class <- str_remove_all(CCPIS$Class, "\\s+")
-CCPIS$number <- 1:length(CCPIS$StartDate)
+CCPIS$number <- 1:nrow(CCPIS)
 Codes <- openxlsx::read.xlsx("_data/CCPIS/8digitCodes.xlsx")
 CCPISManageManually <- CCPIS |>
   filter(!(Class %in% Codes$Code.à.8.chiffres)) |>
