@@ -2022,3 +2022,41 @@ knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 #| fig-cap: "Correlation Matrix for Interest in Topics, 2023 Datagotchi PES"
 knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 ```
+# Political Interest Transmission by Influencers (Without Control Variables) {#sec-appendix9}
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender Congruence of Influencer who Discusses that Topic \label{tab:lmeInfluencer}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Same-Gender Influencers}}\\
+\midrule \hspace{1em}(Intercept) & 4.429*** & 4.101*** & 5.335*** & 4.981*** & 4.460*** & 3.832***\\
+\hspace{1em} & (0.153) & (0.203) & (0.235) & (0.189) & (0.219) & (0.217)\\
+\hspace{1em}Topic most discussed with influencer? & 1.331*** & 0.780* & 0.939** & 1.507*** & 0.038 & 1.551+\\
+\hspace{1em} & (0.165) & (0.319) & (0.298) & (0.359) & (0.487) & (0.881)\\
+\hspace{1em}SD (Intercept Class) & 0.747 & 0.757 & 0.739 & 0.450 & 0.836 & 0.801\\
+\hspace{1em}SD (Observations) & 2.704 & 2.369 & 2.654 & 2.705 & 2.668 & 2.831\\
+\hspace{1em}Num.Obs. & 1678 & 336 & 338 & 335 & 335 & 334\\
+\hspace{1em}R2 Marg. & 0.035 & 0.017 & 0.027 & 0.050 & 0.000 & 0.009\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Other-Gender Influencers}}\\
+\midrule \hspace{1em}(Intercept) & 4.107*** & 3.795*** & 5.146*** & 5.349*** & 3.828*** & 3.167***\\
+\hspace{1em} & (0.201) & (0.240) & (0.346) & (0.354) & (0.328) & (0.277)\\
+\hspace{1em}Topic most discussed with influencer? & 1.136*** & 0.569 & -0.217 & 1.241* & 0.932 & 0.583\\
+\hspace{1em} & (0.283) & (0.580) & (0.523) & (0.542) & (0.817) & (1.464)\\
+\hspace{1em}SD (Intercept Class) & 0.858 & 0.150 & 0.725 & 1.073 & 1.023 & 0.000\\
+\hspace{1em}SD (Observations) & 2.688 & 2.299 & 2.611 & 2.522 & 2.650 & 2.876\\
+\hspace{1em}Num.Obs. & 560 & 112 & 112 & 111 & 113 & 112\\
+\hspace{1em}R2 Marg. & 0.025 & 0.009 & 0.002 & 0.042 & 0.011 & 0.001\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}

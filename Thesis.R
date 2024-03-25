@@ -502,13 +502,48 @@ CCPIS$influencer_gender_alt[CCPIS$influencer_gender %in% c(
 CCPIS$influencer_gender_alt[
   CCPIS$influencer_gender ==
     "Autre (ex.: trans, non-binaire, bispirituel, gender-queer)"] <-
-  "Other (e.g. Trans,\nnon-binary, two-\nspirit, gender-queer)"
+  "Other"
 CCPIS$influencer_gender_alt[
   CCPIS$influencer_gender ==
     "Other (e.g. Trans, non-binary, two-spirit, gender-queer)"] <-
-  "Other (e.g. Trans,\nnon-binary, two-\nspirit, gender-queer)"
+  "Other"
 CCPIS$influencer_gender_alt[CCPIS$influencer_gender == ""] <- NA
 table(CCPIS$influencer_gender_alt, useNA = "always")
+CCPIS$influencer_gender_congruence <- ifelse(
+  CCPIS$influencer_gender_alt == "A woman" & CCPIS$female_alt == "Girl", 1, ifelse(
+    CCPIS$influencer_gender_alt == "A man" & CCPIS$female_alt == "Boy", 1, ifelse(
+      CCPIS$influencer_gender_alt == "Other" & CCPIS$female_alt == "Other", 1, 0)))
+table(CCPIS$influencer_gender_congruence, useNA = "always")
+CCPIS$samegenderinfluencer_discuss_health <- CCPIS$influencer_discuss_health
+CCPIS$samegenderinfluencer_discuss_health[
+  CCPIS$influencer_gender_congruence == 0] <- NA
+CCPIS$othergenderinfluencer_discuss_health <- CCPIS$influencer_discuss_health
+CCPIS$othergenderinfluencer_discuss_health[
+  CCPIS$influencer_gender_congruence == 1] <- NA
+CCPIS$samegenderinfluencer_discuss_foreign <- CCPIS$influencer_discuss_foreign
+CCPIS$samegenderinfluencer_discuss_foreign[
+  CCPIS$influencer_gender_congruence == 0] <- NA
+CCPIS$othergenderinfluencer_discuss_foreign <- CCPIS$influencer_discuss_foreign
+CCPIS$othergenderinfluencer_discuss_foreign[
+  CCPIS$influencer_gender_congruence == 1] <- NA
+CCPIS$samegenderinfluencer_discuss_law <- CCPIS$influencer_discuss_law
+CCPIS$samegenderinfluencer_discuss_law[
+  CCPIS$influencer_gender_congruence == 0] <- NA
+CCPIS$othergenderinfluencer_discuss_law <- CCPIS$influencer_discuss_law
+CCPIS$othergenderinfluencer_discuss_law[
+  CCPIS$influencer_gender_congruence == 1] <- NA
+CCPIS$samegenderinfluencer_discuss_education <- CCPIS$influencer_discuss_education
+CCPIS$samegenderinfluencer_discuss_education[
+  CCPIS$influencer_gender_congruence == 0] <- NA
+CCPIS$othergenderinfluencer_discuss_education <- CCPIS$influencer_discuss_education
+CCPIS$othergenderinfluencer_discuss_education[
+  CCPIS$influencer_gender_congruence == 1] <- NA
+CCPIS$samegenderinfluencer_discuss_partisan <- CCPIS$influencer_discuss_partisan
+CCPIS$samegenderinfluencer_discuss_partisan[
+  CCPIS$influencer_gender_congruence == 0] <- NA
+CCPIS$othergenderinfluencer_discuss_partisan <- CCPIS$influencer_discuss_partisan
+CCPIS$othergenderinfluencer_discuss_partisan[
+  CCPIS$influencer_gender_congruence == 1] <- NA
 political <- function(new, old) {
   new <- NA
   new[old %in% c("Not political", "Pas politique")] <- 0
@@ -3885,6 +3920,48 @@ CCPISOldGirlsAgentsLonger <- cbind(
   CCPISOldGirlsTeacherLonger, CCPISOldGirlsInfluencerLonger)
 CCPISOldGirlsAgentsLonger <- CCPISOldGirlsAgentsLonger[,
  !duplicated(colnames(CCPISOldGirlsAgentsLonger), fromLast = TRUE)]
+longer_samegenderinfluencer <- function(data) {
+  pivot_longer(data, cols = c(
+    "samegenderinfluencer_discuss_health",
+    "samegenderinfluencer_discuss_foreign",
+    "samegenderinfluencer_discuss_law",
+    "samegenderinfluencer_discuss_education",
+    "samegenderinfluencer_discuss_partisan"),
+    names_to = "name_influencer", values_to = "value_influencer") |>
+  mutate(interest_all = case_when(
+    name_influencer == "samegenderinfluencer_discuss_health" ~
+     interest_health,
+    name_influencer == "samegenderinfluencer_discuss_foreign" ~
+     interest_foreign,
+    name_influencer == "samegenderinfluencer_discuss_law" ~
+     interest_law,
+    name_influencer == "samegenderinfluencer_discuss_education" ~
+     interest_education,
+    name_influencer == "samegenderinfluencer_discuss_partisan" ~
+     interest_partisan))
+}
+CCPISSameGenderInfluencerLonger <- longer_samegenderinfluencer(CCPIS)
+longer_othergenderinfluencer <- function(data) {
+  pivot_longer(data, cols = c(
+    "othergenderinfluencer_discuss_health",
+    "othergenderinfluencer_discuss_foreign",
+    "othergenderinfluencer_discuss_law",
+    "othergenderinfluencer_discuss_education",
+    "othergenderinfluencer_discuss_partisan"),
+    names_to = "name_influencer", values_to = "value_influencer") |>
+  mutate(interest_all = case_when(
+    name_influencer == "othergenderinfluencer_discuss_health" ~
+     interest_health,
+    name_influencer == "othergenderinfluencer_discuss_foreign" ~
+     interest_foreign,
+    name_influencer == "othergenderinfluencer_discuss_law" ~
+     interest_law,
+    name_influencer == "othergenderinfluencer_discuss_education" ~
+     interest_education,
+    name_influencer == "othergenderinfluencer_discuss_partisan" ~
+     interest_partisan))
+}
+CCPISOtherGenderInfluencerLonger <- longer_othergenderinfluencer(CCPIS)
 
 #### 4.2 Create empty models ####
 ModelInterest <- nlme::lme(data = CCPIS, fixed = interest ~ 1,
@@ -4159,6 +4236,30 @@ ModelOldBoysMaleFriends <- lme_no_ctrl(
   data = CCPISOldBoysMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
 ModelOldGirlsMaleFriends <- lme_no_ctrl(
   data = CCPISOldGirlsMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
+ModelHealthSameGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "samegenderinfluencer_discuss_health", y = "interest_health")
+ModelHealthOtherGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "othergenderinfluencer_discuss_health", y = "interest_health")
+ModelForeignSameGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "samegenderinfluencer_discuss_foreign", y = "interest_foreign")
+ModelForeignOtherGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "othergenderinfluencer_discuss_foreign", y = "interest_foreign")
+ModelLawSameGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "samegenderinfluencer_discuss_law", y = "interest_law")
+ModelLawOtherGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "othergenderinfluencer_discuss_law", y = "interest_law")
+ModelEducationSameGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "samegenderinfluencer_discuss_education", y = "interest_education")
+ModelEducationOtherGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "othergenderinfluencer_discuss_education", y = "interest_education")
+ModelPartisanSameGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "samegenderinfluencer_discuss_partisan", y = "interest_partisan")
+ModelPartisanOtherGenderInfluencer <- lme_no_ctrl(
+  data = CCPIS, x = "othergenderinfluencer_discuss_partisan", y = "interest_partisan")
+ModelAllSameGenderInfluencer <- lme_no_ctrl(
+  data = CCPISSameGenderInfluencerLonger, x = "value_influencer", y = "interest_all")
+ModelAllOtherGenderInfluencer <- lme_no_ctrl(
+  data = CCPISOtherGenderInfluencerLonger, x = "value_influencer", y = "interest_all")
 
 #### 4.4 Create models with SES only ####
 lme_ses <- function(data, x, y) {
@@ -5263,6 +5364,30 @@ result2 <- gsub(" & std.error", "\\\\hspace{1em}", result2)
 result2 <- gsub("SD", "\\\\hspace{1em}SD", result2)
 result2 <- gsub("R2 Marg. & ", "R2 Marg.", result2)
 gsub("Num.Obs. & ", "Num.Obs.", result2)
+modelsummary::modelsummary(models = list(
+  "Same-Gender Influencers" = list(
+    "All" = ModelAllSameGenderInfluencer,
+    "Health care" = ModelHealthSameGenderInfluencer,
+    "International affairs" = ModelForeignSameGenderInfluencer,
+    "Law and crime" = ModelLawSameGenderInfluencer,
+    "Education" = ModelEducationSameGenderInfluencer,
+    "Partisan politics" = ModelPartisanSameGenderInfluencer),
+  "Other-Gender Influencers" = list(
+    "All" = ModelAllOtherGenderInfluencer,
+    "Health care" = ModelHealthOtherGenderInfluencer,
+    "International affairs" = ModelForeignOtherGenderInfluencer,
+    "Law and crime" = ModelLawOtherGenderInfluencer,
+    "Education" = ModelEducationOtherGenderInfluencer,
+    "Partisan politics" = ModelPartisanOtherGenderInfluencer)),
+  shape = "rbind", stars = TRUE, gof_omit = "(IC)|(RMSE)|(R2 Cond.)",
+  output = "latex",
+  notes = c("Method: Multilevel linear regression",
+            "Fixed Effects: Classroom",
+            "Controls: None"),
+  title = paste("Interest in Topic by Gender Congruence of Influencer who",
+                "Discusses that Topic \\label{tab:lmeInfluencer}"),
+  coef_rename = c("x" = "Topic most discussed with influencer?")) |>
+    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
 
 #### 4.8 Create confidence intervals graphs ####
 get_ci <- function(model, var_order, level = 0.95) {
@@ -6014,6 +6139,11 @@ t.test(CCPISYoung$interest_foreign, CCPISOld$interest_foreign) # interest higher
 t.test(CCPISYoung$interest_law, CCPISOld$interest_law) # interest higher for 16-18-year-olds
 t.test(CCPISYoung$interest_education, CCPISOld$interest_education) # interest higher for 16-18-year-olds
 t.test(CCPISYoung$interest_partisan, CCPISOld$interest_partisan) # N.S.
+CCPISYoung$female <- as.numeric(CCPISYoung$female)
+CCPISOld$female <- as.numeric(CCPISOld$female)
+t.test(CCPISYoung$female, CCPISOld$female) # 53% vs. 45% girls, p<0.05
+t.test(CCPISYoung$white, CCPISOld$white) # 53% vs. 64% whites, p<0.01
+t.test(CCPISYoung$immig, CCPISOld$immig) # 9% vs. 20% immigrnats, p<0.001
 
 ### 6. Correlations ####
 CorrCCPIS <- CCPIS[c(21, 32:36)]
