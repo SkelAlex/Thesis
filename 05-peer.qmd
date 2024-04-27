@@ -1,11 +1,5 @@
----
-title: "Gender Homophily and Social Learning: How Can Friends Shape Political Interests? {#sec-chap5}"
-author: "Alexandre Fortier-Chouinard"
-bibliography: Thesis.bib
-format: pdf
-toc: true
-toc-depth: 5
----
+# Gender Homophily and Social Learning: How Can Friends Shape Political Interests? {#sec-chap5}
+
 Peers play a crucial role in children's socialization, especially during adolescence. This chapter aims to decipher peer-to-peer political interest transmission and the role gender can play in that transmission. To what extent do female peers and friends influence political interest development? Does that influence grow as children age? Do female friends have a greater influence in transmitting political interest to boys or girls? What about male peers? Do these results hold for different political topics, when political interest is measured by sector? The chapter relies on gender homophily theory and social learning. It seeks to test this dissertation's second hypothesis highlighted in @sec-chap1: *Children's interest in specific political topics is more related to political discussions with their same-gender peer(s) than other-gender peer(s).*
 
 As @sec-chap1 lays it out, theories of gender homophily and social learning suggest that children are influenced by role models, especially those who share their gender, and this finding applies to attitudes such as political interest. Gender homophily can lead to social learning with observer--model similarity: as children and teenagers stick with other children who resemble them --- mostly of their gender --- they can start imitating their habits, attitudes and behaviours, including interests in various political topics.

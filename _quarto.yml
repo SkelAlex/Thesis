@@ -2,7 +2,7 @@ project:
   type: book
 book:
   title: "Gendered Political Socialization"
-  subtitle: "Why Women and Men Still Differ in Political Interest"
+  subtitle: "Why Women and Men Still Differ in Their Political Interests"
   author: "Alexandre Fortier-Chouinard"
   date: last-modified
   date-format: "MMMM D, YYYY"
@@ -18,8 +18,8 @@ book:
   appendices:
     - 08-appendix.qmd
 bibliography: Thesis.bib
-#filters:
-#  - section-bibliographies
+toc: true
+toc-depth: 5
 header-includes:
   - \widowpenalty10000
   - \clubpenalty10000

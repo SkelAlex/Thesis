@@ -1,11 +1,5 @@
----
-title: "Gender and Political Interest Development: Canadian Trends from Childhood to Adulthood {#sec-chap3}"
-author: "Alexandre Fortier-Chouinard"
-bibliography: Thesis.bib
-format: pdf
-toc: true
-toc-depth: 5
----
+# Gender and Political Interest Development: Canadian Trends from Childhood to Adulthood {#sec-chap3}
+
 As @sec-chap1 showed, studies have long shown a gender gap in political interest among adults in Western countries, in which men report being more interested in politics than women, and one of the main explanations for that gap is socialization. This process can be influenced by four main agents: parents, peers, media and schools. Moreover, when dissecting interests by topic, women typically develop stronger interests in cooperation-focused political topics, while men typically develop stronger interests in self-assertion-focused political topics. Socialization can happen at various stages throughout the life course. It can start from an early age but does not stop completely after someone reaches adulthood. The timing of gendered political socialization processes can be puzzling. This chapter therefore seeks to provide an overview of how political interest evolves while Canadians age. Identifying the critical periods of life in which political interest can fluctuate will lay the groundwork for @sec-chap4 and @sec-chap5, which will focus their attention on explaining how various socialization agents can influence the development of political interest, especially among children and teenagers.
 
 This chapter addresses two related questions: *Throughout the average person's life, when does political interest increase, decrease, or remain stable? How does the evolution of political interest over the life course differ between girls and boys, and later between women and men?* After exploring what studies have found about these two questions in various countries, the chapter uses a variety of Canadian and international datasets to provide context-specific answers to these two questions and break results down by age, gender, other socio-demographic characteristics, other forms of political engagement and, most importantly, interest in various political topics. This chapter hypothesizes that for both boys and girls, adolescence is the moment in time when gender differences in interest in various political topics emerge. Notably, it is argued that boys develop more interest in partisan politics, which is a contributing factor to their higher interest in running for elected office when they reach adulthood.
