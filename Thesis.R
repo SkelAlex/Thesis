@@ -7,7 +7,7 @@
 pacman::p_load(tidyverse, extrafont, ggtext, openxlsx, qdap, psy, kableExtra,
                readstata13, haven, anesrake, questionr, ggpubr, nlme,
                modelsummary, Hmisc, scales, ggtext, pwr, lme4, lmtest,
-               ggcorrplot)
+               ggcorrplot, psych)
 delete_rows_na <- function(row, loadings, number_na_allowed = 5) {
   if (sum(is.na(row)) <= number_na_allowed) {
     # Perform element-wise multiplication for each variable and its loading
@@ -20,83 +20,83 @@ delete_rows_na <- function(row, loadings, number_na_allowed = 5) {
 }
 
 ### 1. Data cleaning ####
-#### 1.1 CCPIS ####
-CCPISEN <- read.csv("_data/CCPIS/StudentsEN.csv")
-CCPISFR1 <- read.csv("_data/CCPIS/StudentsFR1.csv")
-CCPISFR3 <- read.csv("_data/CCPIS/StudentsFR3.csv")
-CCPISBad <- bind_rows(CCPISEN, CCPISFR1, CCPISFR3) |>
+#### 1.1 CPIS ####
+CPISEN <- read.csv("_data/CPIS/StudentsEN.csv")
+CPISFR1 <- read.csv("_data/CPIS/StudentsFR1.csv")
+CPISFR3 <- read.csv("_data/CPIS/StudentsFR3.csv")
+CPISBad <- bind_rows(CPISEN, CPISFR1, CPISFR3) |>
   filter(str_detect(StartDate, "^20") & # remove column descriptions
            (Consent == "I do not accept to participate in this survey" |
               Consentement ==
               "Je n'accepte pas de participer à cette recherche ") |
            Q5_1 == "" | is.na(Q5_1))
-CCPIS <- bind_rows(CCPISEN, CCPISFR1, CCPISFR3) |>
+CPIS <- bind_rows(CPISEN, CPISFR1, CPISFR3) |>
   filter(str_detect(StartDate, "^20") & # remove column descriptions
            (Consent == "I accept to participate in this survey" |
               Consentement == "J'accepte de participer à cette recherche") &
            Q5_1 != "" & !is.na(Q5_1))
-CCPIS$Class <- CCPIS$Classe
-CCPIS$Class[is.na(CCPIS$Class)] <- CCPIS$Class.ID[
-  is.na(CCPIS$Class)]
-CCPIS$Class <- str_remove_all(CCPIS$Class, "\\s+")
-CCPIS$number <- 1:nrow(CCPIS)
-Codes <- openxlsx::read.xlsx("_data/CCPIS/8digitCodes.xlsx")
-CCPISManageManually <- CCPIS |>
+CPIS$Class <- CPIS$Classe
+CPIS$Class[is.na(CPIS$Class)] <- CPIS$Class.ID[
+  is.na(CPIS$Class)]
+CPIS$Class <- str_remove_all(CPIS$Class, "\\s+")
+CPIS$number <- 1:nrow(CPIS)
+Codes <- openxlsx::read.xlsx("_data/CPIS/8digitCodes.xlsx")
+CPISManageManually <- CPIS |>
   filter(!(Class %in% Codes$Code.à.8.chiffres)) |>
   select(StartDate:EndDate, LocationLatitude:LocationLongitude, Class:Élève,
          number)
 # manual check of classrooms numbers which don't match the list to see if I
 # can match them with other classes through common latitude/longitude &
 # similar star time and end time
-CCPIS$Class[!(CCPIS$Class %in% Codes$Code.à.8.chiffres)] <- c(
+CPIS$Class[!(CPIS$Class %in% Codes$Code.à.8.chiffres)] <- c(
   rep("", 9), rep("16554548", 2), "79362677", "41083499", "04120709",
   rep("61150875", 2), rep("40965312", 3), rep("43731111", 2),
   rep("27787836", 4), rep("35043304", 17), rep("56697824", 5), "07892125",
   "26319798", "", rep("46537164", 2), rep("65988237", 3), "53394381",
   "84691593", "", "72249157", "36611780", rep("", 2), "14748972")
-CCPIS$school <- qdap::mgsub(text.var = CCPIS$Class,
+CPIS$school <- qdap::mgsub(text.var = CPIS$Class,
                                pattern = Codes$Code.à.8.chiffres,
                                replacement = Codes$École)
-CCPIS$school[CCPIS$school == paste0(
+CPIS$school[CPIS$school == paste0(
   "Student Senate (https://www.rcdsb.on.ca/en/parents-and-students/",
   "student-senate.aspx)")] <- "Renfrew County DSB Student Senate"
-CCPIS <- filter(CCPIS, school != "")
-CCPIS$teacher <- qdap::mgsub(text.var = CCPIS$Class,
+CPIS <- filter(CPIS, school != "")
+CPIS$teacher <- qdap::mgsub(text.var = CPIS$Class,
                                 pattern = Codes$Code.à.8.chiffres,
                                 replacement = Codes$`Nom.de.l'enseignant`)
-table(CCPIS$school, useNA = "always")
-table(CCPIS$Class, useNA = "always") # 38 classes, but 6 with 1-2 students
+table(CPIS$school, useNA = "always")
+table(CPIS$Class, useNA = "always") # 38 classes, but 6 with 1-2 students
 # so 32 classes with at least 9 students (or 30 with at least 12)
-table(CCPIS$teacher, useNA = "always")
-CCPIS$province <- NA
-CCPIS$province[CCPIS$school %in% unique(CCPIS$school)[4:8]] <-
+table(CPIS$teacher, useNA = "always")
+CPIS$province <- NA
+CPIS$province[CPIS$school %in% unique(CPIS$school)[4:8]] <-
   "Quebec"
-CCPIS$province[CCPIS$school %in% unique(CCPIS$school)[1:3]] <-
+CPIS$province[CPIS$school %in% unique(CPIS$school)[1:3]] <-
   "Ontario"
-CCPIS$school_lang <- NA
-CCPIS$school_lang[CCPIS$school %in% unique(CCPIS$school)[4:8]] <-
+CPIS$school_lang <- NA
+CPIS$school_lang[CPIS$school %in% unique(CPIS$school)[4:8]] <-
   "French"
-CCPIS$school_lang[CCPIS$school %in% unique(CCPIS$school)[1:3]] <-
+CPIS$school_lang[CPIS$school %in% unique(CPIS$school)[1:3]] <-
   "English"
-CCPIS$private <- 1
-CCPIS$private[CCPIS$school %in% c(
+CPIS$private <- 1
+CPIS$private[CPIS$school %in% c(
   "École Jean-de-Brébeuf", # CSS de la Capitale
   "École de la Rose-des-Vents", # CSS des Draveurs
   "Renfrew County DSB Student Senate")] <- 0 # public
-table(CCPIS$province, useNA = "always")
-table(CCPIS$school_lang, useNA = "always")
-table(CCPIS$private, useNA = "always")
-CCPIS$city <- case_when(
-  CCPIS$school == "Collège Citoyen" ~ "Laval",
-  CCPIS$school == "Collège Boisbriand 2016" ~ "Boisbriand",
-  CCPIS$school == "École Jean-de-Brébeuf" ~ "Québec",
-  CCPIS$school == "École de la Rose-des-Vents" ~ "Cantley",
-  CCPIS$school == "Renfrew County DSB Student Senate" ~ "Pembroke",
-  CCPIS$school == "Collège mariste de Québec" ~ "Québec",
-  CCPIS$school == "Urban Village Academy" ~ "Barrie",
-  CCPIS$school == "Jaya International High School" ~ "Mississauga")
-table(CCPIS$city, useNA = "always")
-names(CCPIS)[20:77] <- c(
+table(CPIS$province, useNA = "always")
+table(CPIS$school_lang, useNA = "always")
+table(CPIS$private, useNA = "always")
+CPIS$city <- case_when(
+  CPIS$school == "Collège Citoyen" ~ "Laval",
+  CPIS$school == "Collège Boisbriand 2016" ~ "Boisbriand",
+  CPIS$school == "École Jean-de-Brébeuf" ~ "Québec",
+  CPIS$school == "École de la Rose-des-Vents" ~ "Cantley",
+  CPIS$school == "Renfrew County DSB Student Senate" ~ "Pembroke",
+  CPIS$school == "Collège mariste de Québec" ~ "Québec",
+  CPIS$school == "Urban Village Academy" ~ "Barrie",
+  CPIS$school == "Jaya International High School" ~ "Mississauga")
+table(CPIS$city, useNA = "always")
+names(CPIS)[20:77] <- c(
   "pol_meaning", "interest", "lockdown_political", "nurses_political",
   "china_political", "ukraine_political", "police_political",
   "crime_political", "tuition_political", "privateschool_political",
@@ -113,466 +113,466 @@ names(CCPIS)[20:77] <- c(
   "sexrole_inferior", "sexrole_underpressure", "sexrole_emotional",
   "sexrole_devote", "sexrole_gentle", "sexrole_helpful", "sexrole_kind",
   "sexrole_awarefeelings", "sexrole_understanding", "sexrole_warm", "email")
-CCPIS$female <- NA
-CCPIS$female[CCPIS$gender %in% c("A boy", "Un garçon")] <- 0
-CCPIS$female[CCPIS$gender %in% c("A girl", "Une fille")] <- 1
-CCPIS$female <- as.factor(CCPIS$female)
-table(CCPIS$female, useNA = "always") # 17 "other", 33 did not answer
-CCPIS$female_alt <- NA
-CCPIS$female_alt[CCPIS$gender %in% c("A boy", "Un garçon")] <- "Boy"
-CCPIS$female_alt[CCPIS$gender %in% c("A girl", "Une fille")] <- "Girl"
-CCPIS$female_alt[
-  CCPIS$gender ==
+CPIS$female <- NA
+CPIS$female[CPIS$gender %in% c("A boy", "Un garçon")] <- 0
+CPIS$female[CPIS$gender %in% c("A girl", "Une fille")] <- 1
+CPIS$female <- as.factor(CPIS$female)
+table(CPIS$female, useNA = "always") # 17 "other", 33 did not answer
+CPIS$female_alt <- NA
+CPIS$female_alt[CPIS$gender %in% c("A boy", "Un garçon")] <- "Boy"
+CPIS$female_alt[CPIS$gender %in% c("A girl", "Une fille")] <- "Girl"
+CPIS$female_alt[
+  CPIS$gender ==
     "Autre (ex.: trans, non-binaire, bispirituel, gender-queer)"] <- "Other"
-CCPIS$female_alt2 <- CCPIS$female_alt
-CCPIS$female_alt2[CCPIS$female_alt == "Girl"] <- "Girls"
-CCPIS$female_alt2[CCPIS$female_alt == "Boy"] <- "Boys"
-CCPIS$female_alt <- as.factor(CCPIS$female_alt)
-CCPIS$female_alt2 <- as.factor(CCPIS$female_alt2)
-CCPIS$age <- 2022 - as.numeric(CCPIS$yob)
-CCPIS$age[CCPIS$age > 18 | CCPIS$age < 9] <- NA
-table(CCPIS$age, useNA = "always")
-CCPIS$age_squared <- CCPIS$age ^ 2
-CCPIS$lang <- "Allophone"
-CCPIS$lang[CCPIS$language == "Français"] <- "Francophone"
-CCPIS$lang[CCPIS$language %in% c("English", "Anglais")] <- "Anglophone"
-CCPIS$lang[CCPIS$language %in% c(
+CPIS$female_alt2 <- CPIS$female_alt
+CPIS$female_alt2[CPIS$female_alt == "Girl"] <- "Girls"
+CPIS$female_alt2[CPIS$female_alt == "Boy"] <- "Boys"
+CPIS$female_alt <- as.factor(CPIS$female_alt)
+CPIS$female_alt2 <- as.factor(CPIS$female_alt2)
+CPIS$age <- 2022 - as.numeric(CPIS$yob)
+CPIS$age[CPIS$age > 18 | CPIS$age < 9] <- NA
+table(CPIS$age, useNA = "always")
+CPIS$age_squared <- CPIS$age ^ 2
+CPIS$lang <- "Allophone"
+CPIS$lang[CPIS$language == "Français"] <- "Francophone"
+CPIS$lang[CPIS$language %in% c("English", "Anglais")] <- "Anglophone"
+CPIS$lang[CPIS$language %in% c(
   "Don’t know/Prefer not to answer", "Je ne sais pas/Préfère ne pas répondre",
   "")] <- NA
-table(CCPIS$lang, useNA = "always")
-CCPIS$immig <- NA
-CCPIS$immig[CCPIS$born_canada %in% c("Yes", "Oui")] <- 0
-CCPIS$immig[CCPIS$born_canada %in% c("No", "Non")] <- 1
-CCPIS$ethn[CCPIS$ethnicity %in% c("Blanc(he)", "White")] <- "White"
-CCPIS$ethn[CCPIS$ethnicity == "Noir(e)"] <- "Black"
-CCPIS$ethn[CCPIS$ethnicity == paste(
+table(CPIS$lang, useNA = "always")
+CPIS$immig <- NA
+CPIS$immig[CPIS$born_canada %in% c("Yes", "Oui")] <- 0
+CPIS$immig[CPIS$born_canada %in% c("No", "Non")] <- 1
+CPIS$ethn[CPIS$ethnicity %in% c("Blanc(he)", "White")] <- "White"
+CPIS$ethn[CPIS$ethnicity == "Noir(e)"] <- "Black"
+CPIS$ethn[CPIS$ethnicity == paste(
   "Asiatique occidental(e) (e.g., Iranien(ne), Afghan(e), etc.)")] <-
   "West Asian"
-CCPIS$ethn[CCPIS$ethnicity == paste(
+CPIS$ethn[CPIS$ethnicity == paste(
   "Asiatique du Sud-Est (ex.: Vietnamien(ne), Cambodgien(ne), Laotien(ne),",
   "Thaïlandais(e), etc.)")] <- "Southeast Asian"
-CCPIS$ethn[CCPIS$ethnicity == "Arabe"] <- "Arabic"
-CCPIS$ethn[CCPIS$ethnicity == paste(
+CPIS$ethn[CPIS$ethnicity == "Arabe"] <- "Arabic"
+CPIS$ethn[CPIS$ethnicity == paste(
   "Sud-Asiatique (ex.: Indien(ne) de l’Inde, Pakistanais(e),",
   "Sri-Lankais(e), etc.)")] <- "South Asian"
-CCPIS$ethn[CCPIS$ethnicity == "Latino-Américain(e)"] <- "Hispanic"
-CCPIS$ethn[CCPIS$ethnicity == paste(
+CPIS$ethn[CPIS$ethnicity == "Latino-Américain(e)"] <- "Hispanic"
+CPIS$ethn[CPIS$ethnicity == paste(
   "Première Nation (Indien(ne) de l’Amérique du Nord), Métis(se) ou",
   "Inuk (Inuit)")] <- "Indigenous"
-CCPIS$ethn[CCPIS$ethnicity %in% c("Chinese", "Chinois(e)")] <- "Chinese"
-CCPIS$ethn[CCPIS$ethnicity == "Philippin(e)"] <- "Filipino"
-CCPIS$ethn[CCPIS$ethnicity == "Coréen(ne)"] <- "Korean"
-CCPIS$ethn[CCPIS$ethnicity == "Japonais(e)"] <- "Japanese"
-CCPIS$ethn[CCPIS$ethnicity %in% c("Autre (veuillez spécifier)",
+CPIS$ethn[CPIS$ethnicity %in% c("Chinese", "Chinois(e)")] <- "Chinese"
+CPIS$ethn[CPIS$ethnicity == "Philippin(e)"] <- "Filipino"
+CPIS$ethn[CPIS$ethnicity == "Coréen(ne)"] <- "Korean"
+CPIS$ethn[CPIS$ethnicity == "Japonais(e)"] <- "Japanese"
+CPIS$ethn[CPIS$ethnicity %in% c("Autre (veuillez spécifier)",
                                         "Other (please specify)")] <- "Other"
-table(CCPIS$ethn, useNA = "always")
-CCPIS$white <- 0
-CCPIS$white[CCPIS$ethn == "White"] <- 1
-CCPIS$white[is.na(CCPIS$ethn)] <- NA
-table(CCPIS$white, useNA = "always")
-CCPIS$interest <- as.numeric(CCPIS$interest)
-CCPIS$interest_health <- as.numeric(CCPIS$interest_health)
-CCPIS$interest_foreign <- as.numeric(CCPIS$interest_foreign)
-CCPIS$interest_law <- as.numeric(CCPIS$interest_law)
-CCPIS$interest_education <- as.numeric(CCPIS$interest_education)
-CCPIS$interest_partisan <- as.numeric(CCPIS$interest_partisan)
-CCPIS$gender_parent_health <- NA
-CCPIS$gender_parent_health[
-  CCPIS$parent_health %in% c("Mon père", "Father")] <- 0
-CCPIS$gender_parent_health[
-  CCPIS$parent_health %in% c("Ma mère", "Mother")] <- 1
-table(CCPIS$gender_parent_health, useNA = "always")
-CCPIS$gender_parent_education <- NA
-CCPIS$gender_parent_education[
-  CCPIS$parent_education %in% c("Mon père", "Father")] <- 0
-CCPIS$gender_parent_education[
-  CCPIS$parent_education %in% c("Ma mère", "Mother")] <- 1
-table(CCPIS$gender_parent_education, useNA = "always")
-CCPIS$gender_parent_law <- NA
-CCPIS$gender_parent_law[
-  CCPIS$parent_law %in% c("Mon père", "Father")] <- 0
-CCPIS$gender_parent_law[
-  CCPIS$parent_law %in% c("Ma mère", "Mother")] <- 1
-table(CCPIS$gender_parent_law, useNA = "always")
-CCPIS$gender_parent_foreign <- NA
-CCPIS$gender_parent_foreign[
-  CCPIS$parent_foreign %in% c("Mon père", "Father")] <- 0
-CCPIS$gender_parent_foreign[
-  CCPIS$parent_foreign %in% c("Ma mère", "Mother")] <- 1
-table(CCPIS$gender_parent_foreign, useNA = "always")
-CCPIS$gender_parent_partisan <- NA
-CCPIS$gender_parent_partisan[
-  CCPIS$parent_partisan %in% c("Mon père", "Father")] <- 0
-CCPIS$gender_parent_partisan[
-  CCPIS$parent_partisan %in% c("Ma mère", "Mother")] <- 1
-table(CCPIS$gender_parent_partisan, useNA = "always")
-CCPIS$mother_discuss_clean <- CCPIS$mother_discuss
-CCPIS$mother_discuss_clean[CCPIS$mother_discuss %in% c(
+table(CPIS$ethn, useNA = "always")
+CPIS$white <- 0
+CPIS$white[CPIS$ethn == "White"] <- 1
+CPIS$white[is.na(CPIS$ethn)] <- NA
+table(CPIS$white, useNA = "always")
+CPIS$interest <- as.numeric(CPIS$interest)
+CPIS$interest_health <- as.numeric(CPIS$interest_health)
+CPIS$interest_foreign <- as.numeric(CPIS$interest_foreign)
+CPIS$interest_law <- as.numeric(CPIS$interest_law)
+CPIS$interest_education <- as.numeric(CPIS$interest_education)
+CPIS$interest_partisan <- as.numeric(CPIS$interest_partisan)
+CPIS$gender_parent_health <- NA
+CPIS$gender_parent_health[
+  CPIS$parent_health %in% c("Mon père", "Father")] <- 0
+CPIS$gender_parent_health[
+  CPIS$parent_health %in% c("Ma mère", "Mother")] <- 1
+table(CPIS$gender_parent_health, useNA = "always")
+CPIS$gender_parent_education <- NA
+CPIS$gender_parent_education[
+  CPIS$parent_education %in% c("Mon père", "Father")] <- 0
+CPIS$gender_parent_education[
+  CPIS$parent_education %in% c("Ma mère", "Mother")] <- 1
+table(CPIS$gender_parent_education, useNA = "always")
+CPIS$gender_parent_law <- NA
+CPIS$gender_parent_law[
+  CPIS$parent_law %in% c("Mon père", "Father")] <- 0
+CPIS$gender_parent_law[
+  CPIS$parent_law %in% c("Ma mère", "Mother")] <- 1
+table(CPIS$gender_parent_law, useNA = "always")
+CPIS$gender_parent_foreign <- NA
+CPIS$gender_parent_foreign[
+  CPIS$parent_foreign %in% c("Mon père", "Father")] <- 0
+CPIS$gender_parent_foreign[
+  CPIS$parent_foreign %in% c("Ma mère", "Mother")] <- 1
+table(CPIS$gender_parent_foreign, useNA = "always")
+CPIS$gender_parent_partisan <- NA
+CPIS$gender_parent_partisan[
+  CPIS$parent_partisan %in% c("Mon père", "Father")] <- 0
+CPIS$gender_parent_partisan[
+  CPIS$parent_partisan %in% c("Ma mère", "Mother")] <- 1
+table(CPIS$gender_parent_partisan, useNA = "always")
+CPIS$mother_discuss_clean <- CPIS$mother_discuss
+CPIS$mother_discuss_clean[CPIS$mother_discuss %in% c(
   "Je ne sais pas/Préfère ne pas répondre",
   "Don't know/Prefer not to answer", "")] <- NA
-CCPIS$mother_discuss_clean[CCPIS$mother_discuss == "Santé"] <- "Health care"
-CCPIS$mother_discuss_clean[
-  CCPIS$mother_discuss == "Affaires internationales"] <-
+CPIS$mother_discuss_clean[CPIS$mother_discuss == "Santé"] <- "Health care"
+CPIS$mother_discuss_clean[
+  CPIS$mother_discuss == "Affaires internationales"] <-
   "International affairs"
-CCPIS$mother_discuss_clean[CCPIS$mother_discuss == "Loi et crime"] <-
+CPIS$mother_discuss_clean[CPIS$mother_discuss == "Loi et crime"] <-
   "Law and crime"
-CCPIS$mother_discuss_clean[CCPIS$mother_discuss == "Éducation"] <- "Education"
-CCPIS$mother_discuss_clean[CCPIS$mother_discuss == "Politique partisane"] <-
+CPIS$mother_discuss_clean[CPIS$mother_discuss == "Éducation"] <- "Education"
+CPIS$mother_discuss_clean[CPIS$mother_discuss == "Politique partisane"] <-
   "Partisan politics"
-table(CCPIS$mother_discuss_clean, useNA = "always")
-CCPIS$mother_discuss_health <- 0
-CCPIS$mother_discuss_health[CCPIS$mother_discuss_clean == "Health care"] <- 1
-CCPIS$mother_discuss_health[is.na(CCPIS$mother_discuss_clean)] <- NA
-table(CCPIS$mother_discuss_health, useNA = "always")
-CCPIS$mother_discuss_foreign <- 0
-CCPIS$mother_discuss_foreign[CCPIS$mother_discuss_clean ==
+table(CPIS$mother_discuss_clean, useNA = "always")
+CPIS$mother_discuss_health <- 0
+CPIS$mother_discuss_health[CPIS$mother_discuss_clean == "Health care"] <- 1
+CPIS$mother_discuss_health[is.na(CPIS$mother_discuss_clean)] <- NA
+table(CPIS$mother_discuss_health, useNA = "always")
+CPIS$mother_discuss_foreign <- 0
+CPIS$mother_discuss_foreign[CPIS$mother_discuss_clean ==
                                "International affairs"] <- 1
-CCPIS$mother_discuss_foreign[is.na(CCPIS$mother_discuss_clean)] <- NA
-table(CCPIS$mother_discuss_foreign, useNA = "always")
-CCPIS$mother_discuss_law <- 0
-CCPIS$mother_discuss_law[CCPIS$mother_discuss_clean == "Law and crime"] <- 1
-CCPIS$mother_discuss_law[is.na(CCPIS$mother_discuss_clean)] <- NA
-table(CCPIS$mother_discuss_law, useNA = "always")
-CCPIS$mother_discuss_education <- 0
-CCPIS$mother_discuss_education[CCPIS$mother_discuss_clean == "Education"] <- 1
-CCPIS$mother_discuss_education[is.na(CCPIS$mother_discuss_clean)] <- NA
-table(CCPIS$mother_discuss_education, useNA = "always")
-CCPIS$mother_discuss_partisan <- 0
-CCPIS$mother_discuss_partisan[CCPIS$mother_discuss_clean ==
+CPIS$mother_discuss_foreign[is.na(CPIS$mother_discuss_clean)] <- NA
+table(CPIS$mother_discuss_foreign, useNA = "always")
+CPIS$mother_discuss_law <- 0
+CPIS$mother_discuss_law[CPIS$mother_discuss_clean == "Law and crime"] <- 1
+CPIS$mother_discuss_law[is.na(CPIS$mother_discuss_clean)] <- NA
+table(CPIS$mother_discuss_law, useNA = "always")
+CPIS$mother_discuss_education <- 0
+CPIS$mother_discuss_education[CPIS$mother_discuss_clean == "Education"] <- 1
+CPIS$mother_discuss_education[is.na(CPIS$mother_discuss_clean)] <- NA
+table(CPIS$mother_discuss_education, useNA = "always")
+CPIS$mother_discuss_partisan <- 0
+CPIS$mother_discuss_partisan[CPIS$mother_discuss_clean ==
                                 "Partisan politics"] <- 1
-CCPIS$mother_discuss_partisan[is.na(CCPIS$mother_discuss_clean)] <- NA
-table(CCPIS$mother_discuss_partisan, useNA = "always")
-CCPIS$father_discuss_clean <- CCPIS$father_discuss
-CCPIS$father_discuss_clean[CCPIS$father_discuss %in% c(
+CPIS$mother_discuss_partisan[is.na(CPIS$mother_discuss_clean)] <- NA
+table(CPIS$mother_discuss_partisan, useNA = "always")
+CPIS$father_discuss_clean <- CPIS$father_discuss
+CPIS$father_discuss_clean[CPIS$father_discuss %in% c(
   "Je ne sais pas/Préfère ne pas répondre",
   "Don't know/Prefer not to answer", "")] <- NA
-CCPIS$father_discuss_clean[CCPIS$father_discuss == "Santé"] <- "Health care"
-CCPIS$father_discuss_clean[
-  CCPIS$father_discuss == "Affaires internationales"] <-
+CPIS$father_discuss_clean[CPIS$father_discuss == "Santé"] <- "Health care"
+CPIS$father_discuss_clean[
+  CPIS$father_discuss == "Affaires internationales"] <-
   "International affairs"
-CCPIS$father_discuss_clean[CCPIS$father_discuss == "Loi et crime"] <-
+CPIS$father_discuss_clean[CPIS$father_discuss == "Loi et crime"] <-
   "Law and crime"
-CCPIS$father_discuss_clean[CCPIS$father_discuss == "Éducation"] <- "Education"
-CCPIS$father_discuss_clean[CCPIS$father_discuss == "Politique partisane"] <-
+CPIS$father_discuss_clean[CPIS$father_discuss == "Éducation"] <- "Education"
+CPIS$father_discuss_clean[CPIS$father_discuss == "Politique partisane"] <-
   "Partisan politics"
-table(CCPIS$father_discuss_clean, useNA = "always")
-CCPIS$father_discuss_health <- 0
-CCPIS$father_discuss_health[CCPIS$father_discuss_clean == "Health care"] <- 1
-CCPIS$father_discuss_health[is.na(CCPIS$father_discuss_clean)] <- NA
-table(CCPIS$father_discuss_health, useNA = "always")
-CCPIS$father_discuss_foreign <- 0
-CCPIS$father_discuss_foreign[CCPIS$father_discuss_clean ==
+table(CPIS$father_discuss_clean, useNA = "always")
+CPIS$father_discuss_health <- 0
+CPIS$father_discuss_health[CPIS$father_discuss_clean == "Health care"] <- 1
+CPIS$father_discuss_health[is.na(CPIS$father_discuss_clean)] <- NA
+table(CPIS$father_discuss_health, useNA = "always")
+CPIS$father_discuss_foreign <- 0
+CPIS$father_discuss_foreign[CPIS$father_discuss_clean ==
                                "International affairs"] <- 1
-CCPIS$father_discuss_foreign[is.na(CCPIS$father_discuss_clean)] <- NA
-table(CCPIS$father_discuss_foreign, useNA = "always")
-CCPIS$father_discuss_law <- 0
-CCPIS$father_discuss_law[CCPIS$father_discuss_clean == "Law and crime"] <- 1
-CCPIS$father_discuss_law[is.na(CCPIS$father_discuss_clean)] <- NA
-table(CCPIS$father_discuss_law, useNA = "always")
-CCPIS$father_discuss_education <- 0
-CCPIS$father_discuss_education[CCPIS$father_discuss_clean == "Education"] <- 1
-CCPIS$father_discuss_education[is.na(CCPIS$father_discuss_clean)] <- NA
-table(CCPIS$father_discuss_education, useNA = "always")
-CCPIS$father_discuss_partisan <- 0
-CCPIS$father_discuss_partisan[CCPIS$father_discuss_clean ==
+CPIS$father_discuss_foreign[is.na(CPIS$father_discuss_clean)] <- NA
+table(CPIS$father_discuss_foreign, useNA = "always")
+CPIS$father_discuss_law <- 0
+CPIS$father_discuss_law[CPIS$father_discuss_clean == "Law and crime"] <- 1
+CPIS$father_discuss_law[is.na(CPIS$father_discuss_clean)] <- NA
+table(CPIS$father_discuss_law, useNA = "always")
+CPIS$father_discuss_education <- 0
+CPIS$father_discuss_education[CPIS$father_discuss_clean == "Education"] <- 1
+CPIS$father_discuss_education[is.na(CPIS$father_discuss_clean)] <- NA
+table(CPIS$father_discuss_education, useNA = "always")
+CPIS$father_discuss_partisan <- 0
+CPIS$father_discuss_partisan[CPIS$father_discuss_clean ==
                                 "Partisan politics"] <- 1
-CCPIS$father_discuss_partisan[is.na(CCPIS$father_discuss_clean)] <- NA
-table(CCPIS$father_discuss_partisan, useNA = "always")
-CCPIS$peers_female <- NA
-CCPIS$peers_female[CCPIS$friends_gender %in% c("Garçons", "Boys")] <- 0
-CCPIS$peers_female[CCPIS$friends_gender %in% c("Filles", "Girls")] <- 1
-table(CCPIS$peers_female, useNA = "always")
-CCPIS$malefriends_discuss_clean <- CCPIS$malefriends_discuss
-CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss %in% c(
+CPIS$father_discuss_partisan[is.na(CPIS$father_discuss_clean)] <- NA
+table(CPIS$father_discuss_partisan, useNA = "always")
+CPIS$peers_female <- NA
+CPIS$peers_female[CPIS$friends_gender %in% c("Garçons", "Boys")] <- 0
+CPIS$peers_female[CPIS$friends_gender %in% c("Filles", "Girls")] <- 1
+table(CPIS$peers_female, useNA = "always")
+CPIS$malefriends_discuss_clean <- CPIS$malefriends_discuss
+CPIS$malefriends_discuss_clean[CPIS$malefriends_discuss %in% c(
   "Je ne sais pas/Préfère ne pas répondre",
   "Don't know/Prefer not to answer", "")] <- NA
-CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss ==
+CPIS$malefriends_discuss_clean[CPIS$malefriends_discuss ==
                                   "Santé"] <- "Health care"
-CCPIS$malefriends_discuss_clean[
-  CCPIS$malefriends_discuss == "Affaires internationales"] <-
+CPIS$malefriends_discuss_clean[
+  CPIS$malefriends_discuss == "Affaires internationales"] <-
   "International affairs"
-CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss ==
+CPIS$malefriends_discuss_clean[CPIS$malefriends_discuss ==
                                   "Loi et crime"] <-
   "Law and crime"
-CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss ==
+CPIS$malefriends_discuss_clean[CPIS$malefriends_discuss ==
                                   "Éducation"] <- "Education"
-CCPIS$malefriends_discuss_clean[CCPIS$malefriends_discuss ==
+CPIS$malefriends_discuss_clean[CPIS$malefriends_discuss ==
                                   "Politique partisane"] <-
   "Partisan politics"
-table(CCPIS$malefriends_discuss_clean, useNA = "always")
-CCPIS$malefriends_discuss_health <- 0
-CCPIS$malefriends_discuss_health[CCPIS$malefriends_discuss_clean %in% c(
+table(CPIS$malefriends_discuss_clean, useNA = "always")
+CPIS$malefriends_discuss_health <- 0
+CPIS$malefriends_discuss_health[CPIS$malefriends_discuss_clean %in% c(
   "Santé", "Health care")] <- 1
-CCPIS$malefriends_discuss_health[
-  is.na(CCPIS$malefriends_discuss_clean)] <- NA
-table(CCPIS$malefriends_discuss_health, useNA = "always")
-CCPIS$malefriends_discuss_foreign <- 0
-CCPIS$malefriends_discuss_foreign[
-  CCPIS$malefriends_discuss_clean %in% c(
+CPIS$malefriends_discuss_health[
+  is.na(CPIS$malefriends_discuss_clean)] <- NA
+table(CPIS$malefriends_discuss_health, useNA = "always")
+CPIS$malefriends_discuss_foreign <- 0
+CPIS$malefriends_discuss_foreign[
+  CPIS$malefriends_discuss_clean %in% c(
     "Affaires internationales", "International affairs")] <- 1
-CCPIS$malefriends_discuss_foreign[
-  is.na(CCPIS$malefriends_discuss_clean)] <- NA
-table(CCPIS$malefriends_discuss_foreign, useNA = "always")
-CCPIS$malefriends_discuss_law <- 0
-CCPIS$malefriends_discuss_law[CCPIS$malefriends_discuss_clean %in% c(
+CPIS$malefriends_discuss_foreign[
+  is.na(CPIS$malefriends_discuss_clean)] <- NA
+table(CPIS$malefriends_discuss_foreign, useNA = "always")
+CPIS$malefriends_discuss_law <- 0
+CPIS$malefriends_discuss_law[CPIS$malefriends_discuss_clean %in% c(
   "Loi et crime", "Law and crime")] <- 1
-CCPIS$malefriends_discuss_law[
-  is.na(CCPIS$malefriends_discuss_clean)] <- NA
-table(CCPIS$malefriends_discuss_law, useNA = "always")
-CCPIS$malefriends_discuss_education <- 0
-CCPIS$malefriends_discuss_education[
-  CCPIS$malefriends_discuss_clean %in% c("Éducation", "Education")] <- 1
-CCPIS$malefriends_discuss_education[
-  is.na(CCPIS$malefriends_discuss_clean)] <- NA
-table(CCPIS$malefriends_discuss_education, useNA = "always")
-CCPIS$malefriends_discuss_partisan <- 0
-CCPIS$malefriends_discuss_partisan[
-  CCPIS$malefriends_discuss_clean %in% c(
+CPIS$malefriends_discuss_law[
+  is.na(CPIS$malefriends_discuss_clean)] <- NA
+table(CPIS$malefriends_discuss_law, useNA = "always")
+CPIS$malefriends_discuss_education <- 0
+CPIS$malefriends_discuss_education[
+  CPIS$malefriends_discuss_clean %in% c("Éducation", "Education")] <- 1
+CPIS$malefriends_discuss_education[
+  is.na(CPIS$malefriends_discuss_clean)] <- NA
+table(CPIS$malefriends_discuss_education, useNA = "always")
+CPIS$malefriends_discuss_partisan <- 0
+CPIS$malefriends_discuss_partisan[
+  CPIS$malefriends_discuss_clean %in% c(
     "Politique partisane", "Partisan politics")] <- 1
-CCPIS$malefriends_discuss_partisan[
-  is.na(CCPIS$malefriends_discuss_clean)] <- NA
-table(CCPIS$malefriends_discuss_partisan, useNA = "always")
-CCPIS$femalefriends_discuss_clean <- CCPIS$femalefriends_discuss
-CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss %in% c(
+CPIS$malefriends_discuss_partisan[
+  is.na(CPIS$malefriends_discuss_clean)] <- NA
+table(CPIS$malefriends_discuss_partisan, useNA = "always")
+CPIS$femalefriends_discuss_clean <- CPIS$femalefriends_discuss
+CPIS$femalefriends_discuss_clean[CPIS$femalefriends_discuss %in% c(
   "Je ne sais pas/Préfère ne pas répondre",
   "Don't know/Prefer not to answer", "")] <- NA
-CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss ==
+CPIS$femalefriends_discuss_clean[CPIS$femalefriends_discuss ==
                                     "Santé"] <- "Health care"
-CCPIS$femalefriends_discuss_clean[
-  CCPIS$femalefriends_discuss == "Affaires internationales"] <-
+CPIS$femalefriends_discuss_clean[
+  CPIS$femalefriends_discuss == "Affaires internationales"] <-
   "International affairs"
-CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss ==
+CPIS$femalefriends_discuss_clean[CPIS$femalefriends_discuss ==
                                     "Loi et crime"] <-
   "Law and crime"
-CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss ==
+CPIS$femalefriends_discuss_clean[CPIS$femalefriends_discuss ==
                                     "Éducation"] <- "Education"
-CCPIS$femalefriends_discuss_clean[CCPIS$femalefriends_discuss ==
+CPIS$femalefriends_discuss_clean[CPIS$femalefriends_discuss ==
                                     "Politique partisane"] <-
   "Partisan politics"
-table(CCPIS$femalefriends_discuss_clean, useNA = "always")
-CCPIS$femalefriends_discuss_health <- 0
-CCPIS$femalefriends_discuss_health[
-  CCPIS$femalefriends_discuss_clean %in% c("Santé", "Health care")] <- 1
-CCPIS$femalefriends_discuss_health[
-  is.na(CCPIS$femalefriends_discuss_clean)] <- NA
-table(CCPIS$femalefriends_discuss_health, useNA = "always")
-CCPIS$femalefriends_discuss_foreign <- 0
-CCPIS$femalefriends_discuss_foreign[
-  CCPIS$femalefriends_discuss_clean %in% c(
+table(CPIS$femalefriends_discuss_clean, useNA = "always")
+CPIS$femalefriends_discuss_health <- 0
+CPIS$femalefriends_discuss_health[
+  CPIS$femalefriends_discuss_clean %in% c("Santé", "Health care")] <- 1
+CPIS$femalefriends_discuss_health[
+  is.na(CPIS$femalefriends_discuss_clean)] <- NA
+table(CPIS$femalefriends_discuss_health, useNA = "always")
+CPIS$femalefriends_discuss_foreign <- 0
+CPIS$femalefriends_discuss_foreign[
+  CPIS$femalefriends_discuss_clean %in% c(
     "Affaires internationales", "International affairs")] <- 1
-CCPIS$femalefriends_discuss_foreign[
-  is.na(CCPIS$femalefriends_discuss_clean)] <- NA
-table(CCPIS$femalefriends_discuss_foreign, useNA = "always")
-CCPIS$femalefriends_discuss_law <- 0
-CCPIS$femalefriends_discuss_law[
-  CCPIS$femalefriends_discuss_clean %in% c(
+CPIS$femalefriends_discuss_foreign[
+  is.na(CPIS$femalefriends_discuss_clean)] <- NA
+table(CPIS$femalefriends_discuss_foreign, useNA = "always")
+CPIS$femalefriends_discuss_law <- 0
+CPIS$femalefriends_discuss_law[
+  CPIS$femalefriends_discuss_clean %in% c(
     "Loi et crime", "Law and crime")] <- 1
-CCPIS$femalefriends_discuss_law[
-  is.na(CCPIS$femalefriends_discuss_clean)] <- NA
-table(CCPIS$femalefriends_discuss_law, useNA = "always")
-CCPIS$femalefriends_discuss_education <- 0
-CCPIS$femalefriends_discuss_education[
-  CCPIS$femalefriends_discuss_clean %in% c("Éducation", "Education")] <- 1
-CCPIS$femalefriends_discuss_education[
-  is.na(CCPIS$femalefriends_discuss_clean)] <- NA
-table(CCPIS$femalefriends_discuss_education, useNA = "always")
-CCPIS$femalefriends_discuss_partisan <- 0
-CCPIS$femalefriends_discuss_partisan[
-  CCPIS$femalefriends_discuss_clean %in% c(
+CPIS$femalefriends_discuss_law[
+  is.na(CPIS$femalefriends_discuss_clean)] <- NA
+table(CPIS$femalefriends_discuss_law, useNA = "always")
+CPIS$femalefriends_discuss_education <- 0
+CPIS$femalefriends_discuss_education[
+  CPIS$femalefriends_discuss_clean %in% c("Éducation", "Education")] <- 1
+CPIS$femalefriends_discuss_education[
+  is.na(CPIS$femalefriends_discuss_clean)] <- NA
+table(CPIS$femalefriends_discuss_education, useNA = "always")
+CPIS$femalefriends_discuss_partisan <- 0
+CPIS$femalefriends_discuss_partisan[
+  CPIS$femalefriends_discuss_clean %in% c(
     "Politique partisane", "Partisan politics")] <- 1
-CCPIS$femalefriends_discuss_partisan[is.na(
-  CCPIS$femalefriends_discuss_clean)] <- NA
-table(CCPIS$femalefriends_discuss_partisan, useNA = "always")
-CCPIS$teacher_discuss_clean <- CCPIS$teacher_discuss
-CCPIS$teacher_discuss_clean[
-  CCPIS$teacher_discuss %in% c("", "Don't know/Prefer not to answer",
+CPIS$femalefriends_discuss_partisan[is.na(
+  CPIS$femalefriends_discuss_clean)] <- NA
+table(CPIS$femalefriends_discuss_partisan, useNA = "always")
+CPIS$teacher_discuss_clean <- CPIS$teacher_discuss
+CPIS$teacher_discuss_clean[
+  CPIS$teacher_discuss %in% c("", "Don't know/Prefer not to answer",
                                "Je ne sais pas/Préfère ne pas répondre")] <- NA
-table(CCPIS$teacher_discuss_clean)
-CCPIS$teacher_discuss_health <- 0
-CCPIS$teacher_discuss_health[is.na(CCPIS$teacher_discuss_clean)] <- NA
-CCPIS$teacher_discuss_health[CCPIS$teacher_discuss_clean %in% c(
+table(CPIS$teacher_discuss_clean)
+CPIS$teacher_discuss_health <- 0
+CPIS$teacher_discuss_health[is.na(CPIS$teacher_discuss_clean)] <- NA
+CPIS$teacher_discuss_health[CPIS$teacher_discuss_clean %in% c(
   "Santé", "Health care")] <- 1
-CCPIS$teacher_discuss_foreign <- 0
-CCPIS$teacher_discuss_foreign[is.na(CCPIS$teacher_discuss_clean)] <- NA
-CCPIS$teacher_discuss_foreign[CCPIS$teacher_discuss_clean %in% c(
+CPIS$teacher_discuss_foreign <- 0
+CPIS$teacher_discuss_foreign[is.na(CPIS$teacher_discuss_clean)] <- NA
+CPIS$teacher_discuss_foreign[CPIS$teacher_discuss_clean %in% c(
   "Affaires internationales", "International affairs")] <- 1
-CCPIS$teacher_discuss_law <- 0
-CCPIS$teacher_discuss_law[is.na(CCPIS$teacher_discuss_clean)] <- NA
-CCPIS$teacher_discuss_law[CCPIS$teacher_discuss_clean %in% c(
+CPIS$teacher_discuss_law <- 0
+CPIS$teacher_discuss_law[is.na(CPIS$teacher_discuss_clean)] <- NA
+CPIS$teacher_discuss_law[CPIS$teacher_discuss_clean %in% c(
   "Loi et crime", "Law and crime")] <- 1
-CCPIS$teacher_discuss_education <- 0
-CCPIS$teacher_discuss_education[is.na(CCPIS$teacher_discuss_clean)] <- NA
-CCPIS$teacher_discuss_education[CCPIS$teacher_discuss_clean %in% c(
+CPIS$teacher_discuss_education <- 0
+CPIS$teacher_discuss_education[is.na(CPIS$teacher_discuss_clean)] <- NA
+CPIS$teacher_discuss_education[CPIS$teacher_discuss_clean %in% c(
   "Éducation", "Education")] <- 1
-CCPIS$teacher_discuss_partisan <- 0
-CCPIS$teacher_discuss_partisan[is.na(CCPIS$teacher_discuss_clean)] <- NA
-CCPIS$teacher_discuss_partisan[CCPIS$teacher_discuss_clean %in% c(
+CPIS$teacher_discuss_partisan <- 0
+CPIS$teacher_discuss_partisan[is.na(CPIS$teacher_discuss_clean)] <- NA
+CPIS$teacher_discuss_partisan[CPIS$teacher_discuss_clean %in% c(
   "Politique partisane", "Partisan politics")] <- 1
-CCPIS$influencer_discuss_clean <- CCPIS$influencer_discuss
-CCPIS$influencer_discuss_clean[
-  CCPIS$influencer_discuss %in% c(
+CPIS$influencer_discuss_clean <- CPIS$influencer_discuss
+CPIS$influencer_discuss_clean[
+  CPIS$influencer_discuss %in% c(
     "", "Don't know/Prefer not to answer",
     "Je ne sais pas/Préfère ne pas répondre")] <- NA
-table(CCPIS$influencer_discuss_clean)
-CCPIS$influencer_discuss_health <- 0
-CCPIS$influencer_discuss_health[is.na(CCPIS$influencer_discuss_clean)] <- NA
-CCPIS$influencer_discuss_health[CCPIS$influencer_discuss_clean %in% c(
+table(CPIS$influencer_discuss_clean)
+CPIS$influencer_discuss_health <- 0
+CPIS$influencer_discuss_health[is.na(CPIS$influencer_discuss_clean)] <- NA
+CPIS$influencer_discuss_health[CPIS$influencer_discuss_clean %in% c(
   "Santé", "Health care")] <- 1
-CCPIS$influencer_discuss_foreign <- 0
-CCPIS$influencer_discuss_foreign[is.na(CCPIS$influencer_discuss_clean)] <- NA
-CCPIS$influencer_discuss_foreign[CCPIS$influencer_discuss_clean %in% c(
+CPIS$influencer_discuss_foreign <- 0
+CPIS$influencer_discuss_foreign[is.na(CPIS$influencer_discuss_clean)] <- NA
+CPIS$influencer_discuss_foreign[CPIS$influencer_discuss_clean %in% c(
   "Affaires internationales", "International affairs")] <- 1
-CCPIS$influencer_discuss_law <- 0
-CCPIS$influencer_discuss_law[is.na(CCPIS$influencer_discuss_clean)] <- NA
-CCPIS$influencer_discuss_law[CCPIS$influencer_discuss_clean %in% c(
+CPIS$influencer_discuss_law <- 0
+CPIS$influencer_discuss_law[is.na(CPIS$influencer_discuss_clean)] <- NA
+CPIS$influencer_discuss_law[CPIS$influencer_discuss_clean %in% c(
   "Loi et crime", "Law and crime")] <- 1
-CCPIS$influencer_discuss_education <- 0
-CCPIS$influencer_discuss_education[is.na(CCPIS$influencer_discuss_clean)] <- NA
-CCPIS$influencer_discuss_education[CCPIS$influencer_discuss_clean %in% c(
+CPIS$influencer_discuss_education <- 0
+CPIS$influencer_discuss_education[is.na(CPIS$influencer_discuss_clean)] <- NA
+CPIS$influencer_discuss_education[CPIS$influencer_discuss_clean %in% c(
   "Éducation", "Education")] <- 1
-CCPIS$influencer_discuss_partisan <- 0
-CCPIS$influencer_discuss_partisan[is.na(CCPIS$influencer_discuss_clean)] <- NA
-CCPIS$influencer_discuss_partisan[CCPIS$influencer_discuss_clean %in% c(
+CPIS$influencer_discuss_partisan <- 0
+CPIS$influencer_discuss_partisan[is.na(CPIS$influencer_discuss_clean)] <- NA
+CPIS$influencer_discuss_partisan[CPIS$influencer_discuss_clean %in% c(
   "Politique partisane", "Partisan politics")] <- 1
-CCPIS[, 61:76] <- map(CCPIS[, 61:76], as.numeric)
-CCPIS[, 61:76] <- apply(CCPIS[, 61:76], 2, function(x) {(x - 1) / 4})
-CCPIS$sexrole_easydecisions_rev <- 1 - CCPIS$sexrole_easydecisions
-CCPIS$fam_situation_alt <- CCPIS$fam_situation
-CCPIS$fam_situation_alt[CCPIS$fam_situation == "Une mère uniquement"] <-
+CPIS[, 61:76] <- map(CPIS[, 61:76], as.numeric)
+CPIS[, 61:76] <- apply(CPIS[, 61:76], 2, function(x) {(x - 1) / 4})
+CPIS$sexrole_easydecisions_rev <- 1 - CPIS$sexrole_easydecisions
+CPIS$fam_situation_alt <- CPIS$fam_situation
+CPIS$fam_situation_alt[CPIS$fam_situation == "Une mère uniquement"] <-
   "One mother only"
-CCPIS$fam_situation_alt[CCPIS$fam_situation == "Un père uniquement"] <-
+CPIS$fam_situation_alt[CPIS$fam_situation == "Un père uniquement"] <-
   "One father only"
-CCPIS$fam_situation_alt[CCPIS$fam_situation == "Deux mères"] <-
+CPIS$fam_situation_alt[CPIS$fam_situation == "Deux mères"] <-
   "Two mothers"
-CCPIS$fam_situation_alt[CCPIS$fam_situation == "Deux pères"] <-
+CPIS$fam_situation_alt[CPIS$fam_situation == "Deux pères"] <-
   "Two fathers"
-CCPIS$fam_situation_alt[CCPIS$fam_situation == "Autre"] <- "Other"
-CCPIS$fam_situation_alt[CCPIS$fam_situation ==
+CPIS$fam_situation_alt[CPIS$fam_situation == "Autre"] <- "Other"
+CPIS$fam_situation_alt[CPIS$fam_situation ==
                              "Une mère, un père et au moins un beau-parent"] <-
   "Mother, father\nand stepparent(s)"
-CCPIS$fam_situation_alt[CCPIS$fam_situation == paste(
+CPIS$fam_situation_alt[CPIS$fam_situation == paste(
   "One mother, one father and at least one stepparent")] <-
   "Mother, father\nand stepparent(s)"
-CCPIS$fam_situation_alt[CCPIS$fam_situation ==
+CPIS$fam_situation_alt[CPIS$fam_situation ==
                              "Une mère, un père et aucun beau-parent"] <-
   "Mother and father"
-CCPIS$fam_situation_alt[CCPIS$fam_situation ==
+CPIS$fam_situation_alt[CPIS$fam_situation ==
                              "One mother, one father and no stepparents"] <-
   "Mother and father"
-table(CCPIS$fam_situation_alt, useNA = "always")
-CCPIS$friends_gender_alt <- CCPIS$friends_gender
-CCPIS$friends_gender_alt[CCPIS$friends_gender == "Filles"] <- "Girls"
-CCPIS$friends_gender_alt[CCPIS$friends_gender == "Garçons"] <- "Boys"
-CCPIS$friends_gender_alt[CCPIS$friends_gender ==
+table(CPIS$fam_situation_alt, useNA = "always")
+CPIS$friends_gender_alt <- CPIS$friends_gender
+CPIS$friends_gender_alt[CPIS$friends_gender == "Filles"] <- "Girls"
+CPIS$friends_gender_alt[CPIS$friends_gender == "Garçons"] <- "Boys"
+CPIS$friends_gender_alt[CPIS$friends_gender ==
                               "Environ autant des deux genres"] <-
   "About the same\nfor both genders"
-CCPIS$friends_gender_alt[CCPIS$friends_gender ==
+CPIS$friends_gender_alt[CPIS$friends_gender ==
                               "About the same for both genders"] <-
   "About the same\nfor both genders"
-CCPIS$friends_gender_alt[CCPIS$friends_gender %in% c(
+CPIS$friends_gender_alt[CPIS$friends_gender %in% c(
   "Don't know/Prefer not to answer", "",
   "Je ne sais pas/Préfère ne pas répondre")] <- NA
-table(CCPIS$friends_gender_alt, useNA = "always")
-CCPIS$parent_discuss_alt <- NA
-CCPIS$parent_discuss_alt[CCPIS$parent_discuss %in% c("Ma mère", "Mother")] <- 1
-CCPIS$parent_discuss_alt[CCPIS$parent_discuss %in% c(
+table(CPIS$friends_gender_alt, useNA = "always")
+CPIS$parent_discuss_alt <- NA
+CPIS$parent_discuss_alt[CPIS$parent_discuss %in% c("Ma mère", "Mother")] <- 1
+CPIS$parent_discuss_alt[CPIS$parent_discuss %in% c(
   "Mon père", "Father")] <- 0
-table(CCPIS$parent_discuss_alt, useNA = "always")
+table(CPIS$parent_discuss_alt, useNA = "always")
 
-CCPIS$teacher_gender_alt <- CCPIS$teacher_gender
-CCPIS$teacher_gender_alt[CCPIS$teacher_gender %in% c(
+CPIS$teacher_gender_alt <- CPIS$teacher_gender
+CPIS$teacher_gender_alt[CPIS$teacher_gender %in% c(
   "A boy", "Un homme")] <- "A man"
-CCPIS$teacher_gender_alt[CCPIS$teacher_gender %in% c(
+CPIS$teacher_gender_alt[CPIS$teacher_gender %in% c(
   "A girl", "Une femme")] <- "A woman"
-CCPIS$teacher_gender_alt[
-  CCPIS$teacher_gender ==
+CPIS$teacher_gender_alt[
+  CPIS$teacher_gender ==
     "Autre (ex.: trans, non-binaire, bispirituel, gender-queer)"] <-
   "Other (e.g. Trans,\nnon-binary, two-\nspirit, gender-queer)"
-CCPIS$teacher_gender_alt[
-  CCPIS$teacher_gender ==
+CPIS$teacher_gender_alt[
+  CPIS$teacher_gender ==
     "Other (e.g. Trans, non-binary, two-spirit, gender-queer)"] <-
   "Other (e.g. Trans,\nnon-binary, two-\nspirit, gender-queer)"
-CCPIS$teacher_gender_alt[CCPIS$teacher_gender == ""] <- NA
-table(CCPIS$teacher_gender_alt, useNA = "always")
-CCPIS$influencer_gender_alt <- CCPIS$influencer_gender
-CCPIS$influencer_gender_alt[CCPIS$influencer_gender %in% c(
+CPIS$teacher_gender_alt[CPIS$teacher_gender == ""] <- NA
+table(CPIS$teacher_gender_alt, useNA = "always")
+CPIS$influencer_gender_alt <- CPIS$influencer_gender
+CPIS$influencer_gender_alt[CPIS$influencer_gender %in% c(
   "A boy", "Un homme")] <- "A man"
-CCPIS$influencer_gender_alt[CCPIS$influencer_gender %in% c(
+CPIS$influencer_gender_alt[CPIS$influencer_gender %in% c(
   "A girl", "Une femme")] <- "A woman"
-CCPIS$influencer_gender_alt[
-  CCPIS$influencer_gender ==
+CPIS$influencer_gender_alt[
+  CPIS$influencer_gender ==
     "Autre (ex.: trans, non-binaire, bispirituel, gender-queer)"] <-
   "Other"
-CCPIS$influencer_gender_alt[
-  CCPIS$influencer_gender ==
+CPIS$influencer_gender_alt[
+  CPIS$influencer_gender ==
     "Other (e.g. Trans, non-binary, two-spirit, gender-queer)"] <-
   "Other"
-CCPIS$influencer_gender_alt[CCPIS$influencer_gender == ""] <- NA
-table(CCPIS$influencer_gender_alt, useNA = "always")
-CCPIS$influencer_gender_congruence <- ifelse(
-  CCPIS$influencer_gender_alt == "A woman" & CCPIS$female_alt == "Girl", 1, ifelse(
-    CCPIS$influencer_gender_alt == "A man" & CCPIS$female_alt == "Boy", 1, ifelse(
-      CCPIS$influencer_gender_alt == "Other" & CCPIS$female_alt == "Other", 1, 0)))
-table(CCPIS$influencer_gender_congruence, useNA = "always")
-CCPIS$samegenderinfluencer_discuss_health <- CCPIS$influencer_discuss_health
-CCPIS$samegenderinfluencer_discuss_health[
-  CCPIS$influencer_gender_congruence == 0] <- NA
-CCPIS$othergenderinfluencer_discuss_health <- CCPIS$influencer_discuss_health
-CCPIS$othergenderinfluencer_discuss_health[
-  CCPIS$influencer_gender_congruence == 1] <- NA
-CCPIS$samegenderinfluencer_discuss_foreign <- CCPIS$influencer_discuss_foreign
-CCPIS$samegenderinfluencer_discuss_foreign[
-  CCPIS$influencer_gender_congruence == 0] <- NA
-CCPIS$othergenderinfluencer_discuss_foreign <- CCPIS$influencer_discuss_foreign
-CCPIS$othergenderinfluencer_discuss_foreign[
-  CCPIS$influencer_gender_congruence == 1] <- NA
-CCPIS$samegenderinfluencer_discuss_law <- CCPIS$influencer_discuss_law
-CCPIS$samegenderinfluencer_discuss_law[
-  CCPIS$influencer_gender_congruence == 0] <- NA
-CCPIS$othergenderinfluencer_discuss_law <- CCPIS$influencer_discuss_law
-CCPIS$othergenderinfluencer_discuss_law[
-  CCPIS$influencer_gender_congruence == 1] <- NA
-CCPIS$samegenderinfluencer_discuss_education <- CCPIS$influencer_discuss_education
-CCPIS$samegenderinfluencer_discuss_education[
-  CCPIS$influencer_gender_congruence == 0] <- NA
-CCPIS$othergenderinfluencer_discuss_education <- CCPIS$influencer_discuss_education
-CCPIS$othergenderinfluencer_discuss_education[
-  CCPIS$influencer_gender_congruence == 1] <- NA
-CCPIS$samegenderinfluencer_discuss_partisan <- CCPIS$influencer_discuss_partisan
-CCPIS$samegenderinfluencer_discuss_partisan[
-  CCPIS$influencer_gender_congruence == 0] <- NA
-CCPIS$othergenderinfluencer_discuss_partisan <- CCPIS$influencer_discuss_partisan
-CCPIS$othergenderinfluencer_discuss_partisan[
-  CCPIS$influencer_gender_congruence == 1] <- NA
+CPIS$influencer_gender_alt[CPIS$influencer_gender == ""] <- NA
+table(CPIS$influencer_gender_alt, useNA = "always")
+CPIS$influencer_gender_congruence <- ifelse(
+  CPIS$influencer_gender_alt == "A woman" & CPIS$female_alt == "Girl", 1, ifelse(
+    CPIS$influencer_gender_alt == "A man" & CPIS$female_alt == "Boy", 1, ifelse(
+      CPIS$influencer_gender_alt == "Other" & CPIS$female_alt == "Other", 1, 0)))
+table(CPIS$influencer_gender_congruence, useNA = "always")
+CPIS$samegenderinfluencer_discuss_health <- CPIS$influencer_discuss_health
+CPIS$samegenderinfluencer_discuss_health[
+  CPIS$influencer_gender_congruence == 0] <- NA
+CPIS$othergenderinfluencer_discuss_health <- CPIS$influencer_discuss_health
+CPIS$othergenderinfluencer_discuss_health[
+  CPIS$influencer_gender_congruence == 1] <- NA
+CPIS$samegenderinfluencer_discuss_foreign <- CPIS$influencer_discuss_foreign
+CPIS$samegenderinfluencer_discuss_foreign[
+  CPIS$influencer_gender_congruence == 0] <- NA
+CPIS$othergenderinfluencer_discuss_foreign <- CPIS$influencer_discuss_foreign
+CPIS$othergenderinfluencer_discuss_foreign[
+  CPIS$influencer_gender_congruence == 1] <- NA
+CPIS$samegenderinfluencer_discuss_law <- CPIS$influencer_discuss_law
+CPIS$samegenderinfluencer_discuss_law[
+  CPIS$influencer_gender_congruence == 0] <- NA
+CPIS$othergenderinfluencer_discuss_law <- CPIS$influencer_discuss_law
+CPIS$othergenderinfluencer_discuss_law[
+  CPIS$influencer_gender_congruence == 1] <- NA
+CPIS$samegenderinfluencer_discuss_education <- CPIS$influencer_discuss_education
+CPIS$samegenderinfluencer_discuss_education[
+  CPIS$influencer_gender_congruence == 0] <- NA
+CPIS$othergenderinfluencer_discuss_education <- CPIS$influencer_discuss_education
+CPIS$othergenderinfluencer_discuss_education[
+  CPIS$influencer_gender_congruence == 1] <- NA
+CPIS$samegenderinfluencer_discuss_partisan <- CPIS$influencer_discuss_partisan
+CPIS$samegenderinfluencer_discuss_partisan[
+  CPIS$influencer_gender_congruence == 0] <- NA
+CPIS$othergenderinfluencer_discuss_partisan <- CPIS$influencer_discuss_partisan
+CPIS$othergenderinfluencer_discuss_partisan[
+  CPIS$influencer_gender_congruence == 1] <- NA
 political <- function(new, old) {
   new <- NA
   new[old %in% c("Not political", "Pas politique")] <- 0
   new[old %in% c("Political", "Politique")] <- 1
   return(new)
 }
-CCPIS$lockdown_political_alt <- political(
-  old = CCPIS$lockdown_political, new = CCPIS$lockdown_political_alt)
-CCPIS$nurses_political_alt <- political(
-  old = CCPIS$nurses_political, new = CCPIS$nurses_political_alt)
-CCPIS$china_political_alt <- political(
-  old = CCPIS$china_political, new = CCPIS$china_political_alt)
-CCPIS$ukraine_political_alt <- political(
-  old = CCPIS$ukraine_political, new = CCPIS$ukraine_political_alt)
-CCPIS$police_political_alt <- political(
-  old = CCPIS$police_political, new = CCPIS$police_political_alt)
-CCPIS$crime_political_alt <- political(
-  old = CCPIS$crime_political, new = CCPIS$crime_political_alt)
-CCPIS$tuition_political_alt <- political(
-  old = CCPIS$tuition_political, new = CCPIS$tuition_political_alt)
-CCPIS$privateschool_political_alt <- political(
-  old = CCPIS$privateschool_political, new = CCPIS$privateschool_political_alt)
-CCPIS$elections_political_alt <- political(
-  old = CCPIS$elections_political, new = CCPIS$elections_political_alt)
-CCPIS$parties_political_alt <- political(
-  old = CCPIS$parties_political, new = CCPIS$parties_political_alt)
+CPIS$lockdown_political_alt <- political(
+  old = CPIS$lockdown_political, new = CPIS$lockdown_political_alt)
+CPIS$nurses_political_alt <- political(
+  old = CPIS$nurses_political, new = CPIS$nurses_political_alt)
+CPIS$china_political_alt <- political(
+  old = CPIS$china_political, new = CPIS$china_political_alt)
+CPIS$ukraine_political_alt <- political(
+  old = CPIS$ukraine_political, new = CPIS$ukraine_political_alt)
+CPIS$police_political_alt <- political(
+  old = CPIS$police_political, new = CPIS$police_political_alt)
+CPIS$crime_political_alt <- political(
+  old = CPIS$crime_political, new = CPIS$crime_political_alt)
+CPIS$tuition_political_alt <- political(
+  old = CPIS$tuition_political, new = CPIS$tuition_political_alt)
+CPIS$privateschool_political_alt <- political(
+  old = CPIS$privateschool_political, new = CPIS$privateschool_political_alt)
+CPIS$elections_political_alt <- political(
+  old = CPIS$elections_political, new = CPIS$elections_political_alt)
+CPIS$parties_political_alt <- political(
+  old = CPIS$parties_political, new = CPIS$parties_political_alt)
 
 ##### 1.1.1 Factor analysis ####
-AgencyScale <- na.omit(CCPIS[, c(
+AgencyScale <- na.omit(CPIS[, c(
   "sexrole_independent", "sexrole_passive", "sexrole_competitive",
   "sexrole_easydecisions_rev", "sexrole_giveup", "sexrole_selfconfident",
   "sexrole_inferior", "sexrole_underpressure")])
@@ -614,10 +614,10 @@ agencyVariables <- c("sexrole_independent", "sexrole_passive",
                      "sexrole_competitive", "sexrole_easydecisions_rev",
                      "sexrole_giveup", "sexrole_selfconfident",
                      "sexrole_inferior", "sexrole_underpressure")
-CCPIS$agentic <- apply(CCPIS[agencyVariables], 1, delete_rows_na,
+CPIS$agentic <- apply(CPIS[agencyVariables], 1, delete_rows_na,
                        loadings = AgencyFactorLoadings)
-length(na.omit(CCPIS$agentic)) / nrow(CCPIS) * 100 # 90% available data
-CommunalityScale <- na.omit(CCPIS[, c(
+length(na.omit(CPIS$agentic)) / nrow(CPIS) * 100 # 90% available data
+CommunalityScale <- na.omit(CPIS[, c(
   "sexrole_emotional", "sexrole_devote", "sexrole_gentle", "sexrole_helpful",
   "sexrole_kind", "sexrole_awarefeelings", "sexrole_understanding",
   "sexrole_warm")])
@@ -663,48 +663,64 @@ communalVariables <- c("sexrole_emotional", "sexrole_devote", "sexrole_gentle",
                        "sexrole_helpful", "sexrole_kind",
                        "sexrole_awarefeelings", "sexrole_understanding",
                        "sexrole_warm")
-CCPIS$communal <- apply(CCPIS[communalVariables], 1, delete_rows_na,
+CPIS$communal <- apply(CPIS[communalVariables], 1, delete_rows_na,
                         loadings = CommunalityFactorLoadings)
  # 0 = not communal, 1 = communal
-length(na.omit(CCPIS$communal)) / nrow(CCPIS) * 100 # 89% available data
-CCPISBoys <- filter(CCPIS, female == 0)
-CCPISGirls <- filter(CCPIS, female == 1)
-CCPISYoung <- CCPIS |> filter(age > 9 & age <= 15)
-CCPISOld <- CCPIS |> filter(age >= 16 & age < 19)
-CCPISYoung$agegrp <- "Ages 9-15"
-CCPISOld$agegrp <- "Ages 16-18"
-CCPISOldYoung <- rbind(CCPISYoung, CCPISOld)
-CCPISOldYoung$agegrp <- factor(CCPISOldYoung$agegrp, levels = c(
+length(na.omit(CPIS$communal)) / nrow(CPIS) * 100 # 89% available data
+
+##### 1.1.2 Open-ended question analysis ####
+CPISOpen <- openxlsx::read.xlsx("_data/CPIS/CPISReview_Andrea_v2.xlsx")
+CPISOpenTab <- data.frame(Freq = colSums(CPISOpen[2:ncol(CPISOpen)], na.rm = T))
+CPISOpenTab$subject <- rownames(CPISOpenTab)
+ggplot(CPISOpenTab, aes(x = Freq, y = reorder(subject, Freq))) +
+  geom_bar(stat = "identity") +
+  theme_linedraw() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
+        panel.grid = element_blank(),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/CPISOpenQuestion.pdf", width = 11, height = 4.25)
+
+##### 1.1.3 Creation of sub-datasets ####
+CPISBoys <- filter(CPIS, female == 0)
+CPISGirls <- filter(CPIS, female == 1)
+CPISYoung <- CPIS |> filter(age > 9 & age <= 15)
+CPISOld <- CPIS |> filter(age >= 16 & age < 19)
+CPISYoung$agegrp <- "Ages 9-15"
+CPISOld$agegrp <- "Ages 16-18"
+CPISOldYoung <- rbind(CPISYoung, CPISOld)
+CPISOldYoung$agegrp <- factor(CPISOldYoung$agegrp, levels = c(
   "Ages 9-15", "Ages 16-18"))
-CCPISYoungBoys <- filter(CCPISYoung, female == 0)
-CCPISYoungGirls <- filter(CCPISYoung, female == 1)
-CCPISOldBoys <- filter(CCPISOld, female == 0)
-CCPISOldGirls <- filter(CCPISOld, female == 1)
-mean(CCPIS$agentic, na.rm= T)
-mean(CCPIS$communal, na.rm= T)
-CCPISReview <- data.frame(pol_meaning = CCPIS$pol_meaning)
-CCPISReview$governing_government <- NA
-CCPISReview$power <- NA
-CCPISReview$communication_speeches <- NA
-CCPISReview$leadership <- NA
-CCPISReview$conflict <- NA
-CCPISReview$disagreement <- NA
-CCPISReview$controversy_debate <- NA
-CCPISReview$competition <- NA
-CCPISReview$partisan_game <- NA
-CCPISReview$elections_voting_democracy <- NA
-CCPISReview$rules_laws <- NA
-CCPISReview$legislating <- NA
-CCPISReview$specific_political_issue <- NA
-CCPISReview$cooperation <- NA
-CCPISReview$political_parties <- NA
-CCPISReview$resource_distribution <- NA
-CCPISReview$interest_groups <- NA
-CCPISReview$specific_people <- NA
-CCPISReview$mistake_other_concept <- NA
-CCPISReview$too_vague <- NA
-CCPISReview$no_real_answer <- NA
-#openxlsx::write.xlsx(CCPISReview, "_data/CCPIS/CCPISReview.xlsx")
+CPISYoungBoys <- filter(CPISYoung, female == 0)
+CPISYoungGirls <- filter(CPISYoung, female == 1)
+CPISOldBoys <- filter(CPISOld, female == 0)
+CPISOldGirls <- filter(CPISOld, female == 1)
+mean(CPIS$agentic, na.rm= T)
+mean(CPIS$communal, na.rm= T)
+CPISReview <- data.frame(pol_meaning = CPIS$pol_meaning)
+CPISReview$governing_government <- NA
+CPISReview$power <- NA
+CPISReview$communication_speeches <- NA
+CPISReview$leadership <- NA
+CPISReview$conflict <- NA
+CPISReview$disagreement <- NA
+CPISReview$controversy_debate <- NA
+CPISReview$competition <- NA
+CPISReview$partisan_game <- NA
+CPISReview$elections_voting_democracy <- NA
+CPISReview$rules_laws <- NA
+CPISReview$legislating <- NA
+CPISReview$specific_political_issue <- NA
+CPISReview$cooperation <- NA
+CPISReview$political_parties <- NA
+CPISReview$resource_distribution <- NA
+CPISReview$interest_groups <- NA
+CPISReview$specific_people <- NA
+CPISReview$mistake_other_concept <- NA
+CPISReview$too_vague <- NA
+CPISReview$no_real_answer <- NA
+#openxlsx::write.xlsx(CPISReview, "_data/CPIS/CPISReview.xlsx")
 
 #### 1.2 Census ####
 #Census16 <- readstata13::read.dta13( # Census microdata for raking
@@ -1496,8 +1512,8 @@ length(na.omit(CES21$efficacy)) / nrow(CES21) * 100 # 98% available data
 
 KnowScale <- na.omit(CES21[, c(
   "know_premier_name", "know_finmin_name", "know_govgen_name")])
-KnowCronbach <- round(as.numeric(psy::cronbach(KnowScale)[3]),
-                          digits = 2)
+KnowLoevinger <- round(as.numeric(unlist(
+  mokken::coefH(KnowScale))["H.Scale H"]), digits = 2)
 KnowFactorAnalysis <- factanal(KnowScale, factors = 1)
 KnowVariableNames <- c("Name of Provincial Premier", "Name of Finance Minister",
                        "Name of Governor General")
@@ -1514,8 +1530,8 @@ ggplot(data.frame(KnowVariableNames, KnowFactorLoadings),
     KnowFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
     family = "CM Roman", size = 6) +
   geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
-  annotate("text", label = paste("Cronbach's alpha =", as.character(
-    KnowCronbach)), x = 1.1, y = 0.85, size = 6,
+  annotate("text", label = paste("Loevinger's H =", as.character(
+    KnowLoevinger)), x = 1.1, y = 0.85, size = 6,
     family = "CM Roman") +
   annotate("text", label = paste("First eigenvalue =", as.character(
     KnowFirstEigenvalue)), x = 0.9, y = 0.85, size = 6,
@@ -2002,8 +2018,8 @@ GSS20nonimmigrantmen <- filter(GSS20, female == 0 & immig == 0)
 GSS20nonimmigrantwomen <- filter(GSS20, female == 1 & immig == 0)
 
 ### 2. Descriptive statistics graphs ####
-#### 2.1 CCPIS ####
-PlotGender <- CCPIS |>
+#### 2.1 CPIS ####
+PlotGender <- CPIS |>
   filter(!is.na(female_alt)) |>
   ggplot(aes(x = female_alt)) +
   geom_bar() +
@@ -2012,14 +2028,14 @@ PlotGender <- CCPIS |>
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotAge <- ggplot(CCPIS, aes(x = age)) +
+PlotAge <- ggplot(CPIS, aes(x = age)) +
   geom_histogram(binwidth = 1) +
   labs(x = "Age", y = "Frequency") +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotEthnicity <- CCPIS |>
+PlotEthnicity <- CPIS |>
   filter(!is.na(ethn)) |>
   ggplot(aes(x = ethn)) +
   geom_bar() +
@@ -2029,7 +2045,7 @@ PlotEthnicity <- CCPIS |>
         axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotLanguage <- CCPIS |>
+PlotLanguage <- CPIS |>
   filter(!is.na(lang)) |>
   ggplot(aes(x = lang)) +
   geom_bar() +
@@ -2039,7 +2055,7 @@ PlotLanguage <- CCPIS |>
         axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotImmigrant <- CCPIS |>
+PlotImmigrant <- CPIS |>
   filter(!is.na(immig)) |>
   ggplot(aes(x = as.factor(immig))) +
   geom_bar() +
@@ -2049,21 +2065,21 @@ PlotImmigrant <- CCPIS |>
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotAgentic <- ggplot(CCPIS, aes(x = agentic)) +
+PlotAgentic <- ggplot(CPIS, aes(x = agentic)) +
   geom_histogram(breaks = seq(0, 1, 0.1)) +
   labs(x = "Agency scale score", y = "Frequency") +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotCommunal <- ggplot(CCPIS, aes(x = communal)) +
+PlotCommunal <- ggplot(CPIS, aes(x = communal)) +
   geom_histogram(breaks = seq(0, 1, 0.1)) +
   labs(x = "Communality scale score", y = "Frequency") +
   theme_minimal() +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotFamSituation <- CCPIS |>
+PlotFamSituation <- CPIS |>
   ggplot(aes(x = as.factor(fam_situation_alt))) +
   geom_bar() +
   labs(x = "Family situation", y = "Frequency") +
@@ -2075,9 +2091,9 @@ PlotFamSituation <- CCPIS |>
 ggsave(plot = ggpubr::ggarrange(
   PlotGender, PlotAge, PlotEthnicity, PlotLanguage, PlotImmigrant, PlotAgentic,
   PlotCommunal, PlotFamSituation, nrow = 3, ncol = 3),
-  "_graphs/CCPISDescriptive.pdf", width = 11, height = 12.75)
+  "_graphs/CPISDescriptive.pdf", width = 11, height = 12.75)
 
-filter(CCPIS, !is.na(teacher_gender_alt) & !is.na(female)) |>
+filter(CPIS, !is.na(teacher_gender_alt) & !is.na(female)) |>
   ggplot(aes(x = as.factor(teacher_gender_alt))) +
   geom_bar() +
   facet_grid(~female_alt2) +
@@ -2085,7 +2101,7 @@ filter(CCPIS, !is.na(teacher_gender_alt) & !is.na(female)) |>
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
-filter(CCPIS, !is.na(influencer_gender_alt) & !is.na(female)) |>
+filter(CPIS, !is.na(influencer_gender_alt) & !is.na(female)) |>
   ggplot(aes(x = as.factor(influencer_gender_alt))) +
   geom_bar() +
   facet_grid(~female_alt2) +
@@ -2094,7 +2110,7 @@ filter(CCPIS, !is.na(influencer_gender_alt) & !is.na(female)) |>
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
 
-PlotInterest <- ggplot(CCPIS, aes(x = interest)) +
+PlotInterest <- ggplot(CPIS, aes(x = interest)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
   labs(x = "General\npolitical interest", y = "Frequency") +
@@ -2102,7 +2118,7 @@ PlotInterest <- ggplot(CCPIS, aes(x = interest)) +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotHealth <- ggplot(CCPIS, aes(x = interest_health)) +
+PlotHealth <- ggplot(CPIS, aes(x = interest_health)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
   labs(x = "Interest in\nhealth care", y = "Frequency") +
@@ -2110,7 +2126,7 @@ PlotHealth <- ggplot(CCPIS, aes(x = interest_health)) +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotForeign <- ggplot(CCPIS, aes(x = interest_foreign)) +
+PlotForeign <- ggplot(CPIS, aes(x = interest_foreign)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
   labs(x = "Interest in\ninternational relations", y = "Frequency") +
@@ -2118,7 +2134,7 @@ PlotForeign <- ggplot(CCPIS, aes(x = interest_foreign)) +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotLaw <- ggplot(CCPIS, aes(x = interest_law)) +
+PlotLaw <- ggplot(CPIS, aes(x = interest_law)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
   labs(x = "Interest in\nlaw and crime", y = "Frequency") +
@@ -2126,7 +2142,7 @@ PlotLaw <- ggplot(CCPIS, aes(x = interest_law)) +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotEducation <- ggplot(CCPIS, aes(x = interest_education)) +
+PlotEducation <- ggplot(CPIS, aes(x = interest_education)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
   labs(x = "Interest in\neducation", y = "Frequency") +
@@ -2134,7 +2150,7 @@ PlotEducation <- ggplot(CCPIS, aes(x = interest_education)) +
   theme(axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-PlotPartisan <- ggplot(CCPIS, aes(x = interest_partisan)) +
+PlotPartisan <- ggplot(CPIS, aes(x = interest_partisan)) +
   geom_histogram(binwidth = 1) +
   scale_y_continuous(limits = c(0, 120)) +
   labs(x = "Interest in\npartisan politics", y = "Frequency") +
@@ -2145,10 +2161,10 @@ PlotPartisan <- ggplot(CCPIS, aes(x = interest_partisan)) +
 ggsave(plot = ggpubr::ggarrange(
   PlotInterest, PlotHealth, PlotForeign, PlotLaw, PlotEducation, PlotPartisan,
   nrow = 2, ncol = 3), width = 11, height = 8.5,
-  "_graphs/CCPISInterest.pdf")
+  "_graphs/CPISInterest.pdf")
 
 PoliticalGraphData <- pivot_longer(
-  CCPISOldYoung, cols = lockdown_political_alt:parties_political_alt,
+  CPISOldYoung, cols = lockdown_political_alt:parties_political_alt,
   names_to = "name", values_to = "value") |>
   filter(!is.na(value)) |>
   group_by(name, agegrp) |>
@@ -2188,7 +2204,7 @@ ggplot(PoliticalGraphData, aes(x = value, y = reorder(name_full, value))) +
         axis.title = element_text(size = 17.5),
         axis.text.x = element_text(angle = 90, vjust = 0.5),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/CCPISPolitical.pdf", width = 11, height = 4.25)
+ggsave("_graphs/CPISPolitical.pdf", width = 11, height = 4.25)
 
 #### 2.2 Datagotchi PES, CES, WVS and GSS ####
 PlotAgeDG <- ggplot(DG, aes(x = age)) +
@@ -2589,12 +2605,12 @@ ggsave(plot = ggpubr::ggarrange(
   PlotInterestCES, PlotInterestWVS, PlotInterestGSS,
   nrow = 2, ncol = 2), width = 11, height = 8.5,
   "_graphs/CESWVSGSSInterest.pdf")
-mean(CCPIS$interest, na.rm=T)
-mean(CCPIS$interest_law, na.rm=T)
-mean(CCPIS$interest_education, na.rm=T)
-mean(CCPIS$interest_foreign, na.rm=T)
-mean(CCPIS$interest_partisan, na.rm=T)
-mean(CCPIS$interest_health, na.rm=T)
+mean(CPIS$interest, na.rm=T)
+mean(CPIS$interest_law, na.rm=T)
+mean(CPIS$interest_education, na.rm=T)
+mean(CPIS$interest_foreign, na.rm=T)
+mean(CPIS$interest_partisan, na.rm=T)
+mean(CPIS$interest_health, na.rm=T)
 mean(DG$interest, na.rm=T)
 weighted.mean(DG$interest, na.rm=T, w = DG$weight)
 weighted.mean(DG$interest_law, na.rm=T, w = DG$weight)
@@ -2612,10 +2628,10 @@ weighted.mean(GSS20$interest, na.rm=T, w = GSS20$weight)
 
 ### 3. Multivariate analysis graphs ####
 #### 3.1 Political interest by age & gender (all) ####
-CCPISGrouped <- CCPIS |>
+CPISGrouped <- CPIS |>
   group_by(age, female) |>
   summarise(interest = mean(interest, na.rm = TRUE))
-CCPISGroupedCategory <- CCPIS |>
+CPISGroupedCategory <- CPIS |>
   group_by(age, female) |>
   summarise(interest_health = mean(interest_health, na.rm = TRUE),
             interest_foreign = mean(interest_foreign, na.rm = TRUE),
@@ -2623,9 +2639,9 @@ CCPISGroupedCategory <- CCPIS |>
             interest_education = mean(interest_education, na.rm = TRUE),
             interest_partisan = mean(interest_partisan, na.rm = TRUE))
 
-Plot1 <- ggplot(filter(CCPIS, !is.na(female)),
+Plot1 <- ggplot(filter(CPIS, !is.na(female)),
        aes(x = age, y = interest, color = female)) +
-  geom_point(data = filter(CCPISGrouped, !is.na(female)), size = 0.25,
+  geom_point(data = filter(CPISGrouped, !is.na(female)), size = 0.25,
              aes(x = age, y = interest, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
   scale_y_continuous(name = "",
@@ -2639,9 +2655,9 @@ Plot1 <- ggplot(filter(CCPIS, !is.na(female)),
         legend.text = element_text(size = 17.5),
         text = element_text(family = "CM Roman")) +
   ggtitle("General")
-Plot2 <- ggplot(filter(CCPIS, !is.na(female)),
+Plot2 <- ggplot(filter(CPIS, !is.na(female)),
        aes(x = age, y = interest_health, color = female)) +
-  geom_point(data = filter(CCPISGroupedCategory, !is.na(female)), size = 0.25,
+  geom_point(data = filter(CPISGroupedCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_health, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
   scale_y_continuous(name = "",
@@ -2655,9 +2671,9 @@ Plot2 <- ggplot(filter(CCPIS, !is.na(female)),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("Health care")
-Plot3 <- ggplot(filter(CCPIS, !is.na(female)),
+Plot3 <- ggplot(filter(CPIS, !is.na(female)),
                 aes(x = age, y = interest_foreign, color = female)) +
-  geom_point(data = filter(CCPISGroupedCategory, !is.na(female)), size = 0.25,
+  geom_point(data = filter(CPISGroupedCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_foreign, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
   scale_y_continuous(name = "",
@@ -2671,9 +2687,9 @@ Plot3 <- ggplot(filter(CCPIS, !is.na(female)),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("International affairs")
-Plot4 <- ggplot(filter(CCPIS, !is.na(female)),
+Plot4 <- ggplot(filter(CPIS, !is.na(female)),
                 aes(x = age, y = interest_law, color = female)) +
-  geom_point(data = filter(CCPISGroupedCategory, !is.na(female)), size = 0.25,
+  geom_point(data = filter(CPISGroupedCategory, !is.na(female)), size = 0.25,
              aes(x = age, y = interest_law, color = female, weight = NULL)) +
   geom_smooth(method = "loess") +
   scale_y_continuous(name = "",
@@ -2687,9 +2703,9 @@ Plot4 <- ggplot(filter(CCPIS, !is.na(female)),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("Law and crime")
-Plot5 <- ggplot(filter(CCPIS, !is.na(female)),
+Plot5 <- ggplot(filter(CPIS, !is.na(female)),
                 aes(x = age, y = interest_education, color = female)) +
-  geom_point(data = filter(CCPISGroupedCategory, !is.na(female)),
+  geom_point(data = filter(CPISGroupedCategory, !is.na(female)),
              size = 0.25, aes(x = age, y = interest_education, color = female,
                               weight = NULL)) +
   geom_smooth(method = "loess") +
@@ -2704,9 +2720,9 @@ Plot5 <- ggplot(filter(CCPIS, !is.na(female)),
         legend.position = "none",
         text = element_text(family = "CM Roman")) +
   ggtitle("Education")
-Plot6 <- ggplot(filter(CCPIS, !is.na(female)),
+Plot6 <- ggplot(filter(CPIS, !is.na(female)),
                 aes(x = age, y = interest_partisan, color = female)) +
-  geom_point(data = filter(CCPISGroupedCategory, !is.na(female)),
+  geom_point(data = filter(CPISGroupedCategory, !is.na(female)),
              size = 0.25, aes(x = age, y = interest_partisan, color = female,
                               weight = NULL)) +
   geom_smooth(method = "loess") +
@@ -2723,7 +2739,7 @@ Plot6 <- ggplot(filter(CCPIS, !is.na(female)),
   ggtitle("Partisan politics")
 ggsave(plot = ggpubr::ggarrange(Plot1, Plot2, Plot3, Plot4, Plot5, Plot6,
        nrow = 2, ncol = 3, common.legend = TRUE, legend = "bottom"),
-       "_graphs/InterestAgeGenderCCPIS.pdf", width = 11, height = 8.5)
+       "_graphs/InterestAgeGenderCPIS.pdf", width = 11, height = 8.5)
 
 DGgrouped <- DG |>
   dplyr::group_by(age, female) |>
@@ -3135,7 +3151,7 @@ ggplot(CESGapYearAge,
   geom_smooth(aes(weight = NULL), linewidth = 0.25, alpha = 0.1, se = F) +
   geom_hline(yintercept = 0) +
   scale_y_continuous(name = "General political interest\ngender gap") +
-  scale_x_continuous(name = "Age, 2021 CES") +
+  scale_x_continuous(name = "Age, CES") +
   scale_color_manual(name = "Year", values = c(
     "1997" = "grey20", "2000" = "grey20", "2004" = "grey20", "2006" = "grey50",
     "2008" = "grey50", "2011" = "grey50", "2015" = "grey80", "2019" = "grey80",
@@ -3558,23 +3574,23 @@ ggplot(EthnicityInterest, aes(x = ethn, y = interest,
 ggsave("_graphs/InterestEthnicity20_21.pdf", width = 11, height = 4.25)
 
 #### 3.7 Parents ####
-CCPISBoysLonger <- pivot_longer(CCPISBoys,
+CPISBoysLonger <- pivot_longer(CPISBoys,
                                 cols = c(starts_with(c("gender_parent_",
                                                       "parent_discuss_alt"))))
-CCPISBoysLonger$sex <- "Boys"
-CCPISGirlsLonger <- pivot_longer(CCPISGirls,
+CPISBoysLonger$sex <- "Boys"
+CPISGirlsLonger <- pivot_longer(CPISGirls,
                                     cols = c(starts_with(c("gender_parent_",
                                                            "parent_discuss_alt"))))
-CCPISGirlsLonger$sex <- "Girls"
-CCPISLonger <- rbind(CCPISBoysLonger, CCPISGirlsLonger)
-CCPISLonger$topic <- case_when(
-  CCPISLonger$name == "gender_parent_health" ~ "Health\ncare",
-  CCPISLonger$name == "gender_parent_education" ~ "Education",
-  CCPISLonger$name == "gender_parent_law" ~ "Law and\ncrime",
-  CCPISLonger$name == "gender_parent_foreign" ~ "Inter-\nnational\naffairs",
-  CCPISLonger$name == "gender_parent_partisan" ~ "Partisan\npolitics",
-  CCPISLonger$name == "parent_discuss_alt" ~ "All\ndiscussions")
-ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
+CPISGirlsLonger$sex <- "Girls"
+CPISLonger <- rbind(CPISBoysLonger, CPISGirlsLonger)
+CPISLonger$topic <- case_when(
+  CPISLonger$name == "gender_parent_health" ~ "Health\ncare",
+  CPISLonger$name == "gender_parent_education" ~ "Education",
+  CPISLonger$name == "gender_parent_law" ~ "Law and\ncrime",
+  CPISLonger$name == "gender_parent_foreign" ~ "Inter-\nnational\naffairs",
+  CPISLonger$name == "gender_parent_partisan" ~ "Partisan\npolitics",
+  CPISLonger$name == "parent_discuss_alt" ~ "All\ndiscussions")
+ggplot(CPISLonger, aes(x = sex, fill = as.factor(value))) +
   geom_bar(position = "fill") +
   facet_wrap(~topic, ncol = 6) +
   scale_x_discrete("Gender") +
@@ -3593,7 +3609,7 @@ ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
         axis.text.x = element_text(angle = 45),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopics.pdf", width = 11, height = 4.25)
-ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
+ggplot(CPISLonger, aes(x = sex, fill = as.factor(value))) +
   geom_bar(position = "fill") +
   facet_wrap(~topic, ncol = 6) +
   scale_x_discrete("Gender") +
@@ -3613,24 +3629,24 @@ ggplot(CCPISLonger, aes(x = sex, fill = as.factor(value))) +
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopicsGrey.pdf", width = 11, height = 4.25)
 
-CCPISBoysGraph <- CCPISBoys |>
+CPISBoysGraph <- CPISBoys |>
   pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
   group_by(name) |>
   mutate(N = n()) |>
   group_by(name, value) |>
   summarise(perc = n() / unique(N)) |>
   filter(!is.na(value))
-CCPISBoysGraph$sex <- "Boys"
-CCPISGirlsGraph <- CCPISGirls |>
+CPISBoysGraph$sex <- "Boys"
+CPISGirlsGraph <- CPISGirls |>
   pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
   group_by(name) |>
   mutate(N = n()) |>
   group_by(name, value) |>
   summarise(perc = n() / unique(N)) |>
   filter(!is.na(value))
-CCPISGirlsGraph$sex <- "Girls"
-CCPISGraph <- rbind(CCPISBoysGraph, CCPISGirlsGraph)
-ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
+CPISGirlsGraph$sex <- "Girls"
+CPISGraph <- rbind(CPISBoysGraph, CPISGirlsGraph)
+ggplot(CPISGraph, aes(x = value, y = perc, fill = name)) +
   geom_bar(position = "dodge", stat = "identity") +
   facet_wrap(~sex) +
   scale_x_discrete("Topic most often discussed with parent") +
@@ -3644,10 +3660,10 @@ ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
         legend.text = element_text(size = 17.5),
         legend.title = element_text(size = 17.5),
         strip.text.x = element_text(size = 17.5),
-        axis.text.x = element_text(angle = 45, vjust = 0.5),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopicsMomDad.pdf", width = 11, height = 4.25)
-ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
+ggplot(CPISGraph, aes(x = value, y = perc, fill = name)) +
   geom_bar(position = "dodge", stat = "identity") +
   facet_wrap(~sex) +
   scale_x_discrete("Topic most often discussed with parent") +
@@ -3660,12 +3676,12 @@ ggplot(CCPISGraph, aes(x = value, y = perc, fill = name)) +
         legend.text = element_text(size = 17.5),
         legend.title = element_text(size = 17.5),
         strip.text.x = element_text(size = 17.5),
-        axis.text.x = element_text(angle = 45, vjust = 0.5),
+        axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopicsMomDadGrey.pdf", width = 11, height = 4.25)
 
 #### 3.8 Peers ####
-CCPISBoysPeerGraph <- CCPISBoys |>
+CPISBoysPeerGraph <- CPISBoys |>
   pivot_longer(cols = c(femalefriends_discuss_clean,
                         malefriends_discuss_clean)) |>
   group_by(name) |>
@@ -3673,8 +3689,8 @@ CCPISBoysPeerGraph <- CCPISBoys |>
   group_by(name, value) |>
   summarise(perc = n() / unique(N)) |>
   filter(!is.na(value))
-CCPISBoysPeerGraph$sex <- "Boys"
-CCPISGirlsPeerGraph <- CCPISGirls |>
+CPISBoysPeerGraph$sex <- "Boys"
+CPISGirlsPeerGraph <- CPISGirls |>
   pivot_longer(cols = c(femalefriends_discuss_clean,
                         malefriends_discuss_clean)) |>
   group_by(name) |>
@@ -3682,9 +3698,9 @@ CCPISGirlsPeerGraph <- CCPISGirls |>
   group_by(name, value) |>
   summarise(perc = n() / unique(N)) |>
   filter(!is.na(value))
-CCPISGirlsPeerGraph$sex <- "Girls"
-CCPISPeerGraph <- rbind(CCPISBoysPeerGraph, CCPISGirlsPeerGraph)
-ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
+CPISGirlsPeerGraph$sex <- "Girls"
+CPISPeerGraph <- rbind(CPISBoysPeerGraph, CPISGirlsPeerGraph)
+ggplot(CPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   geom_bar(position = "dodge", stat = "identity") +
   facet_wrap(~sex) +
   scale_x_discrete("Topic most often discussed") +
@@ -3701,7 +3717,7 @@ ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
         axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/PeersTopics.pdf", width = 11, height = 4.25)
-ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
+ggplot(CPISPeerGraph, aes(x = value, y = perc, fill = name)) +
   geom_bar(position = "dodge", stat = "identity") +
   facet_wrap(~sex) +
   scale_x_discrete("Topic most often discussed") +
@@ -3717,7 +3733,7 @@ ggplot(CCPISPeerGraph, aes(x = value, y = perc, fill = name)) +
         axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/PeersTopicsGrey.pdf", width = 11, height = 4.25)
-filter(CCPISOldYoung, !is.na(friends_gender_alt) & !is.na(female)) |>
+filter(CPISOldYoung, !is.na(friends_gender_alt) & !is.na(female)) |>
   ggplot(aes(x = female_alt, fill = as.factor(friends_gender_alt))) +
   geom_bar(position = "fill") +
   facet_wrap(~agegrp) +
@@ -3733,12 +3749,12 @@ filter(CCPISOldYoung, !is.na(friends_gender_alt) & !is.na(female)) |>
         axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/PeersGenderAge.pdf", width = 11, height = 4.25)
-CCPISOldYoungBoys <- filter(CCPISOldYoung, female == 0)
-CCPISOldYoungGirls <- filter(CCPISOldYoung, female == 1)
-prop.table(table(CCPISOldYoungBoys$agegrp,
- CCPISOldYoungBoys$friends_gender_alt), margin = 1)
-prop.table(table(CCPISOldYoungGirls$agegrp,
- CCPISOldYoungGirls$friends_gender_alt), margin = 1)
+CPISOldYoungBoys <- filter(CPISOldYoung, female == 0)
+CPISOldYoungGirls <- filter(CPISOldYoung, female == 1)
+prop.table(table(CPISOldYoungBoys$agegrp,
+ CPISOldYoungBoys$friends_gender_alt), margin = 1)
+prop.table(table(CPISOldYoungGirls$agegrp,
+ CPISOldYoungGirls$friends_gender_alt), margin = 1)
 
 ### 4. Regression models ####
 #### 4.1 Create longer versions of each dataset ####
@@ -3752,13 +3768,13 @@ longer_parent <- function(data) {
     name_parent == "gender_parent_education" ~ interest_education,
     name_parent == "gender_parent_partisan" ~ interest_partisan))
 }
-CCPISParentLonger <- longer_parent(CCPIS)
-CCPISBoysParentLonger <- longer_parent(CCPISBoys)
-CCPISGirlsParentLonger <- longer_parent(CCPISGirls)
-CCPISYoungBoysParentLonger <- longer_parent(CCPISYoungBoys)
-CCPISYoungGirlsParentLonger <- longer_parent(CCPISYoungGirls)
-CCPISOldBoysParentLonger <- longer_parent(CCPISOldBoys)
-CCPISOldGirlsParentLonger <- longer_parent(CCPISOldGirls)
+CPISParentLonger <- longer_parent(CPIS)
+CPISBoysParentLonger <- longer_parent(CPISBoys)
+CPISGirlsParentLonger <- longer_parent(CPISGirls)
+CPISYoungBoysParentLonger <- longer_parent(CPISYoungBoys)
+CPISYoungGirlsParentLonger <- longer_parent(CPISYoungGirls)
+CPISOldBoysParentLonger <- longer_parent(CPISOldBoys)
+CPISOldGirlsParentLonger <- longer_parent(CPISOldGirls)
 longer_mother <- function(data) {
   pivot_longer(data, cols = c(
     "mother_discuss_health", "mother_discuss_foreign", "mother_discuss_law",
@@ -3771,13 +3787,13 @@ longer_mother <- function(data) {
     name_mother == "mother_discuss_education" ~ interest_education,
     name_mother == "mother_discuss_partisan" ~ interest_partisan))
 }
-CCPISMotherLonger <- longer_mother(CCPIS)
-CCPISBoysMotherLonger <- longer_mother(CCPISBoys)
-CCPISGirlsMotherLonger <- longer_mother(CCPISGirls)
-CCPISYoungBoysMotherLonger <- longer_mother(CCPISYoungBoys)
-CCPISYoungGirlsMotherLonger <- longer_mother(CCPISYoungGirls)
-CCPISOldBoysMotherLonger <- longer_mother(CCPISOldBoys)
-CCPISOldGirlsMotherLonger <- longer_mother(CCPISOldGirls)
+CPISMotherLonger <- longer_mother(CPIS)
+CPISBoysMotherLonger <- longer_mother(CPISBoys)
+CPISGirlsMotherLonger <- longer_mother(CPISGirls)
+CPISYoungBoysMotherLonger <- longer_mother(CPISYoungBoys)
+CPISYoungGirlsMotherLonger <- longer_mother(CPISYoungGirls)
+CPISOldBoysMotherLonger <- longer_mother(CPISOldBoys)
+CPISOldGirlsMotherLonger <- longer_mother(CPISOldGirls)
 longer_father <- function(data) {
   pivot_longer(data, cols = c(
     "father_discuss_health", "father_discuss_foreign", "father_discuss_law",
@@ -3790,13 +3806,13 @@ longer_father <- function(data) {
     name_father == "father_discuss_education" ~ interest_education,
     name_father == "father_discuss_partisan" ~ interest_partisan))
 }
-CCPISFatherLonger <- longer_father(CCPIS)
-CCPISBoysFatherLonger <- longer_father(CCPISBoys)
-CCPISGirlsFatherLonger <- longer_father(CCPISGirls)
-CCPISYoungBoysFatherLonger <- longer_father(CCPISYoungBoys)
-CCPISYoungGirlsFatherLonger <- longer_father(CCPISYoungGirls)
-CCPISOldBoysFatherLonger <- longer_father(CCPISOldBoys)
-CCPISOldGirlsFatherLonger <- longer_father(CCPISOldGirls)
+CPISFatherLonger <- longer_father(CPIS)
+CPISBoysFatherLonger <- longer_father(CPISBoys)
+CPISGirlsFatherLonger <- longer_father(CPISGirls)
+CPISYoungBoysFatherLonger <- longer_father(CPISYoungBoys)
+CPISYoungGirlsFatherLonger <- longer_father(CPISYoungGirls)
+CPISOldBoysFatherLonger <- longer_father(CPISOldBoys)
+CPISOldGirlsFatherLonger <- longer_father(CPISOldGirls)
 longer_femalefriends <- function(data) {
   pivot_longer(data, cols = c(
     "femalefriends_discuss_health", "femalefriends_discuss_foreign",
@@ -3812,13 +3828,13 @@ longer_femalefriends <- function(data) {
     name_femalefriends == "femalefriends_discuss_partisan" ~
      interest_partisan))
 }
-CCPISFemaleFriendsLonger <- longer_femalefriends(CCPIS)
-CCPISBoysFemaleFriendsLonger <- longer_femalefriends(CCPISBoys)
-CCPISGirlsFemaleFriendsLonger <- longer_femalefriends(CCPISGirls)
-CCPISYoungBoysFemaleFriendsLonger <- longer_femalefriends(CCPISYoungBoys)
-CCPISYoungGirlsFemaleFriendsLonger <- longer_femalefriends(CCPISYoungGirls)
-CCPISOldBoysFemaleFriendsLonger <- longer_femalefriends(CCPISOldBoys)
-CCPISOldGirlsFemaleFriendsLonger <- longer_femalefriends(CCPISOldGirls)
+CPISFemaleFriendsLonger <- longer_femalefriends(CPIS)
+CPISBoysFemaleFriendsLonger <- longer_femalefriends(CPISBoys)
+CPISGirlsFemaleFriendsLonger <- longer_femalefriends(CPISGirls)
+CPISYoungBoysFemaleFriendsLonger <- longer_femalefriends(CPISYoungBoys)
+CPISYoungGirlsFemaleFriendsLonger <- longer_femalefriends(CPISYoungGirls)
+CPISOldBoysFemaleFriendsLonger <- longer_femalefriends(CPISOldBoys)
+CPISOldGirlsFemaleFriendsLonger <- longer_femalefriends(CPISOldGirls)
 longer_malefriends <- function(data) {
   pivot_longer(data, cols = c(
     "malefriends_discuss_health", "malefriends_discuss_foreign",
@@ -3832,13 +3848,13 @@ longer_malefriends <- function(data) {
     name_malefriends == "malefriends_discuss_education" ~ interest_education,
     name_malefriends == "malefriends_discuss_partisan" ~ interest_partisan))
 }
-CCPISMaleFriendsLonger <- longer_malefriends(CCPIS)
-CCPISBoysMaleFriendsLonger <- longer_malefriends(CCPISBoys)
-CCPISGirlsMaleFriendsLonger <- longer_malefriends(CCPISGirls)
-CCPISYoungBoysMaleFriendsLonger <- longer_malefriends(CCPISYoungBoys)
-CCPISYoungGirlsMaleFriendsLonger <- longer_malefriends(CCPISYoungGirls)
-CCPISOldBoysMaleFriendsLonger <- longer_malefriends(CCPISOldBoys)
-CCPISOldGirlsMaleFriendsLonger <- longer_malefriends(CCPISOldGirls)
+CPISMaleFriendsLonger <- longer_malefriends(CPIS)
+CPISBoysMaleFriendsLonger <- longer_malefriends(CPISBoys)
+CPISGirlsMaleFriendsLonger <- longer_malefriends(CPISGirls)
+CPISYoungBoysMaleFriendsLonger <- longer_malefriends(CPISYoungBoys)
+CPISYoungGirlsMaleFriendsLonger <- longer_malefriends(CPISYoungGirls)
+CPISOldBoysMaleFriendsLonger <- longer_malefriends(CPISOldBoys)
+CPISOldGirlsMaleFriendsLonger <- longer_malefriends(CPISOldGirls)
 longer_teacher <- function(data) {
   pivot_longer(data, cols = c(
     "teacher_discuss_health", "teacher_discuss_foreign",
@@ -3852,13 +3868,13 @@ longer_teacher <- function(data) {
     name_teacher == "teacher_discuss_education" ~ interest_education,
     name_teacher == "teacher_discuss_partisan" ~ interest_partisan))
 }
-CCPISTeacherLonger <- longer_teacher(CCPIS)
-CCPISBoysTeacherLonger <- longer_teacher(CCPISBoys)
-CCPISGirlsTeacherLonger <- longer_teacher(CCPISGirls)
-CCPISYoungBoysTeacherLonger <- longer_teacher(CCPISYoungBoys)
-CCPISYoungGirlsTeacherLonger <- longer_teacher(CCPISYoungGirls)
-CCPISOldBoysTeacherLonger <- longer_teacher(CCPISOldBoys)
-CCPISOldGirlsTeacherLonger <- longer_teacher(CCPISOldGirls)
+CPISTeacherLonger <- longer_teacher(CPIS)
+CPISBoysTeacherLonger <- longer_teacher(CPISBoys)
+CPISGirlsTeacherLonger <- longer_teacher(CPISGirls)
+CPISYoungBoysTeacherLonger <- longer_teacher(CPISYoungBoys)
+CPISYoungGirlsTeacherLonger <- longer_teacher(CPISYoungGirls)
+CPISOldBoysTeacherLonger <- longer_teacher(CPISOldBoys)
+CPISOldGirlsTeacherLonger <- longer_teacher(CPISOldGirls)
 longer_influencer <- function(data) {
   pivot_longer(data, cols = c(
     "influencer_discuss_health", "influencer_discuss_foreign",
@@ -3872,54 +3888,54 @@ longer_influencer <- function(data) {
     name_influencer == "influencer_discuss_education" ~ interest_education,
     name_influencer == "influencer_discuss_partisan" ~ interest_partisan))
 }
-CCPISInfluencerLonger <- longer_influencer(CCPIS)
-CCPISBoysInfluencerLonger <- longer_influencer(CCPISBoys)
-CCPISGirlsInfluencerLonger <- longer_influencer(CCPISGirls)
-CCPISYoungBoysInfluencerLonger <- longer_influencer(CCPISYoungBoys)
-CCPISYoungGirlsInfluencerLonger <- longer_influencer(CCPISYoungGirls)
-CCPISOldBoysInfluencerLonger <- longer_influencer(CCPISOldBoys)
-CCPISOldGirlsInfluencerLonger <- longer_influencer(CCPISOldGirls)
-CCPISAgentsLonger <- cbind(
-  CCPISMotherLonger, CCPISFatherLonger, CCPISFemaleFriendsLonger,
-  CCPISMaleFriendsLonger, CCPISTeacherLonger, CCPISInfluencerLonger)
-CCPISAgentsLonger <- CCPISAgentsLonger[,
- !duplicated(colnames(CCPISAgentsLonger), fromLast = TRUE)]
-CCPISBoysAgentsLonger <- cbind(
-  CCPISBoysMotherLonger, CCPISBoysFatherLonger, CCPISBoysFemaleFriendsLonger,
-  CCPISBoysMaleFriendsLonger, CCPISBoysTeacherLonger,
-  CCPISBoysInfluencerLonger)
-CCPISBoysAgentsLonger <- CCPISBoysAgentsLonger[,
- !duplicated(colnames(CCPISBoysAgentsLonger), fromLast = TRUE)]
-CCPISGirlsAgentsLonger <- cbind(
-  CCPISGirlsMotherLonger, CCPISGirlsFatherLonger,
-  CCPISGirlsFemaleFriendsLonger, CCPISGirlsMaleFriendsLonger,
-  CCPISGirlsTeacherLonger, CCPISGirlsInfluencerLonger)
-CCPISGirlsAgentsLonger <- CCPISGirlsAgentsLonger[,
- !duplicated(colnames(CCPISGirlsAgentsLonger), fromLast = TRUE)]
-CCPISYoungBoysAgentsLonger <- cbind(
-  CCPISYoungBoysMotherLonger, CCPISYoungBoysFatherLonger,
-  CCPISYoungBoysFemaleFriendsLonger, CCPISYoungBoysMaleFriendsLonger,
-  CCPISYoungBoysTeacherLonger, CCPISYoungBoysInfluencerLonger)
-CCPISYoungBoysAgentsLonger <- CCPISYoungBoysAgentsLonger[,
- !duplicated(colnames(CCPISYoungBoysAgentsLonger), fromLast = TRUE)]
-CCPISYoungGirlsAgentsLonger <- cbind(
-  CCPISYoungGirlsMotherLonger, CCPISYoungGirlsFatherLonger,
-  CCPISYoungGirlsFemaleFriendsLonger, CCPISYoungGirlsMaleFriendsLonger,
-  CCPISYoungGirlsTeacherLonger, CCPISYoungGirlsInfluencerLonger)
-CCPISYoungGirlsAgentsLonger <- CCPISYoungGirlsAgentsLonger[,
- !duplicated(colnames(CCPISYoungGirlsAgentsLonger), fromLast = TRUE)]
-CCPISOldBoysAgentsLonger <- cbind(
-  CCPISOldBoysMotherLonger, CCPISOldBoysFatherLonger,
-  CCPISOldBoysFemaleFriendsLonger, CCPISOldBoysMaleFriendsLonger,
-  CCPISOldBoysTeacherLonger, CCPISOldBoysInfluencerLonger)
-CCPISOldBoysAgentsLonger <- CCPISOldBoysAgentsLonger[,
- !duplicated(colnames(CCPISOldBoysAgentsLonger), fromLast = TRUE)]
-CCPISOldGirlsAgentsLonger <- cbind(
-  CCPISOldGirlsMotherLonger, CCPISOldGirlsFatherLonger,
-  CCPISOldGirlsFemaleFriendsLonger, CCPISOldGirlsMaleFriendsLonger,
-  CCPISOldGirlsTeacherLonger, CCPISOldGirlsInfluencerLonger)
-CCPISOldGirlsAgentsLonger <- CCPISOldGirlsAgentsLonger[,
- !duplicated(colnames(CCPISOldGirlsAgentsLonger), fromLast = TRUE)]
+CPISInfluencerLonger <- longer_influencer(CPIS)
+CPISBoysInfluencerLonger <- longer_influencer(CPISBoys)
+CPISGirlsInfluencerLonger <- longer_influencer(CPISGirls)
+CPISYoungBoysInfluencerLonger <- longer_influencer(CPISYoungBoys)
+CPISYoungGirlsInfluencerLonger <- longer_influencer(CPISYoungGirls)
+CPISOldBoysInfluencerLonger <- longer_influencer(CPISOldBoys)
+CPISOldGirlsInfluencerLonger <- longer_influencer(CPISOldGirls)
+CPISAgentsLonger <- cbind(
+  CPISMotherLonger, CPISFatherLonger, CPISFemaleFriendsLonger,
+  CPISMaleFriendsLonger, CPISTeacherLonger, CPISInfluencerLonger)
+CPISAgentsLonger <- CPISAgentsLonger[,
+ !duplicated(colnames(CPISAgentsLonger), fromLast = TRUE)]
+CPISBoysAgentsLonger <- cbind(
+  CPISBoysMotherLonger, CPISBoysFatherLonger, CPISBoysFemaleFriendsLonger,
+  CPISBoysMaleFriendsLonger, CPISBoysTeacherLonger,
+  CPISBoysInfluencerLonger)
+CPISBoysAgentsLonger <- CPISBoysAgentsLonger[,
+ !duplicated(colnames(CPISBoysAgentsLonger), fromLast = TRUE)]
+CPISGirlsAgentsLonger <- cbind(
+  CPISGirlsMotherLonger, CPISGirlsFatherLonger,
+  CPISGirlsFemaleFriendsLonger, CPISGirlsMaleFriendsLonger,
+  CPISGirlsTeacherLonger, CPISGirlsInfluencerLonger)
+CPISGirlsAgentsLonger <- CPISGirlsAgentsLonger[,
+ !duplicated(colnames(CPISGirlsAgentsLonger), fromLast = TRUE)]
+CPISYoungBoysAgentsLonger <- cbind(
+  CPISYoungBoysMotherLonger, CPISYoungBoysFatherLonger,
+  CPISYoungBoysFemaleFriendsLonger, CPISYoungBoysMaleFriendsLonger,
+  CPISYoungBoysTeacherLonger, CPISYoungBoysInfluencerLonger)
+CPISYoungBoysAgentsLonger <- CPISYoungBoysAgentsLonger[,
+ !duplicated(colnames(CPISYoungBoysAgentsLonger), fromLast = TRUE)]
+CPISYoungGirlsAgentsLonger <- cbind(
+  CPISYoungGirlsMotherLonger, CPISYoungGirlsFatherLonger,
+  CPISYoungGirlsFemaleFriendsLonger, CPISYoungGirlsMaleFriendsLonger,
+  CPISYoungGirlsTeacherLonger, CPISYoungGirlsInfluencerLonger)
+CPISYoungGirlsAgentsLonger <- CPISYoungGirlsAgentsLonger[,
+ !duplicated(colnames(CPISYoungGirlsAgentsLonger), fromLast = TRUE)]
+CPISOldBoysAgentsLonger <- cbind(
+  CPISOldBoysMotherLonger, CPISOldBoysFatherLonger,
+  CPISOldBoysFemaleFriendsLonger, CPISOldBoysMaleFriendsLonger,
+  CPISOldBoysTeacherLonger, CPISOldBoysInfluencerLonger)
+CPISOldBoysAgentsLonger <- CPISOldBoysAgentsLonger[,
+ !duplicated(colnames(CPISOldBoysAgentsLonger), fromLast = TRUE)]
+CPISOldGirlsAgentsLonger <- cbind(
+  CPISOldGirlsMotherLonger, CPISOldGirlsFatherLonger,
+  CPISOldGirlsFemaleFriendsLonger, CPISOldGirlsMaleFriendsLonger,
+  CPISOldGirlsTeacherLonger, CPISOldGirlsInfluencerLonger)
+CPISOldGirlsAgentsLonger <- CPISOldGirlsAgentsLonger[,
+ !duplicated(colnames(CPISOldGirlsAgentsLonger), fromLast = TRUE)]
 longer_samegenderinfluencer <- function(data) {
   pivot_longer(data, cols = c(
     "samegenderinfluencer_discuss_health",
@@ -3940,7 +3956,7 @@ longer_samegenderinfluencer <- function(data) {
     name_influencer == "samegenderinfluencer_discuss_partisan" ~
      interest_partisan))
 }
-CCPISSameGenderInfluencerLonger <- longer_samegenderinfluencer(CCPIS)
+CPISSameGenderInfluencerLonger <- longer_samegenderinfluencer(CPIS)
 longer_othergenderinfluencer <- function(data) {
   pivot_longer(data, cols = c(
     "othergenderinfluencer_discuss_health",
@@ -3961,49 +3977,49 @@ longer_othergenderinfluencer <- function(data) {
     name_influencer == "othergenderinfluencer_discuss_partisan" ~
      interest_partisan))
 }
-CCPISOtherGenderInfluencerLonger <- longer_othergenderinfluencer(CCPIS)
+CPISOtherGenderInfluencerLonger <- longer_othergenderinfluencer(CPIS)
 
 #### 4.2 Create empty models ####
-ModelInterest <- nlme::lme(data = CCPIS, fixed = interest ~ 1,
+ModelInterest <- nlme::lme(data = CPIS, fixed = interest ~ 1,
                     random = ~ 1 | Class, na.action = na.omit)
 ModelInterestEffects <- nlme::VarCorr(ModelInterest)
 100 * as.numeric(ModelInterestEffects[1]) / (
   as.numeric(ModelInterestEffects[1]) + as.numeric(ModelInterestEffects[2]))
 # ~6.2% of variance in political interest is located at the classroom level
-ModelHealth <- nlme::lme(data = CCPIS, fixed = interest_health ~ 1,
+ModelHealth <- nlme::lme(data = CPIS, fixed = interest_health ~ 1,
                     random = ~ 1 | Class, na.action = na.omit)
 ModelHealthEffects <- nlme::VarCorr(ModelHealth)
 100 * as.numeric(ModelHealthEffects[1]) / (as.numeric(ModelHealthEffects[1]) +
                                              as.numeric(ModelHealthEffects[2]))
 # ~4.6% of variance in interest in health care is located at the classroom level
-ModelForeign <- nlme::lme(data = CCPIS, fixed = interest_foreign ~ 1,
+ModelForeign <- nlme::lme(data = CPIS, fixed = interest_foreign ~ 1,
                          random = ~ 1 | Class, na.action = na.omit)
 ModelForeignEffects <- nlme::VarCorr(ModelForeign)
 100 * as.numeric(ModelForeignEffects[1]) / (
   as.numeric(ModelForeignEffects[1]) + as.numeric(ModelForeignEffects[2]))
 # ~3.6% of variance in interest in international affairs is located at the
 # classroom level
-ModelLaw <- nlme::lme(data = CCPIS, fixed = interest_law ~ 1,
+ModelLaw <- nlme::lme(data = CPIS, fixed = interest_law ~ 1,
                           random = ~ 1 | Class, na.action = na.omit)
 ModelLawEffects <- nlme::VarCorr(ModelLaw)
 100 * as.numeric(ModelLawEffects[1]) / (as.numeric(ModelLawEffects[1]) +
                                               as.numeric(ModelLawEffects[2]))
 # ~1.4% of variance in interest in law and crime is located at the classroom
 # level
-ModelEducation <- nlme::lme(data = CCPIS, fixed = interest_education ~ 1,
+ModelEducation <- nlme::lme(data = CPIS, fixed = interest_education ~ 1,
                           random = ~ 1 | Class, na.action = na.omit)
 ModelEducationEffects <- nlme::VarCorr(ModelEducation)
 100 * as.numeric(ModelEducationEffects[1]) / (as.numeric(ModelEducationEffects[1]) +
                                               as.numeric(ModelEducationEffects[2]))
 # ~8.1% of variance in interest in education is located at the classroom level
-ModelPartisan <- nlme::lme(data = CCPIS, fixed = interest_partisan ~ 1,
+ModelPartisan <- nlme::lme(data = CPIS, fixed = interest_partisan ~ 1,
                           random = ~ 1 | Class, na.action = na.omit)
 ModelPartisanEffects <- nlme::VarCorr(ModelPartisan)
 100 * as.numeric(ModelPartisanEffects[1]) / (as.numeric(ModelPartisanEffects[1]) +
                                               as.numeric(ModelPartisanEffects[2]))
 # ~2.6% of variance in interest in partisan politics is located at the
 # classroom level
-ModelInterestYoung <- nlme::lme(data = CCPISYoung, fixed = interest ~
+ModelInterestYoung <- nlme::lme(data = CPISYoung, fixed = interest ~
                                 1, random = ~ 1 | Class, na.action = na.omit)
 ModelInterestYoungEffects <- nlme::VarCorr(ModelInterestYoung)
 100 * as.numeric(ModelInterestYoungEffects[1]) / (
@@ -4011,7 +4027,7 @@ ModelInterestYoungEffects <- nlme::VarCorr(ModelInterestYoung)
   as.numeric(ModelInterestYoungEffects[2]))
 # ~7% of variance in political interest is located at the classroom level among
 # students aged 9-15
-ModelInterestOld <- nlme::lme(data = CCPISOld, fixed = interest ~
+ModelInterestOld <- nlme::lme(data = CPISOld, fixed = interest ~
                               1, random = ~ 1 | Class, na.action = na.omit)
 ModelInterestOldEffects <- nlme::VarCorr(ModelInterestOld)
 100 * as.numeric(ModelInterestOldEffects[1]) / (
@@ -4026,48 +4042,48 @@ lme_no_ctrl <- function(data, x, y) {
   data$y <- data[[y]]
   nlme::lme(data = data, fixed = y ~ x, random = ~ 1 | Class, na.action = na.omit)
 }
-ModelInterestGender <- lme_no_ctrl(data = CCPIS, x = "female", y = "interest")
+ModelInterestGender <- lme_no_ctrl(data = CPIS, x = "female", y = "interest")
 summary(ModelInterestGender)
 # girls' political interest = 4.1/10; boys' political interest = 4.6/10; p<0.05
 ModelHealthGender <- lme_no_ctrl(
-  data = CCPIS, x = "female", y = "interest_health")
+  data = CPIS, x = "female", y = "interest_health")
 summary(ModelHealthGender) # N.S.
 ModelForeignGender <- lme_no_ctrl(
-  data = CCPIS, x = "female", y = "interest_foreign")
+  data = CPIS, x = "female", y = "interest_foreign")
 summary(ModelForeignGender) # p<0.001
 ModelLawGender <- lme_no_ctrl(
-  data = CCPIS, x = "female", y = "interest_law")
+  data = CPIS, x = "female", y = "interest_law")
 summary(ModelLawGender) # p<0.05
 ModelEducationGender <- lme_no_ctrl(
-  data = CCPIS, x = "female", y = "interest_education")
+  data = CPIS, x = "female", y = "interest_education")
 summary(ModelEducationGender) # N.S.
 ModelPartisanGender <- lme_no_ctrl(
-  data = CCPIS, x = "female", y = "interest_partisan")
+  data = CPIS, x = "female", y = "interest_partisan")
 summary(ModelPartisanGender) # p<0.001
 ModelInterestGenderYoung <- lme_no_ctrl(
-  data = CCPISYoung, x = "female", y = "interest")
+  data = CPISYoung, x = "female", y = "interest")
 ModelHealthGenderYoung <- lme_no_ctrl(
-  data = CCPISYoung, x = "female", y = "interest_health")
+  data = CPISYoung, x = "female", y = "interest_health")
 ModelForeignGenderYoung <- lme_no_ctrl(
-  data = CCPISYoung, x = "female", y = "interest_foreign")
+  data = CPISYoung, x = "female", y = "interest_foreign")
 ModelLawGenderYoung <- lme_no_ctrl(
-  data = CCPISYoung, x = "female", y = "interest_law")
+  data = CPISYoung, x = "female", y = "interest_law")
 ModelEducationGenderYoung <- lme_no_ctrl(
-  data = CCPISYoung, x = "female", y = "interest_education")
+  data = CPISYoung, x = "female", y = "interest_education")
 ModelPartisanGenderYoung <- lme_no_ctrl(
-  data = CCPISYoung, x = "female", y = "interest_partisan")
+  data = CPISYoung, x = "female", y = "interest_partisan")
 ModelInterestGenderOld <- lme_no_ctrl(
-  data = CCPISOld, x = "female", y = "interest")
+  data = CPISOld, x = "female", y = "interest")
 ModelHealthGenderOld <- lme_no_ctrl(
-  data = CCPISOld, x = "female", y = "interest_health")
+  data = CPISOld, x = "female", y = "interest_health")
 ModelForeignGenderOld <- lme_no_ctrl(
-  data = CCPISOld, x = "female", y = "interest_foreign")
+  data = CPISOld, x = "female", y = "interest_foreign")
 ModelLawGenderOld <- lme_no_ctrl(
-  data = CCPISOld, x = "female", y = "interest_law")
+  data = CPISOld, x = "female", y = "interest_law")
 ModelEducationGenderOld <- lme_no_ctrl(
-  data = CCPISOld, x = "female", y = "interest_education")
+  data = CPISOld, x = "female", y = "interest_education")
 ModelPartisanGenderOld <- lme_no_ctrl(
-  data = CCPISOld, x = "female", y = "interest_partisan")
+  data = CPISOld, x = "female", y = "interest_partisan")
 ModelInterestGenderDG <- lm(data = DG, formula = interest ~ female)
 # women's political interest = 6.9/10; men's political interest = 7.7; p<0.001
 ModelHealthGenderDG <- lm(data = DG, formula = interest_health ~ female)
@@ -4077,189 +4093,189 @@ ModelLawGenderDG <- lm(data = DG, formula = interest_law ~ female)
 ModelEducationGenderDG <- lm(data = DG, formula = interest_education ~ female)
 ModelPartisanGenderDG <- lm(data = DG, formula = interest_partisan ~ female)
 ModelBoysHealthGenderParent <- lme_no_ctrl(
-  data = CCPISBoys, x = "gender_parent_health", y = "interest_health")
+  data = CPISBoys, x = "gender_parent_health", y = "interest_health")
 ModelGirlsHealthGenderParent <- lme_no_ctrl(
-  data = CCPISGirls, x = "gender_parent_health", y = "interest_health")
+  data = CPISGirls, x = "gender_parent_health", y = "interest_health")
 ModelBoysForeignGenderParent <- lme_no_ctrl(
-  data = CCPISBoys, x = "gender_parent_foreign", y = "interest_foreign")
+  data = CPISBoys, x = "gender_parent_foreign", y = "interest_foreign")
 ModelGirlsForeignGenderParent <- lme_no_ctrl(
-  data = CCPISGirls, x = "gender_parent_foreign", y = "interest_foreign")
+  data = CPISGirls, x = "gender_parent_foreign", y = "interest_foreign")
 ModelBoysLawGenderParent <- lme_no_ctrl(
-  data = CCPISBoys, x = "gender_parent_law", y = "interest_law")
+  data = CPISBoys, x = "gender_parent_law", y = "interest_law")
 ModelGirlsLawGenderParent <- lme_no_ctrl(
-  data = CCPISGirls, x = "gender_parent_law", y = "interest_law")
+  data = CPISGirls, x = "gender_parent_law", y = "interest_law")
 ModelBoysEducationGenderParent <- lme_no_ctrl(
-  data = CCPISBoys, x = "gender_parent_education", y = "interest_education")
+  data = CPISBoys, x = "gender_parent_education", y = "interest_education")
 ModelGirlsEducationGenderParent <- lme_no_ctrl(
-  data = CCPISGirls, x = "gender_parent_education", y = "interest_education")
+  data = CPISGirls, x = "gender_parent_education", y = "interest_education")
 ModelBoysPartisanGenderParent <- lme_no_ctrl(
-  data = CCPISBoys, x = "gender_parent_partisan", y = "interest_partisan")
+  data = CPISBoys, x = "gender_parent_partisan", y = "interest_partisan")
 ModelGirlsPartisanGenderParent <- lme_no_ctrl(
-  data = CCPISGirls, x = "gender_parent_partisan", y = "interest_partisan")
+  data = CPISGirls, x = "gender_parent_partisan", y = "interest_partisan")
 ModelBoysAllGenderParent <- lme_no_ctrl(
-  data = CCPISBoysParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISBoysParentLonger, x = "value_parent", y = "interest_all")
 ModelGirlsAllGenderParent <- lme_no_ctrl(
-  data = CCPISGirlsParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISGirlsParentLonger, x = "value_parent", y = "interest_all")
 ModelYoungBoysGenderParent <- lme_no_ctrl(
-  data = CCPISYoungBoysParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISYoungBoysParentLonger, x = "value_parent", y = "interest_all")
 ModelYoungGirlsGenderParent <- lme_no_ctrl(
-  data = CCPISYoungGirlsParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISYoungGirlsParentLonger, x = "value_parent", y = "interest_all")
 ModelOldBoysGenderParent <- lme_no_ctrl(
-  data = CCPISOldBoysParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISOldBoysParentLonger, x = "value_parent", y = "interest_all")
 ModelOldGirlsGenderParent <- lme_no_ctrl(
-  data = CCPISOldGirlsParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISOldGirlsParentLonger, x = "value_parent", y = "interest_all")
 ModelBoysHealthMother <- lme_no_ctrl(
-  data = CCPISBoys, x = "mother_discuss_health", y = "interest_health")
+  data = CPISBoys, x = "mother_discuss_health", y = "interest_health")
 ModelGirlsHealthMother <- lme_no_ctrl(
-  data = CCPISGirls, x = "mother_discuss_health", y = "interest_health")
+  data = CPISGirls, x = "mother_discuss_health", y = "interest_health")
 ModelBoysForeignMother <- lme_no_ctrl(
-  data = CCPISBoys, x = "mother_discuss_foreign", y = "interest_foreign")
+  data = CPISBoys, x = "mother_discuss_foreign", y = "interest_foreign")
 ModelGirlsForeignMother <- lme_no_ctrl(
-  data = CCPISGirls, x = "mother_discuss_foreign", y = "interest_foreign")
+  data = CPISGirls, x = "mother_discuss_foreign", y = "interest_foreign")
 ModelBoysLawMother <- lme_no_ctrl(
-  data = CCPISBoys, x = "mother_discuss_law", y = "interest_law")
+  data = CPISBoys, x = "mother_discuss_law", y = "interest_law")
 ModelGirlsLawMother <- lme_no_ctrl(
-  data = CCPISGirls, x = "mother_discuss_law", y = "interest_law")
+  data = CPISGirls, x = "mother_discuss_law", y = "interest_law")
 ModelBoysEducationMother <- lme_no_ctrl(
-  data = CCPISBoys, x = "mother_discuss_education", y = "interest_education")
+  data = CPISBoys, x = "mother_discuss_education", y = "interest_education")
 ModelGirlsEducationMother <- lme_no_ctrl(
-  data = CCPISGirls, x = "mother_discuss_education", y = "interest_education")
+  data = CPISGirls, x = "mother_discuss_education", y = "interest_education")
 ModelBoysPartisanMother <- lme_no_ctrl(
-  data = CCPISBoys, x = "mother_discuss_partisan", y = "interest_partisan")
+  data = CPISBoys, x = "mother_discuss_partisan", y = "interest_partisan")
 ModelGirlsPartisanMother <- lme_no_ctrl(
-  data = CCPISGirls, x = "mother_discuss_partisan", y = "interest_partisan")
+  data = CPISGirls, x = "mother_discuss_partisan", y = "interest_partisan")
 ModelBoysAllMother <- lme_no_ctrl(
-  data = CCPISBoysAgentsLonger, x = "value_mother", y = "interest_all")
+  data = CPISBoysAgentsLonger, x = "value_mother", y = "interest_all")
 ModelGirlsAllMother <- lme_no_ctrl(
-  data = CCPISGirlsAgentsLonger, x = "value_mother", y = "interest_all")
+  data = CPISGirlsAgentsLonger, x = "value_mother", y = "interest_all")
 ModelYoungBoysMother <- lme_no_ctrl(
-  data = CCPISYoungBoysMotherLonger, x = "value_mother", y = "interest_all")
+  data = CPISYoungBoysMotherLonger, x = "value_mother", y = "interest_all")
 ModelYoungGirlsMother <- lme_no_ctrl(
-  data = CCPISYoungGirlsMotherLonger, x = "value_mother", y = "interest_all")
+  data = CPISYoungGirlsMotherLonger, x = "value_mother", y = "interest_all")
 ModelOldBoysMother <- lme_no_ctrl(
-  data = CCPISOldBoysMotherLonger, x = "value_mother", y = "interest_all")
+  data = CPISOldBoysMotherLonger, x = "value_mother", y = "interest_all")
 ModelOldGirlsMother <- lme_no_ctrl(
-  data = CCPISOldGirlsMotherLonger, x = "value_mother", y = "interest_all")
+  data = CPISOldGirlsMotherLonger, x = "value_mother", y = "interest_all")
 ModelBoysHealthFather <- lme_no_ctrl(
-  data = CCPISBoys, x = "father_discuss_health", y = "interest_health")
+  data = CPISBoys, x = "father_discuss_health", y = "interest_health")
 ModelGirlsHealthFather <- lme_no_ctrl(
-  data = CCPISGirls, x = "father_discuss_health", y = "interest_health")
+  data = CPISGirls, x = "father_discuss_health", y = "interest_health")
 ModelBoysForeignFather <- lme_no_ctrl(
-  data = CCPISBoys, x = "father_discuss_foreign", y = "interest_foreign")
+  data = CPISBoys, x = "father_discuss_foreign", y = "interest_foreign")
 ModelGirlsForeignFather <- lme_no_ctrl(
-  data = CCPISGirls, x = "father_discuss_foreign", y = "interest_foreign")
+  data = CPISGirls, x = "father_discuss_foreign", y = "interest_foreign")
 ModelBoysLawFather <- lme_no_ctrl(
-  data = CCPISBoys, x = "father_discuss_law", y = "interest_law")
+  data = CPISBoys, x = "father_discuss_law", y = "interest_law")
 ModelGirlsLawFather <- lme_no_ctrl(
-  data = CCPISGirls, x = "father_discuss_law", y = "interest_law")
+  data = CPISGirls, x = "father_discuss_law", y = "interest_law")
 ModelBoysEducationFather <- lme_no_ctrl(
-  data = CCPISBoys, x = "father_discuss_education", y = "interest_education")
+  data = CPISBoys, x = "father_discuss_education", y = "interest_education")
 ModelGirlsEducationFather <- lme_no_ctrl(
-  data = CCPISGirls, x = "father_discuss_education", y = "interest_education")
+  data = CPISGirls, x = "father_discuss_education", y = "interest_education")
 ModelBoysPartisanFather <- lme_no_ctrl(
-  data = CCPISBoys, x = "father_discuss_partisan", y = "interest_partisan")
+  data = CPISBoys, x = "father_discuss_partisan", y = "interest_partisan")
 ModelGirlsPartisanFather <- lme_no_ctrl(
-  data = CCPISGirls, x = "father_discuss_partisan", y = "interest_partisan")
+  data = CPISGirls, x = "father_discuss_partisan", y = "interest_partisan")
 ModelBoysAllFather <- lme_no_ctrl(
-  data = CCPISBoysAgentsLonger, x = "value_father", y = "interest_all")
+  data = CPISBoysAgentsLonger, x = "value_father", y = "interest_all")
 ModelGirlsAllFather <- lme_no_ctrl(
-  data = CCPISGirlsAgentsLonger, x = "value_father", y = "interest_all")
+  data = CPISGirlsAgentsLonger, x = "value_father", y = "interest_all")
 ModelYoungBoysFather <- lme_no_ctrl(
-  data = CCPISYoungBoysFatherLonger, x = "value_father", y = "interest_all")
+  data = CPISYoungBoysFatherLonger, x = "value_father", y = "interest_all")
 ModelYoungGirlsFather <- lme_no_ctrl(
-  data = CCPISYoungGirlsFatherLonger, x = "value_father", y = "interest_all")
+  data = CPISYoungGirlsFatherLonger, x = "value_father", y = "interest_all")
 ModelOldBoysFather <- lme_no_ctrl(
-  data = CCPISOldBoysFatherLonger, x = "value_father", y = "interest_all")
+  data = CPISOldBoysFatherLonger, x = "value_father", y = "interest_all")
 ModelOldGirlsFather <- lme_no_ctrl(
-  data = CCPISOldGirlsFatherLonger, x = "value_father", y = "interest_all")
+  data = CPISOldGirlsFatherLonger, x = "value_father", y = "interest_all")
 ModelBoysHealthFemaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "femalefriends_discuss_health", y = "interest_health")
+  data = CPISBoys, x = "femalefriends_discuss_health", y = "interest_health")
 ModelGirlsHealthFemaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "femalefriends_discuss_health", y = "interest_health")
+  data = CPISGirls, x = "femalefriends_discuss_health", y = "interest_health")
 ModelBoysForeignFemaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "femalefriends_discuss_foreign", y = "interest_foreign")
+  data = CPISBoys, x = "femalefriends_discuss_foreign", y = "interest_foreign")
 ModelGirlsForeignFemaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "femalefriends_discuss_foreign", y = "interest_foreign")
+  data = CPISGirls, x = "femalefriends_discuss_foreign", y = "interest_foreign")
 ModelBoysLawFemaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "femalefriends_discuss_law", y = "interest_law")
+  data = CPISBoys, x = "femalefriends_discuss_law", y = "interest_law")
 ModelGirlsLawFemaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "femalefriends_discuss_law", y = "interest_law")
+  data = CPISGirls, x = "femalefriends_discuss_law", y = "interest_law")
 ModelBoysEducationFemaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "femalefriends_discuss_education", y = "interest_education")
+  data = CPISBoys, x = "femalefriends_discuss_education", y = "interest_education")
 ModelGirlsEducationFemaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "femalefriends_discuss_education", y = "interest_education")
+  data = CPISGirls, x = "femalefriends_discuss_education", y = "interest_education")
 ModelBoysPartisanFemaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "femalefriends_discuss_partisan", y = "interest_partisan")
+  data = CPISBoys, x = "femalefriends_discuss_partisan", y = "interest_partisan")
 ModelGirlsPartisanFemaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "femalefriends_discuss_partisan", y = "interest_partisan")
+  data = CPISGirls, x = "femalefriends_discuss_partisan", y = "interest_partisan")
 ModelBoysAllFemaleFriends <- lme_no_ctrl(
-  data = CCPISBoysAgentsLonger, x = "value_femalefriends", y = "interest_all")
+  data = CPISBoysAgentsLonger, x = "value_femalefriends", y = "interest_all")
 ModelGirlsAllFemaleFriends <- lme_no_ctrl(
-  data = CCPISGirlsAgentsLonger, x = "value_femalefriends", y = "interest_all")
+  data = CPISGirlsAgentsLonger, x = "value_femalefriends", y = "interest_all")
 ModelYoungBoysFemaleFriends <- lme_no_ctrl(
-  data = CCPISYoungBoysFemaleFriendsLonger, x = "value_femalefriends", y = "interest_all")
+  data = CPISYoungBoysFemaleFriendsLonger, x = "value_femalefriends", y = "interest_all")
 ModelYoungGirlsFemaleFriends <- lme_no_ctrl(
-  data = CCPISYoungGirlsFemaleFriendsLonger, x = "value_femalefriends", y = "interest_all")
+  data = CPISYoungGirlsFemaleFriendsLonger, x = "value_femalefriends", y = "interest_all")
 ModelOldBoysFemaleFriends <- lme_no_ctrl(
-  data = CCPISOldBoysFemaleFriendsLonger, x = "value_femalefriends", y = "interest_all")
+  data = CPISOldBoysFemaleFriendsLonger, x = "value_femalefriends", y = "interest_all")
 ModelOldGirlsFemaleFriends <- lme_no_ctrl(
-  data = CCPISOldGirlsFemaleFriendsLonger, x = "value_femalefriends", y = "interest_all")
+  data = CPISOldGirlsFemaleFriendsLonger, x = "value_femalefriends", y = "interest_all")
 ModelBoysHealthMaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "malefriends_discuss_health", y = "interest_health")
+  data = CPISBoys, x = "malefriends_discuss_health", y = "interest_health")
 ModelGirlsHealthMaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "malefriends_discuss_health", y = "interest_health")
+  data = CPISGirls, x = "malefriends_discuss_health", y = "interest_health")
 ModelBoysForeignMaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "malefriends_discuss_foreign", y = "interest_foreign")
+  data = CPISBoys, x = "malefriends_discuss_foreign", y = "interest_foreign")
 ModelGirlsForeignMaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "malefriends_discuss_foreign", y = "interest_foreign")
+  data = CPISGirls, x = "malefriends_discuss_foreign", y = "interest_foreign")
 ModelBoysLawMaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "malefriends_discuss_law", y = "interest_law")
+  data = CPISBoys, x = "malefriends_discuss_law", y = "interest_law")
 ModelGirlsLawMaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "malefriends_discuss_law", y = "interest_law")
+  data = CPISGirls, x = "malefriends_discuss_law", y = "interest_law")
 ModelBoysEducationMaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "malefriends_discuss_education", y = "interest_education")
+  data = CPISBoys, x = "malefriends_discuss_education", y = "interest_education")
 ModelGirlsEducationMaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "malefriends_discuss_education", y = "interest_education")
+  data = CPISGirls, x = "malefriends_discuss_education", y = "interest_education")
 ModelBoysPartisanMaleFriends <- lme_no_ctrl(
-  data = CCPISBoys, x = "malefriends_discuss_partisan", y = "interest_partisan")
+  data = CPISBoys, x = "malefriends_discuss_partisan", y = "interest_partisan")
 ModelGirlsPartisanMaleFriends <- lme_no_ctrl(
-  data = CCPISGirls, x = "malefriends_discuss_partisan", y = "interest_partisan")
+  data = CPISGirls, x = "malefriends_discuss_partisan", y = "interest_partisan")
 ModelBoysAllMaleFriends <- lme_no_ctrl(
-  data = CCPISBoysAgentsLonger, x = "value_malefriends", y = "interest_all")
+  data = CPISBoysAgentsLonger, x = "value_malefriends", y = "interest_all")
 ModelGirlsAllMaleFriends <- lme_no_ctrl(
-  data = CCPISGirlsAgentsLonger, x = "value_malefriends", y = "interest_all")
+  data = CPISGirlsAgentsLonger, x = "value_malefriends", y = "interest_all")
 ModelYoungBoysMaleFriends <- lme_no_ctrl(
-  data = CCPISYoungBoysMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
+  data = CPISYoungBoysMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
 ModelYoungGirlsMaleFriends <- lme_no_ctrl(
-  data = CCPISYoungGirlsMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
+  data = CPISYoungGirlsMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
 ModelOldBoysMaleFriends <- lme_no_ctrl(
-  data = CCPISOldBoysMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
+  data = CPISOldBoysMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
 ModelOldGirlsMaleFriends <- lme_no_ctrl(
-  data = CCPISOldGirlsMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
+  data = CPISOldGirlsMaleFriendsLonger, x = "value_malefriends", y = "interest_all")
 ModelHealthSameGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "samegenderinfluencer_discuss_health", y = "interest_health")
+  data = CPIS, x = "samegenderinfluencer_discuss_health", y = "interest_health")
 ModelHealthOtherGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "othergenderinfluencer_discuss_health", y = "interest_health")
+  data = CPIS, x = "othergenderinfluencer_discuss_health", y = "interest_health")
 ModelForeignSameGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "samegenderinfluencer_discuss_foreign", y = "interest_foreign")
+  data = CPIS, x = "samegenderinfluencer_discuss_foreign", y = "interest_foreign")
 ModelForeignOtherGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "othergenderinfluencer_discuss_foreign", y = "interest_foreign")
+  data = CPIS, x = "othergenderinfluencer_discuss_foreign", y = "interest_foreign")
 ModelLawSameGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "samegenderinfluencer_discuss_law", y = "interest_law")
+  data = CPIS, x = "samegenderinfluencer_discuss_law", y = "interest_law")
 ModelLawOtherGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "othergenderinfluencer_discuss_law", y = "interest_law")
+  data = CPIS, x = "othergenderinfluencer_discuss_law", y = "interest_law")
 ModelEducationSameGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "samegenderinfluencer_discuss_education", y = "interest_education")
+  data = CPIS, x = "samegenderinfluencer_discuss_education", y = "interest_education")
 ModelEducationOtherGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "othergenderinfluencer_discuss_education", y = "interest_education")
+  data = CPIS, x = "othergenderinfluencer_discuss_education", y = "interest_education")
 ModelPartisanSameGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "samegenderinfluencer_discuss_partisan", y = "interest_partisan")
+  data = CPIS, x = "samegenderinfluencer_discuss_partisan", y = "interest_partisan")
 ModelPartisanOtherGenderInfluencer <- lme_no_ctrl(
-  data = CCPIS, x = "othergenderinfluencer_discuss_partisan", y = "interest_partisan")
+  data = CPIS, x = "othergenderinfluencer_discuss_partisan", y = "interest_partisan")
 ModelAllSameGenderInfluencer <- lme_no_ctrl(
-  data = CCPISSameGenderInfluencerLonger, x = "value_influencer", y = "interest_all")
+  data = CPISSameGenderInfluencerLonger, x = "value_influencer", y = "interest_all")
 ModelAllOtherGenderInfluencer <- lme_no_ctrl(
-  data = CCPISOtherGenderInfluencerLonger, x = "value_influencer", y = "interest_all")
+  data = CPISOtherGenderInfluencerLonger, x = "value_influencer", y = "interest_all")
 
 #### 4.4 Create models with SES only ####
 lme_ses <- function(data, x, y) {
@@ -4268,112 +4284,112 @@ lme_ses <- function(data, x, y) {
   nlme::lme(data = data, fixed = y ~ x + age + white + immig + lang,
             random = ~ 1 | Class, na.action = na.omit)
 }
-ModelInterestGenderSES <- lme_ses(data = CCPIS, x = "female", y = "interest")
-ModelHealthGenderSES <- lme_ses(data = CCPIS, x = "female",
+ModelInterestGenderSES <- lme_ses(data = CPIS, x = "female", y = "interest")
+ModelHealthGenderSES <- lme_ses(data = CPIS, x = "female",
  y = "interest_health")
-ModelForeignGenderSES <- lme_ses(data = CCPIS, x = "female",
+ModelForeignGenderSES <- lme_ses(data = CPIS, x = "female",
  y = "interest_foreign")
-ModelLawGenderSES <- lme_ses(data = CCPIS, x = "female",
+ModelLawGenderSES <- lme_ses(data = CPIS, x = "female",
  y = "interest_law")
-ModelEducationGenderSES <- lme_ses(data = CCPIS, x = "female",
+ModelEducationGenderSES <- lme_ses(data = CPIS, x = "female",
  y = "interest_education")
-ModelPartisanGenderSES <- lme_ses(data = CCPIS, x = "female",
+ModelPartisanGenderSES <- lme_ses(data = CPIS, x = "female",
  y = "interest_partisan")
-ModelBoysHealthMotherSES <- lme_ses(data = CCPISBoys,
+ModelBoysHealthMotherSES <- lme_ses(data = CPISBoys,
  x = "mother_discuss_health", y = "interest_health")
-ModelBoysForeignMotherSES <- lme_ses(data = CCPISBoys,
+ModelBoysForeignMotherSES <- lme_ses(data = CPISBoys,
  x = "mother_discuss_foreign", y = "interest_foreign")
-ModelBoysLawMotherSES <- lme_ses(data = CCPISBoys, x = "mother_discuss_law",
+ModelBoysLawMotherSES <- lme_ses(data = CPISBoys, x = "mother_discuss_law",
  y = "interest_law")
-ModelBoysEducationMotherSES <- lme_ses(data = CCPISBoys,
+ModelBoysEducationMotherSES <- lme_ses(data = CPISBoys,
  x = "mother_discuss_education", y = "interest_education")
-ModelBoysPartisanMotherSES <- lme_ses(data = CCPISBoys,
+ModelBoysPartisanMotherSES <- lme_ses(data = CPISBoys,
  x = "mother_discuss_partisan", y = "interest_partisan")
-ModelBoysAllMotherSES <- lme_ses(data = CCPISBoysMotherLonger,
+ModelBoysAllMotherSES <- lme_ses(data = CPISBoysMotherLonger,
  x = "value_mother", y = "interest_all")
-ModelBoysHealthFatherSES <- lme_ses(data = CCPISBoys,
+ModelBoysHealthFatherSES <- lme_ses(data = CPISBoys,
  x = "father_discuss_health", y = "interest_health")
-ModelBoysForeignFatherSES <- lme_ses(data = CCPISBoys,
+ModelBoysForeignFatherSES <- lme_ses(data = CPISBoys,
  x = "father_discuss_foreign", y = "interest_foreign")
-ModelBoysLawFatherSES <- lme_ses(data = CCPISBoys, x = "father_discuss_law",
+ModelBoysLawFatherSES <- lme_ses(data = CPISBoys, x = "father_discuss_law",
  y = "interest_law")
-ModelBoysEducationFatherSES <- lme_ses(data = CCPISBoys,
+ModelBoysEducationFatherSES <- lme_ses(data = CPISBoys,
  x = "father_discuss_education", y = "interest_education")
-ModelBoysPartisanFatherSES <- lme_ses(data = CCPISBoys,
+ModelBoysPartisanFatherSES <- lme_ses(data = CPISBoys,
  x = "father_discuss_partisan", y = "interest_partisan")
-ModelBoysAllFatherSES <- lme_ses(data = CCPISBoysFatherLonger,
+ModelBoysAllFatherSES <- lme_ses(data = CPISBoysFatherLonger,
  x = "value_father", y = "interest_all")
-ModelGirlsHealthMotherSES <- lme_ses(data = CCPISGirls,
+ModelGirlsHealthMotherSES <- lme_ses(data = CPISGirls,
  x = "mother_discuss_health", y = "interest_health")
-ModelGirlsForeignMotherSES <- lme_ses(data = CCPISGirls,
+ModelGirlsForeignMotherSES <- lme_ses(data = CPISGirls,
  x = "mother_discuss_foreign", y = "interest_foreign")
-ModelGirlsLawMotherSES <- lme_ses(data = CCPISGirls, x = "mother_discuss_law",
+ModelGirlsLawMotherSES <- lme_ses(data = CPISGirls, x = "mother_discuss_law",
  y = "interest_law")
-ModelGirlsEducationMotherSES <- lme_ses(data = CCPISGirls,
+ModelGirlsEducationMotherSES <- lme_ses(data = CPISGirls,
  x = "mother_discuss_education", y = "interest_education")
-ModelGirlsPartisanMotherSES <- lme_ses(data = CCPISGirls,
+ModelGirlsPartisanMotherSES <- lme_ses(data = CPISGirls,
  x = "mother_discuss_partisan", y = "interest_partisan")
-ModelGirlsAllMotherSES <- lme_ses(data = CCPISGirlsMotherLonger,
+ModelGirlsAllMotherSES <- lme_ses(data = CPISGirlsMotherLonger,
  x = "value_mother", y = "interest_all")
-ModelGirlsHealthFatherSES <- lme_ses(data = CCPISGirls,
+ModelGirlsHealthFatherSES <- lme_ses(data = CPISGirls,
  x = "father_discuss_health", y = "interest_health")
-ModelGirlsForeignFatherSES <- lme_ses(data = CCPISGirls,
+ModelGirlsForeignFatherSES <- lme_ses(data = CPISGirls,
  x = "father_discuss_foreign", y = "interest_foreign")
-ModelGirlsLawFatherSES <- lme_ses(data = CCPISGirls, x = "father_discuss_law",
+ModelGirlsLawFatherSES <- lme_ses(data = CPISGirls, x = "father_discuss_law",
  y = "interest_law")
-ModelGirlsEducationFatherSES <- lme_ses(data = CCPISGirls,
+ModelGirlsEducationFatherSES <- lme_ses(data = CPISGirls,
  x = "father_discuss_education", y = "interest_education")
-ModelGirlsPartisanFatherSES <- lme_ses(data = CCPISGirls,
+ModelGirlsPartisanFatherSES <- lme_ses(data = CPISGirls,
  x = "father_discuss_partisan", y = "interest_partisan")
-ModelGirlsAllFatherSES <- lme_ses(data = CCPISGirlsFatherLonger,
+ModelGirlsAllFatherSES <- lme_ses(data = CPISGirlsFatherLonger,
  x = "value_father", y = "interest_all")
-ModelBoysHealthMaleFriendsSES <- lme_ses(data = CCPISBoys,
+ModelBoysHealthMaleFriendsSES <- lme_ses(data = CPISBoys,
  x = "malefriends_discuss_health", y = "interest_health")
-ModelBoysForeignMaleFriendsSES <- lme_ses(data = CCPISBoys,
+ModelBoysForeignMaleFriendsSES <- lme_ses(data = CPISBoys,
  x = "malefriends_discuss_foreign", y = "interest_foreign")
-ModelBoysLawMaleFriendsSES <- lme_ses(data = CCPISBoys, x = "malefriends_discuss_law",
+ModelBoysLawMaleFriendsSES <- lme_ses(data = CPISBoys, x = "malefriends_discuss_law",
  y = "interest_law")
-ModelBoysEducationMaleFriendsSES <- lme_ses(data = CCPISBoys,
+ModelBoysEducationMaleFriendsSES <- lme_ses(data = CPISBoys,
  x = "malefriends_discuss_education", y = "interest_education")
-ModelBoysPartisanMaleFriendsSES <- lme_ses(data = CCPISBoys,
+ModelBoysPartisanMaleFriendsSES <- lme_ses(data = CPISBoys,
  x = "malefriends_discuss_partisan", y = "interest_partisan")
-ModelBoysAllMaleFriendsSES <- lme_ses(data = CCPISBoysMaleFriendsLonger,
+ModelBoysAllMaleFriendsSES <- lme_ses(data = CPISBoysMaleFriendsLonger,
  x = "value_malefriends", y = "interest_all")
-ModelBoysHealthFemaleFriendsSES <- lme_ses(data = CCPISBoys,
+ModelBoysHealthFemaleFriendsSES <- lme_ses(data = CPISBoys,
  x = "femalefriends_discuss_health", y = "interest_health")
-ModelBoysForeignFemaleFriendsSES <- lme_ses(data = CCPISBoys,
+ModelBoysForeignFemaleFriendsSES <- lme_ses(data = CPISBoys,
  x = "femalefriends_discuss_foreign", y = "interest_foreign")
-ModelBoysLawFemaleFriendsSES <- lme_ses(data = CCPISBoys, x = "femalefriends_discuss_law",
+ModelBoysLawFemaleFriendsSES <- lme_ses(data = CPISBoys, x = "femalefriends_discuss_law",
  y = "interest_law")
-ModelBoysEducationFemaleFriendsSES <- lme_ses(data = CCPISBoys,
+ModelBoysEducationFemaleFriendsSES <- lme_ses(data = CPISBoys,
  x = "femalefriends_discuss_education", y = "interest_education")
-ModelBoysPartisanFemaleFriendsSES <- lme_ses(data = CCPISBoys,
+ModelBoysPartisanFemaleFriendsSES <- lme_ses(data = CPISBoys,
  x = "femalefriends_discuss_partisan", y = "interest_partisan")
-ModelBoysAllFemaleFriendsSES <- lme_ses(data = CCPISBoysFemaleFriendsLonger,
+ModelBoysAllFemaleFriendsSES <- lme_ses(data = CPISBoysFemaleFriendsLonger,
  x = "value_femalefriends", y = "interest_all")
-ModelGirlsHealthMaleFriendsSES <- lme_ses(data = CCPISGirls,
+ModelGirlsHealthMaleFriendsSES <- lme_ses(data = CPISGirls,
  x = "malefriends_discuss_health", y = "interest_health")
-ModelGirlsForeignMaleFriendsSES <- lme_ses(data = CCPISGirls,
+ModelGirlsForeignMaleFriendsSES <- lme_ses(data = CPISGirls,
  x = "malefriends_discuss_foreign", y = "interest_foreign")
-ModelGirlsLawMaleFriendsSES <- lme_ses(data = CCPISGirls, x = "malefriends_discuss_law",
+ModelGirlsLawMaleFriendsSES <- lme_ses(data = CPISGirls, x = "malefriends_discuss_law",
  y = "interest_law")
-ModelGirlsEducationMaleFriendsSES <- lme_ses(data = CCPISGirls,
+ModelGirlsEducationMaleFriendsSES <- lme_ses(data = CPISGirls,
  x = "malefriends_discuss_education", y = "interest_education")
-ModelGirlsPartisanMaleFriendsSES <- lme_ses(data = CCPISGirls,
+ModelGirlsPartisanMaleFriendsSES <- lme_ses(data = CPISGirls,
  x = "malefriends_discuss_partisan", y = "interest_partisan")
-ModelGirlsAllMaleFriendsSES <- lme_ses(data = CCPISGirlsMaleFriendsLonger,
+ModelGirlsAllMaleFriendsSES <- lme_ses(data = CPISGirlsMaleFriendsLonger,
  x = "value_malefriends", y = "interest_all")
-ModelGirlsHealthFemaleFriendsSES <- lme_ses(data = CCPISGirls,
+ModelGirlsHealthFemaleFriendsSES <- lme_ses(data = CPISGirls,
  x = "femalefriends_discuss_health", y = "interest_health")
-ModelGirlsForeignFemaleFriendsSES <- lme_ses(data = CCPISGirls,
+ModelGirlsForeignFemaleFriendsSES <- lme_ses(data = CPISGirls,
  x = "femalefriends_discuss_foreign", y = "interest_foreign")
-ModelGirlsLawFemaleFriendsSES <- lme_ses(data = CCPISGirls, x = "femalefriends_discuss_law",
+ModelGirlsLawFemaleFriendsSES <- lme_ses(data = CPISGirls, x = "femalefriends_discuss_law",
  y = "interest_law")
-ModelGirlsEducationFemaleFriendsSES <- lme_ses(data = CCPISGirls,
+ModelGirlsEducationFemaleFriendsSES <- lme_ses(data = CPISGirls,
  x = "femalefriends_discuss_education", y = "interest_education")
-ModelGirlsPartisanFemaleFriendsSES <- lme_ses(data = CCPISGirls,
+ModelGirlsPartisanFemaleFriendsSES <- lme_ses(data = CPISGirls,
  x = "femalefriends_discuss_partisan", y = "interest_partisan")
-ModelGirlsAllFemaleFriendsSES <- lme_ses(data = CCPISGirlsFemaleFriendsLonger,
+ModelGirlsAllFemaleFriendsSES <- lme_ses(data = CPISGirlsFemaleFriendsLonger,
  x = "value_femalefriends", y = "interest_all")
 lme_ses_dg <- function(data, y) {
   data$y <- data[[y]]
@@ -4401,17 +4417,17 @@ lme_ses_interactions <- function(data, y) {
             random = ~ 1 | Class, na.action = na.omit)
 }
 ModelInterestGenderSESInterac <- lme_ses_interactions(
-  data = CCPIS, y = "interest")
+  data = CPIS, y = "interest")
 ModelHealthGenderSESInterac <- lme_ses_interactions(
-  data = CCPIS, y = "interest_health")
+  data = CPIS, y = "interest_health")
 ModelForeignGenderSESInterac <- lme_ses_interactions(
-  data = CCPIS, y = "interest_foreign")
+  data = CPIS, y = "interest_foreign")
 ModelLawGenderSESInterac <- lme_ses_interactions(
-  data = CCPIS, y = "interest_law")
+  data = CPIS, y = "interest_law")
 ModelEducationGenderSESInterac <- lme_ses_interactions(
-  data = CCPIS, y = "interest_education")
+  data = CPIS, y = "interest_education")
 ModelPartisanGenderSESInterac <- lme_ses_interactions(
-  data = CCPIS, y = "interest_partisan")
+  data = CPIS, y = "interest_partisan")
 lme_ses_agesquared_dg_weighted <- function(data, y) {
   data$y <- data[[y]]
   lm(data = data, formula = y ~ female + age + age_squared + white +
@@ -4468,144 +4484,144 @@ lme_ses_personality <- function(data, x, y) {
             communal, random = ~ 1 | Class, na.action = na.omit)
 }
 ModelInterestGenderSESPersonality <- lme_ses_personality(
-  data = CCPIS, x = "female", y = "interest")
+  data = CPIS, x = "female", y = "interest")
 ModelHealthGenderSESPersonality <- lme_ses_personality(
-  data = CCPIS, x = "female", y = "interest_health")
+  data = CPIS, x = "female", y = "interest_health")
 ModelForeignGenderSESPersonality <- lme_ses_personality(
-  data = CCPIS, x = "female", y = "interest_foreign")
+  data = CPIS, x = "female", y = "interest_foreign")
 ModelLawGenderSESPersonality <- lme_ses_personality(
-  data = CCPIS, x = "female", y = "interest_law")
+  data = CPIS, x = "female", y = "interest_law")
 ModelEducationGenderSESPersonality <- lme_ses_personality(
-  data = CCPIS, x = "female", y = "interest_education")
+  data = CPIS, x = "female", y = "interest_education")
 ModelPartisanGenderSESPersonality <- lme_ses_personality(
-  data = CCPIS, x = "female", y = "interest_partisan")
+  data = CPIS, x = "female", y = "interest_partisan")
 ModelBoysHealthGenderParentCtrl <- lme_ses_personality(
-  data = CCPISBoys, x = "gender_parent_health", y = "interest_health")
+  data = CPISBoys, x = "gender_parent_health", y = "interest_health")
 ModelGirlsHealthGenderParentCtrl <- lme_ses_personality(
-  data = CCPISGirls, x = "gender_parent_health", y = "interest_health")
+  data = CPISGirls, x = "gender_parent_health", y = "interest_health")
 ModelBoysForeignGenderParentCtrl <- lme_ses_personality(
-  data = CCPISBoys, x = "gender_parent_foreign", y = "interest_foreign")
+  data = CPISBoys, x = "gender_parent_foreign", y = "interest_foreign")
 ModelGirlsForeignGenderParentCtrl <- lme_ses_personality(
-  data = CCPISGirls, x = "gender_parent_foreign", y = "interest_foreign")
+  data = CPISGirls, x = "gender_parent_foreign", y = "interest_foreign")
 ModelBoysLawGenderParentCtrl <- lme_ses_personality(
-  data = CCPISBoys, x = "gender_parent_law", y = "interest_law")
+  data = CPISBoys, x = "gender_parent_law", y = "interest_law")
 ModelGirlsLawGenderParentCtrl <- lme_ses_personality(
-  data = CCPISGirls, x = "gender_parent_law", y = "interest_law")
+  data = CPISGirls, x = "gender_parent_law", y = "interest_law")
 ModelBoysEducationGenderParentCtrl <- lme_ses_personality(
-  data = CCPISBoys, x = "gender_parent_education", y = "interest_education")
+  data = CPISBoys, x = "gender_parent_education", y = "interest_education")
 ModelGirlsEducationGenderParentCtrl <- lme_ses_personality(
-  data = CCPISGirls, x = "gender_parent_education", y = "interest_education")
+  data = CPISGirls, x = "gender_parent_education", y = "interest_education")
 ModelBoysPartisanGenderParentCtrl <- lme_ses_personality(
-  data = CCPISBoys, x = "gender_parent_partisan", y = "interest_partisan")
+  data = CPISBoys, x = "gender_parent_partisan", y = "interest_partisan")
 ModelGirlsPartisanGenderParentCtrl <- lme_ses_personality(
-  data = CCPISGirls, x = "gender_parent_partisan", y = "interest_partisan")
+  data = CPISGirls, x = "gender_parent_partisan", y = "interest_partisan")
 ModelBoysAllGenderParentCtrl <- lme_ses_personality(
-  data = CCPISBoysParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISBoysParentLonger, x = "value_parent", y = "interest_all")
 ModelGirlsAllGenderParentCtrl <- lme_ses_personality(
-  data = CCPISGirlsParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISGirlsParentLonger, x = "value_parent", y = "interest_all")
 ModelYoungBoysGenderParentCtrl <- lme_ses_personality(
-  data = CCPISYoungBoysParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISYoungBoysParentLonger, x = "value_parent", y = "interest_all")
 ModelYoungGirlsGenderParentCtrl <- lme_ses_personality(
-  data = CCPISYoungGirlsParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISYoungGirlsParentLonger, x = "value_parent", y = "interest_all")
 ModelOldBoysGenderParentCtrl <- lme_ses_personality(
-  data = CCPISOldBoysParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISOldBoysParentLonger, x = "value_parent", y = "interest_all")
 ModelOldGirlsGenderParentCtrl <- lme_ses_personality(
-  data = CCPISOldGirlsParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISOldGirlsParentLonger, x = "value_parent", y = "interest_all")
 ModelBoysHealthMotherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "mother_discuss_health", y = "interest_health")
+  data = CPISBoys, x = "mother_discuss_health", y = "interest_health")
 ModelBoysForeignMotherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "mother_discuss_foreign", y = "interest_foreign")
+  data = CPISBoys, x = "mother_discuss_foreign", y = "interest_foreign")
 ModelBoysLawMotherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "mother_discuss_law", y = "interest_law")
+  data = CPISBoys, x = "mother_discuss_law", y = "interest_law")
 ModelBoysEducationMotherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "mother_discuss_education", y = "interest_education")
+  data = CPISBoys, x = "mother_discuss_education", y = "interest_education")
 ModelBoysPartisanMotherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "mother_discuss_partisan", y = "interest_partisan")
+  data = CPISBoys, x = "mother_discuss_partisan", y = "interest_partisan")
 ModelBoysAllMotherSESPersonality <- lme_ses_personality(
-  data = CCPISBoysMotherLonger, x = "value_mother", y = "interest_all")
+  data = CPISBoysMotherLonger, x = "value_mother", y = "interest_all")
 ModelBoysHealthFatherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "father_discuss_health", y = "interest_health")
+  data = CPISBoys, x = "father_discuss_health", y = "interest_health")
 ModelBoysForeignFatherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "father_discuss_foreign", y = "interest_foreign")
+  data = CPISBoys, x = "father_discuss_foreign", y = "interest_foreign")
 ModelBoysLawFatherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "father_discuss_law", y = "interest_law")
+  data = CPISBoys, x = "father_discuss_law", y = "interest_law")
 ModelBoysEducationFatherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "father_discuss_education", y = "interest_education")
+  data = CPISBoys, x = "father_discuss_education", y = "interest_education")
 ModelBoysPartisanFatherSESPersonality <- lme_ses_personality(
-  data = CCPISBoys, x = "father_discuss_partisan", y = "interest_partisan")
+  data = CPISBoys, x = "father_discuss_partisan", y = "interest_partisan")
 ModelBoysAllFatherSESPersonality <- lme_ses_personality(
-  data = CCPISBoysFatherLonger, x = "value_father", y = "interest_all")
+  data = CPISBoysFatherLonger, x = "value_father", y = "interest_all")
 ModelGirlsHealthMotherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "mother_discuss_health", y = "interest_health")
+  data = CPISGirls, x = "mother_discuss_health", y = "interest_health")
 ModelGirlsForeignMotherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "mother_discuss_foreign", y = "interest_foreign")
+  data = CPISGirls, x = "mother_discuss_foreign", y = "interest_foreign")
 ModelGirlsLawMotherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "mother_discuss_law", y = "interest_law")
+  data = CPISGirls, x = "mother_discuss_law", y = "interest_law")
 ModelGirlsEducationMotherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "mother_discuss_education", y = "interest_education")
+  data = CPISGirls, x = "mother_discuss_education", y = "interest_education")
 ModelGirlsPartisanMotherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "mother_discuss_partisan", y = "interest_partisan")
+  data = CPISGirls, x = "mother_discuss_partisan", y = "interest_partisan")
 ModelGirlsAllMotherSESPersonality <- lme_ses_personality(
-  data = CCPISGirlsMotherLonger, x = "value_mother", y = "interest_all")
+  data = CPISGirlsMotherLonger, x = "value_mother", y = "interest_all")
 ModelGirlsHealthFatherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "father_discuss_health", y = "interest_health")
+  data = CPISGirls, x = "father_discuss_health", y = "interest_health")
 ModelGirlsForeignFatherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "father_discuss_foreign", y = "interest_foreign")
+  data = CPISGirls, x = "father_discuss_foreign", y = "interest_foreign")
 ModelGirlsLawFatherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "father_discuss_law", y = "interest_law")
+  data = CPISGirls, x = "father_discuss_law", y = "interest_law")
 ModelGirlsEducationFatherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "father_discuss_education", y = "interest_education")
+  data = CPISGirls, x = "father_discuss_education", y = "interest_education")
 ModelGirlsPartisanFatherSESPersonality <- lme_ses_personality(
-  data = CCPISGirls, x = "father_discuss_partisan", y = "interest_partisan")
+  data = CPISGirls, x = "father_discuss_partisan", y = "interest_partisan")
 ModelGirlsAllFatherSESPersonality <- lme_ses_personality(
-  data = CCPISGirlsFatherLonger, x = "value_father", y = "interest_all")
-ModelBoysHealthMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+  data = CPISGirlsFatherLonger, x = "value_father", y = "interest_all")
+ModelBoysHealthMaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys,
  x = "malefriends_discuss_health", y = "interest_health")
-ModelBoysForeignMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ModelBoysForeignMaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys,
  x = "malefriends_discuss_foreign", y = "interest_foreign")
-ModelBoysLawMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys, x = "malefriends_discuss_law",
+ModelBoysLawMaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys, x = "malefriends_discuss_law",
  y = "interest_law")
-ModelBoysEducationMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ModelBoysEducationMaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys,
  x = "malefriends_discuss_education", y = "interest_education")
-ModelBoysPartisanMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ModelBoysPartisanMaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys,
  x = "malefriends_discuss_partisan", y = "interest_partisan")
-ModelBoysAllMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoysMaleFriendsLonger,
+ModelBoysAllMaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoysMaleFriendsLonger,
  x = "value_malefriends", y = "interest_all")
-ModelBoysHealthFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ModelBoysHealthFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys,
  x = "femalefriends_discuss_health", y = "interest_health")
-ModelBoysForeignFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ModelBoysForeignFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys,
  x = "femalefriends_discuss_foreign", y = "interest_foreign")
-ModelBoysLawFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys, x = "femalefriends_discuss_law",
+ModelBoysLawFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys, x = "femalefriends_discuss_law",
  y = "interest_law")
-ModelBoysEducationFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ModelBoysEducationFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys,
  x = "femalefriends_discuss_education", y = "interest_education")
-ModelBoysPartisanFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoys,
+ModelBoysPartisanFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoys,
  x = "femalefriends_discuss_partisan", y = "interest_partisan")
-ModelBoysAllFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISBoysFemaleFriendsLonger,
+ModelBoysAllFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISBoysFemaleFriendsLonger,
  x = "value_femalefriends", y = "interest_all")
-ModelGirlsHealthMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ModelGirlsHealthMaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls,
  x = "malefriends_discuss_health", y = "interest_health")
-ModelGirlsForeignMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ModelGirlsForeignMaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls,
  x = "malefriends_discuss_foreign", y = "interest_foreign")
-ModelGirlsLawMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls, x = "malefriends_discuss_law",
+ModelGirlsLawMaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls, x = "malefriends_discuss_law",
  y = "interest_law")
-ModelGirlsEducationMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ModelGirlsEducationMaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls,
  x = "malefriends_discuss_education", y = "interest_education")
-ModelGirlsPartisanMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ModelGirlsPartisanMaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls,
  x = "malefriends_discuss_partisan", y = "interest_partisan")
-ModelGirlsAllMaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirlsMaleFriendsLonger,
+ModelGirlsAllMaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirlsMaleFriendsLonger,
  x = "value_malefriends", y = "interest_all")
-ModelGirlsHealthFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ModelGirlsHealthFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls,
  x = "femalefriends_discuss_health", y = "interest_health")
-ModelGirlsForeignFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ModelGirlsForeignFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls,
  x = "femalefriends_discuss_foreign", y = "interest_foreign")
-ModelGirlsLawFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls, x = "femalefriends_discuss_law",
+ModelGirlsLawFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls, x = "femalefriends_discuss_law",
  y = "interest_law")
-ModelGirlsEducationFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ModelGirlsEducationFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls,
  x = "femalefriends_discuss_education", y = "interest_education")
-ModelGirlsPartisanFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirls,
+ModelGirlsPartisanFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirls,
  x = "femalefriends_discuss_partisan", y = "interest_partisan")
-ModelGirlsAllFemaleFriendsSESPersonality <- lme_ses_personality(data = CCPISGirlsFemaleFriendsLonger,
+ModelGirlsAllFemaleFriendsSESPersonality <- lme_ses_personality(data = CPISGirlsFemaleFriendsLonger,
  x = "value_femalefriends", y = "interest_all")
 lme_ses_personality_boysgirls <- function(data, x, y) {
   data$x <- data[[x]]
@@ -4615,17 +4631,17 @@ lme_ses_personality_boysgirls <- function(data, x, y) {
             Class, na.action = na.omit)
 }
 ModelHealthGenderParentCtrl <- lme_ses_personality_boysgirls(
-  data = CCPIS, x = "gender_parent_health", y = "interest_health")
+  data = CPIS, x = "gender_parent_health", y = "interest_health")
 ModelForeignGenderParentCtrl <- lme_ses_personality_boysgirls(
-  data = CCPIS, x = "gender_parent_foreign", y = "interest_foreign")
+  data = CPIS, x = "gender_parent_foreign", y = "interest_foreign")
 ModelLawGenderParentCtrl <- lme_ses_personality_boysgirls(
-  data = CCPIS, x = "gender_parent_law", y = "interest_law")
+  data = CPIS, x = "gender_parent_law", y = "interest_law")
 ModelEducationGenderParentCtrl <- lme_ses_personality_boysgirls(
-  data = CCPIS, x = "gender_parent_education", y = "interest_education")
+  data = CPIS, x = "gender_parent_education", y = "interest_education")
 ModelPartisanGenderParentCtrl <- lme_ses_personality_boysgirls(
-  data = CCPIS, x = "gender_parent_partisan", y = "interest_partisan")
+  data = CPIS, x = "gender_parent_partisan", y = "interest_partisan")
 ModelAllGenderParentCtrl <- lme_ses_personality_boysgirls(
-  data = CCPISParentLonger, x = "value_parent", y = "interest_all")
+  data = CPISParentLonger, x = "value_parent", y = "interest_all")
 lme_ses_personality_agesquared <- function(data, y) {
   data$y <- data[[y]]
   nlme::lme(data = data, fixed = y ~ female + age + age_squared +
@@ -4645,17 +4661,17 @@ lme_ses_personality_femalewhite <- function(data, y) {
             random = ~ 1 | Class, na.action = na.omit)
 }
 summary(lme_ses_personality_agesquared(
-  data = CCPIS, y = "interest_partisan"))
+  data = CPIS, y = "interest_partisan"))
 summary(lme_ses_personality_femaleage(
-  data = CCPIS, y = "interest_partisan"))
+  data = CPIS, y = "interest_partisan"))
 summary(lme_ses_personality_femalewhite(
-  data = CCPIS, y = "interest_partisan"))
+  data = CPIS, y = "interest_partisan"))
 summary(lme_ses_personality_agesquared(
-  data = CCPIS, y = "interest_foreign"))
+  data = CPIS, y = "interest_foreign"))
 summary(lme_ses_personality_femaleage(
-  data = CCPIS, y = "interest_foreign"))
+  data = CPIS, y = "interest_foreign"))
 summary(lme_ses_personality_femalewhite(
-  data = CCPIS, y = "interest_foreign"))
+  data = CPIS, y = "interest_foreign"))
 lme_ses_personality_interactions <- function(data, y) {
   data$y <- data[[y]]
   nlme::lme(data = data, fixed = y ~ female * age + age_squared +
@@ -4663,41 +4679,41 @@ lme_ses_personality_interactions <- function(data, y) {
             random = ~ 1 | Class, na.action = na.omit)
 }
 ModelInterestGenderCtrl <- lme_ses_personality_interactions(
-  data = CCPIS, y = "interest")
+  data = CPIS, y = "interest")
 ModelHealthGenderCtrl <- lme_ses_personality_interactions(
-  data = CCPIS, y = "interest_health")
+  data = CPIS, y = "interest_health")
 ModelForeignGenderCtrl <- lme_ses_personality_interactions(
-  data = CCPIS, y = "interest_foreign")
+  data = CPIS, y = "interest_foreign")
 ModelLawGenderCtrl <- lme_ses_personality_interactions(
-  data = CCPIS, y = "interest_law")
+  data = CPIS, y = "interest_law")
 ModelEducationGenderCtrl <- lme_ses_personality_interactions(
-  data = CCPIS, y = "interest_education")
+  data = CPIS, y = "interest_education")
 ModelPartisanGenderCtrl <- lme_ses_personality_interactions(
-  data = CCPIS, y = "interest_partisan")
+  data = CPIS, y = "interest_partisan")
 ModelInterestGenderYoungCtrl <- lme_ses_personality_interactions(
-  data = CCPISYoung, y = "interest")
+  data = CPISYoung, y = "interest")
 ModelHealthGenderYoungCtrl <- lme_ses_personality_interactions(
-  data = CCPISYoung, y = "interest_health")
+  data = CPISYoung, y = "interest_health")
 ModelForeignGenderYoungCtrl <- lme_ses_personality_interactions(
-  data = CCPISYoung, y = "interest_foreign")
+  data = CPISYoung, y = "interest_foreign")
 ModelLawGenderYoungCtrl <- lme_ses_personality_interactions(
-  data = CCPISYoung, y = "interest_law")
+  data = CPISYoung, y = "interest_law")
 ModelEducationGenderYoungCtrl <- lme_ses_personality_interactions(
-  data = CCPISYoung, y = "interest_education")
+  data = CPISYoung, y = "interest_education")
 ModelPartisanGenderYoungCtrl <- lme_ses_personality_interactions(
-  data = CCPISYoung, y = "interest_partisan")
+  data = CPISYoung, y = "interest_partisan")
 ModelInterestGenderOldCtrl <- lme_ses_personality_interactions(
-  data = CCPISOld, y = "interest")
+  data = CPISOld, y = "interest")
 ModelHealthGenderOldCtrl <- lme_ses_personality_interactions(
-  data = CCPISOld, y = "interest_health")
+  data = CPISOld, y = "interest_health")
 ModelForeignGenderOldCtrl <- lme_ses_personality_interactions(
-  data = CCPISOld, y = "interest_foreign")
+  data = CPISOld, y = "interest_foreign")
 ModelLawGenderOldCtrl <- lme_ses_personality_interactions(
-  data = CCPISOld, y = "interest_law")
+  data = CPISOld, y = "interest_law")
 ModelEducationGenderOldCtrl <- lme_ses_personality_interactions(
-  data = CCPISOld, y = "interest_education")
+  data = CPISOld, y = "interest_education")
 ModelPartisanGenderOldCtrl <- lme_ses_personality_interactions(
-  data = CCPISOld, y = "interest_partisan")
+  data = CPISOld, y = "interest_partisan")
 lme_ses_personality_allagents <- function(data, x1, x2, x3, x4, x5, x6, y) {
   data$x1 <- data[[x1]]
   data$x2 <- data[[x2]]
@@ -4711,87 +4727,87 @@ lme_ses_personality_allagents <- function(data, x1, x2, x3, x4, x5, x6, y) {
             random = ~ 1 | Class, na.action = na.omit)
 }
 ModelBoysHealthAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISBoys, x1 = "mother_discuss_health", x2 = "father_discuss_health",
+  data = CPISBoys, x1 = "mother_discuss_health", x2 = "father_discuss_health",
   x3 = "femalefriends_discuss_health", x4 = "malefriends_discuss_health",
   x5 = "teacher_discuss_health", x6 = "influencer_discuss_health",
   y = "interest_health")
 ModelGirlsHealthAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISGirls, x1 = "mother_discuss_health", x2 = "father_discuss_health",
+  data = CPISGirls, x1 = "mother_discuss_health", x2 = "father_discuss_health",
   x3 = "femalefriends_discuss_health", x4 = "malefriends_discuss_health",
   x5 = "teacher_discuss_health", x6 = "influencer_discuss_health",
   y = "interest_health")
 ModelBoysForeignAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISBoys, x1 = "mother_discuss_foreign", x2 = "father_discuss_foreign",
+  data = CPISBoys, x1 = "mother_discuss_foreign", x2 = "father_discuss_foreign",
   x3 = "femalefriends_discuss_foreign", x4 = "malefriends_discuss_foreign",
   x5 = "teacher_discuss_foreign", x6 = "influencer_discuss_foreign",
   y = "interest_foreign")
 ModelGirlsForeignAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISGirls, x1 = "mother_discuss_foreign", x2 = "father_discuss_foreign",
+  data = CPISGirls, x1 = "mother_discuss_foreign", x2 = "father_discuss_foreign",
   x3 = "femalefriends_discuss_foreign", x4 = "malefriends_discuss_foreign",
   x5 = "teacher_discuss_foreign", x6 = "influencer_discuss_foreign",
   y = "interest_foreign")
 ModelBoysLawAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISBoys, x1 = "mother_discuss_law", x2 = "father_discuss_law",
+  data = CPISBoys, x1 = "mother_discuss_law", x2 = "father_discuss_law",
   x3 = "femalefriends_discuss_law", x4 = "malefriends_discuss_law",
   x5 = "teacher_discuss_law", x6 = "influencer_discuss_law",
   y = "interest_law")
 ModelGirlsLawAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISGirls, x1 = "mother_discuss_law", x2 = "father_discuss_law",
+  data = CPISGirls, x1 = "mother_discuss_law", x2 = "father_discuss_law",
   x3 = "femalefriends_discuss_law", x4 = "malefriends_discuss_law",
   x5 = "teacher_discuss_law", x6 = "influencer_discuss_law",
   y = "interest_law")
 ModelBoysEducationAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISBoys, x1 = "mother_discuss_education", x2 = "father_discuss_education",
+  data = CPISBoys, x1 = "mother_discuss_education", x2 = "father_discuss_education",
   x3 = "femalefriends_discuss_education", x4 = "malefriends_discuss_education",
   x5 = "teacher_discuss_education", x6 = "influencer_discuss_education",
   y = "interest_education")
 ModelGirlsEducationAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISGirls, x1 = "mother_discuss_education", x2 = "father_discuss_education",
+  data = CPISGirls, x1 = "mother_discuss_education", x2 = "father_discuss_education",
   x3 = "femalefriends_discuss_education", x4 = "malefriends_discuss_education",
   x5 = "teacher_discuss_education", x6 = "influencer_discuss_education",
   y = "interest_education")
 ModelBoysPartisanAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISBoys, x1 = "mother_discuss_partisan", x2 = "father_discuss_partisan",
+  data = CPISBoys, x1 = "mother_discuss_partisan", x2 = "father_discuss_partisan",
   x3 = "femalefriends_discuss_partisan", x4 = "malefriends_discuss_partisan",
   x5 = "teacher_discuss_partisan", x6 = "influencer_discuss_partisan",
   y = "interest_partisan")
 #ModelGirlsPartisanAgentsCtrl <- lme_ses_personality_allagents(
-#  data = CCPISGirls, x1 = "mother_discuss_partisan", x2 = "father_discuss_partisan",
+#  data = CPISGirls, x1 = "mother_discuss_partisan", x2 = "father_discuss_partisan",
 #  x3 = "femalefriends_discuss_partisan", x4 = "malefriends_discuss_partisan",
 #  x5 = "teacher_discuss_partisan", x6 = "influencer_discuss_partisan",
 #  y = "interest_partisan") # error
 ModelGirlsPartisanAgentsCtrl <- lme4::lmer(
-  data = CCPISGirls, formula = interest_partisan ~ mother_discuss_partisan +
+  data = CPISGirls, formula = interest_partisan ~ mother_discuss_partisan +
   father_discuss_partisan + femalefriends_discuss_partisan +
   malefriends_discuss_partisan + teacher_discuss_partisan +
   influencer_discuss_partisan + age + age_squared + white + immig + lang +
   agentic + communal+ (1 | Class), na.action = na.omit)
 ModelBoysAllAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISBoysAgentsLonger, x1 = "value_mother", x2 = "value_father",
+  data = CPISBoysAgentsLonger, x1 = "value_mother", x2 = "value_father",
   x3 = "value_femalefriends", x4 = "value_malefriends", x5 = "value_teacher",
   x6 = "value_influencer", y = "interest_all")
 ModelGirlsAllAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISGirlsAgentsLonger, x1 = "value_mother", x2 = "value_father",
+  data = CPISGirlsAgentsLonger, x1 = "value_mother", x2 = "value_father",
   x3 = "value_femalefriends", x4 = "value_malefriends", x5 = "value_teacher",
   x6 = "value_influencer", y = "interest_all")
 ModelYoungBoysAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISYoungBoysAgentsLonger, x1 = "value_mother", x2 = "value_father",
+  data = CPISYoungBoysAgentsLonger, x1 = "value_mother", x2 = "value_father",
   x3 = "value_femalefriends", x4 = "value_malefriends", x5 = "value_teacher",
   x6 = "value_influencer", y = "interest_all")
 ModelYoungGirlsAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISYoungGirlsAgentsLonger, x1 = "value_mother", x2 = "value_father",
+  data = CPISYoungGirlsAgentsLonger, x1 = "value_mother", x2 = "value_father",
   x3 = "value_femalefriends", x4 = "value_malefriends", x5 = "value_teacher",
   x6 = "value_influencer", y = "interest_all")
 # ModelOldBoysAgentsCtrl <- lme_ses_personality_allagents(
-#   data = CCPISOldBoysAgentsLonger, x1 = "value_mother", x2 = "value_father",
+#   data = CPISOldBoysAgentsLonger, x1 = "value_mother", x2 = "value_father",
 #   x3 = "value_femalefriends", x4 = "value_malefriends", y = "interest_all")
 ModelOldBoysAgentsCtrl <- lme4::lmer(
-  data = CCPISOldBoysAgentsLonger, formula = interest_all ~ value_mother +
+  data = CPISOldBoysAgentsLonger, formula = interest_all ~ value_mother +
   value_father + value_femalefriends + value_malefriends + value_teacher +
   value_influencer + age + age_squared + white + immig + lang + agentic +
   communal + (1 | Class), na.action = na.omit)
 ModelOldGirlsAgentsCtrl <- lme_ses_personality_allagents(
-  data = CCPISOldGirlsAgentsLonger, x1 = "value_mother", x2 = "value_father",
+  data = CPISOldGirlsAgentsLonger, x1 = "value_mother", x2 = "value_father",
   x3 = "value_femalefriends", x4 = "value_malefriends", x5 = "value_teacher",
   x6 = "value_influencer", y = "interest_all")
 lme_ses_personality_allagents_boysgirls <- function(
@@ -4809,39 +4825,39 @@ lme_ses_personality_allagents_boysgirls <- function(
               random = ~ 1 | Class, na.action = na.omit)
 }
 ModelHealthAgentsCtrl <- lme_ses_personality_allagents_boysgirls(
-  data = CCPIS, x1 = "mother_discuss_health", x2 = "father_discuss_health",
+  data = CPIS, x1 = "mother_discuss_health", x2 = "father_discuss_health",
   x3 = "femalefriends_discuss_health", x4 = "malefriends_discuss_health",
   x5 = "teacher_discuss_health", x6 = "influencer_discuss_health",
   y = "interest_health")
 ModelForeignAgentsCtrl <- lme_ses_personality_allagents_boysgirls(
-  data = CCPIS, x1 = "mother_discuss_foreign", x2 = "father_discuss_foreign",
+  data = CPIS, x1 = "mother_discuss_foreign", x2 = "father_discuss_foreign",
   x3 = "femalefriends_discuss_foreign", x4 = "malefriends_discuss_foreign",
   x5 = "teacher_discuss_foreign", x6 = "influencer_discuss_foreign",
   y = "interest_foreign")
 ModelLawAgentsCtrl <- lme_ses_personality_allagents_boysgirls(
-  data = CCPIS, x1 = "mother_discuss_law", x2 = "father_discuss_law",
+  data = CPIS, x1 = "mother_discuss_law", x2 = "father_discuss_law",
   x3 = "femalefriends_discuss_law", x4 = "malefriends_discuss_law",
   x5 = "teacher_discuss_law", x6 = "influencer_discuss_law",
   y = "interest_law")
 ModelEducationAgentsCtrl <- lme_ses_personality_allagents_boysgirls(
-  data = CCPIS, x1 = "mother_discuss_education", x2 = "father_discuss_education",
+  data = CPIS, x1 = "mother_discuss_education", x2 = "father_discuss_education",
   x3 = "femalefriends_discuss_education", x4 = "malefriends_discuss_education",
   x5 = "teacher_discuss_education", x6 = "influencer_discuss_education",
   y = "interest_education")
 ModelPartisanAgentsCtrl <- lme4::lmer(
-  data = CCPIS, formula = interest_partisan ~ female * mother_discuss_partisan +
+  data = CPIS, formula = interest_partisan ~ female * mother_discuss_partisan +
   female * father_discuss_partisan + female * femalefriends_discuss_partisan +
   female * malefriends_discuss_partisan + female * teacher_discuss_partisan +
   female * influencer_discuss_partisan + female * age + age_squared +
   female * white + immig + lang + agentic + communal + (1 | Class),
   na.action = na.omit)
 ModelAllAgentsCtrl <- lme_ses_personality_allagents_boysgirls(
-  data = CCPISAgentsLonger, x1 = "value_mother", x2 = "value_father",
+  data = CPISAgentsLonger, x1 = "value_mother", x2 = "value_father",
   x3 = "value_femalefriends", x4 = "value_malefriends", x5 = "value_teacher",
   x6 = "value_influencer", y = "interest_all")
 
 #### 4.6 Test models for multicollinearity, heteroskedasticity and autocorrelation ####
-CCPISModels <- list(
+CPISModels <- list(
   ModelInterestGender, ModelHealthGender, ModelForeignGender,
   ModelLawGender, ModelEducationGender, ModelPartisanGender,
   ModelInterestGenderSES, ModelHealthGenderSES, ModelForeignGenderSES,
@@ -4855,7 +4871,7 @@ CCPISModels <- list(
   ModelInterestGenderCtrl, ModelHealthGenderCtrl,
   ModelForeignGenderCtrl, ModelLawGenderCtrl,
   ModelEducationGenderCtrl, ModelPartisanGenderCtrl)
-CCPISAgentsModels <- list(
+CPISAgentsModels <- list(
   ModelBoysHealthGenderParent, ModelBoysForeignGenderParent,
   ModelBoysLawGenderParent, ModelBoysEducationGenderParent,
   ModelBoysPartisanGenderParent, ModelBoysAllGenderParent,
@@ -4928,7 +4944,7 @@ CCPISAgentsModels <- list(
   ModelHealthAgentsCtrl, ModelForeignAgentsCtrl,
   ModelLawAgentsCtrl, ModelEducationAgentsCtrl,
   ModelPartisanAgentsCtrl, ModelAllAgentsCtrl)
-  CCPISAgentsModels2 <- list(
+  CPISAgentsModels2 <- list(
     ModelBoysHealthMaleFriendsSES, ModelBoysForeignMaleFriendsSES,
   ModelBoysLawMaleFriendsSES, ModelBoysEducationMaleFriendsSES,
   ModelBoysPartisanMaleFriendsSES, ModelBoysAllMaleFriendsSES,
@@ -4961,9 +4977,9 @@ DGModels <- list(
   ModelInterestGenderDGSESInterac, ModelHealthGenderDGSESInterac,
   ModelForeignGenderDGSESInterac, ModelLawGenderDGSESInterac,
   ModelEducationGenderDGSESInterac, ModelPartisanGenderDGSESInterac)
-map(CCPISModels[7:length(CCPISModels)], car::vif)
-map(CCPISAgentsModels[61:length(CCPISAgentsModels)], car::vif)
-map(CCPISAgentsModels2, car::vif)
+map(CPISModels[7:length(CPISModels)], car::vif)
+map(CPISAgentsModels[61:length(CPISAgentsModels)], car::vif)
+map(CPISAgentsModels2, car::vif)
 map(DGModels[7:length(DGModels)], car::vif)
 print(map(DGModels, ~bptest(.x)[[4]]))
  # Breusch-Pagan test for heteroscedasticity
@@ -4990,7 +5006,7 @@ modelsummary::modelsummary(models = list(
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
-  title = paste("Interest in Topic by Gender, CCPIS \\label{tab:lmeInterestCCPIS}"),
+  title = paste("Interest in Topic by Gender, CPIS \\label{tab:lmeInterestCPIS}"),
   coef_rename = c(
     "x1" = "Gender (1 = girl)",
     "female1" = "Gender (1 = girl)",
@@ -5023,8 +5039,8 @@ modelsummary::modelsummary(models = list(
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Controls: None"),
-  title = paste("Interest in Topic by Gender and Age Group, CCPIS",
-               "\\label{tab:lmeInterestYoungOldCCPIS}"),
+  title = paste("Interest in Topic by Gender and Age Group, CPIS",
+               "\\label{tab:lmeInterestYoungOldCPIS}"),
   coef_rename = c("x1" = "Gender (1 = girl)"),
   output = "latex") |>
     kableExtra::kable_styling(font_size = 6, full_width = FALSE)
@@ -5047,8 +5063,8 @@ modelsummary::modelsummary(models = list(
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
-  title = paste("Interest in Topic by Gender and Age Group, CCPIS",
-               "\\label{tab:lmeInterestYoungOldCCPISCtrl}"),
+  title = paste("Interest in Topic by Gender and Age Group, CPIS",
+               "\\label{tab:lmeInterestYoungOldCPISCtrl}"),
   coef_rename = c(
     "female1" = "Gender (1 = girl)",
     "age" = "Age",
@@ -5394,7 +5410,7 @@ get_ci <- function(model, var_order, level = 0.95) {
   mod_int <- nlme::intervals(model, which = "fixed", level = level)
   c(mod_int[1]$fixed[var_order + 1,]) # extract est. and ci for 1st IV only
 }
-GenderCCPISData <- data.frame(
+GenderCPISData <- data.frame(
   pred_interest = get_ci(ModelInterestGender, 1),
   pred_interest_ses = get_ci(ModelInterestGenderSES, 1),
   pred_interest_ses_personality = get_ci(ModelInterestGenderSESPersonality, 1),
@@ -5419,21 +5435,21 @@ GenderCCPISData <- data.frame(
   pred_partisan_ses = get_ci(ModelPartisanGenderSES, 1),
   pred_partisan_ses_personality = get_ci(ModelPartisanGenderSESPersonality, 1),
   pred_partisan_ctrl = get_ci(ModelPartisanGenderCtrl, 1))
-rownames(GenderCCPISData) <- c("ci_l", "pred", "ci_u")
-GenderCCPISData <- as.data.frame(t(GenderCCPISData))
-GenderCCPISData$ctrl <- rep(c(
+rownames(GenderCPISData) <- c("ci_l", "pred", "ci_u")
+GenderCPISData <- as.data.frame(t(GenderCPISData))
+GenderCPISData$ctrl <- rep(c(
   "Without Controls", "With Controls for SES",
   "With Controls for SES\nand Personality Traits",
   "With Controls for SES, Interactions\nand Personality Traits"), 6)
-GenderCCPISData$ctrl <- factor(GenderCCPISData$ctrl, levels = c(
+GenderCPISData$ctrl <- factor(GenderCPISData$ctrl, levels = c(
   "Without Controls", "With Controls for SES",
   "With Controls for SES\nand Personality Traits",
   "With Controls for SES, Interactions\nand Personality Traits"))
-GenderCCPISData$topic <- c(
+GenderCPISData$topic <- c(
   rep("Politics (general)", 4), rep("Health care", 4),
   rep("International affairs", 4), rep("Law and crime", 4),
   rep("Education", 4), rep("Partisan politics", 4))
-ggplot(GenderCCPISData, aes(x = pred, y = topic)) +
+ggplot(GenderCPISData, aes(x = pred, y = topic)) +
   geom_point() +
   facet_wrap(~ ctrl) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
@@ -5449,8 +5465,8 @@ ggplot(GenderCCPISData, aes(x = pred, y = topic)) +
         axis.text.y = ggtext::element_markdown(
           color = c("red", rep("black", 5))),
           text = element_text(family = "CM Roman"))
-ggsave("_graphs/GenderCCPIS.pdf", width = 11, height = 4.25)
-GenderCCPISYOData <- data.frame(
+ggsave("_graphs/GenderCPIS.pdf", width = 11, height = 4.25)
+GenderCPISYOData <- data.frame(
   pred_interest_y = get_ci(ModelInterestGenderYoung, 1),
   pred_interest_o = get_ci(ModelInterestGenderOld, 1),
   pred_health_y = get_ci(ModelHealthGenderYoung, 1),
@@ -5463,16 +5479,16 @@ GenderCCPISYOData <- data.frame(
   pred_education_o = get_ci(ModelEducationGenderOld, 1),
   pred_partisan_y = get_ci(ModelPartisanGenderYoung, 1),
   pred_partisan_o = get_ci(ModelPartisanGenderOld, 1))
-rownames(GenderCCPISYOData) <- c("ci_l", "pred", "ci_u")
-GenderCCPISYOData <- as.data.frame(t(GenderCCPISYOData))
-GenderCCPISYOData$age <- rep(c("9-15", "16-18"), 6)
-GenderCCPISYOData$age <- factor(GenderCCPISYOData$age, levels = c(
+rownames(GenderCPISYOData) <- c("ci_l", "pred", "ci_u")
+GenderCPISYOData <- as.data.frame(t(GenderCPISYOData))
+GenderCPISYOData$age <- rep(c("9-15", "16-18"), 6)
+GenderCPISYOData$age <- factor(GenderCPISYOData$age, levels = c(
   "9-15", "16-18"))
-GenderCCPISYOData$topic <- c(
+GenderCPISYOData$topic <- c(
   rep("Politics (general)", 2), rep("Health care", 2),
   rep("International affairs", 2), rep("Law and crime", 2),
   rep("Education", 2), rep("Partisan politics", 2))
-ggplot(GenderCCPISYOData, aes(x = pred, y = topic)) +
+ggplot(GenderCPISYOData, aes(x = pred, y = topic)) +
   geom_point() +
   facet_wrap(~ age) +
   geom_errorbar(aes(xmin = ci_l, xmax = ci_u), width = 0.5) +
@@ -5488,7 +5504,7 @@ ggplot(GenderCCPISYOData, aes(x = pred, y = topic)) +
         axis.text.y = ggtext::element_markdown(
           color = c("red", rep("black", 5))),
           text = element_text(family = "CM Roman"))
-ggsave("_graphs/GenderCCPISYO.pdf", width = 11, height = 4.25)
+ggsave("_graphs/GenderCPISYO.pdf", width = 11, height = 4.25)
 get_ci_lm <- function(model, var_order, level = 0.95) {
   mod_int <- confint(model, level = level)
   c(mod_int[var_order + 1, 1], model[[1]][var_order + 1],
@@ -6123,35 +6139,35 @@ DiscussParentYOCtrlData |>
 ggsave("_graphs/DiscussPeersYOCtrl.pdf", width = 11, height = 4.25)
 
 ### 5. T-tests ####
-t.test(CCPIS$femalefriends_discuss_health,
- CCPIS$malefriends_discuss_health)
-t.test(CCPIS$femalefriends_discuss_foreign,
- CCPIS$malefriends_discuss_foreign)
-t.test(CCPIS$femalefriends_discuss_law,
- CCPIS$malefriends_discuss_law)
-t.test(CCPIS$femalefriends_discuss_education,
- CCPIS$malefriends_discuss_education)
-t.test(CCPISBoys$femalefriends_discuss_partisan,
- CCPISGirls$malefriends_discuss_partisan)
-t.test(CCPISYoung$interest, CCPISOld$interest) # interest higher for 16-18-year-olds
-t.test(CCPISYoung$interest_health, CCPISOld$interest_health) # interest higher for 16-18-year-olds
-t.test(CCPISYoung$interest_foreign, CCPISOld$interest_foreign) # interest higher for 16-18-year-olds
-t.test(CCPISYoung$interest_law, CCPISOld$interest_law) # interest higher for 16-18-year-olds
-t.test(CCPISYoung$interest_education, CCPISOld$interest_education) # interest higher for 16-18-year-olds
-t.test(CCPISYoung$interest_partisan, CCPISOld$interest_partisan) # N.S.
-CCPISYoung$female <- as.numeric(CCPISYoung$female)
-CCPISOld$female <- as.numeric(CCPISOld$female)
-t.test(CCPISYoung$female, CCPISOld$female) # 53% vs. 45% girls, p<0.05
-t.test(CCPISYoung$white, CCPISOld$white) # 53% vs. 64% whites, p<0.01
-t.test(CCPISYoung$immig, CCPISOld$immig) # 9% vs. 20% immigrnats, p<0.001
+t.test(CPIS$femalefriends_discuss_health,
+ CPIS$malefriends_discuss_health)
+t.test(CPIS$femalefriends_discuss_foreign,
+ CPIS$malefriends_discuss_foreign)
+t.test(CPIS$femalefriends_discuss_law,
+ CPIS$malefriends_discuss_law)
+t.test(CPIS$femalefriends_discuss_education,
+ CPIS$malefriends_discuss_education)
+t.test(CPISBoys$femalefriends_discuss_partisan,
+ CPISGirls$malefriends_discuss_partisan)
+t.test(CPISYoung$interest, CPISOld$interest) # interest higher for 16-18-year-olds
+t.test(CPISYoung$interest_health, CPISOld$interest_health) # interest higher for 16-18-year-olds
+t.test(CPISYoung$interest_foreign, CPISOld$interest_foreign) # interest higher for 16-18-year-olds
+t.test(CPISYoung$interest_law, CPISOld$interest_law) # interest higher for 16-18-year-olds
+t.test(CPISYoung$interest_education, CPISOld$interest_education) # interest higher for 16-18-year-olds
+t.test(CPISYoung$interest_partisan, CPISOld$interest_partisan) # N.S.
+CPISYoung$female <- as.numeric(CPISYoung$female)
+CPISOld$female <- as.numeric(CPISOld$female)
+t.test(CPISYoung$female, CPISOld$female) # 53% vs. 45% girls, p<0.05
+t.test(CPISYoung$white, CPISOld$white) # 53% vs. 64% whites, p<0.01
+t.test(CPISYoung$immig, CPISOld$immig) # 9% vs. 20% immigrnats, p<0.001
 
 ### 6. Correlations ####
-CorrCCPIS <- CCPIS[c(21, 32:36)]
-names(CorrCCPIS) <- c("General", "Health care", "International affairs",
+CorrCPIS <- CPIS[c(21, 32:36)]
+names(CorrCPIS) <- c("General", "Health care", "International affairs",
                       "Law and crime", "Education", "Partisan politics")
-CorMatrixCCPIS <- cor(CorrCCPIS, use = "pairwise.complete.obs") # imputation
-diag(CorMatrixCCPIS) <- NA
-ggcorrplot::ggcorrplot(CorMatrixCCPIS, method = "circle",
+CorMatrixCPIS <- cor(CorrCPIS, use = "pairwise.complete.obs") # imputation
+diag(CorMatrixCPIS) <- NA
+ggcorrplot::ggcorrplot(CorMatrixCPIS, method = "circle",
                        legend.title = "Correlation") +
   labs(x = "", y = "") +
   theme_minimal() +
@@ -6162,7 +6178,7 @@ ggcorrplot::ggcorrplot(CorMatrixCCPIS, method = "circle",
         strip.text.x = element_text(size = 17.5),
         axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/CorMatrixCCPIS.pdf", width = 11, height = 8.5)
+ggsave("_graphs/CorMatrixCPIS.pdf", width = 11, height = 8.5)
 CorrDG <- DG[191:196]
 names(CorrDG) <- c("General", "Health care", "International affairs",
                    "Law and crime", "Education", "Partisan politics")

@@ -1,7 +1,79 @@
 ---
 format: pdf
 ---
-# CCPIS English Questionnaire {#sec-appendix1}
+# Emails Sent to School Boards and Schools {#sec-appendix1}
+
+## Email destined for school boards in English
+
+Title: "Participation of your schools to an academic project"
+
+Hello,
+
+I am contacting your school board as part of my doctoral dissertation project in political science, which focuses on the role of gender and social networks in the development of political interest. As part of my research, I will be administering a short online survey to elementary and high school students from various schools. If possible, I would love to do some of my data collection in schools from \[name of school board or school service centre\]. Should you agree, I would then contact each selected school individually in order to get approvals of the school's governing board, teachers, and students.
+
+I am taking all safety precautions to reduce the risk of spread of COVID-19. If you would like more information about my project, you can email me at alexandre.fortier.chouinard@mail.utoronto.ca or contact me at \[phone number of the researcher\]. I will be happy to answer any questions you may have!
+
+Thank you for giving me a positive or negative answer as soon as possible.
+
+Alexandre Fortier-Chouinard
+
+Ph.D. Candidate in Political Science
+
+University of Toronto
+
+## Email destined for primary schools in English
+
+Title: "Participation to an academic project"
+
+Hello,
+
+I am contacting your school as part of my doctoral dissertation project in political science, which focuses on the role of gender and social networks in the development of political interest. As part of my research, I will be administering a short online survey to elementary and high school students from various schools. If possible, I would love to do some of my data collection at \[name of school\]. If so, I would like to get your permission and the email addresses of the teachers of \[name of the required social studies course in the province\] in grade 5 so that I can schedule a 15-minute time slot with them for their students to complete the surveys.
+
+I am taking all safety precautions to reduce the risk of spread of COVID-19. If you would like more information about my project, you can email me at alexandre.fortier.chouinard@mail.utoronto.ca or contact me at \[phone number of the researcher\]. I will be happy to answer any questions you may have!
+
+Thank you for giving me a positive or negative answer (including that of the governing board) as soon as possible.
+
+Alexandre Fortier-Chouinard
+
+Ph.D. Candidate in Political Science
+
+University of Toronto 
+
+## Email destined for secondary schools in English
+
+Hello,
+
+I am contacting your school as part of my doctoral dissertation project in political science, which focuses on the role of gender and social networks in the development of political interest. As part of my research, I will be administering a short online survey to elementary and high school students from various schools. If possible, I would love to do some of my data collection at [name of school\]. If so, I would like to get your permission and the email addresses of the teachers of \[name of the required social studies course in the province\] in grades 7, 9 and 11 \[or secondary 1, 3 and 5, depending on the province\] so that I can schedule a 15-minute time slot with them for their students to complete the surveys.
+
+I am taking all safety precautions to reduce the risk of spread of COVID-19. If you would like more information about my project, you can email me at alexandre.fortier.chouinard@mail.utoronto.ca or contact me at \[phone number of the researcher\]. I will be happy to answer any questions you may have!
+
+Thank you for giving me a positive or negative answer (including that of the governing board) as soon as possible.
+
+Alexandre Fortier-Chouinard
+
+Ph.D. Candidate in Political Science
+
+University of Toronto
+
+## Email destined for teachers in English
+
+Title: "Participation to an academic project"
+
+Hello,
+
+I am contacting you as part of my doctoral dissertation project in political science, which focuses on the role of gender and social networks in the development of political interest. As part of my research, I will be administering a short online survey to elementary and high school students from various schools. Your school has agreed to allow me to conduct part of my data collection with teachers of \[name of required social studies course in the province\]. The principal has provided me with your contact information. Would it be possible for me to take about 15 minutes in \[your classrooms/classroom\] in \[grade\] in the next few weeks to have students complete a questionnaire? Other than the 15 minutes in your classrooms \[and a potential follow-up 15-minute questionnaire (Quebec only)\], this requires nothing more from you.
+
+I am taking all safety precautions to reduce the risk of spread of COVID-19. You can email me back at alexandre.fortier.chouinard@mail.utoronto.ca or contact me at \[phone number of the researcher\]. Please feel free to ask me questions about my project if you have any, it will be my pleasure to answer them.
+
+Hoping for a positive response from you, I look forward to hearing from you!
+
+Alexandre Fortier-Chouinard
+
+Ph.D. Candidate in Political Science
+
+University of Toronto
+
+# CPIS English Questionnaire {#sec-appendix2}
 
 TITLE OF THE RESEARCH PROJECT: Gendered Political Socialization: Why Women and Men Still Differ on Political Interest
 
@@ -335,7 +407,7 @@ ADDITIONAL INFORMATION: If you have questions about the research or the implicat
 21. We might do a follow-up survey in a few years. If you accept to be contacted by email for this survey, what is your current email address? Leave the field blank if you do not wish to be recontacted for this.
   - (Open field)
 
-# CCPIS French Questionnaire {#sec-appendix2}
+# CPIS French Questionnaire {#sec-appendix3}
 
 TITRE DE LA RECHERCHE : Socialisation politique genrée : Pourquoi les femmes et les hommes diffèrent encore en matière d'intérêt politique
 
@@ -669,7 +741,7 @@ RENSEIGNEMENTS SUPPLÉMENTAIRES: Si vous avez des questions sur la recherche ou 
 21. Il est possible que nous faisions une enquête de suivi dans quelques années. Si tu acceptes d’être contacté(e) par courriel pour cette enquête, quelle est ton adresse courriel actuelle? Garde le champ vide si tu ne veux pas être recontacté(e) pour cela.
   - (Champ libre)
 
-# 2022 Quebec Datagotchi Post-Election Survey French Questionnaire {#sec-appendix3}
+# 2022 Quebec Datagotchi Post-Election Survey French Questionnaire {#sec-appendix4}
 
 ## Socio-Economic Status
 
@@ -1611,7 +1683,7 @@ Veuillez indiquer votre âge
 | --- | --- |
 | L'anglais |  |
 
-# Political Interest by Gender {#sec-appendix4}
+# Political Interest by Gender {#sec-appendix5}
 
 ```{r}
 #| label: fig-interestdg
@@ -1621,15 +1693,15 @@ knitr::include_graphics("_graphs/GenderDG.pdf")
 ```
 
 ```{r}
-#| label: fig-interestccpis
+#| label: fig-interestcpis
 #| echo: false
-#| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Children, 2022 CCPIS"
-knitr::include_graphics("_graphs/GenderCCPIS.pdf")
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Children, 2022 CPIS"
+knitr::include_graphics("_graphs/GenderCPIS.pdf")
 ```
 
 \begin{table}
 \centering\centering
-\caption{Interest in Topic by Gender and Age Group, CCPIS \label{tab:lmeInterestYoungOldCCPIS}}
+\caption{Interest in Topic by Gender and Age Group, CPIS \label{tab:lmeInterestYoungOldCPIS}}
 \centering
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
@@ -1664,7 +1736,7 @@ knitr::include_graphics("_graphs/GenderCCPIS.pdf")
 \end{tabular}
 \end{table}
 
-# Political Interest Transmission (With Interaction Terms, Boys and Girls Together) {#sec-appendix5}
+# Political Interest Transmission (With Interaction Terms, Boys and Girls Together) {#sec-appendix6}
 
 \begin{table}
 \centering\centering
@@ -1800,11 +1872,11 @@ knitr::include_graphics("_graphs/MotherDiscuss.pdf")
 ```{r}
 #| label: fig-father
 #| echo: false
-#| fig-cap: "Interest in Topic Most Often Discussed with One's Father, 2022 CCPIS"
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Father, 2022 CPIS"
 knitr::include_graphics("_graphs/FatherDiscuss.pdf")
 ```
 
-# Political Interest Transmission by Parents (Without Control Variables) {#sec-appendix6}
+# Political Interest Transmission by Parents (Without Control Variables) {#sec-appendix7}
 
 \begin{table}
 \centering\centering
@@ -1920,11 +1992,11 @@ knitr::include_graphics("_graphs/FatherDiscuss.pdf")
 ```{r}
 #| label: fig-discussparentyo
 #| echo: false
-#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Parents, 2022 CCPIS"
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Parents, 2022 CPIS"
 knitr::include_graphics("_graphs/DiscussParentYO.pdf")
 ```
 
-# Political Interest Transmission by Peers (Without Control Variables) {#sec-appendix7}
+# Political Interest Transmission by Peers (Without Control Variables) {#sec-appendix8}
 
 \begin{table}
 \centering\centering
@@ -2003,16 +2075,16 @@ knitr::include_graphics("_graphs/DiscussParentYO.pdf")
 ```{r}
 #| label: fig-discusspeersyo
 #| echo: false
-#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CCPIS"
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CPIS"
 knitr::include_graphics("_graphs/DiscussPeersYO.pdf")
 ```
 
-# Correlation Matrixes {#sec-appendix8}
+# Correlation Matrixes {#sec-appendix9}
 
 ```{r}
-#| label: fig-corccpis
+#| label: fig-corcpis
 #| echo: false
-#| fig-cap: "Correlation Matrix for Interest in Topics, 2022 CCPIS"
+#| fig-cap: "Correlation Matrix for Interest in Topics, 2022 CPIS"
 knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 ```
 
@@ -2022,7 +2094,7 @@ knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 #| fig-cap: "Correlation Matrix for Interest in Topics, 2023 Datagotchi PES"
 knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 ```
-# Political Interest Transmission by Influencers (Without Control Variables) {#sec-appendix9}
+# Political Interest Transmission by Influencers (Without Control Variables) {#sec-appendix10}
 
 \begin{table}
 \centering\centering
