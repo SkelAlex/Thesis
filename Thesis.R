@@ -3628,6 +3628,12 @@ ggplot(CPISLonger, aes(x = sex, fill = as.factor(value))) +
         axis.text.x = element_text(angle = 45),
         text = element_text(family = "CM Roman"))
 ggsave("_graphs/ParentTopicsGrey.pdf", width = 11, height = 4.25)
+CPISLongerTest <- filter(CPISLonger, topic == "All\ndiscussions")
+prop.table(table(CPISLongerTest$value, CPISLongerTest$sex, useNA = "always"), margin = 2)
+CPISLongerTest2 <- filter(CPISLonger, topic == "Health\ncare")
+prop.table(table(CPISLongerTest2$value, CPISLongerTest2$sex, useNA = "always"), margin = 2)
+CPISLongerTest3 <- filter(CPISLonger, topic == "Education")
+prop.table(table(CPISLongerTest3$value, CPISLongerTest3$sex, useNA = "always"), margin = 2)
 
 CPISBoysGraph <- CPISBoys |>
   pivot_longer(cols = c(mother_discuss_clean, father_discuss_clean)) |>
