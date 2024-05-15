@@ -27,7 +27,7 @@ For parents, what these findings suggest is that parental education matters. Pol
 
 ## Media
 
-Tested alongside other influences, influencers' discussion of a specific topic is the strongest overall predictor of children's interest in that same topic in \ref{tab:lmeAgentsCtrl}. Other research about the role of media has generally found they play an important role in socialization.
+Tested alongside other influences, influencers' discussion of a specific topic is the strongest overall predictor of children's interest in that same topic in \ref{tab:lmeAgentsSES}, particularly among girls. Other research about the role of media has generally found they play an important role in socialization.
 
 An emerging literature has found influencers can increase youth political interest. @schmuck2022 hypothesize and show evidence that, among adolescents and young adults, political interest is negatively related to exposure to influencer content. Moreover, the relationship is stronger when there are interactions between influencer and follower in which the influencer engages in perceived simplification of politics. @harff2022 similarly find among young women that interactions with an influencer increase the strength of the relationship between following an influencer and being interested in politics. @harff2024 find no relationship between adolescents and young adults' use of social media influencers as a *primary* source of political information and their level of political interest. Among older adults, @wasike2023 finds that following a social media influencer is positively related to political interest, which suggests this type of influence may extend later in life.
 
@@ -37,7 +37,7 @@ Given the emerging interest in the role of influencers in political socializatio
 
 ## Schools
 
-Tested alongside other influences, teachers' discussion of a specific topic is not significantly related to children's interest in that same topic in \ref{tab:lmeAgentsCtrl}. While teachers do not have a distinct influence on interest in particular topics in this study, the broader influence of schools on political interest development has been assessed time and again in various studies. Schools can influence childhood socialization in many ways, including citizenship education classes, classroom political discussions, extracurricular activities, and active learning strategies.
+Tested alongside other influences, teachers' discussion of a specific topic is not significantly related to children's interest in that same topic in \ref{tab:lmeAgentsSES}. While teachers do not have a distinct influence on interest in particular topics in this study, the broader influence of schools on political interest development has been assessed time and again in various studies. Schools can influence childhood socialization in many ways, including citizenship education classes, classroom political discussions, extracurricular activities, and active learning strategies.
 
 While earlier studies found only weak links between citizenship education classes and political interest [@langton1968], more recent studies find a positive link [@dassonneville2012; @maheo2019; @neundorf2016]. *Citizenship education* and *civic education* classes include classes teaching facts about government and politics but also promoting political engagement [@althof2006; @themistokleous2016].
 

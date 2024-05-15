@@ -26,7 +26,7 @@ Studies have investigated the gender patterns in parent--child political discuss
 
 The nature of discussions about politics could also vary by gender, with more conflictual discussions happening between sons and fathers, or between mothers and daughters, than between other-gender pairs. @vuchinich1987 shows the opposite to be true: parents are more likely to begin conflictual interactions with their other-gender children than same-gender children, while children initiate conflictual interactions with their mother more than with their father. It is not clear whether these patterns also apply to political discussions.
 
-While past studies by @mayer2004 and others have found no differences in the frequency of political discussions by child gender or parent gender, these studies have not studied whether the specific topics of political discussions in the family could vary by parent gender or child gender. Are fathers more likely than mothers to discuss agency-related political topics with their children? Are parents more likely to discuss communality-related political topics with their daughters than sons? Hypotheses 2a--2d provide hypotheses about the frequency of political discussions by gender in the family unit.
+While past studies by @mayer2004 and others have found no differences in the frequency of political discussions by child gender or parent gender, these studies have not studied whether the specific topics of political discussions in the family could vary by parent gender or child gender. Are fathers more likely than mothers to discuss agency-related political topics with their children? Are parents more likely to discuss cooperation-focused political topics with their daughters than sons? Hypotheses 2a--2d provide hypotheses about the frequency of political discussions by gender in the family unit.
 
 - *__Hypothesis 2a__: Mothers are more likely than fathers to discuss the politics of health care and education with their children.*
 
@@ -50,7 +50,7 @@ Social learning theory and observer--model similarity both assume that political
 
 - *__Hypothesis 2e__: Children's political interests are more affected by political discussions with their same-gender parent(s) than their other-gender parent(s).*
 
-According to Hypothesis 2e and social learning theory more generally, a parent's interest in a specific political topic should influence interest in that topic more strongly for their same-gender children than other-gender children. On average, a mother is expected to have more transmission potential of her interest in health care issues to her daughters than sons through political discussion, for example. Given the importance of parents' role in socialization in childhood and adolescence, this transmission process would explain part of the gender gap in interest in topics such as health care and partisan politics that exists among adults.^[Hypothesis 2e supposes similar effects of parental discussions for different topics and suggests the key factor explaining interest transmission is parent--child gender congruence, but there are other possible answers to the question of how political interest gender gaps could be transmitted by parents, including the nature of the topics themselves. Mothers may have more transmission potential of interest in cooperation-focused topics for which the average woman reports more interest, and fathers may have more transmission potential of interest in assertion-focused topics for which the average man reports more interest. Since @campbellrosie2008 suggest that women tend to see political issues through the lens of cooperation while men tend to see them through a lens of self-assertion, it could be the case that parental socialization of boys favours agency-related political topics while parental socialization of girls favours communality-related political topics.] It is also possible that mothers have more transmission potential than fathers for interest in all topics, a finding that would be consistent with @prior2019's finding that the mother--daughter transmission link is the strongest.
+According to Hypothesis 2e and social learning theory more generally, a parent's interest in a specific political topic should influence interest in that topic more strongly for their same-gender children than other-gender children. On average, a mother is expected to have more transmission potential of her interest in health care issues to her daughters than sons through political discussion, for example. Given the importance of parents' role in socialization in childhood and adolescence, this transmission process would explain part of the gender gap in interest in topics such as health care and partisan politics that exists among adults.^[Hypothesis 2e supposes similar effects of parental discussions for different topics and suggests the key factor explaining interest transmission is parent--child gender congruence, but there are other possible answers to the question of how political interest gender gaps could be transmitted by parents, including the nature of the topics themselves. Mothers may have more transmission potential of interest in cooperation-focused topics for which the average woman reports more interest, and fathers may have more transmission potential of interest in assertion-focused topics for which the average man reports more interest. Since @campbellrosie2008 suggest that women tend to see political issues through the lens of cooperation while men tend to see them through a lens of self-assertion, it could be the case that parental socialization of boys favours assertion-focused political topics while parental socialization of girls favours cooperation-focused political topics.] It is also possible that mothers have more transmission potential than fathers for interest in all topics, a finding that would be consistent with @prior2019's finding that the mother--daughter transmission link is the strongest.
 
 - *__Hypothesis 2f__: Children's political interests become more and more affected by political discussions with their parent(s) as they age.*
 
@@ -62,7 +62,7 @@ The 2022--23 Children Political Interest Survey (CPIS) is used to study relation
 
 In order to determine the importance of parents depending on their gender, the following question was asked to children: "Which parent do you discuss most often with? (a) Mother; (b) Father; (c) Both equally".  Several questions are then used to assess the role of parents in transmitting interest to their children. Given the important role of political discussion in the transmission of political interest, this variable is used to measure parents' transmission potential: "For each of the following topics, which parent do you discuss most often with?" Answers are either "My mother", "My father" or "Don't know/Prefer not to answer".^[Students who do not have one parent of either gender are removed from the analysis.] Second, students are asked "Among these five topics, which one do you discuss most often with your mother(s)?" Each of the five topics is listed, and the same question is then asked about the father(s). While topics such as health care and education can be spoken about without referring to their political aspects, children were given examples of political issues related to each of these topics shortly before in the same survey when they were asked which topic they were most interested in. These questions are limited by the fact that data was collected among children only --- the perceptions of their parents may differ. Yet, the relative levels of discussions of these topics relative to one another and between mothers and fathers should not theoretically be affected by the study's design.
 
-All multilevel regression results presented in this chapter include controls for socio-economic status, agency, communality, and classroom fixed effects, except if otherwise specified. A simple multilevel regression model with one explanatory variable --- often a given role model's interest in a specific topic --- is followed by multiple regression models with control variables for three blocs of variables: (1) socio-economic status variables, (2) personality traits, and (3) all other role models (peers, teachers, and influencers). Socio-economic status variables include confounding variables that have been linked with political interest and could therefore mediate any given relationship found between two persons' political interest. These include gender, age, language, ethnicity, and immigrant status. Personality traits include the agency and communality scales developed in @sec-chap2.
+All multilevel regression results presented in this chapter include classroom fixed effects. A simple multilevel regression model with one explanatory variable --- often a given role model's interest in a specific topic --- is followed by multiple regression models with control variables for two blocs of variables: (1) socio-economic status variables, (2) all other role models than parents (peers, teachers, and influencers) and a squared term for age. Socio-economic status variables include confounding variables that have been linked with political interest and could therefore mediate any given relationship found between two persons' political interest. These include gender, age, language, ethnicity, and immigrant status.
 
 ## Results
 
@@ -79,7 +79,7 @@ knitr::include_graphics("_graphs/ParentTopicsGrey.pdf")
 
 One could argue that children discuss the politics of health care and education with their mothers simply because they spend more time discussing with their mothers than fathers in general. This indeed seems to be the case for girls --- 82% of them discuss mostly with their mothers in general, which is more than the 79% who discuss education mostly with their mothers, and only slightly less than the 84% who discuss health care mostly with their mothers. For boys however, discussions with their mothers about the politics of health care (81%) and education (70%) are more common than discussions overall (62%).
 
-These results match with what previous literature has found about women reporting more interest in education and health care, and men reporting more interest in partisan politics, law and crime, and international affairs. Hypotheses 2a and 2b are therefore corroborated. Also in line with the literature, parents seem to talk about various political topics just as much with their sons as with their daughters. Hypotheses 2c and 2d, which hypothesized agency-related topics would be more prevalent in discussions with sons while communality-related topics would be more prevalent in discussions with daughters, are not corroborated.
+These results match with what previous literature has found about women reporting more interest in education and health care, and men reporting more interest in partisan politics, law and crime, and international affairs. Hypotheses 2a and 2b are therefore corroborated. Also in line with the literature, parents seem to talk about various political topics just as much with their sons as with their daughters. Hypotheses 2c and 2d, which hypothesized agency-related topics would be more prevalent in discussions with sons while cooperation-focused topics would be more prevalent in discussions with daughters, are not corroborated.
 
 @fig-parentsmomdad shows the extent to which mothers discuss each of the five topics and the same for fathers. Mothers overwhelmingly discuss education and health care according to their children, while fathers discuss international affairs more than other topics but seem like a more heterogeneous group. Despite partisan politics being the least discussed topic by both parents, fathers are much more likely to discuss it than mothers according to this metric. For law and crime too, fathers are more likely to discuss it. Again, when these results are broken down by students' gender, very similar results are found for boys and girls.
 
@@ -96,11 +96,11 @@ Regardless, the fact that results among boys and girls both strongly point in th
 
 ### Topics Parents Discuss the Most
 
-When it comes to parents' role in political interest transmission, Table \ref{tab:lmeParentCtrl} shows the relationship between students' interest in each of the five topics and the gender of the parent who discusses the topic with them the most. The top part of the table shows determinants of interest among boys, while the bottom part does the same for girls. Column "All" is a stacked dataset that aggregates all parent--child linkages matched by topic. Children's interest in either of the five topics does not seem to be related to the gender of the parent who discusses the topic the most; the topic-by-topic analysis shows all relationships are statistically insignificant. However, in stacked data, the fact that their father discusses a topic more than their mother increases sons' interest in that topic by an average of 0.6 points on an 11-point scale (*p*<0.001). This effect size represents more than half of the 0.9-point gender gap in interest in partisan politics and 1-point gender gap in interest in international affairs seen in @sec-chap3. The gender of the parent who discusses a topic more does not have a significant effect on daughters' interest in that topic, a finding that contradicts theoretical expectations that mothers play a particularly important role in their daughters' political socialization.^[Table \ref{tab:lmeParent} in @sec-appendix7 shows very similar findings when control variables are removed.] No variables among those tested significantly predict girls' political interest, but agency has a strong positive relationship with boys' interest, with strong individual coefficients for partisan politics, health care and international affairs. Boys' interest in any topic seems to be associated four times more with their competitive and assertive traits than with their father discussing the topic with them more than their mother. Table \ref{tab:lmeParentCtrlInterac} in @sec-appendix6 replicates the analysis while putting boys and girls in the same model. A significant positive effect of fathers on their children's political interest is found, supplemented by a negative term associated with being a white girl.
+When it comes to parents' role in political interest transmission, Table \ref{tab:lmeParentSESInterac} shows the relationship between students' interest in each of the five topics and the gender of the parent who discusses the topic with them the most. The top part of the table shows determinants of interest among boys, while the bottom part does the same for girls. Column "All" is a stacked dataset that aggregates all parent--child linkages matched by topic. Children's interest in either of the five topics does not seem to be related to the gender of the parent who discusses the topic the most; the topic-by-topic analysis shows all relationships are statistically insignificant. However, in stacked data, the fact that their father discusses a topic more than their mother increases sons' interest in that topic by an average of 0.7 points on an 11-point scale (*p*<0.001). This effect size represents more than half of the 0.9-point gender gap in interest in partisan politics and 1-point gender gap in interest in international affairs seen in @sec-chap3. The gender of the parent who discusses a topic more does not have a significant effect on daughters' interest in that topic, a finding that contradicts theoretical expectations that mothers play a particularly important role in their daughters' political socialization.^[Table \ref{tab:lmeParent} in @sec-appendix7 shows very similar findings when control variables are removed.] No variables among those tested significantly predict girls' political interest. Table \ref{tab:lmeParentBoysGirls} in @sec-appendix6 replicates the analysis while putting boys and girls in the same model. A significant positive effect of fathers on their children's political interest is found, supplemented by a negative term associated with being a white girl.
 
 \begin{table}
 \centering\centering
-\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most \label{tab:lmeParentCtrl}}
+\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most (With Interactions) \label{tab:lmeParentSESInterac}}
 \centering
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
@@ -109,52 +109,48 @@ When it comes to parents' role in political interest transmission, Table \ref{ta
 \midrule
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Boys}}\\
-\midrule \hspace{1em}(Intercept) & 0.767 & -0.406 & 4.571+ & 1.583 & -1.822 & -0.390\\
-\hspace{1em} & (1.413) & (2.067) & (2.393) & (2.207) & (2.037) & (2.547)\\
-\hspace{1em}Mother discusses topic more than father & -0.616*** & -0.506 & -0.216 & -0.396 & 0.266 & 0.190\\
-\hspace{1em} & (0.163) & (0.404) & (0.388) & (0.399) & (0.389) & (0.472)\\
-\hspace{1em}Age & 0.135 & 0.198 & -0.111 & 0.193 & 0.215+ & -0.026\\
-\hspace{1em} & (0.090) & (0.133) & (0.148) & (0.140) & (0.129) & (0.158)\\
-\hspace{1em}Ethnicity (1 = white) & 0.421* & 0.236 & 1.198** & 0.033 & -0.254 & 0.685\\
-\hspace{1em} & (0.195) & (0.380) & (0.386) & (0.420) & (0.405) & (0.503)\\
-\hspace{1em}Immigrant & -0.336 & 0.129 & -1.140* & -0.012 & -0.693 & -0.708\\
-\hspace{1em} & (0.269) & (0.515) & (0.532) & (0.565) & (0.550) & (0.719)\\
-\hspace{1em}English spoken at home & -0.278 & -0.362 & -1.169 & -0.411 & -0.507 & 0.674\\
-\hspace{1em} & (0.414) & (0.796) & (0.812) & (0.857) & (0.831) & (1.140)\\
-\hspace{1em}French spoken at home & -0.006 & 0.228 & -0.940* & -0.038 & 0.034 & 0.593\\
-\hspace{1em} & (0.233) & (0.452) & (0.454) & (0.492) & (0.473) & (0.590)\\
-\hspace{1em}Agency & 2.655*** & 3.022** & 2.612* & 1.390 & 1.503 & 5.376***\\
-\hspace{1em} & (0.513) & (0.960) & (1.050) & (1.106) & (1.038) & (1.346)\\
-\hspace{1em}Communality & 1.021 & -0.068 & 3.060* & 0.260 & 3.289* & 1.661\\
-\hspace{1em} & (0.622) & (1.177) & (1.268) & (1.303) & (1.299) & (1.600)\\
-\hspace{1em}SD (Intercept Class) & 0.667 & 0.570 & 0.701 & 0.353 & 0.338 & 0.002\\
-\hspace{1em}SD (Observations) & 2.603 & 2.315 & 2.353 & 2.632 & 2.649 & 2.821\\
-\hspace{1em}Num.Obs. & 1058 & 223 & 211 & 212 & 236 & 176\\
-\hspace{1em}R2 Marg. & 0.059 & 0.071 & 0.136 & 0.028 & 0.081 & 0.135\\
+\midrule \hspace{1em}(Intercept) & 8.760 & 10.988 & -3.757 & 10.621 & 31.363* & 37.670+\\
+\hspace{1em} & (8.739) & (15.860) & (16.316) & (16.266) & (14.909) & (19.217)\\
+\hspace{1em}Mother discusses topic more than father & -0.651*** & -0.388 & -0.380 & -0.345 & 0.232 & -0.088\\
+\hspace{1em} & (0.161) & (0.399) & (0.397) & (0.390) & (0.388) & (0.487)\\
+\hspace{1em}Age & -0.649 & -1.179 & 1.447 & -0.867 & -4.016+ & -4.790+\\
+\hspace{1em} & (1.198) & (2.189) & (2.240) & (2.261) & (2.053) & (2.657)\\
+\hspace{1em}Age squared & 0.027 & 0.049 & -0.050 & 0.035 & 0.146* & 0.168+\\
+\hspace{1em} & (0.041) & (0.075) & (0.076) & (0.078) & (0.070) & (0.091)\\
+\hspace{1em}Ethnicity (1 = white) & 0.316+ & 0.124 & 1.082** & -0.124 & -0.152 & 0.517\\
+\hspace{1em} & (0.192) & (0.373) & (0.385) & (0.406) & (0.400) & (0.510)\\
+\hspace{1em}Immigrant & -0.215 & 0.228 & -1.025* & 0.253 & -0.420 & -0.791\\
+\hspace{1em} & (0.259) & (0.499) & (0.519) & (0.542) & (0.532) & (0.714)\\
+\hspace{1em}English spoken at home & -0.406 & -0.334 & -1.252 & -0.429 & -0.376 & -0.144\\
+\hspace{1em} & (0.406) & (0.777) & (0.803) & (0.829) & (0.818) & (1.132)\\
+\hspace{1em}French spoken at home & -0.017 & 0.149 & -0.882+ & 0.040 & 0.046 & 0.343\\
+\hspace{1em} & (0.230) & (0.444) & (0.453) & (0.480) & (0.470) & (0.603)\\
+\hspace{1em}SD (Intercept Class) & 0.757 & 0.657 & 0.829 & 0.385 & 0.394 & 0.001\\
+\hspace{1em}SD (Observations) & 2.642 & 2.339 & 2.413 & 2.629 & 2.694 & 2.977\\
+\hspace{1em}Num.Obs. & 1107 & 233 & 220 & 222 & 246 & 186\\
+\hspace{1em}R2 Marg. & 0.021 & 0.029 & 0.067 & 0.015 & 0.041 & 0.049\\
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Girls}}\\
-\midrule \hspace{1em}(Intercept) & 3.092* & 0.684 & 2.805 & 5.115* & 1.322 & 2.077\\
-\hspace{1em} & (1.397) & (2.026) & (2.253) & (2.319) & (2.228) & (2.772)\\
-\hspace{1em}Mother discusses topic more than father & -0.211 & 0.154 & 0.009 & 0.153 & -0.421 & -0.036\\
-\hspace{1em} & (0.178) & (0.453) & (0.439) & (0.426) & (0.452) & (0.500)\\
-\hspace{1em}Age & 0.124 & 0.205 & 0.076 & 0.124 & 0.212 & 0.025\\
-\hspace{1em} & (0.087) & (0.125) & (0.134) & (0.139) & (0.135) & (0.161)\\
-\hspace{1em}Ethnicity (1 = white) & -0.348 & -0.290 & 0.148 & -0.259 & -0.435 & -0.128\\
-\hspace{1em} & (0.221) & (0.399) & (0.492) & (0.468) & (0.429) & (0.579)\\
-\hspace{1em}Immigrant & -0.171 & 0.234 & -0.439 & -1.151+ & 0.767 & -0.112\\
-\hspace{1em} & (0.293) & (0.528) & (0.667) & (0.669) & (0.565) & (0.715)\\
-\hspace{1em}English spoken at home & -0.520 & -0.061 & -0.311 & -1.217 & 0.184 & 0.090\\
-\hspace{1em} & (0.383) & (0.647) & (0.831) & (0.759) & (0.746) & (0.897)\\
-\hspace{1em}French spoken at home & 0.073 & 0.229 & -0.070 & -0.791 & 0.405 & 0.705\\
-\hspace{1em} & (0.246) & (0.445) & (0.539) & (0.531) & (0.479) & (0.630)\\
-\hspace{1em}Agency & 0.094 & -0.393 & 0.164 & 1.422 & -0.028 & 1.866\\
-\hspace{1em} & (0.607) & (1.100) & (1.343) & (1.370) & (1.186) & (1.556)\\
-\hspace{1em}Communality & 0.027 & 0.994 & 1.471 & -1.837 & 0.038 & -0.483\\
-\hspace{1em} & (0.583) & (1.036) & (1.249) & (1.276) & (1.140) & (1.567)\\
-\hspace{1em}SD (Intercept Class) & 0.734 & 0.715 & 0.392 & 0.534 & 0.820 & 0.514\\
-\hspace{1em}SD (Observations) & 2.686 & 2.367 & 2.742 & 2.797 & 2.587 & 2.727\\
-\hspace{1em}Num.Obs. & 978 & 222 & 189 & 200 & 218 & 149\\
-\hspace{1em}R2 Marg. & 0.014 & 0.032 & 0.015 & 0.044 & 0.042 & 0.019\\
+\midrule \hspace{1em}(Intercept) & 12.388+ & 10.465 & 25.279+ & 11.236 & 17.735 & 44.466*\\
+\hspace{1em} & (7.185) & (11.106) & (13.521) & (13.799) & (11.679) & (19.529)\\
+\hspace{1em}Mother discusses topic more than father & -0.232 & 0.194 & -0.009 & -0.019 & -0.383 & -0.123\\
+\hspace{1em} & (0.176) & (0.450) & (0.431) & (0.416) & (0.449) & (0.481)\\
+\hspace{1em}Age & -1.193 & -1.144 & -2.961 & -0.815 & -2.112 & -5.743*\\
+\hspace{1em} & (0.997) & (1.552) & (1.892) & (1.930) & (1.640) & (2.695)\\
+\hspace{1em}Age squared & 0.046 & 0.048 & 0.106 & 0.033 & 0.081 & 0.198*\\
+\hspace{1em} & (0.034) & (0.054) & (0.066) & (0.067) & (0.057) & (0.092)\\
+\hspace{1em}Ethnicity (1 = white) & -0.346 & -0.287 & 0.224 & -0.227 & -0.453 & -0.124\\
+\hspace{1em} & (0.219) & (0.399) & (0.483) & (0.468) & (0.425) & (0.566)\\
+\hspace{1em}Immigrant & -0.143 & 0.234 & -0.548 & -1.024 & 0.701 & -0.139\\
+\hspace{1em} & (0.287) & (0.522) & (0.648) & (0.657) & (0.557) & (0.680)\\
+\hspace{1em}English spoken at home & -0.471 & -0.106 & -0.462 & -1.111 & 0.195 & 0.046\\
+\hspace{1em} & (0.371) & (0.631) & (0.800) & (0.765) & (0.726) & (0.854)\\
+\hspace{1em}French spoken at home & 0.083 & 0.219 & -0.127 & -0.703 & 0.332 & 0.509\\
+\hspace{1em} & (0.241) & (0.440) & (0.525) & (0.527) & (0.473) & (0.611)\\
+\hspace{1em}SD (Intercept Class) & 0.657 & 0.604 & 0.001 & 0.656 & 0.679 & 0.170\\
+\hspace{1em}SD (Observations) & 2.684 & 2.380 & 2.739 & 2.787 & 2.595 & 2.716\\
+\hspace{1em}Num.Obs. & 992 & 226 & 192 & 203 & 221 & 150\\
+\hspace{1em}R2 Marg. & 0.017 & 0.035 & 0.020 & 0.029 & 0.054 & 0.038\\
 \bottomrule
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
@@ -165,11 +161,11 @@ When it comes to parents' role in political interest transmission, Table \ref{ta
 
 ### Topics Most Often Discussed with Mothers
 
-Table \ref{tab:lmeAgentsCtrl} shows students' interest in each of the five topics depending on whether this topic is the one they most often discuss with various role models, starting with mothers. The top part of the table shows determinants of interest among boys, while the bottom part does the same for girls. Again, column "All" is a stacked dataset that aggregates all role model--child linkages matched by topic. For boys, interest in either of the five topics or the stacked data is unrelated to their discussion of these topics with their mothers. For girls, interest in education is related to their mothers discussing education (*p*<0.01). For other topics, no statistically significant effect is found^[The coefficient for partisan politics was dropped from the model for rank deficiency.] --- but all coefficients are still positive. In the stacked data, if a girl's mother discusses one of the five topics most, her interest in that topic is expected to increase by 0.7 points on the 11-point scale (*p*<0.05), almost as large as the gender gaps in interest in international affairs (1) or partisan politics (0.9).
+Table \ref{tab:lmeAgentsSES} shows students' interest in each of the five topics depending on whether this topic is the one they most often discuss with various role models, starting with mothers. The top part of the table shows determinants of interest among boys, while the bottom part does the same for girls. Again, column "All" is a stacked dataset that aggregates all role model--child linkages matched by topic. For boys, interest in either of the five topics or the stacked data is unrelated to their discussion of these topics with their mothers. For girls, interest in education is related to their mothers discussing education (*p*<0.01). For other topics, no statistically significant effect is found^[The coefficient for partisan politics was dropped from the model for rank deficiency.] --- but all coefficients are still positive. In the stacked data, if a girl's mother discusses one of the five topics most, her interest in that topic is expected to increase by 0.7 points on the 11-point scale (*p*<0.05), almost as large as the gender gaps in interest in international affairs (1) or partisan politics (0.9).
 
 \begin{table}
 \centering\centering
-\caption{Interest in Topic Most Often Discussed with Role Models \label{tab:lmeAgentsCtrl}}
+\caption{Interest in Topic Most Often Discussed with Role Models \label{tab:lmeAgentsSES}}
 \centering
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
@@ -178,76 +174,68 @@ Table \ref{tab:lmeAgentsCtrl} shows students' interest in each of the five topic
 \midrule
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Boys}}\\
-\midrule \hspace{1em}(Intercept) & -2.542 & -16.247 & -18.190 & 17.323 & 9.570 & 8.688\\
-\hspace{1em} & (12.427) & (24.337) & (17.889) & (21.442) & (23.386) & (24.865)\\
-\hspace{1em}Topic most discussed with mother? & -0.219 & 0.992 & 0.321 & -0.185 & -0.809 & 0.626\\
-\hspace{1em} & (0.287) & (0.590) & (0.817) & (1.289) & (0.557) & (1.602)\\
-\hspace{1em}Topic most discussed with father? & 0.809** & 1.206 & 0.065 & 1.178+ & 0.187 & 2.159*\\
-\hspace{1em} & (0.289) & (1.331) & (0.453) & (0.590) & (0.713) & (1.050)\\
-\hspace{1em}Topic most discussed with female friends? & 0.694* & -0.742 & -0.607 & 2.815** & 1.972** & 0.750\\
-\hspace{1em} & (0.295) & (0.787) & (0.498) & (0.840) & (0.560) & (2.164)\\
-\hspace{1em}Topic most discussed with male friends? & 0.614* & -2.506* & 0.457 & 0.201 & 0.325 & 2.620+\\
-\hspace{1em} & (0.310) & (1.219) & (0.482) & (0.663) & (0.721) & (1.470)\\
-\hspace{1em}Topic most discussed by teacher? & 0.356 & 1.201 & 1.517** & -0.733 & 0.220 & -0.311\\
-\hspace{1em} & (0.297) & (1.042) & (0.477) & (1.185) & (0.640) & (1.372)\\
-\hspace{1em}Topic most discussed by social media influencer? & 0.751* & 0.760 & 0.247 & 0.351 & 1.776 & -1.281\\
-\hspace{1em} & (0.292) & (0.690) & (0.451) & (0.692) & (1.108) & (2.173)\\
-\hspace{1em}Age & 0.361 & 2.390 & 3.033 & -2.646 & -1.452 & -1.147\\
-\hspace{1em} & (1.741) & (3.427) & (2.510) & (3.010) & (3.238) & (3.494)\\
-\hspace{1em}Age squared & -0.006 & -0.081 & -0.107 & 0.100 & 0.059 & 0.043\\
-\hspace{1em} & (0.060) & (0.119) & (0.087) & (0.104) & (0.112) & (0.121)\\
-\hspace{1em}Ethnicity (1 = white) & 0.112 & -0.778 & 0.539 & 0.441 & -0.352 & 0.544\\
-\hspace{1em} & (0.284) & (0.644) & (0.530) & (0.552) & (0.636) & (0.693)\\
-\hspace{1em}Immigrant & -0.328 & 0.350 & -1.476+ & 0.978 & -1.529 & -0.698\\
-\hspace{1em} & (0.422) & (0.912) & (0.752) & (0.817) & (0.927) & (0.988)\\
-\hspace{1em}English spoken at home & 0.266 & -0.438 & -0.819 & 0.992 & -0.105 & 0.403\\
-\hspace{1em} & (0.743) & (1.575) & (1.202) & (1.423) & (1.524) & (1.608)\\
-\hspace{1em}French spoken at home & 0.405 & 0.694 & -0.826 & 1.158 & -1.373 & 0.834\\
-\hspace{1em} & (0.404) & (0.915) & (0.680) & (0.786) & (0.857) & (0.907)\\
-\hspace{1em}Agency & 1.140 & 1.603 & 2.458+ & 2.961+ & -0.851 & 2.368\\
-\hspace{1em} & (0.853) & (1.888) & (1.390) & (1.594) & (1.752) & (1.831)\\
-\hspace{1em}Communality & 3.560*** & 3.189 & 3.062+ & 1.648 & 7.827*** & 1.784\\
-\hspace{1em} & (0.921) & (1.945) & (1.528) & (1.713) & (1.980) & (2.063)\\
-\hspace{1em}SD (Intercept Class) & 0.853 & 1.085 & 0.000 & 0.918 & 0.653 & 1.017\\
-\hspace{1em}SD (Observations) & 2.317 & 2.288 & 1.912 & 2.043 & 2.364 & 2.440\\
-\hspace{1em}Num.Obs. & 444 & 88 & 89 & 89 & 89 & 89\\
-\hspace{1em}R2 Marg. & 0.170 & 0.203 & 0.298 & 0.263 & 0.285 & 0.201\\
+\midrule \hspace{1em}(Intercept) & 6.011 & -17.012 & -15.964 & 31.164 & 33.365 & 8.199\\
+\hspace{1em} & (12.054) & (24.194) & (17.744) & (20.788) & (22.838) & (23.231)\\
+\hspace{1em}Topic most discussed with mother? & -0.279 & 0.997+ & -0.243 & 0.021 & -0.729 & 0.401\\
+\hspace{1em} & (0.288) & (0.558) & (0.815) & (1.338) & (0.600) & (1.612)\\
+\hspace{1em}Topic most discussed with father? & 0.768** & 1.431 & 0.310 & 1.291* & -0.420 & 2.111+\\
+\hspace{1em} & (0.292) & (1.313) & (0.458) & (0.607) & (0.764) & (1.057)\\
+\hspace{1em}Topic most discussed with female friends? & 0.664* & -0.433 & -0.647 & 2.471** & 1.797** & 1.122\\
+\hspace{1em} & (0.298) & (0.766) & (0.489) & (0.857) & (0.606) & (2.141)\\
+\hspace{1em}Topic most discussed with male friends? & 0.594+ & -2.723* & 0.857+ & 0.167 & -0.085 & 2.240\\
+\hspace{1em} & (0.315) & (1.209) & (0.481) & (0.670) & (0.778) & (1.468)\\
+\hspace{1em}Topic most discussed by teacher? & 0.326 & 1.481 & 1.133* & -0.284 & -0.443 & -0.003\\
+\hspace{1em} & (0.298) & (0.967) & (0.471) & (1.201) & (0.660) & (1.359)\\
+\hspace{1em}Topic most discussed by social media influencer? & 0.703* & 0.864 & 0.115 & 0.316 & 0.618 & -1.216\\
+\hspace{1em} & (0.295) & (0.667) & (0.456) & (0.712) & (1.161) & (2.173)\\
+\hspace{1em}Age & -0.557 & 2.737 & 2.971 & -4.208 & -4.067 & -0.873\\
+\hspace{1em} & (1.691) & (3.393) & (2.497) & (2.928) & (3.196) & (3.277)\\
+\hspace{1em}Age squared & 0.029 & -0.088 & -0.099 & 0.155 & 0.146 & 0.038\\
+\hspace{1em} & (0.059) & (0.118) & (0.087) & (0.102) & (0.111) & (0.115)\\
+\hspace{1em}Ethnicity (1 = white) & 0.087 & -0.648 & 0.454 & 0.258 & -0.369 & 0.469\\
+\hspace{1em} & (0.286) & (0.629) & (0.537) & (0.560) & (0.688) & (0.681)\\
+\hspace{1em}Immigrant & 0.044 & 0.655 & -1.107 & 1.579+ & -0.325 & -0.704\\
+\hspace{1em} & (0.415) & (0.892) & (0.728) & (0.796) & (0.952) & (0.938)\\
+\hspace{1em}English spoken at home & 0.426 & -0.127 & -0.408 & 1.192 & 1.521 & 0.307\\
+\hspace{1em} & (0.750) & (1.537) & (1.216) & (1.438) & (1.599) & (1.564)\\
+\hspace{1em}French spoken at home & 0.861* & 0.973 & -0.303 & 1.572* & -0.217 & 0.980\\
+\hspace{1em} & (0.389) & (0.873) & (0.665) & (0.752) & (0.886) & (0.858)\\
+\hspace{1em}SD (Intercept Class) & 0.940 & 1.185 & 0.000 & 1.057 & 0.182 & 0.951\\
+\hspace{1em}SD (Observations) & 2.369 & 2.266 & 1.993 & 2.100 & 2.665 & 2.472\\
+\hspace{1em}Num.Obs. & 458 & 90 & 92 & 92 & 92 & 92\\
+\hspace{1em}R2 Marg. & 0.114 & 0.171 & 0.219 & 0.210 & 0.144 & 0.179\\
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Girls}}\\
-\midrule \hspace{1em}(Intercept) & -31.417+ & -7.555 & -44.190 & 2.501 & -32.938 & -12.741\\
-\hspace{1em} & (16.033) & (24.727) & (32.490) & (28.593) & (26.734) & (28.197)\\
-\hspace{1em}Topic most discussed with mother? & 0.730* & 0.359 & 1.057 & 1.719+ & 2.038** & \\
-\hspace{1em} & (0.317) & (0.568) & (1.818) & (0.976) & (0.632) & \\
-\hspace{1em}Topic most discussed with father? & 0.455 & 0.243 & -0.158 & 2.013* & 0.355 & 0.114\\
-\hspace{1em} & (0.311) & (0.834) & (0.729) & (0.744) & (0.715) & (0.984)\\
-\hspace{1em}Topic most discussed with female friends? & 0.467 & -0.119 & 0.884 & -0.420 & 0.639 & 2.020\\
-\hspace{1em} & (0.320) & (0.645) & (0.869) & (0.776) & (0.606) & (2.549)\\
-\hspace{1em}Topic most discussed with male friends? & 0.647* & -0.718 & -0.160 & -0.212 & 0.325 & 3.073**\\
-\hspace{1em} & (0.306) & (0.844) & (0.766) & (0.620) & (0.754) & (1.089)\\
-\hspace{1em}Topic most discussed by teacher? & 0.086 & -0.749 & 0.102 & -0.729 & 0.149 & 3.032***\\
-\hspace{1em} & (0.307) & (1.217) & (0.804) & (0.763) & (0.617) & (0.759)\\
-\hspace{1em}Topic most discussed by social media influencer? & 0.812** & 1.581* & -0.325 & 1.504* & -1.612 & 1.577\\
-\hspace{1em} & (0.309) & (0.683) & (0.716) & (0.713) & (0.977) & (1.505)\\
-\hspace{1em}Age & 4.591* & 1.251 & 6.523 & 0.339 & 4.015 & 2.223\\
-\hspace{1em} & (2.176) & (3.393) & (4.472) & (3.950) & (3.666) & (3.896)\\
-\hspace{1em}Age squared & -0.148* & -0.025 & -0.217 & -0.011 & -0.120 & -0.073\\
-\hspace{1em} & (0.073) & (0.116) & (0.153) & (0.135) & (0.125) & (0.133)\\
-\hspace{1em}Ethnicity (1 = white) & -0.157 & 0.551 & -0.235 & -0.488 & 0.390 & -0.359\\
-\hspace{1em} & (0.346) & (0.648) & (0.783) & (0.729) & (0.699) & (0.639)\\
-\hspace{1em}Immigrant & -0.381 & -0.384 & -1.110 & -2.435* & 0.843 & -0.526\\
-\hspace{1em} & (0.440) & (0.845) & (1.058) & (0.972) & (0.867) & (0.848)\\
-\hspace{1em}English spoken at home & -0.435 & -0.306 & -0.954 & -0.702 & -0.086 & -0.717\\
-\hspace{1em} & (0.498) & (0.841) & (1.058) & (0.935) & (0.938) & (0.886)\\
-\hspace{1em}French spoken at home & 0.183 & -0.371 & -0.118 & -0.405 & 0.626 & -0.440\\
-\hspace{1em} & (0.414) & (0.729) & (0.910) & (0.801) & (0.771) & (0.764)\\
-\hspace{1em}Agency & 1.609 & -1.131 & 2.586 & 1.309 & 3.809+ & 2.930\\
-\hspace{1em} & (1.012) & (1.839) & (2.348) & (2.036) & (2.080) & (1.886)\\
-\hspace{1em}Communality & -0.997 & -1.252 & -0.452 & 0.439 & 0.017 & -3.603+\\
-\hspace{1em} & (1.087) & (1.886) & (2.229) & (2.039) & (2.069) & (1.868)\\
-\hspace{1em}SD (Intercept Class) & 1.051 & 0.000 & 0.482 & 0.223 & 0.905 & 0.784\\
-\hspace{1em}SD (Observations) & 2.370 & 2.203 & 2.618 & 2.345 & 2.223 & 2.095\\
+\midrule \hspace{1em}(Intercept) & -26.389+ & -9.169 & -38.483 & 3.836 & -23.826 & -1.653\\
+\hspace{1em} & (15.858) & (23.812) & (31.457) & (27.142) & (26.186) & (28.375)\\
+\hspace{1em}Topic most discussed with mother? & 0.729* & 0.259 & 1.667 & 1.769+ & 1.798** & \\
+\hspace{1em} & (0.318) & (0.555) & (1.689) & (0.958) & (0.623) & \\
+\hspace{1em}Topic most discussed with father? & 0.454 & 0.226 & -0.130 & 1.935* & 0.564 & -0.059\\
+\hspace{1em} & (0.311) & (0.822) & (0.713) & (0.721) & (0.711) & (1.010)\\
+\hspace{1em}Topic most discussed with female friends? & 0.468 & -0.060 & 0.852 & -0.401 & 0.656 & 2.236\\
+\hspace{1em} & (0.320) & (0.637) & (0.856) & (0.762) & (0.611) & (2.535)\\
+\hspace{1em}Topic most discussed with male friends? & 0.647* & -0.788 & -0.177 & -0.228 & 0.213 & 3.291**\\
+\hspace{1em} & (0.307) & (0.833) & (0.760) & (0.607) & (0.756) & (1.112)\\
+\hspace{1em}Topic most discussed by teacher? & 0.085 & -0.902 & -0.070 & -0.763 & 0.233 & 2.856***\\
+\hspace{1em} & (0.308) & (1.193) & (0.785) & (0.751) & (0.602) & (0.775)\\
+\hspace{1em}Topic most discussed by social media influencer? & 0.812** & 1.418* & -0.444 & 1.494* & -1.910+ & 1.737\\
+\hspace{1em} & (0.309) & (0.648) & (0.703) & (0.672) & (0.977) & (1.525)\\
+\hspace{1em}Age & 3.932+ & 1.299 & 5.885 & 0.279 & 3.050 & 0.623\\
+\hspace{1em} & (2.146) & (3.271) & (4.311) & (3.731) & (3.583) & (3.918)\\
+\hspace{1em}Age squared & -0.126+ & -0.028 & -0.195 & -0.009 & -0.086 & -0.020\\
+\hspace{1em} & (0.072) & (0.112) & (0.147) & (0.128) & (0.122) & (0.134)\\
+\hspace{1em}Ethnicity (1 = white) & -0.186 & 0.646 & -0.370 & -0.531 & 0.121 & -0.490\\
+\hspace{1em} & (0.346) & (0.634) & (0.768) & (0.717) & (0.691) & (0.649)\\
+\hspace{1em}Immigrant & -0.373 & -0.365 & -1.122 & -2.478* & 0.761 & -0.528\\
+\hspace{1em} & (0.441) & (0.837) & (1.052) & (0.960) & (0.878) & (0.871)\\
+\hspace{1em}English spoken at home & -0.290 & -0.401 & -0.722 & -0.549 & 0.270 & -0.282\\
+\hspace{1em} & (0.487) & (0.814) & (1.027) & (0.886) & (0.922) & (0.879)\\
+\hspace{1em}French spoken at home & 0.272 & -0.454 & 0.057 & -0.284 & 0.855 & -0.187\\
+\hspace{1em} & (0.412) & (0.710) & (0.888) & (0.775) & (0.768) & (0.769)\\
+\hspace{1em}SD (Intercept Class) & 1.069 & 0.000 & 0.442 & 0.001 & 0.872 & 0.720\\
+\hspace{1em}SD (Observations) & 2.372 & 2.186 & 2.607 & 2.328 & 2.259 & 2.170\\
 \hspace{1em}Num.Obs. & 387 & 78 & 77 & 76 & 78 & 78\\
-\hspace{1em}R2 Marg. & 0.103 & 0.202 & 0.100 & 0.299 & 0.257 & 0.307\\
+\hspace{1em}R2 Marg. & 0.096 & 0.196 & 0.088 & 0.302 & 0.230 & 0.267\\
 \bottomrule
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
@@ -256,29 +244,29 @@ Table \ref{tab:lmeAgentsCtrl} shows students' interest in each of the five topic
 \end{tabular}
 \end{table}
 
-Among significant predictors of girls' interest in all political topics, only social media influencers have a marginally larger substantial (0.8-point) effect, which highlights the important role mothers can have among broader socialization influences. Among significant predictors of boys' interest in all political topics, several other role models seem to play an important role, just like communality: more cooperative boys tend to be more interested in all topics, largest driven by a strong relationship between cooperativeness and interest in education politics, with extremes of the communality scale associated with a 7.8-point difference on the 11-point interest scale.
+Among significant predictors of girls' interest in all political topics, only social media influencers have a marginally larger substantial (0.8-point) effect, which highlights the important role mothers can have among broader socialization influences. Among significant predictors of boys' interest in all political topics, several other role models seem to play an important role.
 
 ### Topics Most Often Discussed with Fathers
 
-Table \ref{tab:lmeAgentsCtrl} then shows students' interest in a specific topic depending on it being the topic they most often discuss with their father(s). For boys, interest in partisan politics is related to their fathers discussing partisan politics (*p*<0.05). In the stacked data, if a boy's father discusses one of the five topics most, their interest in that topic is expected to increase by 0.8 points on an 11-point interest scale (*p*<0.01), an effect that is almost as large as the gender gap in interest in partisan politics. For girls, interest in law and crime is related to their fathers discussing law and crime (*p*<0.05). In the stacked data, however, no significant effect is found. None of the other topic-specific father--son and father--daughter relationships are statistically significant at the 95% confidence level.^[Coefficients for peers are analyzed in @sec-chap5.]
+Table \ref{tab:lmeAgentsSES} then shows students' interest in a specific topic depending on it being the topic they most often discuss with their father(s). For boys, interest in law and crime is related to their fathers discussing law and crime (*p*<0.05). In the stacked data, if a boy's father discusses one of the five topics most, their interest in that topic is expected to increase by 0.8 points on an 11-point interest scale (*p*<0.01), an effect that is almost as large as the gender gap in interest in partisan politics. For girls, interest in law and crime is also related to their fathers discussing law and crime (*p*<0.05). In the stacked data, however, no significant effect is found. None of the other topic-specific father--son and father--daughter relationships are statistically significant at the 95% confidence level.^[Coefficients for peers are analyzed in @sec-chap5.]
 
-Overall, results from Table \ref{tab:lmeAgentsCtrl} lend support to Hypothesis 2e, which suggests that children's interest in a given political topic should be more related to their same-gender parent discussing that topic with them than their other-gender parent discussing it with them. Fathers' influence on sons seems to be similar to mothers' influence on daughters, contrary to some past research in which the influence of mothers on political interest development was deemed to be generally stronger than fathers. Table \ref{tab:lmeParentCtrl} also shows that when a topic is discussed by their father rather than their mother, their sons' interest in that topic is more likely to increase. For girls, whichever parent discusses a topic more does not seem to significantly predict their interest in that topic when the question is asked this way --- in particular for white girls. Notably, results do not suggest that the influence of mothers in the transmission of political interests is greater than the influence of fathers.
+Overall, results from Table \ref{tab:lmeAgentsSES} lend support to Hypothesis 2e, which suggests that children's interest in a given political topic should be more related to their same-gender parent discussing that topic with them than their other-gender parent discussing it with them. Fathers' influence on sons seems to be similar to mothers' influence on daughters, contrary to some past research in which the influence of mothers on political interest development was deemed to be generally stronger than fathers. Table \ref{tab:lmeParentSESInterac} also shows that when a topic is discussed by their father rather than their mother, their sons' interest in that topic is more likely to increase. For girls, whichever parent discusses a topic more does not seem to significantly predict their interest in that topic when the question is asked this way --- in particular for white girls. Notably, results do not suggest that the influence of mothers in the transmission of political interests is greater than the influence of fathers.
 
-I conducted two tests to verify whether the relationship between parental discussion and child interest is robust to the inclusion and removal of confounding variables. First, Tables \ref{tab:lmeMother} and \ref{tab:lmeFather} in @sec-appendix7 reproduce coefficients for mothers and fathers from Table \ref{tab:lmeAgentsCtrl} without controls. Generally, the same relationships are found, although the influence of mothers on their daughters and of fathers on their sons increases by 1 point and becomes significant at a higher level. Father--daughter interest transmission in the stacked data becomes significant at *p*<0.01 but remains substantively smaller than both father--son and mother--daughter transmission. Mother--son, mother--daughter and father--daughter law and crime interest transmission also become marginally significant at least at the *p*<0.05 level. @fig-mother and @fig-father in @sec-appendix6 also include models where only SES is controlled for, and where SES and personality traits are controlled for. Results are similar to these models without controls.
+I conducted two tests to verify whether the relationship between parental discussion and child interest is robust to the inclusion and removal of confounding variables. First, Tables \ref{tab:lmeMother} and \ref{tab:lmeFather} in @sec-appendix7 reproduce coefficients for mothers and fathers from Table \ref{tab:lmeAgentsSES} without controls. Generally, the same relationships are found, although the influence of mothers on their daughters and of fathers on their sons increases by 1 point and becomes significant at a higher level. Father--daughter interest transmission in the stacked data becomes significant at *p*<0.01 but remains substantively smaller than both father--son and mother--daughter transmission. For all parent--child pairs, law and crime interest transmission also becomes marginally significant at least at the *p*<0.05 level. @fig-mother and @fig-father in @sec-appendix6 also include a model in which SES is controlled for but not discussions with other role models. Results are similar to these models without controls.
 
-Second, Table \ref{tab:lmeAgentsCtrlInterac} in @sec-appendix6 replicates the Table \ref{tab:lmeAgentsCtrl} analysis while putting boys and girls in the same model. Here, the influence of fathers remains strong, positive and significant at the 99% confidence level, but the coefficient for mothers becomes *negative* --- discussion with the mother is not associated with more interest in any of the five topics or the stacked data. However, the interaction term between mother discussion and child interest is significant and even larger than the coefficient for the influence of fathers (0.9 vs. 0.8), again confirming mothers do play a role in the interests of their daughters.
+Second, Table \ref{tab:lmeAgentsBoysGirls} in @sec-appendix6 replicates the Table \ref{tab:lmeAgentsSES} analysis while putting boys and girls in the same model. Here, the influence of fathers remains strong, positive and significant at the 95% confidence level, but the coefficient for mothers becomes *negative* --- discussion with the mother is not associated with more interest in any of the five topics or the stacked data. However, the interaction term between mother discussion and child interest is significant and even larger than the coefficient for the influence of fathers (1 vs. 0.8), again confirming mothers do play a role in the interests of their daughters.
 
-Overall, the topic-by-topic analysis does not show a consistent pattern, with relatively few significant coefficients and a lower sample size. However, Table \ref{tab:lmeAgentsCtrl} shows that interest in *some* cooperation-oriented topics such as education is more likely to be transmitted by mothers --- at least for girls --- while interest in *some* assertion-oriented topics such as partisan politics and law and crime is more likely to be transmitted by fathers --- at least for sons.
+Overall, the topic-by-topic analysis does not show a consistent pattern, with relatively few significant coefficients and a lower sample size. However, Table \ref{tab:lmeAgentsSES} shows that interest in *some* cooperation-oriented topics such as education is more likely to be transmitted by mothers --- at least for girls --- while interest in law and crime is likely to be transmitted by either parent.
 
 ### Age Trends
 
-@fig-discussparentyoctrl shows relationships between parents' discussion of certain topics and children's interest in those topics broken down by age group. For the sake of simplicity and to avoid small sample sizes, topic-by-topic analyses are excluded, with all analyses using stacked data of each parent discussion--child interest pair. Results are mixed but seem to show that in some respects, older teenagers (ages 16--18) are more influenced by their parents' discussion of certain topics than 10--15-year-olds. Notably, for girls, the influence of both their father and mother is only statistically significant among 16--18 year-olds, and it grows in size compared with girls aged 10--15. No such difference between age groups is found among boys. However, for boys aged 16--18, when their parent most interested in a specific topic is their father, they become more interested in that topic, while this relationship is weaker and non-significant for boys aged 10--15. These results provide mixed evidence for Hypothesis 2f: aging makes more statistically significant relationships emerge, but the effect sizes only become somewhat wider between age groups. Yet, among 10--15-year-olds, only father--son political interest transmission is statistically significant, which could indicate that early parental socialization is more limited than what was previously thought. It could be the case that due to a more limited sample size, smaller effect sizes are present but do not reach statistical significance. This would be consistent with the finding that, for all significant parent--child interest relationships found among 16--18-year-olds, the direction of the relationship among 10--15-year-olds is the same --- but the coefficient is larger. Moreover, again confirming Hypothesis 2e, the largest effect sizes among 16--18-year-olds are for mother--daughter and father--son transmission. Substantively, when a topic is the one their mother discusses the most, 16--18-year-old daughters' interest in that topic increases on average by 1.2 points. Similarly, when a topic is the one their father discusses the most, 16--18-year-old sons' interest in that topic increases on average by 1 point.^[@fig-discussparentyo in @sec-appendix7 finds similar results when controls are removed.]
+@fig-discussparentyoses shows relationships between parents' discussion of certain topics and children's interest in those topics broken down by age group. For the sake of simplicity and to avoid small sample sizes, topic-by-topic analyses are excluded, with all analyses using stacked data of each parent discussion--child interest pair. Results are mixed but seem to show that in some respects, older teenagers (ages 16--18) are more influenced by their parents' discussion of certain topics than 10--15-year-olds. Notably, for girls, the influence of both their father and mother is only statistically significant among 16--18 year-olds, and it grows in size compared with girls aged 10--15. No such difference between age groups is found among boys. However, for boys aged 16--18, when their parent most interested in a specific topic is their father, they become more interested in that topic, while this relationship is weaker and non-significant for boys aged 10--15. These results provide mixed evidence for Hypothesis 2f: aging makes more statistically significant relationships emerge, but the effect sizes only become somewhat wider between age groups. Yet, among 10--15-year-olds, none of the parent--child political interest transmission links are statistically significant, which could indicate that early parental socialization is more limited than what was previously thought. It could be the case that due to a more limited sample size, smaller effect sizes are present but do not reach statistical significance. This would be consistent with the finding that, for all significant parent--child interest relationships found among 16--18-year-olds, the direction of the relationship among 10--15-year-olds is the same --- but the coefficient is larger. Moreover, again confirming Hypothesis 2e, the largest effect sizes among 16--18-year-olds are for mother--daughter and father--son transmission. Substantively, when a topic is the one their mother discusses the most, 16--18-year-old daughters' interest in that topic increases on average by 1 point. Similarly, when a topic is the one their father discusses the most, 16--18-year-old sons' interest in that topic increases on average by 0.9 point.^[@fig-discussparentyo in @sec-appendix7 finds similar results when controls are removed, but the father--son link becomes significant among 10--15-year-olds.]
 
 ```{r}
-#| label: fig-discussparentyoctrl
+#| label: fig-discussparentyoses
 #| echo: false
 #| fig-cap: "Interest in Topics by Gender, Age and Discussion with Parents, 2022 CPIS"
-knitr::include_graphics("_graphs/DiscussParentYOCtrl.pdf")
+knitr::include_graphics("_graphs/DiscussParentYOSES.pdf")
 ```
 
 ## Discussion

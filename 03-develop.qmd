@@ -72,7 +72,7 @@ Political socialization should be studied in the period of life where political 
 
 Hypothesis 1a should apply to interest in the five topics used throughout this dissertation: health care, education, partisan politics, law and crime, and international affairs. Since past studies have found the self-reported measure of political interest is mostly associated with interest in partisan politics [@campbellrosie2008], I conceive of it as an assertion-focused political topic.
 
-Gender differences also seem to become starker between ages 15 and 25: the early increase in self-reported political interest seems to be stronger for men [@jennings1981, 276], and political socialization seems to be faster-paced during the teenage years. @fraile2020 suggest that "the development of gender roles during early childhood is a crucial phase in the source of the gender gap, deserving further attention from scholars" (89). Moreover, no study has measured the evolution of interest in various political topics with age among children or adults. Given that research that has studied political interest among adults has found that women and men are interested in different topics depending on these topics being assertion-focused or cooperation-focused (see @sec-chap1), Hypotheses 1b and 1c address the question of when these differences should start to occur. They suggest that --- likely as a result of cognitive maturation --- personality traits only start fostering interest in assertion-focused or cooperation-focused political topics between ages 15 and 25.^[Another possibility is that such differences in interest exist prior to the increase in self-reported political interest around age 15, perhaps as a result of tendencies towards agency and communality which start developing early. Gender differences in assertive speech use may develop between 1 and 2 years old, as @fagot1985 suggest, or may not have already developed at that age, as @brownell2006 suggest. A meta-analysis of studies done by @leaper2004 including children from various age groups more generally finds that boys use more assertive speech than girls, although this is not the case in mixed-gender interactions. @noakes2006 also find that, among boys and girls aged 9--14, boys reported having more interpersonal disagreements related to status and hierarchy, and girls were more likely to use cooperative conflict resolution strategies. Finally, @caravita2012 find that, among 9--15-year-old girls and boys, boys appear to have more agentic goals and girls appear to have more communal goals, although aging makes the gender gap in agency appear and the gap in communality disappear, which could be due to a relatively small sample size.]
+Gender differences also seem to become starker between ages 15 and 25: the early increase in self-reported political interest seems to be stronger for men [@jennings1981, 276], and political socialization seems to be faster-paced during the teenage years. @fraile2020 suggest that "the development of gender roles during early childhood is a crucial phase in the source of the gender gap, deserving further attention from scholars" (89). Moreover, no study has measured the evolution of interest in various political topics with age among children or adults. Given that research that has studied political interest among adults has found that women and men are interested in different topics depending on these topics being assertion-focused or cooperation-focused (see @sec-chap1), Hypotheses 1b and 1c address the question of when these differences should start to occur. They suggest that --- likely as a result of cognitive maturation --- personality traits only start fostering interest in assertion-focused or cooperation-focused political topics between ages 15 and 25.^[Another possibility is that such differences in interest exist prior to the increase in self-reported political interest around age 15, perhaps as a result of boys' tendencies towards agency and girls' tendencies towards communion which start developing early. Gender differences in assertive speech use may develop between 1 and 2 years old, as @fagot1985 suggest, or may not have already developed at that age, as @brownell2006 suggest. A meta-analysis of studies done by @leaper2004 including children from various age groups more generally finds that boys use more assertive speech than girls, although this is not the case in mixed-gender interactions. @noakes2006 also find that, among boys and girls aged 9--14, boys reported having more interpersonal disagreements related to status and hierarchy, and girls were more likely to use cooperative conflict resolution strategies. Finally, @caravita2012 find that, among 9--15-year-old girls and boys, boys appear to have more agentic goals and girls appear to have more communal goals, although aging makes the gender gap in agency appear and the gap in communion disappear, which could be due to a relatively small sample size.]
 
 ***Hypothesis 1b**: Between ages 15 and 25, compared to girls, boys develop more interest in assertion-focused political topics such as law and crime, international affairs and partisan politics. These differences then stabilize and carry on at the adult age.*
 
@@ -181,7 +181,7 @@ Is the gender gap in political interest concentrated among certain demographic g
 knitr::include_graphics("_graphs/InterestWaveGroup.pdf")
 ```
 
-Now, how do adults' political interests change depending on age and gender? This question is best answered using Datagotchi PES data. As Table \ref{tab:olsInterestDG} shows, in models without controls, Quebec men generally report being more interested in politics than women, with a 0.9-point gap, similar to the other three studies. Men's interest in international affairs and partisan politics is also higher than women's (0.7-point and 0.6-point difference respectively; both *p*<0.001). However, women are significantly more interested in health care and education (0.7-point and 0.5-point difference respectively, both *p*<0.001) than men are. Interest in law and crime is about the same for both genders. Interestingly, the largest coefficient found is for interest in politics in general --- not any specific topic.^[@fig-interestdg in @sec-appendix5 shows the gender coefficient for an intermediate model with SES (socio-economic status) controls but no interactions. Before adding interactions between (i) gender and age, (ii) gender and ethnicity, and (iii) age squared, coefficients from the simple regression model remain significant.]
+Now, how do adults' political interests change depending on age and gender? This question is best answered using Datagotchi PES data. As Table \ref{tab:olsInterestDG} shows, in models without controls, Quebec men generally report being more interested in politics than women, with a 0.9-point gap, similar to the other three studies. Men's interest in international affairs and partisan politics is also higher than women's (0.7-point and 0.6-point difference respectively; both *p*<0.001). However, women are significantly more interested in health care and education (0.7-point and 0.5-point difference respectively, both *p*<0.001) than men are. Interest in law and crime is about the same for both genders. Interestingly, the largest coefficient found is for interest in politics in general --- not any specific topic. In models with controls for SES (socio-economic status) variables, Table \ref{tab:olsInterestDG} shows coefficients from the simple regression model remain significant and in the same direction.^[@fig-interestdg in @sec-appendix5 shows the gender coefficient for a third model with socio-economic status controls and interactions for (i) gender and age, (ii) gender and ethnicity, and (iii) age squared. Some of the relationships found in the first two models remain significant while others lose significance --- and confidence intervals widen significantly, potentially driven by high multicollinearity. Self-reported political interest is not associated anymore with being a man, but it is positively associated with being an older woman and marginally negatively associated with being a white woman. Women remain more likely to be interested in health care politics under these specifications, and again, there is a positive association with being an older woman and a negative association with being a white woman. Interest in international affairs is positively associated with being a man in general, but also with being an older woman. Interest in law and crime remains unlinked with gender, while interest in partisan politics is again strongly associated with being a man --- also with a significant impact of being an older woman. The coefficients for interest in education politics are notable, as being a white woman and being an older woman are both positively related to the outcome, but the coefficient for gender is now negative, suggesting that men are expected to be *more* interested in education politics after controlling for interactions between gender, ethnicity and age.]
 
 \begin{table}
 \centering\centering
@@ -204,44 +204,36 @@ Now, how do adults' political interests change depending on age and gender? This
 \hspace{1em}Log.Lik. & -3254.524 & -3523.301 & -3437.633 & -3591.294 & -3524.218 & -3687.310\\
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{With Controls}}\\
-\midrule \hspace{1em}(Intercept) & 7.751*** & 4.166*** & 7.652*** & 6.469*** & 5.947*** & 8.463***\\
-\hspace{1em} & (0.819) & (0.815) & (0.834) & (1.020) & (0.841) & (0.941)\\
-\hspace{1em}Gender (1 = women) & -0.580 & 1.733* & -2.020* & -0.251 & -1.744* & -3.951***\\
-\hspace{1em} & (0.694) & (0.836) & (0.856) & (0.865) & (0.864) & (0.966)\\
-\hspace{1em}Age & -0.030 & -0.005 & -0.042+ & 0.013 & -0.055* & -0.144***\\
-\hspace{1em} & (0.020) & (0.023) & (0.024) & (0.025) & (0.024) & (0.027)\\
-\hspace{1em}Age squared & 0.000+ & 0.000 & 0.001* & 0.000 & 0.001* & 0.001***\\
-\hspace{1em} & (0.000) & (0.000) & (0.000) & (0.000) & (0.000) & (0.000)\\
-\hspace{1em}Ethnicity (1 = white) & 0.503 & -0.957* & -0.833+ & -1.305* & -0.722 & 0.056\\
-\hspace{1em} & (0.504) & (0.477) & (0.488) & (0.628) & (0.492) & (0.551)\\
-\hspace{1em}Immigrant & -0.443+ & 1.361*** & 0.057 & -0.428 & 1.035*** & 0.045\\
-\hspace{1em} & (0.229) & (0.298) & (0.305) & (0.285) & (0.308) & (0.344)\\
-\hspace{1em}French spoken at home & 0.106 & 0.659** & 0.324 & -0.243 & 0.307 & 0.237\\
-\hspace{1em} & (0.340) & (0.224) & (0.229) & (0.423) & (0.231) & (0.259)\\
-\hspace{1em}Income between \$60,000 and \$150,000 & 0.040 & 0.371+ & 0.182 & 0.257 & 0.360+ & 0.987***\\
-\hspace{1em} & (0.125) & (0.190) & (0.194) & (0.156) & (0.196) & (0.219)\\
-\hspace{1em}Income above \$150,000 & 0.122 & 0.172 & 0.433* & 0.439* & 0.395* & 0.622**\\
-\hspace{1em} & (0.163) & (0.182) & (0.186) & (0.203) & (0.188) & (0.210)\\
-\hspace{1em}Education: college & 0.118 & 0.335+ & 0.273 & 0.180 & 0.472** & 0.254\\
-\hspace{1em} & (0.206) & (0.175) & (0.179) & (0.256) & (0.181) & (0.203)\\
-\hspace{1em}Education: university & 0.466* & 0.735*** & 0.529* & -0.124 & 1.396*** & 0.802***\\
-\hspace{1em} & (0.192) & (0.204) & (0.209) & (0.239) & (0.211) & (0.236)\\
-\hspace{1em}Gender (1 = women):Age & 0.018** & 0.021** & 0.020** & -0.009 & 0.017* & 0.039***\\
-\hspace{1em} & (0.006) & (0.007) & (0.007) & (0.007) & (0.007) & (0.008)\\
-\hspace{1em}Gender (1 = women):Ethnicity (1 = white) & -1.181+ & -1.872* & 0.775 & 0.863 & 1.764* & 1.551+\\
-\hspace{1em} & (0.657) & (0.802) & (0.821) & (0.819) & (0.828) & (0.926)\\
+\midrule \hspace{1em}(Intercept) & 7.438*** & 4.079*** & 5.903*** & 6.100*** & 3.987*** & 4.653***\\
+\hspace{1em} & (0.615) & (0.596) & (0.610) & (0.763) & (0.615) & (0.696)\\
+\hspace{1em}Gender (1 = women) & -0.872*** & 0.838*** & -0.331** & 0.168 & 0.759*** & -0.662***\\
+\hspace{1em} & (0.098) & (0.116) & (0.119) & (0.122) & (0.120) & (0.136)\\
+\hspace{1em}Age & 0.011*** & 0.030*** & 0.023*** & 0.012** & 0.001 & 0.003\\
+\hspace{1em} & (0.003) & (0.004) & (0.004) & (0.004) & (0.004) & (0.004)\\
+\hspace{1em}Ethnicity (1 = white) & -0.157 & -1.613*** & -0.506 & -0.824+ & -0.045 & 0.727\\
+\hspace{1em} & (0.339) & (0.380) & (0.389) & (0.421) & (0.392) & (0.443)\\
+\hspace{1em}Immigrant & -0.475* & 1.226*** & 0.132 & -0.415 & 1.181*** & 0.202\\
+\hspace{1em} & (0.230) & (0.293) & (0.300) & (0.285) & (0.302) & (0.342)\\
+\hspace{1em}French spoken at home & 0.048 & 0.605** & 0.233 & -0.238 & 0.228 & 0.032\\
+\hspace{1em} & (0.340) & (0.223) & (0.228) & (0.422) & (0.230) & (0.260)\\
+\hspace{1em}Income between \$60,000 and \$150,000 & -0.011 & 0.307+ & 0.045 & 0.254+ & 0.231 & 0.686**\\
+\hspace{1em} & (0.122) & (0.186) & (0.191) & (0.151) & (0.192) & (0.218)\\
+\hspace{1em}Income above \$150,000 & 0.036 & 0.026 & 0.278 & 0.439* & 0.287 & 0.268\\
+\hspace{1em} & (0.157) & (0.172) & (0.176) & (0.195) & (0.178) & (0.201)\\
+\hspace{1em}Education: college & 0.123 & 0.367* & 0.224 & 0.167 & 0.402* & 0.150\\
+\hspace{1em} & (0.206) & (0.174) & (0.179) & (0.256) & (0.180) & (0.204)\\
+\hspace{1em}Education: university & 0.453* & 0.791*** & 0.461* & -0.129 & 1.293*** & 0.655**\\
+\hspace{1em} & (0.192) & (0.202) & (0.207) & (0.239) & (0.209) & (0.236)\\
 \hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & 1575\\
-\hspace{1em}R2 & 0.076 & 0.129 & 0.053 & 0.017 & 0.128 & 0.065\\
-\hspace{1em}R2 Adj. & 0.069 & 0.122 & 0.046 & 0.010 & 0.121 & 0.057\\
-\hspace{1em}Log.Lik. & -3232.057 & -39061.721 & -39098.369 & -3578.081 & -39112.301 & -39288.383\\
+\hspace{1em}R2 & 0.067 & 0.121 & 0.044 & 0.016 & 0.119 & 0.034\\
+\hspace{1em}R2 Adj. & 0.062 & 0.116 & 0.039 & 0.010 & 0.114 & 0.029\\
+\hspace{1em}Log.Lik. & -3239.313 & -39068.770 & -39105.751 & -3579.255 & -39119.704 & -39313.305\\
 \bottomrule
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Without controls: Ordinary least squares (OLS) regressions}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}With controls: OLS for Politics (general) and Law and Crime; Weighted least squares (WLS) for other regressions}\\
 \end{tabular}
 \end{table}
-
-In models with controls for socio-demographic variables and interaction terms for gender and ethnicity as well as gender and age, Table \ref{tab:olsInterestDG} shows some of the relationships found in models without controls remain significant while others lose significance. Self-reported political interest is not associated with being a man, but it is positively associated with being an older woman and marginally negatively associated with being a white woman. Women remain more likely to be interested in health care politics under these specifications, and again, there is a positive association with being an older woman and a negative association with being a white woman. Interest in international affairs is positively associated with being a man in general, but also with being an older woman. Interest in law and crime remains unlinked with gender, while interest in partisan politics is again strongly associated with being a man --- also with a significant impact of being an older woman. The coefficients for interest in education politics are notable, as being a white woman and being an older woman are both positively related to the outcome, but the coefficient for gender is now negative, suggesting that men are expected to be more interested in education politics after controlling for interactions between gender, ethnicity and age.
 
 @fig-datagotchi inquires further into age trends in the evolution of interest in each of the topics, including gendered aspects of these age trends. Similar to @fig-ceswvsgssinterest, the gender gap in self-reported political interest diminishes among older respondents, as older women tend to become more interested. This trend of increased interest in politics among older women compared with younger ones can also be observed in interest in health care, international affairs, law and crime, and partisan politics. After age 50, men are no more likely than women to report being interested in partisan politics or international affairs, despite a significant gender gap among younger respondents.
 
@@ -260,7 +252,7 @@ Overall, @fig-datagotchi provides little evidence to support Hypothesis 1a, that
 
 ### Evolution of Political Interest Among Children
 
-What kinds of political topics are children and adolescents interested in? Are there gender differences in how interested they are in these topics? Does gender predict political interest in itself, or is it only a proxy for other variables? Data from the CPIS is used to answer these questions. Table \ref{tab:lmeInterestCPIS} shows the link between gender and interest in each of the topics among elementary and high school students. The upper part includes gender as the only predictor, while the lower part includes controls for socio-demographic variables and personality traits.
+What kinds of political topics are children and adolescents interested in? Are there gender differences in how interested they are in these topics? Does gender predict political interest in itself, or is it only a proxy for other variables? Data from the CPIS is used to answer these questions. Table \ref{tab:lmeInterestCPIS} shows the link between gender and interest in each of the topics among elementary and high school students. The upper part includes gender as the only predictor, while the lower part includes controls for socio-demographic variables.
 
 \begin{table}
 \centering\centering
@@ -283,34 +275,24 @@ What kinds of political topics are children and adolescents interested in? Are t
 \hspace{1em}R2 Marg. & 0.007 & 0.001 & 0.029 & 0.007 & 0.000 & 0.022\\
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{With Controls}}\\
-\midrule \hspace{1em}(Intercept) & -2.429 & 10.710 & 13.284 & 7.365 & 19.424* & 21.801**\\
-\hspace{1em} & (8.113) & (7.495) & (8.444) & (8.799) & (8.916) & (8.210)\\
-\hspace{1em}Gender (1 = girl) & 1.497 & 0.074 & -2.296 & 0.903 & -0.121 & -0.640\\
-\hspace{1em} & (2.046) & (1.984) & (2.271) & (2.326) & (2.233) & (2.275)\\
-\hspace{1em}Age & 0.293 & -1.304 & -1.420 & -0.601 & -2.627* & -2.814*\\
-\hspace{1em} & (1.111) & (1.031) & (1.159) & (1.211) & (1.221) & (1.127)\\
-\hspace{1em}Age squared & -0.004 & 0.049 & 0.047 & 0.026 & 0.098* & 0.092*\\
-\hspace{1em} & (0.038) & (0.035) & (0.040) & (0.042) & (0.042) & (0.039)\\
-\hspace{1em}Ethnicity (1 = white) & 0.630* & 0.214 & 0.886* & -0.053 & 0.050 & 0.662+\\
-\hspace{1em} & (0.320) & (0.315) & (0.354) & (0.365) & (0.352) & (0.357)\\
-\hspace{1em}Immigrant & -0.163 & 0.167 & -0.713* & -0.690+ & 0.212 & -0.413\\
-\hspace{1em} & (0.321) & (0.317) & (0.357) & (0.371) & (0.357) & (0.359)\\
-\hspace{1em}English spoken at home & -0.445 & -0.218 & -1.644*** & -0.514 & 0.253 & -0.106\\
-\hspace{1em} & (0.451) & (0.436) & (0.493) & (0.507) & (0.499) & (0.491)\\
-\hspace{1em}French spoken at home & -0.035 & 0.093 & -0.358 & -0.245 & 0.422 & 0.550+\\
-\hspace{1em} & (0.279) & (0.275) & (0.308) & (0.319) & (0.307) & (0.308)\\
-\hspace{1em}Agency & 3.494*** & 1.319* & 2.544*** & 2.077** & 1.321+ & 3.335***\\
-\hspace{1em} & (0.629) & (0.614) & (0.694) & (0.719) & (0.690) & (0.702)\\
-\hspace{1em}Communality & 1.662* & 1.066 & 2.253** & -0.174 & 1.283+ & 1.243\\
-\hspace{1em} & (0.658) & (0.656) & (0.739) & (0.760) & (0.733) & (0.756)\\
-\hspace{1em}Gender (1 = girl):Age & -0.092 & 0.025 & 0.115 & -0.010 & 0.018 & 0.030\\
-\hspace{1em} & (0.130) & (0.126) & (0.145) & (0.148) & (0.142) & (0.145)\\
-\hspace{1em}Gender (1 = girl):Ethnicity (1 = white) & -0.764+ & -0.500 & -0.635 & -0.218 & -0.505 & -0.929+\\
-\hspace{1em} & (0.428) & (0.420) & (0.473) & (0.490) & (0.470) & (0.477)\\
-\hspace{1em}SD (Intercept Class) & 0.515 & 0.401 & 0.335 & 0.366 & 0.642 & 0.203\\
-\hspace{1em}SD (Observations) & 2.385 & 2.371 & 2.686 & 2.774 & 2.636 & 2.717\\
-\hspace{1em}Num.Obs. & 558 & 563 & 559 & 559 & 561 & 561\\
-\hspace{1em}R2 Marg. & 0.109 & 0.041 & 0.119 & 0.039 & 0.057 & 0.109\\
+\midrule \hspace{1em}(Intercept) & 1.413 & 1.138 & 4.458*** & 2.838* & 0.218 & 4.246**\\
+\hspace{1em} & (1.337) & (1.187) & (1.315) & (1.254) & (1.436) & (1.309)\\
+\hspace{1em}Gender (1 = girl) & -0.432* & 0.128 & -0.973*** & 0.492* & -0.122 & -0.809***\\
+\hspace{1em} & (0.212) & (0.201) & (0.232) & (0.237) & (0.229) & (0.236)\\
+\hspace{1em}Age & 0.218* & 0.192* & 0.099 & 0.176* & 0.253** & -0.041\\
+\hspace{1em} & (0.086) & (0.076) & (0.084) & (0.079) & (0.092) & (0.083)\\
+\hspace{1em}Ethnicity (1 = white) & 0.160 & -0.024 & 0.570* & -0.143 & -0.107 & 0.168\\
+\hspace{1em} & (0.250) & (0.237) & (0.270) & (0.276) & (0.267) & (0.275)\\
+\hspace{1em}Immigrant & -0.255 & 0.273 & -0.794* & -0.702+ & 0.385 & -0.412\\
+\hspace{1em} & (0.322) & (0.308) & (0.352) & (0.360) & (0.349) & (0.357)\\
+\hspace{1em}English spoken at home & -0.781+ & -0.253 & -1.801*** & -0.632 & 0.118 & -0.348\\
+\hspace{1em} & (0.454) & (0.429) & (0.492) & (0.497) & (0.491) & (0.502)\\
+\hspace{1em}French spoken at home & -0.112 & 0.136 & -0.402 & -0.293 & 0.389 & 0.569+\\
+\hspace{1em} & (0.284) & (0.271) & (0.308) & (0.313) & (0.305) & (0.312)\\
+\hspace{1em}SD (Intercept Class) & 0.598 & 0.470 & 0.442 & 0.318 & 0.665 & 0.408\\
+\hspace{1em}SD (Observations) & 2.476 & 2.375 & 2.738 & 2.811 & 2.680 & 2.792\\
+\hspace{1em}Num.Obs. & 579 & 584 & 581 & 581 & 584 & 581\\
+\hspace{1em}R2 Marg. & 0.031 & 0.022 & 0.070 & 0.024 & 0.030 & 0.045\\
 \bottomrule
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
@@ -321,9 +303,9 @@ What kinds of political topics are children and adolescents interested in? Are t
 
 In the upper half of the table, taking into account classroom fixed effects, boys generally report being more interested in politics than girls, but the gender gap is relatively minimal, standing at 0.4 for the 11-point political interest scale (*p*<0.05). Boys' interest in international affairs and partisan politics is higher than girls' (1-point and 0.9-point difference respectively; both *p*<0.001). This seems to be in line with the results among adult respondents. However, girls' interest in law and crime is also slightly higher (0.5 point, *p*<0.05). This result is more surprising given previous literature showing the contrary. Yet, the direction of the gender gap for these three topics matches findings among Datagotchi PES adult respondents. Interest in the other two topics, health care and education, are almost even between the genders. Coupled with Datagotchi PES data showing significant gaps for both of these topics only emerge after age 35, when women become more interested than men in both cases, this suggests life-cycle factors trump childhood socialization as an explanatory factor for the development of gender differences in interests in these two topics. The experiences of several women as mothers and caregivers might be the elements that shape the importance they start giving to health care and education in their mid-thirties and forties. Socialization remains a plausible explanation for the development of gender patterns in interest in partisan politics and international affairs, even though this process may start earlier than previously thought. Gender differences in interest for these latter two topics seem to either fade or be overcome by similar life-cycle factors after age 50.
 
-However, when controlling for socio-demographic factors and personality traits and adding interactions for gender and age as well as gender and ethnicity, all relationships between gender and interest disappear, as the lower part of Table \ref{tab:lmeInterestCPIS} shows. Moreover, none of the interaction terms are significant at the *p*<0.05 level. Yet, when interaction terms are removed but other control variables are kept, coefficients from the simple regression model remain significant except for general political interest, which marginally loses statistical significance.^[@fig-interestcpis in @sec-appendix5 shows the gender coefficient for two intermediate models, one with SES controls and one with SES and personality traits but no interactions.] These results may therefore be an artifact of high multicollinearity.
+As the lower part of Table \ref{tab:lmeInterestCPIS} shows, when adding controls for socio-economic status variables, all coefficients from the simple regression model retain the same level of statistical significance and very similar slope coefficients. Results do not seem to be driven by gender, language, age, ethnicity, or immigrant status.^[@fig-interestcpis in @sec-appendix5 shows the gender coefficient for the two models as well as a third one, which includes all SES controls as well as interactions for gender and age, gender and ethnicity, and a squared term for age. In this last model, all relationships between gender and interest disappear, and confidence intervals widen significantly. Moreover, none of the interaction terms are significant at the *p*<0.05 level. These results may be an artifact of high multicollinearity.]
 
-@fig-interestyoungold re-analyzes those results for children aged 9--15 (*n*=277) and teenagers aged 16--18 (*n*=365). Among younger students, the gender gap in self-reported political interest is 0.1/10 (not statistically significant). Among those aged 16--18, this gap grows to 0.5/10 (*p*<0.05). Notably, among both groups, both interest in international affairs and interest in partisan politics are higher among boys than girls, suggesting some gender differences in interests may already exist before adolescence.
+@fig-interestyoungold re-analyzes those results for children aged 10--15 (*n*=256) and teenagers aged 16--18 (*n*=345). Among younger students, the gender gap in self-reported political interest is 0.1/10 (not statistically significant). Among those aged 16--18, this gap grows to 0.5/10 (*p*<0.05). Notably, among both groups, both interest in international affairs and interest in partisan politics are higher among boys than girls, suggesting some gender differences in interests may already exist before adolescence.
 
 ```{r}
 #| label: fig-interestyoungold

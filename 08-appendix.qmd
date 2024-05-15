@@ -436,7 +436,7 @@ RENSEIGNEMENTS SUPPLÉMENTAIRES: Si vous avez des questions sur la recherche ou 
     - (Champ libre)
 
 2. Quel est ton intérêt pour la politique en général? Glisse la barre sur un chiffre de 0 à 10, où 0 indique aucun intérêt du tout et 10 indique beaucoup d'intérêt.
-    - (barre de 0--10)
+    - (Barre de 0--10)
     - Je ne sais pas/Préfère ne pas répondre
 
 3. Parmi les sujets suivants, indique ceux qui, selon toi, sont politiques et ceux qui ne le sont pas.
@@ -494,23 +494,23 @@ RENSEIGNEMENTS SUPPLÉMENTAIRES: Si vous avez des questions sur la recherche ou 
 4. Si tu ouvrais un site Web d'information et que tu voyais les articles suivants, dans quelle mesure serais-tu intéressé par la lecture de chaque article? Déplace la barre vis-à-vis un nombre compris entre 0 et 10, où 0 signifie <<&nbsp;Pas du tout intéressé, je ne le lirai pas&nbsp;>> et 10 signifie <<&nbsp;Très intéressé, je le lirai très probablement&nbsp;>>.
 
     + 4.1 Santé (ex.: restrictions en cas de pandémie, conditions de travail des infirmiers(ères))
-        - (barre de 0--10)
+        - (Barre de 0--10)
         - Je ne sais pas/Préfère ne pas répondre
 
     + 4.2 Affaires internationales (ex.: conflits diplomatiques entre le Canada et la Chine, guerre en Ukraine)
-        - (barre de 0--10)
+        - (Barre de 0--10)
         - Je ne sais pas/Préfère ne pas répondre
 
     + 4.3 Loi et crime (ex.: financement de la police, peines pour des crimes violents)
-        - (barre de 0--10)
+        - (Barre de 0--10)
         - Je ne sais pas/Préfère ne pas répondre
 
     + 4.4 Éducation (ex.: frais de scolarité universitaires, financement des écoles publiques et privées)
-        - (barre de 0--10)
+        - (Barre de 0--10)
         - Je ne sais pas/Préfère ne pas répondre
 
     + 4.5 Politique partisane (ex.: élections fédérales, partis politiques)
-        - (barre de 0--10)
+        - (Barre de 0--10)
         - Je ne sais pas/Préfère ne pas répondre
 
 5. Lequel des choix suivants décrit le mieux ta situation familiale, peu importe que tes parents biologiques vivent ensemble ou non?
@@ -675,67 +675,67 @@ RENSEIGNEMENTS SUPPLÉMENTAIRES: Si vous avez des questions sur la recherche ou 
 20. Pour chacune de ces paires de caractéristiques, indique où tu te situes sur une échelle entre les deux extrêmes.
 
     + 20.1 Pas du tout indépendant(e) - Très indépendant(e)
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.2 Très passif(ive) - Très actif(ive)
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.3 Pas du tout compétitif(ive) - Très compétitif(ive)
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.4 Peut prendre des décisions facilement - A de la difficulté à prendre des décisions
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.5 Abandonne très facilement - N'abandonne jamais facilement
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.6 Pas du tout confiant(e) en soi - Très confiant(e) en soi
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.7 Se sent très inférieur(e) - Se sent très supérieur(e)
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.8 S'effondre sous la pression - Résiste bien à la pression
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.9 Pas du tout émotionnel(le) - Très émotionnel(le)
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.10 Pas du tout capable de se dévouer aux autres - Capable de se dévouer complètement aux autres
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.11 Très rude - Très doux (douce)
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.12 Pas très aidant(e) avec les autres - Très aidant(e) avec les autres
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.13 Pas très gentil(le) - Très gentil(le)
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.14 Pas du tout conscient(e) des sentiments des autres - Très conscient(e) des sentiments des autres
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.15 Pas du tout compréhensif(ive) des autres - Très compréhensif(ive) des autres
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
       
     + 20.16 Très froid(e) dans les relations avec les autres - Très chaud(e) dans les relations avec les autres
-        - (barre de 1--5)
+        - (Barre de 1--5)
         - Je ne sais pas/Préfère ne pas répondre
 
 21. Il est possible que nous faisions une enquête de suivi dans quelques années. Si tu acceptes d’être contacté(e) par courriel pour cette enquête, quelle est ton adresse courriel actuelle? Garde le champ vide si tu ne veux pas être recontacté(e) pour cela.
@@ -766,7 +766,7 @@ RENSEIGNEMENTS SUPPLÉMENTAIRES: Si vous avez des questions sur la recherche ou 
 
 3. Quel âge avez-vous?
 
-Veuillez indiquer votre âge
+- (Champ libre: Veuillez indiquer votre âge)
 
 4. Laquelle des catégories suivantes vous décrit le mieux?
 
@@ -824,10 +824,10 @@ Veuillez indiquer votre âge
 - Catholique
 - Protestantisme
 - Orthodoxe
-- Autre (veuillez préciser) \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+- Autre (veuillez préciser ____)
 - Préfère ne pas répondre
 
-9. Quel est votre degré d'attachement à cette église, dénomination religieuse ou communauté religieuse ?
+9. Quel est votre degré d'attachement à cette église, dénomination religieuse ou communauté religieuse&nbsp;?
 
 - Très faible
 - Plutôt faible
@@ -853,12 +853,9 @@ Veuillez indiquer votre âge
 - Veuf/veuve
 - Divorcé/séparé
 
-|  |
-| --- |
-
 12. Dans quel pays êtes-vous né(e)?
 
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+- (Champ libre)
 
 13. Êtes-vous...
 
@@ -886,43 +883,53 @@ Veuillez indiquer votre âge
 
 16. Quel est l'enjeu le plus important pour vous, personnellement?
 
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+- (Champ libre)
 
-17. Quel que soit le parti pour lequel vous avez l'intention de voter à l'occasion de la prochaine élection provinciale québécoise, en général, quelle est la probabilité que vous appuyiez [Sur une échelle de 0 à 10, où 0 signifie très peu probable, et 10 très probable] :
+17. Quel que soit le parti pour lequel vous avez l'intention de voter à l'occasion de la prochaine élection provinciale québécoise, en général, quelle est la probabilité que vous appuyiez [Sur une échelle de 0 à 10, où 0 signifie très peu probable, et 10 très probable]:
 
-|
- | Préfère ne pas répondre |
-| --- | --- |
+    + 17.1 Coalition avenir Québec (CAQ)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
 
-|
- | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+    + 17.2 Parti libéral du Québec (PLQ)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
 
-| Coalition avenir Québec (CAQ) |  |
-| --- | --- |
-| Parti libéral du Québec (PLQ) |  |
-| Parti Québécois (PQ) |  |
-| Québec solidaire (QS) |  |
-| Parti conservateur du Québec (PCQ) |  |
+    + 17.3 Parti Québécois (PQ)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
 
-18. Quel que soit le parti pour lequel vous avez l'intention de voter à l'occasion de la prochaine élection fédérale canadienne, en général, quelle est la probabilité que vous appuyiez [Sur une échelle de 0 à 10, où 0 signifie très peu probable, et 10 très probable] :
+    + 17.4 Québec solidaire (QS)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
 
-|
- | Préfère ne pas répondre |
-| --- | --- |
+    + 17.5 Parti conservateur du Québec (PCQ)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
 
-|
- | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+18. Quel que soit le parti pour lequel vous avez l'intention de voter à l'occasion de la prochaine élection fédérale canadienne, en général, quelle est la probabilité que vous appuyiez [Sur une échelle de 0 à 10, où 0 signifie très peu probable, et 10 très probable]:
 
-| Parti libéral du Canada (PLC) |  |
-| --- | --- |
-| Parti conservateur du Canada (PCC) |  |
-| Nouveau Parti démocratique (NPD) |  |
-| Bloc Québécois (BQ) |  |
-| Parti vert du Canada (PV) |  |
+    + 18.1 Parti libéral du Canada (PLC)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
 
-19. Lors d'une élection, certaines personnes ne peuvent pas voter parce qu'elles sont malades ou occupées, ou pour une autre raison. Avez-vous voté aux élections provinciales québécoises de 2022 ?
+    + 18.2 Parti conservateur du Canada (PCC)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
+
+    + 18.3 Nouveau Parti démocratique (NPD)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
+
+    + 18.4 Bloc Québécois (BQ)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
+
+    + 18.5 Parti vert du Canada (PV)
+        - (Barre de 0--10)
+        - Préfère ne pas répondre
+
+19. Lors d'une élection, certaines personnes ne peuvent pas voter parce qu'elles sont malades ou occupées, ou pour une autre raison. Avez-vous voté aux élections provinciales québécoises de 2022&nbsp;?
 
 - Oui
 - Non
@@ -934,17 +941,12 @@ Veuillez indiquer votre âge
 - Parti Québécois
 - Québec Solidaire
 - Parti conservateur du Québec
-- Autre parti (veuillez spécifier) \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+- Autre parti (veuillez spécifier ____) 
 - Préfère ne pas répondre
 
-21. En politique, nous discutons parfois de "gauche" et "droite". Où est-ce que vous vous situerez sur l'échelle du placement gauche-droite? L'échelle va de 0 à 10 : 0 signifie que vous vous situez très à gauche, 10 signifie que vous vous situez très à droite (5 est le centre).
+21. En politique, nous discutons parfois de "gauche" et "droite". Où est-ce que vous vous situerez sur l'échelle du placement gauche-droite? L'échelle va de 0 à 10 : 0 signifie que vous vous situez très à gauche, 10 signifie que vous vous situez très à droite (5 est le centre). Veuillez déplacer le curseur
 
-|
- | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-
-| Veuillez déplacer le curseur |  |
-| --- | --- |
+- (Barre de 0--10)
 
 22. En politique provinciale québécoise, vous considérez-vous habituellement comme étant...
 
@@ -968,43 +970,26 @@ Veuillez indiquer votre âge
 
 24. Quel est votre degré d'accord avec les énoncés suivants?
 
-|
- | Fortement en accord | Plutôt en accord | Ni en accord ni en désaccord | Plutôt en désaccord | Fortement en désaccord |
-| --- | --- | --- | --- | --- | --- |
-| Est-ce que vous accepteriez que la Taxe de Vente du Québec augmente et passe de 9.975% à 10.575% pour avoir accès à des soins dentaires et psychologiques gratuits? |
--
- |
--
- |
--
- |
--
- |
--
- |
-| --- | --- | --- | --- | --- | --- |
-| Est-ce qu'il est légitime que le gouvernement impose à tous les travailleurs de payer 0.5% de leur revenu (jusqu'à concurrence de 430$) pour s'assurer des deux parents d'un nouveau-né puisse recevoir 70% de son salaire pour rester à la maison avec son enfant pendant 50 semaines. |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Est-ce que vous accepteriez que le gouvernement diminue la Taxe de Vente du Québec pour qu'elle passe de 9.975% à 9.575%, mais que les frais de scolarité à l'université passent de 3000\$ à 7000\$ par année? |
--
- |
--
- |
--
- |
--
- |
--
- |
+    + 24.1 Est-ce que vous accepteriez que la Taxe de Vente du Québec augmente et passe de 9.975% à 10.575% pour avoir accès à des soins dentaires et psychologiques gratuits?
+        - Fortement en accord
+        - Plutôt en accord
+        - Ni en accord ni en désaccord
+        - Plutôt en désaccord
+        - Fortement en désaccord
+
+    + 24.2 Est-ce qu'il est légitime que le gouvernement impose à tous les travailleurs de payer 0.5% de leur revenu (jusqu'à concurrence de 430$) pour s'assurer des deux parents d'un nouveau-né puisse recevoir 70% de son salaire pour rester à la maison avec son enfant pendant 50 semaines.
+        - Fortement en accord
+        - Plutôt en accord
+        - Ni en accord ni en désaccord
+        - Plutôt en désaccord
+        - Fortement en désaccord
+
+    + 24.3 Est-ce que vous accepteriez que le gouvernement diminue la Taxe de Vente du Québec pour qu'elle passe de 9.975% à 9.575%, mais que les frais de scolarité à l'université passent de 3000\$ à 7000\$ par année?
+        - Fortement en accord
+        - Plutôt en accord
+        - Ni en accord ni en désaccord
+        - Plutôt en désaccord
+        - Fortement en désaccord
 
 25. Si le gouvernement avait des surplus budgétaires, est-ce qu'il devrait surtout réduire les impôts ou surtout augmenter les dépenses en éducation ou en santé.
 
@@ -1048,14 +1033,9 @@ Veuillez indiquer votre âge
 - Restée la même
 - Détériorée
 
-31. D'une manière générale, diriez-vous que l'on peut faire confiance à la plupart des gens ou que l'on ne peut pas être trop prudent dans ses relations avec les autres? Veuillez utiliser cette échelle de 0 à 10, où 0 signifie que vous ne pouvez pas être trop prudent et 10 que vous pouvez faire confiance à la plupart des gens.
+31. D'une manière générale, diriez-vous que l'on peut faire confiance à la plupart des gens ou que l'on ne peut pas être trop prudent dans ses relations avec les autres? Veuillez utiliser cette échelle de 0 à 10, où 0 signifie que vous ne pouvez pas être trop prudent et 10 que vous pouvez faire confiance à la plupart des gens. Déplacez le curseur
 
-|
- | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-
-| Déplacez le curseur |  |
-| --- | --- |
+- (Barre de 0--10)
 
 32. Je considère que je reçois ma juste part des services publics, considérant les taxes et impôts que je paie.
 
@@ -1135,149 +1115,104 @@ Veuillez indiquer votre âge
 
 42. À quel point seriez-vous prêt à tolérer les actions politiques suivantes pour l'avancement de la cause climatique?
 
-|
- | Aucune tolérance | Tolérance faible | Tolérance moyenne | Tolérance élevée |
-| --- | --- | --- | --- | --- |
-| Signer une pétition |
--
- |
--
- |
--
- |
--
- |
-| --- | --- | --- | --- | --- |
-| Boycotter des produits et compagnies |
--
- |
--
- |
--
- |
--
- |
-| Désinvestir des placements |
--
- |
--
- |
--
- |
--
- |
-| Participer à une manifestation |
--
- |
--
- |
--
- |
--
- |
-| Occuper temporairement un espace public |
--
- |
--
- |
--
- |
--
- |
-| S'attacher à un arbre ou un véhicule |
--
- |
--
- |
--
- |
--
- |
-| Bloquer un pont ou une route |
--
- |
--
- |
--
- |
--
- |
-| Bloquer la construction d'un oléoduc (pipeline) |
--
- |
--
- |
--
- |
--
- |
-| Faire du vandalisme sur des objets |
--
- |
--
- |
--
- |
--
- |
-| Saboter des infrastructures, des véhicules, etc |
--
- |
--
- |
--
- |
--
- |
-| Tirer un objet sur des infrastructures, des véhicules, etc. |
--
- |
--
- |
--
- |
--
- |
-| Affronter des policiers dans une manifestation |
--
- |
--
- |
--
- |
--
- |
-| Violenter des individus en position de pouvoir |
--
- |
--
- |
--
- |
--
- |
+    + 42.1 Signer une pétition
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
 
-43. Si vous ouvriez un site Web d'information et que vous voyiez les articles suivants, dans quelle mesure seriez-vous intéressé par la lecture de chaque article? Déplacez la barre vis-à-vis un nombre compris entre 0 et 10, où 0 signifie « Pas du tout intéressé, je ne le lirai pas » et 10 signifie « Très intéressé, je le lirai fort probablement »
+    + 42.2 Boycotter des produits et compagnies
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
 
-|
- | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+    + 42.3 Désinvestir des placements
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
 
-| Santé (ex.: restrictions en cas de pandémie, conditions de travail des infirmiers(ères)) | |
-| --- | --- |
-| Affaires internationales (ex.: conflits diplomatiques entre le Canada et la Chine, guerre en Ukraine) | |
-| Loi et crime (ex.: financement de la police, peines pour des crimes violents) | |
-| Éducation (ex.: frais de scolarité universitaires, financement des écoles publiques et privées) | |
-| Politique partisane (ex.: les élections fédérales, les partis politiques) | |
+    + 42.4 Participer à une manifestation
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
 
-44. Quel est votre intérêt pour la politique en général? Glissez la barre sur un chiffre de 0 à 10, où 0 indique aucun intérêt du tout et 10 indique beaucoup d'intérêt.
+    + 42.5 Occuper temporairement un espace public
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
 
-|
- | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+    + 42.6 S'attacher à un arbre ou un véhicule
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
 
-| Déplacez le curseur |  |
-| --- | --- |
+    + 42.7 Bloquer un pont ou une route
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
+
+    + 42.8 Bloquer la construction d'un oléoduc (pipeline)
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
+
+    + 42.9 Faire du vandalisme sur des objets
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
+
+    + 42.10 Saboter des infrastructures, des véhicules, etc
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
+
+    + 42.11 Tirer un objet sur des infrastructures, des véhicules, etc.
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
+
+    + 42.12 Affronter des policiers dans une manifestation
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
+
+    + 42.13 Violenter des individus en position de pouvoir
+        - Aucune tolérance
+        - Tolérance faible
+        - Tolérance moyenne
+        - Tolérance élevée
+
+43. Si vous ouvriez un site Web d'information et que vous voyiez les articles suivants, dans quelle mesure seriez-vous intéressé par la lecture de chaque article? Déplacez la barre vis-à-vis un nombre compris entre 0 et 10, où 0 signifie <<&nbsp;Pas du tout intéressé, je ne le lirai pas&nbsp;>> et 10 signifie <<&nbsp;Très intéressé, je le lirai fort probablement&nbsp;>>
+
+    + 43.1 Santé (ex.: restrictions en cas de pandémie, conditions de travail des infirmiers(ères))
+        - (Barre de 0--10)
+
+    + 43.2 Affaires internationales (ex.: conflits diplomatiques entre le Canada et la Chine, guerre en Ukraine)
+        - (Barre de 0--10)
+
+    + 43.3 Loi et crime (ex.: financement de la police, peines pour des crimes violents)
+        - (Barre de 0--10)
+
+    + 43.4 Éducation (ex.: frais de scolarité universitaires, financement des écoles publiques et privées)
+        - (Barre de 0--10)
+
+    + 43.5 Politique partisane (ex.: les élections fédérales, les partis politiques)
+        - (Barre de 0--10)
+
+44. Quel est votre intérêt pour la politique en général? Glissez la barre sur un chiffre de 0 à 10, où 0 indique aucun intérêt du tout et 10 indique beaucoup d'intérêt. Déplacez le curseur
+
+- (Barre de 0--10)
 
 45. Certains pensent que le gouvernement à Ottawa devrait faire tout en son pouvoir pour améliorer la situation sociale et économique des personnes noires. D'autres estiment que le gouvernement ne devrait faire aucun effort particulier pour aider les personnes noires. Et, bien sûr, d'autres personnes ont des opinions quelque part entre les deux. Où vous situeriez-vous sur l'échelle suivante, où 1 signifie que le gouvernement devrait aider les personnes noires et 7 que le gouvernement ne devrait pas aider les personnes noires)?
 
@@ -1297,7 +1232,7 @@ Veuillez indiquer votre âge
 - Plutôt d'accord
 - Fortement en accord
 
-47. Sur l'échelle suivante, où 1 correspond à « équitablement » et 7 à « inéquitablement », comment pensez-vous que la police traite les personnes noires par rapport aux personnes blanches au Canada?
+47. Sur l'échelle suivante, où 1 correspond à <<&nbsp;équitablement&nbsp;>> et 7 à <<&nbsp;inéquitablement&nbsp;>>, comment pensez-vous que la police traite les personnes noires par rapport aux personnes blanches au Canada?
 
 - 1 (Équitablement)
 - 2
@@ -1309,76 +1244,47 @@ Veuillez indiquer votre âge
 
 48. Selon vous, quel est le degré de discrimination au Canada aujourd'hui contre chacun des groupes suivants?
 
-|
- | Aucune | Un peu | Une quantité modérée | Beaucoup | Énormément |
-| --- | --- | --- | --- | --- | --- |
-| Les noirs |
--
- |
--
- |
--
- |
--
- |
--
- |
-| --- | --- | --- | --- | --- | --- |
-| Les asiatiques |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Les blancs |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Les autochtones |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Les hispaniques |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Les arabes |
--
- |
--
- |
--
- |
--
- |
--
- |
+    + 48.1 Les noirs
+        - Aucune
+        - Un peu
+        - Une quantité modérée
+        - Beaucoup
+        - Énormément
+
+    + 48.2 Les asiatiques
+        - Aucune
+        - Un peu
+        - Une quantité modérée
+        - Beaucoup
+        - Énormément
+
+    + 48.3 Les blancs
+        - Aucune
+        - Un peu
+        - Une quantité modérée
+        - Beaucoup
+        - Énormément
+
+    + 48.4 Les autochtones
+        - Aucune
+        - Un peu
+        - Une quantité modérée
+        - Beaucoup
+        - Énormément
+
+    + 48.5 Les hispaniques
+        - Aucune
+        - Un peu
+        - Une quantité modérée
+        - Beaucoup
+        - Énormément
+
+    + 48.6 Les arabes
+        - Aucune
+        - Un peu
+        - Une quantité modérée
+        - Beaucoup
+        - Énormément
 
 ## Perceptions
 
@@ -1392,7 +1298,7 @@ Veuillez indiquer votre âge
 
 50. Que représente l'enjeu du coût de la vie pour vous, personnellement?
 
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+- (Champ libre)
 
 51. Il serait possible d'accomplir mes activités quotidiennes sans voiture.
 
@@ -1404,7 +1310,7 @@ Veuillez indiquer votre âge
 
 ## Lifestyle
 
-52. En comparaison avec le reste de la société, comment évaluez-vous votre consommation d'alcool ?
+52. En comparaison avec le reste de la société, comment évaluez-vous votre consommation d'alcool&nbsp;?
 
 - Très en-dessous de la moyenne
 - En-dessous de la moyenne
@@ -1412,19 +1318,11 @@ Veuillez indiquer votre âge
 - Au-dessus de la moyenne
 - Très au-dessus de la moyenne
 
-53. Comment percevez-vous les gens qui sont contre la consommation d'alcool? [Sur un thermomètre de sentiment allant de 0 (Très négatif) à 100 (Très positif)]
+53. Comment percevez-vous les gens qui sont contre la consommation d'alcool? [Sur un thermomètre de sentiment allant de 0 (Très négatif) à 100 (Très positif)] Déplacez le curseur
 
-|
- | 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+- (Barre de 0--100 par bonds de 10)
 
-| Déplacez le curseur | |
-| --- | --- |
-
-|  |
-| --- |
-
-54. Au cours des 12 derniers mois, à quelle fréquence avez-vous consommé des boissons alcoolisées ?
+54. Au cours des 12 derniers mois, à quelle fréquence avez-vous consommé des boissons alcoolisées&nbsp;?
 
 - Moins d'une fois par mois
 - Une fois par mois
@@ -1436,7 +1334,7 @@ Veuillez indiquer votre âge
 - Préfère ne pas répondre
 - Ne sais pas
 
-55. Au cours du dernier mois, combien de fois avez-vous bu [5 pour les hommes /4 pour les femmes] verres ou plus d'alcool à une même occasion ?
+55. Au cours du dernier mois, combien de fois avez-vous bu [5 pour les hommes /4 pour les femmes] verres ou plus d'alcool à une même occasion&nbsp;?
 
 - Jamais
 - Moins d'une fois
@@ -1458,7 +1356,7 @@ Veuillez indiquer votre âge
 
 57. Quel est votre livre préféré?
 
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+- (Champ libre)
 
 58. Quel est votre genre de roman préféré?
 
@@ -1468,7 +1366,7 @@ Veuillez indiquer votre âge
 - Roman d'amour
 - Roman philosophique
 - Roman d'aventure
-- Autre (veuillez préciser) \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+- Autre (veuillez préciser ____)
 
 ## Other Opinions
 
@@ -1482,206 +1380,149 @@ Veuillez indiquer votre âge
 
 60. Voici une liste de domaines où l'État intervient. Spécifiez si vous souhaitez que le gouvernement dépense plus ou moins dans chaque domaine. Soyez conscients que dépenser plus ou beaucoup plus peut occasionner une augmentation des taxes et impôts.
 
-|
- | Dépenser beaucoup plus | Dépenser plus | Dépenser le même montant qu'actuellement | Dépenser moins | Dépenser beaucoup moins |
-| --- | --- | --- | --- | --- | --- |
-| Soins de santé |
--
- |
--
- |
--
- |
--
- |
--
- |
-| --- | --- | --- | --- | --- | --- |
-| Soins à domicile pour les personnes âgées |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Services de garde |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Éducation |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Les prestations aux personnes à faible revenu |
--
- |
--
- |
--
- |
--
- |
--
- |
-| Les prestations aux familles |
--
- |
--
- |
--
- |
--
- |
--
- |
+    + 60.1 Soins de santé
+        - Dépenser beaucoup plus
+        - Dépenser plus
+        - Dépenser le même montant qu'actuellement
+        - Dépenser moins
+        - Dépenser beaucoup moins
 
-61. Imaginez que le gouvernement ait les moyens d'augmenter certains programmes sociaux, mais pas tous. Parmi les améliorations suivantes des programmes sociaux, lesquels vous semblent les plus importantes ? Vous devez attribuer 100 points. Donnez plus de points aux améliorations que vous considérez comme plus importantes et moins de points à celles que vous considérez comme moins importantes. Le gouvernement devrait...
+    + 60.2 Soins à domicile pour les personnes âgées
+        - Dépenser beaucoup plus
+        - Dépenser plus
+        - Dépenser le même montant qu'actuellement
+        - Dépenser moins
+        - Dépenser beaucoup moins
 
-|
- | 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+    + 60.3 Services de garde
+        - Dépenser beaucoup plus
+        - Dépenser plus
+        - Dépenser le même montant qu'actuellement
+        - Dépenser moins
+        - Dépenser beaucoup moins
 
-| Améliorer les soins à domicile pour les personnes âgées | |
-| --- | --- |
-| Augmenter les prestations offertes aux familles | |
-| Augmenter le nombre de places dans les services de garde | |
-| Améliorer la qualité du réseau d'éducation | |
-| Améliorer l'accès au réseau de la santé | |
-| Améliorer la lutte à la pauvreté | |
+    + 60.4 Éducation
+        - Dépenser beaucoup plus
+        - Dépenser plus
+        - Dépenser le même montant qu'actuellement
+        - Dépenser moins
+        - Dépenser beaucoup moins
+
+    + 60.5 Les prestations aux personnes à faible revenu
+        - Dépenser beaucoup plus
+        - Dépenser plus
+        - Dépenser le même montant qu'actuellement
+        - Dépenser moins
+        - Dépenser beaucoup moins
+
+    + 60.6 Les prestations aux familles
+        - Dépenser beaucoup plus
+        - Dépenser plus
+        - Dépenser le même montant qu'actuellement
+        - Dépenser moins
+        - Dépenser beaucoup moins
+
+61. Imaginez que le gouvernement ait les moyens d'augmenter certains programmes sociaux, mais pas tous. Parmi les améliorations suivantes des programmes sociaux, lesquels vous semblent les plus importantes&nbsp;? Vous devez attribuer 100 points. Donnez plus de points aux améliorations que vous considérez comme plus importantes et moins de points à celles que vous considérez comme moins importantes. Le gouvernement devrait...
+
+    + 61.1 Améliorer les soins à domicile pour les personnes âgées
+        - (Barre de 0--100 par bonds de 10)
+
+    + 61.2 Augmenter les prestations offertes aux familles
+        - (Barre de 0--100 par bonds de 10)
+
+    + 61.3 Augmenter le nombre de places dans les services de garde
+        - (Barre de 0--100 par bonds de 10)
+
+    + 61.4 Améliorer la qualité du réseau d'éducation
+        - (Barre de 0--100 par bonds de 10)
+
+    + 61.5 Améliorer l'accès au réseau de la santé
+        - (Barre de 0--100 par bonds de 10)
+
+    + 61.6 Améliorer la lutte à la pauvreté
+        - (Barre de 0--100 par bonds de 10)
 
 62. Selon vous, quel est le meilleur...
 
-|
- | Veuillez inscrire votre réponse dans l'encadré. | Cochez la case si vous n'en connaissez aucun. |
-| --- | --- | --- |
-|
- | Question ouverte | Je n'en connais aucun |
-| Livre canadien de tous les temps? |
- |
--
- |
-| Album de musique canadien de tous les temps? |
- |
--
- |
-| Film canadien de tous les temps? |
- |
--
- |
-| Journal quotidien canadien de tous les temps? |
- |
--
- |
+    + 62.1 Livre canadien de tous les temps?
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 62.2 Album de musique canadien de tous les temps?
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 62.3 Film canadien de tous les temps?
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 62.4 Journal quotidien canadien de tous les temps?
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
 
 63. Nous souhaitons savoir si les gens connaissent mieux certains types de personnalités publiques que d'autres au Canada. Sans consulter d'autres sources, veuillez nommer une personnalité publique francophone canadienne travaillant:
 
-|
- | Veuillez inscrire votre réponse dans l'encadré. | Cochez la case si vous n'en connaissez aucun. |
-| --- | --- | --- |
-|
- | Question ouverte | Je n'en connais aucun |
-| Dans les médias (ex.: animateur/animatrice, journaliste, ...) |
- |
--
- |
-| Comme chanteur/chanteuse |
- |
--
- |
-| Comme acteur/actrice |
- |
--
- |
-| Comme écrivain/écrivaine |
- |
--
- |
+    + 63.1 Dans les médias (ex.: animateur/animatrice, journaliste, ...)
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 63.2 Comme chanteur/chanteuse
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 63.3 Comme acteur/actrice
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 63.4 Comme écrivain/écrivaine
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
 
 64. Nous souhaitons savoir si les gens connaissent mieux certains types de personnalités publiques que d'autres au Canada. Sans consulter d'autres sources, veuillez nommer une personnalité publique anglophone canadienne travaillant:
 
-|
- | Veuillez inscrire votre réponse dans l'encadré. | Cochez la case si vous n'en connaissez aucun. |
-| --- | --- | --- |
-|
- | Question ouverte | Je n'en connais aucun |
-| Dans les médias (ex.: animateur/animatrice, journaliste, ...) |
- |
--
- |
-| Comme chanteur/chanteuse |
- |
--
- |
-| Comme acteur/actrice |
- |
--
- |
-| Comme écrivain/écrivaine |
- |
--
- |
+    + 64.1 Dans les médias (ex.: animateur/animatrice, journaliste, ...)
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 64.2 Comme chanteur/chanteuse
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 64.3 Comme acteur/actrice
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
+
+    + 64.4 Comme écrivain/écrivaine
+        - (Veuillez inscrire votre réponse dans l'encadré. Question ouverte)
+        - (Cochez la case si vous n'en connaissez aucun.) Je n'en connais aucun
 
 65. Combien d'amis avez-vous de chacun des groupes suivants? Par "amis", nous référons à des personnes que vous appréciez et connaissez bien, mais qui ne sont pas des membres de votre famille.
 
-|
- | 1-2 | 3-4 | 5-6 | 7 ou plus |
-| --- | --- | --- | --- | --- |
-| Des gens de langue maternelle francophone |
--
- |
--
- |
--
- |
--
- |
-| --- | --- | --- | --- | --- |
-| Des gens de langue maternelle anglophone |
--
- |
--
- |
--
- |
--
- |
-| Des gens d'une autre langue maternelle |
--
- |
--
- |
--
- |
--
- |
+    + 65.1 Des gens de langue maternelle francophone
+        - 1--2
+        - 3--4
+        - 5--6
+        - 7 ou plus
 
-66. Sur une échelle de 0 à 10, comment évaluez-vous vos compétences dans les langues suivantes ?
+    + 65.2 Des gens de langue maternelle anglophone
+        - 1--2
+        - 3--4
+        - 5--6
+        - 7 ou plus
 
-|
- | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+    + 65.3 Des gens d'une autre langue maternelle
+        - 1--2
+        - 3--4
+        - 5--6
+        - 7 ou plus
 
-| Le français |  |
-| --- | --- |
-| L'anglais |  |
+66. Sur une échelle de 0 à 10, comment évaluez-vous vos compétences dans les langues suivantes&nbsp;?
+
+    + 66.1 Le français
+        - (Barre de 0--10)
+
+    + 66.2 L'anglais
+        - (Barre de 0--10)
 
 # Political Interest by Gender {#sec-appendix5}
 
@@ -1709,7 +1550,7 @@ knitr::include_graphics("_graphs/GenderCPIS.pdf")
   & Politics (general) & Health care & International affairs & Law and crime & Education & Partisan politics\\
 \midrule
 \addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{Ages 9--15}}\\
+\multicolumn{7}{l}{\textit{Ages 10--15}}\\
 \midrule \hspace{1em}(Intercept) & 3.990*** & 3.638*** & 5.356*** & 4.519*** & 3.569*** & 3.854***\\
 \hspace{1em} & (0.294) & (0.232) & (0.310) & (0.293) & (0.257) & (0.321)\\
 \hspace{1em}Gender (1 = girl) & -0.113 & 0.077 & -0.891* & 0.630+ & -0.073 & -0.755*\\
@@ -1740,44 +1581,40 @@ knitr::include_graphics("_graphs/GenderCPIS.pdf")
 
 \begin{table}
 \centering\centering
-\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most (With Interactions) \label{tab:lmeParentCtrlInterac}}
+\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most (With Interactions) \label{tab:lmeParentBoysGirls}}
 \centering
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
 \toprule
- & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
 \midrule
-(Intercept) & 7.161 & 10.839 & 11.161 & 3.305 & 19.727* & 24.890\\
-\hspace{1em} & (5.906) & (9.560) & (11.141) & (10.783) & (10.011) & (15.098)\\
-Mother discusses topic more than father & -0.417*** & -0.144 & -0.096 & -0.114 & 0.032 & 0.117\\
-\hspace{1em} & (0.121) & (0.299) & (0.294) & (0.290) & (0.293) & (0.340)\\
-Gender (1 = girl) & 0.007 & 0.169 & -3.255 & 2.377 & -0.679 & -0.157\\
-\hspace{1em} & (1.290) & (2.397) & (2.809) & (2.879) & (2.586) & (3.354)\\
-Age & -0.616 & -1.336 & -0.909 & 0.034 & -2.600+ & -3.335\\
-\hspace{1em} & (0.798) & (1.305) & (1.506) & (1.473) & (1.362) & (2.048)\\
-Age squared & 0.024 & 0.052 & 0.027 & 0.006 & 0.096* & 0.114\\
-\hspace{1em} & (0.027) & (0.045) & (0.051) & (0.050) & (0.046) & (0.070)\\
-Ethnicity (1 = white) & 0.364+ & 0.156 & 1.034* & 0.046 & -0.073 & 0.663\\
-\hspace{1em} & (0.189) & (0.365) & (0.400) & (0.415) & (0.387) & (0.474)\\
-Immigrant & -0.225 & 0.165 & -0.745+ & -0.510 & 0.048 & -0.255\\
-\hspace{1em} & (0.194) & (0.367) & (0.416) & (0.429) & (0.392) & (0.492)\\
-English spoken at home & -0.395 & -0.198 & -0.741 & -0.793 & -0.041 & 0.308\\
-\hspace{1em} & (0.277) & (0.490) & (0.580) & (0.555) & (0.548) & (0.688)\\
-French spoken at home & 0.056 & 0.193 & -0.475 & -0.410 & 0.226 & 0.650\\
-\hspace{1em} & (0.166) & (0.315) & (0.348) & (0.360) & (0.335) & (0.425)\\
-Agency & 1.696*** & 1.495* & 1.492+ & 1.541+ & 1.125 & 3.676***\\
-\hspace{1em} & (0.387) & (0.719) & (0.833) & (0.858) & (0.779) & (1.006)\\
-Communality & 0.887* & 0.901 & 2.239* & -0.702 & 1.519+ & 0.702\\
-\hspace{1em} & (0.411) & (0.759) & (0.877) & (0.897) & (0.847) & (1.088)\\
-Gender (1 = girl):Age & 0.012 & 0.014 & 0.165 & -0.114 & 0.049 & -0.009\\
-\hspace{1em} & (0.082) & (0.153) & (0.178) & (0.183) & (0.164) & (0.212)\\
-Gender (1 = girl):Ethnicity (1 = white) & -0.712** & -0.441 & -0.828 & -0.357 & -0.396 & -0.895\\
-\hspace{1em} & (0.254) & (0.474) & (0.544) & (0.557) & (0.521) & (0.653)\\
-\hspace{1em}SD (Intercept Class) & 0.595 & 0.407 & 0.474 & 0.352 & 0.535 & 0.529\\
-\hspace{1em}SD (Observations) & 2.671 & 2.384 & 2.567 & 2.723 & 2.636 & 2.732\\
+(Intercept) & 10.996+ & 11.686 & 12.494 & 9.940 & 25.076** & 34.623*\\
+ & (5.676) & (9.225) & (10.829) & (10.495) & (9.527) & (14.211)\\
+Mother discusses topic more than father & -0.468*** & -0.136 & -0.203 & -0.166 & 0.027 & -0.083\\
+ & (0.119) & (0.298) & (0.294) & (0.282) & (0.289) & (0.342)\\
+Gender (1 = girl) & -0.042 & -0.018 & -2.360 & 0.650 & -0.956 & 0.677\\
+ & (1.251) & (2.334) & (2.717) & (2.767) & (2.517) & (3.326)\\
+Age & -0.934 & -1.300 & -0.860 & -0.726 & -3.112* & -4.378*\\
+ & (0.773) & (1.263) & (1.479) & (1.446) & (1.302) & (1.955)\\
+Age squared & 0.036 & 0.053 & 0.029 & 0.030 & 0.114* & 0.154*\\
+ & (0.026) & (0.043) & (0.051) & (0.050) & (0.045) & (0.067)\\
+Ethnicity (1 = white) & 0.271 & 0.112 & 0.944* & -0.140 & -0.041 & 0.548\\
+ & (0.184) & (0.356) & (0.391) & (0.403) & (0.378) & (0.468)\\
+Immigrant & -0.224 & 0.204 & -0.816* & -0.329 & 0.043 & -0.447\\
+ & (0.191) & (0.359) & (0.407) & (0.417) & (0.383) & (0.488)\\
+English spoken at home & -0.527+ & -0.146 & -0.880 & -0.732 & -0.147 & -0.050\\
+ & (0.273) & (0.485) & (0.574) & (0.549) & (0.541) & (0.686)\\
+French spoken at home & 0.010 & 0.183 & -0.559 & -0.325 & 0.174 & 0.457\\
+ & (0.164) & (0.310) & (0.344) & (0.354) & (0.331) & (0.426)\\
+Gender (1 = girl):Age & 0.008 & 0.020 & 0.102 & -0.021 & 0.067 & -0.081\\
+ & (0.080) & (0.149) & (0.173) & (0.177) & (0.160) & (0.211)\\
+Gender (1 = girl):Ethnicity (1 = white) & -0.645* & -0.401 & -0.704 & -0.132 & -0.465 & -0.707\\
+ & (0.251) & (0.466) & (0.537) & (0.547) & (0.516) & (0.658)\\
+\hspace{1em}SD (Intercept Class) & 0.625 & 0.467 & 0.524 & 0.408 & 0.540 & 0.437\\
+\hspace{1em}SD (Observations) & 2.683 & 2.381 & 2.583 & 2.716 & 2.648 & 2.816\\
 \midrule
-\hspace{1em}Num.Obs. & 2036 & 445 & 400 & 412 & 454 & 325\\
-\hspace{1em}R2 Marg. & 0.035 & 0.045 & 0.110 & 0.029 & 0.052 & 0.108\\
+Num.Obs.2099 & 459 & 412 & 425 & 467 & 336\\
+R2 Marg.0.021 & 0.032 & 0.082 & 0.016 & 0.038 & 0.066\\
 \bottomrule
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
@@ -1788,72 +1625,62 @@ Gender (1 = girl):Ethnicity (1 = white) & -0.712** & -0.441 & -0.828 & -0.357 & 
 
 \begin{table}
 \centering\centering
-\caption{Interest in Topic Most Often Discussed with Role Models (With Interactions) \label{tab:lmeAgentsCtrlInterac}}
+\caption{Interest in Topic Most Often Discussed with Role Models (With Interactions) \label{tab:lmeAgentsBoysGirls}}
 \centering
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
 \toprule
- & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
+  & All & Health care & International affairs & Law and crime & Education & Partisan politics\\
 \midrule
-(Intercept) & -13.304 & -12.115 & -23.329 & 7.461 & 4.325 & 0.921\\
-\hspace{1em} & (9.414) & (17.197) & (16.302) & (17.065) & (17.518) & (18.381)\\
-Gender (1 = girl) & -2.392 & -6.739 & -3.920 & 7.129 & -5.966 & 0.149\\
-\hspace{1em} & (2.147) & (4.489) & (4.433) & (4.517) & (5.097) & (4.611)\\
-Topic most discussed with mother? & -0.218 & 0.990+ & 0.166 & -0.203 & -0.597 & 0.395\\
-\hspace{1em} & (0.299) & (0.555) & (0.938) & (1.334) & (0.557) & (1.516)\\
-Topic most discussed with father? & 0.810** & 1.197 & 0.099 & 0.998 & 0.105 & 2.149*\\
-\hspace{1em} & (0.301) & (1.239) & (0.525) & (0.627) & (0.698) & (0.986)\\
-Topic most discussed with female friends? & 0.695* & -0.220 & -0.696 & 2.627** & 1.850** & 1.758\\
-\hspace{1em} & (0.308) & (0.749) & (0.577) & (0.885) & (0.563) & (2.020)\\
-Topic most discussed with male friends? & 0.614+ & -2.922* & 0.606 & 0.490 & 0.150 & 2.794*\\
-\hspace{1em} & (0.323) & (1.169) & (0.544) & (0.697) & (0.717) & (1.363)\\
-Topic most discussed by teacher? & 0.357 & 1.292 & 1.500** & -1.045 & 0.022 & 0.160\\
-\hspace{1em} & (0.310) & (0.991) & (0.554) & (1.265) & (0.633) & (1.267)\\
-Topic most discussed by social media influencer? & 0.752* & 1.061 & 0.273 & 0.345 & 1.395 & -1.777\\
-\hspace{1em} & (0.304) & (0.660) & (0.521) & (0.711) & (1.095) & (1.996)\\
-Age & 2.047 & 2.055 & 3.808+ & -1.112 & -0.673 & 0.119\\
-\hspace{1em} & (1.299) & (2.398) & (2.272) & (2.378) & (2.402) & (2.563)\\
-Age squared & -0.064 & -0.067 & -0.133+ & 0.050 & 0.032 & 0.000\\
-\hspace{1em} & (0.044) & (0.083) & (0.079) & (0.082) & (0.083) & (0.089)\\
-Ethnicity (1 = white) & 0.134 & -0.708 & 0.544 & 0.371 & -0.326 & 0.758\\
-\hspace{1em} & (0.278) & (0.595) & (0.593) & (0.580) & (0.620) & (0.625)\\
-Immigrant & -0.635* & -0.111 & -1.200* & -0.796 & -0.203 & -0.887\\
-\hspace{1em} & (0.286) & (0.595) & (0.592) & (0.614) & (0.614) & (0.630)\\
-English spoken at home & 0.022 & 0.018 & -0.965 & -0.255 & 0.242 & 0.055\\
-\hspace{1em} & (0.381) & (0.755) & (0.711) & (0.734) & (0.776) & (0.780)\\
-French spoken at home & 0.409 & 0.200 & -0.405 & -0.054 & 0.051 & 0.416\\
-\hspace{1em} & (0.267) & (0.558) & (0.521) & (0.540) & (0.559) & (0.579)\\
-Agency & 1.266* & 0.237 & 2.510* & 2.235+ & 0.790 & 2.457+\\
-\hspace{1em} & (0.608) & (1.295) & (1.244) & (1.240) & (1.332) & (1.286)\\
-Communality & 1.530* & 1.449 & 1.395 & 1.552 & 4.254** & -0.512\\
-\hspace{1em} & (0.642) & (1.350) & (1.256) & (1.301) & (1.403) & (1.356)\\
-Gender (1 = girl):Topic\\
-most discussed with mother? & 0.941* & -0.730 & 0.518 & 1.814 & 2.596** & \\
-\hspace{1em} & (0.440) & (0.808) & (1.780) & (1.642) & (0.853) & \\
-Gender (1 = girl):Topic\\
-most discussed with father? & -0.349 & -0.844 & -0.201 & 1.097 & 0.538 & -2.226\\
-\hspace{1em} & (0.437) & (1.518) & (0.798) & (0.960) & (1.014) & (1.439)\\
-Gender (1 = girl):Topic\\
-most discussed with female friends? & -0.228 & 0.082 & 1.677+ & -2.825* & -1.482+ & 0.162\\
-\hspace{1em} & (0.448) & (1.024) & (0.922) & (1.163) & (0.840) & (3.374)\\
-Gender (1 = girl):Topic\\
-most discussed with male friends? & 0.026 & 2.112 & -0.685 & -1.074 & 0.072 & 0.433\\
-\hspace{1em} & (0.449) & (1.464) & (0.830) & (0.893) & (1.071) & (1.787)\\
-Gender (1 = girl):Topic\\
-most discussed by teacher? & -0.270 & -2.473 & -1.354 & 0.547 & 0.384 & 2.754+\\
-\hspace{1em} & (0.440) & (1.619) & (0.864) & (1.465) & (0.875) & (1.487)\\
-Gender (1 = girl):Topic\\
-most discussed by social media influencer? & 0.058 & 0.015 & -0.636 & 1.427 & -3.440* & 3.256\\
-\hspace{1em} & (0.437) & (0.965) & (0.799) & (1.000) & (1.475) & (2.538)\\
-Gender (1 = girl):Age & 0.109 & 0.392 & 0.235 & -0.429 & 0.251 & -0.073\\
-\hspace{1em} & (0.133) & (0.280) & (0.276) & (0.281) & (0.311) & (0.289)\\
-Gender (1 = girl):Ethnicity (1 = white) & -0.351 & 1.209 & -0.753 & -0.520 & 0.560 & -1.583+\\
-\hspace{1em} & (0.387) & (0.825) & (0.788) & (0.820) & (0.846) & (0.833)\\
-\hspace{1em}SD (Intercept Class) & 0.746 & 0.676 & 0.000 & 0.315 & 0.486 & 0.675\\
-\hspace{1em}SD (Observations) & 2.415 & 2.294 & 2.253 & 2.301 & 2.419 & 2.368\\
+(Intercept) & -8.948 & -13.867 & -22.750 & 23.058 & 13.852 & 3.026\\
+ & (9.130) & (17.013) & (15.928) & (17.299) & (16.960) & (17.625)\\
+Gender (1 = girl) & -2.307 & -6.406 & -2.449 & 5.453 & -7.929 & 0.980\\
+ & (2.141) & (4.395) & (4.348) & (4.541) & (5.051) & (4.501)\\
+Topic most discussed with mother? & -0.277 & 0.911+ & -0.261 & -0.038 & -0.577 & 0.314\\
+ & (0.296) & (0.525) & (0.907) & (1.372) & (0.566) & (1.518)\\
+Topic most discussed with father? & 0.769* & 1.387 & 0.327 & 1.087+ & -0.251 & 2.047*\\
+ & (0.299) & (1.215) & (0.514) & (0.640) & (0.711) & (0.988)\\
+Topic most discussed with female friends? & 0.665* & -0.084 & -0.617 & 2.385** & 1.704** & 1.591\\
+ & (0.305) & (0.726) & (0.555) & (0.902) & (0.575) & (2.010)\\
+Topic most discussed with male friends? & 0.595+ & -3.032** & 0.849 & 0.344 & -0.134 & 2.537+\\
+ & (0.322) & (1.148) & (0.537) & (0.707) & (0.734) & (1.361)\\
+Topic most discussed by teacher? & 0.327 & 1.326 & 1.167* & -0.585 & -0.434 & 0.157\\
+ & (0.306) & (0.917) & (0.533) & (1.283) & (0.618) & (1.261)\\
+Topic most discussed by social media influencer? & 0.704* & 1.064+ & 0.112 & 0.451 & 0.576 & -1.475\\
+ & (0.302) & (0.638) & (0.513) & (0.734) & (1.100) & (1.995)\\
+Age & 1.679 & 2.395 & 3.929+ & -2.863 & -1.387 & -0.058\\
+ & (1.265) & (2.367) & (2.228) & (2.427) & (2.355) & (2.471)\\
+Age squared & -0.051 & -0.077 & -0.132+ & 0.108 & 0.053 & 0.009\\
+ & (0.044) & (0.082) & (0.077) & (0.084) & (0.082) & (0.086)\\
+Ethnicity (1 = white) & 0.012 & -0.628 & 0.371 & 0.099 & -0.471 & 0.559\\
+ & (0.275) & (0.576) & (0.581) & (0.579) & (0.621) & (0.610)\\
+Immigrant & -0.498+ & -0.037 & -1.128+ & -0.387 & 0.106 & -0.873\\
+ & (0.283) & (0.586) & (0.584) & (0.618) & (0.623) & (0.620)\\
+English spoken at home & -0.008 & 0.054 & -0.769 & 0.038 & 0.492 & 0.157\\
+ & (0.385) & (0.749) & (0.715) & (0.778) & (0.799) & (0.778)\\
+French spoken at home & 0.555* & 0.261 & -0.185 & 0.306 & 0.396 & 0.503\\
+ & (0.268) & (0.550) & (0.519) & (0.551) & (0.570) & (0.574)\\
+Gender (1 = girl):Topic most discussed with mother? & 1.004* & -0.562 & 1.828 & 1.755 & 2.335** & \\
+ & (0.439) & (0.781) & (1.699) & (1.691) & (0.869) & \\
+Gender (1 = girl):Topic most discussed with father? & -0.309 & -0.984 & -0.499 & 0.763 & 0.895 & -2.129\\
+ & (0.437) & (1.499) & (0.791) & (0.986) & (1.038) & (1.442)\\
+Gender (1 = girl):Topic most discussed with female friends? & -0.200 & -0.115 & 1.479 & -2.278+ & -1.207 & 0.901\\
+ & (0.448) & (0.998) & (0.915) & (1.193) & (0.862) & (3.357)\\
+Gender (1 = girl):Topic most discussed with male friends? & 0.049 & 2.245 & -0.917 & -1.075 & 0.496 & 0.763\\
+ & (0.450) & (1.439) & (0.833) & (0.914) & (1.100) & (1.787)\\
+Gender (1 = girl):Topic most discussed by teacher? & -0.237 & -2.363 & -1.213 & 0.129 & 0.560 & 2.710+\\
+ & (0.439) & (1.569) & (0.862) & (1.492) & (0.889) & (1.486)\\
+Gender (1 = girl):Topic most discussed by social media influencer? & 0.106 & 0.157 & -0.601 & 1.110 & -2.828+ & 3.257\\
+ & (0.437) & (0.939) & (0.794) & (1.028) & (1.506) & (2.531)\\
+Gender (1 = girl):Age & 0.096 & 0.377 & 0.133 & -0.328 & 0.368 & -0.149\\
+ & (0.133) & (0.274) & (0.269) & (0.282) & (0.310) & (0.282)\\
+Gender (1 = girl):Ethnicity (1 = white) & -0.335 & 1.045 & -0.725 & -0.363 & 0.545 & -1.470+\\
+ & (0.384) & (0.804) & (0.783) & (0.831) & (0.860) & (0.822)\\
+\hspace{1em}SD (Intercept Class) & 0.840 & 0.733 & 0.000 & 0.705 & 0.501 & 0.682\\
+\hspace{1em}SD (Observations) & 2.428 & 2.262 & 2.278 & 2.318 & 2.502 & 2.376\\
 \midrule
-\hspace{1em}Num.Obs. & 831 & 166 & 166 & 165 & 167 & 167\\
-\hspace{1em}R2 Marg. & 0.151 & 0.173 & 0.284 & 0.250 & 0.250 & 0.307\\
+Num.Obs.845 & 168 & 169 & 168 & 170 & 170\\
+R2 Marg.0.130 & 0.170 & 0.257 & 0.193 & 0.195 & 0.295\\
 \bottomrule
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
