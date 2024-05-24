@@ -1074,6 +1074,7 @@ CES97$weight <- CES97$cpsnwgt1
 summary(CES97$weight)
 CES97men <- filter(CES97, female == 0)
 CES97women <- filter(CES97, female == 1)
+CES97$mode <- "CPS phone"
 
 CES00 <- readstata13::read.dta13("_data/CES/CES00/CES00.dta")
 CES00$female <- NA
@@ -1096,6 +1097,7 @@ CES00$weight <- CES00$ceshhwgt
 #CES00$weight <- CES00$cesnwgt
 #CES00$weight <- CES00$cespwgt
 summary(CES00$weight)
+CES00$mode <- "CPS phone"
 CES00men <- filter(CES00, female == 0)
 CES00women <- filter(CES00, female == 1)
 
@@ -1120,6 +1122,7 @@ CES04$age <- 2004 - CES04$age
 #CES04$weight <- CES04$ces04_ROCNWGT
 CES04$weight <- CES04$ces04_CESHHWGT
 summary(CES04$weight)
+CES04$mode <- "CPS phone"
 CES04men <- filter(CES04, female == 0)
 CES04women <- filter(CES04, female == 1)
 CES06 <- filter(CES0411, str_detect(CES0411$Survey_Type04060811,
@@ -1141,6 +1144,7 @@ CES06$age <- 2006 - CES06$age
 #CES06$weight <- CES06$ces06_RDDHHWGT
 CES06$weight <- CES06$ces06_CESHHWGT
 summary(CES06$weight)
+CES06$mode <- "CPS phone"
 CES06men <- filter(CES06, female == 0)
 CES06women <- filter(CES06, female == 1)
 CES08 <- filter(CES0411, str_detect(CES0411$Survey_Type04060811,
@@ -1160,6 +1164,7 @@ CES08$age <- 2008 - CES08$age
 #CES08$weight <- CES08$ces08_PROVWGT
 CES08$weight <- CES08$ces08_NATWGT
 summary(CES08$weight)
+CES08$mode <- "CPS phone"
 CES08men <- filter(CES08, female == 0)
 CES08women <- filter(CES08, female == 1)
 CES11 <- filter(CES0411, str_detect(CES0411$Survey_Type04060811,
@@ -1183,6 +1188,7 @@ CES11$weight <- CES11$HOUSEHOLD_WGTSAMP11
 summary(CES11$weight)
 CES11men <- filter(CES11, female == 0)
 CES11women <- filter(CES11, female == 1)
+CES11$mode <- "PES phone"
 
 CES15 <- readstata13::read.dta13(
   "_data/CES/CES15/CES15-online+phone.dta")
@@ -1204,6 +1210,16 @@ CES15$age <- 2015 - CES15$age
 CES15$weight <- CES15$CombWgt
 CES15men <- filter(CES15, female == 0)
 CES15women <- filter(CES15, female == 1)
+CES15$original_mode <- CES15$mode
+CES15$mode <- NA
+table(CES15$original_mode) # compared to Breton et al. 2015 table 1
+CES15$mode[CES15$original_mode == 0 & is.na(CES15$p_date)] <- "CPS phone"
+CES15$mode[CES15$original_mode == 1 & is.na(CES15$p_date)] <- "CPS online"
+CES15$mode[CES15$original_mode == 0 & !is.na(CES15$p_date)] <- "PES phone"
+CES15$mode[CES15$original_mode == 1 & !is.na(CES15$p_date)] <- "PES online"
+# but political interest questions were asked in the PES only, so CPS phone/
+# online will not appear in the graph
+table(CES15$mode, useNA = "always")
 
 CES19online <- haven::read_dta(
   "_data/CES/CES19/CES19-online.dta")
@@ -1216,6 +1232,12 @@ CES19online$interest <- CES19online$cps19_interest_gen_1 * 10
 # 0 uninterested in politics, 100 interested
 CES19online$interest <- as.integer(CES19online$interest)
 CES19online$age <- CES19online$cps19_age
+table(CES19online$cps19_interest_gen_1, CES19online$pes19_interest_1,
+ useNA = "always")
+CES19online$mode <- "CPS online"
+table(CES19online$pes19_interest_1)
+# but political interest questions in the PES were excluded since they come from the same respondents
+
 CES19phone <- readstata13::read.dta13("_data/CES/CES19/CES19-phone.dta")
 CES19phone$female <- NA
 CES19phone$female[CES19phone$q3 == "(1) Male"] <- 0
@@ -1237,11 +1259,20 @@ CES19phone$interest[CES19phone$p27 ==
                       "(10) 10 - A great deal of interest"] <- 100
 CES19phone$interest <- as.integer(CES19phone$interest)
 CES19phone$age <- 2019 - CES19phone$q2
+table(CES19phone$mode_PES, useNA = "always")
+CES19phone$mode <- NA
+CES19phone$mode[is.na(CES19phone$mode_PES)] <- "CPS phone"
+CES19phone$mode[CES19phone$mode_PES == "(1) CATI"] <- "PES phone"
+CES19phone$mode[CES19phone$mode_PES == "(2) Web"] <- "PES online"
+# but political interest questions were asked in the PES only, so CPS phone
+# will not appear in the graph
+
 CES19 <- data.frame(
   id = c(CES19online$cps19_ResponseId, CES19phone$sample_id),
   # merge online + phone data
-  mode = c(rep("online", length(CES19online$cps19_ResponseId)),
+  sample = c(rep("online", length(CES19online$cps19_ResponseId)),
            rep("phone", length(CES19phone$sample_id))),
+  mode = as.factor(c(CES19online$mode, CES19phone$mode)),
   female = as.factor(c(CES19online$female, CES19phone$female)),
   interest = as.integer(c(CES19online$interest, CES19phone$interest)),
   age = c(CES19online$age, CES19phone$age),
@@ -1336,6 +1367,7 @@ CES21$interest[CES21$interest == -990] <- NA
 # 0 uninterested in politics, 100 interested
 CES21$interest <- as.integer(CES21$interest)
 CES21$age <- CES21$cps21_age
+CES21$mode <- "CPS online"
 CES21$immig <- ifelse(CES21$cps21_bornin_canada == "Yes", 1,
                       ifelse(CES21$cps21_bornin_canada == "No", 2, NA))
 CES21$weight <- CES21$cps21_weight_general_all
@@ -1639,15 +1671,15 @@ cumsum(prop.table(table(CES21$income)))
 cumsum(prop.table(table(CES21$age)))
 prop.table(table(CES21$province))
 summary(CES21$weight)
-CES97clean <- select(CES97, interest, female, year, age, weight)
-CES00clean <- select(CES00, interest, female, year, age, weight)
-CES04clean <- select(CES04, interest, female, year, age, weight)
-CES06clean <- select(CES06, interest, female, year, age, weight)
-CES08clean <- select(CES08, interest, female, year, age, weight)
-CES11clean <- select(CES11, interest, female, year, age, weight)
-CES15clean <- select(CES15, interest, female, year, age, weight)
-CES19clean <- select(CES19, interest, female, year, age, weight)
-CES21clean <- select(CES21, interest, female, year, age, weight)
+CES97clean <- select(CES97, interest, female, year, age, mode, weight)
+CES00clean <- select(CES00, interest, female, year, age, mode, weight)
+CES04clean <- select(CES04, interest, female, year, age, mode, weight)
+CES06clean <- select(CES06, interest, female, year, age, mode, weight)
+CES08clean <- select(CES08, interest, female, year, age, mode, weight)
+CES11clean <- select(CES11, interest, female, year, age, mode, weight)
+CES15clean <- select(CES15, interest, female, year, age, mode, weight)
+CES19clean <- select(CES19, interest, female, year, age, mode, weight)
+CES21clean <- select(CES21, interest, female, year, age, mode, weight)
 CES <- bind_rows(CES97clean, CES00clean, CES04clean, CES06clean, CES08clean,
                  CES11clean, CES15clean, CES19clean, CES21clean)
 
@@ -3138,34 +3170,30 @@ ProvinceData$interest_gss <- GSSProv$interest
 #### 3.3 Political interest by gender gap by year and age ####
 CESGapYearAge <- CES |>
   filter(!is.na(female) & !is.na(weight)) |>
-  group_by(female, year, age) |>
+  group_by(female, year, age, mode) |>
   reframe(interest = weighted.mean(interest, w = weight, na.rm = TRUE),
           n = n()) |>
-  group_by(year, age) |>
+  group_by(year, age, mode) |>
   reframe(interest_gap = interest[female == 1] - interest[female == 0],
           n = sum(n, na.rm = T))
-ggplot(CESGapYearAge,
-       aes(x = age, y = interest_gap / 10, color = as.factor(year), weight = n,
-           group = as.factor(year), linetype = as.factor(year))) +
-  geom_smooth(aes(weight = NULL), linewidth = 0.25, alpha = 0.1, se = F) +
+ggplot(CESGapYearAge, aes(x = age, y = interest_gap / 10, weight = n,
+                          linetype = as.factor(mode))) +
+  facet_wrap(~year) +
+  geom_smooth() +
   geom_hline(yintercept = 0) +
-  scale_y_continuous(name = "General political interest\ngender gap") +
+  scale_y_continuous(name = "General political interest gender gap") +
   scale_x_continuous(name = "Age, CES") +
-  scale_color_manual(name = "Year", values = c(
-    "1997" = "grey20", "2000" = "grey20", "2004" = "grey20", "2006" = "grey50",
-    "2008" = "grey50", "2011" = "grey50", "2015" = "grey80", "2019" = "grey80",
-    "2021" = "grey80")) +
-  scale_linetype_manual(name = "Year", values = c(
-    "1997" = "solid", "2000" = "dotted", "2004" = "dashed", "2006" = "solid",
-    "2008" = "dotted", "2011" = "dashed", "2015" = "solid", "2019" = "dotted",
-    "2021" = "dashed")) +
+  scale_linetype_manual("Survey mode", values = c(
+    "CPS phone" = "dashed", "CPS online" = "solid",
+    "PES phone" = "twodash", "PES online" = "dotted")) +
   theme_minimal() +
-  theme(axis.text = element_text(size = 17.5),
+  theme(strip.text.x = element_text(size = 17.5),
+        axis.text = element_text(size = 17.5),
         axis.title = element_text(size = 17.5),
         legend.text = element_text(size = 17.5),
         legend.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/CESGapYearAge.pdf", width = 11, height = 4.25)
+ggsave("_graphs/CESGapYearAge.pdf", width = 11, height = 12.75)
 
 #### 3.4 Political interest by year & gender (CES & WVS) ####
 weighted.interest.se <- function(data) {
