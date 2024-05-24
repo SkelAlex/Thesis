@@ -8,7 +8,7 @@ book:
   date-format: "MMMM D, YYYY"
   chapters:
     - index.qmd
-    - 01-intro.qmd
+    #- 01-intro.qmd
     - 02-method.qmd
     - 03-develop.qmd
     - 04-parent.qmd
@@ -20,6 +20,17 @@ book:
 bibliography: Thesis.bib
 toc: true
 toc-depth: 5
+lof: true
+lot: true
+linestretch: 1.5
+abstract: "This is my abstract."
+include-before: "Acknowledgements."
+geometry:
+  - top=20mm
+  - left=32mm
+  - right=20mm
+  - bottom=20mm
+  - heightrounded
 header-includes:
   - \widowpenalty10000
   - \clubpenalty10000
