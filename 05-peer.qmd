@@ -66,7 +66,7 @@ Gender homophily therefore holds among younger and older students, who mostly bo
 ```{r}
 #| label: fig-peers-topics
 #| echo: false
-#| fig-cap: "Topic most often discussed with friends by child gender and friends' gender, 2023 CPIS data"
+#| fig-cap: "Interest in Topic Most Often Discussed with Friends by Child Gender and Friends' Gender, 2022 CPIS"
 knitr::include_graphics("_graphs/PeersTopicsGrey.pdf")
 ```
 
@@ -79,7 +79,7 @@ When it comes to female friends' role in political interest transmission, @fig-f
 ```{r}
 #| label: fig-femalefriends
 #| echo: false
-#| fig-cap: "Interest in topic most often discussed with one's female friends"
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Female Friends, 2022 CPIS"
 knitr::include_graphics("_graphs/FemaleFriendsDiscuss.pdf")
 ```
 

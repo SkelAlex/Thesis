@@ -1685,6 +1685,13 @@ CES <- bind_rows(CES97clean, CES00clean, CES04clean, CES06clean, CES08clean,
 
 #### 1.5 WVS ####
 WVS <- readRDS("_data/WVS/WVS_TimeSeries_1981_2022_Rds_v3_0.rds")
+table(WVS$COUNTRY_ALPHA)
+Countries <- read.csv("_data/countries_codes_and_coordinates.csv")
+ # https://gist.github.com/cpl/3dc2d19137588d9ae202d67233715478
+Countries$Alpha.3.code <- str_remove_all(Countries$Alpha.3.code, "\\s+")
+table(Countries$Alpha.3.code)
+WVS <- left_join(WVS, Countries, join_by(COUNTRY_ALPHA == Alpha.3.code))
+WVS$country <- WVS$Country
 WVS$ethn <- NA
 WVS$ethn[WVS$X051 == 124001] <- "White"
 WVS$ethn[WVS$X051 == 124002] <- "Black"
@@ -2307,6 +2314,25 @@ ggsave(plot = ggpubr::ggarrange(
   PlotGenderDG, PlotAgeDG, PlotEthnicityDG, PlotLanguageDG, PlotImmigrantDG,
   PlotIncomeDG, PlotEducationDG, nrow = 3, ncol = 3),
   "_graphs/DGDescriptive.pdf", width = 11, height = 12.75)
+WVSWave7 |>
+  group_by(country) |>
+  reframe(
+    interest_male = weighted.mean(
+      interest[as.numeric(female) == 1], na.rm = T, w = weight[
+        as.numeric(female) == 1]),
+    interest_female = weighted.mean(
+      interest[as.numeric(female) == 2], na.rm = T, w = weight[
+        as.numeric(female) == 2])) |>
+  ggplot(aes(x = interest_male - interest_female, y = reorder(country, interest_male - interest_female))) +
+  geom_bar(stat = "identity") +
+  scale_x_continuous(paste("Gender gap in general political interest\nLeft:",
+                           "women more interested; right: men more interested")) +
+  scale_y_discrete("Country") +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/InterestGapByCountry.pdf", width = 11, height = 12.75)
 
 PlotAgeCES <- CES21 |>
   filter(!is.na(age)) |>

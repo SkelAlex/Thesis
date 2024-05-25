@@ -3,12 +3,12 @@ project:
 book:
   title: "Gendered Political Socialization"
   subtitle: "Why Women and Men Still Differ in Their Political Interests"
-  author: "Alexandre Fortier-Chouinard"
+  author: "by Alexandre Fortier-Chouinard"
+  publisher: "A thesis submitted in conformity with the requirements for the degree of PhD in Political Science, Graduate Department of Political Science, in the University of Toronto"
   date: last-modified
   date-format: "MMMM D, YYYY"
   chapters:
     - index.qmd
-    #- 01-intro.qmd
     - 02-method.qmd
     - 03-develop.qmd
     - 04-parent.qmd
@@ -23,17 +23,20 @@ toc-depth: 5
 lof: true
 lot: true
 linestretch: 1.5
-abstract: "This is my abstract."
-include-before: "Acknowledgements."
+include-before:
+  - "Abstract"
+  - "Acknowledgements."
 geometry:
   - top=20mm
   - left=32mm
   - right=20mm
   - bottom=20mm
   - heightrounded
+  - twoside
 header-includes:
   - \widowpenalty10000
   - \clubpenalty10000
+  - \pagenumbering{roman}
 format:
   pdf:
     documentclass: scrreprt

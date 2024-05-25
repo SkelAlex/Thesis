@@ -73,7 +73,7 @@ All multilevel regression results presented in this chapter include classroom fi
 ```{r}
 #| label: fig-parents
 #| echo: false
-#| fig-cap: "Topic most often discussed with parents by child gender, 2023 CPIS data"
+#| fig-cap: "Topic Most Often Discussed with Parents by Child Gender, 2022 CPIS data"
 knitr::include_graphics("_graphs/ParentTopicsGrey.pdf")
 ```
 
