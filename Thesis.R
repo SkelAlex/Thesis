@@ -3497,7 +3497,7 @@ ggplot(GenderEthnicityInterest, aes(x = group, y = interest / 10,
   geom_point(position = position_dodge(width = 0.5), size = 0.75) +
   geom_errorbar(aes(ymin = interest.lb / 10, ymax = interest.ub / 10),
                 width = 0, position = position_dodge(width = 0.5)) +
-  scale_y_continuous(name = "General\npolitical interest",
+  scale_y_continuous(name = "General political interest",
                      limits = c(0, 10)) +
   scale_x_discrete(name = "Group") +
   scale_color_manual(name = "Wave", values = c(
