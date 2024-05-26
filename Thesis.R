@@ -3513,7 +3513,7 @@ ggplot(GenderEthnicityInterest, aes(x = group, y = interest / 10,
         legend.title = element_text(size = 17.5),
         axis.text.x = element_text(angle = 90),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/InterestWaveGroup.pdf", width = 11, height = 4.25)
+ggsave("_graphs/InterestWaveGroup.pdf", width = 11, height = 8.5)
 
 #### 3.6 Political interest by ethnicity (2017-22 CES & WVS) ####
 EthnicityInterestWVS <- data.frame(

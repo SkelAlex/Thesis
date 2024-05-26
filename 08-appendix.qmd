@@ -1540,6 +1540,13 @@ knitr::include_graphics("_graphs/GenderDG.pdf")
 knitr::include_graphics("_graphs/GenderCPIS.pdf")
 ```
 
+```{r}
+#| label: fig-interestwavegroup
+#| echo: false
+#| fig-cap: "General Political Interest by Year, Gender, Ethnicity and Immigrant Status Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals shown. CES, WVS and GSS weights are applied. Not all surveys included here asked questions about both ethnicity and immigrant status."
+knitr::include_graphics("_graphs/InterestWaveGroup.pdf")
+```
+
 \begin{table}
 \centering\centering
 \caption{Interest in Topic by Gender and Age Group, CPIS \label{tab:lmeInterestYoungOldCPIS}}
