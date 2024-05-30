@@ -12,7 +12,14 @@ There is much uncertainty about the trend in political interest among children a
 
 Around the age of 15, numerous European studies find children start experiencing an important uptick in political interest, which keeps increasing until they reach 25 years old approximately, after which it stabilizes [@neundorf2013; @prior2019; @quintelier2014; @russo2017; @shehata2019]. @russo2017 and @prior2019 suggest that the rise in political interest among adolescents could be due to an increasingly clear sense of what politics is during those formative years (15--25), although it has also been found that by age 10, children have already gained an understanding of what politics means [@hess1967]. @russo2017 put it in these terms:
 
-> \[W\]e observed a general increase in interest in politics, which is much steeper between 16 and 18 years of age than in the 13–15 age range. One interpretation of this finding lies in the ideas that --- at these ages --- adolescents obtain cognitive abilities that allow abstract thinking and reasoning \[...\] and they learn more about society and the wider world. Another possibility is that youths become more interested in political issues because they are approaching voting age, and their "social environment (as parents and teachers) anticipate a 'life event' in becoming an enfranchised voter" \[...\] Even if our results are consistent with both these ideas, it is worth noting that there was no national election in Sweden in 2012 (when we collected data from the 18 year-olds). Hence, cognitive maturation is a more plausible explanation for the increase in political interest that we observed between 16 and 18 years of age (654).
+```{=latex}
+\begingroup
+\setstretch{1}
+\begin{quote}
+[W]e observed a general increase in interest in politics, which is much steeper between 16 and 18 years of age than in the 13–15 age range. One interpretation of this finding lies in the ideas that --- at these ages --- adolescents obtain cognitive abilities that allow abstract thinking and reasoning [...] and they learn more about society and the wider world. Another possibility is that youths become more interested in political issues because they are approaching voting age, and their "social environment (as parents and teachers) anticipate a 'life event' in becoming an enfranchised voter" [...] Even if our results are consistent with both these ideas, it is worth noting that there was no national election in Sweden in 2012 (when we collected data from the 18 year-olds). Hence, cognitive maturation is a more plausible explanation for the increase in political interest that we observed between 16 and 18 years of age (654).
+\end{quote}
+\endgroup
+```
 
 Adolescence and early adulthood are important, as @russo2017 suggest that it "is during this period that parents, teachers, and role models in general can potentially raise youths' interest in political and societal issues" (655). Learning when exactly political interest increases during one's lifetime can help in understanding the political socialization processes at play.
 
