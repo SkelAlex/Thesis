@@ -1,6 +1,3 @@
----
-format: pdf
----
 # Emails Sent to School Boards and Schools {#sec-appendix1}
 
 ## Email destined for school boards in English
