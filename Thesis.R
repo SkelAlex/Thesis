@@ -669,18 +669,37 @@ CPIS$communal <- apply(CPIS[communalVariables], 1, delete_rows_na,
 length(na.omit(CPIS$communal)) / nrow(CPIS) * 100 # 89% available data
 
 ##### 1.1.2 Open-ended question analysis ####
-CPISOpen <- openxlsx::read.xlsx("_data/CPIS/CPISReview_Andrea_v2.xlsx")
-CPISOpenTab <- data.frame(Freq = colSums(CPISOpen[2:ncol(CPISOpen)], na.rm = T))
-CPISOpenTab$subject <- rownames(CPISOpenTab)
-ggplot(CPISOpenTab, aes(x = Freq, y = reorder(subject, Freq))) +
-  geom_bar(stat = "identity") +
+CPISOpen <- openxlsx::read.xlsx("_data/CPIS/CPISReview_CoderFinal.xlsx",
+ colNames = F)
+names(CPISOpen) <- CPISOpen[1, ]
+CPISOpen <- CPISOpen[2:nrow(CPISOpen), ]
+CPISOpen$female <- CPIS$female
+CPISOpenM <- filter(CPISOpen, female == 0)
+CPISOpenMTab <- data.frame(freq = colSums(map_dfr(CPISOpenM[2:(ncol(CPISOpenM) - 1)],
+ as.numeric), na.rm = T))
+CPISOpenMTab$subject <- rownames(CPISOpenMTab)
+CPISOpenMTab$female <- "Boys"
+CPISOpenMTab$perc <- 100 * CPISOpenMTab$freq / nrow(CPISOpenM)
+CPISOpenW <- filter(CPISOpen, female == 1)
+CPISOpenWTab <- data.frame(freq = colSums(map_dfr(CPISOpenW[2:(ncol(CPISOpenW) - 1)],
+ as.numeric), na.rm = T))
+CPISOpenWTab$subject <- rownames(CPISOpenWTab)
+CPISOpenWTab$female <- "Girls"
+CPISOpenWTab$perc <- 100 * CPISOpenWTab$freq / nrow(CPISOpenW)
+CPISOpenTab <- bind_rows(CPISOpenMTab, CPISOpenWTab)
+ggplot(CPISOpenTab, aes(x = perc, y = reorder(subject, perc), fill = female)) +
+  geom_bar(stat = "identity", position = "dodge", color = "black") +
+  scale_fill_manual("Gender", values = c("black", "white")) +
+  labs(x = "% of answers", y = "Category of Answer") +
   theme_linedraw() +
   theme(axis.text = element_text(size = 17.5),
+        legend.text = element_text(size = 17.5),
+        legend.title = element_text(size = 17.5),
         axis.title = element_text(size = 18.5),
         axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
         panel.grid = element_blank(),
         text = element_text(family = "CM Roman"))
-ggsave("_graphs/CPISOpenQuestion.pdf", width = 11, height = 4.25)
+ggsave("_graphs/CPISOpenQuestion.pdf", width = 11, height = 8.5)
 
 ##### 1.1.3 Creation of sub-datasets ####
 CPISBoys <- filter(CPIS, female == 0)
@@ -1472,6 +1491,26 @@ CES21$know_govgen_name[CES21$cps21_govgen_name == "Mary Simon"] <- 1
 CES21$know_govgen_name[CES21$cps21_govgen_name %in% c(
   "I don't know", "Prefer not to answer")] <- NA
 table(CES21$know_govgen_name, useNA = "always")
+CES21$cps21_lr_parties_1[CES21$cps21_lr_parties_1 == -99] <- NA
+CES21$cps21_lr_parties_2[CES21$cps21_lr_parties_2 == -99] <- NA
+CES21$cps21_lr_parties_3[CES21$cps21_lr_parties_3 == -99] <- NA
+CES21$cps21_lr_parties_4[CES21$cps21_lr_parties_4 == -99] <- NA
+CES21$cps21_lr_parties_5[CES21$cps21_lr_parties_5 == -99] <- NA
+CES21$cps21_lr_parties_7[CES21$cps21_lr_parties_7 == -99] <- NA
+CES21Educated <- filter(CES21, education %in% c(
+  "Bachelor's degree", "Master's degree", "Doctorate"))
+CES21$doesnt_know_lpc_pos <- abs(
+  CES21$cps21_lr_parties_1 - mean(CES21Educated$cps21_lr_parties_1, na.rm = T))
+CES21$doesnt_know_cpc_pos <- abs(
+  CES21$cps21_lr_parties_2 - mean(CES21Educated$cps21_lr_parties_2, na.rm = T))
+CES21$doesnt_know_ndp_pos <- abs(
+  CES21$cps21_lr_parties_3 - mean(CES21Educated$cps21_lr_parties_3, na.rm = T))
+CES21$doesnt_know_bq_pos <- abs(
+  CES21$cps21_lr_parties_4 - mean(CES21Educated$cps21_lr_parties_4, na.rm = T))
+CES21$doesnt_know_gpc_pos <- abs(
+  CES21$cps21_lr_parties_5 - mean(CES21Educated$cps21_lr_parties_5, na.rm = T))
+CES21$doesnt_know_ppc_pos <- abs(
+  CES21$cps21_lr_parties_7 - mean(CES21Educated$cps21_lr_parties_7, na.rm = T))
 clean_participation_scale <- function(x){
   CES21$x <- CES21[[x]]
   case_when(CES21$x == "More than five times" ~ 1,
@@ -1587,6 +1626,52 @@ CES21$knowledge <- apply(CES21[knowVariables], 1, delete_rows_na,
 # 0 = efficacious, 1 = not efficacious, at least two answers out of 3 questions
 length(na.omit(CES21$knowledge)) / nrow(CES21) * 100 # 84% available data
 
+KnowPartyScale <- na.omit(CES21[, c(
+  "doesnt_know_lpc_pos", "doesnt_know_cpc_pos", "doesnt_know_ndp_pos",
+  "doesnt_know_bq_pos", "doesnt_know_gpc_pos", "doesnt_know_ppc_pos")])
+KnowPartyLoevinger <- round(as.numeric(unlist(
+  mokken::coefH(round(KnowPartyScale, 0)))["H.Scale H"]), digits = 2)
+KnowPartyFactorAnalysis <- factanal(KnowPartyScale, factors = 1)
+KnowPartyVariableNames <- c(
+  "Knows LPC's ideology", "Knows CPC's ideology", "Knows NDP's ideology",
+  "Knows BQ's ideology", "Knows GPC's ideology", "Knows PPC's ideology")
+KnowPartyFactorLoadings <- KnowPartyFactorAnalysis$loadings[, 1]
+KnowPartyFirstEigenvalue <- round(eigen(cor(KnowPartyScale))$values[1],
+ digits = 2)
+ggplot(data.frame(KnowPartyVariableNames, KnowPartyFactorLoadings),
+       aes(x = reorder(KnowPartyVariableNames, desc(KnowPartyVariableNames)),
+           y = KnowPartyFactorLoadings)) +
+  coord_flip() +
+  geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
+           width = 0.4) +
+  geom_text(aes(label = as.character(round(
+    KnowPartyFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
+    family = "CM Roman", size = 6) +
+  geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
+  annotate("text", label = paste("Loevinger's H =", as.character(
+    KnowPartyLoevinger)), x = 1.3, y = 0.85, size = 6,
+    family = "CM Roman") +
+  annotate("text", label = paste("First eigenvalue =", as.character(
+    KnowPartyFirstEigenvalue)), x = 0.9, y = 0.85, size = 6,
+    family = "CM Roman") +
+  scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
+                     breaks = seq(-0.1, 1, by = 0.1)) +
+  xlab("") +
+  theme_linedraw() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
+        panel.grid = element_blank(),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/KnowPartyScale.pdf", width = 11, height = 4.25)
+knowPartyVariables <- c(
+  "doesnt_know_lpc_pos", "doesnt_know_cpc_pos", "doesnt_know_ndp_pos",
+  "doesnt_know_bq_pos", "doesnt_know_gpc_pos", "doesnt_know_ppc_pos")
+CES21$knowparty <- apply(CES21[knowPartyVariables], 1, delete_rows_na,
+                         loadings = KnowPartyFactorLoadings,
+                         number_na_allowed = 1)
+length(na.omit(CES21$knowparty)) / nrow(CES21) * 100 # 65% available data
+
 ParticScale <- na.omit(CES21[, c(
   "volunteer_community", "attend_meeting_speech", "attend_protest", "boycott",
   "petition", "politician_social_media", "volunteer_partisan",
@@ -1642,6 +1727,106 @@ CES21$participation <- apply(CES21[particVariables], 1, delete_rows_na,
                          number_na_allowed = 10)
 # 0 = efficacious, 1 = not efficacious, at least two answers out of 3 questions
 length(na.omit(CES21$participation)) / nrow(CES21) * 100 # 71% available data
+
+ParticPartisanScale <- na.omit(CES21[, c(
+  "attend_meeting_speech", "politician_social_media", "volunteer_partisan",
+  "contact_politician", "donation_partisan")])
+ParticPartisanCronbach <- round(as.numeric(psy::cronbach(ParticPartisanScale)[3]),
+  digits = 2)
+ParticPartisanFactorAnalysis <- factanal(ParticPartisanScale, factors = 1)
+ParticPartisanVariableNames <- c(
+  "Attend political meeting/speech", "Follow politician social media",
+  "Volunteer politician", "Contact elected official", "Donation to candidate")
+ParticPartisanFactorLoadings <- ParticPartisanFactorAnalysis$loadings[, 1]
+ParticPartisanFirstEigenvalue <- round(
+  eigen(cor(ParticPartisanScale))$values[1], digits = 2)
+ggplot(data.frame(ParticPartisanVariableNames, ParticPartisanFactorLoadings),
+       aes(x = reorder(ParticPartisanVariableNames,
+        desc(ParticPartisanVariableNames)),
+           y = ParticPartisanFactorLoadings)) +
+  coord_flip() +
+  geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
+           width = 0.4) +
+  geom_text(aes(label = as.character(round(
+    ParticPartisanFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
+    family = "CM Roman", size = 6) +
+  geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
+  annotate("text", label = paste("Cronbach's alpha =", as.character(
+    ParticPartisanCronbach)), x = 4, y = 0.825, size = 6,
+    family = "CM Roman") +
+  annotate("text", label = paste("First eigenvalue =", as.character(
+    ParticPartisanFirstEigenvalue)), x = 2, y = 0.825, size = 6,
+    family = "CM Roman") +
+  scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
+                     breaks = seq(-0.1, 1, by = 0.1)) +
+  xlab("") +
+  theme_linedraw() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
+        panel.grid = element_blank(),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/ParticPartisanScale.pdf", width = 11, height = 4.25)
+particPartisanVariables <- c(
+  "attend_meeting_speech", "politician_social_media", "volunteer_partisan",
+  "contact_politician", "donation_partisan")
+CES21$particPartisan <- apply(CES21[particPartisanVariables], 1, delete_rows_na,
+                         loadings = ParticPartisanFactorLoadings,
+                         number_na_allowed = 2)
+length(na.omit(CES21$particPartisan)) / nrow(CES21) * 100 # 71% available data
+
+ParticNonPartisanScale <- na.omit(CES21[, c(
+  "volunteer_community", "attend_protest", "boycott", "petition",
+  "donation_cause", "group_partic", "comment_politics",
+  "talk_issue_social_media")])
+ParticNonPartisanCronbach <- round(
+  as.numeric(psy::cronbach(ParticNonPartisanScale)[3]), digits = 2)
+ParticNonPartisanFactorAnalysis <- factanal(ParticNonPartisanScale,
+ factors = 1)
+ParticNonPartisanVariableNames <- c(
+  "Volunteer for group/organization", "Attend protest", "Boycott",
+  "Sign petition", "Donation to cause", "Group active membership",
+  "Comment political content", "Discuss politics social media")
+ParticNonPartisanFactorLoadings <-
+ ParticNonPartisanFactorAnalysis$loadings[, 1]
+ParticNonPartisanFirstEigenvalue <- round(
+  eigen(cor(ParticNonPartisanScale))$values[1], digits = 2)
+ggplot(data.frame(ParticNonPartisanVariableNames,
+ ParticNonPartisanFactorLoadings),
+       aes(x = reorder(ParticNonPartisanVariableNames,
+        desc(ParticNonPartisanVariableNames)),
+           y = ParticNonPartisanFactorLoadings)) +
+  coord_flip() +
+  geom_bar(stat = "identity", colour = "black", fill = "black", linewidth = 1,
+           width = 0.4) +
+  geom_text(aes(label = as.character(round(
+    ParticNonPartisanFactorLoadings, digits = 2))), vjust = 0.35, hjust = -0.3,
+    family = "CM Roman", size = 6) +
+  geom_hline(yintercept = 0.3, colour = "gray", linetype = "longdash") +
+  annotate("text", label = paste("Cronbach's alpha =", as.character(
+    ParticNonPartisanCronbach)), x = 4, y = 0.825, size = 6,
+    family = "CM Roman") +
+  annotate("text", label = paste("First eigenvalue =", as.character(
+    ParticNonPartisanFirstEigenvalue)), x = 2, y = 0.825, size = 6,
+    family = "CM Roman") +
+  scale_y_continuous(name = "Factor loadings", limits = c(-0.1, 1),
+                     breaks = seq(-0.1, 1, by = 0.1)) +
+  xlab("") +
+  theme_linedraw() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 18.5),
+        axis.title.x = element_text(hjust = 0.3, vjust = -0.17),
+        panel.grid = element_blank(),
+        text = element_text(family = "CM Roman"))
+ggsave("_graphs/ParticNonPartisanScale.pdf", width = 11, height = 4.25)
+particNonPartisanVariables <- c(
+  "volunteer_community", "attend_protest", "boycott", "petition",
+  "donation_cause", "group_partic", "comment_politics",
+  "talk_issue_social_media")
+CES21$particNonPartisan <- apply(
+  CES21[particNonPartisanVariables], 1, delete_rows_na,
+  loadings = ParticNonPartisanFactorLoadings, number_na_allowed = 5)
+length(na.omit(CES21$particNonPartisan)) / nrow(CES21) * 100 # 71% available data
 
 CES21men <- filter(CES21, female == 0)
 CES21women <- filter(CES21, female == 1)
@@ -2932,8 +3117,13 @@ CES21grouped <- CES21 |>
           external_efficacy = weighted.mean(
             external_efficacy, w = weight, na.rm = TRUE),
           knowledge = weighted.mean(knowledge, w = weight, na.rm = TRUE),
+          knowparty = weighted.mean(knowparty, w = weight, na.rm = TRUE),
           participation = weighted.mean(
-            participation, w = weight, na.rm = TRUE))
+            participation, w = weight, na.rm = TRUE),
+          particPartisan = weighted.mean(
+            particPartisan, w = weight, na.rm = TRUE),
+          particNonPartisan = weighted.mean(
+            particNonPartisan, w = weight, na.rm = TRUE))
 PlotTimeCES <- ggplot(filter(CES21, !is.na(female)),
        aes(x = age, y = interest / 10, color = female, weight = weight)) +
   geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
@@ -3099,6 +3289,21 @@ PlotTimeKnowledge <- ggplot(filter(CES21, !is.na(female)),
         plot.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman")) +
   ggtitle("Knowledge of political\nfigures' names")
+PlotTimeKnowParty <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = knowparty, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = knowparty * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Percentage point error in\npolitical parties' positions")
 PlotTimeParticipation <- ggplot(filter(CES21, !is.na(female)),
        aes(x = age, y = participation * 10, color = female, weight = weight)) +
   geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
@@ -3114,10 +3319,45 @@ PlotTimeParticipation <- ggplot(filter(CES21, !is.na(female)),
         plot.title = element_text(size = 17.5),
         text = element_text(family = "CM Roman")) +
   ggtitle("Political participation")
+PlotTimePartisanParticipation <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = particPartisan * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = particPartisan * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Partisan political participation")
+PlotTimeNonPartisanParticipation <- ggplot(filter(CES21, !is.na(female)),
+       aes(x = age, y = particNonPartisan * 10, color = female, weight = weight)) +
+  geom_point(data = filter(CES21grouped, !is.na(female)), size = 0.25,
+             aes(x = age, y = particNonPartisan * 10, color = female, weight = NULL)) +
+  geom_smooth(method = "loess") +
+  scale_y_continuous(name = "",
+                     limits = c(0, 10), breaks = seq(0, 10, by = 2.5)) +
+  scale_x_continuous(name = "Age", limits = c(18, 105)) +
+  scale_color_grey(name = "", end = 0.5, labels = c("Men", "Women")) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 17.5),
+        axis.title = element_text(size = 17.5),
+        plot.title = element_text(size = 17.5),
+        text = element_text(family = "CM Roman")) +
+  ggtitle("Non-partisan political participation")
 ggsave(plot = ggpubr::ggarrange(
   PlotTimeInternalEfficacy, PlotTimeExternalEfficacy, PlotTimeKnowledge,
-  PlotTimeParticipation, nrow = 2, ncol = 2, common.legend = TRUE, legend = "bottom"),
-  "_graphs/TimePoliticalEngagement.pdf", width = 11, height = 8.5)
+  PlotTimeKnowParty, PlotTimeParticipation, nrow = 3, ncol = 2,
+  common.legend = TRUE, legend = "bottom"),
+  "_graphs/TimePoliticalEngagement.pdf", width = 11, height = 12.75)
+ggsave(plot = ggpubr::ggarrange(
+  PlotTimePartisanParticipation, PlotTimeNonPartisanParticipation,
+  common.legend = TRUE, legend = "bottom"),
+  "_graphs/TimePoliticalParticipation.pdf", width = 11, height = 4.25)
 
 cor.test(CES21$interest, CES21$internal_efficacy, conf.level = 0.999)
 cor.test(CES21$interest, CES21$external_efficacy, conf.level = 0.999)

@@ -105,19 +105,26 @@ Apart from questions about political interest, this chapter also relies on four 
 
 Knowledge of political figures' names is measured by correct answers to questions about who the minister of Finance, governor general of Canada, and their provincial premier are. Political participation is measured by a scale including 13 items: volunteering for groups and organizations, attending political meetings and speeches, attending protests, boycotting products, signing petitions, following politicians on social media, volunteering for politicians, contacting elected officials, donating to candidates, donating to causes, being a group's active member, commenting political content, and discussing politics on social media. CES respondents were asked how often they had done these activities in the past 12 months.
 
-Factor analysis for knowledge of political figures' names (@fig-factor3) and for the political participation scale (@fig-factor4) show that items generally scale well together, with factor loadings at least medium --- above 0.3 [@shevlin2000] --- for all elements of the political participation scale and two out of three of the knowledge scale, and first eigenvalues larger than the conventionally accepted value of 1 [@williams2010]. The Cronbach's alpha for the political participation scale (0.84) is within the 0.7 to 0.9 range suggested by scholars [@tavakol2011], therefore meeting the standard benchmarks for valid and reliable scales established in peer-reviewed studies about measurement scales. For the political knowledge scale, as @gidengil2016a suggest, we rely on Loevinger's H scalability coefficient, given the nature of scaling political knowledge questions with different levels of difficulty. The H scalability coefficient is 0.32, which is a weak scale.
+Factor analysis for knowledge of political figures' names (@fig-factor3), for political parties' ideological positions^[We re-use the framework set by @dassonneville2020.] (@fig-factor4) and for the political participation scale (@fig-factor5) show that items generally scale well together, with factor loadings at least medium --- above 0.3 [@shevlin2000] --- for all elements of the political participation scale and political parties' positions scale as well as two out of three of the political figures' names scale, and first eigenvalues larger than the conventionally accepted value of 1 [@williams2010]. The Cronbach's alpha for the political participation scale (0.84) is within the 0.7 to 0.9 range suggested by scholars [@tavakol2011], therefore meeting the standard benchmarks for valid and reliable scales established in peer-reviewed studies about measurement scales. For both political knowledge scales, as @gidengil2016a suggest, we rely on Loevinger's H scalability coefficient, given the nature of scaling political knowledge questions with different levels of difficulty. The H scalability coefficients are 0.27 and 0.32, which represent weak scales.
 
 ```{r}
 #| label: fig-factor3
 #| echo: false
-#| fig-cap: "CPIS Factor Analysis: Knowledge Scale"
+#| fig-cap: "CES Factor Analysis: Knowledge of Political Figures' Names Scale"
 knitr::include_graphics("_graphs/KnowScale.pdf")
 ```
 
 ```{r}
 #| label: fig-factor4
 #| echo: false
-#| fig-cap: "CPIS Factor Analysis: Political Participation Scale"
+#| fig-cap: "CES Factor Analysis: Knowledge of Party Positions Scale"
+knitr::include_graphics("_graphs/KnowPartyScale.pdf")
+```
+
+```{r}
+#| label: fig-factor5
+#| echo: false
+#| fig-cap: "CES Factor Analysis: Political Participation Scale"
 knitr::include_graphics("_graphs/ParticScale.pdf")
 ```
 
@@ -171,12 +178,12 @@ knitr::include_graphics("_graphs/CESGapYearAge.pdf")
 
 It does not seem that the decline of the gender gap in general political interest among older voters is a pure artifact of survey mode. Average levels of interest by age mostly overlapped between survey modes in 2015 and 2019, two years for which the CES team surveyed separate samples of online and phone respondents.^[Is the gender gap in political interest concentrated among certain demographic groups only? @fig-interestwavegroup in @sec-appendix5 provides a robustness check to the existence of a gender gap in self-reported political interest by looking at gender differences through an intersectional lens, with gender--ethnicity pairs and gender--immigrant status pairs included across several surveys and years for which the information was available. Within each survey--year, self-reported political interest is higher among white men than white women, and non-white men than non-white women. The same applies to the gender gap among immigrants and non-immigrants. By comparison, differences in interest between Caucasians and non-Caucasians are found to be smaller, and there are no differences in interest between people born in Canada and those born abroad. The gender gap in interest therefore seems to trump other socio-demographic characteristics such as ethnicity and immigrant status, which reinforces the need to understand how gendered socialization shapes this gap. With regard to immigration, these results are consistent with the findings of previous studies, which found no significant difference between levels of political interest of immigrants and non-immigrants [@hochman2019]. @prior2018 found higher levels of interest in politics among white than black Americans. In the Dominican Republic, @spierings2012 found that Protestant women report levels of political interest similar to men and higher than Catholic women, while Mestizo women report lower levels of political interest than Indigenous women.]
 
-@fig-timepoliticalengagement shows the level of political engagement among 2021 CES respondents. Levels of external political efficacy and political participation remain low and stable for respondents aged 18 to 90, and no statistically significant gender gap is found. Conversely, large 2-point gender gaps in internal political efficacy and knowledge of political figures' names are found among young respondents. These gaps become smaller, as respondents' age increases.
+@fig-timepoliticalengagement shows the level of political engagement among 2021 CES respondents. Levels of external political efficacy and political participation remain low and stable for respondents aged 18 to 90, and no statistically significant gender gap is found.^[@fig-timepoliticalparticipation in @sec-appendix6 subdivides the political participation scale in two, with partisan-related political participation [@fig-factor6] and non-partisan-related political participation [@fig-factor7] each representing different components of the unified scale. The figure shows the gender gap is stronger for partisan political participation while it is mostly non-significant for non-partisan political participation. Both Cronbach's alpha and first eigenvalues are lower than in the overall political participation scale, and one factor loading narrowly drops below 0.3.] Conversely, large 2-point gender gaps in internal political efficacy and knowledge of political figures' names are found among young respondents. These gaps become smaller, as respondents' age increases. For political parties' ideological positions, the gender gap is small but significant regardless of age, with women likely making more mistakes in estimating political parties' positions.^[I rely on a percentage point difference between an individual respondent's left--right positioning of a party and the average left--right positioning of that party according to voters with a bachelor's degree or above, as suggested by @dassonneville2020.]
 
 ```{r}
 #| label: fig-timepoliticalengagement
 #| echo: false
-#| fig-cap: "Level of Political Engagement Across Several Measures Among Canadian Adults, 2021 CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no engagement at all, and 10 = a great deal of engagement. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES weights are applied."
+#| fig-cap: "Level of Political Engagement Across Several Measures Among Canadian Adults, 2021 CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no engagement at all, and 10 = a great deal of engagement. For percentage point error in political parties' positions, the percentage point error is instead reported. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES weights are applied."
 knitr::include_graphics("_graphs/TimePoliticalEngagement.pdf")
 ```
 
@@ -333,6 +340,17 @@ knitr::include_graphics("_graphs/CPISPolitical.pdf")
 ```
 
 Contrary to Hypothesis 1d, age does not seem to matter in defining which types of issues students see as political. Older students are more likely to define issues as political, but the ordering of issues as political does not change much between both groups --- partisan politics and international affairs always are at the top of the list. It seems that ideas about what politics is and is not are already well-defined in children's minds at a young age. This is particularly striking as interest in partisan politics is not significantly higher among older children than younger ones, suggesting ideas about partisan politics --- both what it is and how interesting it is --- are already ingrained in the early teens.
+
+But what do students think politics is, exactly? To provide a more complete and qualitative answer to this question, students were also asked, "When you think about politics, what kinds of things come to your mind? What does politics mean for you?" 27 categories of answers were defined, some derived from the main definitions of politics put forward in @sec-chap1 --- conflict, cooperation, rules of the game, controversy, power, etc. --- while some were inductively added to categorize answers that did not fit with any of these definitions.^[Each answer was assigned to at least one of the 27 categories by a graduate coder who was external to the research and was given general instructions but was allowed to add their own categories.] @fig-def-politics-qual shows students' answers to the open-ended question. The most common unprompted answers given by students are about elections, voting and democracy (26--27% of answers), followed by government and governing (20%), and leadership and power (12--15%). By contrast, @ferrin2023 found that corruption, a theme mentioned by only 1% of students in this sample,^[The relevant category here is "Negative view".] was the most common element in definitions of politics by Spanish adults, which could be the result of the different national settings, age groups and methodologies of both surveys. @ferrin2023 otherwise find similar results to those presented in @fig-def-politics-qual, with elections, parties and democracy mentioned by significant numbers of respondents. While mentions of the rules of the game are common, in line with @heywood2019's definition, cooperation and competition are both among the least commonly mentioned answers by Canadian students, suggesting a certain disconnect between what political scientists have defined as politics and how young students see the concept. Several students also give vague answers or confuse the concept with another one altogether.
+
+```{r}
+#| label: fig-def-politics-qual
+#| echo: false
+#| fig-cap: "Unprompted Definitions of Politics by Students, 2022 CPIS"
+knitr::include_graphics("_graphs/CPISOpenQuestion.pdf")
+```
+
+Compared with boys, girls in the sample were more likely to say they did not know what politics was, perhaps an unsurprising result considering that research has long found "don't know" answers to be more common among women answering knowledge questions about political institutions [@mondak2004]. Boys were relatively more likely to associate politics with elections, leadership, power and, most notably, a partisan game --- with boys twice as likely as girls to mention this in their answers, perhaps suggesting this is an aspect of politics they *care* more about. Yet, despite these relatively minor differences, boys and girls often defined politics in the same ways, much like what @campbellrosie2008 found.
 
 ## Discussion
 

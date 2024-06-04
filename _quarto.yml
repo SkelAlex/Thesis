@@ -3,10 +3,7 @@ project:
 book:
   title: "The Roots of Political Interests"
   subtitle: "How Gender Still Shapes Childhood Socialization"
-  author: "by Alexandre Fortier-Chouinard"
-  publisher: "A thesis submitted in conformity with the requirements for the degree of PhD in Political Science, Graduate Department of Political Science, in the University of Toronto"
-  date: last-modified
-  date-format: "MMMM D, YYYY"
+  author: "Alexandre Fortier-Chouinard"
   chapters:
     - index.qmd
     - 02-method.qmd
@@ -18,33 +15,26 @@ book:
   appendices:
     - 08-appendix.qmd
 bibliography: Thesis.bib
-toc: true
-toc-depth: 5
 lot: true
 lof: true
-linestretch: 1.5
 include-before:
   - "\\textbf{Abstract}"
   - "This is the abstract."
   - "\\newpage\\textbf{Acknowledgements}"
   - "To be added."
-geometry:
-  - top=20mm
-  - left=32mm
-  - right=20mm
-  - bottom=20mm
-  - heightrounded
-  - twoside
-header-includes:
-  - \widowpenalty10000
-  - \clubpenalty10000
-  - \pagenumbering{roman}
-  - \usepackage{titleps}
-  - \newpagestyle{mystyle}{\setfoot{}{\thepage}{}}
-  - \pagestyle{mystyle}
-  - \makeatletter
-  - \def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty\def\@oddfoot{\hfil\thepage\hfil}\def\@evenfoot{\hfil\thepage\hfil}}
-  - \makeatother
 format:
   pdf:
-    documentclass: scrreprt
+    documentclass: ut-thesis
+    header-includes:
+      - \widowpenalty10000
+      - \clubpenalty10000
+      - \pagenumbering{roman}
+      - \usepackage{titleps}
+      - \newpagestyle{mystyle}{\setfoot{}{\thepage}{}}
+      - \pagestyle{mystyle}
+      - \makeatletter
+      - \def\ps@plain{\let\@mkboth\@gobbletwo\let\@oddhead\@empty\let\@evenhead\@empty\def\@oddfoot{\hfil\thepage\hfil}\def\@evenfoot{\hfil\thepage\hfil}}
+      - \makeatother
+      - \degree{Doctor of Philosophy in Political Science}
+      - \gradyear{2024}
+      - \department{Political Science}

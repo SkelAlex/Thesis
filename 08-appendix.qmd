@@ -1,3 +1,4 @@
+\appendix
 # Emails Sent to School Boards and Schools {#sec-appendix1}
 
 ## Email destined for school boards in English
@@ -1581,7 +1582,30 @@ knitr::include_graphics("_graphs/InterestWaveGroup.pdf")
 \end{tabular}
 \end{table}
 
-# Political Interest Transmission (With Interaction Terms, Boys and Girls Together) {#sec-appendix6}
+# Political Participation by Gender {#sec-appendix6}
+
+```{r}
+#| label: fig-timepoliticalparticipation
+#| echo: false
+#| fig-cap: "Gender Differences in Partisan and Non-Partisan Political Participation by Age Among Canadian Adults, 2021 CES"
+knitr::include_graphics("_graphs/TimePoliticalParticipation.pdf")
+```
+
+```{r}
+#| label: fig-factor6
+#| echo: false
+#| fig-cap: "CES Factor Analysis: Partisan Political Participation Scale"
+knitr::include_graphics("_graphs/ParticPartisanScale.pdf")
+```
+
+```{r}
+#| label: fig-factor7
+#| echo: false
+#| fig-cap: "CES Factor Analysis: Non-Partisan Political Participation Scale"
+knitr::include_graphics("_graphs/ParticNonPartisanScale.pdf")
+```
+
+# Political Interest Transmission (With Interaction Terms, Boys and Girls Together) {#sec-appendix7}
 
 \begin{table}
 \centering\centering
@@ -1707,7 +1731,7 @@ knitr::include_graphics("_graphs/MotherDiscuss.pdf")
 knitr::include_graphics("_graphs/FatherDiscuss.pdf")
 ```
 
-# Political Interest Transmission by Parents (Without Control Variables) {#sec-appendix7}
+# Political Interest Transmission by Parents (Without Control Variables) {#sec-appendix8}
 
 \begin{table}
 \centering\centering
@@ -1827,7 +1851,7 @@ knitr::include_graphics("_graphs/FatherDiscuss.pdf")
 knitr::include_graphics("_graphs/DiscussParentYO.pdf")
 ```
 
-# Political Interest Transmission by Peers (Without Control Variables) {#sec-appendix8}
+# Political Interest Transmission by Peers (Without Control Variables) {#sec-appendix9}
 
 \begin{table}
 \centering\centering
@@ -1910,7 +1934,7 @@ knitr::include_graphics("_graphs/DiscussParentYO.pdf")
 knitr::include_graphics("_graphs/DiscussPeersYO.pdf")
 ```
 
-# Correlation Matrixes {#sec-appendix9}
+# Correlation Matrixes {#sec-appendix10}
 
 ```{r}
 #| label: fig-corcpis
@@ -1925,7 +1949,7 @@ knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 #| fig-cap: "Correlation Matrix for Interest in Topics, 2023 Datagotchi PES"
 knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 ```
-# Political Interest Transmission by Influencers (Without Control Variables) {#sec-appendix10}
+# Political Interest Transmission by Influencers (Without Control Variables) {#sec-appendix11}
 
 \begin{table}
 \centering\centering
