@@ -1653,7 +1653,7 @@ R2 Marg.0.021 & 0.032 & 0.082 & 0.016 & 0.038 & 0.066\\
 
 \begin{table}
 \centering\centering
-\caption{Interest in Topic Most Often Discussed with Role Models (With Interactions) \label{tab:lmeAgentsBoysGirls}}
+\caption{Interest in Topic Most Often Discussed with Socialization Agents (With Interactions) \label{tab:lmeAgentsBoysGirls}}
 \centering
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
@@ -1940,7 +1940,7 @@ knitr::include_graphics("_graphs/DiscussPeersYO.pdf")
 #| label: fig-corcpis
 #| echo: false
 #| fig-cap: "Correlation Matrix for Interest in Topics, 2022 CPIS"
-knitr::include_graphics("_graphs/CorMatrixDG.pdf")
+knitr::include_graphics("_graphs/CorMatrixCPIS.pdf")
 ```
 
 ```{r}

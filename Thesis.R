@@ -2385,6 +2385,12 @@ ggsave(plot = ggpubr::ggarrange(
   PlotInterest, PlotHealth, PlotForeign, PlotLaw, PlotEducation, PlotPartisan,
   nrow = 2, ncol = 3), width = 11, height = 8.5,
   "_graphs/CPISInterest.pdf")
+sd(CPIS$interest, na.rm = T)
+sd(CPIS$interest_health, na.rm = T)
+sd(CPIS$interest_foreign, na.rm = T)
+sd(CPIS$interest_law, na.rm = T)
+sd(CPIS$interest_education, na.rm = T)
+sd(CPIS$interest_partisan, na.rm = T)
 
 PoliticalGraphData <- pivot_longer(
   CPISOldYoung, cols = lockdown_political_alt:parties_political_alt,
@@ -2816,6 +2822,12 @@ ggsave(plot = ggpubr::ggarrange(
   PlotInterestDG, PlotHealthDG, PlotForeignDG, PlotLawDG, PlotEducationDG,
   PlotPartisanDG, nrow = 2, ncol = 3), width = 11, height = 8.5,
   "_graphs/DGInterest.pdf")
+sd(DG$interest, na.rm = T)
+sd(DG$interest_health, na.rm = T)
+sd(DG$interest_foreign, na.rm = T)
+sd(DG$interest_law, na.rm = T)
+sd(DG$interest_education, na.rm = T)
+sd(DG$interest_partisan, na.rm = T)
 
 PlotInterestCES <- ggplot(CES21, aes(x = interest / 10, weight = weight)) +
   geom_histogram(binwidth = 1) +
@@ -5873,7 +5885,7 @@ modelsummary::modelsummary(models = list(
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
-  title = paste("Interest in Topic Most Often Discussed with Role Models",
+  title = paste("Interest in Topic Most Often Discussed with Socialization Agents",
                 "\\label{tab:lmeAgentsSES}"),
   coef_rename = c("x1" = "Topic most discussed with mother?",
                   "x2" = "Topic most discussed with father?",
@@ -5918,7 +5930,7 @@ modelsummary::modelsummary(models = list(
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
-  title = paste("Interest in Topic Most Often Discussed with Role Models",
+  title = paste("Interest in Topic Most Often Discussed with Socialization Agents",
                 "\\label{tab:lmeAgentsCtrl}"),
   coef_rename = c("x1" = "Topic most discussed with mother?",
                   "x2" = "Topic most discussed with father?",
@@ -5959,7 +5971,7 @@ result3 <- modelsummary::modelsummary(models = list(
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
-  title = paste("Interest in Topic Most Often Discussed with Role Models",
+  title = paste("Interest in Topic Most Often Discussed with Socialization Agents",
                 "(With Interactions) \\label{tab:lmeAgentsBoysGirls}"),
   coef_rename = c("female1" = "Gender (1 = girl)",
                   "x1" = "Topic most discussed with mother?",
@@ -6003,7 +6015,7 @@ result4 <- modelsummary::modelsummary(models = list(
   notes = c("Method: Multilevel linear regression",
             "Fixed Effects: Classroom",
             "Reference Category for Language: Other languages spoken at home"),
-  title = paste("Interest in Topic Most Often Discussed with Role Models",
+  title = paste("Interest in Topic Most Often Discussed with Socialization Agents",
                 "(With Interactions) \\label{tab:lmeAgentsCtrlInterac}"),
   coef_rename = c("female1" = "Gender (1 = girl)",
                   "x1" = "Topic most discussed with mother?",
@@ -6504,7 +6516,7 @@ AgentsSESInteracData$topic <- c(rep(c(
 AgentsSESInteracData$agents <- c(rep("Mother", 12), rep("Father", 12),
                           rep("Female friends", 12), rep("Male friends", 12))
 AgentsSESInteracData$controls <-
- "With Controls for SES and\nDiscussions with\nOther Role Models"
+ "With Controls for SES and\nDiscussions with\nOther Socialization Agents"
 AgentsSESPersonalityData <- data.frame(
   mother_health_b = get_ci(ModelBoysHealthMotherSESPersonality, 1),
   mother_health_g = get_ci(ModelGirlsHealthMotherSESPersonality, 1),
@@ -6629,11 +6641,11 @@ AgentsCtrlData$topic <- c(rep(c(
 AgentsCtrlData$agents <- c(rep("Mother", 12), rep("Father", 12),
                            rep("Female friends", 12), rep("Male friends", 12))
 AgentsCtrlData$controls <- paste0("With Controls for SES,\nPersonality Traits ",
-                                  "and\nDiscussions with\nOther Role Models")
+                                  "and\nDiscussions with\nOther Socialization Agents")
 AgentsDataAll <- rbind(AgentsData, AgentsSESData, AgentsSESInteracData)
 AgentsDataAll$controls <- factor(AgentsDataAll$controls, levels = c(
   "Without Controls", "With Controls for SES",
-  "With Controls for SES and\nDiscussions with\nOther Role Models"))
+  "With Controls for SES and\nDiscussions with\nOther Socialization Agents"))
 AgentsDataAll |>
   filter(agents == "Mother") |>
   ggplot(aes(x = pred, y = topic)) +
