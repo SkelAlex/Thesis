@@ -15,11 +15,13 @@ book:
   appendices:
     - 08-appendix.qmd
 bibliography: Thesis.bib
+toc: true
+toc-depth: 5
 lot: true
 lof: true
 include-before:
   - "\\textbf{Abstract}"
-  - "This is the abstract."
+  - "\\doublespacing Socialization by family and friends is one of the main ways in which students acquire political interest. Scholars have found adult women typically report being more interested in cooperation-focused political topics such as health care and education, while adult men report being more interested in assertion-focused political topics such as law and crime, international affairs, and partisan politics. Using data collected among 698 elementary and high school students in Quebec and Ontario, I test hypotheses derived from social learning theory to assess the extent to which parents might influence the development of a gender gap in interest in these topics among children. Results suggest parents and peers play a prominent role in transmitting some forms of political interests to their children and corroborate the idea that, in some respects, there are different socialization routes for girls and boys. While fathers have a stronger influence on their sons' political interests and mothers have a stronger influence on their daughters' political interests, discussions with friends appear to be related to political interests regardless of gender congruence. \\newline Chapter 2 outlines the data and methods used in the empirical chapters of this dissertation. It also provides descriptive statistics about some of the main variables used in the data analysis, including gender, discussions with socialization agents, interest in five political topics, and socio-demographic variables. Chapter 3 studies the evolution of political interest through life, answering questions about the stability of self-reported political interest. Chapter 4 explores the role of parents in the transmission of political interest. Chapter 5 does the same for the role of peers. Finally, the conclusion provides an overall assessment of the influence of socialization agents on the development of political interest among children and teenagers, and of the extent to which socialization can explain political interest gender gaps. The goals of this dissertation are to provide a better understanding of how men and women view politics differently, to raise awareness about this discrepancy and to provide recommendations for actors who seek to encourage interest in various political topics among adult citizens and future adult citizens of both genders."
   - "\\newpage\\textbf{Acknowledgements}"
   - "To be added."
 format:
