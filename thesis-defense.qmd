@@ -13,6 +13,7 @@ format:
 header-includes:
   - \titlegraphic{\includegraphics[width=3cm]{_previous/_practice-talk/logo_uoft.png}}
   - \addtobeamertemplate{navigation symbols}{}{\usebeamerfont{footline}\usebeamercolor[fg]{footline}\hspace{1em}\insertframenumber}
+  - \newcommand{\theHtable}{\thetable}
 ---
 # Context: A Gender Gap in Political Interest?
 
@@ -22,7 +23,7 @@ How do people conceptualize political interest?
 
 - They typically associate politics with partisan politics & foreign policy
 <!--
-Part of my PhD thesis, which studies how role models can transmit political interest to children and the gendered aspects behind this process. In this presentation and for this paper, I am putting the accent on my chapter about the role of parents in this process
+Thank you everyone for coming!
 
 Diplomacy, wars, elections, political parties...
 -->
@@ -32,7 +33,7 @@ Diplomacy, wars, elections, political parties...
 Studies have found that even when thinking about the broader state of these two systems or specific issues related to these, "less" political
 -->
 
-- Politics refers to both agency & communality
+- Politics refers to both agency & communion
 <!--
 The activity through which people make, preserve and amend the general rules under which they live @heywood2019
 -->
@@ -50,7 +51,7 @@ knitr::include_graphics("_previous/_practice-talk/campbellrosie2008.png")
 <!--
 Suddenly, in this BRITISH study, big gender gaps in both directions! Women REPORT BEING more interested in health care
 
-Potential explanation: studies show that ON AVERAGE, men tend to see political issues in a different light: self-assertion for men, cooperation for women (happy to talk more about this after the presentation)
+Potential explanation: studies show that ON AVERAGE, men tend to see political issues in a different light: self-assertion for men, cooperation for women
 
 Aggregate measure of political interest: men report being more interested, presumably because they think "partisan politics" and "foreign policy"
 
@@ -205,28 +206,18 @@ Daughters' political interest seems to be influenced mostly by their mothers
 (In a political home environment, children can either feel social pressure to become interested in politics to create or maintain a sense of social belonging in the family unit, be exposed to more news media content, listen to or participate in more political discussions at home, or all of these [@shehata2019])
 -->
 
-- Research questions: *When and how does political interest transmission occur? To what extent do mothers influence political interest development in their children? Do they have a greater influence on their sons or daughters? What about fathers?*
+- Research questions: *What are the differences in political interests between men and women, how do they get reproduced over time, and why?*
 
 ----
 
-- *__Hypothesis 1a__: Children's interest in specific political topics is more affected by political discussions with their same-gender parent(s) than other-gender parent(s).*
+- *__Hypothesis 1__: Adolescence is the moment in time when gender differences in political interests emerge.*
+
+- *__Hypothesis 2__: Children's political interests are more affected by political discussions with their same-gender parent(s) than other-gender parent(s).*
 <!--
 Basically, I assume the effect found in other studies for political interest will be the same for any political topic: fathers have more influence on transmitting interest to their sons, and mothers to their daughters
 -->
 
-- *__Hypothesis 1b__: Children's interest in the politics of health care and education is more affected by political discussions with their mother(s) than father(s).*
-
-- *__Hypothesis 1c__: Children's interest in law and crime, international affairs, and partisan politics is more affected by political discussions with their father(s) than mother(s).*
-<!--
-Why? Because adult men and women are more interested in these topics respectively
--->
-
-- *__Hypothesis 1d__: Children's interest in specific political topics is more affected by political discussions with their mother(s) than father(s).*
-<!--
-1b, 1c and 1d alternatives to 1a
--->
-
-- *__Hypothesis 1k__: Children's interest in specific political topics becomes more and more affected by political discussions with their parent(s) between ages 11 and 15, after which the parental effects stabilize.*
+- *__Hypothesis 3__: Children's political interests are more affected by political discussions with their same-gender peers than other-gender peers.*
 
 # Data and Methods
 
@@ -273,7 +264,8 @@ I also ask children which parent discusses each issue the most with them
 \fontsize{6}{8}\selectfont
 \begin{tabular}[t]{lcccccc}
 \toprule
-  & Politics (general) & Health care & International affairs & Law and crime & Education & Partisan politics\\
+  & Politics & Health & International & Law and & Education & Partisan\\
+  & (general) & care & affairs & crime & & politics\\
 \midrule
 \addlinespace[0.5em]
 \multicolumn{7}{l}{\textit{Without Controls}}\\
@@ -291,16 +283,6 @@ I also ask children which parent discusses each issue the most with them
 \hspace{1em} & (1.337) & (1.187) & (1.315) & (1.254) & (1.436) & (1.309)\\
 \hspace{1em}Gender (1 = girl) & -0.432* & 0.128 & -0.973*** & 0.492* & -0.122 & -0.809***\\
 \hspace{1em} & (0.212) & (0.201) & (0.232) & (0.237) & (0.229) & (0.236)\\
-\hspace{1em}Age & 0.218* & 0.192* & 0.099 & 0.176* & 0.253** & -0.041\\
-\hspace{1em} & (0.086) & (0.076) & (0.084) & (0.079) & (0.092) & (0.083)\\
-\hspace{1em}Ethnicity (1 = white) & 0.160 & -0.024 & 0.570* & -0.143 & -0.107 & 0.168\\
-\hspace{1em} & (0.250) & (0.237) & (0.270) & (0.276) & (0.267) & (0.275)\\
-\hspace{1em}Immigrant & -0.255 & 0.273 & -0.794* & -0.702+ & 0.385 & -0.412\\
-\hspace{1em} & (0.322) & (0.308) & (0.352) & (0.360) & (0.349) & (0.357)\\
-\hspace{1em}English spoken at home & -0.781+ & -0.253 & -1.801*** & -0.632 & 0.118 & -0.348\\
-\hspace{1em} & (0.454) & (0.429) & (0.492) & (0.497) & (0.491) & (0.502)\\
-\hspace{1em}French spoken at home & -0.112 & 0.136 & -0.402 & -0.293 & 0.389 & 0.569+\\
-\hspace{1em} & (0.284) & (0.271) & (0.308) & (0.313) & (0.305) & (0.312)\\
 \hspace{1em}SD (Intercept Class) & 0.598 & 0.470 & 0.442 & 0.318 & 0.665 & 0.408\\
 \hspace{1em}SD (Observations) & 2.476 & 2.375 & 2.738 & 2.811 & 2.680 & 2.792\\
 \hspace{1em}Num.Obs. & 579 & 584 & 581 & 581 & 584 & 581\\
@@ -309,7 +291,7 @@ I also ask children which parent discusses each issue the most with them
 \multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
 \multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Reference Category for Language: Other languages spoken at home}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: Socio-economic variables}\\
 \end{tabular}
 \end{table}
 <!--
@@ -340,7 +322,7 @@ However, in the lower half of the table, controlling for socio-demographic facto
 ```{r}
 #| echo: false
 #| out.width: "325pt"
-#| fig-cap: "Topic most often discussed with parents, 2023 CPIS data"
+#| fig-cap: "Topic Most Often Discussed with Parents by Child Gender, 2022 CPIS data"
 knitr::include_graphics("_graphs/ParentTopics.pdf")
 ```
 <!--
@@ -372,7 +354,7 @@ As 1h expected, very few differences between boys & girls (except non-political 
 ```{r}
 #| echo: false
 #| out.width: "325pt"
-#| fig-cap: "Topic most often discussed by mothers and fathers, 2023 CPIS data"
+#| fig-cap: "Topic Most Often Discussed by Mothers and Fathers, 2022 CPIS"
 knitr::include_graphics("_graphs/ParentTopicsMomDad.pdf")
 ```
 <!--
@@ -385,12 +367,45 @@ Mothers discuss different topics than fathers at the kitchen table
 
 ----
 
-```{r}
-#| echo: false
-#| out.width: "225pt"
-#| fig-cap: "Interest in topic by gender of parent who discusses that topic the most (with controls)"
-knitr::include_graphics("_graphs/GenderParentCtrl.pdf")
-```
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most (With Interactions) \label{tab:lmeParentSESInterac}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 8.760 & 10.988 & -3.757 & 10.621 & 31.363* & 37.670+\\
+\hspace{1em} & (8.739) & (15.860) & (16.316) & (16.266) & (14.909) & (19.217)\\
+\hspace{1em}Mother discusses topic\\
+more than father & -0.651*** & -0.388 & -0.380 & -0.345 & 0.232 & -0.088\\
+\hspace{1em} & (0.161) & (0.399) & (0.397) & (0.390) & (0.388) & (0.487)\\
+\hspace{1em}SD (Intercept Class) & 0.757 & 0.657 & 0.829 & 0.385 & 0.394 & 0.001\\
+\hspace{1em}SD (Observations) & 2.642 & 2.339 & 2.413 & 2.629 & 2.694 & 2.977\\
+\hspace{1em}Num.Obs. & 1107 & 233 & 220 & 222 & 246 & 186\\
+\hspace{1em}R2 Marg. & 0.021 & 0.029 & 0.067 & 0.015 & 0.041 & 0.049\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 12.388+ & 10.465 & 25.279+ & 11.236 & 17.735 & 44.466*\\
+\hspace{1em} & (7.185) & (11.106) & (13.521) & (13.799) & (11.679) & (19.529)\\
+\hspace{1em}Mother discusses topic\\
+\hspace{1em}more than father & -0.232 & 0.194 & -0.009 & -0.019 & -0.383 & -0.123\\
+\hspace{1em} & (0.176) & (0.450) & (0.431) & (0.416) & (0.449) & (0.481)\\
+\hspace{1em}SD (Intercept Class) & 0.657 & 0.604 & 0.001 & 0.656 & 0.679 & 0.170\\
+\hspace{1em}SD (Observations) & 2.684 & 2.380 & 2.739 & 2.787 & 2.595 & 2.716\\
+\hspace{1em}Num.Obs. & 992 & 226 & 192 & 203 & 221 & 150\\
+\hspace{1em}R2 Marg. & 0.017 & 0.035 & 0.020 & 0.029 & 0.054 & 0.038\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
 <!--
 Children's interest in either of the five topics does not seem to be related to the gender of the parent who discusses the topic the most
 
@@ -401,29 +416,102 @@ However, when aggregated, the fact that their father discusses a topic more than
 
 ----
 
-```{r}
-#| echo: false
-#| out.width: "225pt"
-#| fig-cap: "Interest in topic most often discussed with one's mother"
-knitr::include_graphics("_graphs/MotherDiscuss.pdf")
-```
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with Socialization Agents \label{tab:lmeAgentsSES}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 6.011 & -17.012 & -15.964 & 31.164 & 33.365 & 8.199\\
+\hspace{1em} & (12.054) & (24.194) & (17.744) & (20.788) & (22.838) & (23.231)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with mother? & -0.279 & 0.997+ & -0.243 & 0.021 & -0.729 & 0.401\\
+\hspace{1em} & (0.288) & (0.558) & (0.815) & (1.338) & (0.600) & (1.612)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with father? & 0.768** & 1.431 & 0.310 & 1.291* & -0.420 & 2.111+\\
+\hspace{1em} & (0.292) & (1.313) & (0.458) & (0.607) & (0.764) & (1.057)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with female friends? & 0.664* & -0.433 & -0.647 & 2.471** & 1.797** & 1.122\\
+\hspace{1em} & (0.298) & (0.766) & (0.489) & (0.857) & (0.606) & (2.141)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with male friends? & 0.594+ & -2.723* & 0.857+ & 0.167 & -0.085 & 2.240\\
+\hspace{1em} & (0.315) & (1.209) & (0.481) & (0.670) & (0.778) & (1.468)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}by teacher? & 0.326 & 1.481 & 1.133* & -0.284 & -0.443 & -0.003\\
+\hspace{1em} & (0.298) & (0.967) & (0.471) & (1.201) & (0.660) & (1.359)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}by social media influencer? & 0.703* & 0.864 & 0.115 & 0.316 & 0.618 & -1.216\\
+\hspace{1em} & (0.295) & (0.667) & (0.456) & (0.712) & (1.161) & (2.173)\\
+\hspace{1em}SD (Intercept Class) & 0.940 & 1.185 & 0.000 & 1.057 & 0.182 & 0.951\\
+\hspace{1em}SD (Observations) & 2.369 & 2.266 & 1.993 & 2.100 & 2.665 & 2.472\\
+\hspace{1em}Num.Obs. & 458 & 90 & 92 & 92 & 92 & 92\\
+\hspace{1em}R2 Marg. & 0.114 & 0.171 & 0.219 & 0.210 & 0.144 & 0.179\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Hidden Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with Socialization Agents \label{tab:lmeAgentsSES}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & -26.389+ & -9.169 & -38.483 & 3.836 & -23.826 & -1.653\\
+\hspace{1em} & (15.858) & (23.812) & (31.457) & (27.142) & (26.186) & (28.375)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with mother? & 0.729* & 0.259 & 1.667 & 1.769+ & 1.798** & \\
+\hspace{1em} & (0.318) & (0.555) & (1.689) & (0.958) & (0.623) & \\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with father? & 0.454 & 0.226 & -0.130 & 1.935* & 0.564 & -0.059\\
+\hspace{1em} & (0.311) & (0.822) & (0.713) & (0.721) & (0.711) & (1.010)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with female friends? & 0.468 & -0.060 & 0.852 & -0.401 & 0.656 & 2.236\\
+\hspace{1em} & (0.320) & (0.637) & (0.856) & (0.762) & (0.611) & (2.535)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with male friends? & 0.647* & -0.788 & -0.177 & -0.228 & 0.213 & 3.291**\\
+\hspace{1em} & (0.307) & (0.833) & (0.760) & (0.607) & (0.756) & (1.112)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}by teacher? & 0.085 & -0.902 & -0.070 & -0.763 & 0.233 & 2.856***\\
+\hspace{1em} & (0.308) & (1.193) & (0.785) & (0.751) & (0.602) & (0.775)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}by social media influencer? & 0.812** & 1.418* & -0.444 & 1.494* & -1.910+ & 1.737\\
+\hspace{1em} & (0.309) & (0.648) & (0.703) & (0.672) & (0.977) & (1.525)\\
+\hspace{1em}SD (Intercept Class) & 1.069 & 0.000 & 0.442 & 0.001 & 0.872 & 0.720\\
+\hspace{1em}SD (Observations) & 2.372 & 2.186 & 2.607 & 2.328 & 2.259 & 2.170\\
+\hspace{1em}Num.Obs. & 387 & 78 & 77 & 76 & 78 & 78\\
+\hspace{1em}R2 Marg. & 0.096 & 0.196 & 0.088 & 0.302 & 0.230 & 0.267\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Hidden Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
 <!--
 For boys, interest in any of the five topics or their aggregate is unrelated to their discussion of these topics with their mothers.
 
 For girls, interest in law and crime is related to their mothers discussing law and crime (*p*<0.01), and the same is true for education (*p*<0.01), partisan politics (*p*<0.05) and health care (*p*<0.1) are all positively predicted by their mothers discussing these topics with them. Only when it comes to international affairs is there no statistically significant effect --- but the effect size is still largely positive.
 
 In the aggregate, if a girl's mother discusses mostly one of the five topics, her interest in that topic is expected to increase by 0.9 points on the 11-point scale (*p*<0.001).
--->
 
-----
-
-```{r}
-#| echo: false
-#| out.width: "225pt"
-#| fig-cap: "Interest in topic most often discussed with one's father"
-knitr::include_graphics("_graphs/FatherDiscuss.pdf")
-```
-<!--
 For boys, interest in partisan politics is related to their fathers discussing partisan politics (*p*<0.01), and the same is true for health care (*p*<0.1). At the aggregate level, if a boy's father discusses mostly one of the five topics, their interest in that topic is expected to increase by 0.9 point on an 11-point interest scale (*p*<0.001).
 
 For girls, interest in law and crime is related to their fathers discussing law and crime (*p*<0.01). At the aggregate level, if a girl's father discusses mostly one of the five topics, their interest in that topic is expected to increase by 0.5 point on an 11-point interest scale (*p*<0.1).
@@ -433,9 +521,9 @@ For girls, interest in law and crime is related to their fathers discussing law 
 
 ```{r}
 #| echo: false
-#| out.width: "225pt"
-#| fig-cap: "Parent-child political interest relationships by age group (with controls)"
-knitr::include_graphics("_graphs/DiscussParentYOCtrl.pdf")
+#| out.width: "325pt"
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Parents, 2022 CPIS"
+knitr::include_graphics("_graphs/DiscussParentYOSES.pdf")
 ```
 <!--
 Results are mixed, but seem to show that in some respects, older teenagers (ages 16--18) are more influenced by their parents' discussion of certain topics than 10--15-year-olds.
@@ -448,6 +536,51 @@ Yet, among 10--15-year-olds, political interest transmission is statistically si
 
 Moreover, again confirming Hypothesis 1a, the largest effect sizes among 16--18-year-olds are for mother--daughter and father--son transmission.
 -->
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Children's Friends by Gender and Age Group, 2022 CPIS"
+knitr::include_graphics("_graphs/PeersGenderAge.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Interest in Topic Most Often Discussed with Friends by Child Gender and Friends' Gender, 2022 CPIS"
+knitr::include_graphics("_graphs/PeersTopics.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Female Friends, 2022 CPIS"
+knitr::include_graphics("_graphs/FemaleFriendsDiscuss.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Male Friends, 2022 CPIS"
+knitr::include_graphics("_graphs/MaleFriendsDiscuss.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CPIS"
+knitr::include_graphics("_graphs/DiscussPeersYOSES.pdf")
+```
 
 # Conclusion
 
@@ -480,15 +613,6 @@ a longitudinal causal study would be particularly enlightening
 
 ## THANKS! {.unnumbered}
 
-## References {.allowframebreaks .unnumbered}
-
-----
-
-::: {#refs}
-:::
-
-----
-
 \appendix
 
 # Hypotheses
@@ -498,8 +622,302 @@ a longitudinal causal study would be particularly enlightening
 ```{r}
 #| echo: false
 #| out.width: "225pt"
-#| fig-cap: "Dissertation Hypotheses"
+#| fig-cap: "Theoretical Framework"
 knitr::include_graphics("_graphs/DissertationHypotheses.pdf")
+```
+
+----
+
+```{r}
+#| echo: false
+#| out.width: "225pt"
+#| fig-cap: "Theoretical Framework Reassessed"
+knitr::include_graphics("_graphs/DissertationHypothesesConclusion.pdf")
+```
+
+# Data
+
+## CPIS
+
+----
+
+\begin{table}
+\centering
+\caption{Descriptive statistics, CPIS data}
+\label{tbl-descriptive}
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Type}\footnote{Three public bodies from different school boards.} & \textbf{Lang.} & \textbf{Prov.} & \textbf{Age}\footnote{Age groups of schools, not selected classrooms.} & \textbf{Students} & \textbf{Students} & \textbf{Class-} & \textbf{Tea-}\footnote{Some teachers taught multiple classes; all students surveyed.} \\
+& & & & & \textbf{in body} & \textbf{in sample} & \textbf{rooms} & \textbf{chers} \\
+\hline
+1 & Private & French & Quebec & 12--17 & 450 & 133 & 5 & 2 \\
+2 & Public  & French & Quebec & 12--17 & 690 & 196 & 10 & 2 \\
+3 & Private & French & Quebec & 12--17 & 670 & 78  & 3  & 1 \\
+4 & Private & French & Quebec & 12--17 & 900 & 253 & 12 & 3 \\
+5\footnote{Mixed on-site/online school.} & Private & English & Ontario & 14--18 & —   & 5  & 3  & 2 \\
+6 & Public  & French & Quebec & 5--12  & —   & 14 & 1  & 1 \\
+7 & Private & English & Ontario & 5--14  & —   & 4  & 3  & 1 \\
+8\footnote{School board-level body.} & Public  & English & Ontario & 14--18 & 15  & 15 & 1  & 1 \\
+\hline
+   &   &   &   &   & \textbf{Total} & \textbf{698} & \textbf{38} & \textbf{13} \\
+\hline
+\end{tabular}
+\end{table}
+
+----
+
+```{r}
+#| echo: false
+#| out.width: "225pt"
+#| fig-cap: "CPIS Descriptive Statistics --- General"
+knitr::include_graphics("_graphs/CPISDescriptive.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "225pt"
+#| echo: false
+#| fig-cap: "CPIS Descriptive Statistics --- Political Interest"
+knitr::include_graphics("_graphs/CPISInterest.pdf")
+```
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender, CPIS \label{tab:lmeInterestCPIS}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & Politics & Health & International & Law and & Education & Partisan\\
+  & (general) & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Without Controls}}\\
+\midrule \hspace{1em}(Intercept) & 4.579*** & 4.041*** & 5.724*** & 4.956*** & 4.219*** & 4.007***\\
+\hspace{1em} & (0.184) & (0.167) & (0.180) & (0.173) & (0.206) & (0.171)\\
+\hspace{1em}Gender (1 = girl) & -0.434* & 0.128 & -0.980*** & 0.488* & -0.103 & -0.854***\\
+\hspace{1em} & (0.207) & (0.197) & (0.229) & (0.231) & (0.223) & (0.232)\\
+\hspace{1em}SD (Intercept Class) & 0.651 & 0.542 & 0.473 & 0.377 & 0.771 & 0.344\\
+\hspace{1em}SD (Observations) & 2.499 & 2.397 & 2.802 & 2.837 & 2.701 & 2.855\\
+\hspace{1em}Num.Obs. & 617 & 623 & 620 & 619 & 623 & 620\\
+\hspace{1em}R2 Marg. & 0.007 & 0.001 & 0.029 & 0.007 & 0.000 & 0.022\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{With Controls}}\\
+\midrule \hspace{1em}(Intercept) & 1.413 & 1.138 & 4.458*** & 2.838* & 0.218 & 4.246**\\
+\hspace{1em} & (1.337) & (1.187) & (1.315) & (1.254) & (1.436) & (1.309)\\
+\hspace{1em}Gender (1 = girl) & -0.432* & 0.128 & -0.973*** & 0.492* & -0.122 & -0.809***\\
+\hspace{1em} & (0.212) & (0.201) & (0.232) & (0.237) & (0.229) & (0.236)\\
+\hspace{1em}SD (Intercept Class) & 0.598 & 0.470 & 0.442 & 0.318 & 0.665 & 0.408\\
+\hspace{1em}SD (Observations) & 2.476 & 2.375 & 2.738 & 2.811 & 2.680 & 2.792\\
+\hspace{1em}Num.Obs. & 579 & 584 & 581 & 581 & 584 & 581\\
+\hspace{1em}R2 Marg. & 0.031 & 0.022 & 0.070 & 0.024 & 0.030 & 0.045\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics by Age Group Among Canadian Children, 2022 CPIS \\newline \\textit{Notes}: No controls are added."
+knitr::include_graphics("_graphs/GenderCPISYO.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "225pt"
+#| echo: false
+#| fig-cap: "Unprompted Definitions of Politics by Students, 2022 CPIS"
+knitr::include_graphics("_graphs/CPISOpenQuestion.pdf")
+```
+
+## Datagotchi PES
+
+----
+
+```{r}
+#| echo: false
+#| out.width: "175pt"
+#| fig-cap: "Datagotchi PES Descriptive Statistics --- General"
+knitr::include_graphics("_graphs/DGDescriptive.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "225pt"
+#| echo: false
+#| fig-cap: "Datagotchi PES Descriptive Statistics --- Political Interest"
+knitr::include_graphics("_graphs/DGInterest.pdf")
+```
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender, Datagotchi PES \label{tab:olsInterestDG}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & Politics & Health & International & Law and & Education & Partisan\\
+  & (general) & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Without Controls}}\\
+\midrule \hspace{1em}(Intercept) & 7.724*** & 6.449*** & 7.453*** & 5.421*** & 6.586*** & 6.334***\\
+\hspace{1em} & (0.064) & (0.075) & (0.071) & (0.079) & (0.075) & (0.084)\\
+\hspace{1em}Gender (1 = women) & -0.877*** & 0.690*** & -0.592*** & 0.104 & 0.517*** & -0.645***\\
+\hspace{1em} & (0.097) & (0.116) & (0.109) & (0.121) & (0.116) & (0.128)\\
+\hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & \vphantom{1} 1575\\
+\hspace{1em}R2 & 0.049 & 0.022 & 0.018 & 0.000 & 0.013 & 0.016\\
+\hspace{1em}R2 Adj. & 0.048 & 0.022 & 0.018 & 0.000 & 0.012 & 0.015\\
+\hspace{1em}Log.Lik. & -3254.524 & -3523.301 & -3437.633 & -3591.294 & -3524.218 & -3687.310\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{With Controls}}\\
+\midrule \hspace{1em}(Intercept) & 7.438*** & 4.079*** & 5.903*** & 6.100*** & 3.987*** & 4.653***\\
+\hspace{1em} & (0.615) & (0.596) & (0.610) & (0.763) & (0.615) & (0.696)\\
+\hspace{1em}Gender (1 = women) & -0.872*** & 0.838*** & -0.331** & 0.168 & 0.759*** & -0.662***\\
+\hspace{1em} & (0.098) & (0.116) & (0.119) & (0.122) & (0.120) & (0.136)\\
+\hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & 1575\\
+\hspace{1em}R2 & 0.067 & 0.121 & 0.044 & 0.016 & 0.119 & 0.034\\
+\hspace{1em}R2 Adj. & 0.062 & 0.116 & 0.039 & 0.010 & 0.114 & 0.029\\
+\hspace{1em}Log.Lik. & -3239.313 & -39068.770 & -39105.751 & -3579.255 & -39119.704 & -39313.305\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Without controls: Ordinary least squares (OLS) regressions}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}With controls: OLS for Politics (general) and Law and Crime; Weighted least squares (WLS) for other regressions}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
+
+----
+
+```{r}
+#| out.width: "225pt"
+#| echo: false
+#| fig-cap: "Self-Reported Level of Interest in Various Topics by Age Among Canadian Adults, 2022 Datagotchi PES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. Datagotchi PES weights are applied."
+knitr::include_graphics("_graphs/InterestAgeGenderDG.pdf")
+```
+
+## CES, WVS and GSS
+
+----
+
+```{r}
+#| echo: false
+#| out.width: "175pt"
+#| fig-cap: "2021 CES Descriptive Statistics - General"
+knitr::include_graphics("_graphs/CESDescriptive.pdf")
+```
+
+----
+
+```{r}
+#| echo: false
+#| out.width: "175pt"
+#| fig-cap: "2020 WVS Descriptive Statistics --- General"
+knitr::include_graphics("_graphs/WVSDescriptive.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "2020 GSS Descriptive Statistics (Cycle 35 - Social Identity) --- General"
+knitr::include_graphics("_graphs/GSSDescriptive.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "225pt"
+#| echo: false
+#| fig-cap: "CES, WVS and GSS Descriptive Statistics --- Political Interest"
+knitr::include_graphics("_graphs/CESWVSGSSInterest.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "CES Factor Analysis: Knowledge of Political Figures' Names Scale"
+knitr::include_graphics("_graphs/KnowScale.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "CES Factor Analysis: Knowledge of Party Positions Scale"
+knitr::include_graphics("_graphs/KnowPartyScale.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "CES Factor Analysis: Political Participation Scale"
+knitr::include_graphics("_graphs/ParticScale.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied."
+knitr::include_graphics("_graphs/InterestYearGender.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "225pt"
+#| echo: false
+#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied. For the GSS, respondents' specific age is not available; age groups are used instead."
+knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "Self-Reported Level of General Political Interest by Country, WVS Wave 7 \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. WVS weights are applied."
+knitr::include_graphics("_graphs/InterestGapByCountry.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. CES weights are applied."
+knitr::include_graphics("_graphs/CESGapYearAge.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "Level of Political Engagement Across Several Measures Among Canadian Adults, 2021 CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no engagement at all, and 10 = a great deal of engagement. For percentage point error in political parties' positions, the percentage point error is instead reported. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES weights are applied."
+knitr::include_graphics("_graphs/TimePoliticalEngagement.pdf")
 ```
 
 # Questionnaire
@@ -551,54 +969,586 @@ knitr::include_graphics("_graphs/DissertationHypotheses.pdf")
 
 :::
 
+----
+
+::: nonincremental
+
+For each of these pairs of characteristics, indicate where you fall on a scale between both extremes.
+
+    + 20.1 Not at all independent - Very independent
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.2 Very passive - Very active
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.3 Not at all competitive - Very competitive
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.4 Can make decisions easily - Have difficulty making decisions
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+
+:::
+
+----
+
+::: nonincremental
+      
+    + 20.5 Give up very easily - Never give up easily
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.6 Not at all self-confident - Very self confident
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.7 Feel very inferior - Feel very superior
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.8 Go to pieces under pressure - Stand up well under pressure
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+:::
+
+----
+
+::: nonincremental
+
+    + 20.9 Not at all emotional - Very emotional
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.10 Not at all able to devote self to others - Able to devote self completely to others
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.11 Very rough - Very gentle
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.12 Not at all helpful to others - Very helpful to others
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+:::
+
+----
+
+::: nonincremental
+
+    + 20.13 Not at all kind - Very kind
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.14 Not at all aware of feelings of others - Very aware of feelings of others
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.15 Not at all understanding of others - Very understanding of others
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+      
+    + 20.16 Very cold in relations with others - Very warm in relations with others
+        - (1--5 slider)
+        - Don't know/Prefer not to answer
+
+:::
+
 # How Political is Each Topic?
 
 ----
 
 ```{r}
+#| out.width: "325pt"
 #| echo: false
-#| out.width: "225pt"
-#| fig-cap: "Views of Topics as Political or Non-Political By Canadian Students, 2022"
+#| fig-cap: "Views of Topics as Political or Non-Political By Canadian Students By Age Group, 2022 CPIS"
 knitr::include_graphics("_graphs/CPISPolitical.pdf")
 ```
 
-# Figures Without Controls
+# Appendix Tables and Figures
 
 ----
 
 ```{r}
-#| label: fig-interestyoungold
+#| out.width: "325pt"
 #| echo: false
-#| fig-cap: "Gender Differences in Interest for Specific Political Topics by Age Group Among Canadian Children, 2022 CPIS \\newline \\textit{Notes}: No controls are added."
-knitr::include_graphics("_graphs/GenderCPISYO.pdf")
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Adults, 2023 Datagotchi PES"
+knitr::include_graphics("_graphs/GenderDG.pdf")
 ```
 
 ----
 
 ```{r}
+#| out.width: "325pt"
 #| echo: false
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Children, 2022 CPIS"
+knitr::include_graphics("_graphs/GenderCPIS.pdf")
+```
+
+----
+
+```{r}
 #| out.width: "225pt"
-#| fig-cap: "Interest in topic most often discussed with one's mother"
+#| echo: false
+#| fig-cap: "General Political Interest by Year, Gender, Ethnicity and Immigrant Status Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals shown. CES, WVS and GSS weights are applied. Not all surveys included here asked questions about both ethnicity and immigrant status."
+knitr::include_graphics("_graphs/InterestWaveGroup.pdf")
+```
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender and Age Group, CPIS \label{tab:lmeInterestYoungOldCPIS}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & Politics & Health & International & Law and & Education & Partisan\\
+  & (general) & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Ages 10--15}}\\
+\midrule \hspace{1em}(Intercept) & 3.990*** & 3.638*** & 5.356*** & 4.519*** & 3.569*** & 3.854***\\
+\hspace{1em} & (0.294) & (0.232) & (0.310) & (0.293) & (0.257) & (0.321)\\
+\hspace{1em}Gender (1 = girl) & -0.113 & 0.077 & -0.891* & 0.630+ & -0.073 & -0.755*\\
+\hspace{1em} & (0.319) & (0.309) & (0.375) & (0.379) & (0.357) & (0.364)\\
+\hspace{1em}SD (Intercept Class) & 0.703 & 0.205 & 0.561 & 0.392 & 0.000 & 0.707\\
+\hspace{1em}SD (Observations) & 2.527 & 2.467 & 2.965 & 3.022 & 2.847 & 2.860\\
+\hspace{1em}Num.Obs. & 256 & 256 & 253 & 256 & 254 & 251\\
+\hspace{1em}R2 Marg. & 0.000 & 0.000 & 0.021 & 0.011 & 0.000 & 0.016\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Ages 16--18}}\\
+\midrule \hspace{1em}(Intercept) & 4.997*** & 4.365*** & 5.903*** & 5.291*** & 4.621*** & 4.097***\\
+\hspace{1em} & (0.184) & (0.202) & (0.209) & (0.208) & (0.247) & (0.202)\\
+\hspace{1em}Gender (1 = girl) & -0.546* & 0.213 & -0.932** & 0.473 & -0.013 & -0.886**\\
+\hspace{1em} & (0.271) & (0.261) & (0.293) & (0.293) & (0.293) & (0.302)\\
+\hspace{1em}SD (Intercept Class) & 0.174 & 0.458 & 0.318 & 0.321 & 0.674 & 0.000\\
+\hspace{1em}SD (Observations) & 2.484 & 2.354 & 2.682 & 2.659 & 2.621 & 2.815\\
+\hspace{1em}Num.Obs. & 345 & 349 & 349 & 345 & 351 & 351\\
+\hspace{1em}R2 Marg. & 0.012 & 0.002 & 0.029 & 0.008 & 0.000 & 0.024\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Gender Differences in Partisan and Non-Partisan Political Participation by Age Among Canadian Adults, 2021 CES"
+knitr::include_graphics("_graphs/TimePoliticalParticipation.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "CES Factor Analysis: Partisan Political Participation Scale"
+knitr::include_graphics("_graphs/ParticPartisanScale.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "CES Factor Analysis: Non-Partisan Political Participation Scale"
+knitr::include_graphics("_graphs/ParticNonPartisanScale.pdf")
+```
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most (With Interactions) \label{tab:lmeParentBoysGirls}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+(Intercept) & 10.996+ & 11.686 & 12.494 & 9.940 & 25.076** & 34.623*\\
+ & (5.676) & (9.225) & (10.829) & (10.495) & (9.527) & (14.211)\\
+Mother discusses topic more than father & -0.468*** & -0.136 & -0.203 & -0.166 & 0.027 & -0.083\\
+ & (0.119) & (0.298) & (0.294) & (0.282) & (0.289) & (0.342)\\
+Gender (1 = girl) & -0.042 & -0.018 & -2.360 & 0.650 & -0.956 & 0.677\\
+ & (1.251) & (2.334) & (2.717) & (2.767) & (2.517) & (3.326)\\
+Gender (1 = girl):Age & 0.008 & 0.020 & 0.102 & -0.021 & 0.067 & -0.081\\
+ & (0.080) & (0.149) & (0.173) & (0.177) & (0.160) & (0.211)\\
+Gender (1 = girl):Ethnicity (1 = white) & -0.645* & -0.401 & -0.704 & -0.132 & -0.465 & -0.707\\
+ & (0.251) & (0.466) & (0.537) & (0.547) & (0.516) & (0.658)\\
+\hspace{1em}SD (Intercept Class) & 0.625 & 0.467 & 0.524 & 0.408 & 0.540 & 0.437\\
+\hspace{1em}SD (Observations) & 2.683 & 2.381 & 2.583 & 2.716 & 2.648 & 2.816\\
+\midrule
+Num.Obs.2099 & 459 & 412 & 425 & 467 & 336\\
+R2 Marg.0.021 & 0.032 & 0.082 & 0.016 & 0.038 & 0.066\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Hidden Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with Socialization Agents (With Interactions) \label{tab:lmeAgentsBoysGirls}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+(Intercept) & -8.948 & -13.867 & -22.750 & 23.058 & 13.852 & 3.026\\
+ & (9.130) & (17.013) & (15.928) & (17.299) & (16.960) & (17.625)\\
+Gender (1 = girl) & -2.307 & -6.406 & -2.449 & 5.453 & -7.929 & 0.980\\
+ & (2.141) & (4.395) & (4.348) & (4.541) & (5.051) & (4.501)\\
+Topic most discussed\\
+with mother? & -0.277 & 0.911+ & -0.261 & -0.038 & -0.577 & 0.314\\
+ & (0.296) & (0.525) & (0.907) & (1.372) & (0.566) & (1.518)\\
+Topic most discussed\\
+with father? & 0.769* & 1.387 & 0.327 & 1.087+ & -0.251 & 2.047*\\
+ & (0.299) & (1.215) & (0.514) & (0.640) & (0.711) & (0.988)\\
+Topic most discussed\\
+with female friends? & 0.665* & -0.084 & -0.617 & 2.385** & 1.704** & 1.591\\
+ & (0.305) & (0.726) & (0.555) & (0.902) & (0.575) & (2.010)\\
+Topic most discussed\\
+with male friends? & 0.595+ & -3.032** & 0.849 & 0.344 & -0.134 & 2.537+\\
+ & (0.322) & (1.148) & (0.537) & (0.707) & (0.734) & (1.361)\\
+Topic most discussed\\
+by teacher? & 0.327 & 1.326 & 1.167* & -0.585 & -0.434 & 0.157\\
+ & (0.306) & (0.917) & (0.533) & (1.283) & (0.618) & (1.261)\\
+Topic most discussed\\
+by social media influencer? & 0.704* & 1.064+ & 0.112 & 0.451 & 0.576 & -1.475\\
+ & (0.302) & (0.638) & (0.513) & (0.734) & (1.100) & (1.995)\\
+\hspace{1em}SD (Intercept Class) & 0.840 & 0.733 & 0.000 & 0.705 & 0.501 & 0.682\\
+\hspace{1em}SD (Observations) & 2.428 & 2.262 & 2.278 & 2.318 & 2.502 & 2.376\\
+\midrule
+Num.Obs.845 & 168 & 169 & 168 & 170 & 170\\
+R2 Marg.0.130 & 0.170 & 0.257 & 0.193 & 0.195 & 0.295\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Hidden Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Mother"
 knitr::include_graphics("_graphs/MotherDiscuss.pdf")
 ```
 
 ----
 
 ```{r}
+#| out.width: "175pt"
 #| echo: false
-#| out.width: "225pt"
-#| fig-cap: "Interest in topic most often discussed with one's father"
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Father, 2022 CPIS"
 knitr::include_graphics("_graphs/FatherDiscuss.pdf")
 ```
 
 ----
 
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender of Parent who Discusses that Topic the Most \label{tab:lmeParent}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 5.289*** & 4.631*** & 6.333*** & 5.504*** & 4.260*** & 4.601***\\
+\hspace{1em} & (0.180) & (0.379) & (0.251) & (0.222) & (0.340) & (0.286)\\
+\hspace{1em}Mother discusses topic\\
+\hspace{1em}more than father & -0.665*** & -0.411 & -0.332 & -0.242 & 0.286 & -0.182\\
+\hspace{1em} & (0.161) & (0.401) & (0.401) & (0.381) & (0.379) & (0.480)\\
+\hspace{1em}SD (Intercept Class) & 0.763 & 0.705 & 0.820 & 0.349 & 0.649 & 0.582\\
+\hspace{1em}SD (Observations) & 2.671 & 2.361 & 2.483 & 2.638 & 2.694 & 2.973\\
+\hspace{1em}Num.Obs. & 1138 & 241 & 225 & 228 & 252 & 192\\
+\hspace{1em}R2 Marg. & 0.014 & 0.004 & 0.003 & 0.002 & 0.002 & 0.001\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.749*** & 4.138*** & 5.057*** & 5.652*** & 4.602*** & 3.449***\\
+\hspace{1em} & (0.174) & (0.424) & (0.240) & (0.265) & (0.423) & (0.279)\\
+\hspace{1em}Mother discusses topic\\
+\hspace{1em}more than father & -0.254 & 0.158 & -0.118 & 0.047 & -0.434 & 0.110\\
+\hspace{1em} & (0.173) & (0.442) & (0.415) & (0.397) & (0.445) & (0.475)\\
+\hspace{1em}SD (Intercept Class) & 0.645 & 0.665 & 0.345 & 0.492 & 0.849 & 0.360\\
+\hspace{1em}SD (Observations) & 2.703 & 2.376 & 2.687 & 2.777 & 2.599 & 2.748\\
+\hspace{1em}Num.Obs. & 1032 & 237 & 199 & 212 & 228 & 156\\
+\hspace{1em}R2 Marg. & 0.002 & 0.001 & 0.000 & 0.000 & 0.004 & 0.000\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with One's Mother \label{tab:lmeMother}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 4.810*** & 4.059*** & 5.981*** & 5.091*** & 4.372*** & 4.139***\\
+\hspace{1em} & (0.154) & (0.241) & (0.211) & (0.173) & (0.261) & (0.199)\\
+\hspace{1em}Topic most discussed with mother? & -0.009 & 0.391 & 1.087 & 1.731* & 0.223 & 1.548\\
+\hspace{1em} & (0.190) & (0.310) & (0.726) & (0.675) & (0.338) & (1.231)\\
+\hspace{1em}SD (Intercept Class) & 0.693 & 0.757 & 0.642 & 0.149 & 0.614 & 0.388\\
+\hspace{1em}SD (Observations) & 2.767 & 2.398 & 2.690 & 2.689 & 2.717 & 2.948\\
+\hspace{1em}Num.Obs. & 1320 & 262 & 265 & 265 & 264 & 264\\
+\hspace{1em}R2 Marg. & 0.000 & 0.006 & 0.008 & 0.024 & 0.002 & 0.006\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.215*** & 4.014*** & 4.735*** & 5.160*** & 3.802*** & 3.099***\\
+\hspace{1em} & (0.139) & (0.221) & (0.215) & (0.189) & (0.273) & (0.168)\\
+\hspace{1em}Topic most discussed with mother? & 0.813*** & 0.336 & 1.215+ & 3.145*** & 0.893** & 2.901+\\
+\hspace{1em} & (0.191) & (0.314) & (0.636) & (0.616) & (0.336) & (1.553)\\
+\hspace{1em}SD (Intercept Class) & 0.605 & 0.586 & 0.704 & 0.284 & 0.915 & 0.000\\
+\hspace{1em}SD (Observations) & 2.721 & 2.384 & 2.597 & 2.749 & 2.524 & 2.674\\
+\hspace{1em}Num.Obs. & 1277 & 258 & 255 & 254 & 255 & 255\\
+\hspace{1em}R2 Marg. & 0.013 & 0.004 & 0.014 & 0.093 & 0.027 & 0.014\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with One's Father \label{tab:lmeFather}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 4.678*** & 4.294*** & 5.883*** & 5.078*** & 4.488*** & 4.056***\\
+\hspace{1em} & (0.150) & (0.212) & (0.228) & (0.185) & (0.230) & (0.219)\\
+\hspace{1em}Topic most discussed with father? & 0.929*** & -0.227 & 0.504 & 0.922* & 0.025 & 1.960**\\
+\hspace{1em} & (0.190) & (0.512) & (0.346) & (0.425) & (0.409) & (0.645)\\
+\hspace{1em}SD (Intercept Class) & 0.659 & 0.722 & 0.379 & 0.000 & 0.613 & 0.568\\
+\hspace{1em}SD (Observations) & 2.704 & 2.376 & 2.672 & 2.652 & 2.698 & 2.841\\
+\hspace{1em}Num.Obs. & 1262 & 250 & 254 & 253 & 253 & 252\\
+\hspace{1em}R2 Marg. & 0.018 & 0.001 & 0.008 & 0.018 & 0.000 & 0.035\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.188*** & 4.109*** & 4.796*** & 5.124*** & 4.030*** & 3.137***\\
+\hspace{1em} & (0.161) & (0.216) & (0.248) & (0.203) & (0.266) & (0.206)\\
+\hspace{1em}Topic most discussed with father? & 0.616** & 0.341 & 0.028 & 1.652** & 0.060 & 0.291\\
+\hspace{1em} & (0.199) & (0.449) & (0.377) & (0.507) & (0.397) & (0.644)\\
+\hspace{1em}SD (Intercept Class) & 0.753 & 0.733 & 0.634 & 0.177 & 0.959 & 0.502\\
+\hspace{1em}SD (Observations) & 2.690 & 2.335 & 2.660 & 2.790 & 2.536 & 2.650\\
+\hspace{1em}Num.Obs. & 1154 & 233 & 230 & 230 & 231 & 230\\
+\hspace{1em}R2 Marg. & 0.008 & 0.002 & 0.000 & 0.044 & 0.000 & 0.001\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
+
+----
+
 ```{r}
+#| out.width: "325pt"
 #| echo: false
-#| out.width: "225pt"
-#| fig-cap: "Interest in topic by gender of parent who discusses that topic the most"
-knitr::include_graphics("_graphs/GenderParent.pdf")
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Parents, 2022 CPIS"
+knitr::include_graphics("_graphs/DiscussParentYO.pdf")
 ```
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with one's Female Friends \label{tab:lmeFemaleFriends}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 4.929*** & 4.474*** & 6.297*** & 5.068*** & 4.459*** & 4.576***\\
+\hspace{1em} & (0.163) & (0.273) & (0.242) & (0.250) & (0.316) & (0.250)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with female friends? & 0.541* & -0.078 & 0.267 & 1.605* & 0.752 & -1.114\\
+\hspace{1em} & (0.245) & (0.547) & (0.486) & (0.659) & (0.458) & (1.127)\\
+\hspace{1em}SD (Intercept Class) & 0.643 & 0.745 & 0.034 & 0.625 & 0.638 & 0.400\\
+\hspace{1em}SD (Observations) & 2.750 & 2.568 & 2.630 & 2.564 & 2.756 & 2.896\\
+\hspace{1em}Num.Obs. & 783 & 155 & 157 & 157 & 157 & 157\\
+\hspace{1em}R2 Marg. & 0.006 & 0.000 & 0.002 & 0.036 & 0.017 & 0.006\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.370*** & 4.246*** & 4.687*** & 5.477*** & 4.249*** & 3.376***\\
+\hspace{1em} & (0.155) & (0.268) & (0.238) & (0.251) & (0.296) & (0.201)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with female friends? & 0.902*** & 0.151 & 1.195* & 1.085* & 0.274 & 4.624**\\
+\hspace{1em} & (0.223) & (0.423) & (0.533) & (0.511) & (0.400) & (1.570)\\
+\hspace{1em}SD (Intercept Class) & 0.647 & 1.010 & 0.567 & 0.478 & 0.946 & 0.000\\
+\hspace{1em}SD (Observations) & 2.687 & 2.214 & 2.616 & 2.788 & 2.506 & 2.698\\
+\hspace{1em}Num.Obs. & 914 & 183 & 182 & 181 & 184 & 184\\
+\hspace{1em}R2 Marg. & 0.017 & 0.001 & 0.027 & 0.024 & 0.002 & 0.045\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic Most Often Discussed with One's Male Friends \label{tab:lmeMaleFriends}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Boys}}\\
+\midrule \hspace{1em}(Intercept) & 4.615*** & 4.432*** & 5.474*** & 5.023*** & 4.449*** & 4.175***\\
+\hspace{1em} & (0.155) & (0.232) & (0.239) & (0.197) & (0.230) & (0.239)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with male friends? & 1.541*** & -1.111+ & 1.586*** & 1.503*** & 0.626 & 1.509+\\
+\hspace{1em} & (0.198) & (0.669) & (0.356) & (0.397) & (0.443) & (0.810)\\
+\hspace{1em}SD (Intercept Class) & 0.680 & 0.860 & 0.301 & 0.000 & 0.528 & 0.685\\
+\hspace{1em}SD (Observations) & 2.701 & 2.365 & 2.673 & 2.604 & 2.743 & 2.900\\
+\hspace{1em}Num.Obs. & 1158 & 230 & 233 & 232 & 232 & 231\\
+\hspace{1em}R2 Marg. & 0.047 & 0.011 & 0.079 & 0.058 & 0.008 & 0.014\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Girls}}\\
+\midrule \hspace{1em}(Intercept) & 4.516*** & 4.387*** & 5.133*** & 5.876*** & 4.313*** & 3.592***\\
+\hspace{1em} & (0.167) & (0.211) & (0.298) & (0.293) & (0.289) & (0.231)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with male friends? & 0.944*** & 0.070 & 0.871+ & -0.343 & 0.638 & 2.033*\\
+\hspace{1em} & (0.242) & (0.656) & (0.512) & (0.462) & (0.515) & (1.000)\\
+\hspace{1em}SD (Intercept Class) & 0.691 & 0.410 & 0.858 & 0.000 & 0.961 & 0.000\\
+\hspace{1em}SD (Observations) & 2.646 & 2.297 & 2.595 & 2.768 & 2.444 & 2.751\\
+\hspace{1em}Num.Obs. & 753 & 153 & 149 & 149 & 152 & 150\\
+\hspace{1em}R2 Marg. & 0.019 & 0.000 & 0.019 & 0.004 & 0.010 & 0.027\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CPIS"
+knitr::include_graphics("_graphs/DiscussPeersYO.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "225pt"
+#| echo: false
+#| fig-cap: "Correlation Matrix for Interest in Topics, 2022 CPIS"
+knitr::include_graphics("_graphs/CorMatrixCPIS.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "225pt"
+#| echo: false
+#| fig-cap: "Correlation Matrix for Interest in Topics, 2023 Datagotchi PES"
+knitr::include_graphics("_graphs/CorMatrixDG.pdf")
+```
+
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender Congruence of Influencer who Discusses that Topic \label{tab:lmeInfluencer}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & All & Health & International & Law and & Education & Partisan\\
+  & & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Same-Gender Influencers}}\\
+\midrule \hspace{1em}(Intercept) & 4.429*** & 4.101*** & 5.335*** & 4.981*** & 4.460*** & 3.832***\\
+\hspace{1em} & (0.153) & (0.203) & (0.235) & (0.189) & (0.219) & (0.217)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with influencer? & 1.331*** & 0.780* & 0.939** & 1.507*** & 0.038 & 1.551+\\
+\hspace{1em} & (0.165) & (0.319) & (0.298) & (0.359) & (0.487) & (0.881)\\
+\hspace{1em}SD (Intercept Class) & 0.747 & 0.757 & 0.739 & 0.450 & 0.836 & 0.801\\
+\hspace{1em}SD (Observations) & 2.704 & 2.369 & 2.654 & 2.705 & 2.668 & 2.831\\
+\hspace{1em}Num.Obs. & 1678 & 336 & 338 & 335 & 335 & 334\\
+\hspace{1em}R2 Marg. & 0.035 & 0.017 & 0.027 & 0.050 & 0.000 & 0.009\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Other-Gender Influencers}}\\
+\midrule \hspace{1em}(Intercept) & 4.107*** & 3.795*** & 5.146*** & 5.349*** & 3.828*** & 3.167***\\
+\hspace{1em} & (0.201) & (0.240) & (0.346) & (0.354) & (0.328) & (0.277)\\
+\hspace{1em}Topic most discussed\\
+\hspace{1em}with influencer? & 1.136*** & 0.569 & -0.217 & 1.241* & 0.932 & 0.583\\
+\hspace{1em} & (0.283) & (0.580) & (0.523) & (0.542) & (0.817) & (1.464)\\
+\hspace{1em}SD (Intercept Class) & 0.858 & 0.150 & 0.725 & 1.073 & 1.023 & 0.000\\
+\hspace{1em}SD (Observations) & 2.688 & 2.299 & 2.611 & 2.522 & 2.650 & 2.876\\
+\hspace{1em}Num.Obs. & 560 & 112 & 112 & 111 & 113 & 112\\
+\hspace{1em}R2 Marg. & 0.025 & 0.009 & 0.002 & 0.042 & 0.011 & 0.001\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: None}\\
+\end{tabular}
+\end{table}
 
 # Definitions
 
@@ -644,7 +1594,7 @@ Other definitions [@conover2002; @fitzgerald2013; @heywood2019; @lane1962; @sapi
 
 :::
 
-## Agency & Communality
+## Agency & Communion
 
 ----
 
@@ -657,3 +1607,44 @@ One vision more likely to be shared by women, the other by men
 Men's higher rates of incarceration, stronger presence in the police force, and over-representation among world leaders could lead them to take more interest in these areas.
 Women use health care services more often & take a larger role in care responsibilities on average
 -->
+
+# Miscellaneous
+
+## Positionality & Motivations for the Study
+
+----
+
+1. At first, I wanted to study women's legislative under-representation in various contexts
+
+2. Need to go back in time and look at childhood socialization
+
+3. Gap in the literature: how can we explain the transmission of interests in different political topics?
+
+## Studies about Gender Gaps in Interest
+
+\begin{table}
+\centering
+\caption{Gender differences in political interest among teenagers and young adults}
+\label{tbl-gap-adolescents}
+\footnotesize
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Study} & \textbf{Gender gap} & \textbf{Country} & \textbf{Respondents' ages} \\
+\hline
+Koskimaa \&\\
+Rapeli (2015) & +2  & Finland       & 16--18 \\
+Dostie-Goulet (2009) & +2  & Canada        & 14--16 \\
+Janmaat et al. (2022) & +5  & UK            & 16 \\
+Cicognani et al. (2012) & +11 & Belgium       & 15--19 \\
+Lawless \& Fox (2013) & +11 & United States & 18--25 \\
+Burns et al. (2001) & +15 & United States & 18 \\
+Muxel (2002) & +15 & France        & 18--25 \\
+Fraile \&\\
+Sanchez-Vitores (2020) & +20 & UK            & 15 \\
+Janmaat et al. (2022) & +22 & UK            & 30 \\
+Hyman (1959) & +27 & Germany       & 15--24 \\
+Fraile \&\\
+Sanchez-Vitores (2020) & +30 & UK            & 25 \\
+\hline
+\end{tabular}
+\end{table}
