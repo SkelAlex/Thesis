@@ -17,39 +17,40 @@ header-includes:
 ---
 # Context: A Gender Gap in Political Interest?
 
+## Conceptual Definitions
+
 ----
 
-::: nonincremental
+- **Politics**: "activity through which people make, preserve and amend the general rules under which they live. Politics is inextricably linked to the phenomena of **conflict and cooperation**. On the one hand, the existence of rival opinions, different wants, competing needs, and opposing interests guarantees disagreement about the rules under which people live. On the other hand, people recognize that, in order to influence these rules or ensure their enforcement, they must work with others" [@heywood2019, 34]
+<!--
+Thank you everyone for coming! Thanks Lou for organizing this
+
+2 quick notes on the title: (1) Roots, what do I mean? Transmission processes. (2) Political interests, what do I mean? Interest in several political topics
+
+Bear with me for these definitions, they will be useful all along
+-->
+
+- **Agency**: values, motives, traits & behaviors that align with "goal-achievement and task functioning (competence, assertiveness, decisiveness)" (Sczesny et al., 2018)
+
+- **Communion**: values, motives, traits & behaviors that align with "maintenance of relationships and social functioning (benevolence, trustworthiness, morality)." (Sczesny et al., 2018)
+
+- Some parallels between the 3 concepts<!--agency can create disagreements and conflict, while communion can foster cooperation-->
+
+----
+
+**Gender**: "sets of socially constructed meanings of masculinities and femininities, derived from context-specific identifications of sex, that is, male and female, men and women" [@beckwith2010, 160]
+
+  - These socially constructed meanings revolve around communion for women & agency for men
+
+----
 
 How do people conceptualize political interest?
 
-- They typically associate politics with partisan politics & foreign policy
-<!--
-Thank you everyone for coming!
+- They typically associate politics with partisan politics & (to a lesser extent) foreign policy<!--interest in diplomacy, wars, elections, etc.-->
 
-Diplomacy, wars, elections, political parties...
--->
+- But they often do not associate politics with health care or education<!--even when thinking about the broader state of the health & education systems or specific political issues-->
 
-- But they do not often associate politics with health care or education
-<!--
-Studies have found that even when thinking about the broader state of these two systems or specific issues related to these "less" political topics
--->
-
-- Politics:
-
-> activity through which people make, preserve and amend the general rules under which they live. Politics is inextricably linked to the phenomena of **conflict and cooperation**. On the one hand, the existence of rival opinions, different wants, competing needs, and opposing interests guarantees disagreement about the rules under which people live. On the other hand, people recognize that, in order to influence these rules or ensure their enforcement, they must work with others (@heywood2019, 34).
-
-<!--
-Importantly, this definition emphasizes the notions of cooperation and competition (agency & communion). More than a partisan game, politics includes actions that preserve the policy status quo as well as actions that aim at disrupting it, including contentious politics [@tilly2015] and interest groups that seek to influence the rules --- from the international level to the local level.
-
-- Contested concept for a long time [@gallie1956]
-
-- "The concept is extremely broad and comprises any kind of leadership in action" (@weber1919, p.&nbsp;1)
--->
-
-:::
-
-## Why Does this Matter?
+## Why Do Different Definitions of Politics Matter?
 
 ----
 
@@ -64,32 +65,21 @@ Suddenly, in this BRITISH study, big gender gaps in both directions! Women REPOR
 
 Potential explanation: studies show that ON AVERAGE, men tend to see political issues in a different light: agency for men, communion for women
 
-Aggregate measure of political interest: men report being more interested, presumably because they think "partisan politics" and "foreign policy"
+Aggregate measure of political interest ("On a scale of 0 to 10, how would you rate your interest in politics?" and the like): men report being more interested, presumably because they think about partisan politics & foreign policy
 
-Aggregate measure: generally "On a scale of 0 to 10, how would you rate your interest in politics?" or something like that
-
-(And other studies find similar gaps for political knowledge: ON AVERAGE, women know more about how the health care system works, men TYPICALLY recall politicians' names more, so this seems to bear some resemblance with reality)
+(Studies find similar gender gaps for political knowledge: ON AVERAGE, women know more about how the health care system works, men TYPICALLY recall politicians' names more, so this seems to bear some resemblance with reality)
 -->
 
-Also: @ferrin2020; @ferrin2023; @keeling2023; @kuhn2004; @sabella2004; @tormos2022 --- but no Canadian studies
-
+- Also: @ferrin2020; @ferrin2023; @keeling2023; @kuhn2004; @sabella2004; @tormos2022 --- but no Canadian studies
 <!--
-"work by various Canadian Election Study teams documenting how some issues (e.g., taxes) are gendered in Canada."
-
-I have not seen analyses of which topics women and men report being interested in in Canada. Nevitte et al. (2000) show that, in the 1997 election, women found it was more important to fund social programs while men found it was more important to cut the deficit.
-
-I have not found much more, but I would be happy to include any work on women and men's political interests in Canada.
+(MT: "work by various Canadian Election Study teams documenting how some issues (e.g., taxes) are gendered in Canada." I have not seen analyses of which topics women and men report being interested in in Canada. Nevitte et al. (2000) show that, in the 1997 election, women found it was more important to fund social programs while men found it was more important to cut the deficit. I have not found much more, but I would be happy to include any work on women and men's political interests in Canada.)
 -->
-
-**Gender**: "sets of socially constructed meanings of masculinities and femininities, derived from context-specific identifications of sex, that is, male and female, men and women" [@beckwith2010, 160]
 
 ## Sources of the Gender Gap in Self-Reported Political Interest
 
 ----
 
-<!--
-Four main literatures address the question of how a gender gap in political interest can arise. Let's start with those I do not believe are at the core of the issue
--->
+<!--Four main literatures address the question of how a gender gap in political interest can arise. Let's start with those I do not believe are at the core of the issue-->
 :::: columns
 ::: {.column width="33%"}
 ```{r}
@@ -98,10 +88,7 @@ Four main literatures address the question of how a gender gap in political inte
 knitr::include_graphics("_previous/_practice-talk/inglehart.jpg")
 ```
 
-Structural factors [@inglehart2003]
-<!--
-Structural factors: women's under-representation, society values... While all relevant indicators, do not explain why there is a gender gap in Western countries such as Canada
--->
+Structural factors [@inglehart2003]<!--women's under-representation, society values... While all relevant indicators, do not explain why there is a gender gap in Western countries such as Canada-->
 :::
 ::: {.column width="33%"}
 ```{r}
@@ -112,7 +99,9 @@ knitr::include_graphics("_previous/_practice-talk/gidengil.png")
 
 Life-cycle events [@gidengil2008]
 <!--
-Life-cycle events: motherhood, employment... But in recent studies, motherhood = not significantly related to political interest & employment = mixed results.
+motherhood, employment... But in recent studies, motherhood = not significantly related to political interest & employment = mixed results
+
+(Mestre and Marı́n (2012) also find that women work on average three more hours of paid and unpaid work than men and that the amount of unpaid domestic work is negatively related to political interest for women, suggesting women’s lower political interest could stem from a lack of time. However, the same study also finds that the amount of unpaid domestic work is unrelated to political interest for men, which means some other factors must be at play to explain gender differences)
 -->
 :::
 ::: {.column width="33%"}
@@ -121,14 +110,12 @@ Life-cycle events: motherhood, employment... But in recent studies, motherhood =
 #| out.width: "100pt"
 knitr::include_graphics("_previous/_practice-talk/bell.png")
 ```
-Genetics [@bell2009]
 
+Genetics [@bell2009]
 <!--
 In studies of monozygotic vs. dizygotic twins, those with the same genes (MZ) had more similar levels of political interest
 
-Heritability scores of 24--62%: still half of the variation in political interest comes from elsewhere
-
-But also, (1) any gendered component to this remains uncertain, (2) molecular research is scant, and (3) the actual causal process is unclear -- it is possible that MZ and DZ are treated differently by their parents instead of having different genetic predispositions
+Issues: (1) heritability scores of 24--62%: still half of the variation in political interest comes from elsewhere; (2) molecular research is scant; (3) the actual causal process is unclear - it is possible that MZ and DZ are treated differently by their parents instead of having different genetic predispositions
 
 (@vanditmars2023 assess heritability by sex, with estimates of 21.9--50.8% for women and 39.6--57.2% for men. Despite these differences not being statistically significant, they find that the heritability of political interest remains stable for men across age groups on average, women's political interest becomes more heritable and less a function of the shared environment in which they live as they age. They attribute this result to the fact that when they reach adulthood, "women can more easily select into environments in which they can pursue their predisposition that drives interest in politics, which is supported by our indications of larger heritability estimates for twins who moved out of the parental home")
 -->
@@ -158,10 +145,7 @@ knitr::include_graphics("_previous/_practice-talk/neundorf.png")
 :::
 ::::
 
-A more robust explanation for the Canadian context: socialization
-<!--
-Several studies point towards socialization as a significant factor... Including many biological studies
--->
+A more robust explanation for the Canadian context: socialization<!--several studies point towards socialization as a significant factor... Including many biological studies-->
 
 ----
 
@@ -181,51 +165,40 @@ knitr::include_graphics("_graphs/friends.jpeg")
 ```
 :::
 ::::
-<!--
-Socialization by whom?
+<!--Socialization by whom? 4 main agents: parents, peers, media, schools. Studies find the two most significant ones are, as you see here, parents and peers (use pointer)-->
 
-4 main agents of socialization: parents, peers, media, and schools
-
-But studies find the two most significant ones are, as you see here, parents and peers (use pointer)
--->
-
-# Parents' Role in Political Interest Transmission
+# Theoretical Framework: Socialization Agents & Political Interest Transmission
 
 ----
 
-- Significant relationship between parents' political interest and their children's political interest
+- Significant relationship between the political interest of children and their parents' and peers' political interest [@beauregard2008; @janmaat2022; @neundorf2013; @prior2019; @shehata2019]
 <!--
-[@beauregard2008; @janmaat2022; @neundorf2013; @prior2019; @shehata2019]
-
-@prior2019 estimates moderately strong Pearson correlation coefficients of 0.3 to 0.4 for parent--child political interest scores across three countries.
+(@prior2019 estimates moderately strong Pearson correlation coefficients of 0.3 to 0.4 for parent--child political interest scores across three countries)
 -->
 
-- Growth in parent--child political interest correlations between ages 11 and 15
+- Growth in parent--child political interest correlations between ages 11 and 15 [@prior2019]
 <!--
-Parent--child correlations then remain stronger when both parents share a similar level of political interest, when this parental political interest is stable through time, and when children move out late from their parents' place. Prior
+(Parent--child correlations then remain stronger when both parents share a similar level of political interest, when this parental political interest is stable through time, and when children move out late from their parents' place)
 -->
 
-- Causal link between parents' and children's political interest
+- *Causal* link between parents' and children's political interest --- less clarity for peers
 <!--
-In time series, an increase in mothers' political interest is often accompanied by an increase in their children's political interest. The same goes for fathers, and for decreases rather than increases. Shehata
+In time series, an increase in mothers' political interest is often accompanied by an increase in their children's political interest. The same goes for fathers, and for decreases rather than increases. @shehata2019
+
+(Beyond associations between children's discussion of political issues with peers and their political interest, studies inquiring about longitudinal or causal effects have gotten more mixed results. @dostiegoulet2009en finds evidence that *changes* in political interest from one year to the next are linked to changes in the number of political discussions with friends. The effect size is similar for year-to-year changes in the number of such discussions with parents. @shehata2019 also show that, using a two-way fixed effects panel model, changes in children's frequency of political discussions with peers are related to their changes in political interest just as much as the frequency of political discussions with parents. However, conducting another analysis, they find that political discussions with peers at ages 14--15 do not lead to more political interest two years later, after controlling for initial levels of political interest and frequency of political discussions with parents, suggesting parents play a more long-lasting role in the socialization process over the long run. @stattin2022 further temper the results of this literature by showing that adolescents' initial level of political interest predicts changes in their perceptions of their peers' political interest, while their peers' initial political interest (as perceived by the child) does not predict changes in their own future political interest.)
 -->
 
-- Main causal mechanism: parent--child political discussions
-<!--
-@shehata2019 find that changes in the frequency of political discussions with parents positively predict changes in adolescents' level of political interest
--->
+- Main causal mechanism: parent--child & peer-to-peer political discussions [@shehata2019; @klofstad2007]<!--changes in the frequency of political discussions with parents positively predict changes in adolescents' level of political interest-->
 
 ## Gender Differences in Transmission of Self-Reported Political Interest
 
 ----
 
-- Transmission works better for parent--child pairs of the same gender
+- Transmission works better for parent--child pairs of the same gender [@beauregard2008; @owen1988; @prior2019]
 <!--
-Mothers' political interest has a stronger effect on their daughters than sons' political interest, while fathers' political interest has a stronger effect on their sons' political interest [@beauregard2008; @owen1988; @prior2019]
+Mothers' political interest has a stronger effect on their daughters than sons' political interest, while fathers' political interest has a stronger effect on their sons' political interest.
 
-Daughters' political interest seems to be influenced mostly by their mothers
-
-(it is not clear whether sons' political interest is influenced mostly by their father [@beauregard2008; @owen1988] or mother [@prior2019])
+(Daughters' political interest seems to be influenced mostly by their mothers. It is not clear whether sons' political interest is influenced mostly by their father [@beauregard2008; @owen1988] or mother [@prior2019])
 -->
 
 - Mother--daughter correlations particularly strong
@@ -233,64 +206,50 @@ Daughters' political interest seems to be influenced mostly by their mothers
 (@prior2019: mother--daughter political interest correlations are strongest (0.43), while mother--son, father--daughter and father--son correlations all sit between 0.31 and 0.34)
 -->
 
-- Mothers and fathers talk as much about politics with sons and daughters
+- Mothers and fathers talk as much about "politics" with sons and daughters
 <!--
 (earlier studies found that children discuss politics more often with their fathers than mothers [@noller1985; @oswald1998])
 
 (it seems reasonable to assume, as @hooghe2015 do, that political discussions involving the father tend to revolve mostly around partisan politics, while political discussions with mothers might center on other topics --- presumably health care, education, gender issues, and so on)
 -->
 
-# How Does Socialization Influence the Transmission of Political Interests?
+## How Does Socialization Influence the Transmission of Political Interests?
 
 ----
 
 - **Social learning theory**: Children learn by observing their parents & peers, modelling their behaviour, attitudes, habits & values after them
 
 <!--
-Two main theories I rely upon
+2 main theories I rely upon
+
+Political interest is one such attitude
 -->
 
-  - Social learning is easier when the role model shares the child's gender (observer--model similarity)
+- Social learning is easier when the role model shares the child's gender (observer--model similarity)
 
-  - Works through social pressure
+- Works through social pressure<!--In a political home environment, children can either feel social pressure to become interested in politics to create or maintain a sense of social belonging in the family unit, be exposed to more news media content, listen to or participate in more political discussions at home, or all of these [@shehata2019]-->
+
+- **Gender homophily theory**: Children of the same gender tend to stick together & become friends<!--Studies have found most political discussions between adults are men-to-men and women-to-women-->
+
+- __Research question: *What are the differences in political interests between men and women, how do they get reproduced over time, and why?*__
 <!--
-(In a political home environment, children can either feel social pressure to become interested in politics to create or maintain a sense of social belonging in the family unit, be exposed to more news media content, listen to or participate in more political discussions at home, or all of these [@shehata2019])
--->
+How do parental and peer-to-peer transmission work for different political topics?
 
-- **Gender homophily theory**: Children of the same gender tend to stick together & become friends
-<!--
-Studies have found most political discussions between adults are men-to-men and women-to-women
--->
-
-- __Research questions: *What are the differences in political interests between men and women, how do they get reproduced over time, and why?*__
-<!--
-Parents and peers at the core of the gender gap in political interest? How does that manifest by sub-topic?
-
-Important: how do parents influence their children? How do peer groups influence children?
-
-What shapes interest in partisan politics, which can lead to running for office?
+(What shapes interest in partisan politics, which can lead to running for office?)
 -->
 
 ----
 
 - *__Hypothesis 1__: Adolescence is the moment in time when gender differences in political interests emerge.*
-<!--
-Basically, I assume the effect will be the same for any political topic: fathers have more influence on transmitting interest to their sons, and mothers to their daughters
-
-Adult men and women are more interested in certain topics and are more likely to transmit interest in any topic to their children of the same gender
--->
 
 - *__Hypothesis 2__: Children's political interests are more affected by political discussions with their same-gender parent(s) than other-gender parent(s).*
 <!--
 Basically, I assume the effect found in other studies for political interest will be the same for any political topic: fathers have more influence on transmitting interest to their sons, and mothers to their daughters
+
+(Adult men and women are more interested in certain topics and are more likely to transmit interest in any topic to their children of the same gender)
 -->
 
-- *__Hypothesis 3__: Children's political interests are more affected by political discussions with their same-gender peers than other-gender peers.*
-<!--
-Again, more influence of same-gender peers on each topic, as per social learning theory
-
-So these are my basic assumptions, but alternative hypotheses are easy to make, where the influence of parents would be only on the topic they are most interested in... This is what I will investigate. That would not be inconsistent with social learning theory
--->
+- *__Hypothesis 3__: Children's political interests are more affected by political discussions with their same-gender peers than other-gender peers.*<!--Again, more influence of same-gender peers on each topic-->
 
 ----
 
@@ -301,15 +260,11 @@ So these are my basic assumptions, but alternative hypotheses are easy to make, 
 knitr::include_graphics("_graphs/DissertationHypotheses.pdf")
 ```
 
-- Women's lower legislative representation has consequences for their substantive representation (@chattopadhyay2004, @donato2008, @rayment2020), especially in contexts where people's interests are uncrystallized (Mansbridge, 1999)
+- Women's lower legislative representation has consequences for their substantive representation [@chattopadhyay2004; @donato2008; @rayment2020], especially in contexts where people's preferences are not set in stone (Mansbridge, 1999)
 <!--
-I want to draw your attention to one point:
+I want to draw your attention to one point: men have higher interest in partisan politics => (while not the only cause) they have higher political ambition, which leads them to run for office in greater numbers => consequences for substantive representation
 
-men have higher interest in partisan politics => (while not the only cause) they have higher political ambition, which leads them to run for office in greater numbers => consequences for substantive representation
-
-policies often have different effects on men and women, which can be influenced by policymakers' gender
-
-more likely to adopt policies about women's equality and autonomy
+policies often have different effects on men and women, which can be influenced by policymakers' gender: women are more likely to adopt policies about women's equality and autonomy
 -->
 
 # Data & Methods
@@ -331,6 +286,7 @@ Schools include various urban areas of Quebec & Ontario
 #| out.width: "130pt"
 knitr::include_graphics("_graphs/datagotchi.jpg")
 ```
+
 [@datagotchi2023]
 :::
 ::: {.column width="50%"}
@@ -340,23 +296,19 @@ knitr::include_graphics("_graphs/datagotchi.jpg")
 knitr::include_graphics("_graphs/ces.png")
 knitr::include_graphics("_graphs/wvs.jpg")
 ```
-[@ces2021, @wvs2022]
+
+[@ces2021; @wvs2022]
+
+Where necessary, I apply raking (a form of weighting) based on gender, age, education, region, etc.
 :::
 ::::
-<!--
-Where necessary, I apply raking (a form of weighting) based on gender, age, education, region, etc.
--->
+
 
 ----
 
 Measuring children's interest in different political topics: how?
 
-- Multilevel regressions, classroom fixed effects, controls for SES & personality traits
-<!--
-So this is the technical answer, but...
-
-SES: gender, age, language, ethnicity, immigrant status
--->
+- Multilevel regressions, classroom fixed effects, controls for SES<!--So this is the technical answer, but...-->
 
 - Survey questions with *concrete examples*:
 
@@ -374,20 +326,6 @@ SES: gender, age, language, ethnicity, immigrant status
 All these topics have political implications and are as concrete as possible for children
 
 I also ask children which parent and their peers of which gender discuss each issue the most with them
-
-"Gender equity is conspicuously absent from the topics chosen to constitute gendered interests. In general, the rationale justifying these topic choices should be made more clearly, with greater grounding in the extant literature. Here, more Canadian content may be helpful. (e.g., Gidengil et al., 2012, Anderson, 2010 on regionalism as gender is presented as a comparator in those models, Bittner and Goodyear-Grant on gender and attitudes)."
-
-I consider including gender issues, but I think I dropped it after others recommended for me not to include that variable (maybe too controversial for schools). I chose topics that best exemplified the agency vs. communion spectrum. I was not sure whether women's issues would necessarily fall under one label or the other. I am not sure intuitively, for example, whether the gender pay gap or women's political/industrial under-representation would fall under one of these branches.
-
-I already make it clear that women are more interested in women's issues. I just had to restrict myself to five topics.
-
-I consulted all three studies cited, but did not see a discussion of gendered interests in Canada. Again, I am happy to include anything relevant I may have missed.
-
-"It would be useful to consider how alternative explanations for the empirical patterns found in the data. For example, the overwhelming majority of teachers and nurses are women. What might it mean if mothers are simply talking about their days (e.g., what happened at work) with their kids?"
-
-Interesting question. I made it clear at the outset that the political aspects of health care and education are what I am interested in, by specifying these in a parenthesis (e.g., "Health care (working conditions of nurses, pandemic, restrictions, etc.)").
-
-For nurses, after a quick look at statistics about the number of nurses and the Canadian population, approximately 1.5% of women are nurses. But if their mothers discuss their working conditions with their kids, this is absolutely a political discussion! This discussion can create an interest in the child and can make them aware of society issues, even without realizing it. As for teachers, I did not give "Working conditions of teachers" as an example of a political topic.
 -->
 
 # Results
@@ -397,20 +335,30 @@ For nurses, after a quick look at statistics about the number of nurses and the 
 ----
 
 ```{r}
-#| out.width: "225pt"
+#| out.width: "250pt"
 #| echo: false
-#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied. For the GSS, respondents' specific age is not available; age groups are used instead."
+#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied. For the GSS, respondents' specific age is not available; age groups are used instead."
 knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
 ```
+<!--
+Political interest increases over time
+
+Gender gap narrows over time
+-->
 
 ----
 
 ```{r}
 #| out.width: "175pt"
 #| echo: false
-#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. CES weights are applied."
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. CES weights are applied."
 knitr::include_graphics("_graphs/CESGapYearAge.pdf")
 ```
+<!--
+Similar narrowing of the gender gap across CES survey years and survey modes
+
+(Prior (2019) estimates there is a 10–15 percentage point increase. Political interest continues to increase after 25 years old, but at a slower pace, and the age differences that are observed between older respondents seem almost entirely due to cohort effects: older cohorts of voters, especially those born in the 1940s, are particularly interested in politics. However, within each cohort of people, after reaching 25 years old, political interest remains very stable until death.)
+-->
 
 ----
 
@@ -457,7 +405,7 @@ knitr::include_graphics("_graphs/CESGapYearAge.pdf")
 ```{r}
 #| out.width: "225pt"
 #| echo: false
-#| fig-cap: "Self-Reported Level of Interest in Various Topics by Age Among Canadian Adults, 2022 Datagotchi PES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. Datagotchi PES weights are applied."
+#| fig-cap: "Self-Reported Level of Interest in Various Topics by Age Among Canadian Adults, 2022 Datagotchi PES \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. Datagotchi PES weights are applied."
 knitr::include_graphics("_graphs/InterestAgeGenderDG.pdf")
 ```
 
@@ -503,7 +451,7 @@ knitr::include_graphics("_graphs/InterestAgeGenderDG.pdf")
 <!--
 (In the upper half of the table, taking into account classroom fixed effects, boys generally report being more interested in politics than girls, but the gender gap is relatively minimal, standing at 0.43 for the 11-point political interest scale (*p*<0.05). Boys' interest in international affairs and partisan politics is higher than girls' (1-point and 0.85-point difference respectively; both *p*<0.001). This seems to be in line with the results among adult respondents. However, girls' interest in law and crime is also slightly higher (0.5 point, *p*<0.05). This result is more surprising given previous literature showing the contrary. Results for the other two topics, health care and education, are almost even between the genders, and not statistically significant, despite adult women usually reporting higher levels of interest in these two topics across studies.)
 
-However, in the lower half of the table, controlling for socio-demographic factors, all relationships between gender and interest disappear. It might be the case that girls are less interested in some of these topics by virtue of other socio-demographic characteristics, but there does not seem to be one other socio-demographic variable that reliably predicts interest in any of the topics.
+(However, in the lower half of the table, controlling for socio-demographic factors, all relationships between gender and interest disappear. It might be the case that girls are less interested in some of these topics by virtue of other socio-demographic characteristics, but there does not seem to be one other socio-demographic variable that reliably predicts interest in any of the topics.)
 -->
 
 ----
@@ -511,17 +459,17 @@ However, in the lower half of the table, controlling for socio-demographic facto
 ```{r}
 #| out.width: "325pt"
 #| echo: false
-#| fig-cap: "Gender Differences in Interest for Specific Political Topics by Age Group Among Canadian Children, 2022 CPIS \\newline \\textit{Notes}: No controls are added."
+#| fig-cap: "Gender Differences in Interest for Specific Political Topics by Age Group Among Canadian Children, 2022 CPIS \\newline \\tiny\\textit{Notes}: No controls are added."
 knitr::include_graphics("_graphs/GenderCPISYO.pdf")
 ```
 
-## Parents
+## Parents & Peers
 
 ----
 
 ::: nonincremental
 
-- For each of the following topics, which parent do you discuss most often with?
+- For each of the following topics, which parent do you discuss most often with?<!--what questions did I ask children to measure the influence of their parents? Here is the first one-->
 
   - Health care
       - My mother
@@ -547,47 +495,11 @@ AFTER REMOVING UNDECIDEDS, 82% of students report discussing health care more of
 
 AFTER REMOVING UNDECIDEDS, 62% of boys say they have more discussions with their mother, compared with 82% of girls who report the same
 
-Fathers and mothers are interested in different topics so discuss different topics... Confirms hypotheses 1f and 1g
+Fathers and mothers are interested in different topics so discuss different topics... Confirms hypotheses
 
-As 1h expected, very few differences between boys & girls (except non-political discussions)... Their mothers speak about health care and education, their fathers speak about the other three topics
+Very few differences between boys & girls (except non-political discussions)... Their mothers speak about health care and education, their fathers speak about the other three topics
 
-"In Chapter 4, at times, “don’t know/prefer not to answer/missing” comprises at least half the respondents on substantive empirical tests, yet this is not discussed. What does this mean in the context of the larger project?"
-
-It seems pretty clear to me that some children who have a mother and a father discuss just as much - or just as little - with their mother as with their father. For specific topics, the number of "don't know"s is still not extremely high, but suggests some topics are not discussed at all. For instance, partisan politics is not spoken about in all families, and it seems natural to me that several children say they do not discuss this issue with either parent - especially for those aged 10-15.
-
-Yet, the claim of the project is not that a majority of a child's interests are due specifically to parents of the same gender. The claim is that on average, transmission is more likely to occur between gender-congruent pairs.
--->
-
-----
-
-::: nonincremental
-
-- Among these five topics, which one do you discuss most often with your mother(s)?
-  - Health care
-  - International affairs
-  - Law and crime
-  - Education
-  - Partisan politics
-  - Don't know/Prefer not to answer
-
-- Among these five topics, which one do you discuss most often with your father(s)?
-
-:::
-
-----
-
-```{r}
-#| echo: false
-#| out.width: "325pt"
-#| fig-cap: "Topic Most Often Discussed by Mothers and Fathers, 2022 CPIS"
-knitr::include_graphics("_graphs/ParentTopicsMomDad.pdf")
-```
-<!--
-Again, similar results for boys and girls, but here, which of the 5 topics most discussed by mom and dad
-
-Dads: international affairs. Moms: health care & education
-
-Mothers discuss different topics than fathers at the kitchen table
+(MT: "In Chapter 4, at times, “don’t know/prefer not to answer/missing” comprises at least half the respondents on substantive empirical tests, yet this is not discussed. What does this mean in the context of the larger project?" It seems pretty clear to me that some children who have a mother and a father discuss just as much - or just as little - with their mother as with their father. For specific topics, the number of "don't know"s is still not extremely high, but suggests some topics are not discussed at all. For instance, partisan politics is not spoken about in all families, and it seems natural to me that several children say they do not discuss this issue with either parent - especially for those aged 10-15. Yet, the claim of the project is not that a majority of a child's interests are due specifically to parents of the same gender. The claim is that on average, transmission is more likely to occur between gender-congruent pairs.)
 -->
 
 ----
@@ -638,6 +550,63 @@ However, when aggregated, the fact that their father discusses a topic more than
 
 (Very similar findings are found when control variables are removed.)
 -->
+
+----
+
+::: nonincremental
+
+- Among these five topics, which one do you discuss most often with your mother(s)?
+  - Health care
+  - International affairs
+  - Law and crime
+  - Education
+  - Partisan politics
+  - Don't know/Prefer not to answer
+
+- Among these five topics, which one do you discuss most often with your father(s)?
+
+:::
+
+----
+
+::: nonincremental
+
+- Among these five topics, which one do you discuss most often with your female friends?
+  - Health care
+  - International affairs
+  - Law and crime
+  - Education
+  - Partisan politics
+  - Don't know/Prefer not to answer
+
+- Among these five topics, which one do you discuss most often with your male friends?
+
+:::
+
+----
+
+```{r}
+#| echo: false
+#| out.width: "325pt"
+#| fig-cap: "Topic Most Often Discussed by Mothers and Fathers, 2022 CPIS"
+knitr::include_graphics("_graphs/ParentTopicsMomDad.pdf")
+```
+<!--
+Again, similar results for boys and girls, but here, which of the 5 topics most discussed by mom and dad
+
+Dads: international affairs. Moms: health care & education
+
+Mothers discuss different topics than fathers at the kitchen table
+-->
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Interest in Topic Most Often Discussed with Friends by Child Gender and Friends' Gender, 2022 CPIS"
+knitr::include_graphics("_graphs/PeersTopics.pdf")
+```
 
 ----
 
@@ -751,18 +720,27 @@ For girls, interest in law and crime is related to their fathers discussing law 
 knitr::include_graphics("_graphs/DiscussParentYOSES.pdf")
 ```
 <!--
-Results are mixed, but seem to show that in some respects, older teenagers (ages 16--18) are more influenced by their parents' discussion of certain topics than 10--15-year-olds.
-
-Notably, for girls, the influence of both their father and mother is only statistically significant among 16--18 year-olds, and it grows in size compared with girls aged 10--15. No such difference between age groups is found among boys. However, for boys aged 16--18, when their parent most interested in a specific topic is their father, they become more interested in that topic, while this relationship is weaker and non-significant for boys aged 10--15.
-
-These results provide mixed evidence for Hypothesis 1k: aging makes more statistically significant relationships emerge, but the effect sizes only become somewhat wider between age groups.
-
-Yet, among 10--15-year-olds, political interest transmission is statistically significant in any model, which could indicate that early parental socialization is more limited than what was previously thought. It could be the case that due to a more limited sample size, smaller effect sizes are present but do not reach statistical significance. This would be consistent with the finding that, for all significant parent--child interest relationships found among 16--18-year-olds, the direction of the relationship among 10--15-year-olds is the same --- but the coefficient is larger.
+Older teenagers (ages 16--18) seem to be more influenced by their parents' discussion of certain topics than 10--15-year-olds.
 
 Moreover, again confirming Hypothesis 1a, the largest effect sizes among 16--18-year-olds are for mother--daughter and father--son transmission.
+
+(Notably, for girls, the influence of both their father and mother is only statistically significant among 16--18 year-olds, and it grows in size compared with girls aged 10--15. No such difference between age groups is found among boys. However, for boys aged 16--18, when their parent most interested in a specific topic is their father, they become more interested in that topic, while this relationship is weaker and non-significant for boys aged 10--15.)
+
+(These results provide mixed evidence for Hypothesis 1k: aging makes more statistically significant relationships emerge, but the effect sizes only become somewhat wider between age groups.)
+
+(Yet, among 10--15-year-olds, political interest transmission is statistically significant in any model, which could indicate that early parental socialization is more limited than what was previously thought. It could be the case that due to a more limited sample size, smaller effect sizes are present but do not reach statistical significance. This would be consistent with the finding that, for all significant parent--child interest relationships found among 16--18-year-olds, the direction of the relationship among 10--15-year-olds is the same --- but the coefficient is larger.)
 -->
 
-## Peers
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CPIS"
+knitr::include_graphics("_graphs/DiscussPeersYOSES.pdf")
+```
+
+<!--Patterns somewhat hard to analyze-->
 
 ----
 
@@ -773,41 +751,7 @@ Moreover, again confirming Hypothesis 1a, the largest effect sizes among 16--18-
 knitr::include_graphics("_graphs/PeersGenderAge.pdf")
 ```
 
-----
-
-```{r}
-#| out.width: "325pt"
-#| echo: false
-#| fig-cap: "Interest in Topic Most Often Discussed with Friends by Child Gender and Friends' Gender, 2022 CPIS"
-knitr::include_graphics("_graphs/PeersTopics.pdf")
-```
-
-----
-
-```{r}
-#| out.width: "175pt"
-#| echo: false
-#| fig-cap: "Interest in Topic Most Often Discussed with One's Female Friends, 2022 CPIS"
-knitr::include_graphics("_graphs/FemaleFriendsDiscuss.pdf")
-```
-
-----
-
-```{r}
-#| out.width: "175pt"
-#| echo: false
-#| fig-cap: "Interest in Topic Most Often Discussed with One's Male Friends, 2022 CPIS"
-knitr::include_graphics("_graphs/MaleFriendsDiscuss.pdf")
-```
-
-----
-
-```{r}
-#| out.width: "325pt"
-#| echo: false
-#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CPIS"
-knitr::include_graphics("_graphs/DiscussPeersYOSES.pdf")
-```
+<!--provides support for homophily-->
 
 # Conclusion
 
@@ -822,35 +766,36 @@ knitr::include_graphics("_graphs/DissertationHypothesesConclusion.pdf")
 
 ----
 
-- Social learning theory mostly corroborated: there seems to be stronger transmission of interest for parents of the same gender than their child
+- Social learning theory mostly corroborated: parents & peers influence political interest development --- but gender congruence does not play the expected role for peers, only for parents
 <!--
-Fathers' discussion of various political topics is related to their sons' interest in these topics, while mothers' discussion of various political topics is related to their daughters' interest in these topics Political interest therefore seems to trickle down from parents to children in gendered ways.
+(Fathers' discussion of various political topics is related to their sons' interest in these topics, while mothers' discussion of various political topics is related to their daughters' interest in these topics Political interest therefore seems to trickle down from parents to children in gendered ways.)
 -->
 
-- Children discuss different political topics with peers & parents based on these role models' gender
+- Children discuss different political topics with peers & parents based on their gender<!--Descriptive results show a clear trend: mothers are much more likely to speak about education and health care, while fathers are more likely to speak about the other three topics. These trends mirror previous literature on interest in these topics.-->
+
+- The development of interest in some topics (e.g., partisan politics) starts before adolescence, while this development starts well into adulthood for other topics
+
+- How children develop their interests matters for their future political engagement
 <!--
-Descriptive results show a clear trend: mothers are much more likely to speak about education and health care, while fathers are more likely to speak about the other three topics. These trends mirror previous literature on interest in these topics.
+Political discussion of various topics is seen as something desirable in participatory democracy
+
+Diversity of viewpoints in political discussions leads to collective intelligence (@landemore) and men & women often have different viewpoints rooted in different life experiences
 -->
 
-- Caution: non-causal design, CPIS sample size
+----
+
+- Caution: non-causal design, CPIS sample size (especially by age group)
 <!--
-It does rely on past causal work by Prior and several studies about social learning and the role of parents & peers
+(It does rely on past causal work by Prior and several studies about social learning and the role of parents & peers)
+
+(seem to indicate political interests grows with time, but these results also seem to apply to girls more than to boys --- and the increase between 10--15 and 16--18-year-olds seems rather limited. Future studies conducted among a larger number of children may be able to see more clearly time trends for the growth of parent--child political interest transmission potential.)
 -->
 
 - Topic-by-topic patterns to be further investigated
 <!--
-social learning theory applies well when political interest transmission is evaluated across a range of political topics --- but not necessarily for each topic measured individually.
+(social learning theory applies well when political interest transmission is evaluated across a range of political topics --- but not necessarily for each topic measured individually.)
 -->
-
-- Results by age groups: mixed results => need for larger-n studies among teenagers
-<!--
-seem to indicate political interest grows with time, but these results also seem to apply to girls more than to boys --- and the increase between 10--15 and 16--18-year-olds seems rather limited. Future studies conducted among a larger number of children may be able to see more clearly time trends for the growth of parent--child political interest transmission potential.
--->
-
-- Parent--child studies needed
-<!--
-a longitudinal causal study would be particularly enlightening
--->
+- Parent--child studies needed<!--a longitudinal causal study would be particularly enlightening-->
 
 ## THANKS! {.unnumbered}
 
@@ -915,9 +860,7 @@ knitr::include_graphics("_graphs/CPISPolitical.pdf")
 ```
 
 <!--
-"Throughout Chapter 1, the gender gap in political interest is presented as a product of men’s/boy’s greater interest in partisan politics, but then page 99 shows no gender differences in discussing partisan politics amongst peers “since few male and female friends discuss this topic more than all others.” What does this mean for the assertion that the gender gap in political interest is partisan?"
-
-Another great question. Children aged 10-15 already clearly associate politics with its partisan components more than any other components. Moreover, despite not speaking about partisan politics more than other issues, boys already express higher interest in partisan politics than girls at ages 10-15 - and again for those aged 16-18.
+(MT: "Throughout Chapter 1, the gender gap in political interest is presented as a product of men’s/boy’s greater interest in partisan politics, but then page 99 shows no gender differences in discussing partisan politics amongst peers “since few male and female friends discuss this topic more than all others.” What does this mean for the assertion that the gender gap in political interest is partisan?" Another great question. Children aged 10-15 already clearly associate politics with its partisan components more than any other components. Moreover, despite not speaking about partisan politics more than other issues, boys already express higher interest in partisan politics than girls at ages 10-15 - and again for those aged 16-18.)
 -->
 
 ----
@@ -927,6 +870,24 @@ Another great question. Children aged 10-15 already clearly associate politics w
 #| echo: false
 #| fig-cap: "Unprompted Definitions of Politics by Students, 2022 CPIS"
 knitr::include_graphics("_graphs/CPISOpenQuestion.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Female Friends, 2022 CPIS"
+knitr::include_graphics("_graphs/FemaleFriendsDiscuss.pdf")
+```
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "Interest in Topic Most Often Discussed with One's Male Friends, 2022 CPIS"
+knitr::include_graphics("_graphs/MaleFriendsDiscuss.pdf")
 ```
 
 ## Datagotchi PES
@@ -952,14 +913,21 @@ knitr::include_graphics("_graphs/CPISOpenQuestion.pdf")
 - The CLESSN (Leadership Chair in the Teaching of Digital Social Sciences) designed the rest of the questionnaire
 
 - I designed the weights myself (raking, range 0 to 5) to match with Quebec population numbers as per the 2021 Census [@census2022] on gender, level of education, ethnicity, income and age
+<!--
+The CES weights for province, gender, age & education
+
+The WVS in Canada weights for age, gender, education & region
+
+The GSS weights for gender, age, province, CMA & visible minority status
+
+(MT: "I would also like more clarity about the weights used for the secondary data sources. The text reads as if these are different from the standard population weights provided with, say, the CES, and it’s not immediately clear to me why different weights would need to be calculated. If the standard/provided weights are used, that should be reported.")
+
+(The four datasets that provide information on adults do not involve individuals clustered within classrooms or other broader groupings of interest for this study. Instead of multilevel regressions, simple and multiple ordinary least squares (OLS) and weighted least squares (WLS) regressions are instead performed. All models are tested for heteroskedasticity using the Breusch-Pagan test (Halunga, Orme, and Yamagata 2017) and for autocorrelation using the Durbin–Watson test (Uyanto 2020). OLS is used when both the Durbin–Watson and Breusch–Pagan tests indicate values above 0.05 since there is no evidence of autocorrelation or heteroskedasticity. When either of the two tests indicates a value below 0.05 for an OLS model, meaning either autocorrelation or heteroskedasticity might be an issue, WLS is instead used. Models using all datasets are also tested for multicollinearity. When the values of two variables vary together systematically, one of these variables is kept to avoid any variance inflation factor (VIF) above 5 — except regressions which include a squared term for age and interaction terms for gender with age and ethnicity, where multicollinearity is to be expected.)
+-->
 
 - `anesrake` package (normally used to weight results from the American National Election Studies) [@pasek2018] with default settings
 
 - After raking, the Quebec population percentages match with sample percentages within 10 percentage points --- and typically less than 5 --- for each category of the five variables
-
-<!--
-"I would also like more clarity about the weights used for the secondary data sources. The text reads as if these are different from the standard population weights provided with, say, the CES, and it’s not immediately clear to me why different weights would need to be calculated. If the standard/provided weights are used, that should be reported."
--->
 
 ----
 
@@ -1017,6 +985,12 @@ knitr::include_graphics("_graphs/GSSDescriptive.pdf")
 knitr::include_graphics("_graphs/CESWVSGSSInterest.pdf")
 ```
 
+<!--
+the decrease in the gender gap may be explained by a decrease in the gender gap in interest in *partisan politics*, but also by the emergence of gender gaps in interest in education and health care among women. I am less sure for the latter part obviously, since people mostly think about partisan politics when they think about politics. But it is possible that for a portion of women may become involved in politics through interest in health care and education, as parents... and then as grandparents. Similar shifts happen for men but seem to peak at different times and be less pronounced than for women (Jump to the slide about Datagotchi interest)
+
+I may mention this in-text
+-->
+
 ----
 
 ```{r}
@@ -1049,29 +1023,21 @@ knitr::include_graphics("_graphs/ParticScale.pdf")
 ```{r}
 #| out.width: "325pt"
 #| echo: false
-#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied."
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied."
 knitr::include_graphics("_graphs/InterestYearGender.pdf")
 ```
-
-<!--
-the decrease in the gender gap may be explained by a decrease in the gender gap in interest in *partisan politics*, but also by the emergence of gender gaps in interest in education and health care among women. (Jump to the slide about Datagotchi interest)
-
-I may mention this in-text
--->
 
 ----
 
 ```{r}
 #| out.width: "175pt"
 #| echo: false
-#| fig-cap: "Self-Reported Level of General Political Interest by Country, WVS Wave 7 \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. WVS weights are applied."
+#| fig-cap: "Self-Reported Level of General Political Interest by Country, WVS Wave 7 \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. WVS weights are applied."
 knitr::include_graphics("_graphs/InterestGapByCountry.pdf")
 ```
 
 <!--
-"The cross-national comparisons in Chapter 3 also require more explication to justify the comparisons presented there (e.g., regime type, rights protections for women and girls, etc.)."
-
-Figure 3.6 shows how Canada compares to other WVS countries with regards to the gender gap in self-reported political interest. 57 countries are included; these countries are located on all continents and represent various levels of security and gender equality. I can mention this explicitly in-text.
+(MT: "The cross-national comparisons in Chapter 3 also require more explication to justify the comparisons presented there (e.g., regime type, rights protections for women and girls, etc.)." Figure 3.6 shows how Canada compares to other WVS countries with regards to the gender gap in self-reported political interest. 57 countries are included; these countries are located on all continents and represent various levels of security and gender equality. I can mention this explicitly in-text.)
 -->
 
 ----
@@ -1079,13 +1045,15 @@ Figure 3.6 shows how Canada compares to other WVS countries with regards to the 
 ```{r}
 #| out.width: "175pt"
 #| echo: false
-#| fig-cap: "Level of Political Engagement Across Several Measures Among Canadian Adults, 2021 CES \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no engagement at all, and 10 = a great deal of engagement. For percentage point error in political parties' positions, the percentage point error is instead reported. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES weights are applied."
+#| fig-cap: "Level of Political Engagement Across Several Measures Among Canadian Adults, 2021 CES \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no engagement at all, and 10 = a great deal of engagement. For percentage point error in political parties' positions, the percentage point error is instead reported. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES weights are applied."
 knitr::include_graphics("_graphs/TimePoliticalEngagement.pdf")
 ```
 
 # Questionnaire
 
 ----
+
+::: nonincremental
 
 - Are you...
 
@@ -1094,20 +1062,17 @@ knitr::include_graphics("_graphs/TimePoliticalEngagement.pdf")
   - Other (e.g. Trans, non-binary, two-spirit, gender-queer)
 
 Wording from @ces2021
-
 <!--
 I measure gender - not sex - using this question that allows respondents to choose other identities than man and woman
 
 This question uses CES wording rather than Statistics Canada's
 
-"concepts like masculinities, femininities, and sexisms, and how these concepts relate to the measurement of gender more generally (e.g., Bittner and Goodyear-Grant, Gidengil as written on this, too). Not only are these concepts key to understanding gender, but they are particularly given the importance of homophily as a concept to Chapter 5's empirical analysis"
+(MT: "concepts like masculinities, femininities, and sexisms, and how these concepts relate to the measurement of gender more generally (e.g., Bittner and Goodyear-Grant, Gidengil as written on this, too). Not only are these concepts key to understanding gender, but they are particularly given the importance of homophily as a concept to Chapter 5's empirical analysis") There are two measures of masculinity and feminity suggested by Bittner & Goodyear-Grant (both 2017) and Gidengil and Stolle (2021) that I could have considered. If I had to do it again, I would probably include either the "gender saliency" scale or the "masculinity-femininity" scale in my questionnaires, perhaps as a replacement of some of the agency and communion survey items, to allow for models that control for gender saliency. Are masculine women more or less at risk of transmission of their political interests than feminine women, for example? This would be an absolutely fascinating research and I will update the conclusion to suggest this as an area of future research, citing the works of Gidengil, Stolle, Bittner & Goodyear-Grant. And I could briefly introduce the concepts of femininity and masculinity when introducing communion and agency.
 
-There are two measures of masculinity and feminity suggested by Bittner & Goodyear-Grant (both 2017) and Gidengil and Stolle (2021) that I could have considered. If I had to do it again, I would probably include either the "gender saliency" scale or the "masculinity-femininity" scale in my questionnaires, perhaps as a replacement of some of the agency and communion survey items, to allow for models that control for gender saliency. Are masculine women more or less at risk of transmission of their political interests than feminine women, for example? This would be an absolutely fascinating research and I will update the conclusion to suggest this as an area of future research, citing the works of Gidengil, Stolle, Bittner & Goodyear-Grant.
-
-The focus of my dissertation, however, is elsewhere: comparing boys and girls in all their gender identity complexities. It is not a within-group analysis of boys and girls, but rather a between-group. The studies that justify my research, by Campbell & Winters, Fraile, and others, compare the interests of men and women, not the interests of masculine and feminine personality types, which is why I privileged an approach that directly speaks to their concerns.
-
-I can briefly introduce the concepts of femininity and masculinity when introducing communion and agency.
+The focus of my dissertation, however, is elsewhere: comparing boys and girls in all their gender identity complexities. It is not a within-group analysis of boys and girls, but rather a between-group. The studies that justify my research, by Campbell & Winters, Fraile, and others, compare the interests of men and women, not the interests of masculine and feminine personality types, which is why I privileged an approach that directly speaks to their concerns.)
 -->
+
+:::
 
 ----
 
@@ -1131,6 +1096,12 @@ I can briefly introduce the concepts of femininity and masculinity when introduc
   - Law and crime (i.e., police funding, sentences for violent crimes)
   - Education (i.e., university tuition, funding of public and private schools)
   - Partisan politics (i.e., federal elections, political parties)
+
+<!--
+(MT: "Gender equity is conspicuously absent from the topics chosen to constitute gendered interests. In general, the rationale justifying these topic choices should be made more clearly, with greater grounding in the extant literature. Here, more Canadian content may be helpful. (e.g., Gidengil et al., 2012, Anderson, 2010 on regionalism as gender is presented as a comparator in those models, Bittner and Goodyear-Grant on gender and attitudes)." I consider including gender issues, but I think I dropped it after others recommended for me not to include that variable. Campbell & Winters included the other 5 topics. I also chose topics that best exemplified agency vs. communion. I was not sure whether women's issues would necessarily fall under one label or the other. I am not sure intuitively, for example, whether the gender pay gap or women's political/industrial under-representation would fall under one of these branches. I already make it clear that women are more interested in women's issues. I just had to restrict myself to five topics. I consulted all three studies cited, but did not see a discussion of gendered interests in Canada. Again, I am happy to include anything relevant I may have missed.)
+
+(MT: "It would be useful to consider how alternative explanations for the empirical patterns found in the data. For example, the overwhelming majority of teachers and nurses are women. What might it mean if mothers are simply talking about their days (e.g., what happened at work) with their kids?" Interesting question. I made it clear at the outset that the political aspects of health care and education are what I am interested in, by specifying these in a parenthesis (e.g., "Health care (working conditions of nurses, pandemic, restrictions, etc.)"). For nurses, after a quick look at statistics about the number of nurses and the Canadian population, approximately 1.5% of women are nurses. But if their mothers discuss their working conditions with their kids, this is absolutely a political discussion! This discussion can create an interest in the child and can make them aware of society issues, even without realizing it. As for teachers, I did not give "Working conditions of teachers" as an example of a political topic.)
+-->
 
 :::
 
@@ -1160,7 +1131,7 @@ I can briefly introduce the concepts of femininity and masculinity when introduc
 
 ::: nonincremental
 
-For each of these pairs of characteristics, indicate where you fall on a scale between both extremes. [@spence1978, @ward2006]
+For each of these pairs of characteristics, indicate where you fall on a scale between both extremes. [@spence1978; @ward2006]
 
     + 20.1 Not at all independent - Very independent
         - (1--5 slider)
@@ -1252,6 +1223,8 @@ I originally used the agency and communion scales in multiple regression models 
 
 ----
 
+::: nonincremental
+
 Which of the following best describes your family situation, regardless of whether your biological parents live together or not?
 
 - One mother, one father and no stepparents
@@ -1269,18 +1242,16 @@ Which of the following best describes your family situation, regardless of wheth
 - Other [skip questions 6--9]
 
 <!--
-"The operationalizations for gender and family type are somewhat out of step with Statistics Canada’s estimates of Canadian families. While the low N associated with categorical genders outside the binary is a methodological challenge, it arguably merits more discussion in the dissertation. Similarly, the way families are presented in the dissertation is heteronormative in that lone parent and blended families, and queer parents aren’t considered much, if at all. The CPIS data (page 33) reflects Statistics Canada reports indicating that at least a third of Canadian children live in lone parent or blended families. Given the importance of homophily for the empirical argument, family structure should be addressed more seriously throughout the dissertation."
+(MT: "The operationalizations for gender and family type are somewhat out of step with Statistics Canada’s estimates of Canadian families. While the low N associated with categorical genders outside the binary is a methodological challenge, it arguably merits more discussion in the dissertation. Similarly, the way families are presented in the dissertation is heteronormative in that lone parent and blended families, and queer parents aren’t considered much, if at all. The CPIS data (page 33) reflects Statistics Canada reports indicating that at least a third of Canadian children live in lone parent or blended families. Given the importance of homophily for the empirical argument, family structure should be addressed more seriously throughout the dissertation."
 
-Family structure is fully accounted for in the questionnaire, but I should discuss it more in-text, agreed. I chose this formulation instead of Statistics Canada because I needed specific questions to lead to different options in the Qualtrics questionnaire
-
-In practice, in the CPIS, the question "Which parent discusses the most health care?" with options "Mother", "Father" and "Prefer not to answer/Don't know" was only asked to children who had said they had a mother and a father.
+Family structure is fully accounted for in the questionnaire, but I should discuss it more in-text, agreed. I chose this formulation instead of Statistics Canada because I needed specific questions to lead to different options in the Qualtrics questionnaire. For example, the question "Which parent discusses the most health care?" with options "Mother", "Father" and "Prefer not to answer/Don't know" was only asked to children who had said they had a mother and a father.
 
 Children could indicate whether they had two mothers, two fathers, stepparents, and I also left an open-ended category for other family types, which allowed for queer parents, non-binary parents, and so on.
 
-I can acknowledge early on that the dissertation does not have the statistical power to consider meaningfully blended families. Moreover, I do not have theoretical expectations about these families that would differ substantially from other family types.
-
-I concentrate on gender homophily. A similar concept for parents is called observer--model similarity, although its definition is somewhat similar to homophily. It would be interesting to study whether single parents can more successfully transmit political interest to their other-gender child, but this would need to be the topic of another paper. Anyway, there are too few such instances in my dataset to meaningfully analyze, again. This is why I chose not to address it.
+I can acknowledge early on that the dissertation does not have the statistical power to consider meaningfully blended families. I mention the fact that family types can be varied. Moreover, I do not have theoretical expectations about blended families that would differ substantially from other family types. I concentrate on gender homophily. A similar concept for parents is called observer-model similarity, although its definition is somewhat similar to homophily. It would be interesting to study whether single parents can more successfully transmit political interest to their other-gender child, but this would need to be the topic of another paper. Anyway, there are too few such instances in my dataset to meaningfully analyze, again. This is why I chose not to address it.)
 -->
+
+:::
 
 # Appendix Tables and Figures
 
@@ -1720,9 +1691,6 @@ knitr::include_graphics("_graphs/CorMatrixCPIS.pdf")
 #| fig-cap: "Gender Differences in Interest for Specific Political Topics Among Canadian Adults, 2023 Datagotchi PES"
 knitr::include_graphics("_graphs/GenderDG.pdf")
 ```
-<!--
-I am less sure for the latter part obviously, since people mostly think about partisan politics when they think about politics. But it is possible that for a portion of women may become involved in politics through interest in health care and education, as parents... and then as grandparents. Similar shifts happen for men but seem to peak at different times and be less pronounced than for women
--->
 
 ----
 
@@ -1740,7 +1708,7 @@ knitr::include_graphics("_graphs/CorMatrixDG.pdf")
 ```{r}
 #| out.width: "225pt"
 #| echo: false
-#| fig-cap: "General Political Interest by Year, Gender, Ethnicity and Immigrant Status Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals shown. CES, WVS and GSS weights are applied. Not all surveys included here asked questions about both ethnicity and immigrant status."
+#| fig-cap: "General Political Interest by Year, Gender, Ethnicity and Immigrant Status Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals shown. CES, WVS and GSS weights are applied. Not all surveys included here asked questions about both ethnicity and immigrant status."
 knitr::include_graphics("_graphs/InterestWaveGroup.pdf")
 ```
 
@@ -1787,11 +1755,24 @@ Other definitions [@conover2002; @fitzgerald2013; @heywood2019; @lane1962; @sapi
 
 - The non-violent resolution of disputes
 
-- Power and the distribution of resources
+- Power & the distribution of resources
 
 - Conflictual discussion of controversial topics
 
+- "The concept is extremely broad and comprises any kind of leadership in action" [@weber1919, 1]
+<!--More than a partisan game, politics includes actions that preserve the policy status quo as well as actions that aim at disrupting it, including contentious politics & interest groups that seek to influence the rules - from the international level to the local level.-->
+
 :::
+
+## Political Interest & Socialization
+
+----
+
+**Political interest**: "the degree to which politics arouses a citizen’s curiosity" [@vandeth1990, 278]
+
+- Being aware of politics & caring about it
+
+**Political socialization**: "the process where individual actors acquire political attitudes as a result of outside influences from their direct environment" [@hooghe2022, 99]
 
 ## Gender
 
@@ -1806,26 +1787,19 @@ Other definitions [@conover2002; @fitzgerald2013; @heywood2019; @lane1962; @sapi
 - Goal of the project *with regards to gender & politics*: clarify how gender congruence affects the transmission of interests in communal political topics (often associated with femininity) & agentic political topics (often associated with masculinity)
 
 <!--
-"I would also strongly advise that the dissertation be revised to revisit the claims it makes about gender more generally. In the introduction/theoretical framework, a single source is offered to claim that gender, as a social construct, is developed primarily from biological factors (page 4). While I appreciate that this source is foundational in a narrow part of political behaviour scholarship and that more scholarship is discussed briefly on page 11, it is also entirely out of step with the current state of the field in gender and politics. It also doesn’t help the overall argument much, if at all. Rectifying the omissions outlined above will help here, but I also think it may be useful for Mr. Fortier-Chouinard to reflect on 1) how he understands gender and politics as a field in general and 2) how he understands his contribution to it. This may help clarify the goals of the project, which may, in turn, help better situate it in the larger literature."
-
-I agree with the suggestion that Hatemi and colleagues' study does not contribute to the argument that I make. In fact, reading this again I am also confused about the argument.
-
-I am planning on adding relevant literature to this paragraph and moving Hatemi and colleagues to a footnote, which acknowledges that its findings are at odds with what other studies have found.
+(MT: "I would also strongly advise that the dissertation be revised to revisit the claims it makes about gender more generally. In the introduction/theoretical framework, a single source is offered to claim that gender, as a social construct, is developed primarily from biological factors (page 4). While I appreciate that this source is foundational in a narrow part of political behaviour scholarship and that more scholarship is discussed briefly on page 11, it is also entirely out of step with the current state of the field in gender and politics. It also doesn’t help the overall argument much, if at all. Rectifying the omissions outlined above will help here, but I also think it may be useful for Mr. Fortier-Chouinard to reflect on 1) how he understands gender and politics as a field in general and 2) how he understands his contribution to it. This may help clarify the goals of the project, which may, in turn, help better situate it in the larger literature." I agree with the suggestion that Hatemi and colleagues' study does not contribute to the argument that I make. In fact, reading this again I am also confused about the argument. I am planning on adding relevant literature to this paragraph and moving Hatemi and colleagues to a footnote, which acknowledges that its findings are at odds with what other studies have found.)
 -->
 
 ## Agency & Communion
 
 ----
 
-**Agentic**: "goal-achievement and task functioning (competence, assertiveness, decisiveness)" (Sczesny et al., 2018)
+**Agency**: values, motives, traits & behaviors that align with "goal-achievement and task functioning (competence, assertiveness, decisiveness)" (Sczesny et al., 2018)
 
-**Communal**: "maintenance of relationships and social functioning (benevolence, trustworthiness, morality)." (Sczesny et al., 2018)
+**Communion**: values, motives, traits & behaviors that align with "maintenance of relationships and social functioning (benevolence, trustworthiness, morality)." (Sczesny et al., 2018)
+<!--I could introduce the concepts of agency and communion in the definitions section using these definitions-->
 
-<!--
-I will introduce the concepts of agency and communion in the definitions section using these definitions
--->
-
-- Other authors use similar language: compassion & cooperation (communal) vs. contest, self-assertion & competition (agentic) [@kuhn2004, @campbellrosie2008]
+- Other authors use similar language: compassion & cooperation (communal) vs. contest, self-assertion & competition (agentic) [@kuhn2004; @campbellrosie2008]
 
 - Both derive from gender roles rooted in the historic gendered division of labor
 
@@ -1835,7 +1809,7 @@ I will introduce the concepts of agency and communion in the definitions section
 
 - Priming for competitive aspects of politics reduces women's stated political ambition but not men's [@preece2015]
 
-- Gender differences in frequency of assertive speech seem to start at an early age (1--2 years old) [@fagot1985, @brownell2006] and endure [@leaper2004]
+- Gender differences in frequency of assertive speech seem to start at an early age (1--2 years old) [@fagot1985; @brownell2006] and endure [@leaper2004]
 
 - Cooperative conflict resolution strategies are more commonly used by girls [@noakes2006]
 
@@ -1864,22 +1838,13 @@ The *desire* to run for political office at any level [@fox2005]
 
 - This desire can be short-term or long-term. Political ambition is a form of political engagement through attitudes rather than actions.
 
-- Men have more political ambition than women in Canada & the USA [@fox2005, @fox2024, @tolley2023]. Women tend to downgrade their own qualifications more than men
+- Men have more political ambition than women in Canada & the USA [@fox2005; @fox2024; @tolley2023]. Women tend to downgrade their own qualifications more than men<!--Twice as many men as women seek to be nominated as candidates in Canadian elections-->
 
-<!--Twice as many men as women seek to be nominated as candidates in Canadian elections-->
-
-- This might be related to parental socialization. Women are less likely to receive parental encouragement to run [@fox2005, @fox2024]
+- Parental socialization: women are less likely to receive parental encouragement to run [@fox2005; @fox2024]
 
 - Political interest, self-perceived qualifications, and family socialization, while not the only factors, all predict political ambition
-
 <!--
-"several pieces on political ambition and recruitment by Pruysers and Blais could be engaged with"
-
-Absolutely! Thank you for the suggestion. I will specify in my section about political ambition that Canadian results confirm the findings of Fox & Lawless (citing Pruysers & Blais, 2014, 2017).
-
-I may also refer to Pruysers & Blais (2018, 2019)'s findings that encouragements for women to run for political office do not make a big difference under most circumstances.
-
-I may also refer to Blais et al. (2019)'s finding that the gender gap in political ambition may be partly rooted in personality (women typically have a higher level of honesty-humility and lower degree of narcissism).
+(MT: "several pieces on political ambition and recruitment by Pruysers and Blais could be engaged with" Absolutely! Thank you for the suggestion. I will specify in my section about political ambition that Canadian results confirm the findings of Fox & Lawless (citing Pruysers & Blais, 2014, 2017). I may also refer to Pruysers & Blais (2018, 2019)'s findings that encouragements for women to run for political office do not make a big difference under most circumstances. I may also refer to Blais et al. (2019)'s finding that the gender gap in political ambition may be partly rooted in personality (women typically have a higher level of honesty-humility and lower degree of narcissism).)
 -->
 
 ## Consequences of Social Roles & Stereotypes on Childhood Political Socialization
@@ -1899,33 +1864,24 @@ I may also refer to Blais et al. (2019)'s finding that the gender gap in politic
 Roots of social roles:
 
 1. Social learning from parents, peers (also through gender homophily), media & schools
-
 <!--
 observer-model similarity
 
 social pressures from parents
+
+Children adapt their interests to what their parents and peers who share their gender are interested in. This is the theory I am testing.
 -->
 
-2. These socialization agents are themselves influenced by social norms about men needing to be agentic & women needing to be communal [@campbellrosie2008], themselves rooted in the gendered divison of labour
+2. These socialization agents are themselves influenced by social norms about men "needing to be" agentic & women "needing to be" communal [@campbellrosie2008], themselves rooted in the gendered divison of labour
 
-3. Parents encourage sons more than daughters to run for political office [@fox2005, @fox2024]
+3. Parents encourage sons more than daughters to run for political office [@fox2005; @fox2024]<!--but may not matter that much in Canada according to Blais & Pruysers-->
 
-4. There are more male than female than male politicians who can act as role models [@ipu2024, @wolbrecht2007, @buhlmann2012]
+4. There are more male than female than male politicians who can act as role models [@ipu2024; @wolbrecht2007; @buhlmann2012]
 
 <!--
 I can confidently say that these studies influenced my reflections about women's discrimination in politics and socialization.
 
-"a great deal of this scholarship is entirely omitted from the thesis. This includes but is not limited to how social roles and stereotypes contribute to gender and politics in general and childhood political socialization in particular.
-
-Other collections that would be useful include Taylor-Robinson and Geva’s (2023) study of how gender shapes children’s understanding of leadership across several contexts, including Canada.
-
-on page 46, the text reports that the only explanation offered for declining political interest in children as they age is internalizing gender roles (based on Bos et al., 2022). On page 51, a quoted source (Fraile and Sànches-Vitores, 2020) claims that gender role transmission in early childhood generates the gender gap in political interest and, as a result, merits more scholarly attention (emphasis added). Similarly, on page 91, the dissertation claims that “political interest seems to trickle down from parents to children in gendered ways.” Yes, but how?"
-
-The answers should involve social learning theory, observer-model similarity and gender homophily, in my opinion. Children adapt their interests to what their parents and peers who share their gender are interested in. This is the theory I am testing. This involves social pressures, parents and peers' own internalization of gender norms, agentic and communal roles associated with these interests, and so on.
-
-Perceptions of women as leaders is not the focus of my dissertation, although I understand leadership is an agentic trait which often comes to mind when partisan politics is brought up. Moreover, the reference cited is interested in understandings of leadership among young adults than among children.
-
-I had to cut much of the literature review early on because it focused on the development of political participation, political knowledge, and so on. I am trying to focus the dissertation on the question of how political interest is transmitted through socialization. Other than those I cite, most studies about stereotypes and social roles do not directly address the question of the transmission of political interest (singular or plural), but I am willing to consider other relevant sources I may have missed.
+(MT: "a great deal of this scholarship is entirely omitted from the thesis. This includes but is not limited to how social roles and stereotypes contribute to gender and politics in general and childhood political socialization in particular. // Other collections that would be useful include Taylor-Robinson and Geva’s (2023) study of how gender shapes children’s understanding of leadership across several contexts, including Canada. // on page 46, the text reports that the only explanation offered for declining political interest in children as they age is internalizing gender roles (based on Bos et al., 2022). On page 51, a quoted source (Fraile and Sànches-Vitores, 2020) claims that gender role transmission in early childhood generates the gender gap in political interest and, as a result, merits more scholarly attention (emphasis added). Similarly, on page 91, the dissertation claims that “political interest seems to trickle down from parents to children in gendered ways.” Yes, but how?" Perceptions of women as leaders is not the focus of my dissertation, although I understand leadership is an agentic trait which often comes to mind when partisan politics is brought up. Moreover, the reference cited is interested in understandings of leadership among young adults than among children. I had to cut much of the literature review early on because it focused on the development of political participation, political knowledge, and so on. I am trying to focus the dissertation on the question of how political interest is transmitted through socialization. Other than those I cite, most studies about stereotypes and social roles do not directly address the question of the transmission of political interest (singular or plural), but I am willing to consider other relevant sources I may have missed.)
 
 The literature mentioned here is all relevant, but my research question is "What are the differences in political interests between men and women, how do they get reproduced over time, and why?" The most relevant literatures I cite and want to contribute to, beyond social learning and gender homophily, are about (1) differences in interests between boys and girls, and later between men and women; and (2) the gendered transmission of interests.
 
@@ -1980,16 +1936,14 @@ Sanchez-Vitores (2020) & +30 & UK            & 25 \\
 \end{table}
 
 <!--
-"If the field hasn’t meaningfully studied self-reported political interest in 10, 15, or 20+ years, part of what the dissertation has to do is explain why and provide a rationale for why the field should pick up these lines of inquiry again. For me, this is especially stark when the argument about interest increasing at age 15. If the only source is from 1981, that cues that more is required to justify and substantiate the study’s choices."
-
-I cite much more than one source about the increase around age 15, and several of them are recent: Arens & Watermann (2017), Mayer & Schmidt (2004), Beauregard (2008), Dostie-Goulet (2009a), Bos et al. (2020, 2022). And Table 3.1 cites another 10 recent sources that evaluate the size of the gender gap for 15-25-year-olds.
+(MT: "If the field hasn’t meaningfully studied self-reported political interest in 10, 15, or 20+ years, part of what the dissertation has to do is explain why and provide a rationale for why the field should pick up these lines of inquiry again. For me, this is especially stark when the argument about interest increasing at age 15. If the only source is from 1981, that cues that more is required to justify and substantiate the study’s choices." I cite much more than one source about the increase around age 15, and several of them are recent: Arens & Watermann (2017), Mayer & Schmidt (2004), Beauregard (2008), Dostie-Goulet (2009a), Bos et al. (2020, 2022). And Table 3.1 cites another 10 recent sources that evaluate the size of the gender gap for 15-25-year-olds.)
 -->
 
 ## Women's Participation in Discussion Groups
 
 ----
 
-**Open classroom climate**: "students experience the discussion of social and political issues while in class and \[in which\] they feel comfortable contributing their own opinions during such discussions" (@campbell2007, 62)
+**Open classroom climate**: "students experience the discussion of social and political issues while in class and \[in which\] they feel comfortable contributing their own opinions during such discussions" [@campbell2007, 62]
 
 - Students' perceptions of an *open classroom climate* marginally increase their political interest [@dassonneville2012], as well as several other aspects of their political engagement
 
@@ -1999,69 +1953,16 @@ I cite much more than one source about the increase around age 15, and several o
 
 ----
 
-- Girls are less likely to participate in classroom discussions of politics because boys make the classroom climate aggressive (@mahony1985)
+- Girls are less likely to participate in classroom discussions of politics because boys make the classroom climate aggressive [@mahony1985]
 
-- Girls' presence has a slightly positive impact on girls' speaking time, but interruptions occur as frequently between adolescents whatever their gender (@rosenthal2003)
+- Girls' presence has a slightly positive impact on girls' speaking time, but interruptions occur as frequently between adolescents whatever their gender [@rosenthal2003]
 
-- Adult women's and men's relative speaking time in a deliberative & decision-making setting depends on the number of women [@beauvais2020, @karpowitz2014]. When decisions are made by a majority, the presence of more women leads to more speaking time for each woman
-
+- Adult women's and men's relative speaking time in a deliberative & decision-making setting depends on the number of women [@beauvais2020; @karpowitz2014]. When decisions are made by a majority, the presence of more women leads to more speaking time for each woman
 <!--
-"gendered experiences with political discussion, as outlined in Karpowitz and Mendelberg’s work (2014 book, associated articles)."
-
-I already cite these results in a footnote in the conclusion. This section, which highlights how the extent of women's presence in discussion groups impacts women's speaking time, used to be within the main text, but didn't fit neatly in one section. I leave it up to the committee to decide where this best fits (maybe this should not be a footnote), but I think the issue is sufficiently discussed there.
+(MT: "gendered experiences with political discussion, as outlined in Karpowitz and Mendelberg’s work (2014 book, associated articles)." I already cite these results in a footnote in the conclusion. This section, which highlights how the extent of women's presence in discussion groups impacts women's speaking time, used to be within the main text, but didn't fit neatly in one section. I leave it up to the committee to decide where this best fits (maybe this should not be a footnote), but I think the issue is sufficiently discussed there.)
 -->
 
 # Miscellaneous
-
-## Case Selection
-
-----
-
-Canada = "influential case" (@seawright2008):
-
-- High ("extreme" as per @seawright2008) gender equality by comparative standards, always in top 11 according to several indicators [@conant2019, @em22020, @usnews2020]
-
-<!--
-notably the Women, Peace and Security Index
--->
-
-  - These indicators consider women's inclusion in society, sense of security, income inequality, human rights, exposure to discrimination, etc.
-
-- Relatively low women's legislative representation (**only 30% in October 2024, 67th position**) [@ipu2024]
-
-- By comparison, the 5 Scandinavian/Nordic countries are also in the top 15 of the three reports considered, but in the top 18 for women's legislative representation (minimum 44% in the main legislative assembly as of October 2024)
-
-- I believe that women's legislative under-representation in Canada has something to do with interest in partisan politics
-
-<!--
-"I am not aware of the requirements for an “extreme case” study, but in general, women’s descriptive representation in Canada is high enough comparatively that I do not think many would be persuaded that the disparity between it and societal gender (in)equality would be “extreme.” A more grounded examination of case study methods may help provide a stronger rationale for the dissertation.
-
-It might be useful to add a data source (e.g., ESS) that includes some Scandinavian countries, given the dissertation’s existing rationale for studying Canada."
-
-The point I am making is that Canada is a country that we would expect to be a leader in women's legislative representation given the fact that reports typically place it among "the best countries for women".
--->
-
-----
-
-- CPIS originally intended to include all provinces, but only schools in Quebec and Ontario follow up with me
-
-- Non-random, convenience sample. Findings may not be generalizable to the broader population of Canadian adolescents or adolescents worldwide
-
-- Percentages of girls, immigrants & ethnic minorities are broadly similar in the sample & general Canadian population of adolescents, despite geographic concentration in Quebec & Ontario
-
-- No specific reasons to expect different correlations in the broader population
-
-- *Future research*: I encourage replications with broader, more representative samples -- which, to clarify, are often not the norm for research among children & teenagers given difficulties of access
-
-<!--
-"Within this, a rationale to restrict the CPIS study to Ontario and Quebec alone must be presented in general, with particular attention to how this choice affects the generalizability of the results to Canadian teens."
-
-Ontario and Quebec fare somewhat better - 35-37% of federal MPs from these provinces are women, still far from the top 11 - or from any Scandinavian country.
-
-I am not pretending that Ontario and Quebec teens are similar to teens in the rest of the country in most respects.
-
-I could add that there are no specific reasons to believe patterns of gendered interests and patterns of gendered transmission would vary between provinces.
--->
 
 ## Positionality & Motivations for the Study
 
@@ -2073,17 +1974,49 @@ I could add that there are no specific reasons to believe patterns of gendered i
 
 3. Gap in the literature: how can we explain the transmission of interests in different political topics?
 
-## Future Plans
+## Hypotheses
 
 ----
 
-While this is a monograph, send individual chapters to journals while integrating elements from the introduction, data & methods, and conclusion where appropriate
+- *__Hypothesis 1a__: Political interests start rising around age 15 and increase until age 25, after which they stabilizes.* (not supported)
 
-- Chapter 3 (political interests' development): *CJPS*
+- *__Hypothesis 1b__: Between ages 15 and 25, compared to girls, boys develop more interest in assertion-focused political topics such as law and crime, international affairs and partisan politics. These differences then stabilize and carry on at the adult age.* (not supported)
 
-- Chapter 4 (parents): *Political Science Quarterly*
+- *__Hypothesis 1c__: Between ages 15 and 25, compared to boys, girls develop more interest in cooperation-focused political topics such as health care and education politics. These differences then stabilize and carry on at the adult age.* (not supported)
 
-- Chapter 5 (peers): *Journal of Youth Studies*
+----
+
+- *__Hypothesis 1d__: Boys and girls both see issues related to partisan politics as more political than other political issues starting at age 15.* (not supported)
+
+- *__Hypothesis 1e__: Various indicators of political engagement, such as political interest, political knowledge and political efficacy, mostly increase at the same time --- under age 25.* (not supported)
+
+- *__Hypothesis 1f__: Gender differences in various indicators of political engagement, such as political interest, political knowledge and political efficacy, when they exist, mostly arise at the same time --- under age 25.* (not supported)
+
+----
+
+- *__Hypothesis 2a__: Mothers are more likely than fathers to discuss the politics of health care and education with their children.* (supported)
+
+- *__Hypothesis 2b__: Fathers are more likely than mothers to discuss law and crime, international affairs, and partisan politics with their children.* (supported)
+
+- *__Hypothesis 2c__: Parents are more likely to discuss the politics of health care and education with their daughters than sons.* (not supported)
+
+----
+
+- *__Hypothesis 2d__: Parents are more likely to discuss law and crime, international affairs, and partisan politics with their sons than daughters.* (not supported)
+
+- *__Hypothesis 2e__: Children's political interests are more affected by political discussions with their same-gender parent(s) than their other-gender parent(s).* (supported)
+
+- *__Hypothesis 2f__: Children's political interests become more and more affected by political discussions with their parent(s) as they age.* (partially supported)
+
+----
+
+- *__Hypothesis 3a__: Children are more likely to discuss the politics of health care and education with their female friends than male friends.* (supported)
+
+- *__Hypothesis 3b__: Children are more likely to discuss law and crime, international affairs, and partisan politics with their male friends than female friends.* (supported)
+
+- *__Hypothesis 3c__: Children's political interests are more affected by political discussions with their same-gender friends than their other-gender friends.* (not supported)
+
+- *__Hypothesis 3d__: Children's political interests become more and more affected by political discussions with their friends as they age.* (not supported)
 
 ## Why Using Surveys?
 
@@ -2091,15 +2024,11 @@ While this is a monograph, send individual chapters to journals while integratin
 
 - More objective measure of political interests, with a 0--10 scale
 
-- Less social desirability bias than in-person interviews & focus groups
+- Less social desirability bias than in-person interviews & focus groups<!--Wallace, Goodyear-Grant and Bittner (2024) and others suggest using focus groups to make participants feel more comfortable expressing opinions about their gender. This is a methodology I did consider, but in the end rejected because it is ill-suited to measure attitudes such as political interests. Social desirability bias is stronger in these settings.-->
 
 - Typical way to measure political interest
 
 - Still allows for concrete answers ("**If you were to open a news website and see the following articles how interested would you be in reading each article?** Set the slider to a number from 0 to 10, where 0 means "Not at all interested, I would not read it," and 10 means 'Very interested, I would most likely read it.'"; e.g., Health care (i.e., **pandemic restrictions, working conditions of nurses**))
-
-<!--
-Wallace, Goodyear-Grant and Bittner (2024) and others suggest using focus groups to make participants feel more comfortable expressing opinions about their gender. This is a methodology I did consider, but in the end rejected because it is ill-suited to measure attitudes such as political interests. Social desirability bias is stronger in these settings.
--->
 
 ## Other Measures of Masculinity & Femininity
 
@@ -2111,40 +2040,82 @@ I could have added to my analyses 3 measures of gender identity --- a gender sal
 
 ----
 
-- That being said, my dissertation is focused on addressing a literature about gender differences in political interests (plural) which compares men and women, not agentic vs. communal men, nor women who feel very feminine vs. less feminine vs. masculine [@campbellrosie2008; @coffe2013; @ferrin2020; @hayes1993; @kuhn2004; @sabella2004; @tormos2022; @verba1997]
+- That being said, my dissertation is focused on addressing a literature about gender differences in political interests (plural) which compares men & women, not agentic vs. communal men, nor women who feel very feminine vs. less feminine vs. masculine [@campbellrosie2008; @coffe2013; @ferrin2020; @hayes1993; @kuhn2004; @sabella2004; @tormos2022; @verba1997]
 
 - My main goal is to contribute to between-group differences between women & men, not within-group
 
-- Within-group analysis of political interests using gender saliency scale: an exciting area of future research
+- Within-group analysis of political interests using gender saliency scale: an exciting area of future research<!--Are masculine women more or less at risk of transmission of their political interests than feminine women, for example? I will update the conclusion to suggest this as an area of future research, citing the works of Gidengil, Stolle, Bittner & Goodyear-Grant.-->
 
+## Case Selection
+
+----
+
+Canada = "influential case" [@seawright2008]:
+
+- High ("extreme" as per @seawright2008) gender equality by comparative standards, always in top 11 according to several reports & indicators [@conant2019; @em22020; @usnews2020]<!--notably the Women, Peace and Security Index-->
+
+  - These indicators consider women's inclusion in society, sense of security, income inequality, human rights, exposure to discrimination, etc.
+
+- Relatively low women's legislative representation (**only 30% in October 2024, 67th position**) [@ipu2024]
+
+- By comparison, the 5 Scandinavian/Nordic countries are also in the top 15 of the three reports considered, but in the top 18 for women's legislative representation (minimum 44% in the main legislative assembly as of October 2024)
+
+- I believe that women's legislative under-representation in Canada has something to do with interest in partisan politics
 <!--
-Are masculine women more or less at risk of transmission of their political interests than feminine women, for example? This would be an absolutely fascinating research and I will update the conclusion to suggest this as an area of future research, citing the works of Gidengil, Stolle, Bittner & Goodyear-Grant.
+(MT: "I am not aware of the requirements for an “extreme case” study, but in general, women’s descriptive representation in Canada is high enough comparatively that I do not think many would be persuaded that the disparity between it and societal gender (in)equality would be “extreme.” A more grounded examination of case study methods may help provide a stronger rationale for the dissertation. It might be useful to add a data source (e.g., ESS) that includes some Scandinavian countries, given the dissertation’s existing rationale for studying Canada." The point I am making is that Canada is a country that we would expect to be a leader in women's legislative representation given the fact that reports typically place it among "the best countries for women".)
+
+Another reason to mention: very big gender gap in self-reported political interest; even compared with countries in various cultural contexts, the gender gap is among the largest in Canada (9th out of 57) and it is increasing as per the last CES... But I cannot mention this as a motivation since this is part of my results!
+-->
+
+----
+
+- CPIS originally intended to include all provinces, but only schools in Quebec and Ontario followed up with me
+
+- CPIS = non-random, convenience sample. Findings may not be generalizable to the broader population of Canadian adolescents or adolescents worldwide
+
+- Percentages of girls, immigrants & ethnic minorities are broadly similar in the sample & general Canadian population of adolescents, despite geographic concentration in Quebec & Ontario
+
+- No specific reasons to expect different correlations in the broader population
+
+- *Future research*: I encourage replications with broader, more representative samples --- which, to clarify, are often not the norm for research among children & teenagers given difficulties of access
+<!--
+(MT: "Within this, a rationale to restrict the CPIS study to Ontario and Quebec alone must be presented in general, with particular attention to how this choice affects the generalizability of the results to Canadian teens." Ontario and Quebec fare somewhat better - 35-37% of federal MPs from these provinces are women, still far from the top 11 - or from any Scandinavian country. I am not pretending that Ontario and Quebec teens are similar to teens in the rest of the country in most respects. I could add that there are no specific reasons to believe patterns of gendered interests and patterns of gendered transmission would vary between provinces.)
 -->
 
 ## Study Limitations
 
 ----
 
-- Age & period effects are distinguished for CES data
+- Age & period effects can be analyzed & compared for CES data
 
-- Difficult to distinguish period from generation, since the same individuals were generally not polled again across successive CES surveys -- or only for a restricted number of years
+- Difficult to distinguish period from generation, since the same individuals were generally not polled again across successive CES surveys --- or only for a restricted number of years
 
-- The survey questionnaire for political interests I use (and adapt for children) is quite new, but I do not have longitudinal data that can distinguish age and period effects for each topic<!--This is not possible for a 3- to 4-year PhD project-->
-
-- I hope to include these questions again in future surveys among adults, using emails from the Datagotchi panel and those collected through the CPIS, to produce political interests time-series similar to @prior2019<!--evolution of their political interests in a few years-->
+- The survey questionnaire for political interests I use (& adapt for children) is quite new, but I do not have longitudinal data that can distinguish age & period effects for each topic<!--This is not possible for a 3- to 4-year PhD project-->
 
 ----
 
 - Still, my data tracks with other surveys among adults in other countries (direction of the gender gaps in most topics)<!--except law and crime-->
 
-- Impossible to know for certain, but life-cycle effects seem to be at play when women's interest in health care and education increase after they reach ages where they are more likely to be mothers and to take care of others
+- Impossible to know for certain, but life-cycle effects seem to be at play when women's interest in health care & education increase after they reach ages where they are more likely to be mothers & to take care of others
 
-- Gendered socialization is central in explaining the mental load associated with motherhood vs. fatherhood and why women's interests adapt more than men's when they become parents<!--Life-cycle effects are not simply detached from socialization-->
+- Gendered socialization is central in explaining the mental load associated with motherhood vs. fatherhood and why women's interests adapt more than men's when they become parents<!--Life-cycle effects are not completely detached from socialization-->
 
 <!--
-"On method, I would like to see some discussion about what can (and can’t) be learned about lifecycle effects with cross-sectional, cross-time data."
-
-This is a great question. Figure 3.7 shows the gender gap in self-reported political interest by age and election year.
+(MT: "On method, I would like to see some discussion about what can (and can’t) be learned about lifecycle effects with cross-sectional, cross-time data." Look at the figure about self-reported political interest by age and election year.
 -->
+
+## Future Plans
+
+----
+
+While this is a monograph, send individual chapters to journals while integrating elements from the introduction, data & methods, and conclusion where appropriate
+
+- Chapter 3 (political interests' development): *CJPS*<!--I could include agency & communion questions as part of that article-->
+
+- Chapter 4 (parents): *Political Science Quarterly*
+
+- Chapter 5 (peers): *Journal of Youth Studies*
+
+- I hope to include questions about political interests again in follow-up surveys among adults, using emails from the Datagotchi panel & those collected through the CPIS, to produce political interests panel data time-series similar to @prior2019<!--evolution of their political interests in a few years-->
 
 ----
