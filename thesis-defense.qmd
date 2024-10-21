@@ -34,7 +34,7 @@ Bear with me for these definitions, they will be useful all along
 
 - **Communion**: values, motives, traits & behaviors that align with "maintenance of relationships and social functioning (benevolence, trustworthiness, morality)." (Sczesny et al., 2018)
 
-- Some parallels between the 3 concepts<!--agency can create disagreements and conflict, while communion can foster cooperation-->
+- Links between the 3 concepts<!--agency can create disagreements and conflict, while communion can foster cooperation-->
 
 ----
 
@@ -48,7 +48,7 @@ How do people conceptualize political interest?
 
 - They typically associate politics with partisan politics & (to a lesser extent) foreign policy<!--interest in diplomacy, wars, elections, etc.-->
 
-- But they often do not associate politics with health care or education<!--even when thinking about the broader state of the health & education systems or specific political issues-->
+- But they often do not associate politics with health care politics or education politics<!--even when thinking about the broader state of the health & education systems or specific political issues-->
 
 ## Why Do Different Definitions of Politics Matter?
 
@@ -191,10 +191,9 @@ In time series, an increase in mothers' political interest is often accompanied 
 (Beyond associations between children's discussion of political issues with peers and their political interest, studies inquiring about longitudinal or causal effects have gotten more mixed results. @dostiegoulet2009en finds evidence that *changes* in political interest from one year to the next are linked to changes in the number of political discussions with friends. The effect size is similar for year-to-year changes in the number of such discussions with parents. @shehata2019 also show that, using a two-way fixed effects panel model, changes in children's frequency of political discussions with peers are related to their changes in political interest just as much as the frequency of political discussions with parents. However, conducting another analysis, they find that political discussions with peers at ages 14--15 do not lead to more political interest two years later, after controlling for initial levels of political interest and frequency of political discussions with parents, suggesting parents play a more long-lasting role in the socialization process over the long run. @stattin2022 further temper the results of this literature by showing that adolescents' initial level of political interest predicts changes in their perceptions of their peers' political interest, while their peers' initial political interest (as perceived by the child) does not predict changes in their own future political interest.)
 
 (Main causal mechanisms: parent--child & peer-to-peer political discussions [@shehata2019; @klofstad2007]. changes in the frequency of political discussions with parents positively predict changes in adolescents' level of political interest)
--->
 
 - Transmission works better for parent--child pairs of the same gender [@beauregard2008; @owen1988; @prior2019]
-<!--
+
 Mothers' political interest has a stronger effect on their daughters than sons' political interest, while fathers' political interest has a stronger effect on their sons' political interest.
 
 (Daughters' political interest seems to be influenced mostly by their mothers. It is not clear whether sons' political interest is influenced mostly by their father [@beauregard2008; @owen1988] or mother [@prior2019])
@@ -221,11 +220,11 @@ Mothers' political interest has a stronger effect on their daughters than sons' 
 Political interest is one such attitude
 -->
 
-- Social learning is easier when the role model shares the child's gender (observer--model similarity)
+- Social learning is easier when the role model shares the child's gender (observer--model similarity)<!--mothers & daughters, fathers & sons-->
 
 - Works through social pressure, discussions, the home environment, etc.<!--In a political home environment, children can either feel social pressure to become interested in politics to create or maintain a sense of social belonging in the family unit, be exposed to more news media content, listen to or participate in more political discussions at home, or all of these [@shehata2019]-->
 
-- **Gender homophily theory**: Children of the same gender tend to stick together & become friends<!--Studies have found most political discussions between adults are men-to-men and women-to-women-->
+- **Gender homophily theory**: Children of the same gender tend to stick together & become friends (& discuss issues together)<!--Studies have found most political discussions between adults are men-to-men and women-to-women-->
 
 - __Research question: *What are the differences in political interests between men and women, how do they get reproduced over time, and why?*__
 <!--
@@ -281,10 +280,9 @@ knitr::include_graphics("_graphs/wvs.jpg")
 
 [@ces2021; @wvs2022]
 
-Where necessary, I apply raking (a form of weighting) based on gender, age, education, region, etc.
+Where necessary, I apply raking weights based on gender, age, education, region, etc.
 :::
 ::::
-
 
 ----
 
@@ -317,126 +315,11 @@ I also ask children which parent and their peers of which gender discuss each is
 ----
 
 ```{r}
-#| out.width: "250pt"
-#| echo: false
-#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied. For the GSS, respondents' specific age is not available; age groups are used instead."
-knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
-```
-
-<!--
-Political interest increases as people age
-
-Gender gap narrows as people age
--->
-
-----
-
-```{r}
-#| out.width: "175pt"
-#| echo: false
-#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. CES weights are applied."
-knitr::include_graphics("_graphs/CESGapYearAge.pdf")
-```
-
-<!--
-Similar narrowing of the gender gap across CES survey years and survey modes
-
-(Prior (2019) estimates there is a 10–15 percentage point increase. Political interest continues to increase after 25 years old, but at a slower pace, and the age differences that are observed between older respondents seem almost entirely due to cohort effects: older cohorts of voters, especially those born in the 1940s, are particularly interested in politics. However, within each cohort of people, after reaching 25 years old, political interest remains very stable until death.)
--->
-
-----
-
-\begin{table}
-\centering\centering
-\caption{Interest in Topic by Gender, Datagotchi PES \label{tab:olsInterestDG}}
-\centering
-\fontsize{6}{8}\selectfont
-\begin{tabular}[t]{lcccccc}
-\toprule
-  & Politics & Health & International & Law and & Education & Partisan\\
-  & (general) & care & affairs & crime & & politics\\
-\midrule
-\addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{Without Controls}}\\
-\midrule \hspace{1em}(Intercept) & 7.724*** & 6.449*** & 7.453*** & 5.421*** & 6.586*** & 6.334***\\
-\hspace{1em} & (0.064) & (0.075) & (0.071) & (0.079) & (0.075) & (0.084)\\
-\hspace{1em}Gender (1 = women) & -0.877*** & 0.690*** & -0.592*** & 0.104 & 0.517*** & -0.645***\\
-\hspace{1em} & (0.097) & (0.116) & (0.109) & (0.121) & (0.116) & (0.128)\\
-\hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & \vphantom{1} 1575\\
-\hspace{1em}R2 & 0.049 & 0.022 & 0.018 & 0.000 & 0.013 & 0.016\\
-\hspace{1em}R2 Adj. & 0.048 & 0.022 & 0.018 & 0.000 & 0.012 & 0.015\\
-\hspace{1em}Log.Lik. & -3254.524 & -3523.301 & -3437.633 & -3591.294 & -3524.218 & -3687.310\\
-\addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{With Controls}}\\
-\midrule \hspace{1em}(Intercept) & 7.438*** & 4.079*** & 5.903*** & 6.100*** & 3.987*** & 4.653***\\
-\hspace{1em} & (0.615) & (0.596) & (0.610) & (0.763) & (0.615) & (0.696)\\
-\hspace{1em}Gender (1 = women) & -0.872*** & 0.838*** & -0.331** & 0.168 & 0.759*** & -0.662***\\
-\hspace{1em} & (0.098) & (0.116) & (0.119) & (0.122) & (0.120) & (0.136)\\
-\hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & 1575\\
-\hspace{1em}R2 & 0.067 & 0.121 & 0.044 & 0.016 & 0.119 & 0.034\\
-\hspace{1em}R2 Adj. & 0.062 & 0.116 & 0.039 & 0.010 & 0.114 & 0.029\\
-\hspace{1em}Log.Lik. & -3239.313 & -39068.770 & -39105.751 & -3579.255 & -39119.704 & -39313.305\\
-\bottomrule
-\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Without controls: Ordinary least squares (OLS) regressions}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}With controls: OLS for Politics (general) and Law and Crime; Weighted least squares (WLS) for other regressions}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Controls: Socio-economic variables}\\
-\end{tabular}
-\end{table}
-
-----
-
-```{r}
 #| out.width: "225pt"
 #| echo: false
 #| fig-cap: "Self-Reported Level of Interest in Various Topics by Age Among Canadian Adults, 2022 Datagotchi PES \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. Datagotchi PES weights are applied."
 knitr::include_graphics("_graphs/InterestAgeGenderDG.pdf")
 ```
-
-----
-
-\begin{table}
-\centering\centering
-\caption{Interest in Topic by Gender, CPIS \label{tab:lmeInterestCPIS}}
-\centering
-\fontsize{6}{8}\selectfont
-\begin{tabular}[t]{lcccccc}
-\toprule
-  & Politics & Health & International & Law and & Education & Partisan\\
-  & (general) & care & affairs & crime & & politics\\
-\midrule
-\addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{Without Controls}}\\
-\midrule \hspace{1em}(Intercept) & 4.579*** & 4.041*** & 5.724*** & 4.956*** & 4.219*** & 4.007***\\
-\hspace{1em} & (0.184) & (0.167) & (0.180) & (0.173) & (0.206) & (0.171)\\
-\hspace{1em}Gender (1 = girl) & -0.434* & 0.128 & -0.980*** & 0.488* & -0.103 & -0.854***\\
-\hspace{1em} & (0.207) & (0.197) & (0.229) & (0.231) & (0.223) & (0.232)\\
-\hspace{1em}SD (Intercept Class) & 0.651 & 0.542 & 0.473 & 0.377 & 0.771 & 0.344\\
-\hspace{1em}SD (Observations) & 2.499 & 2.397 & 2.802 & 2.837 & 2.701 & 2.855\\
-\hspace{1em}Num.Obs. & 617 & 623 & 620 & 619 & 623 & 620\\
-\hspace{1em}R2 Marg. & 0.007 & 0.001 & 0.029 & 0.007 & 0.000 & 0.022\\
-\addlinespace[0.5em]
-\multicolumn{7}{l}{\textit{With Controls}}\\
-\midrule \hspace{1em}(Intercept) & 1.413 & 1.138 & 4.458*** & 2.838* & 0.218 & 4.246**\\
-\hspace{1em} & (1.337) & (1.187) & (1.315) & (1.254) & (1.436) & (1.309)\\
-\hspace{1em}Gender (1 = girl) & -0.432* & 0.128 & -0.973*** & 0.492* & -0.122 & -0.809***\\
-\hspace{1em} & (0.212) & (0.201) & (0.232) & (0.237) & (0.229) & (0.236)\\
-\hspace{1em}SD (Intercept Class) & 0.598 & 0.470 & 0.442 & 0.318 & 0.665 & 0.408\\
-\hspace{1em}SD (Observations) & 2.476 & 2.375 & 2.738 & 2.811 & 2.680 & 2.792\\
-\hspace{1em}Num.Obs. & 579 & 584 & 581 & 581 & 584 & 581\\
-\hspace{1em}R2 Marg. & 0.031 & 0.022 & 0.070 & 0.024 & 0.030 & 0.045\\
-\bottomrule
-\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
-\multicolumn{7}{l}{\rule{0pt}{1em}Controls: Socio-economic variables}\\
-\end{tabular}
-\end{table}
-<!--
-(In the upper half of the table, taking into account classroom fixed effects, boys generally report being more interested in politics than girls, but the gender gap is relatively minimal, standing at 0.43 for the 11-point political interest scale (*p*<0.05). Boys' interest in international affairs and partisan politics is higher than girls' (1-point and 0.85-point difference respectively; both *p*<0.001). This seems to be in line with the results among adult respondents. However, girls' interest in law and crime is also slightly higher (0.5 point, *p*<0.05). This result is more surprising given previous literature showing the contrary. Results for the other two topics, health care and education, are almost even between the genders, and not statistically significant, despite adult women usually reporting higher levels of interest in these two topics across studies.)
-
-(However, in the lower half of the table, controlling for socio-demographic factors, all relationships between gender and interest disappear. It might be the case that girls are less interested in some of these topics by virtue of other socio-demographic characteristics, but there does not seem to be one other socio-demographic variable that reliably predicts interest in any of the topics.)
--->
 
 ----
 
@@ -778,6 +661,51 @@ knitr::include_graphics("_graphs/CPISInterest.pdf")
 
 ----
 
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender, CPIS \label{tab:lmeInterestCPIS}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & Politics & Health & International & Law and & Education & Partisan\\
+  & (general) & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Without Controls}}\\
+\midrule \hspace{1em}(Intercept) & 4.579*** & 4.041*** & 5.724*** & 4.956*** & 4.219*** & 4.007***\\
+\hspace{1em} & (0.184) & (0.167) & (0.180) & (0.173) & (0.206) & (0.171)\\
+\hspace{1em}Gender (1 = girl) & -0.434* & 0.128 & -0.980*** & 0.488* & -0.103 & -0.854***\\
+\hspace{1em} & (0.207) & (0.197) & (0.229) & (0.231) & (0.223) & (0.232)\\
+\hspace{1em}SD (Intercept Class) & 0.651 & 0.542 & 0.473 & 0.377 & 0.771 & 0.344\\
+\hspace{1em}SD (Observations) & 2.499 & 2.397 & 2.802 & 2.837 & 2.701 & 2.855\\
+\hspace{1em}Num.Obs. & 617 & 623 & 620 & 619 & 623 & 620\\
+\hspace{1em}R2 Marg. & 0.007 & 0.001 & 0.029 & 0.007 & 0.000 & 0.022\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{With Controls}}\\
+\midrule \hspace{1em}(Intercept) & 1.413 & 1.138 & 4.458*** & 2.838* & 0.218 & 4.246**\\
+\hspace{1em} & (1.337) & (1.187) & (1.315) & (1.254) & (1.436) & (1.309)\\
+\hspace{1em}Gender (1 = girl) & -0.432* & 0.128 & -0.973*** & 0.492* & -0.122 & -0.809***\\
+\hspace{1em} & (0.212) & (0.201) & (0.232) & (0.237) & (0.229) & (0.236)\\
+\hspace{1em}SD (Intercept Class) & 0.598 & 0.470 & 0.442 & 0.318 & 0.665 & 0.408\\
+\hspace{1em}SD (Observations) & 2.476 & 2.375 & 2.738 & 2.811 & 2.680 & 2.792\\
+\hspace{1em}Num.Obs. & 579 & 584 & 581 & 581 & 584 & 581\\
+\hspace{1em}R2 Marg. & 0.031 & 0.022 & 0.070 & 0.024 & 0.030 & 0.045\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Method: Multilevel linear regression}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Fixed Effects: Classroom}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
+<!--
+(In the upper half of the table, taking into account classroom fixed effects, boys generally report being more interested in politics than girls, but the gender gap is relatively minimal, standing at 0.43 for the 11-point political interest scale (*p*<0.05). Boys' interest in international affairs and partisan politics is higher than girls' (1-point and 0.85-point difference respectively; both *p*<0.001). This seems to be in line with the results among adult respondents. However, girls' interest in law and crime is also slightly higher (0.5 point, *p*<0.05). This result is more surprising given previous literature showing the contrary. Results for the other two topics, health care and education, are almost even between the genders, and not statistically significant, despite adult women usually reporting higher levels of interest in these two topics across studies.)
+
+(However, in the lower half of the table, controlling for socio-demographic factors, all relationships between gender and interest disappear. It might be the case that girls are less interested in some of these topics by virtue of other socio-demographic characteristics, but there does not seem to be one other socio-demographic variable that reliably predicts interest in any of the topics.)
+-->
+
+----
+
 ```{r}
 #| out.width: "325pt"
 #| echo: false
@@ -916,6 +844,46 @@ knitr::include_graphics("_graphs/DGDescriptive.pdf")
 knitr::include_graphics("_graphs/DGInterest.pdf")
 ```
 
+----
+
+\begin{table}
+\centering\centering
+\caption{Interest in Topic by Gender, Datagotchi PES \label{tab:olsInterestDG}}
+\centering
+\fontsize{6}{8}\selectfont
+\begin{tabular}[t]{lcccccc}
+\toprule
+  & Politics & Health & International & Law and & Education & Partisan\\
+  & (general) & care & affairs & crime & & politics\\
+\midrule
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{Without Controls}}\\
+\midrule \hspace{1em}(Intercept) & 7.724*** & 6.449*** & 7.453*** & 5.421*** & 6.586*** & 6.334***\\
+\hspace{1em} & (0.064) & (0.075) & (0.071) & (0.079) & (0.075) & (0.084)\\
+\hspace{1em}Gender (1 = women) & -0.877*** & 0.690*** & -0.592*** & 0.104 & 0.517*** & -0.645***\\
+\hspace{1em} & (0.097) & (0.116) & (0.109) & (0.121) & (0.116) & (0.128)\\
+\hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & \vphantom{1} 1575\\
+\hspace{1em}R2 & 0.049 & 0.022 & 0.018 & 0.000 & 0.013 & 0.016\\
+\hspace{1em}R2 Adj. & 0.048 & 0.022 & 0.018 & 0.000 & 0.012 & 0.015\\
+\hspace{1em}Log.Lik. & -3254.524 & -3523.301 & -3437.633 & -3591.294 & -3524.218 & -3687.310\\
+\addlinespace[0.5em]
+\multicolumn{7}{l}{\textit{With Controls}}\\
+\midrule \hspace{1em}(Intercept) & 7.438*** & 4.079*** & 5.903*** & 6.100*** & 3.987*** & 4.653***\\
+\hspace{1em} & (0.615) & (0.596) & (0.610) & (0.763) & (0.615) & (0.696)\\
+\hspace{1em}Gender (1 = women) & -0.872*** & 0.838*** & -0.331** & 0.168 & 0.759*** & -0.662***\\
+\hspace{1em} & (0.098) & (0.116) & (0.119) & (0.122) & (0.120) & (0.136)\\
+\hspace{1em}Num.Obs. & 1575 & 1575 & 1575 & 1575 & 1575 & 1575\\
+\hspace{1em}R2 & 0.067 & 0.121 & 0.044 & 0.016 & 0.119 & 0.034\\
+\hspace{1em}R2 Adj. & 0.062 & 0.116 & 0.039 & 0.010 & 0.114 & 0.029\\
+\hspace{1em}Log.Lik. & -3239.313 & -39068.770 & -39105.751 & -3579.255 & -39119.704 & -39313.305\\
+\bottomrule
+\multicolumn{7}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Without controls: Ordinary least squares (OLS) regressions}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}With controls: OLS for Politics (general) and Law and Crime; Weighted least squares (WLS) for other regressions}\\
+\multicolumn{7}{l}{\rule{0pt}{1em}Controls: Socio-economic variables}\\
+\end{tabular}
+\end{table}
+
 ## CES, WVS and GSS
 
 ----
@@ -995,6 +963,36 @@ knitr::include_graphics("_graphs/ParticScale.pdf")
 #| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES, WVS (Canada) and GSS \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied."
 knitr::include_graphics("_graphs/InterestYearGender.pdf")
 ```
+
+----
+
+```{r}
+#| out.width: "250pt"
+#| echo: false
+#| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied. For the GSS, respondents' specific age is not available; age groups are used instead."
+knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
+```
+
+<!--
+Political interest increases as people age
+
+Gender gap narrows as people age
+-->
+
+----
+
+```{r}
+#| out.width: "175pt"
+#| echo: false
+#| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. CES weights are applied."
+knitr::include_graphics("_graphs/CESGapYearAge.pdf")
+```
+
+<!--
+Similar narrowing of the gender gap across CES survey years and survey modes
+
+(Prior (2019) estimates there is a 10–15 percentage point increase. Political interest continues to increase after 25 years old, but at a slower pace, and the age differences that are observed between older respondents seem almost entirely due to cohort effects: older cohorts of voters, especially those born in the 1940s, are particularly interested in politics. However, within each cohort of people, after reaching 25 years old, political interest remains very stable until death.)
+-->
 
 ----
 
