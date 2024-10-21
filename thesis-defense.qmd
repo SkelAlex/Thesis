@@ -60,10 +60,14 @@ How do people conceptualize political interest?
 #| fig-cap: "Political interests by gender [@campbellrosie2008]"
 knitr::include_graphics("_previous/_practice-talk/campbellrosie2008.png")
 ```
+
 <!--
 Suddenly, in this BRITISH study, big gender gaps in both directions! Women REPORT BEING more interested in health care
+-->
 
-Potential explanation: studies show that ON AVERAGE, men tend to see political issues in a different light: agency for men, communion for women
+- Agentic vs. communal topics
+<!--
+Potential explanation: studies show that ON AVERAGE, men consider themselves more agentic and women, more communal
 
 Aggregate measure of political interest ("On a scale of 0 to 10, how would you rate your interest in politics?" and the like): men report being more interested, presumably because they think about partisan politics & foreign policy
 
@@ -99,7 +103,7 @@ knitr::include_graphics("_previous/_practice-talk/gidengil.png")
 
 Life-cycle events [@gidengil2008]
 <!--
-motherhood, employment... But in recent studies, motherhood = not significantly related to political interest & employment = mixed results
+motherhood, employment... But in recent studies, motherhood = not significantly related to political interest in Canada & employment = mixed results
 
 (Mestre and Marı́n (2012) also find that women work on average three more hours of paid and unpaid work than men and that the amount of unpaid domestic work is negatively related to political interest for women, suggesting women’s lower political interest could stem from a lack of time. However, the same study also finds that the amount of unpaid domestic work is unrelated to political interest for men, which means some other factors must be at play to explain gender differences)
 -->
@@ -174,10 +178,9 @@ knitr::include_graphics("_graphs/friends.jpeg")
 - Significant relationship between the political interest of children and their parents' and peers' political interest [@beauregard2008; @janmaat2022; @neundorf2013; @prior2019; @shehata2019]
 <!--
 (@prior2019 estimates moderately strong Pearson correlation coefficients of 0.3 to 0.4 for parent--child political interest scores across three countries)
--->
 
-- Growth in parent--child political interest correlations between ages 11 and 15 [@prior2019]
-<!--
+(Growth in parent--child political interest correlations between ages 11 and 15 [@prior2019])
+
 (Parent--child correlations then remain stronger when both parents share a similar level of political interest, when this parental political interest is stable through time, and when children move out late from their parents' place)
 -->
 
@@ -186,28 +189,22 @@ knitr::include_graphics("_graphs/friends.jpeg")
 In time series, an increase in mothers' political interest is often accompanied by an increase in their children's political interest. The same goes for fathers, and for decreases rather than increases. @shehata2019
 
 (Beyond associations between children's discussion of political issues with peers and their political interest, studies inquiring about longitudinal or causal effects have gotten more mixed results. @dostiegoulet2009en finds evidence that *changes* in political interest from one year to the next are linked to changes in the number of political discussions with friends. The effect size is similar for year-to-year changes in the number of such discussions with parents. @shehata2019 also show that, using a two-way fixed effects panel model, changes in children's frequency of political discussions with peers are related to their changes in political interest just as much as the frequency of political discussions with parents. However, conducting another analysis, they find that political discussions with peers at ages 14--15 do not lead to more political interest two years later, after controlling for initial levels of political interest and frequency of political discussions with parents, suggesting parents play a more long-lasting role in the socialization process over the long run. @stattin2022 further temper the results of this literature by showing that adolescents' initial level of political interest predicts changes in their perceptions of their peers' political interest, while their peers' initial political interest (as perceived by the child) does not predict changes in their own future political interest.)
+
+(Main causal mechanisms: parent--child & peer-to-peer political discussions [@shehata2019; @klofstad2007]. changes in the frequency of political discussions with parents positively predict changes in adolescents' level of political interest)
 -->
-
-- Main causal mechanism: parent--child & peer-to-peer political discussions [@shehata2019; @klofstad2007]<!--changes in the frequency of political discussions with parents positively predict changes in adolescents' level of political interest-->
-
-## Gender Differences in Transmission of Self-Reported Political Interest
-
-----
 
 - Transmission works better for parent--child pairs of the same gender [@beauregard2008; @owen1988; @prior2019]
 <!--
 Mothers' political interest has a stronger effect on their daughters than sons' political interest, while fathers' political interest has a stronger effect on their sons' political interest.
 
 (Daughters' political interest seems to be influenced mostly by their mothers. It is not clear whether sons' political interest is influenced mostly by their father [@beauregard2008; @owen1988] or mother [@prior2019])
--->
 
-- Mother--daughter correlations particularly strong
-<!--
+(Mother--daughter correlations particularly strong)
+
 (@prior2019: mother--daughter political interest correlations are strongest (0.43), while mother--son, father--daughter and father--son correlations all sit between 0.31 and 0.34)
--->
 
-- Mothers and fathers talk as much about "politics" with sons and daughters
-<!--
+(Mothers and fathers talk as much about "politics" with sons and daughters)
+
 (earlier studies found that children discuss politics more often with their fathers than mothers [@noller1985; @oswald1998])
 
 (it seems reasonable to assume, as @hooghe2015 do, that political discussions involving the father tend to revolve mostly around partisan politics, while political discussions with mothers might center on other topics --- presumably health care, education, gender issues, and so on)
@@ -218,7 +215,6 @@ Mothers' political interest has a stronger effect on their daughters than sons' 
 ----
 
 - **Social learning theory**: Children learn by observing their parents & peers, modelling their behaviour, attitudes, habits & values after them
-
 <!--
 2 main theories I rely upon
 
@@ -227,7 +223,7 @@ Political interest is one such attitude
 
 - Social learning is easier when the role model shares the child's gender (observer--model similarity)
 
-- Works through social pressure<!--In a political home environment, children can either feel social pressure to become interested in politics to create or maintain a sense of social belonging in the family unit, be exposed to more news media content, listen to or participate in more political discussions at home, or all of these [@shehata2019]-->
+- Works through social pressure, discussions, the home environment, etc.<!--In a political home environment, children can either feel social pressure to become interested in politics to create or maintain a sense of social belonging in the family unit, be exposed to more news media content, listen to or participate in more political discussions at home, or all of these [@shehata2019]-->
 
 - **Gender homophily theory**: Children of the same gender tend to stick together & become friends<!--Studies have found most political discussions between adults are men-to-men and women-to-women-->
 
@@ -237,19 +233,6 @@ How do parental and peer-to-peer transmission work for different political topic
 
 (What shapes interest in partisan politics, which can lead to running for office?)
 -->
-
-----
-
-- *__Hypothesis 1__: Adolescence is the moment in time when gender differences in political interests emerge.*
-
-- *__Hypothesis 2__: Children's political interests are more affected by political discussions with their same-gender parent(s) than other-gender parent(s).*
-<!--
-Basically, I assume the effect found in other studies for political interest will be the same for any political topic: fathers have more influence on transmitting interest to their sons, and mothers to their daughters
-
-(Adult men and women are more interested in certain topics and are more likely to transmit interest in any topic to their children of the same gender)
--->
-
-- *__Hypothesis 3__: Children's political interests are more affected by political discussions with their same-gender peers than other-gender peers.*<!--Again, more influence of same-gender peers on each topic-->
 
 ----
 
@@ -272,11 +255,10 @@ policies often have different effects on men and women, which can be influenced 
 ----
 
 Children Political Interest Survey (CPIS): Survey of 698 children & teenagers (8--18) in 8 Quebec & Ontario schools in 2022--23
-
 <!--
-Schools include various urban areas of Quebec & Ontario
-
 15-minute bilingual Qualtrics online survey questionnaire filled during classroom time
+
+(Schools include various urban areas of Quebec & Ontario)
 -->
 
 :::: columns
@@ -340,10 +322,11 @@ I also ask children which parent and their peers of which gender discuss each is
 #| fig-cap: "Self-Reported Level of General Political Interest by Age Among Canadian Adults, 2021 CES, WVS Wave 7 and 2020 Canadian GSS \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no interest at all, and 10 = a great deal of interest. Dots represent average interest by age and gender. 95% confidence intervals represented by shaded areas. CES, WVS and GSS weights are applied. For the GSS, respondents' specific age is not available; age groups are used instead."
 knitr::include_graphics("_graphs/TimeCESWVSGSS.pdf")
 ```
-<!--
-Political interest increases over time
 
-Gender gap narrows over time
+<!--
+Political interest increases as people age
+
+Gender gap narrows as people age
 -->
 
 ----
@@ -354,6 +337,7 @@ Gender gap narrows over time
 #| fig-cap: "General Political Interest by Year and Gender Among Canadian Adults, CES \\newline \\tiny\\textit{Notes}: On the \\textit{y} axis, 0 = no gender difference in interest at all, positive values (up to +10) = women more interested, negative values (down to -10) = men more interested. CES weights are applied."
 knitr::include_graphics("_graphs/CESGapYearAge.pdf")
 ```
+
 <!--
 Similar narrowing of the gender gap across CES survey years and survey modes
 
@@ -491,13 +475,11 @@ knitr::include_graphics("_graphs/GenderCPISYO.pdf")
 knitr::include_graphics("_graphs/ParentTopics.pdf")
 ```
 <!--
-AFTER REMOVING UNDECIDEDS, 82% of students report discussing health care more often with their mother than father, and 74% say the same for education. To the contrary, 64% of students say they discuss law and crime more often with their father, as well as 68% for partisan politics and 71% for international affairs
-
-AFTER REMOVING UNDECIDEDS, 62% of boys say they have more discussions with their mother, compared with 82% of girls who report the same
-
 Fathers and mothers are interested in different topics so discuss different topics... Confirms hypotheses
 
 Very few differences between boys & girls (except non-political discussions)... Their mothers speak about health care and education, their fathers speak about the other three topics
+
+(AFTER REMOVING UNDECIDEDS, 82% of students report discussing health care more often with their mother than father, and 74% say the same for education. To the contrary, 64% of students say they discuss law and crime more often with their father, as well as 68% for partisan politics and 71% for international affairs. STILL AFTER REMOVING UNDECIDEDS, 62% of boys say they have more discussions with their mother, compared with 82% of girls who report the same)
 
 (MT: "In Chapter 4, at times, “don’t know/prefer not to answer/missing” comprises at least half the respondents on substantive empirical tests, yet this is not discussed. What does this mean in the context of the larger project?" It seems pretty clear to me that some children who have a mother and a father discuss just as much - or just as little - with their mother as with their father. For specific topics, the number of "don't know"s is still not extremely high, but suggests some topics are not discussed at all. For instance, partisan politics is not spoken about in all families, and it seems natural to me that several children say they do not discuss this issue with either parent - especially for those aged 10-15. Yet, the claim of the project is not that a majority of a child's interests are due specifically to parents of the same gender. The claim is that on average, transmission is more likely to occur between gender-congruent pairs.)
 -->
@@ -591,6 +573,7 @@ However, when aggregated, the fact that their father discusses a topic more than
 #| fig-cap: "Topic Most Often Discussed by Mothers and Fathers, 2022 CPIS"
 knitr::include_graphics("_graphs/ParentTopicsMomDad.pdf")
 ```
+
 <!--
 Again, similar results for boys and girls, but here, which of the 5 topics most discussed by mom and dad
 
@@ -702,56 +685,14 @@ knitr::include_graphics("_graphs/PeersTopics.pdf")
 <!--
 For boys, interest in any of the five topics or their aggregate is unrelated to their discussion of these topics with their mothers.
 
-For girls, interest in law and crime is related to their mothers discussing law and crime (*p*<0.01), and the same is true for education (*p*<0.01), partisan politics (*p*<0.05) and health care (*p*<0.1) are all positively predicted by their mothers discussing these topics with them. Only when it comes to international affairs is there no statistically significant effect --- but the effect size is still largely positive.
-
 In the aggregate, if a girl's mother discusses mostly one of the five topics, her interest in that topic is expected to increase by 0.9 points on the 11-point scale (*p*<0.001).
 
-For boys, interest in partisan politics is related to their fathers discussing partisan politics (*p*<0.01), and the same is true for health care (*p*<0.1). At the aggregate level, if a boy's father discusses mostly one of the five topics, their interest in that topic is expected to increase by 0.9 point on an 11-point interest scale (*p*<0.001).
+(For girls, interest in law and crime is related to their mothers discussing law and crime (*p*<0.01), and the same is true for education (*p*<0.01), partisan politics (*p*<0.05) and health care (*p*<0.1) are all positively predicted by their mothers discussing these topics with them. Only when it comes to international affairs is there no statistically significant effect --- but the effect size is still largely positive.)
 
-For girls, interest in law and crime is related to their fathers discussing law and crime (*p*<0.01). At the aggregate level, if a girl's father discusses mostly one of the five topics, their interest in that topic is expected to increase by 0.5 point on an 11-point interest scale (*p*<0.1).
+(For boys, interest in partisan politics is related to their fathers discussing partisan politics (*p*<0.01), and the same is true for health care (*p*<0.1). At the aggregate level, if a boy's father discusses mostly one of the five topics, their interest in that topic is expected to increase by 0.9 point on an 11-point interest scale (*p*<0.001).)
+
+(For girls, interest in law and crime is related to their fathers discussing law and crime (*p*<0.01). At the aggregate level, if a girl's father discusses mostly one of the five topics, their interest in that topic is expected to increase by 0.5 point on an 11-point interest scale (*p*<0.1).)
 -->
-
-----
-
-```{r}
-#| echo: false
-#| out.width: "325pt"
-#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Parents, 2022 CPIS"
-knitr::include_graphics("_graphs/DiscussParentYOSES.pdf")
-```
-<!--
-Older teenagers (ages 16--18) seem to be more influenced by their parents' discussion of certain topics than 10--15-year-olds.
-
-Moreover, again confirming Hypothesis 1a, the largest effect sizes among 16--18-year-olds are for mother--daughter and father--son transmission.
-
-(Notably, for girls, the influence of both their father and mother is only statistically significant among 16--18 year-olds, and it grows in size compared with girls aged 10--15. No such difference between age groups is found among boys. However, for boys aged 16--18, when their parent most interested in a specific topic is their father, they become more interested in that topic, while this relationship is weaker and non-significant for boys aged 10--15.)
-
-(These results provide mixed evidence for Hypothesis 1k: aging makes more statistically significant relationships emerge, but the effect sizes only become somewhat wider between age groups.)
-
-(Yet, among 10--15-year-olds, political interest transmission is statistically significant in any model, which could indicate that early parental socialization is more limited than what was previously thought. It could be the case that due to a more limited sample size, smaller effect sizes are present but do not reach statistical significance. This would be consistent with the finding that, for all significant parent--child interest relationships found among 16--18-year-olds, the direction of the relationship among 10--15-year-olds is the same --- but the coefficient is larger.)
--->
-
-----
-
-```{r}
-#| out.width: "325pt"
-#| echo: false
-#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CPIS"
-knitr::include_graphics("_graphs/DiscussPeersYOSES.pdf")
-```
-
-<!--Patterns somewhat hard to analyze-->
-
-----
-
-```{r}
-#| out.width: "325pt"
-#| echo: false
-#| fig-cap: "Children's Friends by Gender and Age Group, 2022 CPIS"
-knitr::include_graphics("_graphs/PeersGenderAge.pdf")
-```
-
-<!--provides support for homophily-->
 
 # Conclusion
 
@@ -771,7 +712,7 @@ knitr::include_graphics("_graphs/DissertationHypothesesConclusion.pdf")
 (Fathers' discussion of various political topics is related to their sons' interest in these topics, while mothers' discussion of various political topics is related to their daughters' interest in these topics Political interest therefore seems to trickle down from parents to children in gendered ways.)
 -->
 
-- Children discuss different political topics with peers & parents based on their gender<!--Descriptive results show a clear trend: mothers are much more likely to speak about education and health care, while fathers are more likely to speak about the other three topics. These trends mirror previous literature on interest in these topics.-->
+- Children discuss different political topics with peers & parents based on their gender<!--Descriptive results show a clear trend: mothers are much more likely to speak about education and health care, while fathers are more likely to speak about the other three topics. These trends mirror previous literature on interest in these topics. Same for peers-->
 
 - The development of interest in some topics (e.g., partisan politics) starts before adolescence, while this development starts well into adulthood for other topics
 
@@ -781,21 +722,6 @@ Political discussion of various topics is seen as something desirable in partici
 
 Diversity of viewpoints in political discussions leads to collective intelligence (@landemore) and men & women often have different viewpoints rooted in different life experiences
 -->
-
-----
-
-- Caution: non-causal design, CPIS sample size (especially by age group)
-<!--
-(It does rely on past causal work by Prior and several studies about social learning and the role of parents & peers)
-
-(seem to indicate political interests grows with time, but these results also seem to apply to girls more than to boys --- and the increase between 10--15 and 16--18-year-olds seems rather limited. Future studies conducted among a larger number of children may be able to see more clearly time trends for the growth of parent--child political interest transmission potential.)
--->
-
-- Topic-by-topic patterns to be further investigated
-<!--
-(social learning theory applies well when political interest transmission is evaluated across a range of political topics --- but not necessarily for each topic measured individually.)
--->
-- Parent--child studies needed<!--a longitudinal causal study would be particularly enlightening-->
 
 ## THANKS! {.unnumbered}
 
@@ -889,6 +815,49 @@ knitr::include_graphics("_graphs/FemaleFriendsDiscuss.pdf")
 #| fig-cap: "Interest in Topic Most Often Discussed with One's Male Friends, 2022 CPIS"
 knitr::include_graphics("_graphs/MaleFriendsDiscuss.pdf")
 ```
+
+----
+
+```{r}
+#| echo: false
+#| out.width: "325pt"
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Parents, 2022 CPIS"
+knitr::include_graphics("_graphs/DiscussParentYOSES.pdf")
+```
+
+<!--
+Older teenagers (ages 16--18) seem to be more influenced by their parents' discussion of certain topics than 10--15-year-olds.
+
+Moreover, again confirming Hypothesis 1a, the largest effect sizes among 16--18-year-olds are for mother--daughter and father--son transmission.
+
+(Notably, for girls, the influence of both their father and mother is only statistically significant among 16--18 year-olds, and it grows in size compared with girls aged 10--15. No such difference between age groups is found among boys. However, for boys aged 16--18, when their parent most interested in a specific topic is their father, they become more interested in that topic, while this relationship is weaker and non-significant for boys aged 10--15.)
+
+(These results provide mixed evidence for Hypothesis 1k: aging makes more statistically significant relationships emerge, but the effect sizes only become somewhat wider between age groups.)
+
+(Yet, among 10--15-year-olds, political interest transmission is statistically significant in any model, which could indicate that early parental socialization is more limited than what was previously thought. It could be the case that due to a more limited sample size, smaller effect sizes are present but do not reach statistical significance. This would be consistent with the finding that, for all significant parent--child interest relationships found among 16--18-year-olds, the direction of the relationship among 10--15-year-olds is the same --- but the coefficient is larger.)
+-->
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Interest in Topics by Gender, Age and Discussion with Peers, 2022 CPIS"
+knitr::include_graphics("_graphs/DiscussPeersYOSES.pdf")
+```
+
+<!--Patterns somewhat hard to analyze-->
+
+----
+
+```{r}
+#| out.width: "325pt"
+#| echo: false
+#| fig-cap: "Children's Friends by Gender and Age Group, 2022 CPIS"
+knitr::include_graphics("_graphs/PeersGenderAge.pdf")
+```
+
+<!--provides support for homophily-->
 
 ## Datagotchi PES
 
@@ -1978,6 +1947,19 @@ Sanchez-Vitores (2020) & +30 & UK            & 25 \\
 
 ----
 
+- *__Hypothesis 1__: Adolescence is the moment in time when gender differences in political interests emerge.*<!--several studies find gender differences in self-reported political interest grow between ages 15 & 25-->
+
+- *__Hypothesis 2__: Children's political interests are more affected by political discussions with their same-gender parent(s) than other-gender parent(s).*
+<!--
+Basically, I assume the effect found in other studies for political interest will be the same for any political topic: fathers have more influence on transmitting interest to their sons, and mothers to their daughters
+
+(Adult men and women are more interested in certain topics and are more likely to transmit interest in any topic to their children of the same gender)
+-->
+
+- *__Hypothesis 3__: Children's political interests are more affected by political discussions with their same-gender peers than other-gender peers.*<!--Again, more influence of same-gender peers on each topic-->
+
+----
+
 - *__Hypothesis 1a__: Political interests start rising around age 15 and increase until age 25, after which they stabilizes.* (not supported)
 
 - *__Hypothesis 1b__: Between ages 15 and 25, compared to girls, boys develop more interest in assertion-focused political topics such as law and crime, international affairs and partisan politics. These differences then stabilize and carry on at the adult age.* (not supported)
@@ -2103,6 +2085,21 @@ Another reason to mention: very big gender gap in self-reported political intere
 <!--
 (MT: "On method, I would like to see some discussion about what can (and can’t) be learned about lifecycle effects with cross-sectional, cross-time data." Look at the figure about self-reported political interest by age and election year.
 -->
+
+----
+
+- Caution: non-causal design, CPIS sample size (especially by age group)
+<!--
+(It does rely on past causal work by Prior and several studies about social learning and the role of parents & peers)
+
+(seem to indicate political interests grows with time, but these results also seem to apply to girls more than to boys --- and the increase between 10--15 and 16--18-year-olds seems rather limited. Future studies conducted among a larger number of children may be able to see more clearly time trends for the growth of parent--child political interest transmission potential.)
+-->
+
+- Topic-by-topic patterns to be further investigated
+<!--
+(social learning theory applies well when political interest transmission is evaluated across a range of political topics --- but not necessarily for each topic measured individually.)
+-->
+- Parent--child studies needed<!--a longitudinal causal study would be particularly enlightening-->
 
 ## Future Plans
 
