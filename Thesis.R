@@ -7,7 +7,7 @@
 pacman::p_load(tidyverse, extrafont, ggtext, openxlsx, qdap, psy, kableExtra,
                readstata13, haven, anesrake, questionr, ggpubr, nlme,
                modelsummary, Hmisc, scales, ggtext, pwr, lme4, lmtest,
-               ggcorrplot, psych)
+               ggcorrplot, psych, mokken, gt)
 delete_rows_na <- function(row, loadings, number_na_allowed = 5) {
   if (sum(is.na(row)) <= number_na_allowed) {
     # Perform element-wise multiplication for each variable and its loading
@@ -43,7 +43,7 @@ CPIS$number <- 1:nrow(CPIS)
 Codes <- openxlsx::read.xlsx("_data/CPIS/8digitCodes.xlsx")
 CPISManageManually <- CPIS |>
   filter(!(Class %in% Codes$Code.à.8.chiffres)) |>
-  select(StartDate:EndDate, LocationLatitude:LocationLongitude, Class:Élève,
+  dplyr::select(StartDate:EndDate, LocationLatitude:LocationLongitude, Class:Élève,
          number)
 # manual check of classrooms numbers which don't match the list to see if I
 # can match them with other classes through common latitude/longitude &
@@ -998,7 +998,7 @@ DG$interest_partisan <- as.numeric(DG$issues_interest_5)
 ##### 1.3.1 Weighting ####
 calculate_unweighted_props <- function(data, variable) {
   data |> # calculate proportions for one variable
-    select({{variable}}) |>
+    dplyr::select({{variable}}) |>
     group_by({{variable}}) |>
     summarise(n = n()) |>
     na.omit() |>
@@ -1015,7 +1015,7 @@ calculate_5_unweighted_props <- function(
   DataProp <- bind_rows(Prop1, Prop2, Prop3, Prop4, Prop5) |>
     pivot_longer(!c(n, prop)) |>
     na.omit() |>
-    select(name, value, n, prop)
+    dplyr::select(name, value, n, prop)
   return(DataProp) # calculate proportions for multiple variables
 }
 add_raking_weights_column_5_var <- function(
@@ -1023,7 +1023,7 @@ add_raking_weights_column_5_var <- function(
     variable5) {
   sampleData$mergeId <- 1:nrow(sampleData) # add a variable for row number
   subsetRaking <- sampleData |> # keep only relevant variables
-    select(mergeId, {{variable1}}, {{variable2}}, {{variable3}},
+    dplyr::select(mergeId, {{variable1}}, {{variable2}}, {{variable3}},
            {{variable4}}, {{variable5}}) |>
     as.data.frame() # transform into data.frame
   popProps <- calculate_5_unweighted_props(data = popData, # population data
@@ -1856,15 +1856,15 @@ cumsum(prop.table(table(CES21$income)))
 cumsum(prop.table(table(CES21$age)))
 prop.table(table(CES21$province))
 summary(CES21$weight)
-CES97clean <- select(CES97, interest, female, year, age, mode, weight)
-CES00clean <- select(CES00, interest, female, year, age, mode, weight)
-CES04clean <- select(CES04, interest, female, year, age, mode, weight)
-CES06clean <- select(CES06, interest, female, year, age, mode, weight)
-CES08clean <- select(CES08, interest, female, year, age, mode, weight)
-CES11clean <- select(CES11, interest, female, year, age, mode, weight)
-CES15clean <- select(CES15, interest, female, year, age, mode, weight)
-CES19clean <- select(CES19, interest, female, year, age, mode, weight)
-CES21clean <- select(CES21, interest, female, year, age, mode, weight)
+CES97clean <- dplyr::select(CES97, interest, female, year, age, mode, weight)
+CES00clean <- dplyr::select(CES00, interest, female, year, age, mode, weight)
+CES04clean <- dplyr::select(CES04, interest, female, year, age, mode, weight)
+CES06clean <- dplyr::select(CES06, interest, female, year, age, mode, weight)
+CES08clean <- dplyr::select(CES08, interest, female, year, age, mode, weight)
+CES11clean <- dplyr::select(CES11, interest, female, year, age, mode, weight)
+CES15clean <- dplyr::select(CES15, interest, female, year, age, mode, weight)
+CES19clean <- dplyr::select(CES19, interest, female, year, age, mode, weight)
+CES21clean <- dplyr::select(CES21, interest, female, year, age, mode, weight)
 CES <- bind_rows(CES97clean, CES00clean, CES04clean, CES06clean, CES08clean,
                  CES11clean, CES15clean, CES19clean, CES21clean)
 
@@ -3384,7 +3384,7 @@ CES21numeric <- CES21numeric[, !missing_vars]
 zero_sd_vars <- sapply(CES21numeric, function(x) sd(x, na.rm = TRUE) == 0)
 # Remove variables with zero standard deviation
 CES21numeric <- CES21numeric[, !zero_sd_vars] |>
-  select(-interest, -cps21_interest_gen_1)
+  dplyr::select(-interest, -cps21_interest_gen_1)
 corTests <- map(CES21numeric, cor.test, y = CES21$interest)
 CorrelateVariablesData <- data.frame(
   lapply(CES21numeric, function(x) as.numeric(as.character(x))))
@@ -5556,7 +5556,7 @@ modelsummary::modelsummary(models = list(
                "\\label{tab:lmeInterestYoungOldCPIS}"),
   coef_rename = c("x1" = "Gender (1 = girl)"),
   output = "latex") |>
-    kableExtra::kable_styling(font_size = 6, full_width = FALSE)
+  gt::tab_options(table.font.size = "small")  # Adjust size as needed
 modelsummary::modelsummary(models = list(
   "Ages 10--15" = list(
     "Politics (general)" = ModelInterestGenderYoungCtrl,
