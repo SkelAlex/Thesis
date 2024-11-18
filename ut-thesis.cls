@@ -108,7 +108,7 @@
 \degree    {(degree)}
 \gradyear  {(gradyear)}
 \department{(department)}
-\copyrighttext{{\copyright} Copyright {\@gradyear} by {\@author}}
+\copyrighttext{{\copyright} Copyright by {\@author} {\@gradyear}}
 \g@addto@macro\frontmatter{\pagenumbering{roman}\pagestyle{plain}}
 \g@addto@macro\mainmatter {\pagenumbering{arabic}\pagestyle{headings}}
 \renewcommand*{\maketitle}%
