@@ -1,9 +1,4 @@
----
-include-before:
-  - "\\newpage"
----
-\\pagenumbering{arabic}
-\\setcounter{page}{1}
+\pagenumbering{arabic}
 # Theories and Explanations for the Gender Gap in Political Interest {#sec-chap1}
 
 Traditional political science studies have long shown that men are generally more interested in politics than women [@burns2001; @inglehart1981; @inglehart2003; @verba1997], a finding that is consistent across countries. However, this difference might be more apparent than real, driven by how people interpret survey questions asking them to indicate how interested they are in politics. Several recent studies [@campbellrosie2008; @ferrin2020; @ferrin2023; @keeling2023; @kuhn2004; @sabella2004; @tormos2022] show that people do not think about the full range of political actions when they are asked questions about their political interest; they mostly think about partisan politics and, to a lesser extent, international affairs. Moreover, men report being more interested than women in certain political topics --- notably partisan politics --- while women report being more interested in other aspects --- like health care and education politics. This suggests that asking people about their general political interest induces a gender bias in the measure of political interest, which stems from the fact that partisan politics is top of mind for people when they are asked about politics.
