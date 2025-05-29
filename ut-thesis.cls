@@ -191,6 +191,16 @@
 \pagestyle{headings}
 \setlength\abovecaptionskip{1ex}
 \setlength\belowcaptionskip{1ex}
+\usepackage{etoolbox}
+\usepackage{ifoddpage}
+
+\pretocmd{\chapter}{%
+  \clearpage%
+  \checkoddpage%
+  \ifoddpage\else%
+    \hbox{}\newpage%
+  \fi%
+}{}{}
 \endinput
 %%
 %% End of file `ut-thesis.cls'.
