@@ -1688,17 +1688,23 @@ English spoken at home & -0.008 & 0.054 & -0.769 & 0.038 & 0.492 & 0.157\\
  & (0.385) & (0.749) & (0.715) & (0.778) & (0.799) & (0.778)\\
 French spoken at home & 0.555* & 0.261 & -0.185 & 0.306 & 0.396 & 0.503\\
  & (0.268) & (0.550) & (0.519) & (0.551) & (0.570) & (0.574)\\
-Gender (1 = girl):Topic most discussed with mother? & 1.004* & -0.562 & 1.828 & 1.755 & 2.335** & \\
+Gender (1 = girl):Topic\\
+most discussed with mother? & 1.004* & -0.562 & 1.828 & 1.755 & 2.335** & \\
  & (0.439) & (0.781) & (1.699) & (1.691) & (0.869) & \\
-Gender (1 = girl):Topic most discussed with father? & -0.309 & -0.984 & -0.499 & 0.763 & 0.895 & -2.129\\
+Gender (1 = girl):Topic\\
+most discussed with father? & -0.309 & -0.984 & -0.499 & 0.763 & 0.895 & -2.129\\
  & (0.437) & (1.499) & (0.791) & (0.986) & (1.038) & (1.442)\\
-Gender (1 = girl):Topic most discussed with female friends? & -0.200 & -0.115 & 1.479 & -2.278+ & -1.207 & 0.901\\
+Gender (1 = girl):Topic\\
+most discussed with female friends? & -0.200 & -0.115 & 1.479 & -2.278+ & -1.207 & 0.901\\
  & (0.448) & (0.998) & (0.915) & (1.193) & (0.862) & (3.357)\\
-Gender (1 = girl):Topic most discussed with male friends? & 0.049 & 2.245 & -0.917 & -1.075 & 0.496 & 0.763\\
+Gender (1 = girl):Topic\\
+most discussed with male friends? & 0.049 & 2.245 & -0.917 & -1.075 & 0.496 & 0.763\\
  & (0.450) & (1.439) & (0.833) & (0.914) & (1.100) & (1.787)\\
-Gender (1 = girl):Topic most discussed by teacher? & -0.237 & -2.363 & -1.213 & 0.129 & 0.560 & 2.710+\\
+Gender (1 = girl):Topic\\
+most discussed by teacher? & -0.237 & -2.363 & -1.213 & 0.129 & 0.560 & 2.710+\\
  & (0.439) & (1.569) & (0.862) & (1.492) & (0.889) & (1.486)\\
-Gender (1 = girl):Topic most discussed by social media influencer? & 0.106 & 0.157 & -0.601 & 1.110 & -2.828+ & 3.257\\
+Gender (1 = girl):Topic\\
+most discussed by social media influencer? & 0.106 & 0.157 & -0.601 & 1.110 & -2.828+ & 3.257\\
  & (0.437) & (0.939) & (0.794) & (1.028) & (1.506) & (2.531)\\
 Gender (1 = girl):Age & 0.096 & 0.377 & 0.133 & -0.328 & 0.368 & -0.149\\
  & (0.133) & (0.274) & (0.269) & (0.282) & (0.310) & (0.282)\\
