@@ -89,7 +89,7 @@ THANKS: Your collaboration is central to this study. Therefore, we would like to
 
 CERTIFICATION OF CONSENT: Simply sending the completed online survey will be considered as an implied expression of your consent to participate in the project.
 
-ADDITIONAL INFORMATION: If you have questions about the research or the implications of your participation, please contact Alexandre Fortier-Chouinard (email: `alexandre.fortier.chouinard@mail.utoronto.ca`) or the project's faculty supervisor, Prof. Christopher Brian Cochrane (email: `christopher.cochrane@utoronto.ca`). If you have questions about your rights as research participants, you can also contact the University of Toronto's office of research ethics (`ethics.review@utoronto.ca`, 416-946-3273). We are taking all safety precautions to reduce the risk of spread of COVID-19.
+ADDITIONAL INFORMATION: If you have questions about the research or the implications of your participation, please contact Alexandre Fortier-Chouinard (email: alexandre.fortier.chouinard\@mail.utoronto.ca) or the project's faculty supervisor, Prof. Christopher Brian Cochrane (email: ____). If you have questions about your rights as research participants, you can also contact the University of Toronto's office of research ethics (ethics.review\@utoronto.ca, 416-946-3273). We are taking all safety precautions to reduce the risk of spread of COVID-19.
 
     - I accept to participate in this survey
     - I do not accept to participate in this survey
